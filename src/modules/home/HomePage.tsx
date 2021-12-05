@@ -4,13 +4,14 @@ import React from 'react'
 import { useKeyCombo } from '@/common/hooks'
 import { SearchBar, SearchModal } from '@/modules/search'
 import { Padding } from '@/ui/atoms'
-import { Modal, useModal } from '@/ui/components'
+import { useModal } from '@/ui/components'
 
 import { Page } from '../common/Page'
+import { BlogPostsSection } from './BlogPostsSection'
 import { GithubReposSection } from './GithubReposSection'
 
 export const HomePage = () => {
-	const { isOpen, open: openModal, close: closeModal, bind: bindModal } = useModal()
+	const { open: openModal, bind: bindModal } = useModal()
 	useKeyCombo('Meta+k', openModal)
 
 	return (
@@ -23,6 +24,9 @@ export const HomePage = () => {
 				{/* Github Repos section */}
 				<Padding px={3}>
 					<GithubReposSection />
+				</Padding>
+				<Padding px={3}>
+					<BlogPostsSection />
 				</Padding>
 			</div>
 			<SearchModal {...bindModal} />

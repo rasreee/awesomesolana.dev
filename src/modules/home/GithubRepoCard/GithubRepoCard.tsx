@@ -12,7 +12,7 @@ import styled from '@/ui/styled'
 
 import { GithubRepo } from './useRecentGithubRepos'
 
-export interface GitRepoCardProps extends GithubRepo {}
+export interface GithubRepoCardProps extends GithubRepo {}
 
 const Stat = styled('div')(
 	({ theme }) =>
@@ -36,7 +36,7 @@ const Stat = styled('div')(
 		`
 )
 
-export function GitRepoCard({ id, title, description, likes, updatedAt, url, tags }: GitRepoCardProps) {
+export function GithubRepoCard({ id, title, description, likes, updatedAt, url, tags }: GithubRepoCardProps) {
 	const router = useRouter()
 	const { isHovered, bind } = useHover<HTMLDivElement>()
 

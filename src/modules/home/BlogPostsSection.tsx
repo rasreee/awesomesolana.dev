@@ -2,9 +2,9 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 
-import { GithubRepoCard, useRecentGithubRepos } from './GithubRepoCard'
+import { BlogPostCard, useRecentBlogPosts } from './BlogPostCard'
 
-const GithubReposSectionHeader = () => {
+const BlogPostsSectionHeader = () => {
 	return (
 		<div
 			className={classNames(
@@ -13,8 +13,8 @@ const GithubReposSectionHeader = () => {
 				'py-2 md:px-5 lg:px-3'
 			)}
 		>
-			<h6 className="text-gray-800 text-sm uppercase font-bold">{'recent github repos'}</h6>
-			<Link href="/repos/all">
+			<h6 className="text-gray-800 text-sm uppercase font-bold">{'recent blog posts'}</h6>
+			<Link href="/articles/all">
 				<a
 					className={classNames(
 						'hover:underline',
@@ -30,8 +30,8 @@ const GithubReposSectionHeader = () => {
 	)
 }
 
-const GithubReposSectionFeed = () => {
-	const { data: recentGithubRepos, isLoading } = useRecentGithubRepos({ limit: 3 })
+const BlogPostsSectionFeed = () => {
+	const { data: recentBlogPosts, isLoading } = useRecentBlogPosts({ limit: 3 })
 
 	return (
 		<div
@@ -46,22 +46,22 @@ const GithubReposSectionFeed = () => {
 			)}
 		>
 			{isLoading && <div>Loading...</div>}
-			{recentGithubRepos?.map((repo) => (
+			{recentBlogPosts?.map((repo) => (
 				<li className="m-0 p-0" key={repo.id}>
-					<GithubRepoCard {...repo} />
+					<BlogPostCard {...repo} />
 				</li>
 			))}
 		</div>
 	)
 }
 
-export const GithubReposSection = () => {
+export const BlogPostsSection = () => {
 	return (
 		<div className="grid space-y-2">
 			{/* Section header */}
-			<GithubReposSectionHeader />
+			<BlogPostsSectionHeader />
 			{/* Section content below header */}
-			<GithubReposSectionFeed />
+			<BlogPostsSectionFeed />
 		</div>
 	)
 }

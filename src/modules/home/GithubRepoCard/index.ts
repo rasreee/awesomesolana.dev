@@ -1,2 +1,2 @@
-export * from './GitRepoCard'
+export * from './GithubRepoCard'
 export * from './useRecentGithubRepos'
