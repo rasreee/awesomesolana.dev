@@ -69,8 +69,7 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url, tag
 									'rounded-md',
 									'md:pb-1',
 									'font-bold text-base text-gray-900',
-									'hover:text-primary-500 hover:bg-primary-50',
-									'active:text-primary-800 active:bg-primary-100',
+									'hover:text-primary-500 active:text-primary-800',
 									'overflow-ellipsis line-clamp-1'
 								)}
 							>
