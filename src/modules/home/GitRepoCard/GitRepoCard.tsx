@@ -130,7 +130,13 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url, tag
 						{tags.map((tag) => (
 							<li key={tag}>
 								<div
-									className={classNames('rounded px-2 py-0.5 font-medium leading-tight', 'bg-teal-100 text-teal-600')}
+									className={classNames(
+										'rounded px-2 py-0.5',
+										'font-medium leading-tight',
+										'bg-teal-100 text-teal-600',
+										'hover:shadow-sm hover:border hover:border-teal-300 active:bg-teal-200 active:text-teal-700',
+										'cursor-pointer'
+									)}
 								>
 									{tag}
 								</div>
