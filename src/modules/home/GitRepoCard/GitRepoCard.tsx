@@ -6,7 +6,6 @@ import React, { MouseEventHandler } from 'react'
 
 import { useHover } from '@/common/hooks'
 import { isMobileDevice } from '@/common/utils'
-import { SecondaryButton } from '@/ui/atoms/Button'
 import { spacing } from '@/ui/foundations'
 import { HeartIcon, LinkIcon } from '@/ui/icon'
 import styled from '@/ui/styled'
@@ -79,7 +78,7 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url, tag
 				onClick={onClick}
 			>
 				{/* Header */}
-				<div className={classNames('flex items-center justify-between', 'overflow-hidden', 'px-4 py-0', 'h-16')}>
+				<div className={classNames('flex items-center justify-between', 'overflow-hidden', 'px-4 pt-2', 'h-16')}>
 					<div className="flex flex-col px-2">
 						<Link href={url}>
 							<a
