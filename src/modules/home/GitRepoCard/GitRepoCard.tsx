@@ -62,7 +62,7 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url }: G
 			<div
 				{...bind}
 				className={classNames(
-					'mobile:w-full',
+					'mobile:w-full h-52',
 					'py-1 md:py-2',
 					'bg-white',
 					'rounded-lg',
@@ -93,15 +93,15 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url }: G
 							<>
 								<a
 									className={classNames(
-										'flex items-center',
+										'flex items-start',
 										'gap-1.5',
-										'px-2 py-0.5',
+										'py-0.5',
 										'text-gray-600',
 										'text-xs underline font-semibold',
 										'hover:text-primary-500',
 										'active:text-primary-800',
 										'cursor-pointer',
-										'overflow-ellipsis overflow-hidden'
+										'overflow-clip'
 									)}
 								>
 									<LinkIcon height="14" width="14" />
@@ -112,7 +112,14 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url }: G
 					</div>
 				</div>
 				{/* Body */}
-				<div className={classNames('grid content-start', 'px-6 py-1.5 md:py-2', 'overflow-ellipsis overflow-hidden')}>
+				<div
+					className={classNames(
+						'grid content-start',
+						'px-6 py-1.5 md:py-2',
+						'overflow-ellipsis overflow-hidden',
+						'text-sm'
+					)}
+				>
 					<p>{description}</p>
 				</div>
 				{/* Footer */}
