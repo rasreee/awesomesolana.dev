@@ -1,27 +1,35 @@
 @import "./variables.css";
 
+/* SF Mono */
+
 @font-face {
 	font-family: 'SF Mono';
 	font-style: normal;
 	font-weight: var(--font-regular);
-	font-display: swap;
-	src: url('fonts/sf-mono/SFMono-Regular.ttf') format('ttf');
+	font-display: auto;
+	src: url('fonts/sf-mono/SFMono-Regular.ttf') format('ttf'),
+		url('fonts/sf-mono/SFMono-Regular.woff') format('woff'),
+		url('fonts/sf-mono/SFMono-Regular.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'SF Mono';
 	font-style: normal;
 	font-weight: var(--font-medium);
-	font-display: swap;
-	src: url('fonts/sf-mono/SFMono-Medium.ttf') format('ttf');
+	font-display: auto;
+	src: url('fonts/sf-mono/SFMono-Medium.ttf') format('ttf'),
+	url('fonts/sf-mono/SFMono-Medium.woff') format('woff'),
+	url('fonts/sf-mono/SFMono-Medium.woff2') format('woff2');
 }
 
 @font-face {
 	font-family: 'SF Mono';
 	font-style: normal;
 	font-weight: var(--font-semibold);
-	font-display: swap;
-	src: url('fonts/sf-mono/SFMono-SemiBold.ttf') format('ttf');
+	font-display: auto;
+	src: url('fonts/sf-mono/SFMono-Semibold.ttf') format('ttf'),
+	url('fonts/sf-mono/SFMono-Semibold.woff') format('woff'),
+	url('fonts/sf-mono/SFMono-Semibold.woff2') format('woff2');
 }
 
 @font-face {
@@ -45,22 +53,22 @@
 	font-family: 'Open Sans';
 	font-style: normal;
 	font-weight: var(--font-semibold);
-	font-display: swap;
-	src: url('fonts/open-sans/OpenSans-SemiBold.ttf') format('ttf');
+	font-display: auto;
+	src: url('fonts/open-sans/OpenSans-Semibold.ttf') format('ttf');
 }
 
 @font-face {
 	font-family: 'Open Sans';
 	font-style: normal;
 	font-weight: var(--font-bold);
-	font-display: swap;
 	src: url('fonts/open-sans/OpenSans-Bold.ttf') format('ttf');
+	font-display: auto;
 }
 
 @font-face {
 	font-family: 'Open Sans';
 	font-style: normal;
 	font-weight: var(--font-extrabold);
-	font-display: swap;
+	font-display: auto;
 	src: url('fonts/open-sans/OpenSans-ExtraBold.ttf') format('ttf');
 }

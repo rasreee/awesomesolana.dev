@@ -8,7 +8,7 @@ import { useHover } from '@/common/hooks'
 import { isMobileDevice } from '@/common/utils'
 import { SecondaryButton } from '@/ui/atoms/Button'
 import { spacing } from '@/ui/foundations'
-import { HeartIcon } from '@/ui/icon'
+import { HeartIcon, LinkIcon } from '@/ui/icon'
 import styled from '@/ui/styled'
 
 import { GithubRepo } from './useRecentGithubRepos'
@@ -89,16 +89,23 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url }: G
 							</a>
 						</Link>
 						<Link href={url}>
-							<a
-								className={classNames(
-									'px-2 py-0.5',
-									'text-gray-600 text-xs underline font-medium',
-									'hover:text-primary-500 hover:font-semibold',
-									'active:text-primary-800 active:font-bold'
-								)}
-							>
-								{url}
-							</a>
+							<>
+								<a
+									className={classNames(
+										'flex items-center',
+										'gap-1.5',
+										'px-2 py-0.5',
+										'text-gray-600',
+										'text-xs underline font-semibold',
+										'hover:text-primary-500',
+										'active:text-primary-800',
+										'cursor-pointer'
+									)}
+								>
+									<LinkIcon height="14" width="14" />
+									{url}
+								</a>
+							</>
 						</Link>
 					</div>
 				</div>

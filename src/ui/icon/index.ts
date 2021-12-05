@@ -1,3 +1,5 @@
 export * from './EyeIcon'
 export * from './HeartIcon'
+export * from './IconProps'
+export * from './LinkIcon'
 export * from './SearchIcon'
