@@ -73,17 +73,17 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url }: G
 				onClick={onClick}
 			>
 				{/* Header */}
-				<div className={classNames('flex items-center justify-between', 'px-4 py-1.5 md:py-2')}>
-					<div className="grid">
+				<div className={classNames('flex items-center justify-between', 'overflow-hidden', 'px-4 py-1.5')}>
+					<div className="grid px-2">
 						<Link href={url}>
 							<a
 								className={classNames(
 									'rounded-md',
-									'px-2 py-1',
+									'py-1 md:pb-2',
 									'font-bold text-base text-gray-900',
 									'hover:text-primary-500 hover:bg-primary-50',
 									'active:text-primary-800 active:bg-primary-100',
-									'overflow-ellipsis overflow-hidden'
+									'overflow-ellipsis line-clamp-1'
 								)}
 							>
 								{title}
@@ -93,19 +93,18 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url }: G
 							<>
 								<a
 									className={classNames(
-										'flex items-start',
+										'flex items-center',
 										'gap-1.5',
-										'py-0.5',
+
 										'text-gray-600',
 										'text-xs underline font-semibold',
 										'hover:text-primary-500',
 										'active:text-primary-800',
-										'cursor-pointer',
-										'overflow-clip'
+										'cursor-pointer'
 									)}
 								>
 									<LinkIcon height="14" width="14" />
-									{url}
+									<span className={classNames('overflow-ellipsis line-clamp-1')}>{url}</span>
 								</a>
 							</>
 						</Link>
@@ -116,7 +115,7 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url }: G
 					className={classNames(
 						'grid content-start',
 						'px-6 py-1.5 md:py-2',
-						'overflow-ellipsis overflow-hidden',
+						'overflow-ellipsis line-clamp-1',
 						'text-sm'
 					)}
 				>
@@ -137,7 +136,7 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url }: G
 						>
 							Next.js
 						</SecondaryButton>
-						<div className={classNames('overflow-ellipsis overflow-hidden', 'text-xs')}>{updatedAt}</div>
+						<div className={classNames('overflow-ellipsis line-clamp-1', 'text-xs')}>{updatedAt}</div>
 					</Left>
 				</div>
 			</div>

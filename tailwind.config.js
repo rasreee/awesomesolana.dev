@@ -75,5 +75,5 @@ module.exports = {
 			display: ['responsive']
 		}
 	},
-	plugins: []
+	plugins: [require('@tailwindcss/line-clamp')]
 }
