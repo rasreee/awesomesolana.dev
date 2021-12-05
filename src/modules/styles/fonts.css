@@ -1,0 +1,66 @@
+@import "./variables.css";
+
+@font-face {
+	font-family: 'SF Mono';
+	font-style: normal;
+	font-weight: var(--font-regular);
+	font-display: swap;
+	src: url('fonts/sf-mono/SFMono-Regular.ttf') format('ttf');
+}
+
+@font-face {
+	font-family: 'SF Mono';
+	font-style: normal;
+	font-weight: var(--font-medium);
+	font-display: swap;
+	src: url('fonts/sf-mono/SFMono-Medium.ttf') format('ttf');
+}
+
+@font-face {
+	font-family: 'SF Mono';
+	font-style: normal;
+	font-weight: var(--font-semibold);
+	font-display: swap;
+	src: url('fonts/sf-mono/SFMono-SemiBold.ttf') format('ttf');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: var(--font-light);
+	font-display: swap;
+	src: url('fonts/open-sans/OpenSans-Light.ttf') format('ttf');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: var(--font-normal);
+	font-display: swap;
+	src: url('fonts/open-sans/OpenSans-Regular.ttf') format('ttf');
+}
+
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: var(--font-semibold);
+	font-display: swap;
+	src: url('fonts/open-sans/OpenSans-SemiBold.ttf') format('ttf');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: var(--font-bold);
+	font-display: swap;
+	src: url('fonts/open-sans/OpenSans-Bold.ttf') format('ttf');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: var(--font-extrabold);
+	font-display: swap;
+	src: url('fonts/open-sans/OpenSans-ExtraBold.ttf') format('ttf');
+}
