@@ -36,23 +36,6 @@ const Stat = styled('div')(
 		`
 )
 
-const Left = styled('div')(
-	({ theme }) =>
-		css`
-			display: flex;
-			align-items: center;
-			gap: ${spacing(2)};
-			font-size: ${theme.fontSizes.sm};
-		`
-)
-
-const Right = styled('div')(
-	({ theme }) =>
-		css`
-			font-size: ${theme.fontSizes.sm};
-		`
-)
-
 export function GitRepoCard({ id, title, description, likes, updatedAt, url, tags }: GitRepoCardProps) {
 	const router = useRouter()
 	const { isHovered, bind } = useHover<HTMLDivElement>()
