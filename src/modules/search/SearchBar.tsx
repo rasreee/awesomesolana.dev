@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 
-import { useInput, useKeyCombo, useOnKeyPress } from '@/common/hooks'
+import { useInput, useOnKeyPress } from '@/common/hooks'
 import { Tag } from '@/models/tag'
-import { KeyComboSymbol, Modal, useModal } from '@/ui/components'
+import { KeyComboSymbol } from '@/ui/components'
 import { only } from '@/ui/helpers'
 import { SearchIcon } from '@/ui/icon'
 
@@ -14,10 +14,8 @@ export interface SearchBarProps {}
 
 export const SearchBar: React.FunctionComponent<SearchBarProps> = () => {
 	const { isFocused, value: query, blur, bind } = useInput({ autoFocus: true })
-	const { isOpen, open: openModal, close: closeModal, bind: bindModal } = useModal()
 
 	useOnKeyPress('Escape', blur)
-	useKeyCombo('Meta+k', openModal)
 
 	useOnKeyPress('Enter', () => {
 		console.log('Submitted Query: ', bind.ref.current?.value)
@@ -102,10 +100,6 @@ export const SearchBar: React.FunctionComponent<SearchBarProps> = () => {
 				</div>
 			</div>
 			<SearchResults hits={hits} />
-			<Modal {...bindModal}>
-				<h1>MODAL</h1>
-				<div>MODALBODY</div>
-			</Modal>
 		</>
 	)
 }
