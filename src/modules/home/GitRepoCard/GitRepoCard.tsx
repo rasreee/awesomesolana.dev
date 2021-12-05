@@ -82,7 +82,8 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url }: G
 									'px-2 py-1',
 									'font-bold text-base text-gray-900',
 									'hover:text-primary-500 hover:bg-primary-50',
-									'active:text-primary-800 active:bg-primary-100'
+									'active:text-primary-800 active:bg-primary-100',
+									'overflow-ellipsis overflow-hidden'
 								)}
 							>
 								{title}
@@ -99,7 +100,8 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url }: G
 										'text-xs underline font-semibold',
 										'hover:text-primary-500',
 										'active:text-primary-800',
-										'cursor-pointer'
+										'cursor-pointer',
+										'overflow-ellipsis overflow-hidden'
 									)}
 								>
 									<LinkIcon height="14" width="14" />
@@ -110,7 +112,7 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url }: G
 					</div>
 				</div>
 				{/* Body */}
-				<div className={classNames('grid content-start', 'px-6 py-1.5 md:py-2')}>
+				<div className={classNames('grid content-start', 'px-6 py-1.5 md:py-2', 'overflow-ellipsis overflow-hidden')}>
 					<p>{description}</p>
 				</div>
 				{/* Footer */}
@@ -128,7 +130,7 @@ export function GitRepoCard({ id, title, description, likes, updatedAt, url }: G
 						>
 							Next.js
 						</SecondaryButton>
-						<p>{updatedAt}</p>
+						<div className={classNames('overflow-ellipsis overflow-hidden', 'text-xs')}>{updatedAt}</div>
 					</Left>
 				</div>
 			</div>
