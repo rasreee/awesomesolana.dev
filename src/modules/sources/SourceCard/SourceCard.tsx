@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { useState } from 'react'
 
 import { Source } from '@/models/source/source.types'
-import { useUpdateSourceLikes } from '@/models/source/useUpdateSourceLikes'
+import { useUpdateSourceData } from '@/models/source/useUpdateSourceData'
 
 import { SourceCardBody } from './SourceCardBody'
 import { SourceCardFooter } from './SourceCardFooter'
@@ -12,10 +12,15 @@ export interface SourceCardProps extends Source {}
 
 export function SourceCard(data: SourceCardProps) {
 	const [localData, setLocalData] = useState(data)
-	const updateSourceLikes = useUpdateSourceLikes(localData.id)
+	const updateSourceData = useUpdateSourceData(localData.id)
 
 	const onClickLikes = async () => {
-		const updatedData = await updateSourceLikes(localData.id, localData.likes + 1)
+		const updatedData = await updateSourceData(localData.id, { likes: localData.likes + 1 })
+		setLocalData(updatedData)
+	}
+
+	const onClickLink = async () => {
+		const updatedData = await updateSourceData(localData.id, { views: localData.views + 1 })
 		setLocalData(updatedData)
 	}
 
