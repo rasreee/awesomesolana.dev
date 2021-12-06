@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import { useRouter } from 'next/router'
 
 import { Page } from '@/common/components/Page'
+import { useIsMobileDevice } from '@/common/hooks'
 import { SourceType } from '@/models/source'
 
 import { SourcesFeedGrid } from './SourcesFeedGrid'
@@ -15,12 +16,16 @@ export const SourcesPage = () => {
 	const sourceType = 'type' in router.query ? normalizeQueryParam<SourceType>(router.query.type) : null
 	const caption = sourceType ? `All ${sourceType.replace('-', ' ')}s` : 'All sources'
 
+	const isMobileDevice = useIsMobileDevice()
+
 	return (
 		<Page title={caption} description={caption}>
-			<div className={classNames('grid', 'space-y-2')}>
-				<div className={classNames('flex', 'items-center justify-between', 'py-2', 'px-5 md:px-2')}>
-					<h1 className="text-gray-800 text-lg uppercase font-bold">{caption}</h1>
-				</div>
+			<div className={classNames(!isMobileDevice && 'flex flex-col gap-2')}>
+				{!isMobileDevice && (
+					<div className={classNames('flex', 'items-center justify-between', 'py-2', 'px-5 md:px-2')}>
+						<h1 className="text-gray-800 text-lg uppercase font-bold">{caption}</h1>
+					</div>
+				)}
 				{sourceType && (
 					<SourcesFeedGrid
 						sourceType={sourceType}

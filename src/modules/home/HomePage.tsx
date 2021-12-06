@@ -14,7 +14,7 @@ export const HomePage = () => {
 	return (
 		<Page title="Home" description="Awesome Solana content">
 			{/* Inner content */}
-			<div className={classNames('grid', 'space-y-6 md:space-y-12', 'py-2 md:py-4', 'mx-auto')}>
+			<div className={classNames('flex flex-col', 'space-y-6 md:space-y-12', 'py-2 md:py-4', 'mx-auto')}>
 				<Padding px={3} py={8}>
 					<SearchBar shouldAutoFocus />
 				</Padding>

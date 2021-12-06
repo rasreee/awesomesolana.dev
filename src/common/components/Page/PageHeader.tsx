@@ -6,36 +6,48 @@ import React from 'react'
 import { useIsMobileDevice } from '@/common/hooks'
 import { SearchBar } from '@/modules/search'
 
-import { Logo } from './Logo'
+import { DefaultLogo, MobileLogo } from './Logo'
 import { NavLinks } from './NavLinks'
 
-export const PageHeader = () => {
-	const router = useRouter()
-	const isMobile = useIsMobileDevice()
-
-	const left = isMobile ? (
-		<div />
-	) : (
-		<Link href={'/'}>
-			<a className="cursor-pointer hover:text-primary-800">
-				<Logo />
-			</a>
-		</Link>
+export const MobilePageHeader = () => {
+	return (
+		<header className={classNames('h-12', 'flex justify-between gap-2', 'px-6 py-3')}>
+			<Link href={'/'}>
+				<a>
+					<MobileLogo />
+				</a>
+			</Link>
+			<div className={classNames('flex items-center gap-3 text-sb')}>
+				<NavLinks />
+			</div>
+		</header>
 	)
+}
+
+export const DefaultPageHeader = () => {
+	const router = useRouter()
 
 	const isHomePage = router.pathname === '/'
 
-	const right = (
-		<div className="flex items-center gap-3">
-			{!isMobile && <NavLinks />}
-			{!isHomePage && <SearchBar size="sm" />}
-		</div>
-	)
-
 	return (
-		<header className={classNames('h-12', 'flex items-center gap-3 justify-between px-6 py-4 md:px-12 md:py-8')}>
-			{left}
-			{right}
+		<header className={classNames('h-12', 'flex items-center gap-3 justify-between', 'px-6 py-4 md:px-12 md:py-8')}>
+			<Link href={'/'}>
+				<a className="cursor-pointer hover:text-primary-800">
+					<DefaultLogo />
+				</a>
+			</Link>
+			<div className="flex items-center gap-3">
+				<NavLinks />
+				{!isHomePage && <SearchBar size="sm" />}
+			</div>
 		</header>
 	)
+}
+
+export const PageHeader = () => {
+	const isMobile = useIsMobileDevice()
+
+	if (isMobile) return <MobilePageHeader />
+
+	return <DefaultPageHeader />
 }
