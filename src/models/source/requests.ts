@@ -1,7 +1,7 @@
 import { mockPromise } from '@/common/utils'
 
 import { getSourcesFixture } from './getSourcesFixture'
-import { Source, SourceType } from './Source'
+import { Source, SourceType } from './types'
 
 let mockDb = getSourcesFixture()
 

@@ -1,11 +1,13 @@
 import useSWR, { Fetcher } from 'swr'
 
 import { SWRResponseWithLoading } from '@/common/utils/swr'
-import { findSourcesByType, Source, SourceType } from '@/models/source'
+
+import { findSourcesByType } from './requests'
+import { Source, SourceType } from './types'
 
 type FetcherOptions = { limit: number }
 
-const getFetcher = (sourceType: SourceType, opts?: FetcherOptions) => {
+const makeFetcher = (sourceType: SourceType, opts?: FetcherOptions) => {
 	const fetcher: Fetcher<Source[]> = async () => {
 		const sources = await findSourcesByType(sourceType)
 
@@ -26,7 +28,7 @@ export const useSourcesByType = (
 	const keyOpts = opts ? `&limit=${opts.limit}` : ''
 	const key = `sources?type=${sourceType}${keyOpts}`
 
-	const swr = useSWR<Source[], Error>(key, getFetcher(sourceType, opts))
+	const swr = useSWR<Source[], Error>(key, makeFetcher(sourceType, opts))
 
 	/* Check if data is still being fetched */
 	const isLoading = typeof swr.data === 'undefined' && typeof swr.error === 'undefined'
