@@ -5,13 +5,13 @@ import { Tag } from '@/common/components/Tag'
 import { clampText } from '@/common/utils/clampText'
 
 export interface SourceCardBodyProps {
-	description: string
+	description?: string
 	tags: string[]
 }
 
 export const SourceCardBody: React.FunctionComponent<SourceCardBodyProps> = ({ description, tags }) => {
 	const descriptionText = useMemo(() => {
-		const clampedDescription = clampText(description, 85)
+		const clampedDescription = clampText(description ?? '', 85)
 
 		return clampedDescription.length ? clampedDescription : 'No description.'
 	}, [description])
