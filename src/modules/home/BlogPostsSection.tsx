@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
 
-import { BlogPostCard, useRecentBlogPosts } from './BlogPostCard'
+import { SourceCard } from '../common/SourceCard'
+import { useRecentBlogPosts } from './useRecentBlogPosts'
 
 const BlogPostsSectionHeader = () => {
 	return (
@@ -46,9 +46,9 @@ const BlogPostsSectionFeed = () => {
 			)}
 		>
 			{isLoading && <div>Loading...</div>}
-			{recentBlogPosts?.map((repo) => (
-				<li className="m-0 p-0" key={repo.id}>
-					<BlogPostCard {...repo} />
+			{recentBlogPosts?.map((blogPost) => (
+				<li className="m-0 p-0" key={blogPost.id}>
+					<SourceCard {...blogPost} />
 				</li>
 			))}
 		</div>

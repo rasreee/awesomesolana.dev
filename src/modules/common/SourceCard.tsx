@@ -1,18 +1,13 @@
 import { css } from '@emotion/react'
 import classNames from 'classnames'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React, { MouseEventHandler } from 'react'
 
-import { useHover } from '@/common/hooks'
-import { isMobileDevice } from '@/common/utils'
+import { Source } from '@/models/source'
 import { spacing } from '@/ui/foundations'
 import { HeartIcon, LinkIcon } from '@/ui/icon'
 import styled from '@/ui/styled'
 
-import { GithubRepo } from './useRecentGithubRepos'
-
-export interface GithubRepoCardProps extends GithubRepo {}
+export interface SourceCardProps extends Source {}
 
 const Stat = styled('div')(
 	({ theme }) =>
@@ -36,29 +31,18 @@ const Stat = styled('div')(
 		`
 )
 
-export function GithubRepoCard({ id, title, description, likes, updatedAt, url, tags }: GithubRepoCardProps) {
-	const router = useRouter()
-	const { isHovered, bind } = useHover<HTMLDivElement>()
-
-	const onClick: MouseEventHandler<HTMLDivElement> = () => {
-		if (isMobileDevice()) {
-			router.push(`/repos/${id}`)
-		}
-	}
-
+export function SourceCard({ id, type, title, description, likes, updatedAt, url, tags }: SourceCardProps) {
 	return (
 		<>
 			<div
-				{...bind}
 				className={classNames(
 					'mobile:w-full h-56',
 					'bg-white',
 					'rounded-lg',
 					'flex flex-col',
-					isHovered ? 'shadow-lg' : 'shadow-sm',
+					'shadow-sm hover:shadow-lg',
 					'mobile:mx-auto'
 				)}
-				onClick={onClick}
 			>
 				{/* Header */}
 				<div className={classNames('flex items-center justify-between', 'overflow-hidden', 'px-4 pt-2', 'h-16')}>

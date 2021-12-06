@@ -2,12 +2,8 @@ import useSWR, { Fetcher } from 'swr'
 
 import { findSourcesByType, Source } from '@/models/source'
 
-export interface BlogPost extends Source {
-	updatedAt: string
-}
-
 const fetcher = (args: { limit: number }) => {
-	const _inner: Fetcher<BlogPost[]> = async () => {
+	const _inner: Fetcher<Source[]> = async () => {
 		const blogPostSources = await findSourcesByType('blog-post')
 		const tutorialSources = await findSourcesByType('tutorial')
 		const res = [...tutorialSources, ...blogPostSources].slice(0, args.limit)
@@ -21,7 +17,7 @@ const fetcher = (args: { limit: number }) => {
 }
 
 export const useRecentBlogPosts = (args: { limit: number }) => {
-	const swr = useSWR<BlogPost[], Error>(`recentBlogPosts?limit=${args.limit}`, fetcher(args))
+	const swr = useSWR<Source[], Error>(`recentSources?limit=${args.limit}`, fetcher(args))
 
 	const isLoading = typeof swr.data === 'undefined' && typeof swr.error === 'undefined'
 

@@ -8,7 +8,8 @@ const _sourcesFixture: Source[] = [
 		description: 'pool-based lending collateralized with a user’s NFT collection',
 		type: 'github-repo',
 		id: 'b4e59f67-61f6-45a4-aa0f-8d0c1be439dd',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'Genopets',
@@ -17,7 +18,8 @@ const _sourcesFixture: Source[] = [
 		description: 'NFT game on Solana for active lifestyles',
 		type: 'github-repo',
 		id: '0fbf7eb9-42a5-474c-aea3-f7338ff80c9d',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'mango-service-v3',
@@ -26,7 +28,8 @@ const _sourcesFixture: Source[] = [
 		description: 'pool-based lending collateralized with a user’s NFT collection',
 		type: 'github-repo',
 		id: 'a6492a50-d563-4ae7-b82a-3e20e7cc9345',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'Superposition',
@@ -35,7 +38,8 @@ const _sourcesFixture: Source[] = [
 		description: 'a decentralized fixed income protocol.',
 		type: 'github-repo',
 		id: 'd39677c0-3fb2-400e-8745-1db2d244db1b',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'Madpacks',
@@ -44,7 +48,8 @@ const _sourcesFixture: Source[] = [
 		description: 'Friend-group primitive on Solana. Look in a wallet and find all of its friends.',
 		type: 'github-repo',
 		id: '26283713-16ca-46c2-af6f-ab7c2c0da51e',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'Solone SDK',
@@ -53,7 +58,8 @@ const _sourcesFixture: Source[] = [
 		description: 'Rapidly develop dApps for Solana',
 		type: 'github-repo',
 		id: '997f59b3-28f0-4486-97b5-772402ce333e',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'Cryptid',
@@ -62,7 +68,8 @@ const _sourcesFixture: Source[] = [
 		description: 'Cryptid is a protocol and client-suite that brings the power of Identity to Solana.',
 		type: 'github-repo',
 		id: 'e57aa435-051a-4a6b-bd7a-b468df011cd0',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'StreamFlow',
@@ -71,7 +78,8 @@ const _sourcesFixture: Source[] = [
 		description: 'https://devpost.com/software/streamflow-finance',
 		type: 'github-repo',
 		id: 'efa320d6-d781-4437-80c4-88abb7107e21',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'MeanDAO',
@@ -80,7 +88,8 @@ const _sourcesFixture: Source[] = [
 		description: 'A DeFi Protocol Powering Everyday Banking Workflows on Solana',
 		type: 'github-repo',
 		id: '530a0478-c5bd-4caa-87fb-1f9cb075ca2e',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'BuyMeCrypto',
@@ -89,7 +98,8 @@ const _sourcesFixture: Source[] = [
 		description: 'Buy me a coffee but crypto',
 		type: 'github-repo',
 		id: 'e7e04c2a-27a7-485a-8f72-4e799e25256d',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'eno',
@@ -99,7 +109,8 @@ const _sourcesFixture: Source[] = [
 			'A content publishing protocol that enables creators to monetize each consumption and turns content into a traceable bearer asset existing in a decentralized environment.',
 		type: 'github-repo',
 		id: 'b6de072b-dd3a-407e-b8ab-83bce6736887',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'Tsunami',
@@ -108,7 +119,8 @@ const _sourcesFixture: Source[] = [
 		description: '',
 		type: 'github-repo',
 		id: '04243ce9-e129-4595-b271-0ac34b84ed67',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'mywish',
@@ -117,7 +129,8 @@ const _sourcesFixture: Source[] = [
 		description: 'Create your smart contract without coding',
 		type: 'github-repo',
 		id: 'd148c47a-70ca-4b4c-b4fa-bf8ecbecfbea',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'dassi',
@@ -126,7 +139,8 @@ const _sourcesFixture: Source[] = [
 		description: '',
 		type: 'github-repo',
 		id: 'c461a998-43c1-4e5e-890d-d6bc6014c1b1',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'easy-spl',
@@ -135,7 +149,8 @@ const _sourcesFixture: Source[] = [
 		description: '',
 		type: 'github-repo',
 		id: '43a3c4e1-0be3-4f04-9cbc-7456a8c75128',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'infinitude',
@@ -144,7 +159,8 @@ const _sourcesFixture: Source[] = [
 		description: "It's Coreless banking solution to improve efficiencies at lesser cost with DLT as primary ledger.",
 		type: 'github-repo',
 		id: '355474ed-106d-4e71-8d2a-6c7308e7f8bf',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'Rust: Too Many Lists',
@@ -153,7 +169,8 @@ const _sourcesFixture: Source[] = [
 		description: 'Learn Rust With Entirely Too Many Linked Lists',
 		type: 'tutorial',
 		id: 'd80275f1-793d-46a5-a125-9403a68d7922',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'Money Streaming Whitepaper',
@@ -162,7 +179,8 @@ const _sourcesFixture: Source[] = [
 		description: 'Money Streaming is one of key sub-graphs of the Mean Protocol',
 		type: 'whitepaper',
 		id: 'b1423976-257a-4e04-b55f-fa25b100a363',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	},
 	{
 		title: 'A Starter Kit for New Solana Developer',
@@ -171,7 +189,8 @@ const _sourcesFixture: Source[] = [
 		description: 'How to get onboard to Solana develepement quickly?',
 		type: 'blog-post',
 		id: '208df2f0-868f-4437-a9b0-9688de54611d',
-		likes: 0
+		likes: 0,
+		updatedAt: ''
 	}
 ]
 

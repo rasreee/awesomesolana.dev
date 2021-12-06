@@ -2,7 +2,8 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 
-import { GithubRepoCard, useRecentGithubRepos } from './GithubRepoCard'
+import { SourceCard } from '../common/SourceCard'
+import { useRecentGithubRepos } from './useRecentGithubRepos'
 
 const GithubReposSectionHeader = () => {
 	return (
@@ -48,7 +49,7 @@ const GithubReposSectionFeed = () => {
 			{isLoading && <div>Loading...</div>}
 			{recentGithubRepos?.map((repo) => (
 				<li className="m-0 p-0" key={repo.id}>
-					<GithubRepoCard {...repo} />
+					<SourceCard {...repo} />
 				</li>
 			))}
 		</div>
