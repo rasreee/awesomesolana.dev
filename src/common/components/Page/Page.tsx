@@ -17,6 +17,7 @@ const Main = styled.main`
 	overflow-x: hidden;
 	min-height: 100vh;
 	width: 100vw;
+	padding-bottom: ${spacing(12)};
 	${({ theme }) =>
 		css`
 			background-color: ${theme.colors.bg};

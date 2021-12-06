@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { Page } from '@/common/components/Page'
 import { useIsMobileDevice } from '@/common/hooks'
 import { SourceType } from '@/models/source'
+import { formatSourceTypeLabel } from '@/models/source/formatSourceTypeLabel'
 
 import { SourcesFeedGrid } from './SourcesFeedGrid'
 
@@ -14,7 +15,7 @@ export const normalizeQueryParam = <T extends string = string>(param: string | s
 export const SourcesPage = () => {
 	const router = useRouter()
 	const sourceType = 'type' in router.query ? normalizeQueryParam<SourceType>(router.query.type) : null
-	const caption = sourceType ? `All ${sourceType.replace('-', ' ')}s` : 'All sources'
+	const caption = sourceType ? `All ${formatSourceTypeLabel(sourceType)}` : 'All sources'
 
 	const isMobileDevice = useIsMobileDevice()
 
@@ -26,13 +27,15 @@ export const SourcesPage = () => {
 						<h1 className="text-gray-800 text-lg uppercase font-bold">{caption}</h1>
 					</div>
 				)}
-				{sourceType && (
-					<SourcesFeedGrid
-						sourceType={sourceType}
-						spaceXClasses={'space-x-0 md:space-x-0'}
-						spaceYClasses={'space-y-2 md:space-y-0'}
-					/>
-				)}
+				<div className="mobile:py-2">
+					{sourceType && (
+						<SourcesFeedGrid
+							sourceType={sourceType}
+							spaceXClasses={'space-x-0 md:space-x-0'}
+							spaceYClasses={'space-y-2 md:space-y-0'}
+						/>
+					)}
+				</div>
 			</div>
 		</Page>
 	)

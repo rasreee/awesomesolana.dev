@@ -15,7 +15,7 @@ const NavLinks: React.FC = () => {
 	const router = useRouter()
 
 	return (
-		<>
+		<nav className="flex items-center gap-3">
 			{navLinks.map((link) => (
 				<li key={link.id}>
 					<NavLink {...link} isActive={link.href === router.pathname}>
@@ -23,7 +23,7 @@ const NavLinks: React.FC = () => {
 					</NavLink>
 				</li>
 			))}
-		</>
+		</nav>
 	)
 }
 

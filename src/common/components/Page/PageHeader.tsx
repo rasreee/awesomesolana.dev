@@ -17,9 +17,7 @@ export const MobilePageHeader = () => {
 					<MobileLogo />
 				</a>
 			</Link>
-			<div className={classNames('flex items-center gap-3 text-sb')}>
-				<NavLinks />
-			</div>
+			<NavLinks />
 		</header>
 	)
 }

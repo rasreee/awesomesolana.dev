@@ -1,9 +1,8 @@
-import { css } from '@emotion/react'
+import classNames from 'classnames'
 import Link from 'next/link'
 import React, { HTMLAttributes } from 'react'
 
-import { Anchor } from '@/common/atoms'
-import styled, { StyledProps } from '@/ui/styled'
+import styled from '@/ui/styled'
 
 export interface NavLinkProps extends HTMLAttributes<HTMLAnchorElement> {
 	id?: string
@@ -12,15 +11,6 @@ export interface NavLinkProps extends HTMLAttributes<HTMLAnchorElement> {
 	isActive?: boolean
 	children: React.ReactNode
 }
-
-const activeStyle = ({ isActive = false, theme }: StyledProps & { isActive?: boolean }) =>
-	isActive &&
-	css`
-		color: ${theme.colors.text};
-		opacity: 1;
-	`
-
-const StyledAnchor = styled(Anchor)<Omit<NavLinkProps, 'label' | 'href'>>(activeStyle)
 
 const Underline = styled.div`
 	flex: 1;
@@ -32,7 +22,15 @@ export function NavLink({ label, href, children, ...props }: NavLinkProps) {
 	return (
 		<label htmlFor={label}>
 			<Link href={href}>
-				<StyledAnchor {...props}>{children}</StyledAnchor>
+				<a
+					className={classNames(
+						'px-3 py-1',
+						'text-gray-500 font-bold active:text-primary-500 hover:text-primary-500 hover:bg-primary-100',
+						'rounded'
+					)}
+				>
+					{children}
+				</a>
 			</Link>
 			{props.isActive && <Underline />}
 		</label>
