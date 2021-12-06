@@ -16,7 +16,7 @@ export const SourceCardHeader: FC<SourceCardHeaderProps> = ({ title, url, onClic
 				className={classNames(
 					'rounded-md',
 					'md:pb-1',
-					'font-bold text-base text-gray-900',
+					'font-semibold text-base text-gray-800',
 					'hover:text-primary-500 active:text-primary-800',
 					'overflow-ellipsis',
 					'max-w-max',
@@ -39,7 +39,7 @@ export const SourceCardHeader: FC<SourceCardHeaderProps> = ({ title, url, onClic
 					'px-2'
 				)}
 			>
-				<LinkIcon height="13" width="13" />
+				<LinkIcon height="13px" width="13px" />
 				<span className={classNames('overflow-ellipsis line-clamp-1', 'p-0 m-0 text-left')}>{url}</span>
 			</button>
 		</div>

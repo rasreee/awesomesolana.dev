@@ -20,7 +20,7 @@ export const SourceCardBody: React.FunctionComponent<SourceCardBodyProps> = ({ d
 		<>
 			<p className={'text-xs leading-5'}>{descriptionText}</p>
 
-			<div className={classNames('flex items-center gap-3', 'absolute bottom-4')}>
+			<div className={classNames('flex items-center gap-3', 'overflow-x-scroll', 'absolute bottom-4')}>
 				{tags.map((tag) => (
 					<Tag fontSize="xs" key={tag}>
 						{tag}
