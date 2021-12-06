@@ -7,6 +7,7 @@ export type Source = {
 	type: SourceType
 	title: string
 	description: string
+	views: number
 	likes: number
 	updatedAt: string
 	url: string

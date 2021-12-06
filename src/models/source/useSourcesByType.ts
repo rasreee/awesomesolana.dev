@@ -2,8 +2,8 @@ import useSWR, { Fetcher } from 'swr'
 
 import { SWRResponseWithLoading } from '@/common/utils/swr'
 
-import { findSourcesByType } from './requests'
-import { Source, SourceType } from './types'
+import { findSourcesByType } from './source.requests'
+import { Source, SourceType } from './source.types'
 
 type FetcherOptions = { limit: number }
 

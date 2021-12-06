@@ -1,4 +1,4 @@
 export * from './getSourcesFixture'
-export * from './requests'
-export * from './types'
+export * from './source.requests'
+export * from './source.types'
 export * from './useSourcesByType'
