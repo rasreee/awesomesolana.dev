@@ -167,7 +167,7 @@ const _sourcesFixture: Source[] = [
 		tags: ['rust'],
 		url: 'https://rust-unofficial.github.io/too-many-lists/index.html',
 		description: 'Learn Rust With Entirely Too Many Linked Lists',
-		type: 'tutorial',
+		type: 'article',
 		id: 'd80275f1-793d-46a5-a125-9403a68d7922',
 		likes: 0,
 		updatedAt: ''
@@ -187,7 +187,7 @@ const _sourcesFixture: Source[] = [
 		tags: ['solana', 'starter', 'article'],
 		url: 'https://hackmd.io/@ironaddicteddog/solana-starter-kit#More-Advanced-Topics',
 		description: 'How to get onboard to Solana develepement quickly?',
-		type: 'blog-post',
+		type: 'article',
 		id: '208df2f0-868f-4437-a9b0-9688de54611d',
 		likes: 0,
 		updatedAt: ''

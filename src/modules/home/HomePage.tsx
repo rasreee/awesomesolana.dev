@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import React from 'react'
 
 import { useKeyCombo } from '@/common/hooks'
 import { SearchBar, SearchModal } from '@/modules/search'
@@ -7,8 +6,7 @@ import { Padding } from '@/ui/atoms'
 import { useModal } from '@/ui/components'
 
 import { Page } from '../common/Page'
-import { BlogPostsSection } from './BlogPostsSection'
-import { GithubReposSection } from './GithubReposSection'
+import { SourcesSection } from './SourcesSection'
 
 export const HomePage = () => {
 	const { open: openModal, bind: bindModal } = useModal()
@@ -23,10 +21,10 @@ export const HomePage = () => {
 				</Padding>
 				{/* Github Repos section */}
 				<Padding px={3}>
-					<GithubReposSection />
+					<SourcesSection sourceType={'github-repo'} />
 				</Padding>
 				<Padding px={3}>
-					<BlogPostsSection />
+					<SourcesSection sourceType={'article'} />
 				</Padding>
 			</div>
 			<SearchModal {...bindModal} />

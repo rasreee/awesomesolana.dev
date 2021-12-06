@@ -99,7 +99,7 @@
 	"tags": "rust",
 	"url": "https://rust-unofficial.github.io/too-many-lists/index.html",
 	"description": "Learn Rust With Entirely Too Many Linked Lists",
-	"type": "tutorial"
+	"type": "article"
 }, {
 	"title": "Money Streaming Whitepaper",
 	"tags": "solana, whitepaper, streaming",
@@ -111,5 +111,5 @@
 	"tags": "solana, starter, article",
 	"url": "https://hackmd.io/@ironaddicteddog/solana-starter-kit#More-Advanced-Topics",
 	"description": "How to get onboard to Solana develepement quickly?",
-	"type": "blog-post"
+	"type": "article"
 }]

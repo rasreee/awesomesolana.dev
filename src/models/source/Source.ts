@@ -1,4 +1,4 @@
-export type SourceType = 'github-repo' | 'blog-post' | 'tutorial' | 'whitepaper'
+export type SourceType = 'github-repo' | 'article' | 'whitepaper'
 
 export type Source = {
 	id: string
