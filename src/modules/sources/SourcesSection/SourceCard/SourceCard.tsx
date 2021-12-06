@@ -2,6 +2,7 @@ import classNames from 'classnames'
 
 import { Source } from '@/models/source/source.types'
 
+import { SourceCardBody } from './SourceCardBody'
 import { SourceCardFooter } from './SourceCardFooter'
 import { SourceCardHeader } from './SourceCardHeader'
 
@@ -33,23 +34,7 @@ export function SourceCard({ id, type, title, description, likes, updatedAt, url
 					'text-sm'
 				)}
 			>
-				<p>{description}</p>
-				<div className={classNames('flex items-center gap-3', 'absolute bottom-4')}>
-					{tags.map((tag) => (
-						<div
-							key={tag}
-							className={classNames(
-								'rounded px-2 py-0.5',
-								'font-medium leading-tight',
-								'bg-teal-100 text-teal-600',
-								'hover:shadow-sm hover:border hover:border-teal-300 active:bg-teal-200 active:text-teal-700',
-								'cursor-pointer'
-							)}
-						>
-							{tag}
-						</div>
-					))}
-				</div>
+				<SourceCardBody {...{ description, tags }} />
 			</div>
 			{/* Footer */}
 			<div

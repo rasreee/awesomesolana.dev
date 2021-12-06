@@ -2,7 +2,8 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React, { FC } from 'react'
 
-import { SourceType } from '@/models/source'
+import { SourceType } from '@/models/source/source.types'
+import { Tag } from '@/modules/common/Tag'
 import { LinkIcon } from '@/ui/icon/LinkIcon'
 
 type SourceCardHeaderProps = { title: string; url: string; type: SourceType }
@@ -10,19 +11,22 @@ type SourceCardHeaderProps = { title: string; url: string; type: SourceType }
 export const SourceCardHeader: FC<SourceCardHeaderProps> = ({ title, url, type }) => {
 	return (
 		<div className="flex flex-col px-2">
-			<Link href={url}>
-				<a
-					className={classNames(
-						'rounded-md',
-						'md:pb-1',
-						'font-bold text-base text-gray-900',
-						'hover:text-primary-500 active:text-primary-800',
-						'overflow-ellipsis line-clamp-1'
-					)}
-				>
-					{title}
-				</a>
-			</Link>
+			<div className="flex items-center gap-4">
+				<Link href={url}>
+					<a
+						className={classNames(
+							'rounded-md',
+							'md:pb-1',
+							'font-bold text-base text-gray-900',
+							'hover:text-primary-500 active:text-primary-800',
+							'overflow-ellipsis line-clamp-1'
+						)}
+					>
+						{title}
+					</a>
+				</Link>
+				<Tag color={'primary'}>{type}</Tag>
+			</div>
 			<Link href={url}>
 				<a
 					className={classNames(
