@@ -3,4 +3,4 @@ export const favIcon32 = 'https://nextify.s3-eu-west-1.amazonaws.com/img/meta/32
 export const favIcon16 = 'https://nextify.s3-eu-west-1.amazonaws.com/img/meta/16.png'
 export const favIcon = 'https://nextify.s3-eu-west-1.amazonaws.com/img/meta/favicon.ico'
 export const safariPinnedTab = 'https://nextify.s3-eu-west-1.amazonaws.com/img/meta/512.svg'
-export const preview = 'https://nextify.s3-eu-west-1.amazonaws.com/img/meta/preview.jpg'
+export const preview = 'https://uxmwcecuncwkkpikkgit.supabase.in/storage/v1/object/public/meta/preview.png'

@@ -1,20 +1,19 @@
 import classNames from 'classnames'
-import { darken, lighten } from 'polished'
 import React, { CSSProperties } from 'react'
 
 import { pseudo } from '@/common/utils/pseudos'
 import { theme } from '@/theme/theme'
-import { FontSize, ThemeColorName } from '@/ui/foundations'
+import { ColorName, colors, FontSize } from '@/ui/foundations'
 
 export interface TagProps {
-	color?: ThemeColorName
+	color?: ColorName
 	fontSize?: FontSize
 	style?: CSSProperties
 }
 
 export const Tag: React.FunctionComponent<TagProps> = ({
 	children,
-	color = 'turquoise',
+	color = 'solanaSecondary',
 	fontSize = 'xs',
 	...props
 }) => {
@@ -29,11 +28,11 @@ export const Tag: React.FunctionComponent<TagProps> = ({
 			)}
 			css={{
 				fontSize: theme.fontSizes[fontSize],
-				background: lighten('0.325', theme.colors[color]),
-				color: darken('0.2', theme.colors[color]),
+				background: colors[color][50],
+				color: colors[color][800],
 				[pseudo('_hover')]: {
 					borderWidth: '1.5px',
-					borderColor: darken('0.1', theme.colors[color])
+					borderColor: colors[color][700]
 				}
 			}}
 			{...props}

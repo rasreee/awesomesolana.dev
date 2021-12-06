@@ -77,6 +77,32 @@ export const colors = {
 		800: '#936915',
 		900: '#7A520C'
 	},
+	solanaPrimary: {
+		0: '#fff',
+		50: '#eddeff',
+		100: '#dfc4ff',
+		200: '#d1abff',
+		300: '#c392ff',
+		400: '#b578ff',
+		500: '#9945ff',
+		600: '#811AFF',
+		700: '#7000f7',
+		800: '#5400ba',
+		900: '#3f008c'
+	},
+	solanaSecondary: {
+		0: '#fff',
+		50: '#CEFDF0',
+		100: '#94FADD',
+		200: '#6DF8D1',
+		300: '#3DF5C1',
+		400: '#0CE9AB',
+		500: '#0AC993',
+		600: '#08AA7C',
+		700: '#07926B',
+		800: '#05664B',
+		900: '#033527'
+	},
 	red: {
 		0: '#fff',
 		50: '#fef2f2',
@@ -101,15 +127,16 @@ const palette = {
 	lightest: '#E2E5E9',
 	blue: '#3366FF',
 	yellow: '#F0C808',
-	turquoise: '#29C6CF',
+	solanaPrimary: colors.solanaPrimary[500],
+	solanaSecondary: colors.solanaSecondary[500],
 	red: '#FF3D71',
 	white: '#fff'
 }
 
 export const baseThemeColors = {
 	...palette,
-	primary: palette.blue,
-	secondary: palette.pink,
+	primary: palette.solanaPrimary,
+	secondary: palette.solanaSecondary,
 	warning: palette.yellow,
 	danger: palette.red
 } as const

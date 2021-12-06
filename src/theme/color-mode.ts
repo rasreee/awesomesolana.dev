@@ -9,8 +9,8 @@ export const colorModes = {
 		surface: '#202F3C',
 		hint: baseColors.gray[300],
 		text: baseColors.gray[50],
-		primary: baseColors.ultramarine[500],
-		secondary: baseColors.strawberry[500],
+		primary: baseColors.solanaPrimary[500],
+		secondary: baseColors.solanaSecondary[500],
 		outline: lighten('0.1', '#202f3c'),
 		accent: '#29C6CF'
 	},
@@ -19,8 +19,8 @@ export const colorModes = {
 		surface: '#fff',
 		hint: '#8F9BB3',
 		text: '#151f28',
-		primary: baseColors.ultramarine[500],
-		secondary: baseColors.strawberry[500],
+		primary: baseColors.solanaPrimary[500],
+		secondary: baseColors.solanaSecondary[500],
 		outline: '#D0D6E2',
 		account: '#29C6CF'
 	}
