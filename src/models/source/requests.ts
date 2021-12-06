@@ -1,9 +1,9 @@
 import { mockPromise } from '@/common/utils'
 
-import { mockSourcesDb } from './fixtures/sources'
+import { getSourcesFixture } from './getSourcesFixture'
 import { Source, SourceType } from './Source'
 
-let mockDb = mockSourcesDb()
+let mockDb = getSourcesFixture()
 
 export const getAllSources = async (): Promise<Source[]> => {
 	await mockPromise()

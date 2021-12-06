@@ -3,11 +3,11 @@ import classNames from 'classnames'
 import { useKeyCombo } from '@/common/hooks'
 import { SOURCE_TYPES } from '@/models/source'
 import { SearchBar, SearchModal } from '@/modules/search'
+import { SourcesSection } from '@/modules/sources/SourcesSection'
 import { Padding } from '@/ui/atoms'
 import { useModal } from '@/ui/components'
 
 import { Page } from '../common/Page'
-import { SourcesSection } from './SourcesSection'
 
 export const HomePage = () => {
 	const { open: openModal, bind: bindModal } = useModal()
