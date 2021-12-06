@@ -32,13 +32,14 @@ export const defaultKeyComboSymbolStyles: Record<'sm' | 'lg', CSSProperties> = {
 }
 
 export const defaultKeySymbolStyles: Record<'sm' | 'lg', CSSProperties> = {
-	sm: { fontSize: '0.875rem', display: 'flex', alignItems: 'center', color: 'inherit' },
+	sm: { fontSize: '0.75rem', display: 'flex', alignItems: 'center', color: 'inherit' },
 	lg: { fontSize: '1.125rem', display: 'flex', alignItems: 'center', color: 'inherit' }
 }
 
 export const keySymbolIconStyles: CSSProperties = {
 	height: '1em',
 	width: '1em',
+	display: 'flex',
 	alignItems: 'center',
 	color: 'inherit'
 }

@@ -69,7 +69,7 @@ export const SearchBar: React.FunctionComponent<SearchBarProps> = ({ shouldAutoF
 					'border',
 					isFocused ? 'outline-none ring-primary-500 border-primary-500' : 'border-gray-300',
 					'placeholder-gray-400',
-					'text-base sm:text-sm'
+					size === 'sm' ? 'text-sm sm:text-xs' : 'text-base sm:text-sm'
 				)}
 			>
 				{isLoading ? (
@@ -77,8 +77,7 @@ export const SearchBar: React.FunctionComponent<SearchBarProps> = ({ shouldAutoF
 				) : (
 					<SearchIcon
 						className={classNames(
-							'h-5 w-5',
-							size === 'sm' ? 'md:h-5 md:w-5' : 'md:h-6 md:w-6',
+							size === 'sm' ? 'h-4 w-4 md:h-4 md:w-4' : 'md:h-6 md:w-6',
 							isFocused ? 'text-primary-500' : 'text-gray-500'
 						)}
 					/>
