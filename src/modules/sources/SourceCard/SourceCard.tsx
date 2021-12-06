@@ -30,7 +30,8 @@ export function SourceCard(data: SourceCardProps) {
 	return (
 		<div
 			className={classNames(
-				'mobile:w-full h-56',
+				'mobile:w-full',
+				'h-52',
 				'bg-white',
 				'rounded-lg',
 				'flex flex-col',
@@ -43,7 +44,7 @@ export function SourceCard(data: SourceCardProps) {
 				<SourceCardHeader onClickLink={onClickLink} title={localData.title} url={localData.url} />
 			</div>
 			{/* Body */}
-			<div className={classNames('relative', 'flex flex-col flex-1 justify-between', 'px-6 py-1.5 md:py-2', 'text-sm')}>
+			<div className={classNames('relative', 'flex flex-col flex-1 justify-between', 'px-6 py-1.5 md:py-2')}>
 				<SourceCardBody description={localData.description} tags={localData.tags} />
 			</div>
 			{/* Footer */}
