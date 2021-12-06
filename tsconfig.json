@@ -45,7 +45,6 @@
 		"**/*.tsx"
 	],
 	"exclude": [
-		"node_modules",
-		"fixtures"
+		"node_modules"
 	]
 }
