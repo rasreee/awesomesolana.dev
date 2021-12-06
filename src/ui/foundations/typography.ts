@@ -20,10 +20,6 @@ const fontSizes = {
 
 export type FontSize = keyof typeof fontSizes
 
-export const fontSize = (theme: Theme, key: FontSize) => {
-	return theme.fontSizes[key]
-}
-
 const fontWeights = {
 	thin: 100,
 	extralight: 200,

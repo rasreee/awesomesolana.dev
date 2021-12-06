@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler, useState } from 'react'
 
-import { KeyComboSymbol } from '@/ui/components'
+import { KeyComboSymbol } from '@/common/components'
 import { colors } from '@/ui/foundations'
 import { SearchIcon } from '@/ui/icon'
 import styled from '@/ui/styled'

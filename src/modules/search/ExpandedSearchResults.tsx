@@ -1,7 +1,7 @@
 import React from 'react'
 
+import { Modal } from '@/common/components'
 import { Tag } from '@/models/tag'
-import { Modal } from '@/ui/components'
 import { colors } from '@/ui/foundations'
 import styled from '@/ui/styled'
 

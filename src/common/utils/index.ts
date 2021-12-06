@@ -1,4 +1,7 @@
 export * from './mobile'
 export * from './mockPromise'
 export * from './object'
+export * from './pseudos'
+export * from './responsive'
+export * from './swr'
 export * from './types'

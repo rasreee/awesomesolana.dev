@@ -2,8 +2,8 @@ import { css } from '@emotion/react'
 import { darken } from 'polished'
 import { FC, HTMLAttributes } from 'react'
 
+import { pseudo } from '@/common/utils/pseudos'
 import { Tag } from '@/models/tag'
-import { pseudo } from '@/ui/helpers'
 import styled from '@/ui/styled'
 
 export interface SearchHitButtonProps extends HTMLAttributes<HTMLButtonElement> {

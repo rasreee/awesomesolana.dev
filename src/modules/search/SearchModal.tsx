@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo } from 'react'
 
+import { Modal, ModalProps } from '@/common/components'
 import { Tag } from '@/models/tag'
-import { Modal, ModalProps } from '@/ui/components'
 
 import { ExpandedSearchResults } from './ExpandedSearchResults'
 import { getSearchResults } from './getSearchResults'

@@ -1,13 +1,11 @@
 import classNames from 'classnames'
 
-import { useKeyCombo } from '@/common/hooks'
+import { Padding } from '@/common/atoms/Padding'
+import { Page } from '@/common/components/Page'
+import { useKeyCombo, useModal } from '@/common/hooks'
 import { SOURCE_TYPES } from '@/models/source'
 import { SearchBar, SearchModal } from '@/modules/search'
 import { SourcesSection } from '@/modules/sources/SourcesSection'
-import { Padding } from '@/ui/atoms'
-import { useModal } from '@/ui/components'
-
-import { Page } from '../common/Page'
 
 export const HomePage = () => {
 	const { open: openModal, bind: bindModal } = useModal()

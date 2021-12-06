@@ -1,10 +1,10 @@
 import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 
+import { KeyComboSymbol } from '@/common/components'
 import { useInput, useOnKeyPress } from '@/common/hooks'
+import { only } from '@/common/utils/responsive'
 import { Tag } from '@/models/tag'
-import { KeyComboSymbol } from '@/ui/components'
-import { only } from '@/ui/helpers'
 import { SearchIcon } from '@/ui/icon'
 
 import { getSearchResults } from './getSearchResults'

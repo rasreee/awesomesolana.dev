@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React, { useEffect } from 'react'
 
-import { Tag } from '@/modules/common/Tag'
+import { Tag } from '@/common/components/Tag'
 
 export interface SourceCardBodyProps {
 	description: string

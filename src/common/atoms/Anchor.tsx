@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 
-import { pseudo } from '@/ui/helpers'
+import { pseudo } from '@/common/utils/pseudos'
 import styled from '@/ui/styled'
 
 const Anchor = styled.a`

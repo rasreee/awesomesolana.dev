@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import Link from 'next/link'
 import React, { HTMLAttributes } from 'react'
 
-import { Anchor } from '@/ui/atoms'
+import { Anchor } from '@/common/atoms'
 import styled, { StyledProps } from '@/ui/styled'
 
 export interface NavLinkProps extends HTMLAttributes<HTMLAnchorElement> {

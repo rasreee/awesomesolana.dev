@@ -1,4 +1,5 @@
-import { AnyFunction, objectKeys } from '.'
+import { objectKeys } from './object'
+import { AnyFunction } from './types'
 
 const group = {
 	hover: (selector: string) => `${selector}:hover &, ${selector}[data-hover] &`,

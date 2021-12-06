@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 
-import { NavLink, NavLinkProps } from '@/ui/components'
+import { NavLink, NavLinkProps } from '@/common/components'
 
 const navLinks: Omit<NavLinkProps, 'children'>[] = [
 	{

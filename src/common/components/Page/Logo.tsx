@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 import * as React from 'react'
 
-import { fontSize } from '@/ui/foundations'
 import styled from '@/ui/styled'
 
 const LogoContainer = styled('div')`
@@ -18,7 +17,7 @@ const LogoContainer = styled('div')`
 			font-family: ${theme.fonts.sans};
 			font-weight: ${theme.fontWeights.bold};
 			color: ${theme.colors.primary};
-			font-size: ${fontSize(theme, 'lg')};
+			font-size: ${theme.fontSizes.sm};
 		`}
 `
 

@@ -1,11 +1,30 @@
+import { css } from '@emotion/react'
 import classNames from 'classnames'
 import Link from 'next/link'
 import React, { FC } from 'react'
 
-import { Main } from '@/ui/atoms/Main'
+import { spacing } from '@/ui/foundations'
+import styled from '@/ui/styled'
 
-import { Logo } from '../Logo'
 import { preview } from './constants'
+import { Logo } from './Logo'
+
+const Main = styled.main`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: ${spacing(3)};
+	padding: 0;
+	position: relative;
+	overflow-x: hidden;
+	min-height: 100vh;
+	width: 100vw;
+	${({ theme }) =>
+		css`
+			background-color: ${theme.colors.bg};
+		`}
+`
+
 import { Meta } from './Meta'
 import { NavLinks } from './NavLinks'
 

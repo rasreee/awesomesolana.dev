@@ -2,8 +2,8 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React, { FC } from 'react'
 
+import { Tag } from '@/common/components/Tag'
 import { SourceType } from '@/models/source/source.types'
-import { Tag } from '@/modules/common/Tag'
 import { LinkIcon } from '@/ui/icon/LinkIcon'
 
 type SourceCardHeaderProps = { title: string; url: string; type: SourceType }

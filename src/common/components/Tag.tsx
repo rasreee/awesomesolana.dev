@@ -2,9 +2,9 @@ import classNames from 'classnames'
 import { darken, lighten } from 'polished'
 import React from 'react'
 
+import { pseudo } from '@/common/utils/pseudos'
 import { theme } from '@/theme/theme'
 import { FontSize, ThemeColorName } from '@/ui/foundations'
-import { pseudo } from '@/ui/helpers'
 
 export interface TagProps {
 	color?: ThemeColorName

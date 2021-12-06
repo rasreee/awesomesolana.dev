@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import React from 'react'
 
-import { Card } from '@/ui/components'
+import { Card } from '@/common/components'
 import { spacing } from '@/ui/foundations'
 import { EyeIcon, HeartIcon } from '@/ui/icon'
 import styled from '@/ui/styled'

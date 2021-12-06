@@ -2,9 +2,8 @@ import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import React, { FC } from 'react'
 
+import { Page } from '@/common/components/Page'
 import { SourceType, useSourcesByType } from '@/models/source'
-
-import { Page } from '../common/Page'
 
 export const normalizeQueryParam = <T extends string = string>(param: string | string[] | undefined): T => {
 	return param as T
