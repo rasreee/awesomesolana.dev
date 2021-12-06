@@ -1,13 +1,11 @@
 import { css } from '@emotion/react'
 import classNames from 'classnames'
-import Link from 'next/link'
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 import { spacing } from '@/ui/foundations'
 import styled from '@/ui/styled'
 
 import { preview } from './constants'
-import { Logo } from './Logo'
 
 const Main = styled.main`
 	display: flex;
@@ -26,7 +24,7 @@ const Main = styled.main`
 `
 
 import { Meta } from './Meta'
-import { NavLinks } from './NavLinks'
+import { PageHeader } from './PageHeader'
 
 export type PageProps = {
 	title: string
@@ -44,14 +42,7 @@ const Page: FC<PageProps> = ({ title, description, image = preview, children }) 
 				{/* Inner container */}
 				<div className="w-full">
 					{/* Header */}
-					<header className={classNames('h-12', 'flex items-center gap-3 justify-between px-6 py-4 md:px-12 md:py-8')}>
-						<Link href={'/'}>
-							<a className="cursor-pointer hover:text-primary-800">
-								<Logo />
-							</a>
-						</Link>
-						<NavLinks />
-					</header>
+					<PageHeader />
 					{/* Content below header */}
 					<div className={classNames('w-full', 'md:max-w-screen-lg', 'mx-auto')}>{children}</div>
 				</div>
