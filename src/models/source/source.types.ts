@@ -13,3 +13,7 @@ export type Source = {
 	url: string
 	tags: string[]
 }
+
+export type RawSourceData = Omit<Source, 'tags'> & {
+	tags: string
+}

@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Tag } from '@/modules/common/Tag'
 
@@ -9,6 +9,10 @@ export interface SourceCardBodyProps {
 }
 
 export const SourceCardBody: React.FunctionComponent<SourceCardBodyProps> = ({ description, tags }) => {
+	useEffect(() => {
+		console.log(tags)
+	}, [])
+
 	return (
 		<>
 			<p>{description}</p>

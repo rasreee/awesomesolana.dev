@@ -1,19 +1,28 @@
+import { SupabaseClient } from '@supabase/supabase-js'
 import useSWR, { Fetcher } from 'swr'
 
+import { useSupabase } from '@/common/supabase/useSupabase'
 import { SWRResponseWithLoading } from '@/common/utils/swr'
 
-import { findSourcesByType } from './source.requests'
-import { Source, SourceType } from './source.types'
+import { RawSourceData, Source, SourceType } from './source.types'
 
 type FetcherOptions = { limit: number }
 
-const makeFetcher = (sourceType: SourceType, opts?: FetcherOptions) => {
+const makeFetcher = (supabase: SupabaseClient, sourceType: SourceType, opts?: FetcherOptions) => {
 	const fetcher: Fetcher<Source[]> = async () => {
-		const sources = await findSourcesByType(sourceType)
+		let request = supabase.from<RawSourceData>('sources').select('*').match({ type: sourceType })
 
-		// TODO let API handle limit
+		if (opts?.limit) {
+			request = request.limit(opts.limit)
+		}
 
-		const result = opts ? sources.slice(0, opts.limit) : sources
+		const { data, error } = await request
+
+		if (error) throw error
+
+		if (!data) throw new Error('No error returned from Supabase, but data was null.')
+
+		const result: Source[] = data.map((rawData) => ({ ...rawData, tags: JSON.parse(rawData.tags) as string[] }))
 
 		return result
 	}
@@ -25,10 +34,11 @@ export const useSourcesByType = (
 	sourceType: SourceType,
 	opts?: FetcherOptions
 ): SWRResponseWithLoading<Source[], Error> => {
+	const client = useSupabase()
 	const keyOpts = opts ? `&limit=${opts.limit}` : ''
 	const key = `sources?type=${sourceType}${keyOpts}`
 
-	const swr = useSWR<Source[], Error>(key, makeFetcher(sourceType, opts))
+	const swr = useSWR<Source[], Error>(key, makeFetcher(client, sourceType, opts))
 
 	/* Check if data is still being fetched */
 	const isLoading = typeof swr.data === 'undefined' && typeof swr.error === 'undefined'

@@ -5,12 +5,6 @@ import { Source, SourceType } from './source.types'
 
 let mockDb = getSourcesFixture()
 
-export const getAllSources = async (): Promise<Source[]> => {
-	await mockPromise()
-
-	return [...mockDb]
-}
-
 export const findSourceById = async (id: string): Promise<Source | null> => {
 	const found = mockDb.find((source) => source.id === id)
 
