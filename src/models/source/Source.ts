@@ -1,4 +1,6 @@
-export type SourceType = 'github-repo' | 'article' | 'whitepaper'
+export const SOURCE_TYPES = ['github-repo', 'article', 'whitepaper'] as const
+
+export type SourceType = typeof SOURCE_TYPES[number]
 
 export type Source = {
 	id: string

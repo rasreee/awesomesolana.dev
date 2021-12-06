@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 
 import { useKeyCombo } from '@/common/hooks'
+import { SOURCE_TYPES } from '@/models/source'
 import { SearchBar, SearchModal } from '@/modules/search'
 import { Padding } from '@/ui/atoms'
 import { useModal } from '@/ui/components'
@@ -19,13 +20,11 @@ export const HomePage = () => {
 				<Padding px={3} py={8}>
 					<SearchBar />
 				</Padding>
-				{/* Github Repos section */}
-				<Padding px={3}>
-					<SourcesSection sourceType={'github-repo'} />
-				</Padding>
-				<Padding px={3}>
-					<SourcesSection sourceType={'article'} />
-				</Padding>
+				{SOURCE_TYPES.map((sourceType) => (
+					<Padding key={sourceType} px={3}>
+						<SourcesSection sourceType={sourceType} />
+					</Padding>
+				))}
 			</div>
 			<SearchModal {...bindModal} />
 		</Page>

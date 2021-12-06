@@ -1,23 +1,32 @@
 import useSWR, { Fetcher } from 'swr'
 
+import { SWRResponseWithLoading } from '@/common/utils/swr'
 import { findSourcesByType, Source, SourceType } from '@/models/source'
 
-const fetcher = (sourceType: SourceType, opts: { limit: number }) => {
-	const _inner: Fetcher<Source[]> = async () => {
-		const sources = await findSourcesByType(sourceType).then((res) => res.slice(0, opts.limit))
+type FetcherOptions = { limit: number }
 
-		return sources
+const getFetcher = (sourceType: SourceType, opts: FetcherOptions) => {
+	const fetcher: Fetcher<Source[]> = async () => {
+		const sources = await findSourcesByType(sourceType)
+
+		// TODO let API handle limit
+		const result = sources.slice(0, opts.limit)
+
+		return result
 	}
 
-	return _inner
+	return fetcher
 }
 
-export const useSourcesByType = (sourceType: SourceType, opts: { limit: number }) => {
-	const swr = useSWR<Source[], Error>(
-		`recentSources?sourceType=${sourceType}&limit=${opts.limit}`,
-		fetcher(sourceType, opts)
-	)
+export const useSourcesByType = (
+	sourceType: SourceType,
+	opts: FetcherOptions
+): SWRResponseWithLoading<Source[], Error> => {
+	const key = `sources?type=${sourceType}&limit=${opts.limit}`
 
+	const swr = useSWR<Source[], Error>(key, getFetcher(sourceType, opts))
+
+	/* Check if data is still being fetched */
 	const isLoading = typeof swr.data === 'undefined' && typeof swr.error === 'undefined'
 
 	return { ...swr, isLoading }
