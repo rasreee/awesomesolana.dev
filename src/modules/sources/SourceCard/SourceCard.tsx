@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 import { Source } from '@/models/source/source.types'
@@ -13,6 +14,7 @@ export interface SourceCardProps extends Source {}
 export function SourceCard(data: SourceCardProps) {
 	const [localData, setLocalData] = useState(data)
 	const updateSourceData = useUpdateSourceData(localData.id)
+	const router = useRouter()
 
 	const onClickLikes = async () => {
 		const updatedData = await updateSourceData(localData.id, { likes: localData.likes + 1 })
@@ -21,6 +23,7 @@ export function SourceCard(data: SourceCardProps) {
 
 	const onClickLink = async () => {
 		const updatedData = await updateSourceData(localData.id, { views: localData.views + 1 })
+		router.push(localData.url)
 		setLocalData(updatedData)
 	}
 
@@ -37,19 +40,11 @@ export function SourceCard(data: SourceCardProps) {
 		>
 			{/* Header */}
 			<div className={classNames('flex items-center justify-between', 'overflow-hidden', 'px-4 pt-2', 'h-16')}>
-				<SourceCardHeader {...{ type: localData.type, title: localData.title, url: localData.url }} />
+				<SourceCardHeader onClickLink={onClickLink} title={localData.title} url={localData.url} />
 			</div>
 			{/* Body */}
-			<div
-				className={classNames(
-					'relative',
-					'flex flex-col flex-1 justify-between',
-					'px-6 py-1.5 md:py-2',
-					'overflow-ellipsis line-clamp-2',
-					'text-sm'
-				)}
-			>
-				<SourceCardBody {...{ description: localData.description, tags: localData.tags }} />
+			<div className={classNames('relative', 'flex flex-col flex-1 justify-between', 'px-6 py-1.5 md:py-2', 'text-sm')}>
+				<SourceCardBody description={localData.description} tags={localData.tags} />
 			</div>
 			{/* Footer */}
 			<div
@@ -64,7 +59,10 @@ export function SourceCard(data: SourceCardProps) {
 				)}
 			>
 				<SourceCardFooter
-					{...{ likes: localData.likes, views: localData.views, updatedAt: localData.updatedAt }}
+					type={localData.type}
+					likes={localData.likes}
+					views={localData.views}
+					updatedAt={localData.updatedAt}
 					onClickLikes={onClickLikes}
 				/>
 			</div>
