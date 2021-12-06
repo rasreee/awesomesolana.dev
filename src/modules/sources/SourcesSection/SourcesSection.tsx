@@ -4,7 +4,7 @@ import { FC } from 'react'
 
 import { SourceType, useSourcesByType } from '@/models/source'
 
-import { SourceCard } from './SourceCard'
+import { SourceCard } from './SourceCard/SourceCard'
 
 export type SourcesSectionHeaderProps = {
 	sourceType: SourceType
