@@ -1,4 +1,4 @@
-export * from './mobile'
+export * from './isBrowser'
 export * from './mockPromise'
 export * from './object'
 export * from './pseudos'

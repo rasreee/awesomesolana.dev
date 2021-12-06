@@ -1,13 +1,10 @@
+import { useMemo } from 'react'
+
 const isBrowser = () => {
 	return typeof window !== 'undefined'
 }
 
-/**
- * Returns whether running on a mobile device
- *
- * @return {boolean}
- */
-export const isMobileDevice = (): boolean => {
+const isMobileDevice = (): boolean => {
 	if (isBrowser()) {
 		try {
 			return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
@@ -19,4 +16,8 @@ export const isMobileDevice = (): boolean => {
 	} else {
 		return false
 	}
+}
+
+export const useIsMobileDevice = () => {
+	return useMemo(isMobileDevice, [])
 }

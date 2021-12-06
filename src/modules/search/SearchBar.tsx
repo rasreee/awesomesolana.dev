@@ -2,8 +2,7 @@ import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 
 import { KeyComboSymbol } from '@/common/components'
-import { useInput, useOnKeyPress } from '@/common/hooks'
-import { only } from '@/common/utils/responsive'
+import { useInput, useIsMobileDevice, useOnKeyPress } from '@/common/hooks'
 import { Tag } from '@/models/tag'
 import { SearchIcon } from '@/ui/icon'
 
@@ -49,6 +48,8 @@ export const SearchBar: React.FunctionComponent<SearchBarProps> = () => {
 		})
 	}, [query])
 
+	const isMobileDevice = useIsMobileDevice()
+
 	return (
 		<>
 			{/* Inner content */}
@@ -85,19 +86,7 @@ export const SearchBar: React.FunctionComponent<SearchBarProps> = () => {
 						'align-middle'
 					)}
 				/>
-				{/* TODO: fix media query for hiding KeyComboSymbol on mobile/tablet */}
-				<div
-					css={{
-						[only('mobile')]: {
-							display: 'none'
-						},
-						[only('desktop')]: {
-							display: 'block'
-						}
-					}}
-				>
-					<KeyComboSymbol keys={['Meta', 'K']} style={{ color: 'var(--gray-500)' }} />
-				</div>
+				{!isMobileDevice && <KeyComboSymbol keys={['Meta', 'K']} style={{ color: 'var(--gray-500)' }} />}
 			</div>
 			<SearchResults hits={hits} />
 		</>
