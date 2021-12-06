@@ -9,6 +9,10 @@ import { SourceCardHeader } from './SourceCardHeader'
 export interface SourceCardProps extends Source {}
 
 export function SourceCard({ id, type, title, description, likes, updatedAt, url, tags, views }: SourceCardProps) {
+	const onClickLikes = async () => {
+		console.log('onClickLikes')
+	}
+
 	return (
 		<div
 			className={classNames(
@@ -48,7 +52,7 @@ export function SourceCard({ id, type, title, description, likes, updatedAt, url
 					'rounded-b-lg'
 				)}
 			>
-				<SourceCardFooter {...{ likes, views, updatedAt }} />
+				<SourceCardFooter {...{ likes, views, updatedAt }} onClickLikes={onClickLikes} />
 			</div>
 		</div>
 	)
