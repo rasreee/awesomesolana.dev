@@ -9,10 +9,13 @@ import { SearchIcon } from '@/ui/icon'
 import { getSearchResults } from './getSearchResults'
 import { SearchResults } from './SearchResults'
 
-export interface SearchBarProps {}
+export interface SearchBarProps {
+	shouldAutoFocus?: boolean
+	size?: 'sm' | 'lg'
+}
 
-export const SearchBar: React.FunctionComponent<SearchBarProps> = () => {
-	const { isFocused, value: query, blur, bind } = useInput({ autoFocus: true })
+export const SearchBar: React.FunctionComponent<SearchBarProps> = ({ shouldAutoFocus = false, size = 'lg' }) => {
+	const { isFocused, value: query, blur, bind } = useInput({ autoFocus: shouldAutoFocus })
 
 	useOnKeyPress('Escape', blur)
 
@@ -58,7 +61,8 @@ export const SearchBar: React.FunctionComponent<SearchBarProps> = () => {
 					'flex items-center',
 					'appearance-none',
 					'w-full md:w-6/12',
-					'mx-auto px-3 py-2',
+					'mx-auto',
+					size === 'sm' ? 'px-3 py-0.5' : 'px-3 py-2',
 					'rounded-lg',
 					'bg-white',
 					'shadow-sm',
@@ -72,7 +76,11 @@ export const SearchBar: React.FunctionComponent<SearchBarProps> = () => {
 					<div>Loading...</div>
 				) : (
 					<SearchIcon
-						className={classNames('h-5 w-5', 'md:h-6 md:w-6', isFocused ? 'text-primary-500' : 'text-gray-500')}
+						className={classNames(
+							'h-5 w-5',
+							size === 'sm' ? 'md:h-5 md:w-5' : 'md:h-6 md:w-6',
+							isFocused ? 'text-primary-500' : 'text-gray-500'
+						)}
 					/>
 				)}
 				<input
@@ -86,7 +94,8 @@ export const SearchBar: React.FunctionComponent<SearchBarProps> = () => {
 						'align-middle'
 					)}
 				/>
-				{!isMobileDevice && <KeyComboSymbol keys={['Meta', 'K']} style={{ color: 'var(--gray-500)' }} />}
+
+				{!isMobileDevice && <KeyComboSymbol size={size} keys={['Meta', 'K']} style={{ color: 'var(--gray-500)' }} />}
 			</div>
 			<SearchResults hits={hits} />
 		</>
