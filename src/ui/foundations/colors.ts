@@ -51,7 +51,7 @@ export const colors = {
 		800: '#002eb8',
 		900: '#00248f'
 	},
-	strawberry: {
+	pink: {
 		0: '#fff',
 		50: '#ffebf6',
 		100: '#ffd6ed',
@@ -77,7 +77,7 @@ export const colors = {
 		800: '#936915',
 		900: '#7A520C'
 	},
-	solanaPrimary: {
+	primary: {
 		0: '#fff',
 		50: '#eddeff',
 		100: '#dfc4ff',
@@ -90,7 +90,7 @@ export const colors = {
 		800: '#5400ba',
 		900: '#3f008c'
 	},
-	solanaSecondary: {
+	secondary: {
 		0: '#fff',
 		50: '#CEFDF0',
 		100: '#94FADD',
@@ -116,29 +116,6 @@ export const colors = {
 		800: '#930A0D',
 		900: '#7A0611'
 	}
-} as const
-
-const palette = {
-	pink: colors.strawberry[500],
-	darkest: '#0E141B',
-	darkGray: '#202f3c',
-	gray: '#6C7E93',
-	lightGray: '#9CA8B4',
-	lightest: '#E2E5E9',
-	blue: '#3366FF',
-	yellow: '#F0C808',
-	solanaPrimary: colors.solanaPrimary[500],
-	solanaSecondary: colors.solanaSecondary[500],
-	red: '#FF3D71',
-	white: '#fff'
-}
-
-export const baseThemeColors = {
-	...palette,
-	primary: palette.solanaPrimary,
-	secondary: palette.solanaSecondary,
-	warning: palette.yellow,
-	danger: palette.red
 } as const
 
 export type ColorName = keyof typeof colors

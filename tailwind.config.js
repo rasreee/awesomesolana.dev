@@ -78,13 +78,13 @@ module.exports = {
 	},
 	variants: {
 		extend: {
-			textColor: ['hover', 'disabled'],
-			backgroundColor: ['disabled', 'hover'],
-			backgroundOpacity: ['disabled', 'hover'],
+			textColor: ['hover', 'disabled', 'active'],
+			backgroundColor: ['disabled', 'hover', 'active'],
+			backgroundOpacity: ['disabled', 'hover', 'active'],
 			backgroundImage: ['disabled'],
 			textOpacity: ['disabled'],
 			cursor: ['disabled'],
-			opacity: ['disabled'],
+			opacity: ['disabled', 'active', 'hover'],
 			display: ['responsive']
 		}
 	},

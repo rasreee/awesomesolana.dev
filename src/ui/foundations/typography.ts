@@ -3,7 +3,7 @@ const fonts = {
 	mono: '"SF Mono", "Roboto Mono", monospace'
 }
 
-const fontSizes = {
+export const fontSizes = {
 	'xxs': '0.625rem',
 	'xs': '0.75rem',
 	'sm': '0.875rem',
@@ -18,7 +18,7 @@ const fontSizes = {
 
 export type FontSize = keyof typeof fontSizes
 
-const fontWeights = {
+export const fontWeights = {
 	thin: 100,
 	extralight: 200,
 	light: 300,

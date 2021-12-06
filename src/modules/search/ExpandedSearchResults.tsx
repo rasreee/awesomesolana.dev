@@ -22,7 +22,7 @@ const HitCount = styled.p`
 	line-height: 100%;
 	font-size: 14px;
 	font-weight: 500;
-	color: ${colors.gray['500']};
+	color: ${colors.gray[500]};
 
 	.countVal {
 		font-size: 1rem;

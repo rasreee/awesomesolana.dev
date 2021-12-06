@@ -2,8 +2,6 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React, { HTMLAttributes } from 'react'
 
-import styled from '@/ui/styled'
-
 export interface NavLinkProps extends HTMLAttributes<HTMLAnchorElement> {
 	id?: string
 	label: string
@@ -12,29 +10,24 @@ export interface NavLinkProps extends HTMLAttributes<HTMLAnchorElement> {
 	children: React.ReactNode
 }
 
-const Underline = styled.div`
-	flex: 1;
-	height: 1px;
-	background-color: ${(props) => props.theme.colors.white};
-`
-
-export function NavLink({ label, href, children, ...props }: NavLinkProps) {
+export function NavLink({ label, href, children, isActive = false, ...props }: NavLinkProps) {
 	return (
 		<label htmlFor={label}>
 			<Link href={href}>
 				<a
 					className={classNames(
 						'px-3 py-4',
+						isActive ? 'text-primary-500' : 'text-gray-500',
 						'flex items-center',
 						'leading-tight',
-						'text-gray-500 font-bold active:text-primary-500 hover:text-primary-500 hover:bg-primary-100',
+						'font-bold active:text-primary-500 hover:text-primary-500 hover:bg-primary-100',
 						'rounded'
 					)}
+					{...props}
 				>
 					{children}
 				</a>
 			</Link>
-			{props.isActive && <Underline />}
 		</label>
 	)
 }

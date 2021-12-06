@@ -1,4 +1,3 @@
-import { lighten } from 'polished'
 import { createContext, Dispatch, SetStateAction, useContext } from 'react'
 
 import { colors as baseColors } from '@/ui/foundations'
@@ -9,20 +8,16 @@ export const colorModes = {
 		surface: '#202F3C',
 		hint: baseColors.gray[300],
 		text: baseColors.gray[50],
-		primary: baseColors.solanaPrimary[500],
-		secondary: baseColors.solanaSecondary[500],
-		outline: lighten('0.1', '#202f3c'),
-		accent: '#29C6CF'
+		primary: baseColors.primary[500],
+		secondary: baseColors.secondary[500]
 	},
 	light: {
 		bg: '#EFF1F5',
 		surface: '#fff',
-		hint: '#8F9BB3',
-		text: '#151f28',
-		primary: baseColors.solanaPrimary[500],
-		secondary: baseColors.solanaSecondary[500],
-		outline: '#D0D6E2',
-		account: '#29C6CF'
+		hint: baseColors.gray[600],
+		text: baseColors.gray[900],
+		primary: baseColors.primary[500],
+		secondary: baseColors.secondary[500]
 	}
 }
 

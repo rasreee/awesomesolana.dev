@@ -4,13 +4,13 @@ import { FC, useMemo, useState } from 'react'
 
 import { theme } from '@/theme/theme'
 
-import { ColorModeContext, ColorModeName } from './color-mode'
+import { ColorModeContext, ColorModeName, colorModes } from './color-mode'
 
 const MyThemeProvider: FC = ({ children }) => {
 	const [colorMode, setColorMode] = useState<ColorModeName>('light')
 
 	const currentTheme = useMemo(() => {
-		const newModeColors = theme.modes[colorMode]
+		const newModeColors = colorModes[colorMode]
 		const newTheme = { ...theme, colors: { ...theme.colors, ...newModeColors } } as Theme
 
 		return newTheme

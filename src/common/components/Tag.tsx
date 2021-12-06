@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import React, { CSSProperties } from 'react'
 
-import { pseudo } from '@/common/utils/pseudos'
-import { theme } from '@/theme/theme'
-import { ColorName, colors, FontSize } from '@/ui/foundations'
+import { ColorName, colors, FontSize, fontSizes } from '@/ui/foundations'
+
+import { pseudo } from '../utils/pseudos'
 
 export interface TagProps {
 	color?: ColorName
@@ -13,7 +13,7 @@ export interface TagProps {
 
 export const Tag: React.FunctionComponent<TagProps> = ({
 	children,
-	color = 'solanaSecondary',
+	color = 'secondary',
 	fontSize = 'xs',
 	...props
 }) => {
@@ -27,12 +27,12 @@ export const Tag: React.FunctionComponent<TagProps> = ({
 				'cursor-pointer'
 			)}
 			css={{
-				fontSize: theme.fontSizes[fontSize],
+				fontSize: fontSizes[fontSize],
 				background: colors[color][50],
-				color: colors[color][800],
+				color: colors[color][700],
 				[pseudo('_hover')]: {
-					borderWidth: '1.5px',
-					borderColor: colors[color][700]
+					borderColor: colors[color][600],
+					borderWidth: '1.5px'
 				}
 			}}
 			{...props}

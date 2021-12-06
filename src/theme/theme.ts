@@ -1,15 +1,9 @@
-import { baseThemeColors, shadows, space, typography } from '@/ui/foundations'
-
-import { colorModes } from './color-mode'
-import { sizes } from './sizes'
+import { colors, shadows, typography } from '@/ui/foundations'
 
 const theme = {
-	modes: colorModes,
-	colors: { ...baseThemeColors, ...colorModes.dark },
+	colors,
 	...typography,
-	shadows,
-	sizes,
-	space
+	shadows
 } as const
 
 export type Theme = typeof theme

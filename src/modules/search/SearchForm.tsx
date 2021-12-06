@@ -1,12 +1,12 @@
 import React, { ChangeEventHandler, useState } from 'react'
 
-import { KeyComboSymbol } from '@/common/components'
-import { colors } from '@/ui/foundations'
-import { SearchIcon } from '@/ui/icon'
+import { KeyComboSymbol } from '@/common/components/KeyComboSymbol'
+import { colors } from '@/ui/foundations/colors'
+import { SearchIcon } from '@/ui/icon/SearchIcon'
 import styled from '@/ui/styled'
 
 const iconSize = 26
-const iconColor = colors.blue['500']
+const iconColor = colors.blue[500]
 const inputPlaceholder = 'Search docs'
 
 const Left = styled.div`

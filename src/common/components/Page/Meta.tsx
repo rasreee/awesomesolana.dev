@@ -3,7 +3,7 @@ import { NextSeo } from 'next-seo'
 import React, { useMemo } from 'react'
 
 import { AppConfig } from '@/common/utils/AppConfig'
-import { theme } from '@/theme/theme'
+import { colors } from '@/ui/foundations/colors'
 
 import { appleTouchIcon, favIcon, favIcon16, favIcon32, safariPinnedTab } from './constants'
 
@@ -25,7 +25,7 @@ export const Meta: React.FunctionComponent<MetaProps> = ({ description, title, i
 				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" key="viewport" />
 				<meta name="description" content={description} />
 				<link rel="manifest" href="/site.webmanifest" />
-				<meta name="theme-color" content={theme.colors.primary} />
+				<meta name="theme-color" content={colors.primary[500]} />
 				<meta property="og:title" content={titleText} />
 				<meta property="og:description" content={description} />
 				<meta property="og:image" content={image} />
@@ -34,7 +34,7 @@ export const Meta: React.FunctionComponent<MetaProps> = ({ description, title, i
 				<meta name="twitter:title" content={titleText} />
 				<meta name="twitter:image" content={image} />
 				<link rel="apple-touch-icon" sizes="180x180" href={appleTouchIcon} />
-				<link rel="mask-icon" href={safariPinnedTab} color={theme.colors.primary} />
+				<link rel="mask-icon" href={safariPinnedTab} color={colors.primary[500]} />
 				<link rel="icon" type="image/png" sizes="32x32" href={favIcon32} />
 				<link rel="icon" type="image/png" sizes="16x16" href={favIcon16} />
 				<link rel="shortcut icon" href={favIcon} />
