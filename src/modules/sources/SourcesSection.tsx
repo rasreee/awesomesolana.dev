@@ -57,7 +57,7 @@ export const SourcesSection: FC<SourcesSectionProps> = ({ sourceType }) => {
 			{/* Section header */}
 			<SourcesSectionHeader sourceType={sourceType} />
 			{/* Section content below header */}
-			<SourcesFeedGrid sourceType={sourceType} opts={{ limit: 3 }} />
+			<SourcesFeedGrid sourceType={sourceType} opts={{ limit: 3 }} spaceYClasses={'space-y-2 md:space-y-0'} />
 		</div>
 	)
 }

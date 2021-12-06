@@ -1,31 +1,13 @@
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import React, { FC } from 'react'
 
 import { Page } from '@/common/components/Page'
-import { SourceType, useSourcesByType } from '@/models/source'
+import { SourceType } from '@/models/source'
 
 import { SourcesFeedGrid } from './SourcesFeedGrid'
 
 export const normalizeQueryParam = <T extends string = string>(param: string | string[] | undefined): T => {
 	return param as T
-}
-
-type SourcesFeedProps = {
-	sourceType: SourceType
-}
-
-export const SourcesFeed: FC<SourcesFeedProps> = ({ sourceType }) => {
-	const { data: sources, isLoading } = useSourcesByType(sourceType)
-
-	return (
-		<>
-			{isLoading && <div>Loading...</div>}
-			{sources?.map((source) => (
-				<div key={source.id}>{source.title}</div>
-			))}
-		</>
-	)
 }
 
 export const SourcesPage = () => {
@@ -39,9 +21,13 @@ export const SourcesPage = () => {
 				<div className={classNames('flex', 'items-center justify-between', 'py-2', 'px-5 md:px-12')}>
 					<h1 className="text-gray-800 text-lg uppercase font-bold">{caption}</h1>
 				</div>
-				<div className={classNames('grid', 'content-center', 'space-y-2 md:space-y-0', 'space-x-0 md:space-x-4')}>
-					{sourceType && <SourcesFeedGrid sourceType={sourceType} />}
-				</div>
+				{sourceType && (
+					<SourcesFeedGrid
+						sourceType={sourceType}
+						spaceXClasses={'space-x-0 md:space-x-0'}
+						spaceYClasses={'space-y-2 md:space-y-0'}
+					/>
+				)}
 			</div>
 		</Page>
 	)
