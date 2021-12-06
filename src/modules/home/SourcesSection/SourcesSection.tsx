@@ -12,7 +12,7 @@ export type SourcesSectionHeaderProps = {
 }
 
 const SourcesSectionHeader: FC<SourcesSectionHeaderProps> = ({ sourceType }) => {
-	const caption = `recent ${sourceType.replace('-', ' ')}s`
+	const caption = `${sourceType.replace('-', ' ')}s`
 
 	return (
 		<div
@@ -48,7 +48,7 @@ export type SourcesSectionFeedProps = {
 }
 
 const SourcesSectionFeed: FC<SourcesSectionFeedProps> = ({ sourceType }) => {
-	const { data: recentSources, isLoading } = useSourcesByType(sourceType, { limit: 3 })
+	const { data: sources, isLoading } = useSourcesByType(sourceType, { limit: 3 })
 
 	return (
 		<div
@@ -61,7 +61,7 @@ const SourcesSectionFeed: FC<SourcesSectionFeedProps> = ({ sourceType }) => {
 			)}
 		>
 			{isLoading && <div>Loading...</div>}
-			{recentSources?.map((source) => (
+			{sources?.map((source) => (
 				<li className="m-0 p-0" key={source.id}>
 					<SourceCard {...source} />
 				</li>
