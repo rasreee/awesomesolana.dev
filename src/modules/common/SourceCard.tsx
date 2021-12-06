@@ -93,19 +93,18 @@ export function SourceCard({ id, type, title, description, likes, updatedAt, url
 					<p>{description}</p>
 					<div className={classNames('flex items-center gap-3', 'absolute bottom-4')}>
 						{tags.map((tag) => (
-							<li key={tag}>
-								<div
-									className={classNames(
-										'rounded px-2 py-0.5',
-										'font-medium leading-tight',
-										'bg-teal-100 text-teal-600',
-										'hover:shadow-sm hover:border hover:border-teal-300 active:bg-teal-200 active:text-teal-700',
-										'cursor-pointer'
-									)}
-								>
-									{tag}
-								</div>
-							</li>
+							<div
+								key={tag}
+								className={classNames(
+									'rounded px-2 py-0.5',
+									'font-medium leading-tight',
+									'bg-teal-100 text-teal-600',
+									'hover:shadow-sm hover:border hover:border-teal-300 active:bg-teal-200 active:text-teal-700',
+									'cursor-pointer'
+								)}
+							>
+								{tag}
+							</div>
 						))}
 					</div>
 				</div>
