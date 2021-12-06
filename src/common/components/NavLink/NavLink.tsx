@@ -24,7 +24,9 @@ export function NavLink({ label, href, children, ...props }: NavLinkProps) {
 			<Link href={href}>
 				<a
 					className={classNames(
-						'px-3 py-1',
+						'px-3 py-4',
+						'flex items-center',
+						'leading-tight',
 						'text-gray-500 font-bold active:text-primary-500 hover:text-primary-500 hover:bg-primary-100',
 						'rounded'
 					)}

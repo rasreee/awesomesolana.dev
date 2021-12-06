@@ -6,21 +6,9 @@ import React from 'react'
 import { useIsMobileDevice } from '@/common/hooks'
 import { SearchBar } from '@/modules/search'
 
-import { DefaultLogo, MobileLogo } from './Logo'
+import { DefaultLogo } from './Logo'
+import { MobilePageHeader } from './MobilePageHeader'
 import { NavLinks } from './NavLinks'
-
-export const MobilePageHeader = () => {
-	return (
-		<header className={classNames('h-12', 'flex justify-between gap-2', 'px-6 py-3')}>
-			<Link href={'/'}>
-				<a>
-					<MobileLogo />
-				</a>
-			</Link>
-			<NavLinks />
-		</header>
-	)
-}
 
 export const DefaultPageHeader = () => {
 	const router = useRouter()
