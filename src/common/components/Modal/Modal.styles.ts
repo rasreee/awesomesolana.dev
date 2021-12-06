@@ -18,12 +18,11 @@ export const Backdrop = styled.div`
 		padding: 10vh;
 	}
 `
-import ReactModal from 'react-modal'
 
 /**
  * Modal container
  */
-export const Container = styled(ReactModal)`
+export const Container = styled.div`
 	margin: auto;
 	width: 100%;
 	max-width: 90%;

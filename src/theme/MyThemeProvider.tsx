@@ -1,16 +1,10 @@
 import { Theme, ThemeProvider } from '@emotion/react'
-import React, { FC, useMemo, useState } from 'react'
+import classNames from 'classnames'
+import { FC, useMemo, useState } from 'react'
 
 import { theme } from '@/theme/theme'
-import styled from '@/ui/styled'
 
 import { ColorModeContext, ColorModeName } from './color-mode'
-
-const BgColor = styled.div`
-	background-color: ${(props) => props.theme.colors.bg};
-	min-width: 100vw;
-	min-height: 100vh;
-`
 
 const MyThemeProvider: FC = ({ children }) => {
 	const [colorMode, setColorMode] = useState<ColorModeName>('light')
@@ -25,7 +19,9 @@ const MyThemeProvider: FC = ({ children }) => {
 	return (
 		<ThemeProvider theme={currentTheme}>
 			<ColorModeContext.Provider value={{ colorMode, setColorMode }}>
-				<BgColor>{children}</BgColor>
+				<div className={classNames(colorMode === 'light' ? 'bg-light' : 'bg-dark', 'min-w-screen min-h-screen')}>
+					{children}
+				</div>
 			</ColorModeContext.Provider>
 		</ThemeProvider>
 	)

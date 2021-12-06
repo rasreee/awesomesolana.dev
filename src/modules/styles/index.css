@@ -43,3 +43,13 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 ::-webkit-scrollbar-track {
 	background: transparent;
 }
+
+
+@layer utilities {
+	.bg-dark {
+		background: #EFF1F5;
+	}
+	.bg-light {
+		background: #232323;
+	}
+}

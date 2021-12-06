@@ -1,3 +1,4 @@
 import { SWRResponse } from 'swr'
-
-export type SWRResponseWithLoading<D, E> = SWRResponse<D, E> & { isLoading: boolean }
+export interface SWRResponseWithLoading<D, E> extends SWRResponse<D, E> {
+	isLoading: boolean
+}

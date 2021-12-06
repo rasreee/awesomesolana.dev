@@ -1,5 +1,3 @@
-import { Theme } from '@emotion/react'
-
 const fonts = {
 	sans: '"Open Sans", Inter, "Inter UI", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Oxygen, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
 	mono: '"SF Mono", "Roboto Mono", monospace'
@@ -33,10 +31,6 @@ const fontWeights = {
 }
 
 export type FontWeight = keyof typeof fontWeights
-
-export const fontWeight = (theme: Theme, key: FontWeight) => {
-	return theme.fontWeights[key]
-}
 
 export const typography = {
 	fonts,

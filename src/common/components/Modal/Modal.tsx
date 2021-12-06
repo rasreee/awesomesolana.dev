@@ -1,16 +1,36 @@
-import React, { ReactNode } from 'react'
-import ReactModal from 'react-modal'
+import { useClickOutside } from '@react-hookz/web'
+import { HTMLAttributes, ReactNode, useRef } from 'react'
 
-import * as S from './styles'
+import { useOnKeyPress } from '@/common/hooks/useOnKeyPress'
 
-export interface ModalProps extends ReactModal.Props {
+import * as S from './Modal.styles'
+
+export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
 	onRequestClose: () => void
 	isOpen: boolean
 	children: ReactNode
 }
 
 export function Modal({ children, isOpen, onRequestClose, ...props }: ModalProps) {
-	return <S.Container {...{ isOpen, onRequestClose, ...props }}>{children}</S.Container>
+	const ref = useRef<HTMLDivElement | null>(null)
+
+	useClickOutside(ref, onRequestClose)
+	useOnKeyPress('Escape', onRequestClose)
+
+	if (!isOpen) return null
+
+	const onRef = (instance: HTMLDivElement | null) => {
+		if (!instance) return
+		ref.current = instance
+	}
+
+	return (
+		<S.Backdrop>
+			<S.Container ref={onRef} {...props}>
+				{children}
+			</S.Container>
+		</S.Backdrop>
+	)
 }
 
 Modal.Header = S.Header

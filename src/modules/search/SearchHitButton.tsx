@@ -1,5 +1,4 @@
 import { css } from '@emotion/react'
-import { darken } from 'polished'
 import { FC, HTMLAttributes } from 'react'
 
 import { pseudo } from '@/common/utils/pseudos'
@@ -25,13 +24,13 @@ const StyledSearchHitButton = styled.button`
 		font-weight: ${theme.fontWeights.semibold};
 		background: ${theme.colors.lightest};
 		${pseudo('_hover')} {
-			background: ${theme.colors.accent};
+			background: ${theme.colors.solanaSecondary[400]};
 			color: white;
 			box-shadow: ${theme.shadows.md};
 		}
 
 		${pseudo('_active')} {
-			background: ${darken('0.1', theme.colors.accent)};
+			background: ${theme.colors.solanaSecondary[500]};
 			color: white;
 			box-shadow: ${theme.shadows.md};
 		}
