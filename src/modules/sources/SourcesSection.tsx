@@ -2,9 +2,9 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import { FC } from 'react'
 
-import { SourceType, useSourcesByType } from '@/models/source'
+import { SourceType } from '@/models/source'
 
-import { SourceCard } from './SourceCard/SourceCard'
+import { SourcesFeedGrid } from './SourcesFeedGrid'
 
 export type SourcesSectionHeaderProps = {
 	sourceType: SourceType
@@ -47,29 +47,6 @@ export type SourcesSectionFeedProps = {
 	sourceType: SourceType
 }
 
-const SourcesSectionFeed: FC<SourcesSectionFeedProps> = ({ sourceType }) => {
-	const { data: sources, isLoading } = useSourcesByType(sourceType, { limit: 3 })
-
-	return (
-		<div
-			className={classNames(
-				'grid',
-				'grid-cols-1 md:grid-cols-3',
-				'content-center',
-				'space-y-2 md:space-y-0',
-				'space-x-0 md:space-x-4'
-			)}
-		>
-			{isLoading && <div>Loading...</div>}
-			{sources?.map((source) => (
-				<li className="m-0 p-0" key={source.id}>
-					<SourceCard {...source} />
-				</li>
-			))}
-		</div>
-	)
-}
-
 export type SourcesSectionProps = {
 	sourceType: SourceType
 }
@@ -80,7 +57,7 @@ export const SourcesSection: FC<SourcesSectionProps> = ({ sourceType }) => {
 			{/* Section header */}
 			<SourcesSectionHeader sourceType={sourceType} />
 			{/* Section content below header */}
-			<SourcesSectionFeed sourceType={sourceType} />
+			<SourcesFeedGrid sourceType={sourceType} opts={{ limit: 3 }} />
 		</div>
 	)
 }

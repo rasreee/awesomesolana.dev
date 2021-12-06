@@ -5,6 +5,8 @@ import React, { FC } from 'react'
 import { Page } from '@/common/components/Page'
 import { SourceType, useSourcesByType } from '@/models/source'
 
+import { SourcesFeedGrid } from './SourcesFeedGrid'
+
 export const normalizeQueryParam = <T extends string = string>(param: string | string[] | undefined): T => {
 	return param as T
 }
@@ -38,7 +40,7 @@ export const SourcesPage = () => {
 					<h1 className="text-gray-800 text-lg uppercase font-bold">{caption}</h1>
 				</div>
 				<div className={classNames('grid', 'content-center', 'space-y-2 md:space-y-0', 'space-x-0 md:space-x-4')}>
-					{sourceType && <SourcesFeed sourceType={sourceType} />}
+					{sourceType && <SourcesFeedGrid sourceType={sourceType} />}
 				</div>
 			</div>
 		</Page>
