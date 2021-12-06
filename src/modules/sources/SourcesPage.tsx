@@ -18,7 +18,7 @@ export const SourcesPage = () => {
 	return (
 		<Page title={caption} description={caption}>
 			<div className={classNames('grid', 'space-y-2')}>
-				<div className={classNames('flex', 'items-center justify-between', 'py-2', 'px-5 md:px-12')}>
+				<div className={classNames('flex', 'items-center justify-between', 'py-2', 'px-5 md:px-2')}>
 					<h1 className="text-gray-800 text-lg uppercase font-bold">{caption}</h1>
 				</div>
 				{sourceType && (

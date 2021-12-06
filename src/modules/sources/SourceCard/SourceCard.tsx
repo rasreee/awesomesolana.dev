@@ -21,7 +21,7 @@ export function SourceCard({ id, type, title, description, likes, updatedAt, url
 				'rounded-lg',
 				'flex flex-col',
 				'shadow-sm hover:shadow-lg',
-				'mobile:mx-auto'
+				'mobile:mx-auto md:mx-1 md:my-1'
 			)}
 		>
 			{/* Header */}

@@ -21,7 +21,7 @@ export const SourcesFeedGrid: FC<SourcesFeedGridProps> = ({
 	const { data: sources, isLoading } = useSourcesByType(sourceType, opts)
 
 	return (
-		<div className={classNames('grid', 'grid-cols-1 md:grid-cols-3', 'content-center', spaceYClasses, spaceXClasses)}>
+		<div className={classNames('grid', 'grid-cols-1 md:grid-cols-3', spaceYClasses, spaceXClasses)}>
 			{isLoading && <div>Loading...</div>}
 			{sources?.map((source) => (
 				<li className="m-0 p-0" key={source.id}>
