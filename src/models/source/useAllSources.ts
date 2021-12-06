@@ -7,11 +7,11 @@ import { SWRResponseWithLoading } from '@/common/utils/swr'
 import { FetcherOptions } from '@/common/utils/types'
 
 import { parseRawSourcesData } from './parseRawSourceData'
-import { RawSourceData, Source, SourceType } from './source.types'
+import { RawSourceData, Source } from './source.types'
 
-const makeFetcher = (supabase: SupabaseClient, sourceType: SourceType, opts?: FetcherOptions) => {
+const makeFetcher = (supabase: SupabaseClient, opts?: FetcherOptions) => {
 	const fetcher: Fetcher<Source[]> = async () => {
-		let request = supabase.from<RawSourceData>('sources').select('*').match({ type: sourceType })
+		let request = supabase.from<RawSourceData>('sources').select('*')
 
 		if (opts?.limit) {
 			request = request.limit(opts.limit)
@@ -25,15 +25,12 @@ const makeFetcher = (supabase: SupabaseClient, sourceType: SourceType, opts?: Fe
 	return fetcher
 }
 
-export const useSourcesByType = (
-	sourceType: SourceType,
-	opts?: FetcherOptions
-): SWRResponseWithLoading<Source[], Error> => {
+export const useAllSources = (opts?: FetcherOptions): SWRResponseWithLoading<Source[], Error> => {
 	const client = useSupabase()
 	const keyOpts = opts ? `&limit=${opts.limit}` : ''
-	const key = `sources?type=${sourceType}${keyOpts}`
+	const key = `sources/all?${keyOpts}`
 
-	const swr = useSWR<Source[], Error>(key, makeFetcher(client, sourceType, opts))
+	const swr = useSWR<Source[], Error>(key, makeFetcher(client, opts))
 
 	/* Check if data is still being fetched */
 	const isLoading = typeof swr.data === 'undefined' && typeof swr.error === 'undefined'

@@ -37,3 +37,5 @@ export type EventKeys =
 	| 'Shift'
 
 export type ColoringProps = { bg: string; txt: string; _hoverBg: string; _activeBg: string; border: string }
+
+export type FetcherOptions = { limit: number }

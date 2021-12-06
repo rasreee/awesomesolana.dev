@@ -1,6 +1,8 @@
 import classNames from 'classnames'
+import { useState } from 'react'
 
 import { Source } from '@/models/source/source.types'
+import { useUpdateSourceLikes } from '@/models/source/useUpdateSourceLikes'
 
 import { SourceCardBody } from './SourceCardBody'
 import { SourceCardFooter } from './SourceCardFooter'
@@ -8,9 +10,13 @@ import { SourceCardHeader } from './SourceCardHeader'
 
 export interface SourceCardProps extends Source {}
 
-export function SourceCard({ id, type, title, description, likes, updatedAt, url, tags, views }: SourceCardProps) {
+export function SourceCard(data: SourceCardProps) {
+	const [localData, setLocalData] = useState(data)
+	const updateSourceLikes = useUpdateSourceLikes(localData.id)
+
 	const onClickLikes = async () => {
-		console.log('onClickLikes')
+		const updatedData = await updateSourceLikes(localData.id, localData.likes + 1)
+		setLocalData(updatedData)
 	}
 
 	return (
@@ -26,7 +32,7 @@ export function SourceCard({ id, type, title, description, likes, updatedAt, url
 		>
 			{/* Header */}
 			<div className={classNames('flex items-center justify-between', 'overflow-hidden', 'px-4 pt-2', 'h-16')}>
-				<SourceCardHeader {...{ type, title, url }} />
+				<SourceCardHeader {...{ type: localData.type, title: localData.title, url: localData.url }} />
 			</div>
 			{/* Body */}
 			<div
@@ -38,7 +44,7 @@ export function SourceCard({ id, type, title, description, likes, updatedAt, url
 					'text-sm'
 				)}
 			>
-				<SourceCardBody {...{ description, tags }} />
+				<SourceCardBody {...{ description: localData.description, tags: localData.tags }} />
 			</div>
 			{/* Footer */}
 			<div
@@ -52,7 +58,10 @@ export function SourceCard({ id, type, title, description, likes, updatedAt, url
 					'rounded-b-lg'
 				)}
 			>
-				<SourceCardFooter {...{ likes, views, updatedAt }} onClickLikes={onClickLikes} />
+				<SourceCardFooter
+					{...{ likes: localData.likes, views: localData.views, updatedAt: localData.updatedAt }}
+					onClickLikes={onClickLikes}
+				/>
 			</div>
 		</div>
 	)
