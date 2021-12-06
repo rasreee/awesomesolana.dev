@@ -61,22 +61,20 @@ export function SourceCard({ id, type, title, description, likes, updatedAt, url
 							</a>
 						</Link>
 						<Link href={url}>
-							<>
-								<a
-									className={classNames(
-										'flex items-center',
-										'gap-1.5',
-										'text-gray-600',
-										'text-xs underline font-semibold',
-										'hover:text-primary-500',
-										'active:text-primary-800',
-										'cursor-pointer'
-									)}
-								>
-									<LinkIcon height="13" width="13" />
-									<span className={classNames('overflow-ellipsis line-clamp-1')}>{url}</span>
-								</a>
-							</>
+							<a
+								className={classNames(
+									'flex items-center',
+									'gap-1.5',
+									'text-gray-600',
+									'text-xs underline font-semibold',
+									'hover:text-primary-500',
+									'active:text-primary-800',
+									'cursor-pointer'
+								)}
+							>
+								<LinkIcon height="13" width="13" />
+								<span className={classNames('overflow-ellipsis line-clamp-1')}>{url}</span>
+							</a>
 						</Link>
 					</div>
 				</div>
