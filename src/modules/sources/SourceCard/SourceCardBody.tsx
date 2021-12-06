@@ -10,15 +10,21 @@ export interface SourceCardBodyProps {
 }
 
 export const SourceCardBody: React.FunctionComponent<SourceCardBodyProps> = ({ description, tags }) => {
-	const clampedDescription = useMemo(() => clampText(description, 70), [description])
+	const descriptionText = useMemo(() => {
+		const clampedDescription = clampText(description, 85)
+
+		return clampedDescription.length ? clampedDescription : 'No description.'
+	}, [description])
 
 	return (
 		<>
-			{clampedDescription && <p className="text-xs leading-5">{clampedDescription}</p>}
+			<p className={'text-xs leading-5'}>{descriptionText}</p>
 
 			<div className={classNames('flex items-center gap-3', 'absolute bottom-4')}>
 				{tags.map((tag) => (
-					<Tag key={tag}>{tag}</Tag>
+					<Tag fontSize="xs" key={tag}>
+						{tag}
+					</Tag>
 				))}
 			</div>
 		</>
