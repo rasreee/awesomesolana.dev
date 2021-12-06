@@ -6,13 +6,18 @@ import { NavLink, NavLinkProps } from '@/ui/components'
 const navLinks: Omit<NavLinkProps, 'children'>[] = [
 	{
 		id: 'articles',
-		href: '/articles',
+		href: `/sources?type=${'article'}`,
 		label: 'Articles'
 	},
 	{
 		id: 'repos',
-		href: '/repos',
+		href: `/sources?type=${'github-repo'}`,
 		label: 'Repos'
+	},
+	{
+		id: 'whitepapers',
+		href: `/sources?type=${'whitepaper'}`,
+		label: 'Whitepapers'
 	}
 ]
 

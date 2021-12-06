@@ -5,12 +5,13 @@ import { findSourcesByType, Source, SourceType } from '@/models/source'
 
 type FetcherOptions = { limit: number }
 
-const getFetcher = (sourceType: SourceType, opts: FetcherOptions) => {
+const getFetcher = (sourceType: SourceType, opts?: FetcherOptions) => {
 	const fetcher: Fetcher<Source[]> = async () => {
 		const sources = await findSourcesByType(sourceType)
 
 		// TODO let API handle limit
-		const result = sources.slice(0, opts.limit)
+
+		const result = opts ? sources.slice(0, opts.limit) : sources
 
 		return result
 	}
@@ -20,9 +21,10 @@ const getFetcher = (sourceType: SourceType, opts: FetcherOptions) => {
 
 export const useSourcesByType = (
 	sourceType: SourceType,
-	opts: FetcherOptions
+	opts?: FetcherOptions
 ): SWRResponseWithLoading<Source[], Error> => {
-	const key = `sources?type=${sourceType}&limit=${opts.limit}`
+	const keyOpts = opts ? `&limit=${opts.limit}` : ''
+	const key = `sources?type=${sourceType}${keyOpts}`
 
 	const swr = useSWR<Source[], Error>(key, getFetcher(sourceType, opts))
 

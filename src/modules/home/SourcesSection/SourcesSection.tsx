@@ -2,10 +2,9 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import { FC } from 'react'
 
-import { SourceType } from '@/models/source'
+import { SourceType, useSourcesByType } from '@/models/source'
 
 import { SourceCard } from './SourceCard'
-import { useSourcesByType } from './useSourcesByType'
 
 export type SourcesSectionHeaderProps = {
 	sourceType: SourceType
