@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import React, { FC, useMemo } from 'react'
 
 import { clampText } from '@/common/utils/clampText'
-import { LinkIcon } from '@/ui/icon/LinkIcon'
+import { LinkIcon } from '@/icons/LinkIcon'
 
 type SourceCardHeaderProps = { title: string; url: string; onClickLink: () => void }
 

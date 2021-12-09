@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 
 import { KeyComboSymbol } from '@/common/components'
 import { useInput, useIsMobileDevice, useOnKeyPress } from '@/common/hooks'
+import { SearchIcon } from '@/icons/SearchIcon'
 import { Tag } from '@/models/tag'
-import { SearchIcon } from '@/ui/icon'
 
 import { getSearchResults } from './getSearchResults'
 import { SearchResults } from './SearchResults'

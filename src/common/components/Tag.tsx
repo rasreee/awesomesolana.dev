@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React, { CSSProperties } from 'react'
 
-import { ColorName, colors, FontSize, fontSizes } from '@/ui/foundations'
+import { ColorName, colors, FontSize, fontSizes } from '@/theme/foundations'
 
 import { pseudo } from '../utils/pseudos'
 

@@ -1,6 +1,6 @@
 import { createContext, Dispatch, SetStateAction, useContext } from 'react'
 
-import { colors as baseColors } from '@/ui/foundations'
+import { colors as baseColors } from '@/theme/foundations'
 
 export const colorModes = {
 	dark: {

@@ -1,4 +1,4 @@
-import styled from '@/ui/styled'
+import styled from '@/common/utils/styled'
 
 /**
  * Wrapper that covers the entire screen as a backdrop

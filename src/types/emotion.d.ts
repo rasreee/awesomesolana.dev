@@ -2,7 +2,7 @@
 import { Interpolation } from '@emotion/react'
 import {} from '@emotion/react/types/css-prop' // See https://github.com/emotion-js/emotion/pull/1941
 
-import { Styling } from '@/ui/styled'
+import { Styling } from '@/common/utils/styled'
 
 import { Theme as AppTheme } from '../theme/theme'
 declare module '@emotion/react' {

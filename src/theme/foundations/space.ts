@@ -1,6 +1,6 @@
-import { rem } from 'polished'
+export const rem = (px: number): string => `${px / 16}rem`
 
-export const space = {
+const space = {
 	auto: 'auto',
 	0: '0px',
 	0.5: '0.125rem',

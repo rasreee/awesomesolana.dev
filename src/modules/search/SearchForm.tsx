@@ -1,9 +1,9 @@
 import React, { ChangeEventHandler, useState } from 'react'
 
 import { KeyComboSymbol } from '@/common/components/KeyComboSymbol'
-import { colors } from '@/ui/foundations/colors'
-import { SearchIcon } from '@/ui/icon/SearchIcon'
-import styled from '@/ui/styled'
+import styled from '@/common/utils/styled'
+import { SearchIcon } from '@/icons/SearchIcon'
+import { colors } from '@/theme/foundations/colors'
 
 const iconSize = 26
 const iconColor = colors.blue[500]

@@ -1,6 +1,6 @@
 import React, { FC, HTMLAttributes } from 'react'
 
-import { IconProps } from '@/ui/icon/IconProps'
+import { IconProps } from '@/icons/IconProps'
 
 export interface SourceStatButtonProps extends HTMLAttributes<HTMLButtonElement> {
 	value: number

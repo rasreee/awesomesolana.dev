@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { IconProps } from '@/ui/icon'
+import { IconProps } from '@/icons/IconProps'
 
 export const DefaultLogo: React.FC<IconProps> = (props) => {
 	return (

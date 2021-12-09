@@ -1,2 +1,2 @@
-export * from './Tag';
-export * from './requests';
+export * from './Tag'
+export * from './requests'

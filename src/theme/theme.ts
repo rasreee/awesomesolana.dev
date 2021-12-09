@@ -1,4 +1,4 @@
-import { colors, shadows, typography } from '@/ui/foundations'
+import { colors, shadows, typography } from './foundations'
 
 const theme = {
 	colors,

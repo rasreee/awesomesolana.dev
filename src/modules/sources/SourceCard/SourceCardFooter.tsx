@@ -2,9 +2,9 @@ import classNames from 'classnames'
 import { FC } from 'react'
 
 import { Tag } from '@/common/components/Tag'
+import { EyeIcon } from '@/icons/EyeIcon'
+import { HeartIconSolid } from '@/icons/HeartIcon'
 import { SourceType } from '@/models/source'
-import { EyeIcon } from '@/ui/icon/EyeIcon'
-import { HeartIconSolid } from '@/ui/icon/HeartIcon'
 
 import { SourceStatButton } from './SourceStatButton'
 

@@ -24,9 +24,6 @@
 			"@/theme/*": [
 				"src/theme/*"
 			],
-			"@/ui/*": [
-				"src/ui/*"
-			],
 			"@/modules/*": [
 				"src/modules/*"
 			],
@@ -35,6 +32,9 @@
 			],
 			"@/models/*": [
 				"src/models/*"
+			],
+			"@/icons/*": [
+				"src/icons/*"
 			],
 		},
 		"incremental": true

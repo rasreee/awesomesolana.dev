@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { Modal } from '@/common/components'
+import styled from '@/common/utils/styled'
 import { Tag } from '@/models/tag'
-import { colors } from '@/ui/foundations'
-import styled from '@/ui/styled'
+import { colors } from '@/theme/foundations'
 
 import { SearchHitButton } from './SearchHitButton'
 import { SearchResults } from './types'
