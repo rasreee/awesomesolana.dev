@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-import { Source } from '@/models/source/source.types'
+import { Source } from '@/models/source/types'
 import { useUpdateSourceData } from '@/models/source/useUpdateSourceData'
 
 import { SourceCardBody } from './SourceCardBody'

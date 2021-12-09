@@ -1,6 +1,6 @@
 import { capitalizeFirstLetter } from '@/common/utils/capitalize'
 
-import { SourceType } from './source.types'
+import { SourceType } from './types'
 
 export const formatSourceTypeLabel = (sourceType: SourceType): string => {
 	if (sourceType === 'github-repo') return 'Repos'

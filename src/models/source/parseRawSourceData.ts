@@ -1,4 +1,4 @@
-import { RawSourceData, Source } from './source.types'
+import { RawSourceData, Source } from './types'
 
 export const parseSingleRawSourceData = (rawData: RawSourceData): Source => {
 	const parsedData = { ...rawData, tags: JSON.parse(rawData.tags) }

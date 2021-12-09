@@ -1,7 +1,7 @@
 import { useSupabase } from '@/common/supabase/useSupabase'
 import { handleSupabaseResponse } from '@/common/utils/handleSupabaseResponse'
 
-import { RawSourceData, Source } from './source.types'
+import { RawSourceData, Source } from './types'
 import { useSourceById } from './useSourceById'
 
 export const useUpdateSourceData = (id: string) => {

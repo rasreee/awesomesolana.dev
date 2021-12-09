@@ -7,7 +7,7 @@ import { SWRResponseWithLoading } from '@/common/utils/swr'
 import { FetcherOptions } from '@/common/utils/types'
 
 import { parseRawSourcesData } from './parseRawSourceData'
-import { RawSourceData, Source, SourceType } from './source.types'
+import { RawSourceData, Source, SourceType } from './types'
 
 const makeFetcher = (supabase: SupabaseClient, sourceType: SourceType, opts?: FetcherOptions) => {
 	const fetcher: Fetcher<Source[]> = async () => {
