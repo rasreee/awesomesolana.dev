@@ -5,14 +5,13 @@ import { useSupabase } from '@/common/supabase/useSupabase'
 import { SWRResponseWithLoading } from '@/common/utils'
 import { handleSupabaseSingleResponse } from '@/common/utils/handleSupabaseResponse'
 
-import { parseSingleRawSourceData } from './parseRawSourceData'
-import { RawSourceData, Source } from './types'
+import { Source } from './types'
 
 const makeFetcher = (supabase: SupabaseClient, id: string) => {
 	const fetcher: Fetcher<Source> = async () => {
-		const request = supabase.from<RawSourceData>('sources').select('*').match({ id }).single()
+		const request = supabase.from<Source>('sources').select('*').match({ id }).single()
 
-		const data = await request.then(handleSupabaseSingleResponse).then(parseSingleRawSourceData)
+		const data = await request.then(handleSupabaseSingleResponse)
 
 		return data
 	}

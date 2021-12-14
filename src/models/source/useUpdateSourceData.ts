@@ -1,7 +1,7 @@
 import { useSupabase } from '@/common/supabase/useSupabase'
 import { handleSupabaseResponse } from '@/common/utils/handleSupabaseResponse'
 
-import { RawSourceData, Source } from './types'
+import { Source } from './types'
 import { useSourceById } from './useSourceById'
 
 export const useUpdateSourceData = (id: string) => {
@@ -15,7 +15,7 @@ export const useUpdateSourceData = (id: string) => {
 
 		const newSourcesData = { ...source, ...data }
 
-		await supabase.from<RawSourceData>('sources').update(data).match({ id }).then(handleSupabaseResponse)
+		await supabase.from<string>('sources').update(data).match({ id }).then(handleSupabaseResponse)
 
 		await mutateSource(newSourcesData)
 

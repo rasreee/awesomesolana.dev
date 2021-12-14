@@ -6,18 +6,17 @@ import { handleSupabaseResponse } from '@/common/utils/handleSupabaseResponse'
 import { SWRResponseWithLoading } from '@/common/utils/swr'
 import { FetcherOptions } from '@/common/utils/types'
 
-import { parseRawSourcesData } from './parseRawSourceData'
-import { RawSourceData, Source, SourceType } from './types'
+import { Source, SourceType } from './types'
 
 const makeFetcher = (supabase: SupabaseClient, sourceType: SourceType, opts?: FetcherOptions) => {
 	const fetcher: Fetcher<Source[]> = async () => {
-		let request = supabase.from<RawSourceData>('sources').select('*').match({ type: sourceType })
+		let request = supabase.from<Source>('sources').select('*').match({ type: sourceType })
 
 		if (opts?.limit) {
 			request = request.limit(opts.limit)
 		}
 
-		const data = await request.then(handleSupabaseResponse).then(parseRawSourcesData)
+		const data = await request.then(handleSupabaseResponse)
 
 		return data
 	}
