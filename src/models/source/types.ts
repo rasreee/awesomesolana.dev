@@ -1,4 +1,12 @@
-export const SOURCE_TYPES = ['github-repo', 'article', 'whitepaper', 'awesome-list', 'video', 'course'] as const
+export const SOURCE_TYPES = [
+	'github-repo',
+	'article',
+	'whitepaper',
+	'awesome-list',
+	'video',
+	'course',
+	'devtool'
+] as const
 
 export type SourceType = typeof SOURCE_TYPES[number]
 
