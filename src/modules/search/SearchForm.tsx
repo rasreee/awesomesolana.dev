@@ -1,9 +1,16 @@
 import classNames from 'classnames'
-import React, { ChangeEventHandler, useState } from 'react'
+import React, {
+	ChangeEventHandler,
+	Dispatch,
+	forwardRef,
+	InputHTMLAttributes,
+	Ref,
+	SetStateAction,
+	useState
+} from 'react'
 
 import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
 import { Spinner } from '@/common/components/spinner'
-import { useDebouncedAndAutofocusedInput } from '@/common/hooks/useInput'
 import { SearchIcon } from '@/icons/SearchIcon'
 import styled from '@/styled'
 import { colors } from '@/theme/foundations/colors'
@@ -17,16 +24,25 @@ const Left = styled.div`
 	align-items: center;
 `
 
-export interface SearchFormProps extends ReturnType<typeof useDebouncedAndAutofocusedInput> {
+export interface SearchFormProps extends InputHTMLAttributes<HTMLInputElement> {
 	isLoading: boolean
+	value: string
+	setValue: Dispatch<SetStateAction<string>>
+	/**
+	 * The ref to the HTML DOM element.
+	 */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	ref?: Ref<any>
+	onChange: ChangeEventHandler<HTMLInputElement>
 }
 
-export function SearchForm({ value: initialQuery, setValue, isLoading }: SearchFormProps) {
-	const [localQuery, setLocalQuery] = useState(initialQuery)
+export const SearchForm = forwardRef((props: SearchFormProps, ref: SearchFormProps['ref']) => {
+	const [localQuery, setLocalQuery] = useState(props.value)
 
-	const onChange: ChangeEventHandler<HTMLInputElement> = ({ currentTarget: { value } }) => {
-		setLocalQuery(value)
-		setValue(value)
+	const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+		const newValue = event.currentTarget.value
+		setLocalQuery(newValue)
+		props.setValue(newValue)
 	}
 
 	return (
@@ -48,10 +64,12 @@ export function SearchForm({ value: initialQuery, setValue, isLoading }: SearchF
 			noValidate
 		>
 			<Left>
-				{isLoading ? <Spinner /> : <SearchIcon height={iconSize} fill={iconColor} />}
-				<input type="search" placeholder={inputPlaceholder} value={localQuery} onChange={onChange} />
+				{props.isLoading ? <Spinner /> : <SearchIcon height={iconSize} fill={iconColor} />}
+				<input ref={ref} type="search" placeholder={inputPlaceholder} value={localQuery} onChange={onChange} />
 			</Left>
 			<KbdSymbol keys={['esc']} />
 		</form>
 	)
-}
+})
+
+SearchForm.displayName = 'SearchForm'

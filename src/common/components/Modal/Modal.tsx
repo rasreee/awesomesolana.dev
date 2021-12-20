@@ -1,9 +1,9 @@
-import { ReactNode } from 'react'
-import ReactModal from 'react-modal'
+import { useClickOutside } from '@react-hookz/web'
+import { ReactNode, useRef } from 'react'
+
+import { useOnKeyPress } from '@/common/hooks'
 
 import * as S from './Modal.styles'
-
-ReactModal.setAppElement('#__next')
 
 export interface ModalProps {
 	children: ReactNode
@@ -12,7 +12,23 @@ export interface ModalProps {
 }
 
 export function Modal({ isOpen, close: onRequestClose, children }: ModalProps) {
-	return <ReactModal {...{ onRequestClose, isOpen }}>{children}</ReactModal>
+	const ref = useRef<HTMLDivElement | null>(null)
+
+	useClickOutside(ref, onRequestClose)
+	useOnKeyPress('Escape', onRequestClose)
+
+	if (!isOpen) return null
+
+	const onRef = (instance: HTMLDivElement | null) => {
+		if (!instance) return
+		ref.current = instance
+	}
+
+	return (
+		<S.Backdrop>
+			<S.Container ref={onRef}>{children}</S.Container>
+		</S.Backdrop>
+	)
 }
 
 Modal.Header = S.Header

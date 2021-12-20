@@ -1,6 +1,7 @@
 import React from "react";
 
-import { AppProviders } from '@/app/AppProviders';
+import { AppShell } from '@/app/AppShell';
+
 import { addDecorator } from "@storybook/react";
 
 export const parameters = {
@@ -19,7 +20,7 @@ export const parameters = {
 
 
 addDecorator((storyFn) => (
-	<AppProviders>
+	<AppShell>
 			{storyFn()}
-	</AppProviders>
+	</AppShell>
 ));

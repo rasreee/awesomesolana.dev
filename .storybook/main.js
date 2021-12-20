@@ -9,7 +9,7 @@ const toPath = (_path) => path.join(process.cwd(), _path);
 
 
 module.exports = {
-	stories: ["../**/*.stories.tsx"],
+	stories: ["../src/modules/**/*.stories.tsx"],
 	addons: [],
 
 	webpackFinal: async (config) => {

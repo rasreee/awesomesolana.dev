@@ -1,23 +1,23 @@
 import React from 'react'
 
-import { eventKbdAbbrs, EventKey, isEventKey } from './eventKey'
+import { eventKbdAbbrs, isEventKey, KeyboardKey } from './keys'
 
-export const KbdSymbolItem = ({ value }: { value: EventKey | string }) => {
+export const KbdSymbolItem = ({ value }: { value: KeyboardKey }) => {
 	if (isEventKey(value)) {
 		const abbrVal = eventKbdAbbrs[value] ?? ''
 
-		if (!abbrVal) {
+		if (!Object.keys(eventKbdAbbrs).includes(value)) {
 			console.warn(`KbdSymbolItem was passed unknown value ${abbrVal}`)
 		}
 
 		return <abbr className="no-underline text-gray-300 dark:text-gray-500">{abbrVal}</abbr>
+	} else {
+		return <>{value}</>
 	}
-
-	return <>{value}</>
 }
 
 export interface KbdSymbolProps {
-	keys: (EventKey | string)[]
+	keys: KeyboardKey[]
 }
 
 export const KbdSymbol: React.FunctionComponent<KbdSymbolProps> = ({ keys }) => {

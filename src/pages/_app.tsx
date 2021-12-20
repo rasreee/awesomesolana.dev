@@ -3,13 +3,13 @@ import '@/modules/styles/index.css'
 import { AppProps } from 'next/app'
 import React from 'react'
 
-import { AppProviders } from '@/app/AppProviders'
+import { AppShell } from '@/app/AppShell'
 
 function App({ Component, pageProps }: AppProps) {
 	return (
-		<AppProviders>
+		<AppShell>
 			<Component {...pageProps} />
-		</AppProviders>
+		</AppShell>
 	)
 }
 
