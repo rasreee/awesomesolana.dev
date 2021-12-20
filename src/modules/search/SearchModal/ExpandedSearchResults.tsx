@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Modal } from '@/common/components'
 import styled from '@/common/utils/styled'
-import { Tag } from '@/models/tag'
+import { Source } from '@/models/source'
 import { colors } from '@/theme/foundations'
 
 import { SearchHitButton } from './SearchHitButton'
@@ -30,7 +30,7 @@ const HitCount = styled.p`
 	}
 `
 
-const SearchHits = ({ data, onHitClick }: { data: Tag[]; onHitClick: any }) => {
+const SearchHits = ({ data, onHitClick }: { data: Source[]; onHitClick: any }) => {
 	return (
 		<HitList>
 			{data.map((hit) => (

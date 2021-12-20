@@ -1,10 +1,10 @@
 import classNames from 'classnames'
 import { FC, HTMLAttributes } from 'react'
 
-import { Tag } from '@/models/tag'
+import { Source } from '@/models/source'
 
 export interface SearchHitButtonProps extends HTMLAttributes<HTMLButtonElement> {
-	hit: Tag
+	hit: Source
 }
 
 export const SearchHitButton: FC<SearchHitButtonProps> = ({ onClick, hit }) => {
@@ -22,7 +22,7 @@ export const SearchHitButton: FC<SearchHitButtonProps> = ({ onClick, hit }) => {
 			)}
 			onClick={onClick}
 		>
-			{hit.name}
+			{hit.title}
 		</button>
 	)
 }

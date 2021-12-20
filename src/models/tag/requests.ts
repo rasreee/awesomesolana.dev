@@ -1,5 +1,5 @@
 import tagsJson from './fixtures/tags.json'
-import { Tag } from './Tag'
+import { Tag } from './types'
 
 export function getTags() {
 	return tagsJson as Tag[]

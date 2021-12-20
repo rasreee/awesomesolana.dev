@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react'
 import { KeyComboSymbol } from '@/common/components'
 import { useInput, useIsMobileDevice, useOnKeyPress } from '@/common/hooks'
 import { SearchIcon } from '@/icons/SearchIcon'
-import { Tag } from '@/models/tag'
+import { Source } from '@/models/source'
+import { useFindSourcesByQuery } from '@/models/source/useFindSourcesByQuery'
 
-import { getSearchResults } from './getSearchResults'
-import { SearchResults } from './SearchResults'
+import { SearchResults } from './SearchModal/SearchResults'
 
 export interface SearchBarProps {
 	shouldAutoFocus?: boolean
@@ -16,6 +16,7 @@ export interface SearchBarProps {
 
 export const SearchBar: React.FunctionComponent<SearchBarProps> = ({ shouldAutoFocus = false, size = 'lg' }) => {
 	const { isFocused, value: query, blur, bind } = useInput({ autoFocus: shouldAutoFocus })
+	const findSourcesByQuery = useFindSourcesByQuery()
 
 	useOnKeyPress('Escape', blur)
 
@@ -23,7 +24,7 @@ export const SearchBar: React.FunctionComponent<SearchBarProps> = ({ shouldAutoF
 		console.log('Submitted Query: ', bind.ref.current?.value)
 	})
 
-	const [hits, setHits] = useState<Tag[]>([])
+	const [hits, setHits] = useState<Source[]>([])
 	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
@@ -41,7 +42,7 @@ export const SearchBar: React.FunctionComponent<SearchBarProps> = ({ shouldAutoF
 
 			await promise
 
-			return getSearchResults(query)
+			return findSourcesByQuery(query)
 		}
 
 		fetcher().then((res) => {

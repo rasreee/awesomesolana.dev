@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { FC } from 'react'
 
-import { SearchModalController } from '@/modules/search/SearchModalController'
+import { SearchModalController } from '@/modules/search/SearchModal/SearchModalController'
 
 import { preview } from './constants'
 import { Meta } from './Meta'

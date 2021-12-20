@@ -1,17 +1,17 @@
 import React from 'react'
 
-import { Tag } from '@/models/tag'
+import { Source } from '@/models/source'
 
 import { SearchHitButton } from './SearchHitButton'
 
 export interface SearchResultsProps {
-	hits: Tag[]
+	hits: Source[]
 }
 
 export const SearchResults: React.FunctionComponent<SearchResultsProps> = ({ hits }) => {
-	const onHitClick = (hit: Tag) => {
+	const onHitClick = (hit: Source) => {
 		return () => {
-			console.log(`Clicked tag: `, JSON.stringify(hit))
+			console.log(`Clicked source: `, JSON.stringify(hit))
 		}
 	}
 

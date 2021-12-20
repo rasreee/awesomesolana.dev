@@ -1,35 +1,25 @@
 import { useRouter } from 'next/router'
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 
-import { Modal, ModalProps } from '@/common/components'
-import { Tag } from '@/models/tag'
+import { Modal, ModalProps } from '@/common/components/Modal'
+import { Source } from '@/models/source/types'
 
 import { ExpandedSearchResults } from './ExpandedSearchResults'
-import { getSearchResults } from './getSearchResults'
-import { useInitialQuery } from './InitialQueryContext'
-import { useRecents } from './RecentsContext'
 import { SearchForm } from './SearchForm'
+import { useSearchModal } from './SearchModalContext'
 import { SearchResults } from './types'
-import { useSearch } from './useSearch'
 
 export interface SearchModalProps extends Pick<ModalProps, 'isOpen' | 'onRequestClose'> {}
 
 export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) => {
 	const router = useRouter()
-	const { setInitialQuery } = useInitialQuery()
-	const { recents, updateRecents } = useRecents()
+	const { setInitialQuery, recents, updateRecents, query, setQuery, hits } = useSearchModal()
 
-	const { query, setQuery, hits, setHits, reset } = useSearch()
-
-	useEffect(() => {
-		setHits(getSearchResults(query))
-	}, [query])
-
-	const onHitClick = (hit: Tag) => () => {
+	const onHitClick = (hit: Source) => () => {
 		updateRecents(hit)
-		setInitialQuery(hit.name)
+		setInitialQuery(hit.title)
 		props.onRequestClose()
-		router.push(`/tags/${hit.id}`)
+		router.push(`/sources/${hit.id}`)
 	}
 
 	const effects = useMemo(() => {
