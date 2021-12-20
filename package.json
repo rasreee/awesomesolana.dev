@@ -54,6 +54,7 @@
 		"@react-hookz/web": "^12.0.0",
 		"@supabase/supabase-js": "^1.28.5",
 		"@tailwindcss/line-clamp": "^0.3.0",
+		"@types/react-modal": "^3.13.1",
 		"classnames": "^2.3.1",
 		"express": "^4.17.2",
 		"next": "12.0.7",
@@ -61,6 +62,7 @@
 		"next-seo": "^4.28.1",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
+		"react-modal": "^3.14.4",
 		"swr": "^1.1.1"
 	},
 	"husky": {

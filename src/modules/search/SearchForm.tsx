@@ -21,7 +21,7 @@ export interface SearchFormProps extends ReturnType<typeof useDebouncedAndAutofo
 	isLoading: boolean
 }
 
-export function SearchForm({ value: initialQuery, setValue, isFocused, isLoading }: SearchFormProps) {
+export function SearchForm({ value: initialQuery, setValue, isLoading }: SearchFormProps) {
 	const [localQuery, setLocalQuery] = useState(initialQuery)
 
 	const onChange: ChangeEventHandler<HTMLInputElement> = ({ currentTarget: { value } }) => {
@@ -40,8 +40,7 @@ export function SearchForm({ value: initialQuery, setValue, isFocused, isLoading
 				'rounded-lg',
 				'bg-white',
 				'shadow-sm',
-				'border',
-				isFocused ? 'outline-none ring-primary-500 border-primary-500' : 'border-gray-300',
+				'border border-gray-300 focused:outline-none focused:ring-primary-500 focused:border-primary-500',
 				'placeholder-gray-400',
 				'text-base sm:text-sm'
 			)}
