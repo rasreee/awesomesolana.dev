@@ -1,7 +1,6 @@
 import React from "react";
 
 import { MyThemeProvider } from '@/theme/MyThemeProvider';
-import '@storybook/addon-console'; 
 import { addDecorator } from "@storybook/react";
 
 export const parameters ={
