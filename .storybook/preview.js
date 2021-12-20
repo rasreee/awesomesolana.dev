@@ -1,7 +1,5 @@
 import React from "react";
 
-import '../src/modules/styles/index.css'
-
 import { AppShell } from '@/app/AppShell';
 
 

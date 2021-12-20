@@ -8,8 +8,7 @@ export const Header = styled.header`
 	padding: 0 1rem;
 	align-items: center;
 	border-bottom-width: 1px;
-	--tw-border-opacity: 1;
-	border-color: rgb(241 245 249 / var(--tw-border-opacity));
+	border-color: rgb(241 245 249 / var(--border-opacity));
 `
 
 export const Dropdown = styled.div``
