@@ -15,13 +15,6 @@ const Left = styled.div`
 	align-items: center;
 `
 
-const Form = styled.form`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
-`
-
 export interface SearchFormProps {
 	query: string
 	onQueryChange: (val: string) => void
