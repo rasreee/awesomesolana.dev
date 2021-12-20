@@ -1,6 +1,8 @@
 import classNames from 'classnames'
 import { FC } from 'react'
 
+import { SearchModalController } from '@/modules/search/SearchModalController'
+
 import { preview } from './constants'
 import { Meta } from './Meta'
 import { PageHeader } from './PageHeader'
@@ -10,8 +12,6 @@ export type PageProps = {
 	description: string
 	image?: string
 }
-
-export const pageHeaderProps = {}
 
 const Page: FC<PageProps> = ({ title, description, image = preview, children }) => {
 	return (
@@ -34,6 +34,7 @@ const Page: FC<PageProps> = ({ title, description, image = preview, children }) 
 					{/* Content below header */}
 					<div className={classNames('w-full', 'md:max-w-screen-lg', 'mx-auto')}>{children}</div>
 				</div>
+				<SearchModalController />
 			</main>
 		</>
 	)

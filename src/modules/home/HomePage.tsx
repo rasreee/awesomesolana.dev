@@ -2,15 +2,11 @@ import classNames from 'classnames'
 
 import { Padding } from '@/common/atoms/Padding'
 import { Page } from '@/common/components/Page'
-import { useKeyCombo, useModal } from '@/common/hooks'
 import { SOURCE_TYPES } from '@/models/source'
-import { SearchBar, SearchModal } from '@/modules/search'
+import { SearchBar } from '@/modules/search'
 import { SourcesSection } from '@/modules/sources/SourcesSection'
 
 export const HomePage = () => {
-	const { open: openModal, bind: bindModal } = useModal()
-	useKeyCombo('Meta+k', openModal)
-
 	return (
 		<Page title="Home" description="Awesome Solana content">
 			{/* Inner content */}
@@ -24,7 +20,6 @@ export const HomePage = () => {
 					</Padding>
 				))}
 			</div>
-			<SearchModal {...bindModal} />
 		</Page>
 	)
 }
