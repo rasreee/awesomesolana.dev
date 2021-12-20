@@ -4,11 +4,11 @@ import React from 'react'
 import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
 import { SearchIcon } from '@/icons/SearchIcon'
 
-export type SearchBarButtonProps = {
+export type SearchButtonProps = {
 	onClick: () => void
 }
 
-export const SearchBarButton: React.FunctionComponent<SearchBarButtonProps> = ({ onClick }) => {
+export const SearchButton: React.FunctionComponent<SearchButtonProps> = ({ onClick }) => {
 	return (
 		<>
 			{/* Inner content */}
