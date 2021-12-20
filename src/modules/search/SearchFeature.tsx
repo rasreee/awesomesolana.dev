@@ -42,7 +42,9 @@ export const SearchFeature: React.FunctionComponent<SearchFeatureProps> = () => 
 				<SearchBarButton onClick={modal.open} />
 				<Modal {...modal.bind}>
 					<Modal.Header>
-						<SearchForm {...input} />
+						<header>
+							<SearchForm {...input} />
+						</header>
 					</Modal.Header>
 					<ExpandedSearchResults shouldExpand={effects.shouldExpand} data={effects.data} onHitClick={onHitClick} />
 				</Modal>
