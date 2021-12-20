@@ -1,6 +1,6 @@
 import styled from '@/styled'
 
-export const SearchModalHeader = styled.header`
+export const Header = styled.header`
 	position: relative;
 	z-index: 1;
 	display: flex;
@@ -12,4 +12,4 @@ export const SearchModalHeader = styled.header`
 	border-color: rgb(241 245 249 / var(--tw-border-opacity));
 `
 
-export const SearchModalDropdown = styled.div``
+export const Dropdown = styled.div``

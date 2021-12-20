@@ -1,17 +1,16 @@
 import { useClickOutside } from '@react-hookz/web'
-import React, { HTMLAttributes, ReactNode, useRef } from 'react'
+import { ReactNode, useRef } from 'react'
 
 import { useOnKeyPress } from '@/common/hooks/useOnKeyPress'
 
 import * as S from './Modal.styles'
+import { useModal } from './useModal'
 
-export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
-	onRequestClose: () => void
-	isOpen: boolean
+export interface ModalProps extends ReturnType<typeof useModal> {
 	children: ReactNode
 }
 
-export function Modal({ children, isOpen, onRequestClose, ...props }: ModalProps) {
+export function Modal({ isOpen, close: onRequestClose, children, ...props }: ModalProps) {
 	const ref = useRef<HTMLDivElement | null>(null)
 
 	useClickOutside(ref, onRequestClose)

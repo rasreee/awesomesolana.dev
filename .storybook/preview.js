@@ -1,6 +1,6 @@
 import React from "react";
 
-import { MyThemeProvider } from '@/theme/MyThemeProvider';
+import { AppProviders } from '@/app/AppProviders';
 import { addDecorator } from "@storybook/react";
 
 export const parameters = {
@@ -19,7 +19,7 @@ export const parameters = {
 
 
 addDecorator((storyFn) => (
-	<MyThemeProvider>
+	<AppProviders>
 			{storyFn()}
-	</MyThemeProvider>
+	</AppProviders>
 ));

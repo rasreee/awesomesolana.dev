@@ -39,6 +39,9 @@
 			"@/styled": [
 				"src/styled"
 			],
+			"@/app/*": [
+				"src/app/*"
+			],
 		},
 		"incremental": true
 	},

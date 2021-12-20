@@ -2,7 +2,8 @@ import classNames from 'classnames'
 import React, { ChangeEventHandler, useState } from 'react'
 
 import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
-import { useDebouncedAndAutofocusedInput } from '@/common/hooks'
+import { Spinner } from '@/common/components/spinner'
+import { useDebouncedAndAutofocusedInput } from '@/common/hooks/useInput'
 import { SearchIcon } from '@/icons/SearchIcon'
 import styled from '@/styled'
 import { colors } from '@/theme/foundations/colors'
@@ -16,9 +17,11 @@ const Left = styled.div`
 	align-items: center;
 `
 
-export interface SearchFormProps extends ReturnType<typeof useDebouncedAndAutofocusedInput> {}
+export interface SearchFormProps extends ReturnType<typeof useDebouncedAndAutofocusedInput> {
+	isLoading: boolean
+}
 
-export function SearchForm({ value: initialQuery, setValue, isFocused }: SearchFormProps) {
+export function SearchForm({ value: initialQuery, setValue, isFocused, isLoading }: SearchFormProps) {
 	const [localQuery, setLocalQuery] = useState(initialQuery)
 
 	const onChange: ChangeEventHandler<HTMLInputElement> = ({ currentTarget: { value } }) => {
@@ -46,7 +49,7 @@ export function SearchForm({ value: initialQuery, setValue, isFocused }: SearchF
 			noValidate
 		>
 			<Left>
-				<SearchIcon height={iconSize} fill={iconColor} />
+				{isLoading ? <Spinner /> : <SearchIcon height={iconSize} fill={iconColor} />}
 				<input type="search" placeholder={inputPlaceholder} value={localQuery} onChange={onChange} />
 			</Left>
 			<KbdSymbol keys={['esc']} />

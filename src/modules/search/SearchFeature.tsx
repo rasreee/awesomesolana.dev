@@ -1,17 +1,12 @@
 import { useRouter } from 'next/router'
-import React, { useMemo } from 'react'
+import React from 'react'
 
-import { Modal } from '@/common/components/Modal'
+import { useModal } from '@/common/components/Modal/useModal'
 import { useKeyCombo } from '@/common/hooks/useKeyCombo'
-import { useModal } from '@/common/hooks/useModal'
 import { Source } from '@/models/source/types'
 
-import { ExpandedSearchResults } from './ExpandedSearchResults'
 import { SearchBarButton } from './SearchBarButton'
-import { SearchModalDropdown, SearchModalHeader } from './SearchFeature.styles'
-import { SearchForm } from './SearchForm'
-import { SearchData } from './types'
-import { useSearchFeature } from './useSearchFeature'
+import { SearchModal } from './SearchModal'
 
 export interface SearchFeatureProps {}
 
@@ -20,38 +15,16 @@ export const SearchFeature: React.FunctionComponent<SearchFeatureProps> = () => 
 	const modal = useModal()
 	useKeyCombo('Meta+k', modal.open)
 
-	const { setInitialQuery, recents, updateRecents, input, hits } = useSearchFeature()
-
-	const onHitClick = (hit: Source) => () => {
-		updateRecents(hit)
-		setInitialQuery(hit.title)
+	const onHitClick = (hit: Source) => {
 		modal.close()
 		router.push(`/sources/${hit.id}`)
 	}
 
-	const effects = useMemo(() => {
-		const data: SearchData = hits.length > 0 ? { list: hits, type: 'hits' } : { list: recents, type: 'recents' }
-
-		const shouldExpand = input.value.length > 0 && data.list.length > 0
-
-		return { data, shouldExpand }
-	}, [hits, recents])
-
 	return (
 		<>
-			<>
-				<SearchBarButton onClick={modal.open} />
-				<Modal {...modal.bind}>
-					<Modal.Header>
-						<SearchModalHeader>
-							<SearchForm {...input} />
-						</SearchModalHeader>
-					</Modal.Header>
-					<SearchModalDropdown>
-						<ExpandedSearchResults shouldExpand={effects.shouldExpand} data={effects.data} onHitClick={onHitClick} />
-					</SearchModalDropdown>
-				</Modal>
-			</>
+			<SearchBarButton onClick={modal.open} />
+
+			<SearchModal onHitClick={onHitClick} {...modal} />
 		</>
 	)
 }
