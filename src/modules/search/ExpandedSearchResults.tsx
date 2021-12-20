@@ -1,13 +1,8 @@
-import { useRouter } from 'next/router'
-import React, { useMemo } from 'react'
-
-import { Modal, ModalProps } from '@/common/components/Modal'
+import { Modal } from '@/common/components/Modal'
 import styled from '@/common/utils/styled'
 import { Source } from '@/models/source/types'
 
-import { SearchForm } from './SearchForm'
 import { SearchHitItemButton } from './SearchHitItemButton'
-import { useSearchModal } from './SearchModalContext'
 import { SearchData } from './types'
 
 const HitListItem = styled.li`
@@ -59,36 +54,5 @@ export const ExpandedSearchResults = (props: { shouldExpand: boolean; onHitClick
 				</HitCount>
 			</Modal.Footer>
 		</>
-	)
-}
-
-export interface SearchModalProps extends Pick<ModalProps, 'isOpen' | 'onRequestClose'> {}
-
-export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) => {
-	const router = useRouter()
-	const { setInitialQuery, recents, updateRecents, input, hits } = useSearchModal()
-
-	const onHitClick = (hit: Source) => () => {
-		updateRecents(hit)
-		setInitialQuery(hit.title)
-		props.onRequestClose()
-		router.push(`/sources/${hit.id}`)
-	}
-
-	const effects = useMemo(() => {
-		const data: SearchData = hits.length > 0 ? { list: hits, type: 'hits' } : { list: recents, type: 'recents' }
-
-		const shouldExpand = input.value.length > 0 && data.list.length > 0
-
-		return { data, shouldExpand }
-	}, [hits, recents])
-
-	return (
-		<Modal {...props}>
-			<Modal.Header>
-				<SearchForm {...input} />
-			</Modal.Header>
-			<ExpandedSearchResults shouldExpand={effects.shouldExpand} data={effects.data} onHitClick={onHitClick} />
-		</Modal>
 	)
 }

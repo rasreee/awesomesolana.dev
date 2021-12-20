@@ -4,13 +4,16 @@ import React from 'react'
 import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
 import { SearchIcon } from '@/icons/SearchIcon'
 
-export type SearchBarProps = {}
+export type SearchBarButtonProps = {
+	onClick: () => void
+}
 
-export const SearchBar: React.FunctionComponent<SearchBarProps> = () => {
+export const SearchBarButton: React.FunctionComponent<SearchBarButtonProps> = ({ onClick }) => {
 	return (
 		<>
 			{/* Inner content */}
 			<button
+				onClick={onClick}
 				className={classNames(
 					'hidden sm:flex items-center w-72 space-x-3 px-4 h-12 bg-white shadow-sm rounded-lg',
 					'text-gray-400 text-left',
