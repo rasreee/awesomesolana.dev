@@ -67,7 +67,7 @@ export const SearchForm = forwardRef((props: SearchFormProps, ref: SearchFormPro
 				{props.isLoading ? <Spinner /> : <SearchIcon height={iconSize} fill={iconColor} />}
 				<input ref={ref} type="search" placeholder={inputPlaceholder} value={localQuery} onChange={onChange} />
 			</Left>
-			<KbdSymbol keys={['esc']} />
+			<KbdSymbol keys={['Escape']} />
 		</form>
 	)
 })

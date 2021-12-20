@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { SearchFeature } from '@/modules/search/SearchFeature'
 
 import { DefaultLogo } from './Logo'
-import { NavLinks } from './NavLinks'
 
 export const DefaultPageHeader = () => {
 	return (
@@ -15,9 +14,6 @@ export const DefaultPageHeader = () => {
 				</a>
 			</Link>
 			<SearchFeature />
-			<div className="flex items-center gap-3">
-				<NavLinks />
-			</div>
 		</header>
 	)
 }

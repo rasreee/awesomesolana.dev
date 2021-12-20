@@ -42,10 +42,6 @@ export const eventKeysConst = [
 
 export type EventKey = typeof eventKeysConst[number]
 
-export const eventKbdAbbrs: Partial<{ [k in EventKey]: string }> = {
-	Meta: '⌘'
-}
-
 export const isEventKey = (o: any): o is EventKey => {
 	return typeof o === 'string' && eventKeys.includes(o)
 }
@@ -160,7 +156,7 @@ export const alphabetKeysConst = [
 	'Z'
 ] as const
 
-export type AlphabetKey = typeof alphabetKeys[number]
+export type AlphabetKey = typeof alphabetKeysConst[number]
 
 export const isAlphabetKey = (o: any): o is AlphabetKey => {
 	return typeof o === 'string' && alphabetKeys.includes(o)
