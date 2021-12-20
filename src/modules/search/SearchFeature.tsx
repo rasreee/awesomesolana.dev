@@ -5,7 +5,7 @@ import { useModal } from '@/common/components/Modal/useModal'
 import { useKeyCombo } from '@/common/hooks/useKeyCombo'
 import { Source } from '@/models/source/types'
 
-import { SearchBarButton } from './SearchBarButton'
+import { SearchButton } from './SearchButton'
 import { SearchModal } from './SearchModal'
 
 export interface SearchFeatureProps {}
@@ -22,7 +22,7 @@ export const SearchFeature: React.FunctionComponent<SearchFeatureProps> = () => 
 
 	return (
 		<>
-			<SearchBarButton onClick={modal.open} />
+			<SearchButton onClick={modal.open} />
 
 			<SearchModal onHitClick={onHitClick} {...modal} />
 		</>

@@ -1,6 +1,6 @@
 export * from './ExpandedSearchResults'
 export * from './Search'
-export * from './SearchBarButton'
+export * from './SearchButton'
 export * from './SearchFeature'
 export * from './SearchForm'
 export * from './SearchHitItemButton'
