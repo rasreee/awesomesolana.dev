@@ -15,3 +15,16 @@ export const useInput = (opts: { autoFocus: boolean }) => {
 
 	return { value, ...inputFocus, bind: { ...inputFocus.bind, onChange } }
 }
+
+export const useDebouncedAndAutofocusedInput = () => {
+	const [value, setValue] = useState('')
+	const inputFocus = useFocus()
+
+	useMountEffect(() => inputFocus.focus())
+
+	const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+		setValue(event.currentTarget.value)
+	}
+
+	return { value, setValue, ...inputFocus, bind: { ...inputFocus.bind, onChange } }
+}

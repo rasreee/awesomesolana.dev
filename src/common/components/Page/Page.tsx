@@ -1,8 +1,6 @@
 import classNames from 'classnames'
 import { FC } from 'react'
 
-import { SearchModalController } from '@/modules/search/SearchModal/SearchModalController'
-
 import { preview } from './constants'
 import { Meta } from './Meta'
 import { PageHeader } from './PageHeader'
@@ -34,7 +32,6 @@ const Page: FC<PageProps> = ({ title, description, image = preview, children }) 
 					{/* Content below header */}
 					<div className={classNames('w-full', 'md:max-w-screen-lg', 'mx-auto')}>{children}</div>
 				</div>
-				<SearchModalController />
 			</main>
 		</>
 	)

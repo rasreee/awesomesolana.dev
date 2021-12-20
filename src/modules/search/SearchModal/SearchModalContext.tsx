@@ -1,7 +1,6 @@
-import { useDebouncedState } from '@react-hookz/web'
 import { createContext, FC, useCallback, useContext, useEffect, useState } from 'react'
 
-import { useKeyCombo, useModal } from '@/common/hooks'
+import { useDebouncedAndAutofocusedInput, useKeyCombo, useModal } from '@/common/hooks'
 import { Source } from '@/models/source/types'
 import { useFindSourcesByQuery } from '@/models/source/useFindSourcesByQuery'
 
@@ -30,13 +29,13 @@ export const useSearchModal = () => {
 }
 
 export interface SearchModalProviderProps {
-	InnerModal: FC<SearchModalProps>
+	children: (props: SearchModalProps) => JSX.Element
 }
 
-export const SearchModalProvider = ({ InnerModal }: SearchModalProviderProps) => {
+export const SearchModalProvider: FC<SearchModalProviderProps> = ({ children }) => {
 	const { open: openModal, bind: bindModal } = useModal()
 	useKeyCombo('Meta+k', openModal)
-	const { value: query, bind, setValue: setQuery } = useDebouncedInput()
+	const { value: query, bind, setValue: setQuery } = useDebouncedAndAutofocusedInput()
 
 	const [hits, setHits] = useState<Source[]>([])
 
@@ -108,7 +107,7 @@ export const SearchModalProvider = ({ InnerModal }: SearchModalProviderProps) =>
 				resetHits
 			}}
 		>
-			<InnerModal {...bindModal} />
+			{children(bindModal)}
 		</SearchModalContext.Provider>
 	)
 }

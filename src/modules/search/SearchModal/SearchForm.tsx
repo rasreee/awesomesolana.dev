@@ -1,6 +1,7 @@
+import classNames from 'classnames'
 import React, { ChangeEventHandler, useState } from 'react'
 
-import { KeyComboSymbol } from '@/common/components/KeyComboSymbol'
+import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
 import styled from '@/common/utils/styled'
 import { SearchIcon } from '@/icons/SearchIcon'
 import { colors } from '@/theme/foundations/colors'
@@ -24,9 +25,10 @@ const Form = styled.form`
 export interface SearchFormProps {
 	query: string
 	onQueryChange: (val: string) => void
+	isFocused: boolean
 }
 
-export function SearchForm({ query: initialQuery, onQueryChange }: SearchFormProps) {
+export function SearchForm({ query: initialQuery, onQueryChange, isFocused }: SearchFormProps) {
 	const [localQuery, setLocalQuery] = useState(initialQuery)
 
 	const onChange: ChangeEventHandler<HTMLInputElement> = ({ currentTarget: { value } }) => {
@@ -35,12 +37,29 @@ export function SearchForm({ query: initialQuery, onQueryChange }: SearchFormPro
 	}
 
 	return (
-		<Form role="search" noValidate>
+		<form
+			className={classNames(
+				'flex items-center',
+				'appearance-none',
+				'w-full md:w-6/12',
+				'mx-auto',
+				'px-3 py-2',
+				'rounded-lg',
+				'bg-white',
+				'shadow-sm',
+				'border',
+				isFocused ? 'outline-none ring-primary-500 border-primary-500' : 'border-gray-300',
+				'placeholder-gray-400',
+				'text-base sm:text-sm'
+			)}
+			role="search"
+			noValidate
+		>
 			<Left>
 				<SearchIcon height={iconSize} fill={iconColor} />
 				<input type="search" placeholder={inputPlaceholder} value={localQuery} onChange={onChange} />
 			</Left>
-			<KeyComboSymbol keys={['esc']} />
-		</Form>
+			<KbdSymbol keys={['esc']} />
+		</form>
 	)
 }
