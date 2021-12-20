@@ -3,11 +3,11 @@ import { FC, HTMLAttributes } from 'react'
 
 import { Source } from '@/models/source'
 
-export interface SearchHitButtonProps extends HTMLAttributes<HTMLButtonElement> {
+export interface SearchHitItemButtonProps extends HTMLAttributes<HTMLButtonElement> {
 	hit: Source
 }
 
-export const SearchHitButton: FC<SearchHitButtonProps> = ({ onClick, hit }) => {
+export const SearchHitItemButton: FC<SearchHitItemButtonProps> = ({ onClick, hit }) => {
 	return (
 		<button
 			className={classNames(

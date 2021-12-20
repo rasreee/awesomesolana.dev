@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import React, { ChangeEventHandler, useState } from 'react'
 
 import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
+import { useDebouncedAndAutofocusedInput } from '@/common/hooks'
 import styled from '@/common/utils/styled'
 import { SearchIcon } from '@/icons/SearchIcon'
 import { colors } from '@/theme/foundations/colors'
@@ -15,25 +16,14 @@ const Left = styled.div`
 	align-items: center;
 `
 
-const Form = styled.form`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
-`
+export interface SearchFormProps extends ReturnType<typeof useDebouncedAndAutofocusedInput> {}
 
-export interface SearchFormProps {
-	query: string
-	onQueryChange: (val: string) => void
-	isFocused: boolean
-}
-
-export function SearchForm({ query: initialQuery, onQueryChange, isFocused }: SearchFormProps) {
+export function SearchForm({ value: initialQuery, setValue, isFocused }: SearchFormProps) {
 	const [localQuery, setLocalQuery] = useState(initialQuery)
 
 	const onChange: ChangeEventHandler<HTMLInputElement> = ({ currentTarget: { value } }) => {
 		setLocalQuery(value)
-		onQueryChange(value)
+		setValue(value)
 	}
 
 	return (

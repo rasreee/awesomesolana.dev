@@ -12,11 +12,11 @@ export interface ISearchModalContext {
 	recents: Source[]
 	setRecents: React.Dispatch<React.SetStateAction<Source[]>>
 	updateRecents: (hit: Source) => void
-	query: string
-	setQuery: React.Dispatch<React.SetStateAction<string>>
 	hits: Source[]
 	setHits: React.Dispatch<React.SetStateAction<Source[]>>
 	resetHits: () => void
+	isLoading: boolean
+	input: ReturnType<typeof useDebouncedAndAutofocusedInput>
 }
 
 export const SearchModalContext = createContext<ISearchModalContext | undefined>(undefined)
@@ -35,12 +35,12 @@ export interface SearchModalProviderProps {
 export const SearchModalProvider: FC<SearchModalProviderProps> = ({ children }) => {
 	const { open: openModal, bind: bindModal } = useModal()
 	useKeyCombo('Meta+k', openModal)
-	const { value: query, bind, setValue: setQuery } = useDebouncedAndAutofocusedInput()
+	const input = useDebouncedAndAutofocusedInput()
 
 	const [hits, setHits] = useState<Source[]>([])
 
 	const resetHits = () => {
-		setQuery('')
+		input.setValue('')
 		setHits([])
 	}
 
@@ -68,7 +68,7 @@ export const SearchModalProvider: FC<SearchModalProviderProps> = ({ children }) 
 	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
-		const query = bind.ref.current?.value
+		const query = input.bind.ref.current?.value
 		if (!query) return setHits([])
 
 		setIsLoading(true)
@@ -90,7 +90,7 @@ export const SearchModalProvider: FC<SearchModalProviderProps> = ({ children }) 
 			setHits(res)
 			setIsLoading(false)
 		})
-	}, [query])
+	}, [input.value])
 
 	return (
 		<SearchModalContext.Provider
@@ -100,11 +100,11 @@ export const SearchModalProvider: FC<SearchModalProviderProps> = ({ children }) 
 				updateRecents,
 				recents,
 				setRecents,
-				query,
-				setQuery,
 				hits,
 				setHits,
-				resetHits
+				resetHits,
+				isLoading,
+				input
 			}}
 		>
 			{children(bindModal)}
