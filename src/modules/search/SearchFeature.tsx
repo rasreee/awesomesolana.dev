@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
 
@@ -25,6 +24,8 @@ export const SearchModalHeader = styled.header`
 	--tw-border-opacity: 1;
 	border-color: rgb(241 245 249 / var(--tw-border-opacity));
 `
+
+export const SearchModalDropdown = styled.div``
 
 export interface SearchFeatureProps {}
 
@@ -60,7 +61,9 @@ export const SearchFeature: React.FunctionComponent<SearchFeatureProps> = () => 
 							<SearchForm {...input} />
 						</SearchModalHeader>
 					</Modal.Header>
-					<ExpandedSearchResults shouldExpand={effects.shouldExpand} data={effects.data} onHitClick={onHitClick} />
+					<SearchModalDropdown>
+						<ExpandedSearchResults shouldExpand={effects.shouldExpand} data={effects.data} onHitClick={onHitClick} />
+					</SearchModalDropdown>
 				</Modal>
 			</>
 		</>

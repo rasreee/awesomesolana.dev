@@ -9,7 +9,7 @@ const toPath = (_path) => path.join(process.cwd(), _path);
 
 
 module.exports = {
-	stories: ["../src/**/**/*.stories.tsx"],
+	stories: ["../**/*.stories.tsx"],
 	addons: [],
 
 	webpackFinal: async (config) => {
@@ -38,10 +38,10 @@ module.exports = {
 			 * @see https://intellij-support.jetbrains.com/hc/en-us/community/posts/360003361399/comments/360002636080
 			 */
 			"@/theme": path.resolve(__dirname, "../src/theme"),
-			"@/ui": path.resolve(__dirname, "../src/ui"),
 			"@/modules": path.resolve(__dirname, "../src/modules"),
 			"@/common": path.resolve(__dirname, "../src/common"),
 			"@/models": path.resolve(__dirname, "../src/models"),
+			"@/icons": path.resolve(__dirname, "../src/icons")
 		}
 
 		config.module.rules.push({
