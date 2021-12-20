@@ -7,13 +7,13 @@ import { Source } from '@/models/source/types'
 import { ExpandedSearchResults } from './ExpandedSearchResults'
 import { SearchForm } from './SearchForm'
 import { useSearchModal } from './SearchModalContext'
-import { SearchData } from './types'
+import { SearchResults } from './types'
 
 export interface SearchModalProps extends Pick<ModalProps, 'isOpen' | 'onRequestClose'> {}
 
 export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) => {
 	const router = useRouter()
-	const { setInitialQuery, recents, updateRecents, query, setQuery, hits, isFocused } = useSearchModal()
+	const { setInitialQuery, recents, updateRecents, query, setQuery, hits } = useSearchModal()
 
 	const onHitClick = (hit: Source) => () => {
 		updateRecents(hit)
@@ -23,7 +23,7 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 	}
 
 	const effects = useMemo(() => {
-		const data: SearchData = hits.length > 0 ? { list: hits, type: 'hits' } : { list: recents, type: 'recents' }
+		const data: SearchResults = hits.length > 0 ? { list: hits, type: 'hits' } : { list: recents, type: 'recents' }
 
 		const shouldExpand = query.length > 0 && data.list.length > 0
 
@@ -33,7 +33,7 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 	return (
 		<Modal {...props}>
 			<Modal.Header>
-				<SearchForm query={query} onQueryChange={setQuery} isFocused={isFocused} />
+				<SearchForm query={query} onQueryChange={setQuery} />
 			</Modal.Header>
 			<ExpandedSearchResults shouldExpand={effects.shouldExpand} data={effects.data} onHitClick={onHitClick} />
 		</Modal>

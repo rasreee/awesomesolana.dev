@@ -17,7 +17,6 @@ export interface ISearchModalContext {
 	hits: Source[]
 	setHits: React.Dispatch<React.SetStateAction<Source[]>>
 	resetHits: () => void
-	isFocused: boolean
 }
 
 export const SearchModalContext = createContext<ISearchModalContext | undefined>(undefined)
@@ -36,7 +35,7 @@ export interface SearchModalProviderProps {
 export const SearchModalProvider: FC<SearchModalProviderProps> = ({ children }) => {
 	const { open: openModal, bind: bindModal } = useModal()
 	useKeyCombo('Meta+k', openModal)
-	const { value: query, bind, setValue: setQuery, isFocused } = useDebouncedAndAutofocusedInput()
+	const { value: query, bind, setValue: setQuery } = useDebouncedAndAutofocusedInput()
 
 	const [hits, setHits] = useState<Source[]>([])
 
@@ -105,8 +104,7 @@ export const SearchModalProvider: FC<SearchModalProviderProps> = ({ children }) 
 				setQuery,
 				hits,
 				setHits,
-				resetHits,
-				isFocused
+				resetHits
 			}}
 		>
 			{children(bindModal)}

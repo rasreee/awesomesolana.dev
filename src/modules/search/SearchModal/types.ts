@@ -1,3 +1,3 @@
 import { Source } from '@/models/source/types'
 
-export type SearchData = { list: Source[]; type: 'hits' | 'recents' }
+export type SearchResults = { list: Source[]; type: 'hits' | 'recents' }

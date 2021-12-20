@@ -6,7 +6,7 @@ import { Source } from '@/models/source'
 import { colors } from '@/theme/foundations'
 
 import { SearchHitButton } from './SearchHitButton'
-import { SearchData } from './types'
+import { SearchResults } from './types'
 
 const HitListItem = styled.li`
 	position: relative;
@@ -42,7 +42,7 @@ const SearchHits = ({ data, onHitClick }: { data: Source[]; onHitClick: any }) =
 	)
 }
 
-export const ExpandedSearchResults = (props: { shouldExpand: boolean; onHitClick: any; data: SearchData }) => {
+export const ExpandedSearchResults = (props: { shouldExpand: boolean; onHitClick: any; data: SearchResults }) => {
 	if (!props.shouldExpand) return null
 
 	return (
