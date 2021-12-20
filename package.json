@@ -1,7 +1,5 @@
 {
-	"name": "create-nextify-app",
-	"version": "0.0.2-7",
-	"description": "React apps using Next.js and Emotion.",
+	"name": "awesome-solana-dev",
 	"keywords": [
 		"nextjs",
 		"next",
@@ -15,11 +13,13 @@
 		"css",
 		"styling",
 		"css-in-js",
-		"workflow"
+		"workflow",
+		"storybook",
+		"solana",
+		"web3"
 	],
-	"homepage": "https://www.nextify.me",
-	"repository": "https://github.com/luangjokaj/nextify",
-	"exports": "./index.js",
+	"homepage": "https://www.awesomesolana.dev",
+	"repository": "https://github.com/rasreee/awesome-solana-dev",
 	"resolutions": {
 		"**/trim": "^1.0.0",
 		"**/glob-parent": "^5.1.2",
