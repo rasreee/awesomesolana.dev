@@ -1,13 +1,10 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
 
-import { useIsMobileDevice } from '@/common/hooks'
 import { SearchBar } from '@/modules/search'
 
 import { DefaultLogo } from './Logo'
-import { MobilePageHeader } from './MobilePageHeader'
 import { NavLinks } from './NavLinks'
 
 export const DefaultPageHeader = () => {
@@ -28,12 +25,4 @@ export const DefaultPageHeader = () => {
 			</div>
 		</header>
 	)
-}
-
-export const PageHeader = () => {
-	const isMobile = useIsMobileDevice()
-
-	if (isMobile) return <MobilePageHeader />
-
-	return <DefaultPageHeader />
 }
