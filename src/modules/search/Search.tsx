@@ -4,8 +4,8 @@ import { useDebouncedAndAutofocusedInput } from '@/common/hooks/useInput'
 import { Source, useFindSourcesByQuery } from '@/models/source'
 
 import { ExpandedSearchResults } from './ExpandedSearchResults'
-import * as S from './SearchFeature.styles'
 import { SearchForm } from './SearchForm'
+import * as S from './styles'
 import { SearchData } from './types'
 
 export interface SearchProps {
