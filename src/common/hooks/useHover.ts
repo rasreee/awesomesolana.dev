@@ -1,8 +1,8 @@
-import { MutableRefObject, Ref, useEffect, useRef, useState } from 'react'
+import { Ref, useEffect, useRef, useState } from 'react'
 
 export function useHover<T extends HTMLElement>(): { isHovered: boolean; bind: { ref: Ref<T> } } {
 	const [value, setValue] = useState<boolean>(false)
-	const ref: any = useRef<T | null>(null)
+	const ref = useRef<T | null>(null)
 	const handleMouseOver = (): void => setValue(true)
 	const handleMouseOut = (): void => setValue(false)
 
