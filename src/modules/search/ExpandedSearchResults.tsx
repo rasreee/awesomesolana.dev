@@ -1,6 +1,6 @@
 import { Modal } from '@/common/components/Modal'
-import styled from '@/common/utils/styled'
 import { Source } from '@/models/source/types'
+import styled from '@/styled'
 
 import { SearchHitItemButton } from './SearchHitItemButton'
 import { SearchData } from './types'

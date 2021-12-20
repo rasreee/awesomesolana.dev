@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FC } from 'react'
+import React, { FC } from 'react'
 
 import { Tag } from '@/common/components/Tag'
 import { EyeIcon } from '@/icons/EyeIcon'

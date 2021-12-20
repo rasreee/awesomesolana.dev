@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FC, HTMLAttributes } from 'react'
+import React, { FC, HTMLAttributes } from 'react'
 
 import { Source } from '@/models/source'
 

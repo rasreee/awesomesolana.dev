@@ -2,30 +2,16 @@ import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
 
 import { Modal } from '@/common/components/Modal'
-import { useKeyCombo } from '@/common/hooks'
+import { useKeyCombo } from '@/common/hooks/useKeyCombo'
 import { useModal } from '@/common/hooks/useModal'
-import styled from '@/common/utils/styled'
 import { Source } from '@/models/source/types'
 
 import { ExpandedSearchResults } from './ExpandedSearchResults'
 import { SearchBarButton } from './SearchBarButton'
+import { SearchModalDropdown, SearchModalHeader } from './SearchFeature.styles'
 import { SearchForm } from './SearchForm'
 import { SearchData } from './types'
 import { useSearchFeature } from './useSearchFeature'
-
-export const SearchModalHeader = styled.header`
-	position: relative;
-	z-index: 1;
-	display: flex;
-	flex: none;
-	padding: 0 1rem;
-	align-items: center;
-	border-bottom-width: 1px;
-	--tw-border-opacity: 1;
-	border-color: rgb(241 245 249 / var(--tw-border-opacity));
-`
-
-export const SearchModalDropdown = styled.div``
 
 export interface SearchFeatureProps {}
 

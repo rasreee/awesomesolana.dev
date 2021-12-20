@@ -3,8 +3,8 @@ import React, { ChangeEventHandler, useState } from 'react'
 
 import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
 import { useDebouncedAndAutofocusedInput } from '@/common/hooks'
-import styled from '@/common/utils/styled'
 import { SearchIcon } from '@/icons/SearchIcon'
+import styled from '@/styled'
 import { colors } from '@/theme/foundations/colors'
 
 const iconSize = 26

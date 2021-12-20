@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import Link from 'next/link'
-import { FC } from 'react'
+import React, { FC } from 'react'
 
 import { SourceType } from '@/models/source'
 

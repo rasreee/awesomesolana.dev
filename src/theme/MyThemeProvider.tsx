@@ -1,6 +1,6 @@
 import { Theme, ThemeProvider } from '@emotion/react'
 import classNames from 'classnames'
-import { FC, useMemo, useState } from 'react'
+import React, { FC, useMemo, useState } from 'react'
 
 import { theme } from '@/theme/theme'
 

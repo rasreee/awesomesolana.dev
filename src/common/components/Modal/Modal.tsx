@@ -1,5 +1,5 @@
 import { useClickOutside } from '@react-hookz/web'
-import { HTMLAttributes, ReactNode, useRef } from 'react'
+import React, { HTMLAttributes, ReactNode, useRef } from 'react'
 
 import { useOnKeyPress } from '@/common/hooks/useOnKeyPress'
 

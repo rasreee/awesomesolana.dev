@@ -41,7 +41,8 @@ module.exports = {
 			"@/modules": path.resolve(__dirname, "../src/modules"),
 			"@/common": path.resolve(__dirname, "../src/common"),
 			"@/models": path.resolve(__dirname, "../src/models"),
-			"@/icons": path.resolve(__dirname, "../src/icons")
+			"@/icons": path.resolve(__dirname, "../src/icons"),
+			"@/styled": path.resolve(__dirname, "../src/styled")
 		}
 
 		config.module.rules.push({

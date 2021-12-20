@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FC } from 'react'
+import React, { FC } from 'react'
 
 export type PaddingProps = { px?: number; py?: number; p?: number }
 

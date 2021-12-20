@@ -36,6 +36,9 @@
 			"@/icons/*": [
 				"src/icons/*"
 			],
+			"@/styled": [
+				"src/styled"
+			],
 		},
 		"incremental": true
 	},

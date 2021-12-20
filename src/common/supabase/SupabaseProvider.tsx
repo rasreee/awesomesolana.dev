@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import { FC, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 
 import { SupabaseContext } from './SupabaseContext'
 
