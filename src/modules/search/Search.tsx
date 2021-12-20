@@ -67,7 +67,7 @@ export const Search: React.FunctionComponent<SearchProps> = ({
 	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
-		const query = input.bind.ref.current?.value
+		const query = input.value
 		if (!query) return setHits([])
 
 		setIsLoading(true)

@@ -1,5 +1,5 @@
 import { useMountEffect } from '@react-hookz/web'
-import { ChangeEventHandler, useState } from 'react'
+import { ChangeEventHandler, Dispatch, MutableRefObject, SetStateAction, useRef, useState } from 'react'
 
 import { useFocus } from './useFocus'
 
@@ -16,15 +16,20 @@ export const useInput = (opts: { autoFocus: boolean }) => {
 	return { value, ...inputFocus, bind: { ...inputFocus.bind, onChange } }
 }
 
-export const useDebouncedAndAutofocusedInput = () => {
+export const useDebouncedAndAutofocusedInput = (): {
+	value: string
+	setValue: Dispatch<SetStateAction<string>>
+	ref: MutableRefObject<HTMLInputElement | null>
+	onChange: ChangeEventHandler<HTMLInputElement>
+} => {
 	const [value, setValue] = useState('')
-	const inputFocus = useFocus()
+	const inputRef = useRef<HTMLInputElement | null>(null)
 
-	useMountEffect(() => inputFocus.focus())
+	useMountEffect(() => inputRef.current?.focus())
 
 	const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
 		setValue(event.currentTarget.value)
 	}
 
-	return { value, setValue, ...inputFocus, bind: { ...inputFocus.bind, onChange } }
+	return { value, setValue, ref: inputRef, onChange }
 }

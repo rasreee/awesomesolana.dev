@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { Modal } from '@/common/components/Modal'
 import { Source } from '@/models/source/types'
 import styled from '@/styled'
