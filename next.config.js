@@ -5,6 +5,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')
 const config = {}
 
 const bundleAnalyzer = withBundleAnalyzer({
+	future: {
+		webpack5: true
+	},
 	enabled: process.env.ANALYZE === 'true',
 	poweredByHeader: false,
 	trailingSlash: true,

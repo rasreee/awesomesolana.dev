@@ -1,3 +1,21 @@
+# dependencies
+**/node_modules
+.pnp
+.pnp.js
+# global monorepo cache
+.cache/*
+
+# dependencies
+node_modules
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+.yarn/cache/*
+
 logs
 *.log*
 pids
@@ -5,17 +23,15 @@ pids
 *.seed
 lib-cov
 coverage
-node_modules
 .vscode
 .DS_Store
 .next
 scratch.js
-notes.md
 .now
 .env
 .vercel
 out
 .eslintcache
 tsconfig.tsbuildinfo
-**/*.stories.tsx
 .env.local
+
