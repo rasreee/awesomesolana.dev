@@ -25,6 +25,8 @@ export interface ConceptFilter extends FilterBase {
 	id: string
 }
 
+export type FilterId = Category | Concept
+
 export type FilterIdType = {
 	[FilterType.Categories]: Category
 	[FilterType.Concepts]: Concept

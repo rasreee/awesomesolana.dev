@@ -10,13 +10,11 @@ import { useStore } from '@/store/store'
 export const SourcesFeedSidebar = observer(function _SourcesFeedSidebar() {
 	const { filterStore } = useStore()
 
-	const onItemClick = (filterArgs: FilterArgs) => () => {
-		const ids = filterStore.getIds(filterArgs.type)
-
-		if (ids.includes(filterArgs.id)) {
-			filterStore.remove(filterArgs)
+	const onItemClick = (args: FilterArgs) => () => {
+		if (filterStore.has(args)) {
+			filterStore.remove(args)
 		} else {
-			filterStore.add(filterArgs)
+			filterStore.add(args)
 		}
 	}
 
@@ -30,12 +28,12 @@ export const SourcesFeedSidebar = observer(function _SourcesFeedSidebar() {
 			<Sidebar.Section>
 				<Sidebar.SectionHeader>
 					<Sidebar.SectionTitle>Categories</Sidebar.SectionTitle>
-					{filterStore.all.categories.length > 0 && (
+					{filterStore.categories.length > 0 && (
 						<button
 							onClick={filterStore.resetStore}
 							className="font-semibold border border-gray-600 rounded-lg hover:bg-gray-200 text-sm px-3 py-1"
 						>
-							{`Clear (${filterStore.all.categories.length})`}
+							{`Clear (${filterStore.categories.length})`}
 						</button>
 					)}
 				</Sidebar.SectionHeader>
@@ -43,8 +41,8 @@ export const SourcesFeedSidebar = observer(function _SourcesFeedSidebar() {
 					{categoriesConst.map((id) => (
 						<Sidebar.ListItem
 							key={id}
-							isActive={filterStore.all.categories.includes(id)}
-							onClick={onItemClick(FilterType.Categories, id)}
+							isActive={filterStore.has({ type: FilterType.Categories, id })}
+							onClick={onItemClick({ type: FilterType.Categories, id })}
 						>
 							{`${id} (${countsData ? countsData[id] : 0})`}
 						</Sidebar.ListItem>

@@ -1,14 +1,30 @@
 import { makeAutoObservable } from 'mobx'
 
-import { FilterArgs, FilterIdType, FilterListArgs, FilterType, UnknownFilterArgsError } from './types'
+import { FilterArgs, FilterId, FilterIdType, FilterListArgs, FilterType, UnknownFilterArgsError } from './types'
 
 export class FilterStore {
 	concepts: Array<FilterIdType[FilterType.Concepts]> = []
 
 	categories: Array<FilterIdType[FilterType.Categories]> = []
 
+	get all(): Array<FilterId> {
+		return [...this.concepts, ...this.categories]
+	}
+
 	constructor() {
 		makeAutoObservable(this)
+	}
+
+	has(args: FilterArgs): boolean {
+		switch (args.type) {
+			case FilterType.Categories:
+				return this.categories.includes(args.id)
+			case FilterType.Concepts:
+				return this.concepts.includes(args.id)
+				break
+			default:
+				throw new UnknownFilterArgsError(args)
+		}
 	}
 
 	getIds<T extends FilterType>(type: T) {
