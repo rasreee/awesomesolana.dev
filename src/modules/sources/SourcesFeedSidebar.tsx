@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 
 import { Sidebar } from '@/common/components'
-import { SOURCE_TYPES, SourceType } from '@/models/source'
+import { SOURCE_TYPES, SourceType, useSourceCounts } from '@/models/source'
 import { SearchFeatureSm } from '@/modules/search/SearchFeatureSm'
 import { useSourcesFeed } from '@/modules/sources/SourcesFeedContext'
 
@@ -26,6 +26,8 @@ export const SourcesFeedSidebar: React.FunctionComponent<SidebarProps> = () => {
 		router.push(getSourcesRoutePath())
 	}
 
+	const { data: countsData } = useSourceCounts()
+
 	return (
 		<Sidebar>
 			<Sidebar.Section>
@@ -46,7 +48,7 @@ export const SourcesFeedSidebar: React.FunctionComponent<SidebarProps> = () => {
 				<Sidebar.List>
 					{SOURCE_TYPES.map((type) => (
 						<Sidebar.ListItem key={type} isActive={sourceTypes.includes(type)} onClick={onItemClick(type)}>
-							{type}
+							{`${type} (${countsData ? countsData[type] : 0})`}
 						</Sidebar.ListItem>
 					))}
 				</Sidebar.List>
