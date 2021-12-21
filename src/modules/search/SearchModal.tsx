@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Modal, useModal } from '@/common/components/Modal'
@@ -9,11 +10,9 @@ import { SearchBar } from './SearchBar'
 import { SearchDropdown } from './SearchDropdown'
 import { SearchHitsData } from './types'
 
-export interface SearchModalProps extends ReturnType<typeof useModal> {
-	onItemClick: (hit: Source) => void
-}
+export interface SearchModalProps extends ReturnType<typeof useModal> {}
 
-export const SearchModal: React.FunctionComponent<SearchModalProps> = ({ onItemClick, ...props }) => {
+export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) => {
 	const [initialQuery, setInitialQuery] = useState<string>('')
 	const [recents, setRecents] = useState<Source[]>([])
 
@@ -42,10 +41,14 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = ({ onItemC
 		[recents]
 	)
 
+	const router = useRouter()
+
 	const handleItemClick = (hit: Source) => () => {
 		updateRecents(hit)
 		setInitialQuery(hit.title)
-		onItemClick(hit)
+
+		router.push(`/sources/${hit.id}`)
+		props.close()
 	}
 
 	const searchData = useMemo(() => {
@@ -87,7 +90,7 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = ({ onItemC
 
 	return (
 		<Modal {...props}>
-			<SearchBar isLoading={isLoading} {...input} />
+			<SearchBar isLoading={isLoading} {...input} onKeyDown={onKeyDown} />
 			{searchData.list.length > 0 && (
 				<SearchDropdown data={searchData} focusedItemIndex={selectedItemIndex} onItemClick={handleItemClick} />
 			)}
