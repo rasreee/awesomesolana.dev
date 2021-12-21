@@ -28,21 +28,11 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 
 	useUpdateEffect(resetHits, [props.isOpen])
 
-	const router = useRouter()
-
-	const onItemClick = (hit: Source) => () => {
-		updateRecents(hit)
-		router.push(`/sources/${hit.id}`)
-		props.close()
-	}
-
 	const searchData = useMemo(() => {
 		const data = hits.length > 0 ? { list: hits, type: 'hits' } : { list: recents, type: 'recents' }
 
 		return data as SearchHitsData
 	}, [hits, recents])
-
-	useAutoComplete(searchData.list, onItemClick)
 
 	const findSourcesByQuery = useFindSourcesByQuery()
 
@@ -63,6 +53,16 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 		const query = input.value
 		submitQuery(query)
 	}, [input.value])
+
+	const router = useRouter()
+
+	const onItemClick = (hit: Source) => () => {
+		updateRecents(hit)
+		router.push(`/sources/${hit.id}`)
+		props.close()
+	}
+
+	useAutoComplete(searchData.list, onItemClick)
 
 	const renderDropdownItem = useCallback(
 		(hit: Source) => {
