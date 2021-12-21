@@ -1,3 +1,4 @@
+import { useUpdateEffect } from '@react-hookz/web'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -24,6 +25,8 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 		input.setValue('')
 		setHits([])
 	}
+
+	useUpdateEffect(resetHits, [props.isOpen])
 
 	const updateRecents = useCallback(
 		(hit: Source) => {
@@ -57,7 +60,7 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 		return data as SearchHitsData
 	}, [hits, recents])
 
-	const { selectedItemIndex, onKeyDown } = useAutoComplete(searchData.list, handleItemClick)
+	const { selectedItemIndex, onKeyDown, setSelectedItemIndex } = useAutoComplete(searchData.list, handleItemClick)
 
 	const findSourcesByQuery = useFindSourcesByQuery()
 
@@ -92,7 +95,12 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 		<Modal {...props}>
 			<SearchBar isLoading={isLoading} {...input} onKeyDown={onKeyDown} />
 			{searchData.list.length > 0 && (
-				<SearchDropdown data={searchData} focusedItemIndex={selectedItemIndex} onItemClick={handleItemClick} />
+				<SearchDropdown
+					data={searchData}
+					setFocusedItemIndex={setSelectedItemIndex}
+					focusedItemIndex={selectedItemIndex}
+					onItemClick={handleItemClick}
+				/>
 			)}
 		</Modal>
 	)

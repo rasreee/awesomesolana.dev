@@ -4,6 +4,7 @@ import { EventKeys } from '../components/keyboard/keys'
 
 export type UseAutoCompleteReturn = {
 	selectedItemIndex: number
+	setSelectedItemIndex: React.Dispatch<React.SetStateAction<number>>
 	onKeyDown: (event: React.KeyboardEvent) => void
 }
 
@@ -19,9 +20,11 @@ export function useAutoComplete<ItemType extends object = object>(
 
 	return {
 		selectedItemIndex,
+		setSelectedItemIndex,
 		onKeyDown: (event) => {
 			const isBackward = event.code === EventKeys.ArrowUp
 			const isForward = event.code === EventKeys.ArrowDown || event.code === EventKeys.Tab
+			console.log(isBackward ? 'Backward Key' : 'Forward Key')
 
 			if (isBackward || isForward) {
 				event.preventDefault()
