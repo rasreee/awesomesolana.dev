@@ -93,9 +93,9 @@ export const Search: React.FunctionComponent<SearchProps> = ({
 
 	return (
 		<>
-			<S.Header>
+			<S.SearchBar>
 				<SearchForm isLoading={isLoading} {...input} />
-			</S.Header>
+			</S.SearchBar>
 			<S.Dropdown>
 				<ExpandedSearchResults shouldExpand={effects.shouldExpand} data={effects.data} onHitClick={handleHitClick} />
 			</S.Dropdown>

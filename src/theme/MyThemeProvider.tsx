@@ -5,6 +5,7 @@ import React, { FC, useMemo, useState } from 'react'
 import { theme } from '@/theme/theme'
 
 import { ColorModeContext, ColorModeName } from './color-mode'
+import { GlobalStyle } from './GlobalStyle'
 
 const MyThemeProvider: FC = ({ children }) => {
 	const [colorMode, setColorMode] = useState<ColorModeName>('light')
@@ -19,6 +20,7 @@ const MyThemeProvider: FC = ({ children }) => {
 
 	return (
 		<ThemeProvider theme={currentTheme}>
+			<GlobalStyle />
 			<ColorModeContext.Provider value={{ colorMode, setColorMode }}>
 				<div className={classNames(colorMode === 'light' ? 'bg-light' : 'bg-dark', 'min-w-screen min-h-screen')}>
 					{children}

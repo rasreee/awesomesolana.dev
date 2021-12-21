@@ -15,14 +15,11 @@ import { SearchIcon } from '@/icons/SearchIcon'
 import styled from '@/styled'
 import { colors } from '@/theme/foundations/colors'
 
+import * as S from './Search.styles'
+
 const iconSize = 26
 const iconColor = colors.blue[500]
 const inputPlaceholder = 'Search docs'
-
-const Left = styled.div`
-	display: flex;
-	align-items: center;
-`
 
 export interface SearchFormProps extends InputHTMLAttributes<HTMLInputElement> {
 	isLoading: boolean
@@ -46,29 +43,13 @@ export const SearchForm = forwardRef((props: SearchFormProps, ref: SearchFormPro
 	}
 
 	return (
-		<form
-			className={classNames(
-				'flex items-center',
-				'appearance-none',
-				'w-full md:w-6/12',
-				'mx-auto',
-				'px-3 py-2',
-				'rounded-lg',
-				'bg-white',
-				'shadow-sm',
-				'border border-gray-300 focused:outline-none focused:ring-primary-500 focused:border-primary-500',
-				'placeholder-gray-400',
-				'text-base sm:text-sm'
-			)}
-			role="search"
-			noValidate
-		>
-			<Left>
+		<S.Form className={classNames('placeholder-gray-400', 'text-base sm:text-sm')} role="search" noValidate>
+			<S.Label>
 				{props.isLoading ? <Spinner /> : <SearchIcon height={iconSize} fill={iconColor} />}
-				<input ref={ref} type="search" placeholder={inputPlaceholder} value={localQuery} onChange={onChange} />
-			</Left>
+				<S.Input ref={ref} type="search" placeholder="Search" value={localQuery} onChange={onChange} />
+			</S.Label>
 			<KbdSymbol keys={['Escape']} />
-		</form>
+		</S.Form>
 	)
 })
 
