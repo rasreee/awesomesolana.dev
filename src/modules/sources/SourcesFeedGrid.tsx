@@ -6,7 +6,7 @@ import { SourceType, useSourcesByType } from '@/models/source'
 import { SourceCard } from './SourceCard'
 
 export type SourcesFeedGridProps = {
-	sourceType: SourceType
+	sourceType?: SourceType
 	opts?: { limit: number }
 	spaceXClasses?: string
 	spaceYClasses?: string

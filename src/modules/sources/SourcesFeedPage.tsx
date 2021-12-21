@@ -16,7 +16,7 @@ export const SourcesFeedPage: React.FunctionComponent<SourcesFeedPageProps> = ()
 	const isMobileDevice = useIsMobileDevice()
 	const { sourceTypes } = useSourcesFeed()
 
-	const caption = sourceTypes ? `All ${formatToListOfPlurals(sourceTypes)}` : 'All sources'
+	const caption = sourceTypes.length > 0 ? `All ${formatToListOfPlurals(sourceTypes)}` : 'All sources'
 
 	return (
 		<Page title={caption} description={caption}>
@@ -24,10 +24,17 @@ export const SourcesFeedPage: React.FunctionComponent<SourcesFeedPageProps> = ()
 				<SourcesFeedSidebar />
 				<div
 					css={css`
+						position: absolute;
+						right: 3rem;
 						width: var(--page-right-width);
 						max-width: var(--page-right-width);
+						${!isMobileDevice &&
+						css`
+							display: flex;
+							flex-direction: column;
+							gap: 0.5rem;
+						`}
 					`}
-					className={classNames('absolute right-12', !isMobileDevice && 'flex flex-col gap-2')}
 				>
 					{!isMobileDevice && (
 						<div className={classNames('flex', 'items-center justify-between', 'py-2', 'px-5 md:px-2')}>
@@ -35,14 +42,18 @@ export const SourcesFeedPage: React.FunctionComponent<SourcesFeedPageProps> = ()
 						</div>
 					)}
 					<div className="mobile:py-2">
-						{sourceTypes.map((type) => (
-							<SourcesFeedGrid
-								key={type}
-								sourceType={type}
-								spaceXClasses={'space-x-0 md:space-x-0'}
-								spaceYClasses={'space-y-2 md:space-y-0'}
-							/>
-						))}
+						{sourceTypes.length ? (
+							sourceTypes.map((type) => (
+								<SourcesFeedGrid
+									key={type}
+									sourceType={type}
+									spaceXClasses={'space-x-0 md:space-x-0'}
+									spaceYClasses={'space-y-2 md:space-y-0'}
+								/>
+							))
+						) : (
+							<SourcesFeedGrid spaceXClasses={'space-x-0 md:space-x-0'} spaceYClasses={'space-y-2 md:space-y-0'} />
+						)}
 					</div>
 				</div>
 			</div>

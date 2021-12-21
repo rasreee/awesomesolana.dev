@@ -8,9 +8,10 @@ import { FetcherOptions } from '@/common/utils/types'
 
 import { Source, SourceType } from './types'
 
-const makeFetcher = (supabase: SupabaseClient, sourceType: SourceType, opts?: FetcherOptions) => {
+const makeFetcher = (supabase: SupabaseClient, sourceType: SourceType | 'all', opts?: FetcherOptions) => {
 	const fetcher: Fetcher<Source[]> = async () => {
-		let request = supabase.from<Source>('sources').select('*').match({ type: sourceType })
+		const matchOpts = sourceType === 'all' ? {} : { type: sourceType }
+		let request = supabase.from<Source>('sources').select('*').match(matchOpts)
 
 		if (opts?.limit) {
 			request = request.limit(opts.limit)
@@ -25,14 +26,14 @@ const makeFetcher = (supabase: SupabaseClient, sourceType: SourceType, opts?: Fe
 }
 
 export const useSourcesByType = (
-	sourceType: SourceType,
+	sourceType?: SourceType | 'all',
 	opts?: FetcherOptions
 ): SWRResponseWithLoading<Source[], Error> => {
 	const client = useSupabase()
 	const keyOpts = opts ? `&limit=${opts.limit}` : ''
 	const key = `sources?type=${sourceType}${keyOpts}`
 
-	const swr = useSWR<Source[], Error>(key, makeFetcher(client, sourceType, opts))
+	const swr = useSWR<Source[], Error>(key, makeFetcher(client, sourceType ?? 'all', opts))
 
 	/* Check if data is still being fetched */
 	const isLoading = typeof swr.data === 'undefined' && typeof swr.error === 'undefined'
