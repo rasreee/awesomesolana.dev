@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import React, {
 	ChangeEventHandler,
 	Dispatch,
@@ -12,16 +11,14 @@ import React, {
 import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
 import { Spinner } from '@/common/components/spinner'
 import { SearchIcon } from '@/icons/SearchIcon'
-import styled from '@/styled'
 import { colors } from '@/theme/foundations/colors'
 
-import * as S from './Search.styles'
+import * as S from './styles'
 
 const iconSize = 26
 const iconColor = colors.blue[500]
-const inputPlaceholder = 'Search docs'
 
-export interface SearchFormProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
 	isLoading: boolean
 	value: string
 	setValue: Dispatch<SetStateAction<string>>
@@ -33,7 +30,7 @@ export interface SearchFormProps extends InputHTMLAttributes<HTMLInputElement> {
 	onChange: ChangeEventHandler<HTMLInputElement>
 }
 
-export const SearchForm = forwardRef((props: SearchFormProps, ref: SearchFormProps['ref']) => {
+export const SearchBar = forwardRef((props: SearchBarProps, ref: SearchBarProps['ref']) => {
 	const [localQuery, setLocalQuery] = useState(props.value)
 
 	const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -43,12 +40,14 @@ export const SearchForm = forwardRef((props: SearchFormProps, ref: SearchFormPro
 	}
 
 	return (
-		<S.Form role="search" noValidate>
-			<S.Label>{props.isLoading ? <Spinner /> : <SearchIcon height={iconSize} fill={iconColor} />}</S.Label>
-			<S.Input ref={ref} type="search" placeholder="Search" value={localQuery} onChange={onChange} />
-			<KbdSymbol keys={['Escape']} />
-		</S.Form>
+		<S.Container>
+			<S.Form role="search" noValidate>
+				<S.Label>{props.isLoading ? <Spinner /> : <SearchIcon height={iconSize} fill={iconColor} />}</S.Label>
+				<S.Input ref={ref} type="search" placeholder="Search" value={localQuery} onChange={onChange} />
+				<KbdSymbol keys={['Escape']} />
+			</S.Form>
+		</S.Container>
 	)
 })
 
-SearchForm.displayName = 'SearchForm'
+SearchBar.displayName = 'SearchBar'

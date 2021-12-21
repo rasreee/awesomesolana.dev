@@ -1,7 +1,7 @@
 import { pseudo } from '@/common/utils/pseudos'
 import styled from '@/styled'
 
-export const SearchBar = styled.header`
+export const Container = styled.header`
 	position: relative;
 	z-index: 1;
 	display: flex;
@@ -43,5 +43,3 @@ export const Input = styled.input`
 	flex: auto;
 	min-width: 0;
 `
-
-export const Dropdown = styled.div``

@@ -5,7 +5,7 @@ import { Source, useFindSourcesByQuery } from '@/models/source'
 
 import { ExpandedSearchResults } from './ExpandedSearchResults'
 import * as S from './Search.styles'
-import { SearchForm } from './SearchForm'
+import { SearchBar } from './SearchBar/SearchBar'
 import { SearchData } from './types'
 
 export interface SearchProps {
@@ -94,7 +94,7 @@ export const Search: React.FunctionComponent<SearchProps> = ({
 	return (
 		<>
 			<S.SearchBar>
-				<SearchForm isLoading={isLoading} {...input} />
+				<SearchBar isLoading={isLoading} {...input} />
 			</S.SearchBar>
 			<S.Dropdown>
 				<ExpandedSearchResults shouldExpand={effects.shouldExpand} data={effects.data} onHitClick={handleHitClick} />
