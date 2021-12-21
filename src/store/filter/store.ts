@@ -19,9 +19,7 @@ export class FilterStore {
 	}
 
 	remove(type: FilterType, id: string) {
-		const oldFilters = this.all[type]
-
-		this.all = { ...this.all, [type]: oldFilters.filter((filterId) => filterId !== id) }
+		this.all = { ...this.all, [type]: this.all[type].filter((filterId) => filterId !== id) }
 	}
 
 	resetStore = () => {
