@@ -1,13 +1,3 @@
-import { useRouter } from 'next/router'
+import { SourcesFeedPage } from '@/modules/sources/SourcesFeedPage'
 
-import { SourcesFeed } from '@/modules/sources'
-
-export default function SourcesPage() {
-	const router = useRouter()
-
-	return (
-		<>
-			<SourcesFeed routerQuery={router.query} />
-		</>
-	)
-}
+export default SourcesFeedPage

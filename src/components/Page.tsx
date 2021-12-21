@@ -1,9 +1,10 @@
 import classNames from 'classnames'
 import React, { FC } from 'react'
 
-import { preview } from './constants'
+import styled from '@/styled'
+
+import { Header } from './Header'
 import { Meta } from './Meta'
-import { PageHeader } from './PageHeader'
 
 export type PageProps = {
 	title: string
@@ -11,7 +12,12 @@ export type PageProps = {
 	image?: string
 }
 
-const Page: FC<PageProps> = ({ title, description, image = preview, children }) => {
+export const Content = styled.div`
+	max-width:  max-width: 1024px;
+	margin: 0 auto;
+`
+
+const Page: FC<PageProps> = ({ title, description, image, children }) => {
 	return (
 		<>
 			<Meta {...{ title, description, image }} />
@@ -28,9 +34,9 @@ const Page: FC<PageProps> = ({ title, description, image = preview, children }) 
 				{/* Inner container */}
 				<div className="w-full">
 					{/* Header */}
-					<PageHeader />
+					<Header />
 					{/* Content below header */}
-					<div className={classNames('w-full', 'md:max-w-screen-lg', 'mx-auto')}>{children}</div>
+					<Content>{children}</Content>
 				</div>
 			</main>
 		</>
