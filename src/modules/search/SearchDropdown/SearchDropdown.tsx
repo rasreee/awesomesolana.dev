@@ -3,7 +3,6 @@ import React from 'react'
 import { Source } from '@/models/source/types'
 
 import { SearchData } from '../types'
-import { SearchHitItemButton } from './SearchHitItemButton'
 import * as S from './styles'
 
 export interface SearchDropdownProps {
@@ -18,12 +17,11 @@ export const SearchDropdown: React.FunctionComponent<SearchDropdownProps> = ({ o
 	return (
 		<S.Dropdown>
 			<S.HitsSection>
-				<S.HitsSectionTitle>Recents</S.HitsSectionTitle>
-				{data.type === 'recents' && <h2>Recents</h2>}
+				{data.type === 'recents' && <S.HitsSectionTitle>Recents</S.HitsSectionTitle>}
 				<S.HitList>
 					{data.list.map((hit) => (
 						<S.HitListItem key={hit.id}>
-							<S.HitItemButton hit={hit} onClick={handleHitClick(hit)} />
+							<S.HitItemButton onClick={handleHitClick(hit)}>{hit.title}</S.HitItemButton>
 						</S.HitListItem>
 					))}
 				</S.HitList>

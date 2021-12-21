@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useSt
 import { useDebouncedAndAutofocusedInput } from '@/common/hooks/useInput'
 import { Source, useFindSourcesByQuery } from '@/models/source'
 
-import { SearchBar } from './SearchBar/SearchBar'
+import { SearchBar } from './SearchBar'
 import { SearchDropdown } from './SearchDropdown'
 import { SearchData } from './types'
 

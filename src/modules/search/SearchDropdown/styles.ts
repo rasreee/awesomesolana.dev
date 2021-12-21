@@ -45,4 +45,7 @@ export const HitItemButton = styled.button`
 	border-bottom: 1px solid var(--gray-100);
 	color: inherit;
 	text-decoration: inherit;
+
+	display: flex;
+	align-items: center;
 `
