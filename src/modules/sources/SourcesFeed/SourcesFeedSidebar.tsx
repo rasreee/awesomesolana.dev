@@ -1,4 +1,3 @@
-import { runInAction } from 'mobx'
 import { observer } from 'mobx-react-lite'
 
 import { Sidebar } from '@/components/Sidebar'
@@ -12,10 +11,10 @@ export const SourcesFeedSidebar = observer(function _SourcesFeedSidebar() {
 
 	const onItemClick = (type: FilterType, id: string) => () => {
 		if (filterStore.allList.some((filter) => filter.id === id)) {
-			return runInAction(() => filterStore.add(type, id))
+			filterStore.remove(type, id)
+		} else {
+			filterStore.add(type, id)
 		}
-
-		runInAction(() => filterStore.remove(type, id))
 	}
 
 	const { data: countsData } = useSourceCounts()
