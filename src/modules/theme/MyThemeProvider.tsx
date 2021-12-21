@@ -4,7 +4,7 @@ import React, { FC, useMemo, useState } from 'react'
 
 import { theme } from '@/modules/theme/theme'
 
-import { ColorModeContext, ColorModeName } from './color-mode'
+import { ColorModeContext, ColorModeName } from './colorMode'
 import { GlobalStyle } from './GlobalStyle'
 
 const MyThemeProvider: FC = ({ children }) => {

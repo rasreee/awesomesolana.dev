@@ -1,15 +1,18 @@
 import React from 'react'
 
+import { SupabaseProvider } from '@/common/supabase/SupabaseProvider'
 import { AppConfig } from '@/common/utils/AppConfig'
+import { AmplitudeProvider } from '@/modules/core/amplitude/AmplitudeProvider'
+import { MyThemeProvider } from '@/modules/theme/MyThemeProvider'
 
-import { AppProviders } from './AppProviders'
-
-export interface AppShellProps {}
-
-export const AppShell: React.FunctionComponent<AppShellProps> = ({ children }) => {
+export const AppShell: React.FunctionComponent = ({ children }) => {
 	return (
 		<div id={AppConfig.elementId}>
-			<AppProviders>{children}</AppProviders>
+			<SupabaseProvider>
+				<AmplitudeProvider>
+					<MyThemeProvider>{children}</MyThemeProvider>
+				</AmplitudeProvider>
+			</SupabaseProvider>
 		</div>
 	)
 }
