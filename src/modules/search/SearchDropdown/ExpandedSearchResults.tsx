@@ -4,8 +4,8 @@ import { Modal } from '@/common/components/Modal'
 import { Source } from '@/models/source/types'
 import styled from '@/styled'
 
-import { SearchHitItemButton } from './SearchHitItemButton'
-import { SearchData } from './types'
+import { SearchHitItemButton } from '../SearchHitItemButton'
+import { SearchData } from '../types'
 
 const HitListItem = styled.li`
 	position: relative;
@@ -41,7 +41,9 @@ const SearchHitsList = ({ data, onHitClick }: { data: Source[]; onHitClick: any 
 	)
 }
 
-export const ExpandedSearchResults = (props: { shouldExpand: boolean; onHitClick: any; data: SearchData }) => {
+export type ExpandedSearchResultsProps = { shouldExpand: boolean; onHitClick: any; data: SearchData }
+
+export const ExpandedSearchResults = (props: ExpandedSearchResultsProps) => {
 	if (!props.shouldExpand) return null
 
 	return (

@@ -3,9 +3,8 @@ import React, { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useSt
 import { useDebouncedAndAutofocusedInput } from '@/common/hooks/useInput'
 import { Source, useFindSourcesByQuery } from '@/models/source'
 
-import { ExpandedSearchResults } from './ExpandedSearchResults'
-import * as S from './Search.styles'
 import { SearchBar } from './SearchBar/SearchBar'
+import { SearchDropdown } from './SearchDropdown'
 import { SearchData } from './types'
 
 export interface SearchProps {
@@ -93,12 +92,9 @@ export const Search: React.FunctionComponent<SearchProps> = ({
 
 	return (
 		<>
-			<S.SearchBar>
-				<SearchBar isLoading={isLoading} {...input} />
-			</S.SearchBar>
-			<S.Dropdown>
-				<ExpandedSearchResults shouldExpand={effects.shouldExpand} data={effects.data} onHitClick={handleHitClick} />
-			</S.Dropdown>
+			<SearchBar isLoading={isLoading} {...input} />
+
+			<SearchDropdown shouldExpand={effects.shouldExpand} data={effects.data} onHitClick={handleHitClick} />
 		</>
 	)
 }
