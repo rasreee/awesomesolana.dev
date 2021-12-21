@@ -12,7 +12,6 @@ const eventKbdAbbrs: Partial<{ [k in EventKey]: string }> = {
 const KbdSymbolItemAbbr = styled.abbr`
 	-webkit-text-decoration-line: none;
 	text-decoration-line: none;
-	color: var(--gray-300);
 `
 
 export const KbdSymbolItem = ({ value }: { value: KeyboardKey }) => {
@@ -31,6 +30,7 @@ export const KbdSymbolItem = ({ value }: { value: KeyboardKey }) => {
 
 const Kbd = styled.kbd`
 	font-weight: var(--font-semibold);
+	color: var(--gray-300);
 `
 
 export interface KbdSymbolProps {
