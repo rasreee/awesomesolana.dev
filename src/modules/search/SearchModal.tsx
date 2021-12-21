@@ -71,12 +71,12 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 		[onItemClick]
 	)
 
+	const shouldShowDropdown = searchData.list.length > 0 && input.value.length > 0
+
 	return (
 		<Modal {...props}>
 			<SearchBar isLoading={isLoading} {...input} onSubmitQuery={submitQuery} />
-			{searchData.list.length > 0 && input.value.length > 0 && (
-				<SearchDropdown data={searchData} renderItem={renderDropdownItem} />
-			)}
+			<SearchDropdown show={shouldShowDropdown} data={searchData} renderItem={renderDropdownItem} />
 		</Modal>
 	)
 }

@@ -8,9 +8,12 @@ import * as S from './SearchDropdown.styles'
 export interface SearchDropdownProps {
 	data: SearchHitsData
 	renderItem: (hit: Source, index: number) => JSX.Element
+	show: boolean
 }
 
-export const SearchDropdown: React.FunctionComponent<SearchDropdownProps> = ({ renderItem, data }) => {
+export const SearchDropdown: React.FunctionComponent<SearchDropdownProps> = ({ show, renderItem, data }) => {
+	if (!show) return null
+
 	return (
 		<S.Dropdown>
 			<S.Content>
