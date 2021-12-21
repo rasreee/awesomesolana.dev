@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
@@ -5,15 +6,16 @@ import { Sidebar } from '@/components'
 import { SOURCE_TYPES, useSourceCounts } from '@/models/source'
 import { getLanguagesAndFrameworks, Language, TagType } from '@/models/tag'
 import { SearchFeatureSm } from '@/modules/search/SearchFeatureSm'
-import { useSourcesFeed } from '@/modules/sources/SourcesFeed/SourcesFeedContext'
+import { useStore } from '@/store/store'
 
 const getFilteredSourcesPath = (type?: TagType, filterIds?: string[]) => {
 	return filterIds && filterIds.length > 0 && type ? `/sources?type=${filterIds.join(',')}` : '/sources'
 }
 
-export const SourcesFeedSidebar: React.FunctionComponent = () => {
+export const SourcesFeedSidebar: React.FunctionComponent = observer(() => {
 	const router = useRouter()
-	const { sourceTypes } = useSourcesFeed()
+	const { filterStore } = useStore()
+
 	const [languages, setLanguages] = useState<Language[]>([])
 
 	const onClearClick = () => {
@@ -50,12 +52,12 @@ export const SourcesFeedSidebar: React.FunctionComponent = () => {
 			<Sidebar.Section>
 				<Sidebar.SectionHeader>
 					<Sidebar.SectionTitle>Content Types</Sidebar.SectionTitle>
-					{sourceTypes.length > 0 && (
+					{filterStore.categories.length > 0 && (
 						<button
 							onClick={onClearClick}
 							className="font-semibold border border-gray-600 rounded-lg hover:bg-gray-200 text-sm px-3 py-1"
 						>
-							{`Clear (${sourceTypes.length})`}
+							{`Clear (${filterStore.categories.length})`}
 						</button>
 					)}
 				</Sidebar.SectionHeader>
@@ -63,7 +65,7 @@ export const SourcesFeedSidebar: React.FunctionComponent = () => {
 					{SOURCE_TYPES.map((id) => (
 						<Sidebar.ListItem
 							key={id}
-							isActive={sourceTypes.includes(id)}
+							isActive={filterStore.categories.includes(id)}
 							onClick={onItemClick(TagType.Categories, id)}
 						>
 							{`${id} (${countsData ? countsData[id] : 0})`}
@@ -93,4 +95,4 @@ export const SourcesFeedSidebar: React.FunctionComponent = () => {
 			</Sidebar.Section>
 		</Sidebar>
 	)
-}
+})
