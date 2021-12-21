@@ -1,9 +1,9 @@
 import { SupabaseClient } from '@supabase/supabase-js'
 
-import { RawSource, Source } from './types'
+import { Source } from './types'
 
 export const findAllSources = async (supabase: SupabaseClient): Promise<Source[]> => {
-	const { data, error } = await supabase.from<RawSource>('sources').select('*')
+	const { data, error } = await supabase.from<Source>('sources').select('*')
 	if (error) throw error
 
 	return data ?? []

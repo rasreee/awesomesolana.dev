@@ -3,12 +3,12 @@ import useSWR from 'swr'
 
 import { useSupabase } from '@/common/supabase/useSupabase'
 
-import { RawSource, SOURCE_TYPES, SourceType } from '.'
+import { Source, SOURCE_TYPES, SourceType } from './types'
 
 export type SourceCounts = Record<SourceType, number>
 
 export const getSourceCount = async (type: SourceType, supabase: SupabaseClient): Promise<number> => {
-	const { data, error } = await supabase.from<RawSource>('sources').select('*').match({ type })
+	const { data, error } = await supabase.from<Source>('sources').select('*').match({ type })
 
 	if (error) throw error
 

@@ -3,8 +3,12 @@ import { useContext } from 'react'
 import { AmplitudeContext } from './AmplitudeProvider'
 
 export const useAmplitude = () => {
-	const ctx = useContext(AmplitudeContext)
-	if (typeof ctx === 'undefined') throw new Error('failed to ensure defined context')
+	const instance = useContext(AmplitudeContext)
+	if (typeof instance === 'undefined') throw new Error('failed to ensure defined context')
 
-	return ctx
+	const logEvent = (eventType: string, data?: any) => {
+		instance.logEvent(eventType, data)
+	}
+
+	return { logEvent }
 }

@@ -1,6 +1,7 @@
 export * from './fetchers'
 export * from './formatSourceTypeLabel'
 export * from './githubRepo'
+export * from './parseSourceTags'
 export * from './types'
 export * from './useAllSources'
 export * from './useFindSourcesByQuery'

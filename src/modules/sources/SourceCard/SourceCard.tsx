@@ -1,13 +1,13 @@
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import { useMemo, useState } from 'react'
 
+import { clampText } from '@/common/utils'
 import { Source, SourceType } from '@/models/source/types'
 import { useUpdateSourceData } from '@/models/source/useUpdateSourceData'
 import { getPageLogger } from '@/modules/core/amplitude/amplitude'
 
 import { useSourcesFeed } from '../SourcesFeed/SourcesFeedContext'
-import { SourceCardBody } from './SourceCardBody'
 import { SourceCardFooter } from './SourceCardFooter'
 import { SourceCardHeader } from './SourceCardHeader'
 
@@ -42,6 +42,12 @@ export function SourceCard(data: SourceCardProps) {
 		}
 	}
 
+	const descriptionText = useMemo(() => {
+		const clampedDescription = clampText(localData.description ?? '', 85)
+
+		return clampedDescription.length ? clampedDescription : 'No description.'
+	}, [localData.description])
+
 	return (
 		<div
 			className={classNames(
@@ -67,7 +73,7 @@ export function SourceCard(data: SourceCardProps) {
 					'px-6 py-1.5 md:py-2'
 				)}
 			>
-				<SourceCardBody description={localData.description} tags={localData.tags} />
+				<p className={'text-xs leading-5'}>{descriptionText}</p>
 			</div>
 			{/* Footer */}
 			<div

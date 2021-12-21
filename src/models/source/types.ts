@@ -20,9 +20,4 @@ export type Source = {
 	likes: number
 	updatedAt: string
 	url: string
-	tags: string | string[]
-}
-
-export type RawSource = Omit<Source, 'tags'> & {
-	tags: string
 }
