@@ -3,7 +3,7 @@ import React, { ChangeEventHandler, Dispatch, forwardRef, Ref, SetStateAction, u
 
 import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
 import { EventKeys } from '@/common/components/keyboard/keys'
-import { Spinner } from '@/common/components/Spinner'
+import { Loader } from '@/common/components/Loader'
 import { SearchIcon } from '@/icons/SearchIcon'
 import { colors } from '@/theme/foundations/colors'
 
@@ -43,7 +43,7 @@ export const SearchBar = forwardRef((props: SearchBarProps, ref: SearchBarProps[
 	return (
 		<S.Container ref={ref}>
 			<S.Form role="search" noValidate>
-				<S.Label>{props.isLoading ? <Spinner /> : <SearchIcon height={iconSize} fill={iconColor} />}</S.Label>
+				<S.Label>{props.isLoading ? <Loader /> : <SearchIcon height={iconSize} fill={iconColor} />}</S.Label>
 				<S.Input
 					ref={inputRef}
 					type="search"
