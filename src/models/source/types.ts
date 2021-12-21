@@ -1,4 +1,4 @@
-export const SOURCE_TYPES = [
+export const categoriesConst = [
 	'github-repo',
 	'github-org',
 	'article',
@@ -9,15 +9,15 @@ export const SOURCE_TYPES = [
 	'devtool'
 ] as const
 
-export type SourceType = typeof SOURCE_TYPES[number]
+export type Category = typeof categoriesConst[number]
 
 export interface Source {
 	id: string
-	type: SourceType
 	title: string
 	description?: string
 	views: number
 	likes: number
 	updatedAt: string
 	url: string
+	category: Category
 }

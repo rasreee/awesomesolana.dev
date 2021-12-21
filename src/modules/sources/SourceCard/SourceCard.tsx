@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useMemo, useState } from 'react'
 
 import { clampText } from '@/common/utils'
-import { Source, SourceType } from '@/models/source/types'
+import { Category, Source } from '@/models/source/types'
 import { useUpdateSourceData } from '@/models/source/useUpdateSourceData'
 import { getPageLogger } from '@/modules/core/amplitude/amplitude'
 import { FilterType } from '@/store/filter'
@@ -26,22 +26,21 @@ export const SourceCard = observer((data: SourceCardProps) => {
 
 	const onClickLikes = async () => {
 		const updatedData = await updateSourceData(localData.id, { likes: localData.likes + 1 })
-		pageLogger.click(`LIKE_BUTTON_${localData.type.toLocaleUpperCase()}`)
+		pageLogger.click(`LIKE_BUTTON_${localData.category.toLocaleUpperCase()}`)
 		setLocalData(updatedData)
 	}
 
 	const onClickLink = async () => {
 		const updatedData = await updateSourceData(localData.id, { views: localData.views + 1 })
-		pageLogger.click(`SOURCE_LINK_${localData.type.toLocaleUpperCase()}`)
+		pageLogger.click(`SOURCE_LINK_${localData.category.toLocaleUpperCase()}`)
 		router.push(localData.url)
 		setLocalData(updatedData)
 	}
 
-	const onCategoryClick = (type: SourceType) => {
+	const onCategoryClick = (category: Category) => {
 		return () => {
-			console.log(type)
 			filterStore.resetStore()
-			filterStore.setFilters(FilterType.Categories, [type])
+			filterStore.setFilters(FilterType.Categories, [category])
 		}
 	}
 
@@ -91,12 +90,12 @@ export const SourceCard = observer((data: SourceCardProps) => {
 				)}
 			>
 				<SourceCardFooter
-					type={localData.type}
+					type={localData.category}
 					likes={localData.likes}
 					views={localData.views}
 					updatedAt={localData.updatedAt}
 					onClickLikes={onClickLikes}
-					onCategoryClick={onCategoryClick(localData.type)}
+					onCategoryClick={onCategoryClick(localData.category)}
 				/>
 			</div>
 		</div>

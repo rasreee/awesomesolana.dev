@@ -18,5 +18,3 @@ export const toFilter =
 		id,
 		type
 	})
-
-export const initAll = (): Record<FilterType, string[]> => ({ categories: [], concepts: [] })

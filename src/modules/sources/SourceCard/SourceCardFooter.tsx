@@ -4,12 +4,12 @@ import React, { FC } from 'react'
 import { Tag } from '@/components/Tag'
 import { EyeIcon } from '@/icons/EyeIcon'
 import { HeartIconSolid } from '@/icons/HeartIcon'
-import { SourceType } from '@/models/source'
+import { Category } from '@/models/source'
 
 import { SourceStatButton } from './SourceStatButton'
 
 type SourceCardFooterProps = {
-	type: SourceType
+	type: Category
 	likes: number
 	views: number
 	updatedAt: string

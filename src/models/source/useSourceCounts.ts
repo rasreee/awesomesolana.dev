@@ -3,12 +3,12 @@ import useSWR from 'swr'
 
 import { useSupabase } from '@/common/supabase/useSupabase'
 
-import { Source, SOURCE_TYPES, SourceType } from './types'
+import { categoriesConst, Category, Source } from './types'
 
-export type SourceCounts = Record<SourceType, number>
+export type SourceCounts = Record<Category, number>
 
-export const getSourceCount = async (type: SourceType, supabase: SupabaseClient): Promise<number> => {
-	const { data, error } = await supabase.from<Source>('sources').select('*').match({ type })
+export const getSourceCount = async (category: Category, supabase: SupabaseClient): Promise<number> => {
+	const { data, error } = await supabase.from<Source>('sources').select('*').match({ category })
 
 	if (error) throw error
 
@@ -19,17 +19,17 @@ export const useSourceCounts = () => {
 	const supabase = useSupabase()
 
 	const fetcher = async () => {
-		const promises = [] as Array<Promise<{ type: SourceType; count: number }>>
+		const promises = [] as Array<Promise<{ category: Category; count: number }>>
 
-		SOURCE_TYPES.forEach((type, index) => {
-			promises[index] = getSourceCount(type, supabase).then((count) => ({ type, count }))
+		categoriesConst.forEach((category, index) => {
+			promises[index] = getSourceCount(category, supabase).then((count) => ({ category, count }))
 		})
 
 		const countsData = await Promise.all(promises)
 		const counts = {} as SourceCounts
 
 		countsData.forEach((data) => {
-			counts[data.type] = data.count
+			counts[data.category] = data.count
 		})
 
 		return counts

@@ -57,7 +57,7 @@ export const SourcesFeed: React.FC<SourcesFeedProps> = observer(() => {
 							filterStore.all.categories.map((id) => (
 								<SourcesFeedGrid
 									key={id}
-									filter={{ type: FilterType.Categories, id }}
+									matchOpts={{ category: id }}
 									spaceXClasses={'space-x-0 md:space-x-0'}
 									spaceYClasses={'space-y-2 md:space-y-0'}
 								/>

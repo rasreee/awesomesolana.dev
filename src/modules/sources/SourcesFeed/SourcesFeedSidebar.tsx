@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 
 import { Sidebar } from '@/components/Sidebar'
-import { SOURCE_TYPES, useSourceCounts } from '@/models/source'
+import { categoriesConst, useSourceCounts } from '@/models/source'
 import { SearchFeatureSm } from '@/modules/search'
 import { FilterType } from '@/store/filter'
 import { useStore } from '@/store/store'
@@ -37,7 +37,7 @@ export const SourcesFeedSidebar = observer(function _SourcesFeedSidebar() {
 					)}
 				</Sidebar.SectionHeader>
 				<Sidebar.List>
-					{SOURCE_TYPES.map((id) => (
+					{categoriesConst.map((id) => (
 						<Sidebar.ListItem
 							key={id}
 							isActive={filterStore.all.categories.includes(id)}

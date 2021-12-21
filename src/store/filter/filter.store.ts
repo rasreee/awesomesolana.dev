@@ -1,7 +1,8 @@
 import { makeAutoObservable } from 'mobx'
 
 import { Filters, FilterType } from './types'
-import { initAll } from './utils'
+
+const initAll = (): Record<FilterType, string[]> => ({ categories: [], concepts: [] })
 
 export class FilterStore {
 	all: Filters = initAll()

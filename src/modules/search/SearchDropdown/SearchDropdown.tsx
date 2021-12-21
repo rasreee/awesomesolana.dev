@@ -1,13 +1,13 @@
 import React from 'react'
 
 import { formatSourceTypeLabel } from '@/models/source'
-import { Source, SOURCE_TYPES, SourceType } from '@/models/source/types'
+import { categoriesConst, Category, Source } from '@/models/source/types'
 
 import { SearchHitsData } from '../types'
 import * as S from './SearchDropdown.styles'
 
 export type SearchDropdownSectionProps = {
-	type: SourceType | 'recents'
+	type: Category | 'recents'
 	items: Source[]
 	renderItem: (hit: Source, index: number) => JSX.Element
 }
@@ -45,11 +45,11 @@ export const SearchDropdown: React.FunctionComponent<SearchDropdownProps> = ({ s
 
 	return (
 		<S.Dropdown>
-			{SOURCE_TYPES.map((sourceType) => (
+			{categoriesConst.map((sourceType) => (
 				<SearchDropdownSection
 					key={sourceType}
 					type={sourceType}
-					items={data.list.filter((item) => item.type === sourceType)}
+					items={data.list.filter((item) => item.category === sourceType)}
 					renderItem={renderItem}
 				/>
 			))}
