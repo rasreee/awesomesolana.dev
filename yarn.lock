@@ -2,31 +2,17 @@
 # yarn lockfile v1
 
 
-"@amplitude/identify@^1.9.1":
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/@amplitude/identify/-/identify-1.9.1.tgz#17e5f0b8615001fd9e10edbbb52eedb4b2794c17"
-  integrity sha512-SlCa8LoYm1jzMeY+BVxcDmUujh0e6mNpyLIfd3zRRao55v7LHpMn1hSizxEzjeZxHR9cJC0HdSppWDp3V/NXwQ==
-  dependencies:
-    "@amplitude/types" "^1.9.1"
-    "@amplitude/utils" "^1.9.1"
-    tslib "^1.9.3"
-
-"@amplitude/node@^1.9.1":
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/@amplitude/node/-/node-1.9.1.tgz#2333506d18a84a10c1cd30ed8620d33c8a953fc3"
-  integrity sha512-aXAy1P8ydMN2+/p6QMJYvk5OO1T5Ju1llIQnYN9xOtC47a34uXv7iOevPAOpRZOYosy+XkwGFITXU60KBYsEaQ==
-  dependencies:
-    "@amplitude/identify" "^1.9.1"
-    "@amplitude/types" "^1.9.1"
-    "@amplitude/utils" "^1.9.1"
-    tslib "^1.9.3"
-
 "@amplitude/types@^1.9.1":
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/@amplitude/types/-/types-1.9.1.tgz#df614ac6d278c60c39bb49e05014cdcc7e7714e9"
   integrity sha512-s10ewnlFjHjNWrUMVTPJ2YRj0eD5UoeL+d0HB01x2Ltae/jFgtHQBS/HGKYV5I+NyiaezjrrZImhAQ72Ww/+8g==
 
-"@amplitude/utils@^1.9.1":
+"@amplitude/ua-parser-js@0.7.26":
+  version "0.7.26"
+  resolved "https://registry.yarnpkg.com/@amplitude/ua-parser-js/-/ua-parser-js-0.7.26.tgz#18d889d84d2ba90c248ab6fcd7e3dd07f1c9c86e"
+  integrity sha512-62/Rid6YQ7F2KT/5vTre41Y26ivrEoFC8lbrsJZqBKaiXMJWG0YpNv9RgxNSaZS2jPLVQgoB/FFeWxihOLfIcg==
+
+"@amplitude/utils@^1.0.5":
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/@amplitude/utils/-/utils-1.9.1.tgz#6d127b1a6f0b62c49a932ef00ecd471e554e192f"
   integrity sha512-OO2w0gfs5b/dMRKh+PHhtqvb43Uf05MMUWrT3xa62P89mBtmusLvWnWycGdBu750YsnYwX8dfeZpYZ/zLH5ttQ==
@@ -1141,7 +1127,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.10.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.14.0", "@babel/runtime@^7.14.8", "@babel/runtime@^7.16.3", "@babel/runtime@^7.16.5", "@babel/runtime@^7.3.1", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.10.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.14.0", "@babel/runtime@^7.14.8", "@babel/runtime@^7.16.3", "@babel/runtime@^7.16.5", "@babel/runtime@^7.3.1", "@babel/runtime@^7.3.4", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4":
   version "7.16.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.16.5.tgz#7f3e34bf8bdbbadf03fbb7b1ea0d929569c9487a"
   integrity sha512-TXWihFIS3Pyv5hzR7j6ihmeLkZfrXGxAr5UfSl8CHf+6q/wpiYDkUau0czckpYG8QmnCIuPpdLtuA9VmuGGyMA==
@@ -3083,6 +3069,11 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
+"@types/amplitude-js@^8.0.2":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@types/amplitude-js/-/amplitude-js-8.0.2.tgz#576069390dd642e4b675a63c0867a52bfb96a01e"
+  integrity sha512-lsUZ2nfAbASU53YWNJqVmB4hFg6qRK2Dlz8FQ3vBqeDwR0OqCAi7Efowx30kvY1WgFz+dBnmRBR/D8x/NCGtwg==
+
 "@types/aria-query@^4.2.0":
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/@types/aria-query/-/aria-query-4.2.2.tgz#ed4e0ad92306a704f9fb132a0cfcf77486dbe2bc"
@@ -3769,6 +3760,17 @@ ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.2, ajv@^6.12.4, ajv@^6.12.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+amplitude-js@^8.13.1:
+  version "8.13.1"
+  resolved "https://registry.yarnpkg.com/amplitude-js/-/amplitude-js-8.13.1.tgz#0ae654a5bdfb434e17e55aa40a34775a902e97dd"
+  integrity sha512-cjKtq+t51jyN5XrnXtZW05jSGRDZKtHVqx/BIuP+b1baBgWqFZ2P5GKEH2DqCWhZqwwkaBkAw+E7tanohYqLMw==
+  dependencies:
+    "@amplitude/ua-parser-js" "0.7.26"
+    "@amplitude/utils" "^1.0.5"
+    "@babel/runtime" "^7.3.4"
+    blueimp-md5 "^2.10.0"
+    query-string "5"
+
 anser@1.4.9:
   version "1.4.9"
   resolved "https://registry.yarnpkg.com/anser/-/anser-1.4.9.tgz#1f85423a5dcf8da4631a341665ff675b96845760"
@@ -4426,6 +4428,11 @@ bluebird@^3.3.5, bluebird@^3.5.5:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
+
+blueimp-md5@^2.10.0:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/blueimp-md5/-/blueimp-md5-2.19.0.tgz#b53feea5498dcb53dc6ec4b823adb84b729c4af0"
+  integrity sha512-DRQrD6gJyy8FbiE4s+bDoXS9hiW3Vbx5uCdwvcCf3zLHL+Iv7LtGHLpr+GZV8rHG8tK766FGYBwRbu8pELTt+w==
 
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.11.9:
   version "4.12.0"
@@ -10737,6 +10744,15 @@ qs@^6.10.0:
   dependencies:
     side-channel "^1.0.4"
 
+query-string@5:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-5.1.1.tgz#a78c012b71c17e05f2e3fa2319dd330682efb3cb"
+  integrity sha512-gjWOsm2SoGlgLEdAGt7a6slVOk9mGiXmPFMqrEhLQ68rhQuBnpfs3+EmlvqKyxnCo9/PPlF+9MtY02S1aFg+Jw==
+  dependencies:
+    decode-uri-component "^0.2.0"
+    object-assign "^4.1.0"
+    strict-uri-encode "^1.0.0"
+
 querystring-es3@0.2.1, querystring-es3@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/querystring-es3/-/querystring-es3-0.2.1.tgz#9ec61f79049875707d69414596fd907a4d711e73"
@@ -11959,6 +11975,11 @@ stream-shift@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/stream-shift/-/stream-shift-1.0.1.tgz#d7088281559ab2778424279b0877da3c392d5a3d"
   integrity sha512-AiisoFqQ0vbGcZgQPY1cdP2I76glaVA/RauYR4G4thNFgkTqr90yXTo4LYX60Jl+sIlPNHHdGSwo01AvbKUSVQ==
+
+strict-uri-encode@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
+  integrity sha1-J5siXfHVgrH1TmWt3UNS4Y+qBxM=
 
 string-argv@^0.3.1:
   version "0.3.1"

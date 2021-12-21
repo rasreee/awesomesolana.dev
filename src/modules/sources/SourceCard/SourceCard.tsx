@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 import { Source, SourceType } from '@/models/source/types'
 import { useUpdateSourceData } from '@/models/source/useUpdateSourceData'
-import { useLogEvent } from '@/modules/core/amplitude/useLogEvent'
+import { getPageLogger } from '@/modules/core/amplitude/amplitude'
 
 import { useSourcesFeed } from '../SourcesFeed/SourcesFeedContext'
 import { SourceCardBody } from './SourceCardBody'
@@ -13,21 +13,22 @@ import { SourceCardHeader } from './SourceCardHeader'
 
 export interface SourceCardProps extends Source {}
 
+const pageLogger = getPageLogger('SOURCES')
+
 export function SourceCard(data: SourceCardProps) {
 	const [localData, setLocalData] = useState(data)
 	const updateSourceData = useUpdateSourceData(localData.id)
 	const router = useRouter()
-	const logEvent = useLogEvent()
 
 	const onClickLikes = async () => {
 		const updatedData = await updateSourceData(localData.id, { likes: localData.likes + 1 })
-		logEvent(`LIKED_${localData.type.toLocaleUpperCase()}_SOURCE`)
+		pageLogger.click(`LIKE_BUTTON_${localData.type.toLocaleUpperCase()}`)
 		setLocalData(updatedData)
 	}
 
 	const onClickLink = async () => {
 		const updatedData = await updateSourceData(localData.id, { views: localData.views + 1 })
-		logEvent(`CLICKED_SOURCE_LINK_${localData.type.toLocaleUpperCase()}`)
+		pageLogger.click(`SOURCE_LINK_${localData.type.toLocaleUpperCase()}`)
 		router.push(localData.url)
 		setLocalData(updatedData)
 	}
