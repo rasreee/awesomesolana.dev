@@ -1,10 +1,21 @@
+import { css } from '@emotion/react'
 import classNames from 'classnames'
 import React, { HTMLAttributes, PropsWithChildren } from 'react'
 
 export interface SidebarProps {}
 
 export const Sidebar = ({ children }: PropsWithChildren<SidebarProps>) => {
-	return <aside className="px-5 flex flex-col gap-5">{children}</aside>
+	return (
+		<aside
+			className={classNames('absolute left-0', 'px-5 flex flex-col gap-5')}
+			css={css`
+				width: var(--page-sidebar-width);
+				max-width: var(--page-sidebar-width);
+			`}
+		>
+			{children}
+		</aside>
+	)
 }
 
 Sidebar.Header = function Header({ children }: PropsWithChildren<{}>) {

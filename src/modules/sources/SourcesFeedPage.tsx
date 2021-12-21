@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import classNames from 'classnames'
 import React from 'react'
 
@@ -20,7 +21,13 @@ export const SourcesFeedPage: React.FunctionComponent<SourcesFeedPageProps> = ()
 		<Page title={caption} description={caption}>
 			<div className="flex justify-start w-full">
 				<SourcesFeedSidebar />
-				<div className={classNames(!isMobileDevice && 'flex flex-col gap-2')}>
+				<div
+					css={css`
+						width: var(--page-right-width);
+						max-width: var(--page-right-width);
+					`}
+					className={classNames('absolute right-12', !isMobileDevice && 'flex flex-col gap-2')}
+				>
 					{!isMobileDevice && (
 						<div className={classNames('flex', 'items-center justify-between', 'py-2', 'px-5 md:px-2')}>
 							<h1 className="text-gray-800 text-lg uppercase font-bold">{caption}</h1>
