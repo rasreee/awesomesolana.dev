@@ -1,2 +1,2 @@
 export * from './SourcesPage'
-export * from './SourcesSection'
+export * from './SourcesFeedSection'

@@ -3,7 +3,7 @@ import React, { ChangeEventHandler, Dispatch, forwardRef, Ref, SetStateAction, u
 
 import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
 import { EventKeys } from '@/common/components/keyboard/keys'
-import { Spinner } from '@/common/components/spinner'
+import { Spinner } from '@/common/components/Spinner'
 import { SearchIcon } from '@/icons/SearchIcon'
 import { colors } from '@/theme/foundations/colors'
 

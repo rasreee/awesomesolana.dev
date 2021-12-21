@@ -1,4 +1,6 @@
 export * from './NavLink'
+export * from './Sidebar'
+export * from './Spinner'
 export * from './Tag'
 export * from './Modal'
 export * from './Page'
