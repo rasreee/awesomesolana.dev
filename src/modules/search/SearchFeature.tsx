@@ -15,7 +15,7 @@ export const SearchFeature: React.FunctionComponent<SearchFeatureProps> = () => 
 	const modal = useModal()
 	useKeyCombo('Meta+k', modal.open)
 
-	const onHitClick = (hit: Source) => {
+	const onItemClick = (hit: Source) => {
 		modal.close()
 		router.push(`/sources/${hit.id}`)
 	}
@@ -23,7 +23,7 @@ export const SearchFeature: React.FunctionComponent<SearchFeatureProps> = () => 
 	return (
 		<>
 			<SearchButton onClick={modal.open} />
-			<SearchModal onHitClick={onHitClick} {...modal} />
+			<SearchModal onItemClick={onItemClick} {...modal} />
 		</>
 	)
 }

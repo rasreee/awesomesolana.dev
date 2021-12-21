@@ -1,3 +1,6 @@
+import { css } from '@emotion/react'
+
+import { pseudo } from '@/common/utils/pseudos'
 import styled from '@/styled'
 
 export const Dropdown = styled.div`
@@ -7,11 +10,11 @@ export const Dropdown = styled.div`
 
 export const Content = styled.div`
 	padding-bottom: 1.5rem;
+	padding-left: 1rem;
+	padding-right: 0.675rem;
 `
 
-export const Section = styled.section`
-	width: 100%;
-`
+export const Section = styled.section``
 
 export const SectionTitle = styled.div`
 	line-height: 1.5rem;
@@ -27,8 +30,10 @@ export const List = styled.ul`
 `
 
 export const ListItem = styled.li`
+	display: list-item;
+	text-align: -webkit-match-parent;
 	list-style: none;
-	position: relative;
+	margin: 0;
 
 	:first-child {
 		border-top-width: 1px;
@@ -37,7 +42,7 @@ export const ListItem = styled.li`
 	border-bottom: 1px solid var(--gray-100);
 `
 
-export const ItemButton = styled.button`
+export const ItemButton = styled.button<{ isFocused: boolean }>`
 	padding: 1rem 1.5rem;
 	font-size: 0.875rem;
 	color: inherit;
@@ -45,4 +50,14 @@ export const ItemButton = styled.button`
 
 	display: flex;
 	align-items: center;
+	${({ theme }) => css`
+		${pseudo('_focus')} {
+			background-color: ${theme.colors.primary[500]};
+			color: white;
+		}
+		${pseudo('_hover')} {
+			background-color: ${theme.colors.primary[500]};
+			color: white;
+		}
+	`}
 `

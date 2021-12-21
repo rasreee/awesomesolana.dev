@@ -19,28 +19,25 @@ export const eventKeys = [
 	'Shift'
 ]
 
-export const eventKeysConst = [
-	'ArrowDown',
-	'ArrowUp',
-	'ArrowLeft',
-	'ArrowRight',
-	'Enter',
-	'Space',
-	'Tab',
-	'Backspace',
-	'Control',
-	'Meta',
-	'Home',
-	'End',
-	'PageDown',
-	'PageUp',
-	'Delete',
-	'Escape',
-	' ',
-	'Shift'
-] as const
-
-export type EventKey = typeof eventKeysConst[number]
+export enum EventKey {
+	ArrowDown = 'ArrowDown',
+	ArrowUp = 'ArrowUp',
+	ArrowRight = 'ArrowRight',
+	ArrowLeft = 'ArrowLeft',
+	Enter = 'Enter',
+	Space = 'Space',
+	Tab = 'Tab',
+	Backspace = 'Backspace',
+	Control = 'Control',
+	Meta = 'Meta',
+	Home = 'Home',
+	PageDown = 'PageDown',
+	PageUp = 'PageUp',
+	Delete = 'Delete',
+	Escape = 'Escape',
+	Shift = 'Shift',
+	BlankSpace = ' '
+}
 
 export const isEventKey = (o: any): o is EventKey => {
 	return typeof o === 'string' && eventKeys.includes(o)

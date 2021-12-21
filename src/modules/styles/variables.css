@@ -13,14 +13,25 @@
 	--font-extrabold: 800;
 	--font-black: 900;
 
-	--gray-50: #f9fafb;
-	--gray-100: #f3f4f6;
-	--gray-200: #e5e7eb;
-	--gray-300: #d1d5db;
-	--gray-400: #9ca3af;
-	--gray-500: #6b7280;
-	--gray-600: #4b5563;
-	--gray-700: #374151;
-	--gray-800: #1f2937;
-	--gray-900: #111827;
+	--indigo-50: #fff;
+	--indigo-100: #CECEFE;
+	--indigo-200: #9F9FFD;
+	--indigo-300: #6E6EF9;
+	--indigo-400: #4A4AF4;
+	--indigo-500: #1111EE;
+	--indigo-600: #0C0CCC;
+	--indigo-700: #0808AB;
+	--indigo-800: #05058A;
+	--indigo-900: #030372;
+
+	--indigo-50: #fff;
+	--green-100: #F1FDD1;
+	--green-200: #DFFCA5;
+	--green-300: #C6F676;
+	--green-400: #ADED53;
+	--green-500: #87E21F;
+	--green-600: #6AC216;
+	--green-700: #50A20F;
+	--green-800: #398309;
+	--green-900: #296C05;
 }

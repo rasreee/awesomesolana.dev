@@ -1,3 +1,4 @@
+export * from './useAutocomplete'
 export * from './useFocus'
 export * from './useHover'
 export * from './useInput'

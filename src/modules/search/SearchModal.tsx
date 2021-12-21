@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Modal, useModal } from '@/common/components/Modal'
-import { useDebouncedAndAutofocusedInput } from '@/common/hooks'
+import { useAutoComplete, useDebouncedAndAutofocusedInput } from '@/common/hooks'
 import { useFindSourcesByQuery } from '@/models/source'
 import { Source } from '@/models/source/types'
 
@@ -10,10 +10,10 @@ import { SearchDropdown } from './SearchDropdown'
 import { SearchHitsData } from './types'
 
 export interface SearchModalProps extends ReturnType<typeof useModal> {
-	onHitClick: (hit: Source) => void
+	onItemClick: (hit: Source) => void
 }
 
-export const SearchModal: React.FunctionComponent<SearchModalProps> = ({ onHitClick, ...props }) => {
+export const SearchModal: React.FunctionComponent<SearchModalProps> = ({ onItemClick, ...props }) => {
 	const [initialQuery, setInitialQuery] = useState<string>('')
 	const [recents, setRecents] = useState<Source[]>([])
 
@@ -42,10 +42,10 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = ({ onHitCl
 		[recents]
 	)
 
-	const handleHitClick = (hit: Source) => () => {
+	const handleItemClick = (hit: Source) => () => {
 		updateRecents(hit)
 		setInitialQuery(hit.title)
-		onHitClick(hit)
+		onItemClick(hit)
 	}
 
 	const searchData = useMemo(() => {
@@ -53,6 +53,8 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = ({ onHitCl
 
 		return data as SearchHitsData
 	}, [hits, recents])
+
+	const { selectedItemIndex, onKeyDown } = useAutoComplete(searchData.list, handleItemClick)
 
 	const findSourcesByQuery = useFindSourcesByQuery()
 
@@ -86,7 +88,9 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = ({ onHitCl
 	return (
 		<Modal {...props}>
 			<SearchBar isLoading={isLoading} {...input} />
-			{searchData.list.length > 0 && <SearchDropdown data={searchData} onHitClick={handleHitClick} />}
+			{searchData.list.length > 0 && (
+				<SearchDropdown data={searchData} focusedItemIndex={selectedItemIndex} onItemClick={handleItemClick} />
+			)}
 		</Modal>
 	)
 }
