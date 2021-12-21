@@ -1,17 +1,10 @@
 import { makeAutoObservable } from 'mobx'
-import Router from 'next/router'
 
-import { Filter, FilterType } from './types'
-import { getFilteredPath, initAll, toFilter } from './utils'
+import { FilterType } from './types'
+import { initAll } from './utils'
+
 export class FilterStore {
 	all: Record<FilterType, string[]> = initAll()
-
-	get allList(): Filter[] {
-		return [
-			...this.all.categories.map(toFilter(FilterType.Categories)),
-			...this.all.concepts.map(toFilter(FilterType.Concepts))
-		]
-	}
 
 	constructor() {
 		makeAutoObservable(this)
@@ -25,14 +18,9 @@ export class FilterStore {
 		this.all.categories = values
 	}
 
-	private updateRoute() {
-		Router.router?.push(getFilteredPath(this.all))
-	}
-
 	add(type: FilterType, id: string) {
 		const oldFilters = this.all
 		this.all = { ...oldFilters, [type]: [...oldFilters[type], id] }
-		this.updateRoute()
 	}
 
 	remove(type: FilterType, id: string) {
@@ -55,7 +43,6 @@ export class FilterStore {
 				}
 
 				this.setConcepts(oldFilters.filter((filterId) => filterId !== id))
-				this.updateRoute()
 		}
 	}
 

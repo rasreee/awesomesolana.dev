@@ -1,5 +1,4 @@
 import { css } from '@emotion/react'
-import { useUpdateEffect } from '@react-hookz/web'
 import classNames from 'classnames'
 import { observer } from 'mobx-react-lite'
 import React from 'react'
@@ -8,7 +7,6 @@ import { useIsMobileDevice } from '@/common/hooks'
 import { formatToListOfPlurals } from '@/common/utils'
 import { Page } from '@/components/Page'
 import { useTotalSourcesCount } from '@/models/source'
-import { parseQueryParamAsArray } from '@/modules/core/nextRouter'
 import { FilterType } from '@/store/filter'
 import { useStore } from '@/store/store'
 
@@ -19,24 +17,16 @@ export interface SourcesFeedProps {
 	routerQuery: Record<string, string | string[] | undefined>
 }
 
-export const SourcesFeed: React.FC<SourcesFeedProps> = observer(({ routerQuery }) => {
+export const SourcesFeed: React.FC<SourcesFeedProps> = observer(() => {
 	const { filterStore } = useStore()
-
-	useUpdateEffect(() => {
-		const categoryFilters = parseQueryParamAsArray('category', routerQuery)
-
-		console.log(categoryFilters)
-
-		filterStore.setCategories(categoryFilters)
-	}, [routerQuery])
 
 	const isMobileDevice = useIsMobileDevice()
 
 	const totalCount = useTotalSourcesCount()
 
 	const caption =
-		filterStore.allList.length > 0
-			? `All ${formatToListOfPlurals(filterStore.allList.map((filter) => filter.id))}`
+		Object.values(filterStore.all).flat().length > 0
+			? `All ${formatToListOfPlurals(Object.values(filterStore.all).flat())}`
 			: `All sources (${totalCount})`
 
 	return (

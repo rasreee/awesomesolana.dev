@@ -10,7 +10,7 @@ export const SourcesFeedSidebar = observer(function _SourcesFeedSidebar() {
 	const { filterStore } = useStore()
 
 	const onItemClick = (type: FilterType, id: string) => () => {
-		if (filterStore.allList.some((filter) => filter.id === id)) {
+		if (Object.values(filterStore.all).some((filters) => filters.includes(id))) {
 			filterStore.remove(type, id)
 		} else {
 			filterStore.add(type, id)
