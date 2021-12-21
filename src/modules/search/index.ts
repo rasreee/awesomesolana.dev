@@ -1,5 +1,3 @@
-export * from './Search.stories'
-export * from './Search'
 export * from './SearchButton'
 export * from './SearchFeature'
 export * from './SearchModal'

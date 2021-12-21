@@ -3,11 +3,11 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
-import { Search } from './Search'
+import { SearchModal } from './SearchModal'
 
 export default {
-	title: 'Search',
-	component: Search
-} as ComponentMeta<typeof Search>
+	title: 'SearchModal',
+	component: SearchModal
+} as ComponentMeta<typeof SearchModal>
 
-export const Template: ComponentStory<typeof Search> = (args) => <Search {...args} />
+export const Template: ComponentStory<typeof SearchModal> = (args) => <SearchModal {...args} isOpen={true} />
