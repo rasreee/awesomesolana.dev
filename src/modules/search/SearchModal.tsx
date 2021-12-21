@@ -47,9 +47,9 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 	const router = useRouter()
 
 	const handleItemClick = (hit: Source) => () => {
+		console.log('HIT CLICKED:', hit)
 		updateRecents(hit)
 		setInitialQuery(hit.title)
-
 		router.push(`/sources/${hit.id}`)
 		props.close()
 	}
@@ -72,19 +72,7 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 
 		setIsLoading(true)
 
-		const fetcher = async () => {
-			const promise = new Promise((resolve) => {
-				setTimeout(() => {
-					resolve(null)
-				}, 200)
-			})
-
-			await promise
-
-			return findSourcesByQuery(query)
-		}
-
-		fetcher().then((res) => {
+		findSourcesByQuery(query).then((res) => {
 			console.log('Hits: ', res)
 			setHits(res)
 			setIsLoading(false)

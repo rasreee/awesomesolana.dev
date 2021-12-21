@@ -28,7 +28,11 @@ export const SearchDropdown: React.FunctionComponent<SearchDropdownProps> = ({
 		focusedButtonRef.current?.focus()
 	}, [focusedItemIndex])
 
-	const handleItemClick = (hit: Source) => () => onItemClick(hit)
+	const handleItemClick = (hit: Source) => {
+		return () => {
+			onItemClick(hit)
+		}
+	}
 
 	useOnKeyPress(EventKeys.ArrowUp, () => {
 		if (focusedItemIndex === 0) return
