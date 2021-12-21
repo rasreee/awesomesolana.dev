@@ -32,6 +32,7 @@ export const List = styled.ul`
 `
 
 export const ListItem = styled.li`
+	list-style-type: none;
 	position: relative;
 `
 
