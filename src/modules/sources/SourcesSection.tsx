@@ -12,7 +12,6 @@ export type SourcesSectionHeaderProps = {
 
 const SourcesSectionHeader: FC<SourcesSectionHeaderProps> = ({ sourceType }) => {
 	const caption = `${sourceType.replace('-', ' ')}s`
-	const sourcesPathname = `/sources?type=${sourceType}`
 
 	return (
 		<div
@@ -25,7 +24,7 @@ const SourcesSectionHeader: FC<SourcesSectionHeaderProps> = ({ sourceType }) => 
 			)}
 		>
 			<h6 className="text-gray-800 text-sm uppercase font-bold">{caption}</h6>
-			<Link href={sourcesPathname}>
+			<Link href={`/sources?type=${sourceType}`}>
 				<a
 					className={classNames(
 						'hover:underline',
