@@ -66,11 +66,7 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 
 	const renderDropdownItem = useCallback(
 		(hit: Source) => {
-			return (
-				<S.ListItem key={hit.id}>
-					<S.ItemButton onClick={onItemClick(hit)}>{hit.title}</S.ItemButton>
-				</S.ListItem>
-			)
+			return <S.ItemButton onClick={onItemClick(hit)}>{hit.title}</S.ItemButton>
 		},
 		[onItemClick]
 	)
@@ -78,7 +74,9 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 	return (
 		<Modal {...props}>
 			<SearchBar isLoading={isLoading} {...input} onSubmitQuery={submitQuery} />
-			{searchData.list.length > 0 && <SearchDropdown data={searchData} renderItem={renderDropdownItem} />}
+			{searchData.list.length > 0 && input.value.length > 0 && (
+				<SearchDropdown data={searchData} renderItem={renderDropdownItem} />
+			)}
 		</Modal>
 	)
 }

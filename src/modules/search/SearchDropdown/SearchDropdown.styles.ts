@@ -42,24 +42,3 @@ export const ListItem = styled.li`
 	}
 	border-bottom: 1px solid var(--gray-100);
 `
-
-export const ItemButton = styled.button<{ isFocused: boolean }>`
-	padding: 1rem 1.5rem;
-	font-size: 0.875rem;
-	color: inherit;
-	text-decoration: inherit;
-	display: flex;
-	align-items: center;
-	border-radius: var(--rounded-md);
-	width: 100%;
-	${({ theme }) => css`
-		${pseudo('_focus')} {
-			background-color: ${theme.colors.primary[500]};
-			color: white;
-		}
-		${pseudo('_hover')} {
-			background-color: ${theme.colors.primary[500]};
-			color: white;
-		}
-	`};
-`

@@ -1,8 +1,5 @@
-import { useUpdateEffect } from '@react-hookz/web'
-import React, { createRef, useMemo } from 'react'
+import React from 'react'
 
-import { EventKeys } from '@/common/components/keyboard/keys'
-import { useOnKeyPress } from '@/common/hooks'
 import { Source } from '@/models/source/types'
 
 import { SearchHitsData } from '../types'
@@ -19,7 +16,11 @@ export const SearchDropdown: React.FunctionComponent<SearchDropdownProps> = ({ r
 			<S.Content>
 				<S.Section>
 					{data.type === 'recents' && <S.SectionTitle>Recents</S.SectionTitle>}
-					<S.List role="listbox">{data.list.map((hit, index) => renderItem(hit, index))}</S.List>
+					<S.List role="listbox">
+						{data.list.map((hit, index) => (
+							<S.ListItem key={hit.id}>{renderItem(hit, index)}</S.ListItem>
+						))}
+					</S.List>
 				</S.Section>
 			</S.Content>
 		</S.Dropdown>
