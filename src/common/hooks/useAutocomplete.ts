@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useUpdateEffect } from '@react-hookz/web'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { EventKeys } from '../components/keyboard/keys'
+import { useOnKeyPress } from './useOnKeyPress'
 
 export type UseAutoCompleteReturn = {
 	selectedItemIndex: number
@@ -17,6 +19,31 @@ export function useAutoComplete<ItemType extends object = object>(
 	useEffect(() => {
 		setSelectedItemIndex(0)
 	}, [items])
+
+	const buttonRefs = useRef<Array<HTMLButtonElement | null>>([])
+
+	useUpdateEffect(() => {
+		const focusedButtonRef = buttonRefs.current[selectedItemIndex]
+		focusedButtonRef?.focus()
+	}, [selectedItemIndex])
+
+	useOnKeyPress(EventKeys.ArrowUp, () => {
+		if (selectedItemIndex === 0) return
+		console.log('decrementing to ' + selectedItemIndex + 1)
+		setSelectedItemIndex(selectedItemIndex - 1)
+	})
+
+	useOnKeyPress(EventKeys.ArrowDown, () => {
+		console.log('incrementing to ' + selectedItemIndex + 1)
+		if (selectedItemIndex === items.length - 1) return
+		setSelectedItemIndex(selectedItemIndex + 1)
+	})
+
+	useOnKeyPress(EventKeys.Tab, () => {
+		if (selectedItemIndex === items.length - 1) return
+		console.log('incrementing to ' + selectedItemIndex + 1)
+		setSelectedItemIndex(selectedItemIndex + 1)
+	})
 
 	return {
 		selectedItemIndex,
