@@ -21,18 +21,12 @@ export const List = styled.ul`
 	margin: 0;
 	padding: 0;
 
-	margin-block-start: 1em;
-	margin-block-end: 1em;
-	margin-inline-start: 0px;
-	margin-inline-end: 0px;
-	padding-inline-start: 40px;
-
 	border-top-width: 1px;
 	border-color: var(--gray-100);
 `
 
 export const ListItem = styled.li`
-	list-style-type: none;
+	list-style: none;
 	position: relative;
 `
 
