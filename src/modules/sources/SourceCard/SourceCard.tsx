@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 
 import { Source, SourceType } from '@/models/source/types'
 import { useUpdateSourceData } from '@/models/source/useUpdateSourceData'
+import { useLogEvent } from '@/modules/core/amplitude/useLogEvent'
 
 import { useSourcesFeed } from '../SourcesFeed/SourcesFeedContext'
 import { SourceCardBody } from './SourceCardBody'
@@ -16,9 +17,11 @@ export function SourceCard(data: SourceCardProps) {
 	const [localData, setLocalData] = useState(data)
 	const updateSourceData = useUpdateSourceData(localData.id)
 	const router = useRouter()
+	const logEvent = useLogEvent()
 
 	const onClickLikes = async () => {
 		const updatedData = await updateSourceData(localData.id, { likes: localData.likes + 1 })
+		logEvent(`LIKED_${localData.type.toLocaleUpperCase()}`)
 		setLocalData(updatedData)
 	}
 
