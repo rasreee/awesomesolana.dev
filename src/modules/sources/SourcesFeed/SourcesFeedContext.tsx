@@ -4,7 +4,7 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useStat
 import { SourceType } from '@/models/source'
 import { parseQueryParamAsArray } from '@/modules/core/nextRouter'
 
-export type ISourcePageContext = {
+export interface ISourcePageContext {
 	sourceTypes: SourceType[]
 	setSourceTypes: Dispatch<SetStateAction<SourceType[]>>
 }

@@ -1,3 +1,3 @@
 import React from 'react'
 
-export type IconProps = React.SVGAttributes<SVGSVGElement>
+export interface IconProps extends React.SVGAttributes<SVGSVGElement> {}

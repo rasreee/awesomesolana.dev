@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { EventKeys } from '../components/keyboard/keys'
 
-export type UseAutoCompleteReturn = {
+export interface UseAutoCompleteReturn {
 	selectedItemIndex: number
 	setSelectedItemIndex: React.Dispatch<React.SetStateAction<number>>
 	onKeyDown: (event: React.KeyboardEvent) => void

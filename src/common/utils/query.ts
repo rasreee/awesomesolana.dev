@@ -1,1 +1,3 @@
-export type QueryOpts = { limit?: number }
+export interface QueryOpts {
+	limit?: number
+}

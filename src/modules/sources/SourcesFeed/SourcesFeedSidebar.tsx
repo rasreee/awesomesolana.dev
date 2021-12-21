@@ -7,11 +7,11 @@ import { getLanguagesAndFrameworks, Language, TagType } from '@/models/tag'
 import { SearchFeatureSm } from '@/modules/search/SearchFeatureSm'
 import { useSourcesFeed } from '@/modules/sources/SourcesFeed/SourcesFeedContext'
 
-import { getFilteredSourcesPath } from './getFilteredSourcesPath'
+const getFilteredSourcesPath = (type?: TagType, filterIds?: string[]) => {
+	return filterIds && filterIds.length > 0 && type ? `/sources?type=${filterIds.join(',')}` : '/sources'
+}
 
-export interface SidebarProps {}
-
-export const SourcesFeedSidebar: React.FunctionComponent<SidebarProps> = () => {
+export const SourcesFeedSidebar: React.FunctionComponent = () => {
 	const router = useRouter()
 	const { sourceTypes } = useSourcesFeed()
 	const [languages, setLanguages] = useState<Language[]>([])

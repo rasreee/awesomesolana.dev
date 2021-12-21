@@ -11,7 +11,7 @@ export const SOURCE_TYPES = [
 
 export type SourceType = typeof SOURCE_TYPES[number]
 
-export type Source = {
+export interface Source {
 	id: string
 	type: SourceType
 	title: string

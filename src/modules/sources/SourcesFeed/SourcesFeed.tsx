@@ -11,9 +11,7 @@ import { useSourcesFeed } from './SourcesFeedContext'
 import { SourcesFeedGrid } from './SourcesFeedGrid'
 import { SourcesFeedSidebar } from './SourcesFeedSidebar'
 
-export interface SourcesFeedPageProps {}
-
-export const SourcesFeedPage: React.FunctionComponent<SourcesFeedPageProps> = () => {
+export const SourcesFeed: React.FunctionComponent = () => {
 	const isMobileDevice = useIsMobileDevice()
 	const { sourceTypes } = useSourcesFeed()
 	const totalCount = useTotalSourcesCount()

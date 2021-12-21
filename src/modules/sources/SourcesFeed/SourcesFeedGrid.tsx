@@ -6,7 +6,7 @@ import { SourceType, useSourcesByType } from '@/models/source'
 
 import { SourceCard } from '../SourceCard'
 
-export type SourcesFeedGridProps = {
+export interface SourcesFeedGridProps {
 	sourceType?: SourceType
 	queryOpts?: QueryOpts
 	spaceXClasses?: string

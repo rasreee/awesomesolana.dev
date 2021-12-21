@@ -7,7 +7,7 @@ import { colors } from '@/modules/theme/foundations/colors'
 
 import { appleTouchIcon, favIcon, favIcon16, favIcon32, safariPinnedTab } from './constants'
 
-export type MetaProps = {
+export interface MetaProps {
 	title: string
 	description: string
 	image?: string

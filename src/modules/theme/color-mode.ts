@@ -23,7 +23,7 @@ export const colorModes = {
 
 export type ColorModeName = keyof typeof colorModes
 
-export type IColorModeContext = {
+export interface IColorModeContext {
 	colorMode: ColorModeName
 	setColorMode: Dispatch<SetStateAction<ColorModeName>>
 }
