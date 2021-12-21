@@ -18,12 +18,16 @@ export const Sidebar = ({ children }: PropsWithChildren<SidebarProps>) => {
 	)
 }
 
-Sidebar.Header = function Header({ children }: PropsWithChildren<{}>) {
-	return <header>{children}</header>
+Sidebar.Section = function Section({ children }: PropsWithChildren<{}>) {
+	return <div className="">{children}</div>
 }
 
-Sidebar.Body = function Body({ children }: PropsWithChildren<{}>) {
-	return <div>{children}</div>
+Sidebar.SectionHeader = function SectionHeader({ children }: PropsWithChildren<{}>) {
+	return <div className="px-2 py-2 flex items-center justify-between h-12 min-h-[3rem] max-h-[3rem]">{children}</div>
+}
+
+Sidebar.SectionTitle = function SectionTitle({ children }: PropsWithChildren<{}>) {
+	return <div className="font-bold text-base">{children}</div>
 }
 
 Sidebar.List = function List({ children }: PropsWithChildren<{}>) {

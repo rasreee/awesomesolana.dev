@@ -22,12 +22,27 @@ export const SourcesFeedSidebar: React.FunctionComponent<SidebarProps> = () => {
 		)
 	}
 
+	const onClearClick = () => {
+		router.push(getSourcesRoutePath())
+	}
+
 	return (
 		<Sidebar>
-			<Sidebar.Header>
+			<Sidebar.Section>
 				<SearchFeatureSm />
-			</Sidebar.Header>
-			<Sidebar.Body>
+			</Sidebar.Section>
+			<Sidebar.Section>
+				<Sidebar.SectionHeader>
+					<Sidebar.SectionTitle>Content Types</Sidebar.SectionTitle>
+					{sourceTypes.length > 0 && (
+						<button
+							onClick={onClearClick}
+							className="font-semibold border border-gray-600 rounded-lg hover:bg-gray-200 text-sm px-3 py-1"
+						>
+							{`Clear (${sourceTypes.length})`}
+						</button>
+					)}
+				</Sidebar.SectionHeader>
 				<Sidebar.List>
 					{SOURCE_TYPES.map((type) => (
 						<Sidebar.ListItem key={type} isActive={sourceTypes.includes(type)} onClick={onItemClick(type)}>
@@ -35,7 +50,7 @@ export const SourcesFeedSidebar: React.FunctionComponent<SidebarProps> = () => {
 						</Sidebar.ListItem>
 					))}
 				</Sidebar.List>
-			</Sidebar.Body>
+			</Sidebar.Section>
 		</Sidebar>
 	)
 }
