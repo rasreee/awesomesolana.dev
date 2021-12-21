@@ -1,6 +1,7 @@
 export * from './AppConfig'
 export * from './capitalize'
 export * from './clampText'
+export * from './formatToListOfPlurals'
 export * from './handleSupabaseResponse'
 export * from './isBrowser'
 export * from './mockPromise'

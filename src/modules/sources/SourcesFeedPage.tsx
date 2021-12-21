@@ -4,6 +4,7 @@ import React from 'react'
 
 import { Page } from '@/common/components'
 import { useIsMobileDevice } from '@/common/hooks'
+import { formatToListOfPlurals } from '@/common/utils'
 
 import { useSourcesFeed } from './SourcesFeedContext'
 import { SourcesFeedGrid } from './SourcesFeedGrid'
@@ -15,7 +16,7 @@ export const SourcesFeedPage: React.FunctionComponent<SourcesFeedPageProps> = ()
 	const isMobileDevice = useIsMobileDevice()
 	const { sourceTypes } = useSourcesFeed()
 
-	const caption = sourceTypes ? `All ${sourceTypes}` : 'All sources'
+	const caption = sourceTypes ? `All ${formatToListOfPlurals(sourceTypes)}` : 'All sources'
 
 	return (
 		<Page title={caption} description={caption}>
