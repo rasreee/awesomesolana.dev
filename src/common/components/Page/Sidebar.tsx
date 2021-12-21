@@ -1,21 +1,43 @@
-import Link from 'next/link'
-import React from 'react'
+import classNames from 'classnames'
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
 
-import { SOURCE_TYPES } from '@/models/source'
+import { normalizeQueryParam } from '@/common/utils'
+import { SOURCE_TYPES, SourceType } from '@/models/source'
 import { SearchFeature } from '@/modules/search'
 
 export interface SidebarProps {}
 
 export const Sidebar: React.FunctionComponent<SidebarProps> = () => {
+	const router = useRouter()
+	const sourceType = 'type' in router.query ? normalizeQueryParam<SourceType>(router.query.type) : null
+
+	const [selectedTypes, setSelectedTypes] = useState<SourceType[]>(sourceType ? [sourceType] : [])
+
+	const onItemClick = (type: SourceType) => () => {
+		if (selectedTypes.includes(type)) {
+			setSelectedTypes((prev) => prev.filter((item) => item !== type))
+		} else {
+			setSelectedTypes((prev) => [...prev, type])
+		}
+	}
+
 	return (
 		<aside className="px-5 flex flex-col gap-5">
 			<SearchFeature />
-			<ul className="flex flex-col gap-1">
+			<ul className="flex flex-col gap-2">
 				{SOURCE_TYPES.map((type) => (
 					<li key={type}>
-						<Link href={`/sources?type=${type}`}>
-							<a>{type}</a>
-						</Link>
+						<button
+							className={classNames(
+								'text-base font-semibold text-gray-700',
+								'rounded-md px-2',
+								selectedTypes.includes(type) && 'bg-primary-400 text-white'
+							)}
+							onClick={onItemClick(type)}
+						>
+							{type}
+						</button>
 					</li>
 				))}
 			</ul>

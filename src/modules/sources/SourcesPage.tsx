@@ -3,14 +3,11 @@ import { useRouter } from 'next/router'
 
 import { Page } from '@/common/components/Page'
 import { useIsMobileDevice } from '@/common/hooks'
+import { normalizeQueryParam } from '@/common/utils'
 import { SourceType } from '@/models/source'
 import { formatSourceTypeLabel } from '@/models/source/formatSourceTypeLabel'
 
 import { SourcesFeedGrid } from './SourcesFeedGrid'
-
-export const normalizeQueryParam = <T extends string = string>(param: string | string[] | undefined): T => {
-	return param as T
-}
 
 export const SourcesPage = () => {
 	const router = useRouter()
