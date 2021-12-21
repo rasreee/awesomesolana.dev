@@ -3,6 +3,7 @@ import styled from '@/styled'
 export const Dropdown = styled.div`
 	flex: 1 1 auto;
 	overflow: auto;
+	overscroll-behavior: contain;
 `
 
 export const Content = styled.div`
