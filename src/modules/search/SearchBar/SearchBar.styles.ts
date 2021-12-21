@@ -8,6 +8,7 @@ export const Container = styled.header`
 	flex: none;
 	align-items: center;
 	padding: 0 1rem;
+	border-bottom: 1px solid var(--gray-100);
 `
 
 export const Form = styled.form`

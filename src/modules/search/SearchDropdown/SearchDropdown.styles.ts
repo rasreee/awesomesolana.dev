@@ -1,6 +1,3 @@
-import { css } from '@emotion/react'
-
-import { pseudo } from '@/common/utils/pseudos'
 import styled from '@/styled'
 
 export const Dropdown = styled.div`
@@ -9,7 +6,6 @@ export const Dropdown = styled.div`
 `
 
 export const Content = styled.div`
-	padding-top: 1.5;
 	padding-bottom: 1.5rem;
 	padding-left: 1rem;
 	padding-right: 0.675rem;
@@ -21,7 +17,7 @@ export const SectionTitle = styled.div`
 	line-height: 1.5rem;
 	font-weight: var(--font-semibold);
 	color: var(--gray-800);
-	margin: 0 1.5rem 1rem;
+	margin: 1.5rem 1rem;
 `
 
 export const List = styled.ul`
