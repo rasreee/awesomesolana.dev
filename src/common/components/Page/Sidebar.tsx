@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 import { normalizeQueryParam } from '@/common/utils'
 import { SOURCE_TYPES, SourceType } from '@/models/source'
-import { SearchFeature } from '@/modules/search'
+import { SearchFeatureSm } from '@/modules/search/SearchFeatureSm'
 
 export interface SidebarProps {}
 
@@ -24,7 +24,7 @@ export const Sidebar: React.FunctionComponent<SidebarProps> = () => {
 
 	return (
 		<aside className="px-5 flex flex-col gap-5">
-			<SearchFeature />
+			<SearchFeatureSm />
 			<ul className="flex flex-col gap-2">
 				{SOURCE_TYPES.map((type) => (
 					<li key={type}>

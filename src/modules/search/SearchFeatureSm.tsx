@@ -3,16 +3,16 @@ import React from 'react'
 import { useModal } from '@/common/components/Modal/useModal'
 import { useKeyCombo } from '@/common/hooks/useKeyCombo'
 
-import { SearchButton } from './SearchButton'
+import { SearchButtonSm } from './SearchButtonSm'
 import { SearchModal } from './SearchModal'
 
-export const SearchFeature: React.FunctionComponent = () => {
+export const SearchFeatureSm: React.FunctionComponent = () => {
 	const modal = useModal()
 	useKeyCombo('Meta+k', modal.open)
 
 	return (
 		<>
-			<SearchButton onClick={modal.open} />
+			<SearchButtonSm onClick={modal.open} />
 			<SearchModal {...modal} />
 		</>
 	)
