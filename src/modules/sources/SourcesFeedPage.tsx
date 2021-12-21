@@ -17,6 +17,7 @@ export const SourcesFeedPage: React.FunctionComponent<SourcesFeedPageProps> = ()
 	const isMobileDevice = useIsMobileDevice()
 	const { sourceTypes } = useSourcesFeed()
 	const totalCount = useTotalSourcesCount()
+
 	const caption = sourceTypes.length > 0 ? `All ${formatToListOfPlurals(sourceTypes)}` : `All sources (${totalCount})`
 
 	return (
