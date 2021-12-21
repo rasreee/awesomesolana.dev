@@ -37,8 +37,7 @@ export const Form = styled.form`
 	border-color: var(--gray-300);
 	${pseudo('_focusVisible')} {
 		outline: none;
-		--tw-ring-opacity: 1;
-		--tw-ring-color: rgb(153 69 255 / var(--tw-ring-opacity));
+		--tw-ring-color: rgb(153 69 255);
 		border-color: var(--primary-500);
 	}
 `
@@ -61,7 +60,7 @@ export const Input = styled.input`
 	height: 3.5rem;
 	color: var(--gray-800);
 	${pseudo('_placeholder')} {
-		color: var(--gray-300);
+		color: var(--gray-400);
 	}
 	margin-left: 0.75rem;
 	margin-right: 1rem;

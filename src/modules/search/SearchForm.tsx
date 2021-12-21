@@ -43,11 +43,9 @@ export const SearchForm = forwardRef((props: SearchFormProps, ref: SearchFormPro
 	}
 
 	return (
-		<S.Form className={classNames('placeholder-gray-400', 'text-base sm:text-sm')} role="search" noValidate>
-			<S.Label>
-				{props.isLoading ? <Spinner /> : <SearchIcon height={iconSize} fill={iconColor} />}
-				<S.Input ref={ref} type="search" placeholder="Search" value={localQuery} onChange={onChange} />
-			</S.Label>
+		<S.Form role="search" noValidate>
+			<S.Label>{props.isLoading ? <Spinner /> : <SearchIcon height={iconSize} fill={iconColor} />}</S.Label>
+			<S.Input ref={ref} type="search" placeholder="Search" value={localQuery} onChange={onChange} />
 			<KbdSymbol keys={['Escape']} />
 		</S.Form>
 	)
