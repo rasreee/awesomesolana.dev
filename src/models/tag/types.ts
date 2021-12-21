@@ -1,8 +1,14 @@
-export type TagType = 'content-formats' | 'dependencies' | 'languages-and-frameworks' | 'crypto-topics'
+export enum TagType {
+	Categories = 'categories',
+	Languages = 'languages'
+	// Dependencies = 'dependencies',
+	// Frameworks = 'frameworks',
+	// Concepts = 'concepts'
+}
 
 export type Tag = {
-	type: TagType
 	id: number
-	name: string
 	count: number
+	name: string
+	type: TagType
 }

@@ -1,36 +1,43 @@
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Sidebar } from '@/common/components'
-import { SOURCE_TYPES, SourceType, useSourceCounts } from '@/models/source'
-import { getLanguagesAndFrameworks } from '@/models/tag'
+import { SOURCE_TYPES, useSourceCounts } from '@/models/source'
+import { getLanguagesAndFrameworks, Language, TagType } from '@/models/tag'
 import { SearchFeatureSm } from '@/modules/search/SearchFeatureSm'
 import { useSourcesFeed } from '@/modules/sources/SourcesFeed/SourcesFeedContext'
 
-import { getSourcesRoutePath } from './getSourcesRoutePath'
+import { getFilteredSourcesPath } from './getFilteredSourcesPath'
 
 export interface SidebarProps {}
 
 export const SourcesFeedSidebar: React.FunctionComponent<SidebarProps> = () => {
 	const router = useRouter()
 	const { sourceTypes } = useSourcesFeed()
-
-	const onItemClick = (type: SourceType) => () => {
-		router.push(
-			getSourcesRoutePath(
-				sourceTypes.includes(type) ? sourceTypes.filter((item) => item !== type) : [...sourceTypes, type]
-			)
-		)
-	}
+	const [languages, setLanguages] = useState<Language[]>([])
 
 	const onClearClick = () => {
-		router.push(getSourcesRoutePath())
+		router.push(getFilteredSourcesPath())
 	}
 
-	const onLanguageAndFrameworkClick = (id: string) => {
-		return () => {
-			console.log(`onLanguageAndFrameworkClick: ${id}`)
+	const onSelect = (type: TagType, id: string, selected: string[]) => {
+		const newFilters = [...selected, id]
+		router.push(getFilteredSourcesPath(type, [...newFilters, id]))
+	}
+
+	const onRemove = (type: TagType, id: string, selected: string[]) => {
+		const filtered = selected.filter((selectedId) => selectedId !== id)
+		router.push(getFilteredSourcesPath(type, [...filtered, id]))
+	}
+
+	const onItemClick = (type: TagType, id: string) => () => {
+		const selected: string[] = []
+
+		if (selected.some((selectedId) => selectedId === id)) {
+			return onSelect(type, id, selected)
 		}
+
+		onRemove(type, id, selected)
 	}
 
 	const { data: countsData } = useSourceCounts()
@@ -53,28 +60,32 @@ export const SourcesFeedSidebar: React.FunctionComponent<SidebarProps> = () => {
 					)}
 				</Sidebar.SectionHeader>
 				<Sidebar.List>
-					{SOURCE_TYPES.map((type) => (
-						<Sidebar.ListItem key={type} isActive={sourceTypes.includes(type)} onClick={onItemClick(type)}>
-							{`${type} (${countsData ? countsData[type] : 0})`}
+					{SOURCE_TYPES.map((id) => (
+						<Sidebar.ListItem
+							key={id}
+							isActive={sourceTypes.includes(id)}
+							onClick={onItemClick(TagType.Categories, id)}
+						>
+							{`${id} (${countsData ? countsData[id] : 0})`}
 						</Sidebar.ListItem>
 					))}
 				</Sidebar.List>
 			</Sidebar.Section>
 			<Sidebar.Section>
 				<Sidebar.SectionHeader>
-					<Sidebar.SectionTitle>Languages and Frameworks</Sidebar.SectionTitle>
-					{sourceTypes.length > 0 && (
+					<Sidebar.SectionTitle>Languages</Sidebar.SectionTitle>
+					{languages.length > 0 && (
 						<button
 							onClick={onClearClick}
 							className="font-semibold border border-gray-600 rounded-lg hover:bg-gray-200 text-sm px-3 py-1"
 						>
-							{`Clear (${sourceTypes.length})`}
+							{`Clear (${languages.length})`}
 						</button>
 					)}
 				</Sidebar.SectionHeader>
 				<Sidebar.List>
 					{getLanguagesAndFrameworks().map((id) => (
-						<Sidebar.ListItem key={id} isActive={false} onClick={onLanguageAndFrameworkClick(id)}>
+						<Sidebar.ListItem key={id} isActive={false} onClick={onItemClick(TagType.Languages, id)}>
 							{`${id} (${0})`}
 						</Sidebar.ListItem>
 					))}

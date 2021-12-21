@@ -1,6 +1,6 @@
 export * from './Logo'
 export * from './Meta'
-export * from './MobileNav'
 export * from './Page'
 export * from './constants'
+export * from './PageHeader'
 export * from './PageHeader'

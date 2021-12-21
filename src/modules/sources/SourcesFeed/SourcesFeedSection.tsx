@@ -4,8 +4,9 @@ import React, { FC } from 'react'
 
 import { QueryOpts } from '@/common/utils'
 import { SourceType } from '@/models/source'
+import { TagType } from '@/models/tag'
 
-import { getSourcesRoutePath } from './getSourcesRoutePath'
+import { getFilteredSourcesPath } from './getFilteredSourcesPath'
 import { SourcesFeedGrid } from './SourcesFeedGrid'
 
 export type SourcesFeedSectionHeaderProps = {
@@ -26,7 +27,7 @@ const SourcesFeedSectionHeaderProps: FC<SourcesFeedSectionHeaderProps> = ({ sour
 			)}
 		>
 			<h6 className="text-gray-800 text-sm uppercase font-bold">{caption}</h6>
-			<Link href={getSourcesRoutePath([sourceType])}>
+			<Link href={getFilteredSourcesPath(TagType.Categories, [sourceType])}>
 				<a
 					className={classNames(
 						'hover:underline',
