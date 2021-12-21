@@ -58,7 +58,7 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 
 	const onItemClick = (hit: Source) => () => {
 		updateRecents(hit)
-		router.push(`/sources/${hit.id}`)
+		router.push(hit.url)
 		props.close()
 	}
 
