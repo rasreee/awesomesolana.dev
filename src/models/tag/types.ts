@@ -1,14 +1,8 @@
-export enum TagType {
-	Categories = 'categories',
-	Languages = 'languages'
-	// Dependencies = 'dependencies',
-	// Frameworks = 'frameworks',
-	// Concepts = 'concepts'
-}
+import { FilterType } from '@/store/filterStore'
 
 export type Tag = {
 	id: number
 	count: number
 	name: string
-	type: TagType
+	type: FilterType
 }

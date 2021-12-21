@@ -35,8 +35,8 @@ export const SourcesFeed: React.FunctionComponent<SourcesFeedProps> = observer((
 	const totalCount = useTotalSourcesCount()
 
 	const caption =
-		filterStore.allFilters.length > 0
-			? `All ${formatToListOfPlurals(Object.values(filterStore.allFilters).map((filter) => filter.id))}`
+		filterStore.allList.length > 0
+			? `All ${formatToListOfPlurals(filterStore.allList.map((filter) => filter.id))}`
 			: `All sources (${totalCount})`
 
 	return (
@@ -67,7 +67,7 @@ export const SourcesFeed: React.FunctionComponent<SourcesFeedProps> = observer((
 							filterStore.categories.map((id) => (
 								<SourcesFeedGrid
 									key={id}
-									filter={{ type: FilterType.Category, id }}
+									filter={{ type: FilterType.Categories, id }}
 									spaceXClasses={'space-x-0 md:space-x-0'}
 									spaceYClasses={'space-y-2 md:space-y-0'}
 								/>
