@@ -7,6 +7,7 @@ import { clampText } from '@/common/utils'
 import { Source, SourceType } from '@/models/source/types'
 import { useUpdateSourceData } from '@/models/source/useUpdateSourceData'
 import { getPageLogger } from '@/modules/core/amplitude/amplitude'
+import { FilterType } from '@/store/filter'
 import { useStore } from '@/store/store'
 
 import { SourceCardFooter } from './SourceCardFooter'
@@ -40,7 +41,7 @@ export const SourceCard = observer((data: SourceCardProps) => {
 		return () => {
 			console.log(type)
 			filterStore.resetStore()
-			filterStore.setCategories([type])
+			filterStore.setFilters(FilterType.Categories, [type])
 		}
 	}
 

@@ -24,3 +24,5 @@ export interface ConceptFilter extends FilterBase {
 }
 
 export type Filter = CategoryFilter | ConceptFilter
+
+export type Filters = Record<FilterType, string[]>

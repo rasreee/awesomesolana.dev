@@ -1,49 +1,27 @@
 import { makeAutoObservable } from 'mobx'
 
-import { FilterType } from './types'
+import { Filters, FilterType } from './types'
 import { initAll } from './utils'
 
 export class FilterStore {
-	all: Record<FilterType, string[]> = initAll()
+	all: Filters = initAll()
 
 	constructor() {
 		makeAutoObservable(this)
 	}
 
-	setConcepts(values: string[]) {
-		this.all.concepts = values
-	}
-
-	setCategories(values: string[]) {
-		this.all.categories = values
+	setFilters(type: FilterType, ids: string[]) {
+		this.all = { ...this.all, [type]: ids }
 	}
 
 	add(type: FilterType, id: string) {
-		const oldFilters = this.all
-		this.all = { ...oldFilters, [type]: [...oldFilters[type], id] }
+		this.all = { ...this.all, [type]: [...this.all[type], id] }
 	}
 
 	remove(type: FilterType, id: string) {
-		let oldFilters
+		const oldFilters = this.all[type]
 
-		switch (type) {
-			case FilterType.Categories: {
-				oldFilters = this.all.categories
-				break
-			}
-			case FilterType.Concepts: {
-				oldFilters = this.all.concepts
-				break
-			}
-
-			default:
-				{
-					oldFilters = this.all.categories
-					console.warn(`WARNING: unknown filter type ${type}`)
-				}
-
-				this.setConcepts(oldFilters.filter((filterId) => filterId !== id))
-		}
+		this.all = { ...this.all, [type]: oldFilters.filter((filterId) => filterId !== id) }
 	}
 
 	resetStore = () => {
