@@ -1,3 +1,5 @@
+import { makeAutoObservable } from 'mobx'
+
 export class CommonStore {
 	appLoading = true
 
@@ -13,4 +15,3 @@ export class CommonStore {
 		this.appLoading = state
 	}
 }
-
