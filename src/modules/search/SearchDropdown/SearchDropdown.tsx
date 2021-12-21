@@ -1,4 +1,5 @@
-import React from 'react'
+import { useUpdateEffect } from '@react-hookz/web'
+import React, { createRef, useMemo } from 'react'
 
 import { EventKeys } from '@/common/components/keyboard/keys'
 import { useOnKeyPress } from '@/common/hooks'
@@ -20,6 +21,13 @@ export const SearchDropdown: React.FunctionComponent<SearchDropdownProps> = ({
 	onItemClick,
 	data
 }) => {
+	const buttonRefs = useMemo(() => data.list.map((hit) => createRef<HTMLButtonElement>()), [data])
+
+	useUpdateEffect(() => {
+		const focusedButtonRef = buttonRefs[focusedItemIndex]
+		focusedButtonRef.current?.focus()
+	}, [focusedItemIndex])
+
 	const handleItemClick = (hit: Source) => () => onItemClick(hit)
 
 	useOnKeyPress(EventKeys.ArrowUp, () => {
@@ -45,7 +53,11 @@ export const SearchDropdown: React.FunctionComponent<SearchDropdownProps> = ({
 					<S.List role="listbox">
 						{data.list.map((hit, index) => (
 							<S.ListItem key={hit.id}>
-								<S.ItemButton isFocused={index === focusedItemIndex} onClick={handleItemClick(hit)}>
+								<S.ItemButton
+									ref={buttonRefs[index]}
+									isFocused={index === focusedItemIndex}
+									onClick={handleItemClick(hit)}
+								>
 									{hit.title}
 								</S.ItemButton>
 							</S.ListItem>
