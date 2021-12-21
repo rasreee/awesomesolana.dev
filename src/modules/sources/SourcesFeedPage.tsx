@@ -5,6 +5,7 @@ import React from 'react'
 import { Page } from '@/common/components'
 import { useIsMobileDevice } from '@/common/hooks'
 import { formatToListOfPlurals } from '@/common/utils'
+import { useTotalSourcesCount } from '@/models/source'
 
 import { useSourcesFeed } from './SourcesFeedContext'
 import { SourcesFeedGrid } from './SourcesFeedGrid'
@@ -15,8 +16,8 @@ export interface SourcesFeedPageProps {}
 export const SourcesFeedPage: React.FunctionComponent<SourcesFeedPageProps> = () => {
 	const isMobileDevice = useIsMobileDevice()
 	const { sourceTypes } = useSourcesFeed()
-
-	const caption = sourceTypes.length > 0 ? `All ${formatToListOfPlurals(sourceTypes)}` : 'All sources'
+	const totalCount = useTotalSourcesCount()
+	const caption = sourceTypes.length > 0 ? `All ${formatToListOfPlurals(sourceTypes)}` : `All sources (${totalCount})`
 
 	return (
 		<Page title={caption} description={caption}>
