@@ -1,6 +1,6 @@
 import { useSupabase } from '@/common/supabase/useSupabase'
-import { handleSupabaseResponse } from '@/common/utils/handleSupabaseResponse'
 
+import { updateSource } from './fetchers'
 import { Source } from './types'
 import { useSourceById } from './useSourceById'
 
@@ -8,18 +8,14 @@ export const useUpdateSourceData = (id: string) => {
 	const supabase = useSupabase()
 	const { data: source, mutate: mutateSource } = useSourceById(id)
 
-	const request = async (id: string, data: Partial<Omit<Source, 'id'>>) => {
+	const request = (id: string, newData: Partial<Omit<Source, 'id'>>) => {
 		if (!source) {
 			throw new Error('tried to update source likes when source data was not available yet')
 		}
 
-		const newSourcesData = { ...source, ...data }
-
-		await supabase.from<Source>('sources').update(data).match({ id }).then(handleSupabaseResponse)
-
-		await mutateSource(newSourcesData)
-
-		return newSourcesData
+		return updateSource(id, newData, supabase).then(() => {
+			return mutateSource({ ...source, ...newData })
+		})
 	}
 
 	return request
