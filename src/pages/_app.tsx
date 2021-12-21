@@ -1,21 +1,18 @@
 import '@/modules/styles/index.css'
 
-import { Provider } from 'mobx-react'
 import { AppProps } from 'next/app'
 import React from 'react'
 
 import { AppShell } from '@/app/AppShell'
-import { useStore } from '@/store/useStore'
+import { store, StoreContext } from '@/store/store'
 
 function App({ Component, pageProps }: AppProps) {
-	const store = useStore(pageProps.initialState)
-
 	return (
-		<Provider store={store}>
+		<StoreContext.Provider value={store}>
 			<AppShell>
 				<Component {...pageProps} />
 			</AppShell>
-		</Provider>
+		</StoreContext.Provider>
 	)
 }
 

@@ -3,7 +3,7 @@ import React from 'react'
 
 const MyDocument = () => {
 	return (
-		<Html>
+		<Html lang="en">
 			<Head />
 			<body>
 				<Main />
