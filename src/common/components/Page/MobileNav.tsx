@@ -3,12 +3,13 @@ import React from 'react'
 
 import { SOURCE_TYPES } from '@/models/source'
 import { formatSourceTypeLabel } from '@/models/source/formatSourceTypeLabel'
+import { getSourcesRoutePath } from '@/modules/sources/getSourcesRoutePath'
 
 import { NavLink, NavLinkProps } from '../NavLink'
 
 const navLinks: Omit<NavLinkProps, 'children'>[] = SOURCE_TYPES.map((sourceType) => ({
 	id: sourceType,
-	href: `/sources?type=${sourceType}`,
+	href: getSourcesRoutePath([sourceType]),
 	label: formatSourceTypeLabel(sourceType)
 }))
 

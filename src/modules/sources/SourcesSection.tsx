@@ -4,6 +4,7 @@ import React, { FC } from 'react'
 
 import { SourceType } from '@/models/source'
 
+import { getSourcesRoutePath } from './getSourcesRoutePath'
 import { SourcesFeedGrid } from './SourcesFeedGrid'
 
 export type SourcesSectionHeaderProps = {
@@ -24,7 +25,7 @@ const SourcesSectionHeader: FC<SourcesSectionHeaderProps> = ({ sourceType }) => 
 			)}
 		>
 			<h6 className="text-gray-800 text-sm uppercase font-bold">{caption}</h6>
-			<Link href={`/sources?type=${sourceType}`}>
+			<Link href={getSourcesRoutePath([sourceType])}>
 				<a
 					className={classNames(
 						'hover:underline',
