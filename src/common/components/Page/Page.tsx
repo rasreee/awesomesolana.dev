@@ -1,9 +1,11 @@
 import classNames from 'classnames'
+import { useRouter } from 'next/router'
 import React, { FC } from 'react'
 
 import { preview } from './constants'
 import { Meta } from './Meta'
 import { PageHeader } from './PageHeader'
+import { Sidebar } from './Sidebar'
 
 export type PageProps = {
 	title: string
@@ -12,6 +14,10 @@ export type PageProps = {
 }
 
 const Page: FC<PageProps> = ({ title, description, image = preview, children }) => {
+	const router = useRouter()
+
+	const isHomePage = router.pathname === '/'
+
 	return (
 		<>
 			<Meta {...{ title, description, image }} />
@@ -30,7 +36,10 @@ const Page: FC<PageProps> = ({ title, description, image = preview, children }) 
 					{/* Header */}
 					<PageHeader />
 					{/* Content below header */}
-					<div className={classNames('w-full', 'md:max-w-screen-lg', 'mx-auto')}>{children}</div>
+					<div className="flex">
+						{!isHomePage && <Sidebar />}
+						<div className={classNames('w-full', 'md:max-w-screen-lg', 'mx-auto')}>{children}</div>
+					</div>
 				</div>
 			</main>
 		</>
