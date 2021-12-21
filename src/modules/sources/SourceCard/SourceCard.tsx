@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 import { useMemo, useState } from 'react'
 
@@ -6,8 +7,8 @@ import { clampText } from '@/common/utils'
 import { Source, SourceType } from '@/models/source/types'
 import { useUpdateSourceData } from '@/models/source/useUpdateSourceData'
 import { getPageLogger } from '@/modules/core/amplitude/amplitude'
+import { useStore } from '@/store/store'
 
-import { useSourcesFeed } from '../SourcesFeed/SourcesFeedContext'
 import { SourceCardFooter } from './SourceCardFooter'
 import { SourceCardHeader } from './SourceCardHeader'
 
@@ -15,7 +16,9 @@ export interface SourceCardProps extends Source {}
 
 const pageLogger = getPageLogger('SOURCES')
 
-export function SourceCard(data: SourceCardProps) {
+export const SourceCard = observer((data: SourceCardProps) => {
+	const { filterStore } = useStore()
+
 	const [localData, setLocalData] = useState(data)
 	const updateSourceData = useUpdateSourceData(localData.id)
 	const router = useRouter()
@@ -33,12 +36,11 @@ export function SourceCard(data: SourceCardProps) {
 		setLocalData(updatedData)
 	}
 
-	const { setSourceTypes } = useSourcesFeed()
-
 	const onTypeClick = (type: SourceType) => {
 		return () => {
 			console.log(type)
-			setSourceTypes([type])
+			filterStore.resetStore()
+			filterStore.setCategories([type])
 		}
 	}
 
@@ -98,4 +100,4 @@ export function SourceCard(data: SourceCardProps) {
 			</div>
 		</div>
 	)
-}
+})
