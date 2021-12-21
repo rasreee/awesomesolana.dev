@@ -5,7 +5,7 @@ import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
 import { EventKeys } from '@/common/components/keyboard/keys'
 import { Loader } from '@/common/components/Loader'
 import { SearchIcon } from '@/icons/SearchIcon'
-import { colors } from '@/theme/foundations/colors'
+import { colors } from '@/modules/theme/foundations/colors'
 
 import * as S from './SearchBar.styles'
 

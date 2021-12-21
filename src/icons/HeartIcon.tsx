@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { theme } from '@/theme/theme'
+import { theme } from '@/modules/theme/theme'
 
 import { IconProps } from './IconProps'
 

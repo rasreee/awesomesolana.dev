@@ -2,7 +2,7 @@ import { Theme, ThemeProvider } from '@emotion/react'
 import classNames from 'classnames'
 import React, { FC, useMemo, useState } from 'react'
 
-import { theme } from '@/theme/theme'
+import { theme } from '@/modules/theme/theme'
 
 import { ColorModeContext, ColorModeName } from './color-mode'
 import { GlobalStyle } from './GlobalStyle'

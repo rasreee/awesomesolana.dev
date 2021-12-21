@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { SupabaseProvider } from '@/common/supabase/SupabaseProvider'
-import { MyThemeProvider } from '@/theme/MyThemeProvider'
+import { MyThemeProvider } from '@/modules/theme/MyThemeProvider'
 
 export interface AppProvidersProps {}
 

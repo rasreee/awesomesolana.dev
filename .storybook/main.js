@@ -40,7 +40,6 @@ module.exports = {
 			 * @see https://nextjs.org/docs/advanced-features/module-path-aliases
 			 * @see https://intellij-support.jetbrains.com/hc/en-us/community/posts/360003361399/comments/360002636080
 			 */
-			"@/theme": path.resolve(__dirname, "../src/theme"),
 			"@/modules": path.resolve(__dirname, "../src/modules"),
 			"@/common": path.resolve(__dirname, "../src/common"),
 			"@/models": path.resolve(__dirname, "../src/models"),

@@ -21,9 +21,6 @@
 		"sourceMap": true,
 		"baseUrl": ".",
 		"paths": {
-			"@/theme/*": [
-				"src/theme/*"
-			],
 			"@/modules/*": [
 				"src/modules/*"
 			],

@@ -3,7 +3,7 @@ import { NextSeo } from 'next-seo'
 import React, { useMemo } from 'react'
 
 import { AppConfig } from '@/common/utils/AppConfig'
-import { colors } from '@/theme/foundations/colors'
+import { colors } from '@/modules/theme/foundations/colors'
 
 import { appleTouchIcon, favIcon, favIcon16, favIcon32, safariPinnedTab } from './constants'
 

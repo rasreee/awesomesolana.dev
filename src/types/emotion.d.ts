@@ -4,7 +4,7 @@ import {} from '@emotion/react/types/css-prop' // See https://github.com/emotion
 
 import { Styling } from '@/styled'
 
-import { Theme as AppTheme } from '../theme/theme'
+import { Theme as AppTheme } from '../modules/theme/theme'
 declare module '@emotion/react' {
 	export interface Theme extends AppTheme {}
 }
