@@ -18,3 +18,9 @@ export const findTagById = (id: number) => {
 export const getDependencies = (): Tag[] => {
 	return getTags().filter((tag) => tag.type === 'dependencies')
 }
+
+import languagesAndFrameworks from './fixtures/languages-and-frameworks.json'
+
+export const getLanguagesAndFrameworks = () => {
+	return [...languagesAndFrameworks]
+}
