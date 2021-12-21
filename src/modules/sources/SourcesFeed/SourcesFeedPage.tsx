@@ -23,18 +23,18 @@ export const SourcesFeedPage: React.FunctionComponent<SourcesFeedPageProps> = ()
 	return (
 		<Page title={caption} description={caption}>
 			<div className="flex justify-start w-full">
-				<SourcesFeedSidebar />
+				{!isMobileDevice && <SourcesFeedSidebar />}
 				<div
 					css={css`
-						position: absolute;
-						right: 3rem;
-						width: var(--page-right-width);
-						max-width: var(--page-right-width);
-						${!isMobileDevice &&
+						display: flex;
+						flex-direction: column;
+						gap: 0.5rem;
+						${isMobileDevice &&
 						css`
-							display: flex;
-							flex-direction: column;
-							gap: 0.5rem;
+							position: absolute;
+							right: 3rem;
+							width: var(--page-right-width);
+							max-width: var(--page-right-width);
 						`}
 					`}
 				>
