@@ -1,22 +1,43 @@
 import { css } from '@emotion/react'
+import { useUpdateEffect } from '@react-hookz/web'
 import classNames from 'classnames'
+import { observer } from 'mobx-react-lite'
 import React from 'react'
 
 import { useIsMobileDevice } from '@/common/hooks'
 import { formatToListOfPlurals } from '@/common/utils'
 import { Page } from '@/components/Page'
 import { useTotalSourcesCount } from '@/models/source'
+import { parseQueryParamAsArray } from '@/modules/core/nextRouter'
+import { FilterType } from '@/store/filterStore'
+import { useStore } from '@/store/store'
 
-import { useSourcesFeed } from './SourcesFeedContext'
 import { SourcesFeedGrid } from './SourcesFeedGrid'
 import { SourcesFeedSidebar } from './SourcesFeedSidebar'
 
-export const SourcesFeed: React.FunctionComponent = () => {
+export interface SourcesFeedProps {
+	routerQuery: Record<string, string | string[] | undefined>
+}
+
+export const SourcesFeed: React.FunctionComponent<SourcesFeedProps> = observer(({ routerQuery }) => {
+	const { filterStore } = useStore()
+
+	useUpdateEffect(() => {
+		const categoryFilters = parseQueryParamAsArray('category', routerQuery)
+
+		console.log(categoryFilters)
+
+		filterStore.setCategories(categoryFilters)
+	}, [routerQuery])
+
 	const isMobileDevice = useIsMobileDevice()
-	const { sourceTypes } = useSourcesFeed()
+
 	const totalCount = useTotalSourcesCount()
 
-	const caption = sourceTypes.length > 0 ? `All ${formatToListOfPlurals(sourceTypes)}` : `All sources (${totalCount})`
+	const caption =
+		filterStore.allFilters.length > 0
+			? `All ${formatToListOfPlurals(Object.values(filterStore.allFilters).map((filter) => filter.id))}`
+			: `All sources (${totalCount})`
 
 	return (
 		<Page title={caption} description={caption}>
@@ -42,11 +63,11 @@ export const SourcesFeed: React.FunctionComponent = () => {
 						</div>
 					)}
 					<div className="mobile:py-2">
-						{sourceTypes.length ? (
-							sourceTypes.map((type) => (
+						{filterStore.categories.length ? (
+							filterStore.categories.map((id) => (
 								<SourcesFeedGrid
-									key={type}
-									sourceType={type}
+									key={id}
+									filter={{ type: FilterType.Category, id }}
 									spaceXClasses={'space-x-0 md:space-x-0'}
 									spaceYClasses={'space-y-2 md:space-y-0'}
 								/>
@@ -59,4 +80,4 @@ export const SourcesFeed: React.FunctionComponent = () => {
 			</div>
 		</Page>
 	)
-}
+})

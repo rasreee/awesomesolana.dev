@@ -8,7 +8,7 @@ export default function SourcesPage() {
 	return (
 		<>
 			<SourcesFeedProvider routerQuery={router.query}>
-				<SourcesFeed />
+				<SourcesFeed routerQuery={router.query} />
 			</SourcesFeedProvider>
 		</>
 	)

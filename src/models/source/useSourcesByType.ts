@@ -3,12 +3,13 @@ import useSWR, { Fetcher } from 'swr'
 
 import { useSupabase } from '@/common/supabase/useSupabase'
 import { handleSupabaseResponse, QueryOpts, SWRResponseWithLoading } from '@/common/utils'
+import { Filter } from '@/store/filterStore'
 
-import { Source, SourceType } from './types'
+import { Source } from './types'
 
-const makeFetcher = (supabase: SupabaseClient, sourceType: SourceType | 'all', opts?: QueryOpts) => {
+const makeFetcher = (supabase: SupabaseClient, filter: Filter | undefined, opts?: QueryOpts) => {
 	const fetcher: Fetcher<Source[]> = async () => {
-		const matchOpts = sourceType === 'all' ? {} : { type: sourceType }
+		const matchOpts = filter ? { [filter.type]: filter.id } : {}
 		let request = supabase.from<Source>('sources').select('*').match(matchOpts)
 
 		if (opts?.limit) {
@@ -24,14 +25,14 @@ const makeFetcher = (supabase: SupabaseClient, sourceType: SourceType | 'all', o
 }
 
 export const useSourcesByType = (
-	sourceType?: SourceType | 'all',
+	filter?: Filter,
 	opts?: QueryOpts | undefined
 ): SWRResponseWithLoading<Source[], Error> => {
 	const client = useSupabase()
 	const keyOpts = opts ? `&limit=${opts.limit}` : ''
-	const key = `sources?type=${sourceType}${keyOpts}`
+	const key = filter ? `/sources?${filter.type}=${filter.id}${keyOpts}` : `/sources/all`
 
-	const swr = useSWR<Source[], Error>(key, makeFetcher(client, sourceType ?? 'all', opts))
+	const swr = useSWR<Source[], Error>(key, makeFetcher(client, filter, opts))
 
 	/* Check if data is still being fetched */
 	const isLoading = typeof swr.data === 'undefined' && typeof swr.error === 'undefined'
