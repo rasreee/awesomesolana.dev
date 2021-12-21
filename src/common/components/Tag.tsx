@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties, MouseEventHandler } from 'react'
 
 import { ColorName, colors, FontSize, fontSizes } from '@/theme/foundations'
 
@@ -9,6 +9,7 @@ export interface TagProps {
 	color?: ColorName
 	fontSize?: FontSize
 	style?: CSSProperties
+	onClick?: MouseEventHandler<HTMLDivElement>
 }
 
 export const Tag: React.FunctionComponent<TagProps> = ({

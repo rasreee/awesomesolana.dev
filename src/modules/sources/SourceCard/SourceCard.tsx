@@ -2,9 +2,10 @@ import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
-import { Source } from '@/models/source/types'
+import { Source, SourceType } from '@/models/source/types'
 import { useUpdateSourceData } from '@/models/source/useUpdateSourceData'
 
+import { useSourcesFeed } from '../SourcesFeedContext'
 import { SourceCardBody } from './SourceCardBody'
 import { SourceCardFooter } from './SourceCardFooter'
 import { SourceCardHeader } from './SourceCardHeader'
@@ -25,6 +26,15 @@ export function SourceCard(data: SourceCardProps) {
 		const updatedData = await updateSourceData(localData.id, { views: localData.views + 1 })
 		router.push(localData.url)
 		setLocalData(updatedData)
+	}
+
+	const { setSourceTypes } = useSourcesFeed()
+
+	const onTypeClick = (type: SourceType) => {
+		return () => {
+			console.log(type)
+			setSourceTypes([type])
+		}
 	}
 
 	return (
@@ -72,6 +82,7 @@ export function SourceCard(data: SourceCardProps) {
 					views={localData.views}
 					updatedAt={localData.updatedAt}
 					onClickLikes={onClickLikes}
+					onTypeClick={onTypeClick(localData.type)}
 				/>
 			</div>
 		</div>
