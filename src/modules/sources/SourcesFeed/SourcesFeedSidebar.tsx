@@ -4,7 +4,7 @@ import React from 'react'
 
 import { Sidebar } from '@/components/Sidebar'
 import { SOURCE_TYPES, useSourceCounts } from '@/models/source'
-import { SearchFeatureSm } from '@/modules/search/SearchFeatureSm'
+import { SearchFeatureSm } from '@/modules/search'
 import { FilterType } from '@/store/filterStore'
 import { useStore } from '@/store/store'
 
