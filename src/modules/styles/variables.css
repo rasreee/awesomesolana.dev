@@ -1,7 +1,8 @@
 :root {
-	--font-sans: Inter, "Inter UI", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Oxygen, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji",
-		sans-serif;
-	--font-mono: "Dank Mono", Dank, dm, Menlo, Consolas, Roboto Mono, Ubuntu Monospace, Oxygen Mono, Liberation Mono, monospace;
+	--font-sans: Inter, 'Inter UI', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Oxygen, sans-serif,
+		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
+	--font-mono: 'Dank Mono', Dank, dm, Menlo, Consolas, Roboto Mono, Ubuntu Monospace, Oxygen Mono, Liberation Mono,
+		monospace;
 
 	--font-thin: 100;
 	--font-extralight: 200;
@@ -14,24 +15,24 @@
 	--font-black: 900;
 
 	--indigo-50: #fff;
-	--indigo-100: #CECEFE;
-	--indigo-200: #9F9FFD;
-	--indigo-300: #6E6EF9;
-	--indigo-400: #4A4AF4;
-	--indigo-500: #1111EE;
-	--indigo-600: #0C0CCC;
-	--indigo-700: #0808AB;
-	--indigo-800: #05058A;
+	--indigo-100: #cecefe;
+	--indigo-200: #9f9ffd;
+	--indigo-300: #6e6ef9;
+	--indigo-400: #4a4af4;
+	--indigo-500: #1111ee;
+	--indigo-600: #0c0ccc;
+	--indigo-700: #0808ab;
+	--indigo-800: #05058a;
 	--indigo-900: #030372;
 
 	--indigo-50: #fff;
-	--green-100: #F1FDD1;
-	--green-200: #DFFCA5;
-	--green-300: #C6F676;
-	--green-400: #ADED53;
-	--green-500: #87E21F;
-	--green-600: #6AC216;
-	--green-700: #50A20F;
+	--green-100: #f1fdd1;
+	--green-200: #dffca5;
+	--green-300: #c6f676;
+	--green-400: #aded53;
+	--green-500: #87e21f;
+	--green-600: #6ac216;
+	--green-700: #50a20f;
 	--green-800: #398309;
-	--green-900: #296C05;
+	--green-900: #296c05;
 }

@@ -1,11 +1,1 @@
-[
-  "python",
-  "nextjs",
-  "react",
-  "typescript",
-  "rust",
-  "golang",
-  "vue",
-  "angular",
-  "express"
-]
+["python", "nextjs", "react", "typescript", "rust", "golang", "vue", "angular", "express"]
