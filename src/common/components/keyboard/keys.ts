@@ -1,4 +1,4 @@
-export const eventKeys = {
+export const EventKeys = {
 	ArrowDown: 'ArrowDown',
 	ArrowUp: 'ArrowUp',
 	ArrowRight: 'ArrowRight',
@@ -18,10 +18,10 @@ export const eventKeys = {
 	BlankSpace: ' '
 } as const
 
-export type EventKey = keyof typeof eventKeys
+export type EventKey = keyof typeof EventKeys
 
 export const isEventKey = (o: any): o is EventKey => {
-	return typeof o === 'string' && Object.keys(eventKeys).includes(o)
+	return typeof o === 'string' && Object.keys(EventKeys).includes(o)
 }
 
 export const alphabetKeys = [

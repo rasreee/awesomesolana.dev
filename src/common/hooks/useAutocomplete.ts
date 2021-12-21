@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { EventKey } from '../components/keyboard/keys'
+import { EventKeys } from '../components/keyboard/keys'
 
 export type UseAutoCompleteReturn = {
 	selectedItemIndex: number
@@ -20,8 +20,8 @@ export function useAutoComplete<ItemType extends object = object>(
 	return {
 		selectedItemIndex,
 		onKeyDown: (event) => {
-			const isBackward = event.code === EventKey.ArrowUp
-			const isForward = event.code === EventKey.ArrowDown || event.code === EventKey.Tab
+			const isBackward = event.code === EventKeys.ArrowUp
+			const isForward = event.code === EventKeys.ArrowDown || event.code === EventKeys.Tab
 
 			if (isBackward || isForward) {
 				event.preventDefault()
@@ -33,7 +33,7 @@ export function useAutoComplete<ItemType extends object = object>(
 				} else {
 					setSelectedItemIndex(isForward ? 0 : n - 1)
 				}
-			} else if (event.code === EventKey.Enter && selectedItemIndex >= 0) {
+			} else if (event.code === EventKeys.Enter && selectedItemIndex >= 0) {
 				onSelect(items[selectedItemIndex])
 			}
 		}

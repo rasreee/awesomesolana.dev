@@ -4,6 +4,7 @@ import React, {
 	Dispatch,
 	forwardRef,
 	InputHTMLAttributes,
+	KeyboardEventHandler,
 	Ref,
 	SetStateAction,
 	useRef,
@@ -20,16 +21,13 @@ import * as S from './SearchBar.styles'
 const iconSize = 26
 const iconColor = colors.blue[500]
 
-export interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface SearchBarProps {
 	isLoading: boolean
 	value: string
 	setValue: Dispatch<SetStateAction<string>>
-	/**
-	 * The ref to the HTML DOM element.
-	 */
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	ref?: Ref<any>
 	onChange: ChangeEventHandler<HTMLInputElement>
+	onKeyDown: KeyboardEventHandler<HTMLInputElement>
 }
 
 export const SearchBar = forwardRef((props: SearchBarProps, ref: SearchBarProps['ref']) => {
@@ -49,7 +47,14 @@ export const SearchBar = forwardRef((props: SearchBarProps, ref: SearchBarProps[
 		<S.Container ref={ref}>
 			<S.Form role="search" noValidate>
 				<S.Label>{props.isLoading ? <Spinner /> : <SearchIcon height={iconSize} fill={iconColor} />}</S.Label>
-				<S.Input ref={inputRef} type="search" placeholder="Search" value={localQuery} onChange={onChange} />
+				<S.Input
+					ref={inputRef}
+					type="search"
+					placeholder="Search"
+					value={localQuery}
+					onChange={onChange}
+					onKeyDown={props.onKeyDown}
+				/>
 				<KbdSymbol keys={['Escape']} />
 			</S.Form>
 		</S.Container>
