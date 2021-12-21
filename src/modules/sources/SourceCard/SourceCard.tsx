@@ -21,12 +21,13 @@ export function SourceCard(data: SourceCardProps) {
 
 	const onClickLikes = async () => {
 		const updatedData = await updateSourceData(localData.id, { likes: localData.likes + 1 })
-		logEvent(`LIKED_${localData.type.toLocaleUpperCase()}`)
+		logEvent(`LIKED_${localData.type.toLocaleUpperCase()}_SOURCE`)
 		setLocalData(updatedData)
 	}
 
 	const onClickLink = async () => {
 		const updatedData = await updateSourceData(localData.id, { views: localData.views + 1 })
+		logEvent(`CLICKED_SOURCE_LINK_${localData.type.toLocaleUpperCase()}`)
 		router.push(localData.url)
 		setLocalData(updatedData)
 	}
