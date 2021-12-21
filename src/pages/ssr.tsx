@@ -1,7 +1,8 @@
 import { getSnapshot } from 'mobx-state-tree'
 
+import { initializeStore } from '@/store/store'
+
 import SampleComponent from '../components/SampleComponent'
-import { initializeStore } from '../store'
 export type SsrProps = { initialState: any }
 
 export default function Ssr({ initialState }: SsrProps) {
