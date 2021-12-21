@@ -1,9 +1,9 @@
 import { useUpdateEffect } from '@react-hookz/web'
 import { useRouter } from 'next/router'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Modal, useModal } from '@/common/components/Modal'
-import { useAutoComplete, useDebouncedAndAutofocusedInput, useOnKeyPress, useSearchHistory } from '@/common/hooks'
+import { useAutoComplete, useDebouncedAndAutofocusedInput, useSearchHistory } from '@/common/hooks'
 import { useFindSourcesByQuery } from '@/models/source'
 import { Source } from '@/models/source/types'
 
@@ -42,41 +42,42 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 		return data as SearchHitsData
 	}, [hits, recents])
 
-	const { selectedItemIndex: focusedItemIndex, onKeyDown } = useAutoComplete(searchData.list, onItemClick)
+	useAutoComplete(searchData.list, onItemClick)
 
 	const findSourcesByQuery = useFindSourcesByQuery()
 
 	const [isLoading, setIsLoading] = useState(false)
 
-	useEffect(() => {
-		const query = input.value
+	const submitQuery = async (query: string) => {
 		if (!query) return setHits([])
 
 		setIsLoading(true)
 
 		findSourcesByQuery(query).then((res) => {
-			console.log('Hits: ', res)
 			setHits(res)
 			setIsLoading(false)
 		})
+	}
+
+	useEffect(() => {
+		const query = input.value
+		submitQuery(query)
 	}, [input.value])
 
 	const renderDropdownItem = useCallback(
-		(hit: Source, index: number) => {
+		(hit: Source) => {
 			return (
 				<S.ListItem key={hit.id}>
-					<S.ItemButton isFocused={index === focusedItemIndex} onClick={onItemClick(hit)}>
-						{hit.title}
-					</S.ItemButton>
+					<S.ItemButton onClick={onItemClick(hit)}>{hit.title}</S.ItemButton>
 				</S.ListItem>
 			)
 		},
-		[focusedItemIndex]
+		[onItemClick]
 	)
 
 	return (
 		<Modal {...props}>
-			<SearchBar isLoading={isLoading} {...input} onKeyDown={onKeyDown} />
+			<SearchBar isLoading={isLoading} {...input} onSubmitQuery={submitQuery} />
 			{searchData.list.length > 0 && <SearchDropdown data={searchData} renderItem={renderDropdownItem} />}
 		</Modal>
 	)

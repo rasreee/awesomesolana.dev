@@ -1,17 +1,8 @@
 import { useMountEffect } from '@react-hookz/web'
-import React, {
-	ChangeEventHandler,
-	Dispatch,
-	forwardRef,
-	InputHTMLAttributes,
-	KeyboardEventHandler,
-	Ref,
-	SetStateAction,
-	useRef,
-	useState
-} from 'react'
+import React, { ChangeEventHandler, Dispatch, forwardRef, Ref, SetStateAction, useRef, useState } from 'react'
 
 import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
+import { EventKeys } from '@/common/components/keyboard/keys'
 import { Spinner } from '@/common/components/spinner'
 import { SearchIcon } from '@/icons/SearchIcon'
 import { colors } from '@/theme/foundations/colors'
@@ -27,7 +18,7 @@ export interface SearchBarProps {
 	setValue: Dispatch<SetStateAction<string>>
 	ref?: Ref<any>
 	onChange: ChangeEventHandler<HTMLInputElement>
-	onKeyDown: KeyboardEventHandler<HTMLInputElement>
+	onSubmitQuery: (query: string) => void
 }
 
 export const SearchBar = forwardRef((props: SearchBarProps, ref: SearchBarProps['ref']) => {
@@ -43,6 +34,12 @@ export const SearchBar = forwardRef((props: SearchBarProps, ref: SearchBarProps[
 
 	useMountEffect(() => inputRef.current?.focus())
 
+	const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.code === EventKeys.Enter) {
+			props.onSubmitQuery(localQuery)
+		}
+	}
+
 	return (
 		<S.Container ref={ref}>
 			<S.Form role="search" noValidate>
@@ -53,7 +50,7 @@ export const SearchBar = forwardRef((props: SearchBarProps, ref: SearchBarProps[
 					placeholder="Search"
 					value={localQuery}
 					onChange={onChange}
-					onKeyDown={props.onKeyDown}
+					onKeyDown={onKeyDown}
 				/>
 				<KbdSymbol keys={['Escape']} />
 			</S.Form>

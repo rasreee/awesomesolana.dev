@@ -43,7 +43,7 @@ export const ListItem = styled.li`
 	border-bottom: 1px solid var(--gray-100);
 `
 
-const interactiveButtonStyles = ({ theme, isFocused }: StyledProps<{ isFocused: boolean }>) => css`
+const interactiveButtonStyles = ({ theme }: StyledProps) => css`
 	${pseudo('_focus')} {
 		background-color: ${theme.colors.primary[500]};
 		color: white;
@@ -52,14 +52,9 @@ const interactiveButtonStyles = ({ theme, isFocused }: StyledProps<{ isFocused: 
 		background-color: ${theme.colors.primary[500]};
 		color: white;
 	}
-	${isFocused &&
-	css`
-		background-color: ${theme.colors.primary[500]};
-		color: white;
-	`}
 `
 
-export const ItemButton = styled.button<{ isFocused: boolean }>`
+export const ItemButton = styled.button`
 	padding: 1rem 1.5rem;
 	font-size: 0.875rem;
 	color: inherit;
