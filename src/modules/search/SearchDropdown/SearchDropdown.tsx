@@ -2,31 +2,30 @@ import React from 'react'
 
 import { Source } from '@/models/source/types'
 
-import { SearchData } from '../types'
+import { SearchHitsData } from '../types'
 import * as S from './styles'
 
 export interface SearchDropdownProps {
-	shouldExpand: boolean
 	onHitClick: (hit: Source) => void
-	data: SearchData
+	data: SearchHitsData
 }
 
-export const SearchDropdown: React.FunctionComponent<SearchDropdownProps> = ({ onHitClick, data, shouldExpand }) => {
+export const SearchDropdown: React.FunctionComponent<SearchDropdownProps> = ({ onHitClick, data }) => {
 	const handleHitClick = (hit: Source) => () => onHitClick(hit)
 
 	return (
 		<S.Dropdown>
 			{data.list.length > 0 && (
-				<S.HitsSection>
-					{data.type === 'recents' && <S.HitsSectionTitle>Recents</S.HitsSectionTitle>}
-					<S.HitList>
+				<S.Section>
+					{data.type === 'recents' && <S.SectionTitle>Recents</S.SectionTitle>}
+					<S.List>
 						{data.list.map((hit) => (
-							<S.HitListItem key={hit.id}>
-								<S.HitItemButton onClick={handleHitClick(hit)}>{hit.title}</S.HitItemButton>
-							</S.HitListItem>
+							<S.ListItem key={hit.id}>
+								<S.ItemButton onClick={handleHitClick(hit)}>{hit.title}</S.ItemButton>
+							</S.ListItem>
 						))}
-					</S.HitList>
-				</S.HitsSection>
+					</S.List>
+				</S.Section>
 			)}
 		</S.Dropdown>
 	)

@@ -5,18 +5,18 @@ export const Dropdown = styled.div`
 	overflow: auto;
 `
 
-export const HitsSection = styled.section`
+export const Section = styled.section`
 	padding-bottom: 1.5rem;
 `
 
-export const HitsSectionTitle = styled.div`
+export const SectionTitle = styled.div`
 	line-height: 1.5rem;
 	font-weight: var(--font-semibold);
 	color: var(--gray-800);
 	margin: 0 1.5rem 1rem;
 `
 
-export const HitList = styled.ul`
+export const List = styled.ul`
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -31,11 +31,11 @@ export const HitList = styled.ul`
 	border-color: var(--gray-100);
 `
 
-export const HitListItem = styled.li`
+export const ListItem = styled.li`
 	position: relative;
 `
 
-export const HitItemButton = styled.button`
+export const ItemButton = styled.button`
 	:first-child {
 		border-top-width: 1px;
 		border-color: var(--gray-100);

@@ -5,7 +5,7 @@ import { Source, useFindSourcesByQuery } from '@/models/source'
 
 import { SearchBar } from './SearchBar'
 import { SearchDropdown } from './SearchDropdown'
-import { SearchData } from './types'
+import { SearchHitsData } from './types'
 
 export interface SearchProps {
 	onHitClick: (hit: Source) => void
@@ -53,12 +53,10 @@ export const Search: React.FunctionComponent<SearchProps> = ({
 		onHitClick(hit)
 	}
 
-	const effects = useMemo(() => {
-		const data: SearchData = hits.length > 0 ? { list: hits, type: 'hits' } : { list: recents, type: 'recents' }
+	const searchHitsData = useMemo(() => {
+		const data = hits.length > 0 ? { list: hits, type: 'hits' } : { list: recents, type: 'recents' }
 
-		const shouldExpand = input.value.length > 0 && data.list.length > 0
-
-		return { data, shouldExpand }
+		return data as SearchHitsData
 	}, [hits, recents])
 
 	const findSourcesByQuery = useFindSourcesByQuery()
@@ -94,7 +92,7 @@ export const Search: React.FunctionComponent<SearchProps> = ({
 		<>
 			<SearchBar isLoading={isLoading} {...input} />
 
-			<SearchDropdown shouldExpand={effects.shouldExpand} data={effects.data} onHitClick={handleHitClick} />
+			<SearchDropdown data={searchHitsData} onHitClick={handleHitClick} />
 		</>
 	)
 }
