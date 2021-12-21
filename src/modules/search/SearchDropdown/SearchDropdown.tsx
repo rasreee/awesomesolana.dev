@@ -15,18 +15,20 @@ export const SearchDropdown: React.FunctionComponent<SearchDropdownProps> = ({ o
 
 	return (
 		<S.Dropdown>
-			{data.list.length > 0 && (
-				<S.Section>
-					{data.type === 'recents' && <S.SectionTitle>Recents</S.SectionTitle>}
-					<S.List>
-						{data.list.map((hit) => (
-							<S.ListItem key={hit.id}>
-								<S.ItemButton onClick={handleHitClick(hit)}>{hit.title}</S.ItemButton>
-							</S.ListItem>
-						))}
-					</S.List>
-				</S.Section>
-			)}
+			<S.Content>
+				{data.list.length > 0 && (
+					<S.Section>
+						{data.type === 'recents' && <S.SectionTitle>Recents</S.SectionTitle>}
+						<S.List>
+							{data.list.map((hit) => (
+								<S.ListItem key={hit.id}>
+									<S.ItemButton onClick={handleHitClick(hit)}>{hit.title}</S.ItemButton>
+								</S.ListItem>
+							))}
+						</S.List>
+					</S.Section>
+				)}
+			</S.Content>
 		</S.Dropdown>
 	)
 }

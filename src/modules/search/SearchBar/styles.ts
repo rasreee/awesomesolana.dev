@@ -6,9 +6,10 @@ export const Container = styled.header`
 	z-index: 1;
 	display: flex;
 	flex: none;
-	padding: 0 1rem;
 	align-items: center;
+	border-bottom-width: 1px;
 	border-color: var(--gray-100);
+	padding: 0 1rem;
 `
 
 export const Form = styled.form`

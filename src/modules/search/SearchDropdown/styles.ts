@@ -5,8 +5,12 @@ export const Dropdown = styled.div`
 	overflow: auto;
 `
 
-export const Section = styled.section`
+export const Content = styled.div`
 	padding-bottom: 1.5rem;
+`
+
+export const Section = styled.section`
+	width: 100%;
 `
 
 export const SectionTitle = styled.div`
@@ -20,24 +24,22 @@ export const List = styled.ul`
 	list-style: none;
 	margin: 0;
 	padding: 0;
-
-	border-top-width: 1px;
-	border-color: var(--gray-100);
 `
 
 export const ListItem = styled.li`
 	list-style: none;
 	position: relative;
-`
 
-export const ItemButton = styled.button`
 	:first-child {
 		border-top-width: 1px;
 		border-color: var(--gray-100);
 	}
+	border-bottom: 1px solid var(--gray-100);
+`
+
+export const ItemButton = styled.button`
 	padding: 1rem 1.5rem;
 	font-size: 0.875rem;
-	border-bottom: 1px solid var(--gray-100);
 	color: inherit;
 	text-decoration: inherit;
 
