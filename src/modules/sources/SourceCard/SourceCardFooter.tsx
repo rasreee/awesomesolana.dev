@@ -13,7 +13,7 @@ type SourceCardFooterProps = {
 	likes: number
 	views: number
 	updatedAt: string
-	onTypeClick: () => void
+	onCategoryClick: () => void
 	onClickLikes: () => void
 }
 
@@ -23,14 +23,14 @@ export const SourceCardFooter: FC<SourceCardFooterProps> = ({
 	views,
 	updatedAt,
 	onClickLikes,
-	onTypeClick
+	onCategoryClick
 }) => {
 	return (
 		<>
 			<div className={classNames('flex items-center gap-3', 'absolute left-5')}>
 				<SourceStatButton value={likes} icon={HeartIconSolid} onClick={onClickLikes} />
 				<SourceStatButton value={views} icon={EyeIcon} />
-				<Tag fontSize="xs" color="primary" style={{ marginTop: '0.125rem' }} onClick={onTypeClick}>
+				<Tag fontSize="xs" color="primary" style={{ marginTop: '0.125rem' }} onClick={onCategoryClick}>
 					{type}
 				</Tag>
 			</div>

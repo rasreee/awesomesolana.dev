@@ -3,7 +3,7 @@ import useSWR, { Fetcher } from 'swr'
 
 import { useSupabase } from '@/common/supabase/useSupabase'
 import { handleSupabaseResponse, QueryOpts, SWRResponseWithLoading } from '@/common/utils'
-import { Filter } from '@/store/filterStore'
+import { Filter } from '@/store/filter'
 
 import { Source } from './types'
 

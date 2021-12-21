@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 
 import { QueryOpts } from '@/common/utils'
 import { useSourcesByType } from '@/models/source'
-import { Filter } from '@/store/filterStore'
+import { Filter } from '@/store/filter'
 
 import { SourceCard } from '../SourceCard'
 

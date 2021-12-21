@@ -36,7 +36,7 @@ export const SourceCard = observer((data: SourceCardProps) => {
 		setLocalData(updatedData)
 	}
 
-	const onTypeClick = (type: SourceType) => {
+	const onCategoryClick = (type: SourceType) => {
 		return () => {
 			console.log(type)
 			filterStore.resetStore()
@@ -95,7 +95,7 @@ export const SourceCard = observer((data: SourceCardProps) => {
 					views={localData.views}
 					updatedAt={localData.updatedAt}
 					onClickLikes={onClickLikes}
-					onTypeClick={onTypeClick(localData.type)}
+					onCategoryClick={onCategoryClick(localData.type)}
 				/>
 			</div>
 		</div>

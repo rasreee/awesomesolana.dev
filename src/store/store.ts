@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
 
 import { CommonStore } from './commonStore'
-import { FilterStore } from './filterStore'
+import { FilterStore } from './filter'
 
 interface Store {
 	filterStore: FilterStore

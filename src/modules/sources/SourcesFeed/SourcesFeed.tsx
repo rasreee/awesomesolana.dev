@@ -9,7 +9,7 @@ import { formatToListOfPlurals } from '@/common/utils'
 import { Page } from '@/components/Page'
 import { useTotalSourcesCount } from '@/models/source'
 import { parseQueryParamAsArray } from '@/modules/core/nextRouter'
-import { FilterType } from '@/store/filterStore'
+import { FilterType } from '@/store/filter'
 import { useStore } from '@/store/store'
 
 import { SourcesFeedGrid } from './SourcesFeedGrid'
@@ -63,8 +63,8 @@ export const SourcesFeed: React.FC<SourcesFeedProps> = observer(({ routerQuery }
 						</div>
 					)}
 					<div className="mobile:py-2">
-						{filterStore.categories.length ? (
-							filterStore.categories.map((id) => (
+						{filterStore.all.categories.length ? (
+							filterStore.all.categories.map((id) => (
 								<SourcesFeedGrid
 									key={id}
 									filter={{ type: FilterType.Categories, id }}

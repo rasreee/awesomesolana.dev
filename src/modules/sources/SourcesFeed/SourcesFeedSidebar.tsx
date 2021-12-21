@@ -1,21 +1,14 @@
 import { runInAction } from 'mobx'
 import { observer } from 'mobx-react-lite'
-import React from 'react'
 
 import { Sidebar } from '@/components/Sidebar'
 import { SOURCE_TYPES, useSourceCounts } from '@/models/source'
 import { SearchFeatureSm } from '@/modules/search'
-import { FilterType } from '@/store/filterStore'
+import { FilterType } from '@/store/filter'
 import { useStore } from '@/store/store'
 
-export const SourcesFeedSidebar: React.FunctionComponent = observer(() => {
+export const SourcesFeedSidebar = observer(function _SourcesFeedSidebar() {
 	const { filterStore } = useStore()
-
-	const onClearClick = () => {
-		runInAction(() => {
-			filterStore.resetStore()
-		})
-	}
 
 	const onItemClick = (type: FilterType, id: string) => () => {
 		if (filterStore.allList.some((filter) => filter.id === id)) {
@@ -34,13 +27,13 @@ export const SourcesFeedSidebar: React.FunctionComponent = observer(() => {
 			</Sidebar.Section>
 			<Sidebar.Section>
 				<Sidebar.SectionHeader>
-					<Sidebar.SectionTitle>Content Types</Sidebar.SectionTitle>
-					{filterStore.categories.length > 0 && (
+					<Sidebar.SectionTitle>Categories</Sidebar.SectionTitle>
+					{filterStore.all.categories.length > 0 && (
 						<button
-							onClick={onClearClick}
+							onClick={filterStore.resetStore}
 							className="font-semibold border border-gray-600 rounded-lg hover:bg-gray-200 text-sm px-3 py-1"
 						>
-							{`Clear (${filterStore.categories.length})`}
+							{`Clear (${filterStore.all.categories.length})`}
 						</button>
 					)}
 				</Sidebar.SectionHeader>
@@ -48,7 +41,7 @@ export const SourcesFeedSidebar: React.FunctionComponent = observer(() => {
 					{SOURCE_TYPES.map((id) => (
 						<Sidebar.ListItem
 							key={id}
-							isActive={filterStore.categories.includes(id)}
+							isActive={filterStore.all.categories.includes(id)}
 							onClick={onItemClick(FilterType.Categories, id)}
 						>
 							{`${id} (${countsData ? countsData[id] : 0})`}

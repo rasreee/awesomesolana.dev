@@ -1,54 +1,8 @@
 import { makeAutoObservable } from 'mobx'
 import Router from 'next/router'
 
-export enum FilterType {
-	Categories = 'categories',
-	// Languages = 'languages'
-	// Dependencies = 'dependencies',
-	// Frameworks = 'frameworks',
-	Concepts = 'concepts'
-}
-
-export const filterTypes = {
-	Categories: FilterType.Categories,
-	Concepts: FilterType.Concepts
-} as const
-
-type FilterBase = { type: FilterType; id: string }
-
-export interface CategoryFilter extends FilterBase {
-	type: FilterType.Categories
-	id: string
-}
-
-export interface ConceptFilter extends FilterBase {
-	type: FilterType.Concepts
-	id: string
-}
-
-export type Filter = CategoryFilter | ConceptFilter
-
-const getFilteredPath = (filters: Record<FilterType, string[]>) => {
-	let pathname = `/sources`
-
-	Object.entries(filters).forEach(([type, ids], index) => {
-		if (ids.length === 0) return
-		const separator = index === 0 ? '?' : '&'
-		pathname += `${pathname}${separator}${type}=${ids.join(',')}`
-	})
-
-	return pathname
-}
-
-const toFilter =
-	(type: FilterType) =>
-	(id: string): Filter => ({
-		id,
-		type
-	})
-
-const initAll = (): Record<FilterType, string[]> => ({ categories: [], concepts: [] })
-
+import { Filter, FilterType } from './types'
+import { getFilteredPath, initAll, toFilter } from './utils'
 export class FilterStore {
 	all: Record<FilterType, string[]> = initAll()
 
@@ -57,14 +11,6 @@ export class FilterStore {
 			...this.all.categories.map(toFilter(FilterType.Categories)),
 			...this.all.concepts.map(toFilter(FilterType.Concepts))
 		]
-	}
-
-	get categories(): string[] {
-		return this.all.categories
-	}
-
-	get concepts(): string[] {
-		return this.all.concepts
 	}
 
 	constructor() {
