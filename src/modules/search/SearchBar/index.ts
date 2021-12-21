@@ -1,2 +1,2 @@
 export * from './SearchBar'
-export * from './styles'
+export * from './SearchBar.styles'

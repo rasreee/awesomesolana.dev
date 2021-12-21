@@ -15,7 +15,7 @@ import { Spinner } from '@/common/components/spinner'
 import { SearchIcon } from '@/icons/SearchIcon'
 import { colors } from '@/theme/foundations/colors'
 
-import * as S from './styles'
+import * as S from './SearchBar.styles'
 
 const iconSize = 26
 const iconColor = colors.blue[500]

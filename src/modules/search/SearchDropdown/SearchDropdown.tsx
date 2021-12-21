@@ -3,7 +3,7 @@ import React from 'react'
 import { Source } from '@/models/source/types'
 
 import { SearchHitsData } from '../types'
-import * as S from './styles'
+import * as S from './SearchDropdown.styles'
 
 export interface SearchDropdownProps {
 	onItemClick: (hit: Source) => void

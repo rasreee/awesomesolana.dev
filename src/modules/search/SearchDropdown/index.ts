@@ -1,2 +1,2 @@
 export * from './SearchDropdown'
-export * from './styles'
+export * from './SearchDropdown.styles'
