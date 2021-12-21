@@ -4,7 +4,7 @@ import React from 'react'
 import { Sidebar } from '@/common/components'
 import { SOURCE_TYPES, SourceType, useSourceCounts } from '@/models/source'
 import { SearchFeatureSm } from '@/modules/search/SearchFeatureSm'
-import { useSourcesFeed } from '@/modules/sources/SourcesFeedContext'
+import { useSourcesFeed } from '@/modules/sources/SourcesFeed/SourcesFeedContext'
 
 import { getSourcesRoutePath } from './getSourcesRoutePath'
 

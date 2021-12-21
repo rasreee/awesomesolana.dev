@@ -4,7 +4,7 @@ import React, { FC } from 'react'
 import { QueryOpts } from '@/common/utils'
 import { SourceType, useSourcesByType } from '@/models/source'
 
-import { SourceCard } from './SourceCard'
+import { SourceCard } from '../SourceCard'
 
 export type SourcesFeedGridProps = {
 	sourceType?: SourceType

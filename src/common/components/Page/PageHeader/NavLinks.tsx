@@ -4,7 +4,7 @@ import React from 'react'
 import { NavLink, NavLinkProps } from '@/common/components'
 import { SOURCE_TYPES } from '@/models/source'
 import { formatSourceTypeLabel } from '@/models/source/formatSourceTypeLabel'
-import { getSourcesRoutePath } from '@/modules/sources/getSourcesRoutePath'
+import { getSourcesRoutePath } from '@/modules/sources/SourcesFeed/getSourcesRoutePath'
 
 const navLinks: Omit<NavLinkProps, 'children'>[] = SOURCE_TYPES.map((sourceType) => ({
 	id: sourceType,

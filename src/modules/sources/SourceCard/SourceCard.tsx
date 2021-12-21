@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { Source, SourceType } from '@/models/source/types'
 import { useUpdateSourceData } from '@/models/source/useUpdateSourceData'
 
-import { useSourcesFeed } from '../SourcesFeedContext'
+import { useSourcesFeed } from '../SourcesFeed/SourcesFeedContext'
 import { SourceCardBody } from './SourceCardBody'
 import { SourceCardFooter } from './SourceCardFooter'
 import { SourceCardHeader } from './SourceCardHeader'
