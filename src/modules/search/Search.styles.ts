@@ -15,31 +15,8 @@ export const SearchBar = styled.header`
 export const Form = styled.form`
 	display: flex;
 	align-items: center;
+	flex: 1 1 auto;
 	min-width: 0;
-	width: 100%;
-	${only('md')} {
-		width: 50%;
-	}
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 0.75rem /* 12px */;
-	padding-right: 0.75rem /* 12px */;
-	padding-top: 0.5rem /* 8px */;
-	padding-bottom: 0.5rem /* 8px */;
-	border-radius: 0.5rem /* 8px */;
-	background: white;
-
-	--tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-	--tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-
-	border-width: 1;
-	border-color: var(--gray-300);
-	${pseudo('_focusVisible')} {
-		outline: none;
-		--tw-ring-color: rgb(153 69 255);
-		border-color: var(--primary-500);
-	}
 `
 
 export const Label = styled.label`
