@@ -19,7 +19,7 @@ export interface SourcesFeedProps {
 	routerQuery: Record<string, string | string[] | undefined>
 }
 
-export const SourcesFeed: React.FunctionComponent<SourcesFeedProps> = observer(({ routerQuery }) => {
+export const SourcesFeed: React.FC<SourcesFeedProps> = observer(({ routerQuery }) => {
 	const { filterStore } = useStore()
 
 	useUpdateEffect(() => {

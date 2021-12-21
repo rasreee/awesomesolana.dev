@@ -1,5 +1,5 @@
+import { runInAction } from 'mobx'
 import { observer } from 'mobx-react-lite'
-import { useRouter } from 'next/router'
 import React from 'react'
 
 import { Sidebar } from '@/components/Sidebar'
@@ -8,24 +8,21 @@ import { SearchFeatureSm } from '@/modules/search'
 import { FilterType } from '@/store/filterStore'
 import { useStore } from '@/store/store'
 
-const getFilteredSourcesPath = (type?: FilterType, filterIds?: string[]) => {
-	return filterIds && filterIds.length > 0 && type ? `/sources?type=${filterIds.join(',')}` : '/sources'
-}
-
 export const SourcesFeedSidebar: React.FunctionComponent = observer(() => {
-	const router = useRouter()
 	const { filterStore } = useStore()
 
 	const onClearClick = () => {
-		router.push(getFilteredSourcesPath())
+		runInAction(() => {
+			filterStore.resetStore()
+		})
 	}
 
 	const onItemClick = (type: FilterType, id: string) => () => {
 		if (filterStore.allList.some((filter) => filter.id === id)) {
-			return filterStore.add(type, id)
+			return runInAction(() => filterStore.add(type, id))
 		}
 
-		filterStore.remove(type, id)
+		runInAction(() => filterStore.remove(type, id))
 	}
 
 	const { data: countsData } = useSourceCounts()
