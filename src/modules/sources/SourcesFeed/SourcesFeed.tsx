@@ -2,9 +2,9 @@ import { css } from '@emotion/react'
 import classNames from 'classnames'
 import React from 'react'
 
-import { Page } from '@/common/components'
 import { useIsMobileDevice } from '@/common/hooks'
 import { formatToListOfPlurals } from '@/common/utils'
+import { Page } from '@/components/Page'
 import { useTotalSourcesCount } from '@/models/source'
 
 import { useSourcesFeed } from './SourcesFeedContext'

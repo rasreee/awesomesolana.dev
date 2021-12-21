@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
+import { KbdSymbol } from '@/components/keyboard/KbdSymbol'
 import { SearchIcon } from '@/icons/SearchIcon'
 
 export type SearchButtonProps = {

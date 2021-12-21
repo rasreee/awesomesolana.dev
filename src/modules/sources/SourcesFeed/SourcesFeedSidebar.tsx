@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
-import { Sidebar } from '@/common/components'
+import { Sidebar } from '@/components'
 import { SOURCE_TYPES, useSourceCounts } from '@/models/source'
 import { getLanguagesAndFrameworks, Language, TagType } from '@/models/tag'
 import { SearchFeatureSm } from '@/modules/search/SearchFeatureSm'

@@ -1,9 +1,8 @@
 import classNames from 'classnames'
 import React, { CSSProperties, MouseEventHandler } from 'react'
 
+import { pseudo } from '@/common/utils'
 import { ColorName, colors, FontSize, fontSizes } from '@/modules/theme/foundations'
-
-import { pseudo } from '../utils/pseudos'
 
 export interface TagProps {
 	color?: ColorName

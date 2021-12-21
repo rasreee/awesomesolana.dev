@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { EventKeys } from '../components/keyboard/keys'
+import { EventKeys } from '@/components/keyboard/keys'
 
 export interface UseAutoCompleteReturn {
 	selectedItemIndex: number

@@ -1,5 +1,7 @@
+export * from './Clock'
 export * from './Loader'
 export * from './NavLink'
+export * from './SampleComponent'
 export * from './Sidebar'
 export * from './Tag'
 export * from './Modal'

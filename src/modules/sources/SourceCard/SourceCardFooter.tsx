@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React, { FC } from 'react'
 
-import { Tag } from '@/common/components/Tag'
+import { Tag } from '@/components/Tag'
 import { EyeIcon } from '@/icons/EyeIcon'
 import { HeartIconSolid } from '@/icons/HeartIcon'
 import { SourceType } from '@/models/source'

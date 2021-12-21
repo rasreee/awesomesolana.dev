@@ -2,8 +2,8 @@ import { useUpdateEffect } from '@react-hookz/web'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { Modal, useModal } from '@/common/components/Modal'
 import { useAutoComplete, useDebouncedAndAutofocusedInput, useSearchHistory } from '@/common/hooks'
+import { Modal, useModal } from '@/components/Modal'
 import { useFindSourcesByQuery } from '@/models/source'
 import { Source } from '@/models/source/types'
 

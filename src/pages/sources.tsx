@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 import { SourcesFeed, SourcesFeedProvider } from '@/modules/sources'
 
-const SourcesPage = () => {
+export default function SourcesPage() {
 	const router = useRouter()
 
 	return (
@@ -13,5 +13,3 @@ const SourcesPage = () => {
 		</>
 	)
 }
-
-export default SourcesPage

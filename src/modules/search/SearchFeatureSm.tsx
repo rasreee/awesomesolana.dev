@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { useModal } from '@/common/components/Modal/useModal'
 import { useKeyCombo } from '@/common/hooks/useKeyCombo'
+import { useModal } from '@/components/Modal/useModal'
 
 import { SearchButtonSm } from './SearchButtonSm'
 import { SearchModal } from './SearchModal'

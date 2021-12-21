@@ -1,9 +1,9 @@
 import { useMountEffect } from '@react-hookz/web'
 import React, { ChangeEventHandler, Dispatch, forwardRef, Ref, SetStateAction, useRef, useState } from 'react'
 
-import { KbdSymbol } from '@/common/components/keyboard/KbdSymbol'
-import { EventKeys } from '@/common/components/keyboard/keys'
-import { Loader } from '@/common/components/Loader'
+import { KbdSymbol } from '@/components/keyboard/KbdSymbol'
+import { EventKeys } from '@/components/keyboard/keys'
+import { Loader } from '@/components/Loader'
 import { SearchIcon } from '@/icons/SearchIcon'
 import { colors } from '@/modules/theme/foundations/colors'
 
