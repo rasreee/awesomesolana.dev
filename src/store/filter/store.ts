@@ -67,10 +67,10 @@ export class FilterStore {
 	remove(args: FilterArgs) {
 		switch (args.type) {
 			case FilterType.Categories:
-				this.categories.filter((id) => id !== args.id)
+				this.categories = this.categories.filter((id) => id !== args.id)
 				break
 			case FilterType.Concepts:
-				this.concepts.filter((id) => id !== args.id)
+				this.concepts = this.concepts.filter((id) => id !== args.id)
 				break
 			default:
 				throw new UnknownFilterArgsError(args)

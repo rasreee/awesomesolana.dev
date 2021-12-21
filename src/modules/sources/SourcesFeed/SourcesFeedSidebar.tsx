@@ -1,3 +1,4 @@
+import { computed } from 'mobx'
 import { observer } from 'mobx-react-lite'
 
 import { Sidebar } from '@/components/Sidebar'
@@ -9,14 +10,6 @@ import { useStore } from '@/store/store'
 
 export const SourcesFeedSidebar = observer(function _SourcesFeedSidebar() {
 	const { filterStore } = useStore()
-
-	const onItemClick = (args: FilterArgs) => () => {
-		if (filterStore.has(args)) {
-			filterStore.remove(args)
-		} else {
-			filterStore.add(args)
-		}
-	}
 
 	const { data: countsData } = useSourceCounts()
 
@@ -38,15 +31,24 @@ export const SourcesFeedSidebar = observer(function _SourcesFeedSidebar() {
 					)}
 				</Sidebar.SectionHeader>
 				<Sidebar.List>
-					{categoriesConst.map((id) => (
-						<Sidebar.ListItem
-							key={id}
-							isActive={filterStore.has({ type: FilterType.Categories, id })}
-							onClick={onItemClick({ type: FilterType.Categories, id })}
-						>
-							{`${id} (${countsData ? countsData[id] : 0})`}
-						</Sidebar.ListItem>
-					))}
+					{categoriesConst.map((id) => {
+						const args = { id, type: FilterType.Categories } as FilterArgs
+						const alreadyActiveComp = computed(() => filterStore.has(args))
+
+						return (
+							<Sidebar.ListItem
+								key={id}
+								isActive={alreadyActiveComp.get()}
+								onClick={() => {
+									const alreadyActive = alreadyActiveComp.get()
+									console.log({ alreadyActive })
+									alreadyActive ? filterStore.remove(args) : filterStore.add(args)
+								}}
+							>
+								{`${id} (${countsData ? countsData[id] : 0})`}
+							</Sidebar.ListItem>
+						)
+					})}
 				</Sidebar.List>
 			</Sidebar.Section>
 		</Sidebar>
