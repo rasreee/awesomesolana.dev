@@ -9,6 +9,7 @@ export const Dropdown = styled.div`
 `
 
 export const Content = styled.div`
+	padding-top: 1.5;
 	padding-bottom: 1.5rem;
 	padding-left: 1rem;
 	padding-right: 0.675rem;
@@ -35,7 +36,7 @@ export const ListItem = styled.li`
 	list-style: none;
 	margin: 0;
 
-	:first-child {
+	:first-of-type {
 		border-top-width: 1px;
 		border-color: var(--gray-100);
 	}
@@ -47,9 +48,10 @@ export const ItemButton = styled.button<{ isFocused: boolean }>`
 	font-size: 0.875rem;
 	color: inherit;
 	text-decoration: inherit;
-
 	display: flex;
 	align-items: center;
+	border-radius: var(--rounded-md);
+	width: 100%;
 	${({ theme }) => css`
 		${pseudo('_focus')} {
 			background-color: ${theme.colors.primary[500]};
@@ -59,5 +61,5 @@ export const ItemButton = styled.button<{ isFocused: boolean }>`
 			background-color: ${theme.colors.primary[500]};
 			color: white;
 		}
-	`}
+	`};
 `

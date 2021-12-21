@@ -27,5 +27,15 @@ export const cssVariables = css`
 		--gray-700: #374151;
 		--gray-800: #1f2937;
 		--gray-900: #111827;
+
+		--rounded-none: 0px;
+		--rounded-sm: 0.125rem;
+		--rounded-default: 0.25rem;
+		--rounded-md: 0.375rem;
+		--rounded-lg: 0.5rem;
+		--rounded-xl: 0.75rem;
+		--rounded-2xl: 1rem;
+		--rounded-3xl: 1.5rem;
+		--rounded-full: 9999px;
 	}
 `
