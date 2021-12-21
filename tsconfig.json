@@ -10,6 +10,7 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
 		"noEmit": true,
 		"esModuleInterop": true,
 		"module": "esnext",
@@ -26,6 +27,9 @@
 			],
 			"@/common/*": [
 				"src/common/*"
+			],
+			"@/store/*": [
+				"src/store/*"
 			],
 			"@/models/*": [
 				"src/models/*"
