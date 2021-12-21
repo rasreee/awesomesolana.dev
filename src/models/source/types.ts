@@ -1,5 +1,6 @@
 export const SOURCE_TYPES = [
 	'github-repo',
+	'github-org',
 	'article',
 	'whitepaper',
 	'awesome-list',
