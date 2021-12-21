@@ -48,7 +48,7 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = ({ onHitCl
 		onHitClick(hit)
 	}
 
-	const searchHitsData = useMemo(() => {
+	const searchData = useMemo(() => {
 		const data = hits.length > 0 ? { list: hits, type: 'hits' } : { list: recents, type: 'recents' }
 
 		return data as SearchHitsData
@@ -86,7 +86,7 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = ({ onHitCl
 	return (
 		<Modal {...props}>
 			<SearchBar isLoading={isLoading} {...input} />
-			<SearchDropdown data={searchHitsData} onHitClick={handleHitClick} />
+			{searchData.list.length > 0 && <SearchDropdown data={searchData} onHitClick={handleHitClick} />}
 		</Modal>
 	)
 }

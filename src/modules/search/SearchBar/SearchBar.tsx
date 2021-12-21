@@ -1,3 +1,4 @@
+import { useMountEffect } from '@react-hookz/web'
 import React, {
 	ChangeEventHandler,
 	Dispatch,
@@ -5,6 +6,7 @@ import React, {
 	InputHTMLAttributes,
 	Ref,
 	SetStateAction,
+	useRef,
 	useState
 } from 'react'
 
@@ -39,11 +41,15 @@ export const SearchBar = forwardRef((props: SearchBarProps, ref: SearchBarProps[
 		props.setValue(newValue)
 	}
 
+	const inputRef = useRef<HTMLInputElement | null>(null)
+
+	useMountEffect(() => inputRef.current?.focus())
+
 	return (
-		<S.Container>
+		<S.Container ref={ref}>
 			<S.Form role="search" noValidate>
 				<S.Label>{props.isLoading ? <Spinner /> : <SearchIcon height={iconSize} fill={iconColor} />}</S.Label>
-				<S.Input ref={ref} type="search" placeholder="Search" value={localQuery} onChange={onChange} />
+				<S.Input ref={inputRef} type="search" placeholder="Search" value={localQuery} onChange={onChange} />
 				<KbdSymbol keys={['Escape']} />
 			</S.Form>
 		</S.Container>
