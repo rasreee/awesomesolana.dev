@@ -2,16 +2,17 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React, { FC } from 'react'
 
+import { QueryOpts } from '@/common/utils'
 import { SourceType } from '@/models/source'
 
 import { getSourcesRoutePath } from './getSourcesRoutePath'
 import { SourcesFeedGrid } from './SourcesFeedGrid'
 
-export type SourcesSectionHeaderProps = {
+export type SourcesFeedSectionHeaderProps = {
 	sourceType: SourceType
 }
 
-const SourcesSectionHeader: FC<SourcesSectionHeaderProps> = ({ sourceType }) => {
+const SourcesFeedSectionHeaderProps: FC<SourcesFeedSectionHeaderProps> = ({ sourceType }) => {
 	const caption = `${sourceType.replace('-', ' ')}s`
 
 	return (
@@ -43,21 +44,18 @@ const SourcesSectionHeader: FC<SourcesSectionHeaderProps> = ({ sourceType }) => 
 	)
 }
 
-export type SourcesSectionFeedProps = {
+export type SourcesFeedSectionProps = {
 	sourceType: SourceType
+	queryOpts?: QueryOpts
 }
 
-export type SourcesSectionProps = {
-	sourceType: SourceType
-}
-
-export const SourcesSection: FC<SourcesSectionProps> = ({ sourceType }) => {
+export const SourcesFeedSection: FC<SourcesFeedSectionProps> = ({ sourceType, queryOpts = {} }) => {
 	return (
 		<div className={classNames('grid', 'space-y-2')}>
 			{/* Section header */}
-			<SourcesSectionHeader sourceType={sourceType} />
+			<SourcesFeedSectionHeaderProps sourceType={sourceType} />
 			{/* Section content below header */}
-			<SourcesFeedGrid sourceType={sourceType} opts={{ limit: 3 }} spaceYClasses={'space-y-2 md:space-y-0'} />
+			<SourcesFeedGrid sourceType={sourceType} queryOpts={queryOpts} spaceYClasses={'space-y-2 md:space-y-0'} />
 		</div>
 	)
 }

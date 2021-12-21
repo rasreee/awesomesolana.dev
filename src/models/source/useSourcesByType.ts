@@ -2,13 +2,11 @@ import { SupabaseClient } from '@supabase/supabase-js'
 import useSWR, { Fetcher } from 'swr'
 
 import { useSupabase } from '@/common/supabase/useSupabase'
-import { handleSupabaseResponse } from '@/common/utils/handleSupabaseResponse'
-import { SWRResponseWithLoading } from '@/common/utils/swr'
-import { FetcherOptions } from '@/common/utils/types'
+import { handleSupabaseResponse, QueryOpts, SWRResponseWithLoading } from '@/common/utils'
 
 import { Source, SourceType } from './types'
 
-const makeFetcher = (supabase: SupabaseClient, sourceType: SourceType | 'all', opts?: FetcherOptions) => {
+const makeFetcher = (supabase: SupabaseClient, sourceType: SourceType | 'all', opts?: QueryOpts) => {
 	const fetcher: Fetcher<Source[]> = async () => {
 		const matchOpts = sourceType === 'all' ? {} : { type: sourceType }
 		let request = supabase.from<Source>('sources').select('*').match(matchOpts)
@@ -27,7 +25,7 @@ const makeFetcher = (supabase: SupabaseClient, sourceType: SourceType | 'all', o
 
 export const useSourcesByType = (
 	sourceType?: SourceType | 'all',
-	opts?: FetcherOptions
+	opts?: QueryOpts | undefined
 ): SWRResponseWithLoading<Source[], Error> => {
 	const client = useSupabase()
 	const keyOpts = opts ? `&limit=${opts.limit}` : ''

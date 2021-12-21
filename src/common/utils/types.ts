@@ -17,5 +17,3 @@ export type Booleanish = boolean | 'true' | 'false'
 export type StringOrNumber = string | number
 
 export type ColoringProps = { bg: string; txt: string; _hoverBg: string; _activeBg: string; border: string }
-
-export type FetcherOptions = { limit: number }
