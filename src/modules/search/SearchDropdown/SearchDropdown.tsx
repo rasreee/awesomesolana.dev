@@ -16,16 +16,18 @@ export const SearchDropdown: React.FunctionComponent<SearchDropdownProps> = ({ o
 
 	return (
 		<S.Dropdown>
-			<S.HitsSection>
-				{data.type === 'recents' && <S.HitsSectionTitle>Recents</S.HitsSectionTitle>}
-				<S.HitList>
-					{data.list.map((hit) => (
-						<S.HitListItem key={hit.id}>
-							<S.HitItemButton onClick={handleHitClick(hit)}>{hit.title}</S.HitItemButton>
-						</S.HitListItem>
-					))}
-				</S.HitList>
-			</S.HitsSection>
+			{data.list.length > 0 && (
+				<S.HitsSection>
+					{data.type === 'recents' && <S.HitsSectionTitle>Recents</S.HitsSectionTitle>}
+					<S.HitList>
+						{data.list.map((hit) => (
+							<S.HitListItem key={hit.id}>
+								<S.HitItemButton onClick={handleHitClick(hit)}>{hit.title}</S.HitItemButton>
+							</S.HitListItem>
+						))}
+					</S.HitList>
+				</S.HitsSection>
+			)}
 		</S.Dropdown>
 	)
 }
