@@ -5,7 +5,7 @@ import { Padding } from '@/common/atoms'
 import { QueryOpts } from '@/common/utils'
 import { SOURCE_TYPES } from '@/models/source'
 
-import { SourcesFeedSection } from './SourcesFeedSection'
+import { SourcesFeedGrid } from './SourcesFeedGrid'
 
 export interface AllSourcesFeedProps {
 	limit?: number
@@ -22,7 +22,7 @@ export const AllSourcesFeed: React.FunctionComponent<AllSourcesFeedProps> = ({ l
 		<div className={classNames('flex flex-col', 'space-y-6 md:space-y-12', 'py-2 md:py-4', 'mx-auto')}>
 			{SOURCE_TYPES.map((sourceType) => (
 				<Padding key={sourceType} px={3}>
-					<SourcesFeedSection sourceType={sourceType} queryOpts={queryOpts} />
+					<SourcesFeedGrid queryOpts={queryOpts} />
 				</Padding>
 			))}
 		</div>
