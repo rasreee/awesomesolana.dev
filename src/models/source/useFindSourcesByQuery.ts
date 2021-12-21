@@ -1,6 +1,6 @@
 import { useSupabase } from '@/common/supabase/useSupabase'
 
-import { findAllSources } from './fetchers'
+import { findAllSources } from './source.api'
 import { Source } from './types'
 
 export const useFindSourcesByQuery = () => {

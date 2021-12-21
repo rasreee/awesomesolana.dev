@@ -1,15 +1,4 @@
-export const categoriesConst = [
-	'github-repo',
-	'github-org',
-	'article',
-	'whitepaper',
-	'awesome-list',
-	'video',
-	'course',
-	'devtool'
-] as const
-
-export type Category = typeof categoriesConst[number]
+import { Category } from '../tag/types'
 
 export interface Source {
 	id: string
@@ -21,3 +10,5 @@ export interface Source {
 	url: string
 	category: Category
 }
+
+export type SourceMatchOpts = Partial<Source> | undefined | null

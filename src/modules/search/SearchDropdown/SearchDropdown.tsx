@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { formatSourceTypeLabel } from '@/models/source'
-import { categoriesConst, Category, Source } from '@/models/source/types'
+import { Source } from '@/models/source/types'
+import { formatSourceTypeLabel } from '@/models/source/utils'
+import { categoriesConst, Category } from '@/models/tag/types'
 
 import { SearchHitsData } from '../types'
 import * as S from './SearchDropdown.styles'

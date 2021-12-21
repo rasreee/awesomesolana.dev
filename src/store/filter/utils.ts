@@ -1,4 +1,4 @@
-import { Filter, FilterType } from './types'
+import { FilterArgs, FilterType } from './types'
 
 export const getFilteredPath = (filters: Record<FilterType, string[]>) => {
 	let pathname = `/sources`
@@ -14,7 +14,8 @@ export const getFilteredPath = (filters: Record<FilterType, string[]>) => {
 
 export const toFilter =
 	(type: FilterType) =>
-	(id: string): Filter => ({
-		id,
-		type
-	})
+	(id: string): FilterArgs =>
+		({
+			id,
+			type
+		} as FilterArgs)

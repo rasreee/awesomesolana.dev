@@ -1,13 +1,14 @@
 import classNames from 'classnames'
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 import { QueryOpts } from '@/common/utils'
-import { Source, useFindSources } from '@/models/source'
+import { SourceMatchOpts } from '@/models/source/types'
+import { useFindSources } from '@/models/source/useFindSources'
 
 import { SourceCard } from '../SourceCard'
 
 export interface SourcesFeedGridProps {
-	matchOpts?: Partial<Source> | undefined | null
+	matchOpts?: SourceMatchOpts
 	queryOpts?: QueryOpts
 	spaceXClasses?: string
 	spaceYClasses?: string

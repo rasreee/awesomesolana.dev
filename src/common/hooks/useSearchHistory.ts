@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 
-import { Source } from '@/models/source'
+import { Source } from '@/models/source/types'
 
 export const useSearchHistory = () => {
 	const [initialQuery, setInitialQuery] = useState<string>('')

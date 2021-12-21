@@ -1,11 +1,11 @@
 import { useUpdateEffect } from '@react-hookz/web'
 import { useRouter } from 'next/router'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import { useAutoComplete, useDebouncedAndAutofocusedInput, useSearchHistory } from '@/common/hooks'
 import { Modal, useModal } from '@/components/Modal'
-import { useFindSourcesByQuery } from '@/models/source'
 import { Source } from '@/models/source/types'
+import { useFindSourcesByQuery } from '@/models/source/useFindSourcesByQuery'
 
 import { SearchBar } from './SearchBar'
 import { SearchDropdown } from './SearchDropdown'
@@ -64,19 +64,18 @@ export const SearchModal: React.FunctionComponent<SearchModalProps> = (props) =>
 
 	useAutoComplete(searchData.list, onItemClick)
 
-	const renderDropdownItem = useCallback(
-		(hit: Source) => {
-			return <S.ItemButton onClick={onItemClick(hit)}>{hit.title}</S.ItemButton>
-		},
-		[onItemClick]
-	)
-
 	const shouldShowDropdown = searchData.list.length > 0 && input.value.length > 0
 
 	return (
 		<Modal {...props}>
 			<SearchBar isLoading={isLoading} {...input} onSubmitQuery={submitQuery} />
-			<SearchDropdown show={shouldShowDropdown} data={searchData} renderItem={renderDropdownItem} />
+			<SearchDropdown
+				show={shouldShowDropdown}
+				data={searchData}
+				renderItem={(hit: Source) => {
+					return <S.ItemButton onClick={onItemClick(hit)}>{hit.title}</S.ItemButton>
+				}}
+			/>
 		</Modal>
 	)
 }

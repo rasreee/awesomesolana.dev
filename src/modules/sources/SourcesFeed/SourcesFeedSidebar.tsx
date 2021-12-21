@@ -1,19 +1,22 @@
 import { observer } from 'mobx-react-lite'
 
 import { Sidebar } from '@/components/Sidebar'
-import { categoriesConst, useSourceCounts } from '@/models/source'
+import { useSourceCounts } from '@/models/source/useSourceCounts'
+import { categoriesConst } from '@/models/tag/types'
 import { SearchFeatureSm } from '@/modules/search'
-import { FilterType } from '@/store/filter'
+import { FilterArgs, FilterType } from '@/store/filter'
 import { useStore } from '@/store/store'
 
 export const SourcesFeedSidebar = observer(function _SourcesFeedSidebar() {
 	const { filterStore } = useStore()
 
-	const onItemClick = (type: FilterType, id: string) => () => {
-		if (Object.values(filterStore.all).some((filters) => filters.includes(id))) {
-			filterStore.remove(type, id)
+	const onItemClick = (filterArgs: FilterArgs) => () => {
+		const ids = filterStore.getIds(filterArgs.type)
+
+		if (ids.includes(filterArgs.id)) {
+			filterStore.remove(filterArgs)
 		} else {
-			filterStore.add(type, id)
+			filterStore.add(filterArgs)
 		}
 	}
 

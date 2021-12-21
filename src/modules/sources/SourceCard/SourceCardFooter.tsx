@@ -4,7 +4,7 @@ import React, { FC } from 'react'
 import { Tag } from '@/components/Tag'
 import { EyeIcon } from '@/icons/EyeIcon'
 import { HeartIconSolid } from '@/icons/HeartIcon'
-import { Category } from '@/models/source'
+import { Category } from '@/models/tag/types'
 
 import { SourceStatButton } from './SourceStatButton'
 

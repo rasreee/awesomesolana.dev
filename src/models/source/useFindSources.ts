@@ -4,11 +4,15 @@ import useSWR, { Fetcher } from 'swr'
 import { useSupabase } from '@/common/supabase/useSupabase'
 import { handleSupabaseResponse, QueryOpts, SWRResponseWithLoading } from '@/common/utils'
 
-import { Source } from './types'
+import { Source, SourceMatchOpts } from './types'
 
-const makeFetcher = (supabase: SupabaseClient, matchOpts: Partial<Source>, opts?: QueryOpts) => {
+const makeFetcher = (supabase: SupabaseClient, matchOpts: SourceMatchOpts, opts?: QueryOpts) => {
 	const fetcher: Fetcher<Source[]> = async () => {
-		let request = supabase.from<Source>('sources').select('*').match(matchOpts)
+		let request = supabase.from<Source>('sources').select('*')
+
+		if (matchOpts) {
+			request = request.match(matchOpts)
+		}
 
 		if (opts?.limit) {
 			request = request.limit(opts.limit)
@@ -23,7 +27,7 @@ const makeFetcher = (supabase: SupabaseClient, matchOpts: Partial<Source>, opts?
 }
 
 export const useFindSources = (
-	_matchOpts: Partial<Source> | undefined | null,
+	_matchOpts?: SourceMatchOpts,
 	opts?: QueryOpts | undefined
 ): SWRResponseWithLoading<Source[], Error> => {
 	const client = useSupabase()

@@ -6,8 +6,7 @@ import React from 'react'
 import { useIsMobileDevice } from '@/common/hooks'
 import { formatToListOfPlurals } from '@/common/utils'
 import { Page } from '@/components/Page'
-import { useTotalSourcesCount } from '@/models/source'
-import { FilterType } from '@/store/filter'
+import { useTotalSourcesCount } from '@/models/source/useTotalSourcesCount'
 import { useStore } from '@/store/store'
 
 import { SourcesFeedGrid } from './SourcesFeedGrid'
@@ -25,9 +24,7 @@ export const SourcesFeed: React.FC<SourcesFeedProps> = observer(() => {
 	const totalCount = useTotalSourcesCount()
 
 	const caption =
-		Object.values(filterStore.all).flat().length > 0
-			? `All ${formatToListOfPlurals(Object.values(filterStore.all).flat())}`
-			: `All sources (${totalCount})`
+		filterStore.all.length > 0 ? `All ${formatToListOfPlurals(filterStore.all)}` : `All sources (${totalCount})`
 
 	return (
 		<Page title={caption} description={caption}>
@@ -53,8 +50,8 @@ export const SourcesFeed: React.FC<SourcesFeedProps> = observer(() => {
 						</div>
 					)}
 					<div className="mobile:py-2">
-						{filterStore.all.categories.length ? (
-							filterStore.all.categories.map((id) => (
+						{filterStore.categories.length ? (
+							filterStore.categories.map((id) => (
 								<SourcesFeedGrid
 									key={id}
 									matchOpts={{ category: id }}

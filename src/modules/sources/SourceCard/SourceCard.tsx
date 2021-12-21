@@ -4,9 +4,10 @@ import { useRouter } from 'next/router'
 import { useMemo, useState } from 'react'
 
 import { clampText } from '@/common/utils'
-import { Category, Source } from '@/models/source/types'
+import { Source } from '@/models/source/types'
 import { useUpdateSourceData } from '@/models/source/useUpdateSourceData'
-import { getPageLogger } from '@/modules/core/amplitude/amplitude'
+import { Category } from '@/models/tag/types'
+import { getPageLogger } from '@/modules/core/amplitude'
 import { FilterType } from '@/store/filter'
 import { useStore } from '@/store/store'
 
@@ -40,7 +41,7 @@ export const SourceCard = observer((data: SourceCardProps) => {
 	const onCategoryClick = (category: Category) => {
 		return () => {
 			filterStore.resetStore()
-			filterStore.setFilters(FilterType.Categories, [category])
+			filterStore.setFilters({ type: FilterType.Categories, ids: [category] })
 		}
 	}
 

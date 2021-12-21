@@ -3,7 +3,8 @@ import useSWR from 'swr'
 
 import { useSupabase } from '@/common/supabase/useSupabase'
 
-import { categoriesConst, Category, Source } from './types'
+import { categoriesConst, Category } from '../tag/types'
+import { Source } from './types'
 
 export type SourceCounts = Record<Category, number>
 
