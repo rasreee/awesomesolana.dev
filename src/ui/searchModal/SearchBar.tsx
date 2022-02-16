@@ -1,9 +1,7 @@
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
 import { ChangeEventHandler } from 'react';
 
 import { useInputFocus } from '@/hooks/useInputFocus';
-import { below } from '@/lib/breakpoints';
+import clsxm from '@/lib/clsxm';
 import Spinner from '@/ui/progress/Spinner';
 
 import SearchIcon from './SearchIcon';
@@ -18,70 +16,39 @@ const SearchBar = () => {
     setQuery(event.currentTarget.value);
 
   return (
-    <SContainer isFocused={isFocused}>
+    <div
+      className={clsxm(
+        isFocused && 'text-white',
+        'flex items-center gap-2 px-5 py-3',
+        'border-b border-base-200 dark:border-base-500',
+      )}
+    >
       {isRequesting ? (
         <Spinner />
       ) : (
-        <SLabel htmlFor="search">
+        <label
+          htmlFor="search"
+          className={clsxm('flex h-6 w-6 items-center justify-center')}
+        >
           <SearchIcon />
-        </SLabel>
+        </label>
       )}
-      <SInput
+      <input
         type="search"
         name="search"
         placeholder="Search"
+        className={clsxm(
+          'block w-full border-none leading-none',
+          'bg-transparent',
+          'text-base-600 dark:text-base-100 dark:placeholder:text-gray-400',
+          'text-base md:text-lg',
+        )}
         value={query}
         onChange={handleChange}
         {...bindInput}
       />
-    </SContainer>
+    </div>
   );
 };
-
-const SContainer = styled.div<{ isFocused: boolean }>`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1.125rem 0.75rem;
-
-  ${({ theme }) => css`
-    border-bottom: 1px solid ${theme.colors.gray[200]};
-    svg {
-      color: ${theme.colors.gray[400]};
-    }
-  `}
-
-  ${({ theme, isFocused }) =>
-    isFocused &&
-    css`
-      svg {
-        color: ${theme.colors.blue[600]};
-      }
-    `}
-`;
-
-const SLabel = styled.label`
-  height: 1.5rem;
-  width: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SInput = styled.input`
-  display: block;
-  width: 100%;
-  border: none !important;
-  line-height: 1;
-
-  ${({ theme }) => css`
-    color: ${theme.colors.gray[800]};
-    font-size: ${theme.fontSizes.lg};
-
-    ${below('tablet')} {
-      font-size: ${theme.fontSizes.base};
-    }
-  `}
-`;
 
 export default SearchBar;
