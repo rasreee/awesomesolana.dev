@@ -1,15 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
-function withOpacityValue(variable) {
-  return ({ opacityValue }) => {
-    if (opacityValue === undefined) {
-      return `rgb(var(${variable}))`;
-    }
-    return `rgb(var(${variable}) / ${opacityValue})`;
-  };
-}
-
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -21,18 +12,22 @@ module.exports = {
       colors: {
         primary: {
           // Customize it on globals.css :root
-          50: withOpacityValue('--tw-color-primary-50'),
-          100: withOpacityValue('--tw-color-primary-100'),
-          200: withOpacityValue('--tw-color-primary-200'),
-          300: withOpacityValue('--tw-color-primary-300'),
-          400: withOpacityValue('--tw-color-primary-400'),
-          500: withOpacityValue('--tw-color-primary-500'),
-          600: withOpacityValue('--tw-color-primary-600'),
-          700: withOpacityValue('--tw-color-primary-700'),
-          800: withOpacityValue('--tw-color-primary-800'),
-          900: withOpacityValue('--tw-color-primary-900'),
+          50: "#F0FFF5",
+          100: "#F0FFF5",
+          200: "#CCFCE3",
+          300: "#8CFAC7",
+          400: "#2CE59B",
+          500: '#00D68F',
+          600: '#00B887',
+          700: "#00997A",
+          800: "#007D6C",
+          900: "#004A45",
         },
-        dark: '#222222',
+        dark: '#192038',
+        base: {
+          800: "#222B45",
+          900:'#192038'
+        }
       },
       keyframes: {
         flicker: {

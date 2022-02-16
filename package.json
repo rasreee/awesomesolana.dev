@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "analyze:unused": "next-unused",
+    "analyze": "cross-env ANALYZE=true yarn run build",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -30,6 +32,7 @@
   "devDependencies": {
     "@commitlint/cli": "^13.2.1",
     "@commitlint/config-conventional": "^13.2.0",
+    "@next/bundle-analyzer": "^12.0.10",
     "@svgr/webpack": "^6.2.1",
     "@tailwindcss/forms": "^0.4.0",
     "@testing-library/jest-dom": "^5.16.2",
@@ -40,6 +43,7 @@
     "@typescript-eslint/parser": "^4.33.0",
     "autoprefixer": "^10.4.2",
     "babel-jest": "^27.5.1",
+    "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.4",
     "eslint-config-prettier": "^8.3.0",
@@ -50,6 +54,7 @@
     "jest": "^27.5.1",
     "lint-staged": "^11.2.6",
     "next-sitemap": "^1.9.12",
+    "next-unused": "^0.0.6",
     "postcss": "^8.4.6",
     "prettier": "^2.5.1",
     "prettier-plugin-tailwindcss": "^0.1.7",
