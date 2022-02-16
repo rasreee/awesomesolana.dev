@@ -3,8 +3,7 @@ import '@/styles/globals.css';
 import '@/styles/colors.css';
 
 import { AppProps } from 'next/app';
-
-import ColorModeProvider from '@/ui/colorMode/ColorModeProvider';
+import { ThemeProvider } from 'next-themes';
 
 /**
  * !STARTERCONF info
@@ -13,9 +12,9 @@ import ColorModeProvider from '@/ui/colorMode/ColorModeProvider';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ColorModeProvider initialMode="dark">
+    <ThemeProvider attribute="class">
       <Component {...pageProps} />
-    </ColorModeProvider>
+    </ThemeProvider>
   );
 }
 

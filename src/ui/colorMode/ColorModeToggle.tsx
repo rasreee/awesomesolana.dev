@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Button from '@/ui/buttons/Button';
 import { SVGIconProps } from '@/ui/icon/types';
 
 import { useColorMode } from './useColorMode';
@@ -39,20 +38,24 @@ function SunOutlineIcon(props: SVGIconProps) {
 
 export default function ColorModeToggle() {
   const { mode, toggle } = useColorMode();
+  const [mounted, setMounted] = React.useState(false);
+
+  // After mounting, we have access to the theme
+  React.useEffect(() => setMounted(true), []);
 
   const Icon = React.useMemo(
     () => (mode === 'dark' ? MoonSolidIcon : SunOutlineIcon),
     [mode],
   );
 
-  const variant = React.useMemo(
-    () => (mode === 'dark' ? 'light' : 'dark'),
-    [mode],
-  );
-
   return (
-    <Button variant={variant} onClick={toggle}>
-      <Icon />
-    </Button>
+    <button
+      aria-label="Toggle Dark Mode"
+      type="button"
+      className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-200 ring-gray-300  transition-all hover:ring-2  dark:bg-gray-600"
+      onClick={toggle}
+    >
+      {mounted && <Icon />}
+    </button>
   );
 }

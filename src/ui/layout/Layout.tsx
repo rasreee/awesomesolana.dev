@@ -11,11 +11,11 @@ export interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <>
+    <div className="bg-light dark:bg-dark">
       <Seo />
       <Header />
       <main className="min-h-[calc(100vh-124px)]">{children}</main>
       <Footer />
-    </>
+    </div>
   );
 }

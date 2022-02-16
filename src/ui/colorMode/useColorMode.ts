@@ -1,11 +1,17 @@
+import { useTheme } from 'next-themes';
 import React from 'react';
 
-import invariant from '@/lib/invariant';
-
-import { ColorModeContext, IColorModeContext } from './ColorModeContext';
+import { IColorModeContext } from './ColorModeContext';
+import { ColorMode } from './types';
 
 export function useColorMode(): IColorModeContext {
-  const context = React.useContext(ColorModeContext);
-  invariant(context);
-  return context;
+  const { resolvedTheme, setTheme } = useTheme();
+
+  const toggle = React.useCallback(() => {
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
+  }, [resolvedTheme, setTheme]);
+
+  const mode = React.useMemo(() => resolvedTheme as ColorMode, [resolvedTheme]);
+
+  return { mode, toggle };
 }

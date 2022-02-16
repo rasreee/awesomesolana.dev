@@ -4,6 +4,7 @@ const { fontFamily } = require('tailwindcss/defaultTheme');
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -47,5 +48,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  variants: {
+    typography: ['dark'],
+  },
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };
