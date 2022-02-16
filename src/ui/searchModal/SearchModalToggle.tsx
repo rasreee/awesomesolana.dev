@@ -13,7 +13,7 @@ const SearchModalToggle = () => {
   return (
     <Button onClick={searchModal.onRequestOpen}>
       <span>Quick search...</span>
-      <Kbd>
+      <Kbd className="bg-base-200 dark:bg-base-800">
         <span>{KbdSymbols.CMD}</span>
         <span>K</span>
       </Kbd>
@@ -22,6 +22,7 @@ const SearchModalToggle = () => {
 };
 
 const Button = styled('button')(
+  baseButtonStyles,
   ({ theme }) =>
     css`
       ${pseudo('_hover')} {
@@ -31,7 +32,6 @@ const Button = styled('button')(
         background: ${theme.colors.gray[200]};
       }
     `,
-  baseButtonStyles,
   ({ theme }) => css`
     background: none;
     border: none;
@@ -54,7 +54,6 @@ const Kbd = styled.kbd`
   gap: 0.125rem;
   ${({ theme }) =>
     css`
-      border: 1px solid ${theme.colors.gray[200]};
       border-radius: ${theme.radii.base};
       font-size: ${theme.fontSizes.sm};
       font-weight: ${theme.fontWeights.medium};
