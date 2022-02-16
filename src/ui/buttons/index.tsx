@@ -5,7 +5,7 @@ import { below } from '@/lib/breakpoints';
 import { pseudo } from '@/lib/pseudo';
 import { StyledProps } from '@/lib/styling';
 
-const sharedStyles = ({ theme }: StyledProps) => css`
+export const baseButtonStyles = ({ theme }: StyledProps) => css`
   padding: 0.75rem;
   border-radius: ${theme.radii.base};
   background: none;
@@ -24,7 +24,7 @@ const sharedStyles = ({ theme }: StyledProps) => css`
 export const PlainButton = styled.button`
   background: none;
   border: none;
-  ${sharedStyles};
+  ${baseButtonStyles};
   ${({ theme }) =>
     css`
       ${pseudo('_hover')} {
@@ -38,7 +38,7 @@ export const PlainButton = styled.button`
 
 export const PrimaryButton = styled.button`
   border: none;
-  ${sharedStyles};
+  ${baseButtonStyles};
   ${({ theme }) =>
     css`
       background: ${theme.colors.blue[600]};
