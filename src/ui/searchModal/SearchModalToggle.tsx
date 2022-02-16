@@ -1,8 +1,4 @@
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
-
-import { pseudo } from '@/lib/pseudo';
-import { baseButtonStyles } from '@/ui/buttons';
+import clsxm from '@/lib/clsxm';
 
 import { KbdSymbols } from './kbdSymbols';
 import { useSearchModal } from './SearchModalContext';
@@ -11,54 +7,28 @@ const SearchModalToggle = () => {
   const searchModal = useSearchModal();
 
   return (
-    <Button onClick={searchModal.onRequestOpen}>
+    <button
+      className={clsxm(
+        'text-medium',
+        'flex min-w-[12rem] items-center justify-between gap-5 rounded-md px-7 py-1.5',
+        'bg-base-200 text-gray-500 dark:bg-base-800 dark:text-gray-300',
+        'text-sm',
+      )}
+      onClick={searchModal.onRequestOpen}
+    >
       <span>Quick search...</span>
-      <Kbd className="bg-base-200 dark:bg-base-800">
+      <kbd
+        className={clsxm(
+          'inline-flex items-center gap-0.5 px-2 py-1 font-serif',
+          'rounded border border-base-100 text-gray-500 dark:border-base-700 dark:text-gray-300',
+          'bg-transparent',
+        )}
+      >
         <span>{KbdSymbols.CMD}</span>
         <span>K</span>
-      </Kbd>
-    </Button>
+      </kbd>
+    </button>
   );
 };
-
-const Button = styled('button')(
-  baseButtonStyles,
-  ({ theme }) =>
-    css`
-      ${pseudo('_hover')} {
-        background: ${theme.colors.gray[100]};
-      }
-      ${pseudo('_active')} {
-        background: ${theme.colors.gray[200]};
-      }
-    `,
-  ({ theme }) => css`
-    background: none;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.25rem;
-    min-width: 20vw;
-    padding: 0.75rem 1.25rem;
-    border-radius: ${theme.radii.md};
-    border: 1px solid ${theme.colors.gray[200]};
-  `,
-);
-
-const Kbd = styled.kbd`
-  font-family: sans-serif;
-  padding: 0.25rem 0.375rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.125rem;
-  ${({ theme }) =>
-    css`
-      border-radius: ${theme.radii.base};
-      font-size: ${theme.fontSizes.sm};
-      font-weight: ${theme.fontWeights.medium};
-      color: ${theme.colors.gray[400]};
-    `}
-`;
 
 export default SearchModalToggle;
