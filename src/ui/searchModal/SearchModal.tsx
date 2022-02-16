@@ -10,6 +10,7 @@ const SearchModal = () => {
   return (
     <Modal {...{ isOpen, onRequestClose }}>
       <SearchBar />
+      <div className="h-[1px] bg-base-200 dark:bg-base-200 dark:opacity-10" />
       <SearchResults />
     </Modal>
   );

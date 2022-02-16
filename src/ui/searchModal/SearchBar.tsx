@@ -20,7 +20,6 @@ const SearchBar = () => {
       className={clsxm(
         isFocused && 'text-white',
         'flex items-center gap-2 px-5 py-3',
-        'border-b border-base-200 dark:border-base-500',
       )}
     >
       {isRequesting ? (
