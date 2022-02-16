@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { ColorMode } from './ColorMode';
 import { ColorModeContext } from './ColorModeContext';
+import { ColorMode } from './types';
 
 export interface ColorModeProviderProps {
   children: React.ReactNode;

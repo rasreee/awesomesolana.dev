@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ColorMode } from './ColorMode';
+import { ColorMode } from './types';
 
 export interface IColorModeContext {
   mode: ColorMode;
