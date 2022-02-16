@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import { openGraph } from '@/lib/helper';
 
-const defaultMeta = {
+const defaultSeoProps = {
   title: 'Awesome Solana Dev',
   siteName: 'Awesome Solana Dev',
   description:
@@ -14,15 +14,22 @@ const defaultMeta = {
   image: '',
 };
 
-export interface SeoProps extends Partial<typeof defaultMeta> {
-  date?: string;
-  templateTitle?: string;
-}
+export type SeoProps = Partial<{
+  date: string;
+  templateTitle: string;
+  title: string;
+  siteName: string;
+  description: string;
+  url: string;
+  type: string;
+  robots: string;
+  image: string;
+}>;
 
 export default function Seo(props: SeoProps) {
   const router = useRouter();
   const meta = {
-    ...defaultMeta,
+    ...defaultSeoProps,
     ...props,
   };
   meta['title'] = props.templateTitle
