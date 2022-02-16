@@ -3,7 +3,7 @@ import clsxm from '@/lib/clsxm';
 import { KbdSymbols } from './kbdSymbols';
 import { useSearchModal } from './SearchModalContext';
 
-const SearchModalToggle = () => {
+const SearchModalToggle = ({ className }: { className?: string }) => {
   const searchModal = useSearchModal();
 
   return (
@@ -11,9 +11,10 @@ const SearchModalToggle = () => {
       className={clsxm(
         'font-medium',
         'px-4 py-2',
-        'flex flex-1 items-center justify-between gap-5 rounded-md',
+        'flex items-center justify-between gap-5 rounded-md',
         'bg-base-50 text-gray-500 dark:bg-base-800 dark:text-gray-300',
         'text-sm',
+        className,
       )}
       onClick={searchModal.onRequestOpen}
     >

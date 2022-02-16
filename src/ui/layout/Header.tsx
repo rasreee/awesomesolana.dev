@@ -10,7 +10,7 @@ export default function Header() {
       <UnstyledLink href="/" className="font-bold hover:text-gray-600">
         Awesome Solana Dev
       </UnstyledLink>
-      <SearchModalToggle />
+      <SearchModalToggle className="max-w-[40%] flex-1" />
       <Navigation />
       <ColorModeToggle />
     </header>

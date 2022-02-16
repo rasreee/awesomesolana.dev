@@ -1,4 +1,5 @@
 import { ChangeEventHandler } from 'react';
+import React from 'react';
 
 import clsxm from '@/lib/clsxm';
 import Spinner from '@/ui/progress/Spinner';
@@ -7,6 +8,12 @@ import SearchIcon from './SearchIcon';
 import { useSearchModal } from './SearchModalContext';
 
 const SearchBar = () => {
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
+
+  React.useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   const { query, setQuery, isRequesting } = useSearchModal();
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) =>
@@ -36,9 +43,11 @@ const SearchBar = () => {
           'bg-transparent',
           'text-base-600 dark:text-base-100 dark:placeholder:text-gray-400',
           'text-base md:text-lg',
+          'focus:border-none focus:outline-none',
         )}
         value={query}
         onChange={handleChange}
+        ref={inputRef}
       />
     </div>
   );

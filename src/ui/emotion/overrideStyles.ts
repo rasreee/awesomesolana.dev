@@ -17,7 +17,7 @@ export const overrideInputStyles = css`
     outline: unset !important;
   }
 
-  input[type='email']:focus {
+  input:focus {
     outline: unset !important;
     outline-offset: unset !important;
     box-shadow: unset !important;

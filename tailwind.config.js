@@ -5,6 +5,7 @@ const { fontFamily } = require('tailwindcss/defaultTheme');
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: 'class',
+  important: true,
   theme: {
     extend: {
       fontFamily: {
@@ -58,6 +59,9 @@ module.exports = {
   },
   variants: {
     typography: ['dark'],
+    outline: ['focus', 'active', 'focus-within', 'focus-visible'],
+    borderWidth: ['focus', 'active', 'focus-within', 'focus-visible'],
+    borderColor: ['focus', 'active', 'focus-within', 'focus-visible'],
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };
