@@ -6,7 +6,7 @@ import Footer from './Footer';
 import Header from './Header';
 
 export interface LayoutProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   seoProps?: SeoProps;
 }
 

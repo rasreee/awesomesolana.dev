@@ -12,6 +12,7 @@
     "react/require-default-props": "off",
     "react/display-name": "off",
     "react/di": "off",
+    "react-hooks/exhaustive-deps": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
