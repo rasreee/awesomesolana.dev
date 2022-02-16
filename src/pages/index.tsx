@@ -7,7 +7,6 @@ export default function HomePage() {
   return (
     <Layout>
       <Seo />
-      <main></main>
     </Layout>
   );
 }

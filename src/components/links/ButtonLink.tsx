@@ -1,10 +1,9 @@
 import * as React from 'react';
 
-import clsxm from '@/lib/clsxm';
-
 import UnstyledLink, {
   UnstyledLinkProps,
 } from '@/components/links/UnstyledLink';
+import clsxm from '@/lib/clsxm';
 
 enum ButtonVariant {
   'primary',
@@ -22,7 +21,7 @@ type ButtonLinkProps = {
 const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
   (
     { children, className, variant = 'primary', isDarkBg = false, ...rest },
-    ref
+    ref,
   ) => {
     return (
       <UnstyledLink
@@ -70,13 +69,13 @@ const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
           ],
           //#endregion  //*======== Variants ===========
           'disabled:cursor-not-allowed',
-          className
+          className,
         )}
       >
         {children}
       </UnstyledLink>
     );
-  }
+  },
 );
 
 export default ButtonLink;

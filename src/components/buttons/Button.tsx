@@ -28,14 +28,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       isDarkBg = false,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const disabled = isLoading || buttonDisabled;
 
     return (
       <button
         ref={ref}
-        type='button'
+        type="button"
         disabled={disabled}
         className={clsxm(
           'inline-flex items-center rounded px-4 py-2 font-semibold',
@@ -81,7 +81,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           'disabled:cursor-not-allowed',
           isLoading &&
             'relative text-transparent transition-none hover:text-transparent disabled:cursor-wait',
-          className
+          className,
         )}
         {...rest}
       >
@@ -93,16 +93,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 'text-white': ['primary', 'dark'].includes(variant),
                 'text-black': ['light'].includes(variant),
                 'text-primary-500': ['outline', 'ghost'].includes(variant),
-              }
+              },
             )}
           >
-            <ImSpinner2 className='animate-spin' />
+            <ImSpinner2 className="animate-spin" />
           </div>
         )}
         {children}
       </button>
     );
-  }
+  },
 );
 
 export default Button;
