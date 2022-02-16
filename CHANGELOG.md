@@ -186,7 +186,7 @@ This changelog is manually generated and not accurate with the package.json, onl
 
     simplified to
 
-    import Nav from '@/components/Nav';
+    import Nav from '@/ui/Nav';
     ```
 
 - #### Seo Component
@@ -230,7 +230,7 @@ Snippets such as React import, useState, useEffect, React Component. [View more]
     | ![image](https://user-images.githubusercontent.com/55318172/137617070-806a0509-84bd-4cae-a900-2ab17e418d8d.png) | ![image](https://user-images.githubusercontent.com/55318172/137617090-c24f684a-bfe5-41b6-8ba9-fa99bae5cadf.png) |
     | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 
-    Open Graph is generated using [og.thcl.dev](https://og.thcl.dev), but please fork and self-host if your website is going to have a lot of traffic.
+    Open Graph is generated using [awesomesolana.dev](https://awesomesolana.dev), but please fork and self-host if your website is going to have a lot of traffic.
 
     Check out the [repository](https://github.com/theodorusclarence/og) to see the API parameters.
 
@@ -253,7 +253,7 @@ Snippets: `np`
 
 ```tsx
 import * as React from 'react';
-import Seo from '@/components/Seo';
+import Seo from '@/ui/Seo';
 export default function TestPage() {
   return (
     <>

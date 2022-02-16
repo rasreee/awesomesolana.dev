@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import Layout from '@/components/layout/Layout';
-import Seo from '@/components/Seo';
+import Layout from '@/ui/layout/Layout';
+import Seo from '@/ui/Seo';
 
 export default function HomePage() {
   return (
