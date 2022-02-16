@@ -1,7 +1,8 @@
-import React, { FC, ReactNode, useRef } from 'react';
+import { FC, ReactNode, useRef } from 'react';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { EventKeys, useKeyPress } from '@/hooks/useKeyPress';
+import clsxm from '@/lib/clsxm';
 
 import * as S from './styles';
 
@@ -31,7 +32,19 @@ export const Modal: FC<ModalProps> = ({ isOpen, onRequestClose, children }) => {
 
   return (
     <S.Backdrop>
-      <S.Container ref={ref}>{children}</S.Container>
+      <div
+        className={clsxm(
+          'm-auto min-h-0 w-full max-w-[90%] sm:max-w-[46rem]',
+          'flex flex-col',
+          'rounded-lg',
+          'shadow-md',
+          'bg-white dark:bg-base-700',
+          'overflow-hidden',
+        )}
+        ref={ref}
+      >
+        {children}
+      </div>
     </S.Backdrop>
   );
 };
