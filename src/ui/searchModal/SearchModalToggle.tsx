@@ -9,7 +9,7 @@ const SearchModalToggle = () => {
   return (
     <button
       className={clsxm(
-        'text-medium',
+        'font-medium',
         'px-4 py-2',
         'flex flex-1 items-center justify-between gap-5 rounded-md',
         'bg-base-50 text-gray-500 dark:bg-base-800 dark:text-gray-300',

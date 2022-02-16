@@ -1,11 +1,9 @@
 import styled from '@emotion/styled';
 
 const EmptySearchResults = () => (
-  <Container>
-    <span className="text-semibold text-lg text-gray-800 dark:text-base-200">
-      No results found
-    </span>
-    <span className="text-gray-800 dark:text-base-200 dark:opacity-70">
+  <Container className="text-gray-700 dark:text-base-200">
+    <span className="text-lg font-medium">No results found</span>
+    <span className="opacity-70">
       We can’t find anything with that term at the moment, try searching
       something else.
     </span>
