@@ -118,4 +118,8 @@
   .bg-surface {
     @apply bg-base-50 dark:bg-base-800;
   }
+
+  .bg-surface-1 {
+    @apply bg-base-100 dark:bg-base-600 dark:opacity-70;
+  }
 }

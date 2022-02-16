@@ -1,7 +1,7 @@
 import classed from '@/lib/classed';
 import clsxm from '@/lib/clsxm';
+import { Divider } from '@/ui/divider';
 
-import EmptySearchResults from './EmptySearchResults';
 import { useSearchModal } from './SearchModalContext';
 import { SearchResultData } from './types';
 
@@ -17,6 +17,24 @@ const Button = classed(
   'hover:bg-gray-50 dark:rounded dark:hover:bg-transparent dark:border dark:border-transparent dark:hover:border-base-500 dark:active:bg-base-600',
 );
 
+function NoSearchResults() {
+  return (
+    <div
+      className={clsxm(
+        'text-left',
+        'text-gray-700 dark:text-base-200',
+        'flex flex-col gap-2',
+      )}
+    >
+      <h4 className="text-lg font-medium">No results found</h4>
+      <span className="opacity-70">
+        We can’t find anything with that term at the moment, try searching
+        something else.
+      </span>
+    </div>
+  );
+}
+
 const SearchResults = () => {
   const { hits, onSelect, isRequesting } = useSearchModal();
 
@@ -27,8 +45,8 @@ const SearchResults = () => {
 
   if (hits.length === 0)
     return (
-      <Container className="py-6">
-        <EmptySearchResults />
+      <Container className="py-6 md:py-10">
+        <NoSearchResults />
       </Container>
     );
 
@@ -38,10 +56,9 @@ const SearchResults = () => {
         {hits.map((searchResult: SearchResultData, index) => (
           <li key={searchResult.id} className={clsxm('list-none')}>
             {index > 0 && (
-              <div
+              <Divider
                 className={clsxm(
                   'bg-base-200 dark:bg-base-600 dark:opacity-40',
-                  'h-[1px]',
                 )}
               />
             )}

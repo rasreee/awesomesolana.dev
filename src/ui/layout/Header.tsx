@@ -1,18 +1,16 @@
 import ColorModeToggle from '@/ui/colorMode/ColorModeToggle';
-import UnstyledLink from '@/ui/links/UnstyledLink';
 import SearchModalToggle from '@/ui/searchModal/SearchModalToggle';
 
-import Navigation from './Navigation';
+import LogoLink from './LogoLink';
 
 export default function Header() {
   return (
-    <header className="layout flex h-[4.5rem] items-center justify-between gap-9">
-      <UnstyledLink href="/" className="font-bold hover:text-gray-600">
-        Awesome Solana Dev
-      </UnstyledLink>
-      <SearchModalToggle className="max-w-[40%] flex-1" />
-      <Navigation />
-      <ColorModeToggle />
+    <header className="flex h-[4.5rem] items-center justify-between gap-4 px-6 sm:px-6 md:gap-9">
+      <LogoLink />
+      <div className="flex items-center gap-3">
+        <SearchModalToggle />
+        <ColorModeToggle />
+      </div>
     </header>
   );
 }

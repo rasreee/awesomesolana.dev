@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
-import { SVGProps } from 'react';
 
-const SearchIcon = (props: SVGProps<SVGSVGElement>) => {
+import { HeroIconProps, SVGIconProps } from '@/icon/types';
+
+function SearchIconOutline(props: SVGIconProps) {
   return (
     <Svg
       {...props}
@@ -19,11 +20,35 @@ const SearchIcon = (props: SVGProps<SVGSVGElement>) => {
       />
     </Svg>
   );
-};
+}
 
 const Svg = styled.svg`
   height: 1.25rem;
   width: 1.25rem;
 `;
+
+function SearchIconSolid(props: SVGIconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-5 w-5"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
+
+function SearchIcon({ variant = 'outline', ...props }: HeroIconProps) {
+  const Icon = variant === 'outline' ? SearchIconOutline : SearchIconSolid;
+
+  return <Icon {...props} />;
+}
 
 export default SearchIcon;

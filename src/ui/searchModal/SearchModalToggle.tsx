@@ -1,11 +1,17 @@
+import React from 'react';
+
+import { useIsMobile } from '@/hooks/useIsMobile';
 import clsxm from '@/lib/clsxm';
 
 import { KbdSymbols } from './kbdSymbols';
+import SearchIcon from './SearchIcon';
 import { useSearchModal } from './SearchModalContext';
 
-const SearchModalToggle = ({ className }: { className?: string }) => {
-  const searchModal = useSearchModal();
+interface SearchModalToggleProps {
+  onClick?: () => void;
+}
 
+function SearchModalToggleLarge({ onClick }: SearchModalToggleProps) {
   return (
     <button
       className={clsxm(
@@ -15,9 +21,9 @@ const SearchModalToggle = ({ className }: { className?: string }) => {
         'bg-surface',
         'text-gray-500 dark:text-gray-300',
         'text-sm',
-        className,
+        'flex-1 sm:w-[40%]',
       )}
-      onClick={searchModal.onRequestOpen}
+      onClick={onClick}
     >
       <span>Quick search...</span>
       <kbd
@@ -31,6 +37,31 @@ const SearchModalToggle = ({ className }: { className?: string }) => {
       </kbd>
     </button>
   );
-};
+}
+
+function SearchModalToggleSmall({ onClick }: SearchModalToggleProps) {
+  return (
+    <button
+      className={clsxm(
+        'rounded-full p-2',
+        'text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100',
+      )}
+      onClick={onClick}
+    >
+      <SearchIcon variant="solid" />
+    </button>
+  );
+}
+
+function SearchModalToggle() {
+  const searchModal = useSearchModal();
+  const isMobile = useIsMobile();
+  const Button = React.useMemo(
+    () => (isMobile ? SearchModalToggleSmall : SearchModalToggleLarge),
+    [isMobile],
+  );
+
+  return <Button onClick={searchModal.onRequestOpen} />;
+}
 
 export default SearchModalToggle;

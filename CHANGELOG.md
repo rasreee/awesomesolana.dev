@@ -182,7 +182,7 @@ This changelog is manually generated and not accurate with the package.json, onl
     You can import without using relative path
 
     ```tsx
-    import Nav from '../../../components/Nav';
+    import Nav from '@/../../components/Nav';
 
     simplified to
 
