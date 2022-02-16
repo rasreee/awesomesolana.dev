@@ -12,7 +12,8 @@ const SearchModalToggle = ({ className }: { className?: string }) => {
         'font-medium',
         'px-4 py-2',
         'flex items-center justify-between gap-5 rounded-md',
-        'bg-base-50 text-gray-500 dark:bg-base-800 dark:text-gray-300',
+        'bg-surface',
+        'text-gray-500 dark:text-gray-300',
         'text-sm',
         className,
       )}

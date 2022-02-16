@@ -38,7 +38,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onRequestClose, children }) => {
           'flex flex-col',
           'rounded-lg',
           'shadow-md',
-          'bg-white dark:bg-base-700',
+          'bg-surface',
           'overflow-hidden',
         )}
         ref={ref}
