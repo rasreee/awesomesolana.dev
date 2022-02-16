@@ -1,23 +1,19 @@
-import styled from '@emotion/styled';
+import clsxm from '@/lib/clsxm';
 
 const EmptySearchResults = () => (
-  <Container className="text-gray-700 dark:text-base-200">
-    <span className="text-lg font-medium">No results found</span>
+  <div
+    className={clsxm(
+      'flex flex-col items-start gap-1.5',
+      'text-left',
+      'text-gray-700 dark:text-base-200',
+    )}
+  >
+    <h4 className="text-lg font-medium">No results found</h4>
     <span className="opacity-70">
       We can’t find anything with that term at the moment, try searching
       something else.
     </span>
-  </Container>
+  </div>
 );
-
-const Container = styled.div`
-  padding: 3.75rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  text-align: center;
-`;
 
 export default EmptySearchResults;
