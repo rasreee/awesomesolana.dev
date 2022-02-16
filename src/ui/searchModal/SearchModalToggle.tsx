@@ -10,8 +10,9 @@ const SearchModalToggle = () => {
     <button
       className={clsxm(
         'text-medium',
-        'flex min-w-[12rem] items-center justify-between gap-5 rounded-md px-7 py-1.5',
-        'bg-base-200 text-gray-500 dark:bg-base-800 dark:text-gray-300',
+        'px-4 py-2',
+        'flex flex-1 items-center justify-between gap-5 rounded-md',
+        'bg-base-50 text-gray-500 dark:bg-base-800 dark:text-gray-300',
         'text-sm',
       )}
       onClick={searchModal.onRequestOpen}
@@ -20,8 +21,7 @@ const SearchModalToggle = () => {
       <kbd
         className={clsxm(
           'inline-flex items-center gap-0.5 px-2 py-1 font-serif',
-          'rounded border border-base-100 text-gray-500 dark:border-base-700 dark:text-gray-300',
-          'bg-transparent',
+          'rounded border border-base-200 bg-base-200 text-gray-600 opacity-70 dark:border-base-700 dark:bg-transparent dark:text-gray-300',
         )}
       >
         <span>{KbdSymbols.CMD}</span>

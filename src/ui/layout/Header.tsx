@@ -6,7 +6,7 @@ import Navigation from './Navigation';
 
 export default function Header() {
   return (
-    <header className="layout flex h-14 items-center justify-between">
+    <header className="layout flex h-[4.5rem] items-center justify-between gap-9">
       <UnstyledLink href="/" className="font-bold hover:text-gray-600">
         Awesome Solana Dev
       </UnstyledLink>
