@@ -34,7 +34,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onRequestClose, children }) => {
     <S.Backdrop>
       <div
         className={clsxm(
-          'm-auto min-h-0 w-full max-w-[90%] sm:max-w-[46rem]',
+          'm-auto min-h-0 w-full max-w-[90%] md:max-w-[46rem]',
           'flex flex-col',
           'rounded-lg',
           'shadow-md',
