@@ -14,7 +14,7 @@ const DELAY_MS = 600;
 
 type SearchModalProviderProps<T extends SearchData> = {
   children: ReactNode;
-  onSelect: (selectedSearchResult: SearchData) => void;
+  onSelect: (selectedSearchResult: T) => void;
   allData: T[];
 };
 
