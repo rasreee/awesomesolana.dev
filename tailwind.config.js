@@ -9,7 +9,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        primary: ['Inter', ...fontFamily.sans],
+        primary: ['Open Sans', ...fontFamily.sans],
+        heading: ['Jost', 'sans-serif'],
+        mono: ['Space Mono', 'monospace'],
         serif: ['sans-serif'],
       },
       colors: {

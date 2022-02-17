@@ -1,3 +1,5 @@
+import { capitalizeFirst } from '@/lib/capitalizeFirst';
+import clsxm from '@/lib/clsxm';
 import { SVGIconProps } from '@/ui/icon/types';
 import UnstyledLink from '@/ui/links/UnstyledLink';
 
@@ -26,7 +28,7 @@ const metadata = {
   socials: {
     github: {
       href: 'https://github.com/rasreee',
-      icon: <GithubIcon />,
+      icon: GithubIcon,
     },
   },
 };
@@ -34,13 +36,18 @@ const metadata = {
 const SocialLinks = () => {
   return (
     <>
-      {Object.entries(metadata.socials).map(([type, { href, icon }]) => (
+      {Object.entries(metadata.socials).map(([type, { href, icon: Icon }]) => (
         <UnstyledLink
-          className="text-gray-400 hover:text-gray-500 active:text-gray-600"
+          className={clsxm(
+            'text-gray-400 hover:text-gray-500 active:text-gray-600',
+            'flex items-center gap-2',
+            'font-mono text-sm font-medium',
+          )}
           key={type}
           href={href}
         >
-          {icon}
+          <Icon className="h-4 w-4" />
+          {capitalizeFirst(type)}
         </UnstyledLink>
       ))}
     </>
@@ -49,7 +56,7 @@ const SocialLinks = () => {
 
 export default function Footer() {
   return (
-    <footer className="layout h-header-footer flex w-screen items-center justify-end px-8">
+    <footer className="bg-app layout h-header-footer flex w-screen items-center justify-end px-8">
       <SocialLinks />
     </footer>
   );

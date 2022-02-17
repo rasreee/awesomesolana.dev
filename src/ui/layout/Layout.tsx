@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import Seo, { SeoProps } from '@/ui/Seo';
 
+import { Divider } from '../divider';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -12,11 +13,14 @@ export interface LayoutProps {
 
 export default function Layout({ children, seoProps }: LayoutProps) {
   return (
-    <div className="bg-light dark:bg-dark">
+    <>
       <Seo {...seoProps} />
-      <Header />
-      <main className="min-h-main">{children}</main>
-      <Footer />
-    </div>
+      <div className="bg-app min-h-full min-w-full">
+        <Header />
+        <main className="bg-app min-h-main">{children}</main>
+        <Divider />
+        <Footer />
+      </div>
+    </>
   );
 }

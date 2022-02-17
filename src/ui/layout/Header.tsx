@@ -9,7 +9,7 @@ const buttonSize = rem(44);
 
 export default function Header() {
   return (
-    <header className="layout h-header-footer flex items-center justify-between sm:px-6 sm:px-6 md:gap-9">
+    <header className="bg-app layout h-header-footer flex items-center justify-between sm:px-6 sm:px-6 md:gap-9">
       <LogoLink />
       <div
         className={clsxm(
