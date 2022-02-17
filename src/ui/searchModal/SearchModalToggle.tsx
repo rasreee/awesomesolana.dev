@@ -19,7 +19,7 @@ function SearchModalToggleLarge(props: SearchModalToggleProps) {
         'px-4 py-2',
         'flex items-center justify-between gap-5 rounded-md',
         'sm:bg-surface',
-        'text-gray-500 dark:text-gray-300',
+        'text-hint',
         'text-sm',
         'w-full',
       )}
