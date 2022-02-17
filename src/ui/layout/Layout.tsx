@@ -17,7 +17,7 @@ export default function Layout({ children, seoProps }: LayoutProps) {
       <Seo {...seoProps} />
       <div className="bg-app min-h-full min-w-full">
         <Header />
-        <main className="bg-app min-h-main">{children}</main>
+        <main className="bg-app min-h-main flex-1">{children}</main>
         <Divider />
         <Footer />
       </div>

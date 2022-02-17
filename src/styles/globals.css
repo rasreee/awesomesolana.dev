@@ -25,10 +25,7 @@
   --color-primary-800: rgb(var(--tw-color-primary-800)); /* #007D6C */
   --color-primary-900: rgb(var(--tw-color-primary-900)); /* #004A45 */
   /* #endregion  /**======== Primary Color =========== */
-
   --header-footer-height: 68px;
-
-  --min-h-main: calc(100vh-136px);
 }
 
 @layer base {
@@ -178,8 +175,7 @@
   }
 
   .min-h-main {
-    height: var(--min-h-main) !important;
-    min-height: var(--min-h-main) !important;
+    @apply min-h-[calc(100vh-2*var(--header-footer-height))];
   }
 
   .h-header-footer {
