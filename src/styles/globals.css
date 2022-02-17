@@ -25,7 +25,8 @@
   --color-primary-800: rgb(var(--tw-color-primary-800)); /* #007D6C */
   --color-primary-900: rgb(var(--tw-color-primary-900)); /* #004A45 */
   /* #endregion  /**======== Primary Color =========== */
-  --header-footer-height: 68px;
+  --header-height: 68px;
+  --footer-height: 54px;
 }
 
 @layer base {
@@ -175,10 +176,10 @@
   }
 
   .min-h-main {
-    @apply min-h-[calc(100vh-2*var(--header-footer-height))];
+    @apply min-h-[calc(100vh-var(--header-height)-var(--footer-height))];
   }
 
   .h-header-footer {
-    @apply h-[var(--header-footer-height)];
+    @apply h-[var(--header-height)];
   }
 }

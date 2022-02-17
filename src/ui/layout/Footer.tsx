@@ -56,7 +56,7 @@ const SocialLinks = () => {
 
 export default function Footer() {
   return (
-    <footer className="bg-app layout h-header-footer flex w-screen items-center justify-end px-8">
+    <footer className="bg-app layout flex h-[var(--footer-height)] w-screen items-center justify-end px-8">
       <SocialLinks />
     </footer>
   );
