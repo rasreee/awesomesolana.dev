@@ -2,7 +2,7 @@ import classed from '@/lib/classed';
 import clsxm from '@/lib/clsxm';
 import { Divider } from '@/ui/divider';
 
-import { useSearchModal } from './SearchModalContext';
+import { ISearchModalContext } from './SearchModalContext';
 import { SearchResultData } from './types';
 
 const Container = classed('div', 'px-10 py-3');
@@ -35,13 +35,12 @@ function NoSearchResults() {
   );
 }
 
-const SearchResults = () => {
-  const { hits, onSelect, isRequesting } = useSearchModal();
-
+const SearchResults = ({
+  hits,
+  onSelect,
+}: Pick<ISearchModalContext, 'hits' | 'onSelect'>) => {
   const handleSelect = (selectedItem: SearchResultData) => () =>
     onSelect(selectedItem);
-
-  if (isRequesting) return null;
 
   if (hits.length === 0)
     return (

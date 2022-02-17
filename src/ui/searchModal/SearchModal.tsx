@@ -6,13 +6,18 @@ import { useSearchModal } from './SearchModalContext';
 import SearchResults from './SearchResults';
 
 const SearchModal = () => {
-  const { isOpen, onRequestClose } = useSearchModal();
+  const { isOpen, onRequestClose, isRequesting, hits, onSelect } =
+    useSearchModal();
 
   return (
     <Modal {...{ isOpen, onRequestClose }}>
       <SearchBar />
-      <Divider className="bg-surface-1" />
-      <SearchResults />
+      {!isRequesting && (
+        <>
+          <Divider className="bg-surface-1" />
+          <SearchResults hits={hits} onSelect={onSelect} />
+        </>
+      )}
     </Modal>
   );
 };
