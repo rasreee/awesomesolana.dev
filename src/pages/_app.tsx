@@ -6,13 +6,14 @@ import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
 
+import { sources } from '@/sources/sources';
 import { theme } from '@/ui/emotion/theme';
-import { SearchModalProvider, SearchResultData } from '@/ui/searchModal';
+import { SearchData, SearchModalProvider } from '@/ui/searchModal';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  const handleSelect = (selectedItem: SearchResultData) => {
+  const handleSelect = (selectedItem: SearchData) => {
     console.log('Selected item: ' + selectedItem);
     router.push(`/hits/${selectedItem.id}`);
   };
@@ -20,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <NextThemeProvider attribute="class">
       <EmotionThemeProvider theme={theme}>
-        <SearchModalProvider onSelect={handleSelect}>
+        <SearchModalProvider allData={sources} onSelect={handleSelect}>
           <Component {...pageProps} />
         </SearchModalProvider>
       </EmotionThemeProvider>

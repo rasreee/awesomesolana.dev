@@ -1,0 +1,268 @@
+[
+  { "id": 0, "type": "content-formats", "name": "boilerplate", "count": 0 },
+  { "id": 1, "type": "content-formats", "name": "course", "count": 0 },
+  { "id": 2, "type": "content-formats", "name": "source code", "count": 0 },
+  { "id": 3, "type": "content-formats", "name": "article", "count": 0 },
+  { "id": 4, "type": "content-formats", "name": "article", "count": 0 },
+  { "id": 5, "type": "content-formats", "name": "whitepaper", "count": 0 },
+  { "id": 6, "type": "content-formats", "name": "awesome", "count": 0 },
+  { "id": 7, "type": "content-formats", "name": "lists", "count": 0 },
+  { "id": 8, "type": "content-formats", "name": "resources", "count": 0 },
+  { "id": 9, "type": "content-formats", "name": "github issue", "count": 0 },
+  {
+    "id": 0,
+    "type": "dependencies",
+    "name": "@project-serum/anchor-cli",
+    "count": 0
+  },
+  {
+    "id": 1,
+    "type": "dependencies",
+    "name": "@project-serum/anchor",
+    "count": 0
+  },
+  {
+    "id": 2,
+    "type": "dependencies",
+    "name": "@project-serum/associated-token",
+    "count": 0
+  },
+  {
+    "id": 3,
+    "type": "dependencies",
+    "name": "@project-serum/awesome-serum",
+    "count": 0
+  },
+  {
+    "id": 4,
+    "type": "dependencies",
+    "name": "@project-serum/borsh",
+    "count": 0
+  },
+  {
+    "id": 5,
+    "type": "dependencies",
+    "name": "@project-serum/common",
+    "count": 0
+  },
+  {
+    "id": 6,
+    "type": "dependencies",
+    "name": "@project-serum/lockup",
+    "count": 0
+  },
+  {
+    "id": 7,
+    "type": "dependencies",
+    "name": "@project-serum/pool",
+    "count": 0
+  },
+  {
+    "id": 8,
+    "type": "dependencies",
+    "name": "@project-serum/registry",
+    "count": 0
+  },
+  {
+    "id": 9,
+    "type": "dependencies",
+    "name": "@project-serum/serum",
+    "count": 0
+  },
+  {
+    "id": 10,
+    "type": "dependencies",
+    "name": "@project-serum/sol-wallet-adapter",
+    "count": 0
+  },
+  {
+    "id": 11,
+    "type": "dependencies",
+    "name": "@project-serum/spl-token-swap",
+    "count": 0
+  },
+  {
+    "id": 12,
+    "type": "dependencies",
+    "name": "@project-serum/swap-ui",
+    "count": 0
+  },
+  {
+    "id": 13,
+    "type": "dependencies",
+    "name": "@project-serum/swap",
+    "count": 0
+  },
+  {
+    "id": 14,
+    "type": "dependencies",
+    "name": "@project-serum/token",
+    "count": 0
+  },
+  {
+    "id": 15,
+    "type": "dependencies",
+    "name": "@project-serum/tokens",
+    "count": 0
+  },
+  {
+    "id": 16,
+    "type": "dependencies",
+    "name": "@solana/buffer-layout",
+    "count": 0
+  },
+  {
+    "id": 17,
+    "type": "dependencies",
+    "name": "@solana/spl-name-service",
+    "count": 0
+  },
+  {
+    "id": 18,
+    "type": "dependencies",
+    "name": "@solana/spl-token-lending",
+    "count": 0
+  },
+  {
+    "id": 19,
+    "type": "dependencies",
+    "name": "@solana/spl-token-registry",
+    "count": 0
+  },
+  { "id": 20, "type": "dependencies", "name": "@solana/spl-token", "count": 0 },
+  {
+    "id": 21,
+    "type": "dependencies",
+    "name": "@solana/token-swap",
+    "count": 0
+  },
+  {
+    "id": 22,
+    "type": "dependencies",
+    "name": "@solana/wallet-adapter",
+    "count": 0
+  },
+  { "id": 23, "type": "dependencies", "name": "@solana/web3.js", "count": 0 },
+  {
+    "id": 24,
+    "type": "dependencies",
+    "name": "@solana/wallet-adapter-react",
+    "count": 0
+  },
+  {
+    "id": 25,
+    "type": "dependencies",
+    "name": "@solana/wallet-adapter-phantom",
+    "count": 0
+  },
+  { "id": 0, "type": "languages-and-frameworks", "name": "python", "count": 0 },
+  { "id": 1, "type": "languages-and-frameworks", "name": "nextjs", "count": 0 },
+  { "id": 2, "type": "languages-and-frameworks", "name": "react", "count": 0 },
+  {
+    "id": 3,
+    "type": "languages-and-frameworks",
+    "name": "typescript",
+    "count": 0
+  },
+  { "id": 4, "type": "languages-and-frameworks", "name": "rust", "count": 0 },
+  { "id": 5, "type": "languages-and-frameworks", "name": "golang", "count": 0 },
+  { "id": 6, "type": "languages-and-frameworks", "name": "vue", "count": 0 },
+  {
+    "id": 7,
+    "type": "languages-and-frameworks",
+    "name": "angular",
+    "count": 0
+  },
+  {
+    "id": 8,
+    "type": "languages-and-frameworks",
+    "name": "express",
+    "count": 0
+  },
+  {
+    "id": 0,
+    "type": "crypto-topics",
+    "name": "associated token account",
+    "count": 0
+  },
+  {
+    "id": 1,
+    "type": "crypto-topics",
+    "name": "program derived address",
+    "count": 0
+  },
+  {
+    "id": 2,
+    "type": "crypto-topics",
+    "name": "decentralized identity / did",
+    "count": 0
+  },
+  { "id": 3, "type": "crypto-topics", "name": "anchor", "count": 0 },
+  { "id": 4, "type": "crypto-topics", "name": "spl token", "count": 0 },
+  { "id": 5, "type": "crypto-topics", "name": "big table", "count": 0 },
+  { "id": 6, "type": "crypto-topics", "name": "wallet", "count": 0 },
+  { "id": 7, "type": "crypto-topics", "name": "nft", "count": 0 },
+  {
+    "id": 8,
+    "type": "crypto-topics",
+    "name": "solana name service",
+    "count": 0
+  },
+  { "id": 9, "type": "crypto-topics", "name": "staking", "count": 0 },
+  {
+    "id": 10,
+    "type": "crypto-topics",
+    "name": "lending / borrowing",
+    "count": 0
+  },
+  {
+    "id": 11,
+    "type": "crypto-topics",
+    "name": "program deployment",
+    "count": 0
+  },
+  { "id": 12, "type": "crypto-topics", "name": "dao", "count": 0 },
+  { "id": 13, "type": "crypto-topics", "name": "exchange", "count": 0 },
+  { "id": 14, "type": "crypto-topics", "name": "sdk", "count": 0 },
+  { "id": 15, "type": "crypto-topics", "name": "game", "count": 0 },
+  { "id": 16, "type": "crypto-topics", "name": "token program", "count": 0 },
+  { "id": 17, "type": "crypto-topics", "name": "system program", "count": 0 },
+  { "id": 18, "type": "crypto-topics", "name": "rent", "count": 0 },
+  { "id": 19, "type": "crypto-topics", "name": "transaction", "count": 0 },
+  {
+    "id": 20,
+    "type": "crypto-topics",
+    "name": "token swap program",
+    "count": 0
+  },
+  { "id": 21, "type": "crypto-topics", "name": "token program", "count": 0 },
+  { "id": 22, "type": "crypto-topics", "name": "amm", "count": 0 },
+  { "id": 23, "type": "crypto-topics", "name": "proof of history", "count": 0 },
+  { "id": 24, "type": "crypto-topics", "name": "phantom", "count": 0 },
+  {
+    "id": 25,
+    "type": "crypto-topics",
+    "name": "program development",
+    "count": 0
+  },
+  {
+    "id": 26,
+    "type": "crypto-topics",
+    "name": "full-stack solana development",
+    "count": 0
+  },
+  { "id": 27, "type": "crypto-topics", "name": "dapp", "count": 0 },
+  { "id": 28, "type": "crypto-topics", "name": "solana runtime", "count": 0 },
+  {
+    "id": 29,
+    "type": "crypto-topics",
+    "name": "cross-program invocations",
+    "count": 0
+  },
+  {
+    "id": 30,
+    "type": "crypto-topics",
+    "name": "program signed accounts",
+    "count": 0
+  }
+]

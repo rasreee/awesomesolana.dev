@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 
-import { SearchResultData } from './types';
+import { SearchData } from './types';
 
 export interface ISearchModalContext {
   isOpen: boolean;
@@ -8,11 +8,11 @@ export interface ISearchModalContext {
   onRequestClose: () => void;
   query: string;
   setQuery: (query: string) => void;
-  hits: SearchResultData[];
-  setHits: (hits: SearchResultData[]) => void;
+  hits: SearchData[];
+  setHits: (hits: SearchData[]) => void;
   error: string | null;
   isRequesting: boolean;
-  onSelect: (selectedSearchResult: SearchResultData) => void;
+  onSelect: (selectedSearchResult: SearchData) => void;
 }
 
 export const SearchModalContext = createContext<

@@ -3,7 +3,7 @@ import clsxm from '@/lib/clsxm';
 import { Divider } from '@/ui/divider';
 
 import { ISearchModalContext } from './SearchModalContext';
-import { SearchResultData } from './types';
+import { SearchData } from './types';
 
 const Container = classed('div', 'px-10 py-3');
 
@@ -39,7 +39,7 @@ const SearchResults = ({
   hits,
   onSelect,
 }: Pick<ISearchModalContext, 'hits' | 'onSelect'>) => {
-  const handleSelect = (selectedItem: SearchResultData) => () =>
+  const handleSelect = (selectedItem: SearchData) => () =>
     onSelect(selectedItem);
 
   if (hits.length === 0)
@@ -52,7 +52,7 @@ const SearchResults = ({
   return (
     <Container>
       <ul className="m-0 p-0">
-        {hits.map((searchResult: SearchResultData, index) => (
+        {hits.map((searchResult: SearchData, index) => (
           <li key={searchResult.id} className={clsxm('list-none')}>
             {index > 0 && (
               <Divider
