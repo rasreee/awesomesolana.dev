@@ -166,7 +166,7 @@
   }
 
   .bg-surface-1 {
-    @apply bg-gray-200 dark:bg-base-600 dark:opacity-70;
+    @apply bg-gray-200 dark:bg-base-700;
   }
 
   .layout {
