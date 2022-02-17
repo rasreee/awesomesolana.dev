@@ -158,7 +158,7 @@
   }
 
   .bg-app {
-    @apply bg-white dark:bg-base-900;
+    @apply bg-white dark:bg-base-1000;
   }
 
   .bg-surface {
