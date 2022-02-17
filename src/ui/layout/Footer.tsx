@@ -49,7 +49,7 @@ const SocialLinks = () => {
 
 export default function Footer() {
   return (
-    <footer className="layout flex h-14 w-screen items-center justify-end px-8">
+    <footer className="layout h-header-footer flex w-screen items-center justify-end px-8">
       <SocialLinks />
     </footer>
   );

@@ -15,7 +15,7 @@ export default function Layout({ children, seoProps }: LayoutProps) {
     <div className="bg-light dark:bg-dark">
       <Seo {...seoProps} />
       <Header />
-      <main className="min-h-[calc(100vh-124px)]">{children}</main>
+      <main className="min-h-main">{children}</main>
       <Footer />
     </div>
   );

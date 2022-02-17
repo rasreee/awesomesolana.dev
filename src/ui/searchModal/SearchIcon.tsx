@@ -1,15 +1,14 @@
-import styled from '@emotion/styled';
+import clsxm from '@/lib/clsxm';
+import { HeroIconProps, SVGIconProps } from '@/ui/icon/types';
 
-import { HeroIconProps, SVGIconProps } from '@/icon/types';
-
-function SearchIconOutline(props: SVGIconProps) {
+function SearchIconOutline({ className, ...props }: SVGIconProps) {
   return (
-    <Svg
-      {...props}
+    <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
+      className={clsxm('h-5 w-5', className)}
       {...props}
     >
       <path
@@ -18,20 +17,15 @@ function SearchIconOutline(props: SVGIconProps) {
         strokeWidth={2}
         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
       />
-    </Svg>
+    </svg>
   );
 }
 
-const Svg = styled.svg`
-  height: 1.25rem;
-  width: 1.25rem;
-`;
-
-function SearchIconSolid(props: SVGIconProps) {
+function SearchIconSolid({ className, ...props }: SVGIconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-5 w-5"
+      className={clsxm('h-5 w-5', className)}
       viewBox="0 0 20 20"
       fill="currentColor"
       {...props}

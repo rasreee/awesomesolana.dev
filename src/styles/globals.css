@@ -25,6 +25,7 @@
   --color-primary-800: rgb(var(--tw-color-primary-800)); /* #007D6C */
   --color-primary-900: rgb(var(--tw-color-primary-900)); /* #004A45 */
   /* #endregion  /**======== Primary Color =========== */
+  --header-footer-height: 68px;
 }
 
 @layer base {
@@ -74,20 +75,8 @@
     @apply font-primary text-sm md:text-base;
   }
   /* #endregion  /**======== Typography =========== */
-
-  .layout {
-    /* 1100px */
-    max-width: 68.75rem;
-    @apply mx-auto w-11/12;
-  }
-
   .bg-dark a.custom-link {
     @apply border-gray-200 hover:border-gray-200/0;
-  }
-
-  /* Class to adjust with sticky footer */
-  .min-h-main {
-    @apply min-h-[calc(100vh-56px)];
   }
 }
 
@@ -121,5 +110,19 @@
 
   .bg-surface-1 {
     @apply bg-base-100 dark:bg-base-600 dark:opacity-70;
+  }
+
+  .layout {
+    /* 1100px */
+    max-width: 68.75rem;
+    @apply mx-auto w-11/12;
+  }
+
+  .min-h-main {
+    @apply min-h-[calc(100vh-2*var(--header-footer-height))];
+  }
+
+  .h-header-footer {
+    @apply h-[var(--header-footer-height)];
   }
 }

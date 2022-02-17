@@ -1,6 +1,5 @@
-import React from 'react';
+import { CSSProperties } from 'react';
 
-import { useIsMobile } from '@/hooks/useIsMobile';
 import clsxm from '@/lib/clsxm';
 
 import { KbdSymbols } from './kbdSymbols';
@@ -9,23 +8,24 @@ import { useSearchModal } from './SearchModalContext';
 
 interface SearchModalToggleProps {
   onClick?: () => void;
+  style?: CSSProperties;
 }
 
-function SearchModalToggleLarge({ onClick }: SearchModalToggleProps) {
+function SearchModalToggleLarge(props: SearchModalToggleProps) {
   return (
     <button
       className={clsxm(
         'font-medium',
         'px-4 py-2',
         'flex items-center justify-between gap-5 rounded-md',
-        'bg-surface',
+        'sm:bg-surface',
         'text-gray-500 dark:text-gray-300',
         'text-sm',
-        'flex-1 sm:w-[40%]',
+        'w-full',
       )}
-      onClick={onClick}
+      {...props}
     >
-      <span>Quick search...</span>
+      <span className="w-max">Quick search...</span>
       <kbd
         className={clsxm(
           'inline-flex items-center gap-0.5 px-2 py-1 font-serif',
@@ -39,29 +39,39 @@ function SearchModalToggleLarge({ onClick }: SearchModalToggleProps) {
   );
 }
 
-function SearchModalToggleSmall({ onClick }: SearchModalToggleProps) {
+function SearchModalToggleSmall(props: SearchModalToggleProps) {
   return (
     <button
       className={clsxm(
-        'rounded-full p-2',
+        'rounded-full',
         'text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100',
       )}
-      onClick={onClick}
+      {...props}
     >
-      <SearchIcon variant="solid" />
+      <SearchIcon variant="solid" className="m-auto" />
     </button>
   );
 }
 
-function SearchModalToggle() {
+function SearchModalToggle({ style }: { style?: CSSProperties }) {
   const searchModal = useSearchModal();
-  const isMobile = useIsMobile();
-  const Button = React.useMemo(
-    () => (isMobile ? SearchModalToggleSmall : SearchModalToggleLarge),
-    [isMobile],
-  );
 
-  return <Button onClick={searchModal.onRequestOpen} />;
+  return (
+    <>
+      <div className="hidden sm:block sm:flex-1">
+        <SearchModalToggleLarge
+          onClick={searchModal.onRequestOpen}
+          style={style}
+        />
+      </div>
+      <div className="sm:hidden">
+        <SearchModalToggleSmall
+          onClick={searchModal.onRequestOpen}
+          style={style}
+        />
+      </div>
+    </>
+  );
 }
 
 export default SearchModalToggle;

@@ -17,7 +17,7 @@ function LogoLink() {
       href="/"
       className={clsxm(
         'max-w-min sm:min-w-max',
-        'font-sans text-base font-extrabold leading-tight hover:text-gray-600 sm:text-xl',
+        'font-sans text-base font-extrabold leading-none hover:text-gray-600 sm:text-xl',
       )}
     >
       {logoText}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 import clsxm from '@/lib/clsxm';
 import { SVGIconProps } from '@/ui/icon/types';
@@ -37,7 +37,7 @@ function SunOutlineIcon(props: SVGIconProps) {
   );
 }
 
-export default function ColorModeToggle() {
+export default function ColorModeToggle({ style }: { style?: CSSProperties }) {
   const { mode, toggle } = useColorMode();
   const [mounted, setMounted] = React.useState(false);
 
@@ -54,11 +54,12 @@ export default function ColorModeToggle() {
       aria-label="Toggle Dark Mode"
       type="button"
       className={clsxm(
-        'flex h-9 w-9 items-center justify-center rounded-lg transition-all',
+        `flex items-center justify-center rounded-lg transition-all`,
         'bg-surface',
         'ring-gray-300 hover:ring-2',
       )}
       onClick={toggle}
+      style={style}
     >
       {mounted && <Icon />}
     </button>
