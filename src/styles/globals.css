@@ -158,15 +158,15 @@
   }
 
   .bg-app {
-    @apply bg-white dark:bg-base-1000;
+    @apply bg-gray-50 dark:bg-base-1000;
   }
 
   .bg-surface {
-    @apply bg-base-50 dark:bg-base-800;
+    @apply bg-gray-50 dark:bg-base-800;
   }
 
   .bg-surface-1 {
-    @apply bg-base-100 dark:bg-base-600 dark:opacity-70;
+    @apply bg-gray-200 dark:bg-base-600 dark:opacity-70;
   }
 
   .layout {

@@ -22,6 +22,7 @@ function SearchModalToggleLarge(props: SearchModalToggleProps) {
         'text-hint',
         'text-sm',
         'w-full',
+        'border border-gray-200',
       )}
       {...props}
     >
@@ -29,7 +30,7 @@ function SearchModalToggleLarge(props: SearchModalToggleProps) {
       <kbd
         className={clsxm(
           'inline-flex items-center gap-0.5 px-2 py-1 font-serif',
-          'rounded border border-base-200 bg-base-200 text-gray-600 opacity-70 dark:border-base-700 dark:bg-transparent dark:text-gray-300',
+          'rounded border border-base-200 bg-base-50 text-gray-600 opacity-70 dark:border-base-700 dark:bg-transparent dark:text-gray-300',
         )}
       >
         <span>{KbdSymbols.CMD}</span>
