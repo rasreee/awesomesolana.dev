@@ -1,12 +1,12 @@
 import { SearchData } from './types';
 
-export function getSearchResultsForQuery(
+export function getSearchResultsForQuery<T extends SearchData = SearchData>(
   query: string,
-  allData: SearchData[],
-): Promise<SearchData[]> {
+  allData: T[],
+): Promise<T[]> {
   if (!query) return Promise.resolve([]);
 
-  let hits = [] as SearchData[];
+  let hits = [] as T[];
 
   const a = query.toLowerCase();
 

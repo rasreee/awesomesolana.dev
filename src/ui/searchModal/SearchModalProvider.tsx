@@ -7,14 +7,16 @@ import { waitFor } from '@/lib/waitFor';
 
 import { getSearchResultsForQuery } from './getSearchResultsForQuery';
 import SearchModal from './SearchModal';
-import { SearchModalContext } from './SearchModalContext';
+import { ISearchModalContext, SearchModalContext } from './SearchModalContext';
 import { SearchData } from './types';
 
 const DELAY_MS = 600;
 
-type SearchModalProviderProps<T extends SearchData> = {
+type SearchModalProviderProps<T extends SearchData> = Pick<
+  ISearchModalContext<T>,
+  'onSelect'
+> & {
   children: ReactNode;
-  onSelect: (selectedSearchResult: T) => void;
   allData: T[];
 };
 
@@ -31,7 +33,7 @@ const SearchModalProvider = <T extends SearchData>({
   useKeyCombo([EventKeys.META, 'k'], onRequestOpen);
 
   const [query, setQuery] = useState('');
-  const [hits, setHits] = useDebouncedState<SearchData[]>([], DELAY_MS);
+  const [hits, setHits] = useDebouncedState<T[]>([], DELAY_MS);
 
   const [error, setError] = useState<string | null>(null);
   const [isRequesting, setIsRequesting] = useState(false);
@@ -40,10 +42,10 @@ const SearchModalProvider = <T extends SearchData>({
     const updateHits = async () => {
       setIsRequesting(true);
       setError(null);
-      let newHits: SearchData[] = [];
+      let newHits: T[] = [];
       let newError: string | null = null;
       try {
-        newHits = await getSearchResultsForQuery(query, allData);
+        newHits = await getSearchResultsForQuery<T>(query, allData);
         setHits(newHits);
       } catch (e) {
         console.error(e);

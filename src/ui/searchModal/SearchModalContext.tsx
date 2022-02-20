@@ -1,19 +1,17 @@
 import { createContext, useContext } from 'react';
 
-import { SearchData } from './types';
-
-export interface ISearchModalContext {
+export type ISearchModalContext<T = any> = {
   isOpen: boolean;
   onRequestOpen: () => void;
   onRequestClose: () => void;
   query: string;
   setQuery: (query: string) => void;
-  hits: SearchData[];
-  setHits: (hits: SearchData[]) => void;
+  hits: T[];
+  setHits: React.Dispatch<React.SetStateAction<T[]>>;
   error: string | null;
   isRequesting: boolean;
-  onSelect: (selectedSearchResult: SearchData) => void;
-}
+  onSelect: (selectedSearchResult: T) => void;
+};
 
 export const SearchModalContext = createContext<
   ISearchModalContext | undefined

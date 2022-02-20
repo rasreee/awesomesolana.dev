@@ -11,7 +11,7 @@ module.exports = {
       fontFamily: {
         primary: ['Open Sans', ...fontFamily.sans],
         heading: ['Jost', 'sans-serif'],
-        mono: ['Space Mono', 'monospace'],
+        mono: ['monospace'],
         serif: ['sans-serif'],
       },
       colors: {
