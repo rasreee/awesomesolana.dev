@@ -11,7 +11,8 @@ function LogoLink() {
           href="/"
           className={clsxm(
             'max-w-min sm:min-w-max',
-            'font-sans text-xl font-extrabold leading-none hover:text-gray-600',
+            'font-sans text-xl font-extrabold leading-none',
+            'text-gray-700 hover:text-gray-800 active:text-gray-900 dark:hover:text-gray-300',
           )}
         >
           AWESOME SOLANA
