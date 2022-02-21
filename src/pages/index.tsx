@@ -1,5 +1,3 @@
-import Layout from '@/ui/layout/Layout';
+import { HomePage } from '@/modules/home';
 
-export default function HomePage() {
-  return <Layout></Layout>;
-}
+export default HomePage;
