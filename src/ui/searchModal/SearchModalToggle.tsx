@@ -2,8 +2,8 @@ import { CSSProperties } from 'react';
 
 import clsxm from '@/lib/clsxm';
 
+import SearchIcon from '../icon/SearchIcon';
 import { KbdSymbols } from './kbdSymbols';
-import SearchIcon from './SearchIcon';
 import { useSearchModal } from './SearchModalContext';
 
 interface SearchModalToggleProps {

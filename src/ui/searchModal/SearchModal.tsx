@@ -1,7 +1,7 @@
 import { Divider } from '@/ui/divider';
 import { Modal } from '@/ui/modal';
 
-import SearchBar from './SearchBar';
+import ModalSearchBar from './ModalSearchBar';
 import { useSearchModal } from './SearchModalContext';
 import SearchResults from './SearchResults';
 
@@ -11,7 +11,7 @@ const SearchModal = () => {
 
   return (
     <Modal className="mt-[30%] sm:mt-[10%]" {...{ isOpen, onRequestClose }}>
-      <SearchBar />
+      <ModalSearchBar />
       {!isRequesting && query && (
         <>
           <Divider className="bg-surface-1" />
