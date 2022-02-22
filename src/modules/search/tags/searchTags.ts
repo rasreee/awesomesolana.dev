@@ -8,7 +8,8 @@ export async function searchTags(query: string): Promise<Tag[]> {
   const a = query.toLowerCase();
 
   hits = tags.filter((item) => {
-    const b = item.name.toLowerCase().slice(0, query.length);
+    const name = item.name;
+    const b = name.toLowerCase().slice(0, query.length);
 
     return a === b;
   });
