@@ -1,25 +1,22 @@
-import { ChangeEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { waitFor } from '@/lib/waitFor';
 
-export function useSearch({
-  searchFn,
-  onSuccess,
-}: {
-  searchFn: (q: string) => Promise<any>;
-  onSuccess: (results: any) => any;
-}): {
+export function useSearchQuery(
+  query: string,
+  {
+    searchFn,
+    onSuccess,
+  }: {
+    searchFn: (q: string) => Promise<any>;
+    onSuccess: (results: any) => any;
+  },
+): {
   error: string | null;
   isRequesting: boolean;
   setIsRequesting: any;
   setError: any;
-  bindInput: {
-    value: string;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
-  };
 } {
-  const [query, setQuery] = useState('');
-
   const [isRequesting, setIsRequesting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,11 +41,5 @@ export function useSearch({
     runSearch(query);
   }, [query]);
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    setQuery(event.currentTarget.value);
-  };
-
-  const bindInput = { value: query, onChange: handleChange };
-
-  return { error, isRequesting, setError, setIsRequesting, bindInput };
+  return { error, isRequesting, setError, setIsRequesting };
 }

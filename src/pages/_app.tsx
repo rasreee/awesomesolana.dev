@@ -6,6 +6,7 @@ import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
 
+import { SearchProvider } from '@/modules/search';
 import { SourceData, sources } from '@/sources/sources';
 import { theme } from '@/ui/emotion/theme';
 import { SearchModalProvider } from '@/ui/searchModal';
@@ -22,7 +23,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <NextThemeProvider attribute="class">
       <EmotionThemeProvider theme={theme}>
         <SearchModalProvider allData={sources} onSelect={handleSelect}>
-          <Component {...pageProps} />
+          <SearchProvider>
+            <Component {...pageProps} />
+          </SearchProvider>
         </SearchModalProvider>
       </EmotionThemeProvider>
     </NextThemeProvider>

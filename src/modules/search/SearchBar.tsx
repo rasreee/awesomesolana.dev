@@ -1,31 +1,50 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
+import { useAutoFocusedInput } from '@/hooks/useInput';
 import { ErrorMessage } from '@/ui/ErrorMessage';
 import { SearchInput } from '@/ui/SearchInput';
 import { StatefulSearchIcon } from '@/ui/StatefulSearchIcon';
 
-import { Search } from './search';
-import { searchTags } from './tags';
-import { useSearch } from './useSearch';
+import { useSearch } from './SearchContext';
+import { searchTags, Tag } from './tags';
+import { useSearchQuery } from './useSearchQuery';
+
+const PLACEHOLDER_TEXT = 'Search for any project, dependency, or topic';
 
 export const SearchBar = () => {
   const router = useRouter();
+  const { search } = useSearch();
 
-  const [search, setSearch] = useState<Search>({});
+  const { value: query, ...bindInput } = useAutoFocusedInput({
+    value: search.query,
+  });
 
   useEffect(() => {
-    const urlQuery = search.tags
+    if (router.asPath === '/' && (!query || !search.tags?.length)) return;
+
+    const urlQuery = search.tags?.length
       ? `?tags=${search.tags.map((tag) => tag.name).join(',')}`
       : '';
 
     router.push(`/search${urlQuery}`);
   }, [search.tags]);
 
-  const { error, isRequesting, bindInput } = useSearch({
-    searchFn: (q) => searchTags(q),
-    onSuccess: (tags) =>
-      setSearch((prev) => ({ ...prev, tags: [...(prev.tags ?? []), ...tags] })),
+  const handleSuccess = (tags: Tag[]) => {
+    if (!tags.length && !search.tags?.length) return;
+
+    // setSearch((prev) => {
+    //   let newTags: Tag[] = [...tags];
+    //   if (search.tags) {
+    //     newTags = [...newTags, ...search.tags];
+    //   }
+    //   return { ...prev, tags: newTags };
+    // });
+  };
+
+  const { error, isRequesting } = useSearchQuery(query, {
+    searchFn: searchTags,
+    onSuccess: handleSuccess,
   });
 
   return (
@@ -33,7 +52,8 @@ export const SearchBar = () => {
       <ErrorMessage>{error}</ErrorMessage>
       <StatefulSearchIcon isRequesting={isRequesting} />
       <SearchInput
-        placeholder="Search for GitHub repositories by dependency or topic"
+        placeholder={PLACEHOLDER_TEXT}
+        value={query}
         {...bindInput}
       />
     </div>

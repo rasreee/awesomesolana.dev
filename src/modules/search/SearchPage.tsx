@@ -1,14 +1,10 @@
-import { useRouter } from 'next/router';
-
 import Layout from '@/ui/layout/Layout';
 
-import { parseSearch } from './search';
 import { SearchBar } from './SearchBar';
+import { useSearch } from './SearchContext';
 
 export function SearchPage() {
-  const router = useRouter();
-
-  const search = parseSearch(router.query);
+  const { search } = useSearch();
 
   return (
     <Layout>
