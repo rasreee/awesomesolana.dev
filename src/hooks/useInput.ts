@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-export function useAutoFocusedInput({
-  value: initialValue = '',
-}: {
-  value?: string | undefined;
-}): {
+export function useAutoFocusedInput(): {
   ref: React.MutableRefObject<HTMLInputElement | null>;
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 } {
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState('');
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setValue(event.currentTarget.value);

@@ -1,61 +1,60 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { useAutoFocusedInput } from '@/hooks/useInput';
+import { waitFor } from '@/lib/waitFor';
 import { ErrorMessage } from '@/ui/ErrorMessage';
 import { SearchInput } from '@/ui/SearchInput';
 import { StatefulSearchIcon } from '@/ui/StatefulSearchIcon';
 
-import { useSearch } from './SearchContext';
 import { searchTags, Tag } from './tags';
-import { useSearchQuery } from './useSearchQuery';
 
 const PLACEHOLDER_TEXT = 'Search for any project, dependency, or topic';
 
 export const SearchBar = () => {
-  const router = useRouter();
-  const { search } = useSearch();
+  const [isRequesting, setIsRequesting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [value, setValue] = useState('');
 
-  const { value: query, ...bindInput } = useAutoFocusedInput({
-    value: search.query,
-  });
+  const [tags, setTags] = useState<Tag[]>([]);
 
   useEffect(() => {
-    if (router.asPath === '/' && (!query || !search.tags?.length)) return;
+    const runSearch = async (searchQuery: string) => {
+      await waitFor(300);
+      setError(null);
+      setIsRequesting(true);
+      try {
+        const result = await searchTags(searchQuery);
+        setTags(result);
+      } catch (e) {
+        if (e instanceof Error) {
+          console.error(e);
+          setError(e.message);
+        }
+      } finally {
+        setIsRequesting(false);
+      }
+    };
 
-    const urlQuery = search.tags?.length
-      ? `?tags=${search.tags.map((tag) => tag.name).join(',')}`
-      : '';
-
-    router.push(`/search${urlQuery}`);
-  }, [search.tags]);
-
-  const handleSuccess = (tags: Tag[]) => {
-    if (!tags.length && !search.tags?.length) return;
-
-    // setSearch((prev) => {
-    //   let newTags: Tag[] = [...tags];
-    //   if (search.tags) {
-    //     newTags = [...newTags, ...search.tags];
-    //   }
-    //   return { ...prev, tags: newTags };
-    // });
-  };
-
-  const { error, isRequesting } = useSearchQuery(query, {
-    searchFn: searchTags,
-    onSuccess: handleSuccess,
-  });
+    runSearch(value);
+  }, [value]);
 
   return (
-    <div className="flex items-center gap-1 px-5 py-2">
-      <ErrorMessage>{error}</ErrorMessage>
-      <StatefulSearchIcon isRequesting={isRequesting} />
-      <SearchInput
-        placeholder={PLACEHOLDER_TEXT}
-        value={query}
-        {...bindInput}
-      />
-    </div>
+    <>
+      <div className="flex items-center gap-1 px-5 py-2">
+        <ErrorMessage>{error}</ErrorMessage>
+        <StatefulSearchIcon isRequesting={isRequesting} />
+        <SearchInput
+          placeholder={PLACEHOLDER_TEXT}
+          value={value}
+          onChange={(event) => setValue(event.currentTarget.value)}
+        />
+      </div>
+      {tags.length > 0 && !isRequesting && (
+        <ul>
+          {tags.map((tag) => (
+            <li key={tag.name}>{tag.name}</li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 };
