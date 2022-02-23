@@ -41,7 +41,7 @@ export const TagsMenu = ({ type, tags }: TagsMenuProps) => {
         </div>
       </button>
       <Popover
-        className="bg-surface mt-2 max-w-fit px-2 py-3"
+        className="bg-surface mt-2 px-2 py-3"
         isOpen={open}
         onRequestClose={closeMenu}
       >
