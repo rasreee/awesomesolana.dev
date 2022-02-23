@@ -13,7 +13,9 @@ export function HomePage() {
         </div>
         <div className="my-3 text-center text-lg">{DESCRIPTION}</div>
       </div>
-      <SearchBar />
+      <div className="mx-auto max-w-3xl">
+        <SearchBar />
+      </div>
     </Layout>
   );
 }

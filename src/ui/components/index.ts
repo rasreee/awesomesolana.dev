@@ -4,7 +4,6 @@ export * from './Modal';
 export * from './NextImage';
 export * from './Popover';
 export * from './Responsive';
-export * from './SearchInput';
 export * from './Seo';
-export * from './StatefulSearchIcon';
+export * from '../../modules/search/StatefulSearchIcon';
 export * from './Tag';

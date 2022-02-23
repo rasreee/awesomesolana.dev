@@ -1,7 +1,6 @@
 import clsxm from '@/lib/clsxm';
-
-import SearchIcon from '../icon/SearchIcon';
-import Spinner from '../progress/Spinner';
+import SearchIcon from '@/ui/icon/SearchIcon';
+import Spinner from '@/ui/progress/Spinner';
 
 export function StatefulSearchIcon({
   isRequesting,
