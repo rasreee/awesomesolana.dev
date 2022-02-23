@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useSWR, { SWRResponse } from 'swr';
 
 import {
-  allProjects,
+  ALL_PROJECTS,
   filterProjectsByTags,
   filterProjectsByTitle,
   Project,
@@ -28,7 +28,7 @@ function useProjectsByTags(
         )}`
       : null,
     async (): Promise<Project[]> => {
-      const result = await Promise.resolve(allProjects);
+      const result = await Promise.resolve(ALL_PROJECTS);
 
       const filtered = filterProjectsByTags(result, tags ?? []);
 
@@ -88,9 +88,9 @@ export function SearchPage() {
           </div>
         </div>
       </HideOnMobile>
-      <div className="mx-5">
-        <Results filteredProjects={filteredProjects} />
-      </div>
+      <Results
+        projects={filteredProjects.length ? filteredProjects : ALL_PROJECTS}
+      />
     </Layout>
   );
 }

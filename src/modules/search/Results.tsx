@@ -2,12 +2,14 @@ import { Project } from '@/data/projects';
 
 import { ProjectItem } from './ProjectItem';
 
-export function Results({ filteredProjects }: { filteredProjects: Project[] }) {
+export function Results({ projects }: { projects: Project[] }) {
   return (
-    <div>
-      {filteredProjects.map((project) => (
-        <ProjectItem key={project.id} {...project} />
+    <ul>
+      {projects.map((project) => (
+        <li key={project.id}>
+          <ProjectItem {...project} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

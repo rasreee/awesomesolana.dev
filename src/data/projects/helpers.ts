@@ -1,6 +1,6 @@
 import { ContentTag, filterTagsByType } from '@/data/tags';
 
-import { allProjects } from './constants';
+import { ALL_PROJECTS } from './constants';
 import { Project } from './types';
 
 export const filterProjects = (tags: ContentTag[]): Project[] => {
@@ -10,7 +10,7 @@ export const filterProjects = (tags: ContentTag[]): Project[] => {
 
   const topics = filterTagsByType(tags, 'topic').map((topic) => topic.name);
 
-  return allProjects.filter(
+  return ALL_PROJECTS.filter(
     (project) =>
       filterTagsByType(project.tags, 'dependency').some((dependency) =>
         dependencies.includes(dependency.name),

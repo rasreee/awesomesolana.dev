@@ -1,25 +1,39 @@
 import { Project } from '@/data/projects';
-import { ContentTag, filterTagsByType } from '@/data/tags';
+import { ContentTag } from '@/data/tags';
+
+import { useSearch } from './SearchContext';
 
 function getTagKey(tag: ContentTag): string {
   return `${tag.type}_${tag.name}`;
 }
 
+function getIntersection(a: ContentTag[], b: ContentTag[]): ContentTag[] {
+  const result: ContentTag[] = [];
+  const bNames = b.map((item) => item.name);
+
+  a.forEach((item) => {
+    if (bNames.includes(item.name)) {
+      result.push(item);
+    }
+  });
+
+  return result;
+}
+
 export function ProjectItem({ title, description, tags, ...props }: Project) {
+  const { search } = useSearch();
+
+  const tagsToShow = search.tags ? getIntersection(search.tags, tags) : tags;
+
   return (
-    <div {...props}>
-      <div className="text-lg font-medium">{title}</div>
+    <div {...props} className="flex flex-col gap-2 px-5 py-3">
+      <div className="text-xl font-semibold">{title}</div>
       <div className="text-base">{description}</div>
-      <div className="flex flex-wrap items-center gap-1">
-        {filterTagsByType(tags, 'dependency').map((dependency) => (
-          <div key={getTagKey(dependency)}>{dependency.name}</div>
+      <ul>
+        {tagsToShow.map((tag) => (
+          <li key={getTagKey(tag)}>{tag.name}</li>
         ))}
-      </div>
-      <div className="flex flex-wrap items-center gap-1">
-        {filterTagsByType(tags, 'topic').map((topic) => (
-          <div key={getTagKey(topic)}>{topic.name}</div>
-        ))}
-      </div>
+      </ul>
     </div>
   );
 }

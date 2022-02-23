@@ -1,6 +1,6 @@
 import { Project } from './types';
 
-export const allProjects: Project[] = [
+export const ALL_PROJECTS: Project[] = [
   {
     id: 'foo-bar',
     title: 'Foo Bar',
