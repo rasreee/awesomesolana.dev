@@ -1,13 +1,10 @@
-import { filterProjects } from '../projects';
+import { Project } from '../projects';
 import { ProjectItem } from './ProjectItem';
-import { useSearch } from './SearchContext';
 
-export function Results() {
-  const { search } = useSearch();
-
+export function Results({ filteredProjects }: { filteredProjects: Project[] }) {
   return (
     <div>
-      {filterProjects(search.tags ?? []).map((project) => (
+      {filteredProjects.map((project) => (
         <ProjectItem key={project.id} {...project} />
       ))}
     </div>

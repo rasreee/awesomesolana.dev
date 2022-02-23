@@ -1,26 +1,63 @@
 import { useEffect, useState } from 'react';
+import useSWR, { SWRResponse } from 'swr';
 
 import { waitFor } from '@/lib/waitFor';
 import { HideOnMobile, OnlyMobile } from '@/ui/components';
 import { Layout } from '@/ui/layouts';
 
+import {
+  allProjects,
+  filterProjectsByTags,
+  filterProjectsByTitle,
+  Project,
+} from '../projects';
+import { ContentTag } from '../tags';
 import { FiltersMenu } from './Filters';
 import { MobileSearchBox } from './MobileSearchBox';
 import { Results } from './Results';
 import { SearchBox } from './SearchBox';
+import { useSearch } from './SearchContext';
+
+function useProjectsByTags(
+  tags: ContentTag[] | undefined,
+): SWRResponse<Project[], Error> {
+  const swr = useSWR<Project[], Error>(
+    tags
+      ? `projects?tags=${encodeURIComponent(
+          tags.map((tag) => tag.name).join(','),
+        )}`
+      : null,
+    async (): Promise<Project[]> => {
+      const result = await Promise.resolve(allProjects);
+
+      const filtered = filterProjectsByTags(result, tags ?? []);
+
+      return filtered;
+    },
+  );
+
+  return swr;
+}
 
 export function SearchPage() {
+  const { search } = useSearch();
+  const { data: allProjects } = useProjectsByTags(search.tags);
+
   const [value, setValue] = useState('');
   const [isRequesting, setIsRequesting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const searchBoxProps = { value, onChange: setValue, isRequesting, error };
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
 
   const submitQuery = async (query: string) => {
     setIsRequesting(true);
     setError(null);
     try {
-      console.log('submitQuery', query);
+      const newFilteredProjects = filterProjectsByTitle(
+        allProjects ?? [],
+        query,
+      );
+      setFilteredProjects(newFilteredProjects);
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -31,6 +68,8 @@ export function SearchPage() {
   useEffect(() => {
     waitFor(300).then(() => submitQuery(value));
   }, [value]);
+
+  const searchBoxProps = { value, onChange: setValue, isRequesting, error };
 
   return (
     <Layout>
@@ -47,7 +86,7 @@ export function SearchPage() {
           </div>
         </div>
       </HideOnMobile>
-      <Results />
+      <Results filteredProjects={filteredProjects} />
     </Layout>
   );
 }

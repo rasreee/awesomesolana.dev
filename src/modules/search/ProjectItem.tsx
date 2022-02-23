@@ -1,24 +1,23 @@
 import { Project } from '../projects';
+import { ContentTag, filterTagsByType } from '../tags';
 
-export function ProjectItem({
-  title,
-  description,
-  dependencies,
-  topics,
-  ...props
-}: Project) {
+function getTagKey(tag: ContentTag): string {
+  return `${tag.type}_${tag.name}`;
+}
+
+export function ProjectItem({ title, description, tags, ...props }: Project) {
   return (
     <div {...props}>
       <div className="text-lg font-medium">{title}</div>
       <div className="text-base">{description}</div>
       <div className="flex flex-wrap items-center gap-1">
-        {dependencies.map((dependency) => (
-          <div key={dependency}>{dependency}</div>
+        {filterTagsByType(tags, 'dependency').map((dependency) => (
+          <div key={getTagKey(dependency)}>{dependency.name}</div>
         ))}
       </div>
       <div className="flex flex-wrap items-center gap-1">
-        {topics.map((topic) => (
-          <div key={topic}>{topic}</div>
+        {filterTagsByType(tags, 'topic').map((topic) => (
+          <div key={getTagKey(topic)}>{topic.name}</div>
         ))}
       </div>
     </div>
