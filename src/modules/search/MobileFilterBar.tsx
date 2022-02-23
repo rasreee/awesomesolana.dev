@@ -1,9 +1,10 @@
 import { FilterType, getFilterTypes } from '@/api/filters';
+import clsxm from '@/lib/clsxm';
 
 import { useSearch } from './SearchContext';
 import { TagsMenu } from './TagsMenu';
 
-export function MobileFilterBar() {
+export function MobileFilterBar({ className }: { className?: string }) {
   const { search } = useSearch();
 
   const tags = search.tags ?? [];
@@ -14,7 +15,9 @@ export function MobileFilterBar() {
 
   return (
     <>
-      <ul className="flex items-center gap-2 overflow-x-auto">
+      <ul
+        className={clsxm('flex items-center gap-2 overflow-x-auto', className)}
+      >
         {getFilterTypes()
           .sort((a, b) => getCountForType(b) - getCountForType(a))
           .map((type) => (

@@ -30,10 +30,11 @@ export const TagsMenu = ({ type }: TagsMenuProps) => {
           count > 0 ? 'text bg-surface-1' : 'text-hint bg-surface',
           'px-3 py-2',
           'rounded-lg',
-          'flex w-full items-center justify-between gap-3 bg-opacity-70 hover:bg-opacity-90 active:bg-opacity-100',
+          'flex w-full items-center justify-between gap-5 bg-opacity-70 hover:bg-opacity-90 active:bg-opacity-100',
+          'md:flex-1',
         )}
       >
-        <span className="max-w-[8rem] truncate text-sm leading-none">
+        <span className="max-w-[7rem] truncate text-sm leading-none md:max-w-[10rem]">
           {capitalizeFirst(toPluralFilterType(type))}
         </span>
         <div
@@ -41,7 +42,8 @@ export const TagsMenu = ({ type }: TagsMenuProps) => {
             count > 0
               ? 'bg-indigo-500 text-white dark:bg-indigo-600'
               : 'bg-surface-2',
-            'flex h-5 w-5 items-center justify-center rounded-full',
+            'h-5 w-5 min-w-[1.25rem] rounded-full',
+            'flex items-center justify-center',
           )}
         >
           <span className="my-auto text-xs font-semibold leading-none">

@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import { Layout } from '@/ui/layouts';
 
+import { MobileFilterBar } from '../search';
 import { SearchBar } from './SearchBar';
 
 const DESCRIPTION =
@@ -32,7 +33,10 @@ export function HomePage() {
               {DESCRIPTION}
             </div>
           </div>
-          <SearchBar />
+          <div className="flex flex-col gap-3">
+            <SearchBar />
+            <MobileFilterBar className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3" />
+          </div>
         </div>
       </div>
     </Layout>
