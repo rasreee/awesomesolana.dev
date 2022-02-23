@@ -160,6 +160,10 @@
     @apply h-[var(--header-height)];
   }
 
+  .text {
+    @apply text-gray-800 dark:text-gray-50;
+  }
+
   .text-hint {
     @apply text-gray-500 dark:text-gray-400;
   }

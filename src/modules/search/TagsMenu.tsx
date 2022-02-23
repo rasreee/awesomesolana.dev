@@ -3,25 +3,20 @@ import { useState } from 'react';
 import { allTagsByType, ContentTag, TAG_TYPE_TO_PLURAL } from '@/data/tags';
 import { capitalizeFirst } from '@/lib/capitalizeFirst';
 import clsxm from '@/lib/clsxm';
-import { Popover, Tag } from '@/ui/components';
+import { Popover, Tag, TextInput } from '@/ui/components';
 
 import { useSearch } from './SearchContext';
 
 type TagsMenuProps = { type: ContentTag['type'] };
 
 export const TagsMenu = ({ type }: TagsMenuProps) => {
-  const { search, removeTag } = useSearch();
+  const { search } = useSearch();
 
   const [open, setOpen] = useState(false);
 
   const openMenu = () => setOpen(true);
 
   const closeMenu = () => setOpen(false);
-
-  const onRemoveClick = (tag: ContentTag) => () => {
-    removeTag(tag);
-    closeMenu();
-  };
 
   return (
     <>
@@ -45,18 +40,51 @@ export const TagsMenu = ({ type }: TagsMenuProps) => {
         </div>
       </button>
       <Popover
-        className="bg-surface mt-2 max-w-fit px-2 py-3"
+        className="bg-surface fixed top-0 left-0 max-w-fit rounded-none px-2 py-3"
         isOpen={open}
         onRequestClose={closeMenu}
       >
-        <ul className={clsxm('flex flex-wrap items-center gap-3')}>
-          {allTagsByType(type).map((tag) => (
-            <li key={tag.name}>
-              <Tag onClickRemove={onRemoveClick(tag)}>{tag.name}</Tag>
-            </li>
-          ))}
-        </ul>
+        <TagsSearch type={type} />
       </Popover>
     </>
   );
 };
+
+function TagsSearch({ type }: { type: ContentTag['type'] }) {
+  const { removeTag } = useSearch();
+
+  const [query, setQuery] = useState('');
+
+  const onRemoveClick = (tag: ContentTag) => () => removeTag(tag);
+
+  return (
+    <>
+      <div className="flex items-center justify-between py-4 pb-7">
+        <button className="text bg-surface-1 rounded-lg bg-opacity-80 px-3 py-1 font-medium text-opacity-70">
+          Clear
+        </button>
+        <span className="text-lg font-semibold">
+          {capitalizeFirst(TAG_TYPE_TO_PLURAL[type])}
+        </span>
+        <button className="text rounded-lg bg-indigo-600 px-3 py-1 font-medium">
+          Done
+        </button>
+      </div>
+      <TextInput
+        type="search"
+        name={`${type}-filter-search`}
+        value={query}
+        onChange={setQuery}
+        placeholder={`Search ${TAG_TYPE_TO_PLURAL[type]}...`}
+        className="bg-app rounded-md text-base placeholder:text-base"
+      />
+      <ul className={clsxm('flex flex-wrap items-center gap-3')}>
+        {allTagsByType(type).map((tag) => (
+          <li key={tag.name}>
+            <Tag onClickRemove={onRemoveClick(tag)}>{tag.name}</Tag>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
