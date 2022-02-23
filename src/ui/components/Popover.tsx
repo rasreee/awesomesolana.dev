@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
-import { EventKeys, useKeyPress } from '@/hooks/useKeyPress';
 import clsxm from '@/lib/clsxm';
 
 export function Popover({
@@ -12,14 +11,12 @@ export function Popover({
 }: {
   children: React.ReactNode;
   isOpen: boolean;
-  onRequestClose: () => void;
+  onRequestClose: React.MouseEventHandler<HTMLDivElement>;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useClickOutside(ref, onRequestClose);
-
-  useKeyPress(EventKeys.ESCAPE, onRequestClose);
 
   if (!isOpen) return null;
 

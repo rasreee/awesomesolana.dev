@@ -15,14 +15,14 @@ const DEFAULT_EVENTS = ['mousedown', 'touchstart'];
  */
 export function useClickOutside<T extends HTMLElement>(
   ref: RefObject<T> | MutableRefObject<T>,
-  callback: EventListener,
+  callback: React.MouseEventHandler<T>,
   events: string[] = DEFAULT_EVENTS,
 ): void {
   const cbRef = useSyncedRef(callback);
   const refRef = useSyncedRef(ref);
 
   useEffect(() => {
-    function handler(this: HTMLElement, event: Event) {
+    function handler(this: T, event: React.MouseEvent<T>) {
       if (!refRef.current.current) return;
 
       const { target: evtTarget } = event;
@@ -36,10 +36,12 @@ export function useClickOutside<T extends HTMLElement>(
       }
     }
 
-    events.forEach((name) => on(document, name, handler, { passive: true }));
+    events.forEach((name) => on(document, name, handler, { passive: false }));
 
     return () => {
-      events.forEach((name) => off(document, name, handler, { passive: true }));
+      events.forEach((name) =>
+        off(document, name, handler, { passive: false }),
+      );
     };
   }, [...events]);
 }

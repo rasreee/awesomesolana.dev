@@ -30,10 +30,10 @@ export function TextInput({
     <input
       placeholder={placeholder}
       className={clsxm(
-        'block max-w-full flex-1 border-none leading-none',
+        'block max-w-full flex-1 border-none',
         'bg-transparent',
         'text-base-600 dark:text-base-100 dark:placeholder:text-gray-400',
-        'text-base md:text-lg',
+        'text-base leading-none placeholder:leading-none md:text-lg md:leading-none',
         className,
       )}
       ref={inputRef}

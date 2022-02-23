@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { TAG_TYPES } from '@/data/tags';
-import { ErrorMessage, Popover, TextInput } from '@/ui/components';
+import { useClickOutside } from '@/hooks/useClickOutside';
+import clsxm from '@/lib/clsxm';
+import { ErrorMessage, TextInput } from '@/ui/components';
 import { AdjustmentsIcon } from '@/ui/icon/AdjustmentsIcon';
 import { XIcon } from '@/ui/icon/XIcon';
 
@@ -11,7 +13,7 @@ import { SearchBoxProps } from './SearchBox';
 import { useSearch } from './SearchContext';
 import { StatefulSearchIcon } from './StatefulSearchIcon';
 
-const DEFAULT_PLACEHOLDER = 'Search for any project, dependency, or topic';
+const DEFAULT_PLACEHOLDER = 'Search projects...';
 
 export function MobileSearchBox({
   value,
@@ -21,39 +23,73 @@ export function MobileSearchBox({
 }: SearchBoxProps) {
   const [filtersMenuOpen, setFiltersMenuOpen] = useState(false);
 
-  const toggleFiltersMenu = () => setFiltersMenuOpen((prev) => !prev);
+  const popoverRef = useRef<HTMLDivElement | null>(null);
+
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+  useClickOutside(popoverRef, (e) => {
+    if (buttonRef.current?.contains(e.target as HTMLElement)) return;
+    setFiltersMenuOpen(false);
+  });
+
+  const toggleFiltersMenu = () => {
+    setFiltersMenuOpen((prev) => !prev);
+  };
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="bg-surface flex w-full items-center gap-1 rounded-xl px-5 py-2">
-        <ErrorMessage>{error}</ErrorMessage>
-        <StatefulSearchIcon isRequesting={isRequesting} />
-        <TextInput
-          type="search"
-          name="search"
-          placeholder={DEFAULT_PLACEHOLDER}
-          value={value}
-          onChange={onChange}
-        />
-        <button onClick={toggleFiltersMenu}>
-          <AdjustmentsIcon />
-        </button>
+      <div className="flex items-center gap-1.5">
+        <div className="bg-surface flex flex-1 items-center gap-1 rounded-lg px-2 py-1">
+          <ErrorMessage>{error}</ErrorMessage>
+          <StatefulSearchIcon isRequesting={isRequesting} />
+          <TextInput
+            type="search"
+            name="search"
+            placeholder={DEFAULT_PLACEHOLDER}
+            value={value}
+            onChange={onChange}
+            className="text-base"
+          />
+          <button
+            ref={buttonRef}
+            onClick={toggleFiltersMenu}
+            className={clsxm(
+              'text opacity-80',
+              filtersMenuOpen && 'bg-surface-2 opacity-100',
+              'h-full rounded p-1',
+            )}
+          >
+            <AdjustmentsIcon />
+          </button>
+        </div>
       </div>
-      <MobileFiltersMenu
-        isOpen={filtersMenuOpen}
-        onRequestClose={toggleFiltersMenu}
-      />
+      <div className="relative">
+        {filtersMenuOpen && (
+          <div
+            className={clsxm(
+              'min-h-0',
+              'flex flex-col',
+              'rounded-lg',
+              'shadow-lg',
+              'overflow-hidden',
+              'absolute z-50',
+              'bg-surface w-full',
+            )}
+            ref={popoverRef}
+          >
+            <MobileFiltersMenu
+              onRequestClose={() => {
+                setFiltersMenuOpen(false);
+              }}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
-function MobileFiltersMenu({
-  isOpen,
-  onRequestClose,
-}: {
-  isOpen: boolean;
-  onRequestClose: () => void;
-}) {
+function MobileFiltersMenu({ onRequestClose }: { onRequestClose: () => void }) {
   const router = useRouter();
   const { search } = useSearch();
 
@@ -62,11 +98,7 @@ function MobileFiltersMenu({
   const clearFilters = () => router.push('/search');
 
   return (
-    <Popover
-      className="bg-surface relative w-full"
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-    >
+    <>
       <div className="flex flex-col gap-2 py-3">
         <div className="flex items-center justify-between px-5">
           <div className="text-lg font-semibold">Filters</div>
@@ -90,6 +122,6 @@ function MobileFiltersMenu({
           ))}
         </div>
       </div>
-    </Popover>
+    </>
   );
 }
