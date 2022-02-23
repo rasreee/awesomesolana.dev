@@ -25,7 +25,7 @@ export function filterProjectsByTitle(
   projects: Project[],
   query: string,
 ): Project[] {
-  if (!query) return [];
+  if (!query) return projects;
 
   let hits = [] as Project[];
 
@@ -45,18 +45,26 @@ export function filterProjectsByTags(
   tags: ContentTag[],
 ): Project[] {
   const dependencies = filterTagsByType(tags, 'dependency').map(
-    (dependency) => dependency.name,
+    (tag) => tag.name,
   );
 
-  const topics = filterTagsByType(tags, 'topic').map((topic) => topic.name);
+  const topics = filterTagsByType(tags, 'topic').map((tag) => tag.name);
+  const languages = filterTagsByType(tags, 'language').map((tag) => tag.name);
+  const frameworks = filterTagsByType(tags, 'framework').map((tag) => tag.name);
 
   return projects.filter(
     (project) =>
-      filterTagsByType(project.tags, 'dependency').some((dependency) =>
-        dependencies.includes(dependency.name),
+      filterTagsByType(project.tags, 'dependency').some((tag) =>
+        dependencies.includes(tag.name),
       ) ||
-      filterTagsByType(project.tags, 'topic').some((topic) =>
-        topics.includes(topic.name),
+      filterTagsByType(project.tags, 'topic').some((tag) =>
+        topics.includes(tag.name),
+      ) ||
+      filterTagsByType(project.tags, 'language').some((tag) =>
+        languages.includes(tag.name),
+      ) ||
+      filterTagsByType(project.tags, 'framework').some((tag) =>
+        frameworks.includes(tag.name),
       ),
   );
 }
