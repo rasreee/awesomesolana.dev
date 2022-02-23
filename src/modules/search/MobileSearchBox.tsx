@@ -10,7 +10,6 @@ import { XIcon } from '@/ui/icon/XIcon';
 
 import { FilterSection } from './Filters';
 import { SearchBoxProps } from './SearchBox';
-import { useSearch } from './SearchContext';
 import { StatefulSearchIcon } from './StatefulSearchIcon';
 
 const DEFAULT_PLACEHOLDER = 'Search projects...';
@@ -91,9 +90,6 @@ export function MobileSearchBox({
 
 function MobileFiltersMenu({ onRequestClose }: { onRequestClose: () => void }) {
   const router = useRouter();
-  const { search } = useSearch();
-
-  const selectedCount = search.tags?.length ?? 0;
 
   const clearFilters = () => router.push('/search');
 
@@ -103,14 +99,6 @@ function MobileFiltersMenu({ onRequestClose }: { onRequestClose: () => void }) {
         <div className="flex items-center justify-between px-5">
           <div className="text-lg font-semibold">Filters</div>
           <div className="flex items-center gap-5">
-            {selectedCount > 0 && (
-              <button
-                onClick={clearFilters}
-                className="active:bg-surface-1 rounded-md px-2 py-1 text-sm font-medium transition-all"
-              >
-                Clear all filters
-              </button>
-            )}
             <button onClick={onRequestClose}>
               <XIcon />
             </button>
@@ -120,6 +108,20 @@ function MobileFiltersMenu({ onRequestClose }: { onRequestClose: () => void }) {
           {TAG_TYPES.map((type) => (
             <FilterSection type={type} key={type} />
           ))}
+        </div>
+        <div className="flex items-center justify-around px-5 py-1">
+          <button
+            onClick={clearFilters}
+            className="active:bg-surface-1 text-hint hover:text active:text rounded-md px-12 py-2 text-base font-medium transition-all"
+          >
+            Clear
+          </button>
+          <button
+            onClick={onRequestClose}
+            className="active:bg-surface-1 rounded-md px-12 py-2 text-base font-medium transition-all"
+          >
+            Done
+          </button>
         </div>
       </div>
     </>

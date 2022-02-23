@@ -1,42 +1,31 @@
-import { Project } from '@/data/projects';
-import { ContentTag, getTagKey } from '@/data/tags';
-import clsxm from '@/lib/clsxm';
+import { ALL_PROJECTS, Project } from '@/data/projects';
 
-import { FilterTag } from './FilterTag';
 import { ProjectItem } from './ProjectItem';
 import { useSearch } from './SearchContext';
 
 export function Results({ projects }: { projects: Project[] }) {
-  const { search, removeTag } = useSearch();
+  const projectsToShow = projects.length ? projects : ALL_PROJECTS;
 
-  const onClickRemove = (tag: ContentTag) => () => removeTag(tag);
-
-  const getIsTagActive = (tag: ContentTag) => {
-    return search.tags?.map((t) => t.name).includes(tag.name);
-  };
+  const { clearFilters } = useSearch();
 
   return (
     <div>
-      <div className="flex flex-col gap-2 py-2 px-3">
-        <span className="text-sm">
-          {projects.length} {projects.length === 1 ? 'result' : 'results'} found
-          {search.tags && search.tags.length > 0 ? ` for tag(s):` : ''}
-        </span>
-        <ul className="flex flex-wrap items-center gap-2">
-          {search.tags?.map((tag) => (
-            <li key={getTagKey(tag)}>
-              <FilterTag
-                tag={tag}
-                isActive={getIsTagActive(tag)}
-                className={clsxm('pr-0.5')}
-                onClickRemove={onClickRemove(tag)}
-              />
-            </li>
-          ))}
-        </ul>
+      <div className="flex flex-col gap-2 py-2 px-1">
+        <div className="flex items-center justify-between">
+          <span className="text-hint text-base">
+            {projectsToShow.length}{' '}
+            {projects.length === 1 ? 'result' : 'results'} found
+          </span>
+          <button
+            onClick={clearFilters}
+            className="active:bg-surface-1 text bg-surface rounded-md px-3 py-1 text-sm font-medium opacity-80 transition-all"
+          >
+            Clear all filters
+          </button>
+        </div>
       </div>
       <ul>
-        {projects.map((project) => (
+        {projectsToShow.map((project) => (
           <li key={project.id}>
             <ProjectItem {...project} />
           </li>

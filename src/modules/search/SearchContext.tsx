@@ -10,6 +10,7 @@ export type ISearchContext = {
   addTag: (tag: ContentTag) => void;
   removeTag: (tag: ContentTag) => void;
   getTags: (type: ContentTag['type']) => ContentTag[];
+  clearFilters: () => void;
 };
 
 export const SearchContext = createContext<ISearchContext | undefined>(
@@ -77,11 +78,17 @@ export function SearchProvider({ children }: { children: any }) {
     router.push(newPath);
   };
 
+  const clearFilters = () => {
+    router.push('/search');
+  };
+
   const getTags = (type: ContentTag['type']) =>
     search.tags ? filterTagsByType(search.tags, type) : [];
 
   return (
-    <SearchContext.Provider value={{ search, removeTag, addTag, getTags }}>
+    <SearchContext.Provider
+      value={{ search, removeTag, addTag, getTags, clearFilters }}
+    >
       {children}
     </SearchContext.Provider>
   );
