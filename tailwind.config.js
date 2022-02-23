@@ -65,6 +65,7 @@ module.exports = {
     outline: ['focus', 'active', 'focus-within', 'focus-visible'],
     borderWidth: ['focus', 'active', 'focus-within', 'focus-visible'],
     borderColor: ['focus', 'active', 'focus-within', 'focus-visible'],
+    color: ['disabled'],
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };

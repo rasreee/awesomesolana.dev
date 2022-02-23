@@ -13,6 +13,7 @@ import { HideOnMobile, OnlyMobile } from '@/ui/components';
 import { Layout } from '@/ui/layouts';
 
 import { FiltersMenu } from './Filters';
+import { MobileResults } from './MobileResults';
 import { MobileSearchBox } from './MobileSearchBox';
 import { Results } from './Results';
 import { SearchBox } from './SearchBox';
@@ -77,7 +78,7 @@ export function SearchPage() {
     <Layout>
       <OnlyMobile className="mx-5">
         <MobileSearchBox {...searchBoxProps} />
-        <Results projects={filteredProjects} />
+        <MobileResults projects={filteredProjects} />
       </OnlyMobile>
       <HideOnMobile>
         <div className="flex justify-around gap-3 px-3">
