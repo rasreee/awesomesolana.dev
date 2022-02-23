@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import useSWR, { SWRResponse } from 'swr';
 
-import { waitFor } from '@/lib/waitFor';
-import { HideOnMobile, OnlyMobile } from '@/ui/components';
-import { Layout } from '@/ui/layouts';
-
 import {
   allProjects,
   filterProjectsByTags,
   filterProjectsByTitle,
   Project,
-} from '../projects';
-import { ContentTag } from '../tags';
+} from '@/data/projects';
+import { ContentTag } from '@/data/tags';
+import { waitFor } from '@/lib/waitFor';
+import { HideOnMobile, OnlyMobile } from '@/ui/components';
+import { Layout } from '@/ui/layouts';
+
 import { FiltersMenu } from './Filters';
 import { MobileSearchBox } from './MobileSearchBox';
 import { Results } from './Results';

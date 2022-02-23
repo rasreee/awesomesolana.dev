@@ -1,4 +1,5 @@
-import { Project } from '../projects';
+import { Project } from '@/data/projects';
+
 import { ProjectItem } from './ProjectItem';
 
 export function Results({ filteredProjects }: { filteredProjects: Project[] }) {

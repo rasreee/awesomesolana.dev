@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
+import { TAG_TYPES } from '@/data/tags';
 import { ErrorMessage, Popover, TextInput } from '@/ui/components';
 import { AdjustmentsIcon } from '@/ui/icon/AdjustmentsIcon';
 import { XIcon } from '@/ui/icon/XIcon';
 
-import { TAG_TYPES } from '../tags';
 import { FilterSection } from './Filters';
 import { SearchBoxProps } from './SearchBox';
 import { useSearch } from './SearchContext';

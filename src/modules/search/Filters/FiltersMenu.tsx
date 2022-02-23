@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { TAG_TYPES } from '@/modules/tags';
+import { TAG_TYPES } from '@/data/tags';
 
 import { useSearch } from '../SearchContext';
 import { FilterSection } from '.';

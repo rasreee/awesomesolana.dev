@@ -7,7 +7,7 @@ import {
   filterTagsByType,
   searchTags,
   TAG_TYPE_TO_PLURAL,
-} from '@/modules/tags';
+} from '@/data/tags';
 import { TextInput } from '@/ui/components';
 
 import { useSearch } from '../SearchContext';

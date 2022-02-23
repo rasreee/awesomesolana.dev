@@ -1,4 +1,4 @@
-import { ContentTag } from '../tags';
+import { ContentTag } from '@/data/tags';
 
 export type Project = {
   id: string;

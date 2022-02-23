@@ -1,5 +1,5 @@
-import { Project } from '../projects';
-import { ContentTag, filterTagsByType } from '../tags';
+import { Project } from '@/data/projects';
+import { ContentTag, filterTagsByType } from '@/data/tags';
 
 function getTagKey(tag: ContentTag): string {
   return `${tag.type}_${tag.name}`;

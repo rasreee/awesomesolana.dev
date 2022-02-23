@@ -1,7 +1,7 @@
 import { NextRouter, useRouter } from 'next/router';
 import { createContext, useContext, useMemo } from 'react';
 
-import { ContentTag, filterTagsByType, getContentTag } from '@/modules/tags';
+import { ContentTag, filterTagsByType, getContentTag } from '@/data/tags';
 
 import { Search } from './types';
 

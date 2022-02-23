@@ -1,12 +1,8 @@
 import { useState } from 'react';
 
+import { ContentTag, filterTagsByType, TAG_TYPE_TO_PLURAL } from '@/data/tags';
 import { capitalizeFirst } from '@/lib/capitalizeFirst';
 import clsxm from '@/lib/clsxm';
-import {
-  ContentTag,
-  filterTagsByType,
-  TAG_TYPE_TO_PLURAL,
-} from '@/modules/tags';
 import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icon/ChevronIcon';
 
 import { useSearch } from '../SearchContext';

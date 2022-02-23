@@ -1,4 +1,5 @@
-import { ContentTag, filterTagsByType } from '../tags';
+import { ContentTag, filterTagsByType } from '@/data/tags';
+
 import { allProjects } from './constants';
 import { Project } from './types';
 

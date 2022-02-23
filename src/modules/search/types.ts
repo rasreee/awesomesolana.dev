@@ -1,4 +1,4 @@
-import { ContentTag } from '@/modules/tags';
+import { ContentTag } from '@/data/tags';
 
 export type Search = {
   query?: string;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
+import { ContentTag, searchTags } from '@/data/tags';
 import { useSearch } from '@/modules/search';
-import { ContentTag, searchTags } from '@/modules/tags';
 import { Popover } from '@/ui/components';
 
 import { GroupedSearchMenu } from './GroupedSearchMenu';
