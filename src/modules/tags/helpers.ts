@@ -39,3 +39,12 @@ export const TAG_TYPE_TO_PLURAL = {
   dependency: 'dependencies',
   topic: 'topics',
 };
+
+type GroupedTags = Array<{ type: ContentTag['type']; tags: ContentTag[] }>;
+
+export function groupTagsByType(tags: ContentTag[]): GroupedTags {
+  return [
+    { type: 'dependency', tags: tagsByType(tags, 'dependency') },
+    { type: 'topic', tags: tagsByType(tags, 'topic') },
+  ];
+}

@@ -4,9 +4,9 @@ import { capitalizeFirst } from '@/lib/capitalizeFirst';
 import { waitFor } from '@/lib/waitFor';
 import {
   ContentTag,
+  groupTagsByType,
   searchTags,
   TAG_TYPE_TO_PLURAL,
-  tagsByType,
 } from '@/modules/tags';
 import {
   ErrorMessage,
@@ -64,11 +64,6 @@ export const SearchBar = () => {
       !search.tags?.map((selectedTag) => selectedTag.name).includes(tag.name),
   );
 
-  const groupedTags: Array<{ type: ContentTag['type']; tags: ContentTag[] }> = [
-    { type: 'dependency', tags: tagsByType(tagsToShow, 'dependency') },
-    { type: 'topic', tags: tagsByType(tagsToShow, 'topic') },
-  ];
-
   return (
     <div>
       <div className="flex items-center gap-1 px-5 py-2">
@@ -85,7 +80,7 @@ export const SearchBar = () => {
         isOpen={tags.length > 0 && !isRequesting}
         onRequestClose={closePopover}
       >
-        {groupedTags.map(
+        {groupTagsByType(tagsToShow).map(
           ({ type, tags: list }) =>
             list.length > 0 && (
               <div className="px-4">
