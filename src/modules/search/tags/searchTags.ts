@@ -1,9 +1,9 @@
-import { Tag, tags } from './tags';
+import { ContentTag, tags } from './tags';
 
-export async function searchTags(query: string): Promise<Tag[]> {
+export async function searchTags(query: string): Promise<ContentTag[]> {
   if (!query) return Promise.resolve([]);
 
-  let hits = [] as Tag[];
+  let hits = [] as ContentTag[];
 
   const a = query.toLowerCase();
 
