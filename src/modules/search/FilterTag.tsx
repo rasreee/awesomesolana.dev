@@ -19,13 +19,13 @@ export function FilterTag({
         'py-0.5 px-2.5',
         'rounded-md',
         'flex items-center justify-between gap-1',
-        'min-w-max max-w-min',
-        'text-sm',
+        'w-max max-w-[11rem] overflow-hidden',
+
         className,
         isActive ? 'bg-surface-1 font-medium' : 'bg-surface bg-opacity-80',
       )}
     >
-      <span>{tag.name}</span>
+      <span className="truncate text-sm">{tag.name}</span>
       {onClickRemove && (
         <button
           className="px-1 opacity-60 hover:opacity-80 active:opacity-100"
