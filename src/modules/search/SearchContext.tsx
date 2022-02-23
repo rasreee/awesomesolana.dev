@@ -37,21 +37,25 @@ export function SearchProvider({ children }: { children: any }) {
 
     const newPath =
       newTags.length > 0
-        ? `/search?tags=${newTags.map((tag) => tag.name).join(',')}`
+        ? `/search?tags=${encodeURIComponent(
+            newTags.map((tag) => tag.name).join(','),
+          )}`
         : `/search`;
 
     router.push(newPath);
   };
 
   const addTag = (tagToAdd: ContentTag) => {
-    let newPath = `/search?tags=${tagToAdd.name}`;
+    let newPath = `/search?tags=${encodeURIComponent(tagToAdd.name)}`;
 
     const { tags: oldTags } = search;
     if (oldTags) {
       const newTags = [...oldTags, tagToAdd];
       newPath =
         newTags.length > 0
-          ? `/search?tags=${newTags.map((tag) => tag.name).join(',')}`
+          ? `/search?tags=${encodeURIComponent(
+              newTags.map((tag) => tag.name).join(','),
+            )}`
           : `/search`;
     }
 
