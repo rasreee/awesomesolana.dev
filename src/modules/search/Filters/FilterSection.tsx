@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { getProjectsCountForTagType } from '@/data/projects';
 import { ContentTag, filterTagsByType, TAG_TYPE_TO_PLURAL } from '@/data/tags';
 import { capitalizeFirst } from '@/lib/capitalizeFirst';
 import clsxm from '@/lib/clsxm';
@@ -22,6 +23,8 @@ export function FilterSection({
   const toggleExpanded = () => setExpanded((prev) => !prev);
 
   const selectedCount = filterTagsByType(search.tags ?? [], type).length;
+
+  if (getProjectsCountForTagType(type) === 0) return null;
 
   return (
     <div className="flex flex-col gap-2">

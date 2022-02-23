@@ -1,5 +1,6 @@
 import invariant from '@/lib/invariant';
 
+import { getProjectsCountForTag } from '../projects';
 import { tags } from './constants';
 import { ContentTag } from './types';
 
@@ -60,4 +61,10 @@ export function allTagsByType(type: ContentTag['type']): ContentTag[] {
 
 export function getTagKey(tag: ContentTag): string {
   return `${tag.type}_${tag.name}`;
+}
+
+export function sortTagsByProjectCount(tags: ContentTag[]): ContentTag[] {
+  return tags.sort(
+    (a, b) => getProjectsCountForTag(b) - getProjectsCountForTag(a),
+  );
 }

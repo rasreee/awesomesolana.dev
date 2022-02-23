@@ -69,3 +69,15 @@ export function filterProjectsByTags(
       ),
   );
 }
+
+export function getProjectsCountForTag(tag: ContentTag): number {
+  return ALL_PROJECTS.filter((project) =>
+    project.tags.map((t) => t.name).includes(tag.name),
+  ).length;
+}
+
+export function getProjectsCountForTagType(type: ContentTag['type']): number {
+  return ALL_PROJECTS.filter((project) =>
+    project.tags.map((tag) => tag.type).includes(type),
+  ).length;
+}

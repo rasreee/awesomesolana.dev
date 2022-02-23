@@ -1,11 +1,14 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
+import { getProjectsCountForTag } from '@/data/projects';
 import {
   allTagsByType,
   ContentTag,
   filterTagsByType,
+  getTagKey,
   searchTags,
+  sortTagsByProjectCount,
   TAG_TYPE_TO_PLURAL,
 } from '@/data/tags';
 import { TextInput } from '@/ui/components';
@@ -38,9 +41,10 @@ export function FilterMenu({ type }: { type: ContentTag['type'] }) {
   };
 
   const previewOptions = allTagsByType(type).slice(0, expanded ? 10 : 5);
-  const tagsToShow = query
-    ? searchTags(query, (tag) => tag.type === type)
-    : previewOptions;
+
+  const tagsToShow = sortTagsByProjectCount(
+    query ? searchTags(query, (tag) => tag.type === type) : previewOptions,
+  );
 
   const router = useRouter();
 
@@ -59,6 +63,8 @@ export function FilterMenu({ type }: { type: ContentTag['type'] }) {
 
   const selectedCount = filterTagsByType(search.tags ?? [], type).length;
 
+  const canShowMore = tagsToShow.length > 0;
+
   return (
     <div className="flex flex-col">
       <div className="bg-app flex items-center gap-1 rounded-md pr-3">
@@ -68,7 +74,7 @@ export function FilterMenu({ type }: { type: ContentTag['type'] }) {
           value={query}
           onChange={setQuery}
           placeholder={`Search ${TAG_TYPE_TO_PLURAL[type]}...`}
-          className="bg-app rounded-md text-base placeholder:text-base"
+          className="bg-app rounded-md text-sm leading-none placeholder:text-sm placeholder:leading-none"
         />
         {selectedCount > 0 && (
           <button
@@ -80,43 +86,56 @@ export function FilterMenu({ type }: { type: ContentTag['type'] }) {
         )}
       </div>
       <ul>
-        {tagsToShow.map((filter) => (
+        {tagsToShow.map((tag) => (
           <FilterOption
-            key={filter.name}
-            name={filter.name}
-            onClick={onClickItem(filter)}
-            checked={getFilterChecked(filter)}
+            key={getTagKey(tag)}
+            tag={tag}
+            onClick={onClickItem(tag)}
+            checked={getFilterChecked(tag)}
           />
         ))}
       </ul>
-      <button
-        className="max-w-max px-3 py-1 text-left font-medium hover:font-semibold"
-        onClick={toggleExpanded}
-      >
-        Show {expanded ? 'less' : 'more'}
-      </button>
+      {canShowMore && (
+        <button
+          className="max-w-max py-2 text-left text-base font-normal leading-none hover:font-medium"
+          onClick={toggleExpanded}
+        >
+          Show {expanded ? 'less' : 'more'}
+        </button>
+      )}
     </div>
   );
 }
 
 function FilterOption({
-  name,
+  tag,
   onClick,
   checked,
   ...props
 }: React.HTMLAttributes<HTMLLIElement> & {
-  name: string;
+  tag: ContentTag;
   onClick: () => void;
   checked: boolean;
 }) {
+  const count = getProjectsCountForTag(tag);
+
   return (
     <li
       {...props}
-      className="flex cursor-pointer items-center gap-2 px-3 py-1"
+      className="flex cursor-pointer items-center justify-between gap-2 px-1 py-2.5"
       onClick={onClick}
     >
-      <input type="checkbox" checked={checked} />
-      <span className="text-base">{name}</span>
+      <div className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          className="bg-app rounded border-none"
+          checked={checked}
+        />
+        <span className="text-sm leading-none">{tag.name}</span>
+      </div>
+      <span className="bg-surface-2 rounded-lg px-1.5 py-0.5 text-xs leading-none">
+        {count}
+      </span>
     </li>
   );
 }
