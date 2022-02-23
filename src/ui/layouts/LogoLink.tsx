@@ -1,24 +1,25 @@
 import React from 'react';
 
 import clsxm from '@/lib/clsxm';
+import { HideOnMobile, OnlyMobile } from '@/ui/components';
 import UnstyledLink from '@/ui/links/UnstyledLink';
 
 function LogoLink() {
   return (
     <>
-      <div className="hidden md:block">
+      <HideOnMobile>
         <UnstyledLink
           href="/"
           className={clsxm(
             'max-w-min sm:min-w-max',
             'font-sans text-xl font-extrabold leading-none',
-            'text-gray-700 hover:text-gray-800 active:text-gray-900 dark:hover:text-gray-300',
+            'text-gray-700 hover:text-gray-800 active:text-gray-900 dark:text-gray-200 dark:hover:text-gray-50',
           )}
         >
           AWESOME SOLANA
         </UnstyledLink>
-      </div>
-      <div className="md:hidden">
+      </HideOnMobile>
+      <OnlyMobile>
         <UnstyledLink
           href="/"
           className={clsxm(
@@ -28,7 +29,7 @@ function LogoLink() {
         >
           AWESOME SOLANA
         </UnstyledLink>
-      </div>
+      </OnlyMobile>
     </>
   );
 }

@@ -2,7 +2,7 @@ import { NextRouter } from 'next/router';
 
 export type Search = {
   query?: string;
-  tags?: any[];
+  tags?: string[];
 };
 
 export function parseSearch(parsedUrlQuery: NextRouter['query']): Search {

@@ -2,23 +2,31 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { waitFor } from '@/lib/waitFor';
-import { ErrorMessage } from '@/ui/ErrorMessage';
-import { Popover } from '@/ui/popover';
-import { SearchInput } from '@/ui/SearchInput';
-import { StatefulSearchIcon } from '@/ui/StatefulSearchIcon';
+import {
+  ErrorMessage,
+  Popover,
+  SearchInput,
+  StatefulSearchIcon,
+} from '@/ui/components';
 
+import { useSearch } from './SearchContext';
 import { searchTags, Tag } from './tags';
 
 const PLACEHOLDER_TEXT = 'Search for any project, dependency, or topic';
 
 export const SearchBar = () => {
   const router = useRouter();
+  const { search } = useSearch();
 
   const [isRequesting, setIsRequesting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [value, setValue] = useState('');
 
   const [tags, setTags] = useState<Tag[]>([]);
+
+  const closePopover = () => {
+    setTags([]);
+  };
 
   useEffect(() => {
     const runSearch = async (searchQuery: string) => {
@@ -41,8 +49,19 @@ export const SearchBar = () => {
     runSearch(value);
   }, [value]);
 
-  const onClickTag = (tag: Tag) => () => {
-    router.push(`search?tags=${tag.name}`);
+  const addTag = (tagToAdd: Tag) => () => {
+    let newPath = `/search?tags=${tagToAdd.name}`;
+
+    const { tags: oldTags } = search;
+    if (oldTags) {
+      const newTags = [...oldTags, tagToAdd.name];
+      newPath =
+        newTags.length > 0 ? `/search?tags=${newTags.join(',')}` : `/search`;
+    }
+
+    router.push(newPath);
+    closePopover();
+    setValue('');
   };
 
   return (
@@ -58,19 +77,21 @@ export const SearchBar = () => {
       </div>
       <Popover
         isOpen={tags.length > 0 && !isRequesting}
-        onRequestClose={() => setTags([])}
+        onRequestClose={closePopover}
       >
         <ul>
-          {tags.map((tag) => (
-            <li key={tag.name}>
-              <button
-                className="w-full py-2 px-4 text-left"
-                onClick={onClickTag(tag)}
-              >
-                {tag.name}
-              </button>
-            </li>
-          ))}
+          {tags
+            .filter((tag) => !search.tags?.includes(tag.name))
+            .map((tag) => (
+              <li key={tag.name}>
+                <button
+                  className="w-full py-2 px-4 text-left"
+                  onClick={addTag(tag)}
+                >
+                  {tag.name}
+                </button>
+              </li>
+            ))}
         </ul>
       </Popover>
     </div>

@@ -14,7 +14,13 @@ export default function Header() {
 
   return (
     <header className="bg-app layout h-header-footer flex items-center justify-between sm:px-6 sm:px-6 md:gap-9">
-      {!isHomePath ? <LogoLink /> : <div />}
+      {!isHomePath ? (
+        <div className="my-auto">
+          <LogoLink />
+        </div>
+      ) : (
+        <div />
+      )}
       <ColorModeToggle style={{ height: buttonSize, width: buttonSize }} />
     </header>
   );

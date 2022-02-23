@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-import Seo, { SeoProps } from '@/ui/Seo';
+import { Divider, Seo, SeoProps } from '@/ui/components';
 
-import { Divider } from '../divider';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -11,7 +10,7 @@ export interface LayoutProps {
   seoProps?: SeoProps;
 }
 
-export default function Layout({ children, seoProps }: LayoutProps) {
+export function Layout({ children, seoProps }: LayoutProps) {
   return (
     <>
       <Seo {...seoProps} />
