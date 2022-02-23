@@ -14,3 +14,7 @@ export function getIntersection<T extends {} = {}>(
 
   return result;
 }
+
+export function uniques<T = any>(list: T[]): T[] {
+  return [...new Set<T>(list).values()];
+}

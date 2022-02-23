@@ -1,9 +1,9 @@
-import { ContentTag } from '@/data/tags';
+import { SearchFilter } from '@/api/filters';
 
 export type Project = {
   id: string;
   title: string;
   description: string;
   githubUrl: string;
-  tags: ContentTag[];
+  tags: SearchFilter[];
 };

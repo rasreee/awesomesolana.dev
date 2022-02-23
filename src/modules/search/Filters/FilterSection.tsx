@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
-import { getProjectsCountForTagType } from '@/data/projects';
-import { ContentTag, filterTagsByType, TAG_TYPE_TO_PLURAL } from '@/data/tags';
-import { capitalizeFirst } from '@/lib/capitalizeFirst';
+import { filtersByType, SearchFilter, toPluralFilterType } from '@/api/filters';
 import clsxm from '@/lib/clsxm';
 import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icon/ChevronIcon';
 
@@ -13,7 +11,7 @@ export function FilterSection({
   type,
   autoExpand = false,
 }: {
-  type: ContentTag['type'];
+  type: SearchFilter['type'];
   autoExpand?: boolean;
 }) {
   const { search } = useSearch();
@@ -22,9 +20,7 @@ export function FilterSection({
 
   const toggleExpanded = () => setExpanded((prev) => !prev);
 
-  const selectedCount = filterTagsByType(search.tags ?? [], type).length;
-
-  if (getProjectsCountForTagType(type) === 0) return null;
+  const selectedCount = filtersByType(search.tags ?? [], type).length;
 
   return (
     <div className="flex flex-col gap-2">
@@ -36,7 +32,7 @@ export function FilterSection({
           {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
         </div>
         <div className={clsxm(expanded && 'font-semibold')}>
-          {capitalizeFirst(TAG_TYPE_TO_PLURAL[type])}{' '}
+          {toPluralFilterType(type)}{' '}
           {selectedCount > 0 ? `(${selectedCount})` : ''}
         </div>
       </button>

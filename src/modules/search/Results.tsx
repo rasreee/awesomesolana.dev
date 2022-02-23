@@ -1,28 +1,25 @@
-import { ALL_PROJECTS, Project } from '@/data/projects';
+import { ALL_PROJECTS } from '@/api/projects';
+import { OnlyMobile } from '@/ui/components';
 
+import { MobileFilterBar } from './MobileFilterBar';
 import { ProjectItem } from './ProjectItem';
+import { ResultsInfo } from './ResultsInfo';
 import { useSearch } from './SearchContext';
 
-export function Results({ projects }: { projects: Project[] }) {
-  const projectsToShow = projects.length ? projects : ALL_PROJECTS;
+export function Results() {
+  const { filteredProjects } = useSearch();
 
-  const { clearFilters } = useSearch();
+  const projectsToShow = filteredProjects.length
+    ? filteredProjects
+    : ALL_PROJECTS;
 
   return (
     <div>
-      <div className="flex flex-col gap-2 py-2 px-1">
-        <div className="flex items-center justify-between">
-          <span className="text-hint text-base">
-            {projectsToShow.length}{' '}
-            {projects.length === 1 ? 'result' : 'results'} found
-          </span>
-          <button
-            onClick={clearFilters}
-            className="active:bg-surface-1 text bg-surface rounded-md px-3 py-1 text-sm font-medium opacity-80 transition-all"
-          >
-            Clear all filters
-          </button>
-        </div>
+      <div className="flex flex-col py-2 px-1">
+        <OnlyMobile>
+          <MobileFilterBar />
+        </OnlyMobile>
+        <ResultsInfo />
       </div>
       <ul>
         {projectsToShow.map((project) => (

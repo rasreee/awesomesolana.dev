@@ -1,18 +1,30 @@
 import { NextRouter, useRouter } from 'next/router';
-import { createContext, useContext, useMemo } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
-import { ContentTag, filterTagsByType, getContentTag } from '@/data/tags';
+import { filtersByType, getFilterTypes, SearchFilter } from '@/api/filters';
+import {
+  filterProjectsByTitle,
+  Project,
+  useProjectsByTags,
+} from '@/api/projects';
+import { waitFor } from '@/lib/waitFor';
 
 import { Search } from './types';
 
 export type ISearchContext = {
   search: Search;
-  addTag: (tag: ContentTag) => void;
-  removeTag: (tag: ContentTag) => void;
-  getFilterChecked: (tag: ContentTag) => boolean;
-  getTags: (type: ContentTag['type']) => ContentTag[];
+  query: string;
+  setQuery: (query: string) => void;
+  error: string | null;
+  setError: (error: string | null) => void;
+  isRequesting: boolean;
+  setIsRequesting: (value: boolean) => void;
+  filteredProjects: Project[];
+  addFilter: (tag: SearchFilter) => void;
+  removeFilter: (tag: SearchFilter) => void;
+  getFilterChecked: (tag: SearchFilter) => boolean;
   clearFilters: () => void;
-  clearFiltersByType: (type: ContentTag['type']) => void;
+  clearFiltersByType: (type: SearchFilter['type']) => void;
 };
 
 export const SearchContext = createContext<ISearchContext | undefined>(
@@ -32,11 +44,23 @@ function parseSearch(parsedUrlQuery: NextRouter['query']): Search {
   if ('query' in parsedUrlQuery) {
     search.query = parsedUrlQuery['query'] as string;
   }
-  if ('tags' in parsedUrlQuery) {
-    search.tags = (parsedUrlQuery['tags'] as string)
-      .split(',')
-      .map(getContentTag);
-  }
+
+  const tags: SearchFilter[] = [];
+
+  const keys = Object.keys(parsedUrlQuery);
+
+  getFilterTypes().forEach((type) => {
+    if (keys.includes(type)) {
+      console.log(`keys.includes(${type})`, keys.includes(type));
+      const tagsForType = (parsedUrlQuery[type] as string)
+        .split(',')
+        .map((name) => ({ type, name }));
+
+      tags.push(...tagsForType);
+    }
+  });
+
+  search.tags = tags;
 
   return search;
 }
@@ -44,38 +68,81 @@ function parseSearch(parsedUrlQuery: NextRouter['query']): Search {
 export function SearchProvider({ children }: { children: any }) {
   const router = useRouter();
 
-  const search = useMemo(() => parseSearch(router.query), [router.query]);
+  const [query, setQuery] = useState('');
+  const [isRequesting, setIsRequesting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
 
-  const removeTag = (tagToRemove: ContentTag) => {
+  const search = useMemo(() => parseSearch(router.query), [router.query]);
+  const { data: allProjects } = useProjectsByTags(search.tags);
+
+  useEffect(() => {
+    if (!allProjects || !query) return;
+
+    const submitQuery = async (query: string) => {
+      setIsRequesting(true);
+      setError(null);
+      try {
+        const newFilteredProjects = filterProjectsByTitle(
+          allProjects ?? [],
+          query,
+        );
+        setFilteredProjects(newFilteredProjects);
+      } catch (e) {
+        setError((e as Error).message);
+      } finally {
+        setIsRequesting(false);
+      }
+    };
+
+    waitFor(300).then(() => submitQuery(query));
+  }, [query, allProjects]);
+
+  const removeFilter = (tagToRemove: SearchFilter) => {
     const { tags } = search;
 
     if (!tags) return;
 
     const newTags = tags.filter((tag) => tag.name !== tagToRemove.name);
 
-    const newPath =
-      newTags.length > 0
-        ? `/search?tags=${encodeURIComponent(
-            newTags.map((tag) => tag.name).join(','),
-          )}`
-        : `/search`;
+    let newPath = `/search`;
+
+    getFilterTypes().forEach((type) => {
+      const tagsForType = newTags.filter((tag) => tag.type === type);
+      if (tagsForType.length > 0) {
+        const prefix = newPath === '/search' ? '?' : '&';
+        newPath =
+          newPath +
+          prefix +
+          type +
+          `=${newTags
+            .filter((tag) => tag.type === type)
+            .map((tag) => tag.name)
+            .join(',')}`;
+      }
+    });
 
     router.push(newPath);
   };
 
-  const addTag = (tagToAdd: ContentTag) => {
-    let newPath = `/search?tags=${encodeURIComponent(tagToAdd.name)}`;
-
+  const addFilter = (tagToAdd: SearchFilter) => {
     const { tags: oldTags } = search;
-    if (oldTags) {
-      const newTags = [...oldTags, tagToAdd];
-      newPath =
-        newTags.length > 0
-          ? `/search?tags=${encodeURIComponent(
-              newTags.map((tag) => tag.name).join(','),
-            )}`
-          : `/search`;
-    }
+    const newTags = oldTags ? [...oldTags, tagToAdd] : [tagToAdd];
+
+    let newPath = `/search`;
+
+    getFilterTypes().forEach((type) => {
+      const tagsForType = newTags.filter((tag) => tag.type === type);
+
+      if (tagsForType.length > 0) {
+        const prefix = newPath === '/search' ? '?' : '&';
+        newPath =
+          newPath +
+          prefix +
+          type +
+          `=${tagsForType.map((tag) => tag.name).join(',')}`;
+      }
+    });
 
     router.push(newPath);
   };
@@ -84,39 +151,52 @@ export function SearchProvider({ children }: { children: any }) {
     router.push('/search');
   };
 
-  const getTags = (type: ContentTag['type']) =>
-    search.tags ? filterTagsByType(search.tags, type) : [];
-
-  const getFilterChecked = (filter: ContentTag): boolean => {
+  const getFilterChecked = (filter: SearchFilter): boolean => {
     const tags = search.tags ?? [];
-    return filterTagsByType(tags, filter.type)
+    return filtersByType(tags, filter.type)
       .map((item) => item.name)
       .includes(filter.name);
   };
 
-  const clearFiltersByType = (type: ContentTag['type']) => {
+  const clearFiltersByType = (typeToRemove: SearchFilter['type']) => {
     const oldTags = search.tags ?? [];
 
-    const newTags = oldTags.filter((tag) => tag.type !== type);
-    if (newTags.length === 0) return router.push('/search');
+    let newPath = `/search`;
 
-    router.push(
-      `/search?tags=${encodeURIComponent(
-        newTags.map((tag) => tag.name).join(','),
-      )}`,
-    );
+    getFilterTypes()
+      .filter((type) => type !== typeToRemove)
+      .forEach((type) => {
+        const tagsForType = oldTags.filter((tag) => tag.type === type);
+
+        if (tagsForType.length > 0) {
+          const prefix = newPath === '/search' ? '?' : '&';
+          newPath =
+            newPath +
+            prefix +
+            type +
+            `=${tagsForType.map((tag) => tag.name).join(',')}`;
+        }
+      });
+
+    router.push(newPath);
   };
 
   return (
     <SearchContext.Provider
       value={{
         search,
-        removeTag,
-        addTag,
-        getTags,
+        query,
+        setQuery,
+        error,
+        setError,
+        isRequesting,
+        setIsRequesting,
+        removeFilter,
+        addFilter,
         clearFilters,
         getFilterChecked,
         clearFiltersByType,
+        filteredProjects,
       }}
     >
       {children}

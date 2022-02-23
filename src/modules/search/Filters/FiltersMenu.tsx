@@ -1,17 +1,13 @@
-import { useRouter } from 'next/router';
-
-import { TAG_TYPES } from '@/data/tags';
+import { getFilterTypes } from '@/api/filters';
+import clsxm from '@/lib/clsxm';
 
 import { useSearch } from '../SearchContext';
-import { FilterSection } from '.';
+import { FilterSection } from './FilterSection';
 
 export function FiltersMenu({ autoExpand = false }: { autoExpand?: boolean }) {
-  const router = useRouter();
-  const { search } = useSearch();
+  const { search, clearFilters } = useSearch();
 
   const selectedCount = search.tags?.length ?? 0;
-
-  const clearFilters = () => router.push('/search');
 
   return (
     <div className="flex flex-col gap-2 py-3">
@@ -20,14 +16,18 @@ export function FiltersMenu({ autoExpand = false }: { autoExpand?: boolean }) {
         {selectedCount > 0 && (
           <button
             onClick={clearFilters}
-            className="bg-surface-1 rounded-md px-2 py-1 text-sm transition-all hover:font-medium"
+            className={clsxm(
+              'border border-transparent hover:border-gray-300 dark:hover:border-base-500',
+              'active:bg-surface-1 bg-surface',
+              'text disabled:text-hint rounded-md px-3 py-1 text-sm font-medium transition-all',
+            )}
           >
-            Clear all filters
+            Clear all
           </button>
         )}
       </div>
       <div>
-        {TAG_TYPES.map((type) => (
+        {getFilterTypes().map((type) => (
           <FilterSection autoExpand={autoExpand} type={type} key={type} />
         ))}
       </div>

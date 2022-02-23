@@ -40,6 +40,7 @@ module.exports = {
           800: '#222B45',
           900: '#192038',
           1000: '#151A30',
+          1100: '#101426',
         },
       },
       keyframes: {
@@ -66,6 +67,8 @@ module.exports = {
     borderWidth: ['focus', 'active', 'focus-within', 'focus-visible'],
     borderColor: ['focus', 'active', 'focus-within', 'focus-visible'],
     color: ['disabled'],
+    textOpacity: ['disabled'],
+    opacity: ['disabled'],
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };

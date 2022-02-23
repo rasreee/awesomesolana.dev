@@ -1,6 +1,6 @@
-import { ContentTag } from '@/data/tags';
+import { SearchFilter } from '@/api/filters';
 
 export type Search = {
   query?: string;
-  tags?: ContentTag[];
+  tags?: SearchFilter[];
 };

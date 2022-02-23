@@ -1,22 +1,27 @@
 import { useState } from 'react';
 
-import { getProjectsCountForTag } from '@/data/projects';
 import {
-  allTagsByType,
-  ContentTag,
-  filterTagsByType,
-  getTagKey,
-  searchTags,
-  sortTagsByProjectCount,
-  TAG_TYPE_TO_PLURAL,
-} from '@/data/tags';
+  filtersByType,
+  SEARCH_FILTERS,
+  SearchFilter,
+  searchFilters,
+  sortFiltersByProjectCount,
+  toPluralFilterType,
+} from '@/api/filters';
+import clsxm from '@/lib/clsxm';
 import { TextInput } from '@/ui/components';
 
 import { useSearch } from '../SearchContext';
+import { FilterMenuOption } from './FilterMenuOption';
 
-export function FilterMenu({ type }: { type: ContentTag['type'] }) {
-  const { search, addTag, removeTag, getFilterChecked, clearFiltersByType } =
-    useSearch();
+export function FilterMenu({ type }: { type: SearchFilter['type'] }) {
+  const {
+    search,
+    addFilter,
+    removeFilter,
+    getFilterChecked,
+    clearFiltersByType,
+  } = useSearch();
 
   const [expanded, setExpanded] = useState(false);
 
@@ -24,40 +29,62 @@ export function FilterMenu({ type }: { type: ContentTag['type'] }) {
 
   const [query, setQuery] = useState('');
 
-  const onClickItem = (filter: ContentTag) => () => {
+  const onClickItem = (filter: SearchFilter) => () => {
     if (!getFilterChecked(filter)) {
-      addTag(filter);
+      addFilter(filter);
     } else {
-      removeTag(filter);
+      removeFilter(filter);
     }
     setQuery('');
   };
 
-  const previewOptions = allTagsByType(type).slice(0, expanded ? 10 : 5);
-
-  const tagsToShow = sortTagsByProjectCount(
-    query ? searchTags(query, (tag) => tag.type === type) : previewOptions,
+  const previewOptions = filtersByType(SEARCH_FILTERS, type).slice(
+    0,
+    expanded ? 10 : 5,
   );
 
-  const selectedCount = filterTagsByType(search.tags ?? [], type).length;
+  const tagsToShow = sortFiltersByProjectCount(
+    query ? searchFilters(query, { type }) : previewOptions,
+  );
+
+  const selectedCount = filtersByType(search.tags ?? [], type).length;
 
   const canShowMore = tagsToShow.length > 0;
 
+  const [focused, setFocused] = useState(false);
+  const onFocus = () => setFocused(true);
+  const onBlur = () => setFocused(false);
+
   return (
     <div className="flex flex-col">
-      <div className="bg-app flex items-center gap-1 rounded-md pr-3">
+      <div
+        className={clsxm(
+          'flex items-center gap-1 rounded-md pr-3',
+          'border border-base-300',
+          focused && 'border-2 border-indigo-400',
+          'dark:bg-base-1100 dark:bg-opacity-60',
+        )}
+      >
         <TextInput
           type="search"
           name={`${type}-filter-search`}
           value={query}
           onChange={setQuery}
-          placeholder={`Search ${TAG_TYPE_TO_PLURAL[type]}...`}
-          className="bg-app rounded-md text-sm leading-none placeholder:text-sm placeholder:leading-none"
+          placeholder={`Search ${toPluralFilterType(type).toLowerCase()}...`}
+          className={clsxm(
+            'bg-transparent',
+            'rounded-md text-sm leading-none placeholder:text-sm placeholder:leading-none',
+          )}
+          onFocus={onFocus}
+          onBlur={onBlur}
         />
         {selectedCount > 0 && (
           <button
             onClick={() => clearFiltersByType(type)}
-            className="bg-surface rounded-md py-1.5 px-2.5 text-sm leading-none transition hover:font-medium"
+            className={clsxm(
+              'bg-surface-1',
+              'rounded-md py-1.5 px-2.5 text-sm leading-none transition hover:font-medium',
+            )}
           >
             Clear
           </button>
@@ -65,8 +92,8 @@ export function FilterMenu({ type }: { type: ContentTag['type'] }) {
       </div>
       <ul>
         {tagsToShow.map((tag) => (
-          <FilterOption
-            key={getTagKey(tag)}
+          <FilterMenuOption
+            key={`${tag.type}_${tag.name}`}
             tag={tag}
             onClick={onClickItem(tag)}
             checked={getFilterChecked(tag)}
@@ -75,45 +102,12 @@ export function FilterMenu({ type }: { type: ContentTag['type'] }) {
       </ul>
       {canShowMore && (
         <button
-          className="max-w-max py-2 text-left text-base font-normal leading-none hover:font-medium"
+          className="text max-w-max py-2 text-left text-base font-normal leading-none text-opacity-80 hover:font-medium hover:text-opacity-100"
           onClick={toggleExpanded}
         >
           Show {expanded ? 'less' : 'more'}
         </button>
       )}
     </div>
-  );
-}
-
-function FilterOption({
-  tag,
-  onClick,
-  checked,
-  ...props
-}: React.HTMLAttributes<HTMLLIElement> & {
-  tag: ContentTag;
-  onClick: () => void;
-  checked: boolean;
-}) {
-  const count = getProjectsCountForTag(tag);
-
-  return (
-    <li
-      {...props}
-      className="flex cursor-pointer items-center justify-between gap-2 px-1 py-2.5"
-      onClick={onClick}
-    >
-      <div className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          className="bg-app rounded border-none"
-          checked={checked}
-        />
-        <span className="text-sm leading-none">{tag.name}</span>
-      </div>
-      <span className="bg-surface-2 rounded-lg px-1.5 py-0.5 text-xs leading-none">
-        {count}
-      </span>
-    </li>
   );
 }

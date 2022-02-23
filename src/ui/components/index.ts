@@ -5,5 +5,4 @@ export * from './NextImage';
 export * from './Popover';
 export * from './Responsive';
 export * from './Seo';
-export * from './Tag';
 export * from './TextInput';
