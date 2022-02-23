@@ -57,3 +57,7 @@ export function groupTagsByType(tags: ContentTag[]): GroupedTags {
 export function allTagsByType(type: ContentTag['type']): ContentTag[] {
   return filterTagsByType(tags, type);
 }
+
+export function getTagKey(tag: ContentTag): string {
+  return `${tag.type}_${tag.name}`;
+}

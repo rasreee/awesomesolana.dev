@@ -10,6 +10,8 @@ export const ALL_PROJECTS: Project[] = [
       { type: 'dependency', name: '@project-serum/anchor' },
       { type: 'dependency', name: '@solana/web3.js' },
       { type: 'topic', name: 'dao' },
+      { type: 'topic', name: 'dapp' },
+      { type: 'topic', name: 'amm' },
       { type: 'language', name: 'typescript' },
     ],
   },

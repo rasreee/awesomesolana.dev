@@ -1,37 +1,38 @@
 import { Project } from '@/data/projects';
-import { ContentTag } from '@/data/tags';
+import { ContentTag, getTagKey } from '@/data/tags';
+import clsxm from '@/lib/clsxm';
 
 import { useSearch } from './SearchContext';
-
-function getTagKey(tag: ContentTag): string {
-  return `${tag.type}_${tag.name}`;
-}
-
-function getIntersection(a: ContentTag[], b: ContentTag[]): ContentTag[] {
-  const result: ContentTag[] = [];
-  const bNames = b.map((item) => item.name);
-
-  a.forEach((item) => {
-    if (bNames.includes(item.name)) {
-      result.push(item);
-    }
-  });
-
-  return result;
-}
 
 export function ProjectItem({ title, description, tags, ...props }: Project) {
   const { search } = useSearch();
 
-  const tagsToShow = search.tags ? getIntersection(search.tags, tags) : tags;
+  const getIsTagActive = (tag: ContentTag) => {
+    return search.tags?.map((t) => t.name).includes(tag.name);
+  };
 
   return (
     <div {...props} className="flex flex-col gap-2 px-5 py-3">
       <div className="text-xl font-semibold">{title}</div>
       <div className="text-base">{description}</div>
-      <ul>
-        {tagsToShow.map((tag) => (
-          <li key={getTagKey(tag)}>{tag.name}</li>
+      <ul className="flex flex-wrap items-center gap-1.5">
+        {tags.map((tag) => (
+          <li key={getTagKey(tag)}>
+            <div
+              className={clsxm(
+                getIsTagActive(tag)
+                  ? 'bg-surface-1 font-medium'
+                  : 'bg-surface bg-opacity-80',
+                'py-0.5 pl-2.5 pr-2.5',
+                'rounded-md',
+                'flex items-center justify-between gap-1',
+                'min-w-max max-w-min',
+                'text-sm',
+              )}
+            >
+              {tag.name}
+            </div>
+          </li>
         ))}
       </ul>
     </div>

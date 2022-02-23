@@ -16,8 +16,9 @@ export function Tag({
       {...props}
       className={clsxm(
         'bg-surface-1',
-        'py-1.5 pr-1.5 pl-2.5',
-        'rounded-2xl',
+        'py-1 pl-2.5',
+        onClickRemove ? 'pr-1.5' : 'pr-2.5',
+        'rounded-lg',
         'flex items-center justify-between gap-1',
         'min-w-max max-w-min',
         className,
