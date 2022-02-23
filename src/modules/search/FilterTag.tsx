@@ -13,7 +13,7 @@ export function FilterTag({
   onClickRemove?: () => void;
   className?: string;
   isActive?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }) {
   return (
     <button
