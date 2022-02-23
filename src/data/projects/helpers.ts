@@ -44,10 +44,11 @@ export function filterProjectsByTags(
   projects: Project[],
   tags: ContentTag[],
 ): Project[] {
+  if (tags.length === 0) return projects;
+
   const dependencies = filterTagsByType(tags, 'dependency').map(
     (tag) => tag.name,
   );
-
   const topics = filterTagsByType(tags, 'topic').map((tag) => tag.name);
   const languages = filterTagsByType(tags, 'language').map((tag) => tag.name);
   const frameworks = filterTagsByType(tags, 'framework').map((tag) => tag.name);

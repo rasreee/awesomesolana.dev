@@ -49,25 +49,27 @@ export function SearchPage() {
 
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
 
-  const submitQuery = async (query: string) => {
-    setIsRequesting(true);
-    setError(null);
-    try {
-      const newFilteredProjects = filterProjectsByTitle(
-        allProjects ?? [],
-        query,
-      );
-      setFilteredProjects(newFilteredProjects);
-    } catch (e) {
-      setError((e as Error).message);
-    } finally {
-      setIsRequesting(false);
-    }
-  };
-
   useEffect(() => {
+    if (!allProjects) return;
+
+    const submitQuery = async (query: string) => {
+      setIsRequesting(true);
+      setError(null);
+      try {
+        const newFilteredProjects = filterProjectsByTitle(
+          allProjects ?? [],
+          query,
+        );
+        setFilteredProjects(newFilteredProjects);
+      } catch (e) {
+        setError((e as Error).message);
+      } finally {
+        setIsRequesting(false);
+      }
+    };
+
     waitFor(300).then(() => submitQuery(value));
-  }, [value]);
+  }, [value, allProjects]);
 
   const searchBoxProps = { value, onChange: setValue, isRequesting, error };
 
@@ -86,7 +88,9 @@ export function SearchPage() {
           </div>
         </div>
       </HideOnMobile>
-      <Results filteredProjects={filteredProjects} />
+      <div className="mx-5">
+        <Results filteredProjects={filteredProjects} />
+      </div>
     </Layout>
   );
 }
