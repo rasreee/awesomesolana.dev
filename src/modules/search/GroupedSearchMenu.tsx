@@ -28,15 +28,15 @@ export function GroupedSearchMenu({
       {groupTagsByType(tagsToShow).map(
         ({ type, tags: list }) =>
           list.length > 0 && (
-            <div className="px-4">
-              <span className="text-lg font-semibold">
-                {capitalizeFirst(TAG_TYPE_TO_PLURAL[type])}
+            <div className="flex flex-col gap-2 px-1">
+              <span className="px-3 py-2 text-lg font-semibold">
+                {capitalizeFirst(TAG_TYPE_TO_PLURAL[type])} {`(${list.length})`}
               </span>
-              <ul>
+              <ul className="max-h-[16rem] overflow-y-auto">
                 {list.map((tag) => (
                   <li className="w-full" key={tag.name}>
                     <button
-                      className="w-full py-3 text-left"
+                      className="hover:bg-surface-1 w-full rounded-md py-3 px-3 text-left"
                       onClick={onTagClick(tag)}
                     >
                       {tag.name}

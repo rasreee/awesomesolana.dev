@@ -51,7 +51,7 @@ export function SearchBar() {
         onSubmit={submitQuery}
       />
       <Popover
-        className="bg-surface"
+        className="bg-surface overflow-hidden py-5 px-3"
         isOpen={filteredTags.length > 0 && !isRequesting}
         onRequestClose={closePopover}
       >
