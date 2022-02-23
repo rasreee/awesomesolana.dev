@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 
 import { waitFor } from '@/lib/waitFor';
-import { ErrorMessage } from '@/ui/components';
-
-import { SearchInput } from './SearchInput';
-import { StatefulSearchIcon } from './StatefulSearchIcon';
+import { StatefulSearchIcon } from '@/modules/search';
+import { ErrorMessage, TextInput } from '@/ui/components';
 
 const DEFAULT_PLACEHOLDER = 'Search for any project, dependency, or topic';
 
@@ -19,16 +17,12 @@ type SearchFormProps = {
 
 export function SearchForm({
   value,
-  onChange: handleChange,
+  onChange,
   error,
   isRequesting,
   onSubmit,
   placeholder = DEFAULT_PLACEHOLDER,
 }: SearchFormProps) {
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    handleChange(event.currentTarget.value);
-  };
-
   useEffect(() => {
     waitFor(300).then(() => onSubmit(value));
   }, [value]);
@@ -37,7 +31,9 @@ export function SearchForm({
     <div className="flex items-center gap-1 px-5 py-2">
       <ErrorMessage>{error}</ErrorMessage>
       <StatefulSearchIcon isRequesting={isRequesting} />
-      <SearchInput
+      <TextInput
+        type="search"
+        name="search"
         placeholder={placeholder}
         value={value}
         onChange={onChange}

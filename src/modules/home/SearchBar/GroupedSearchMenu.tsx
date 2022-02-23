@@ -1,7 +1,7 @@
 import { capitalizeFirst } from '@/lib/capitalizeFirst';
 
-import { ContentTag, groupTagsByType, TAG_TYPE_TO_PLURAL } from '../tags';
-import { useSearch } from './SearchContext';
+import { useSearch } from '../../search/SearchContext';
+import { ContentTag, groupTagsByType, TAG_TYPE_TO_PLURAL } from '../../tags';
 
 type GroupedSearchMenuProps = {
   tags: ContentTag[];

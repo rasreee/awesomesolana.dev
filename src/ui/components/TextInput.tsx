@@ -2,13 +2,19 @@ import React, { useEffect } from 'react';
 
 import clsxm from '@/lib/clsxm';
 
-export function SearchInput({
+export function TextInput({
   placeholder,
+  onChange: handleChange,
+  value,
+  className,
   ...props
 }: {
-  placeholder: string;
+  placeholder?: string;
   value: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: (value: string) => void;
+  type?: string;
+  name?: string;
+  className?: string;
 }) {
   const inputRef = React.useRef<HTMLInputElement | null>(null);
 
@@ -16,18 +22,23 @@ export function SearchInput({
     inputRef.current?.focus();
   }, []);
 
+  const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    handleChange(event.currentTarget.value);
+  };
+
   return (
     <input
-      type="search"
-      name="search"
       placeholder={placeholder}
       className={clsxm(
         'block max-w-full flex-1 border-none leading-none',
         'bg-transparent',
         'text-base-600 dark:text-base-100 dark:placeholder:text-gray-400',
         'text-base md:text-lg',
+        className,
       )}
       ref={inputRef}
+      onChange={onChange}
+      value={value}
       {...props}
     />
   );

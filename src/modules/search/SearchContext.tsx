@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 import { createContext, useContext, useMemo } from 'react';
 
-import { ContentTag, filterTagsByType } from '@/modules/tags';
+import { ContentTag, filterTagsByType, getContentTag } from '@/modules/tags';
 
-import { parseSearch, Search } from './search';
+import { Search } from './types';
 
 export type ISearchContext = {
   search: Search;
@@ -21,6 +21,21 @@ export function useSearch() {
   if (!context)
     throw new Error('SearchContext must be defined to use useSearch');
   return context;
+}
+
+function parseSearch(parsedUrlQuery: NextRouter['query']): Search {
+  const search: Search = {};
+
+  if ('query' in parsedUrlQuery) {
+    search.query = parsedUrlQuery['query'] as string;
+  }
+  if ('tags' in parsedUrlQuery) {
+    search.tags = (parsedUrlQuery['tags'] as string)
+      .split(',')
+      .map(getContentTag);
+  }
+
+  return search;
 }
 
 export function SearchProvider({ children }: { children: any }) {

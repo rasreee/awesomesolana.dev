@@ -9,11 +9,11 @@ export function getContentTag(tagName: string): ContentTag {
   return found;
 }
 
-export async function searchTags(
+export function searchTags(
   query: string,
   predicate?: (tag: ContentTag) => boolean,
-): Promise<ContentTag[]> {
-  if (!query) return Promise.resolve([]);
+): ContentTag[] {
+  if (!query) return [];
 
   let hits = [] as ContentTag[];
 
@@ -28,7 +28,7 @@ export async function searchTags(
     return a === b;
   });
 
-  return Promise.resolve(hits);
+  return hits;
 }
 
 export function filterTagsByType(
@@ -41,6 +41,8 @@ export function filterTagsByType(
 export const TAG_TYPE_TO_PLURAL = {
   dependency: 'dependencies',
   topic: 'topics',
+  language: 'languages',
+  framework: 'frameworks',
 };
 
 type GroupedTags = Array<{ type: ContentTag['type']; tags: ContentTag[] }>;

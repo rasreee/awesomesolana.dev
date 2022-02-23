@@ -1,66 +1,55 @@
+import { useEffect, useState } from 'react';
+
+import { waitFor } from '@/lib/waitFor';
+import { HideOnMobile, OnlyMobile } from '@/ui/components';
 import { Layout } from '@/ui/layouts';
 
-import { filterProjects, Project } from '../projects';
-import { groupTagsByType } from '../tags';
-import { SearchBar } from './SearchBar';
-import { useSearch } from './SearchContext';
-import { TagsMenu } from './TagsMenu';
-
-function FilterBar() {
-  const { search } = useSearch();
-
-  return (
-    <div className="flex items-center gap-2 px-5 py-3">
-      {search.tags &&
-        groupTagsByType(search.tags).map(
-          ({ type, tags }) =>
-            tags.length > 0 && (
-              <div key={type}>
-                <TagsMenu type={type} tags={tags} />
-              </div>
-            ),
-        )}
-    </div>
-  );
-}
+import { FiltersMenu } from './Filters';
+import { MobileSearchBox } from './MobileSearchBox';
+import { Results } from './Results';
+import { SearchBox } from './SearchBox';
 
 export function SearchPage() {
-  const { search } = useSearch();
+  const [value, setValue] = useState('');
+  const [isRequesting, setIsRequesting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const searchBoxProps = { value, onChange: setValue, isRequesting, error };
+
+  const submitQuery = async (query: string) => {
+    setIsRequesting(true);
+    setError(null);
+    try {
+      console.log('submitQuery', query);
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setIsRequesting(false);
+    }
+  };
+
+  useEffect(() => {
+    waitFor(300).then(() => submitQuery(value));
+  }, [value]);
 
   return (
     <Layout>
-      <SearchBar />
-      <FilterBar />
       <div>
-        {filterProjects(search.tags ?? []).map((project) => (
-          <ProjectItem key={project.id} {...project} />
-        ))}
+        <OnlyMobile>
+          <MobileSearchBox {...searchBoxProps} />
+        </OnlyMobile>
+        <HideOnMobile>
+          <div className="flex justify-around gap-3 px-3">
+            <div className="flex-1">
+              <SearchBox {...searchBoxProps} />
+            </div>
+            <div className="bg-surface sm:3/12 rounded-md lg:w-4/12">
+              <FiltersMenu autoExpand />
+            </div>
+          </div>
+        </HideOnMobile>
+        <Results />
       </div>
     </Layout>
-  );
-}
-
-function ProjectItem({
-  title,
-  description,
-  dependencies,
-  topics,
-  ...props
-}: Project) {
-  return (
-    <div {...props}>
-      <div className="text-lg font-medium">{title}</div>
-      <div className="text-base">{description}</div>
-      <div className="flex flex-wrap items-center gap-1">
-        {dependencies.map((dependency) => (
-          <div key={dependency}>{dependency}</div>
-        ))}
-      </div>
-      <div className="flex flex-wrap items-center gap-1">
-        {topics.map((topic) => (
-          <div key={topic}>{topic}</div>
-        ))}
-      </div>
-    </div>
   );
 }

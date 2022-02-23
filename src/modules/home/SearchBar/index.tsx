@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
+import { useSearch } from '@/modules/search';
+import { ContentTag, searchTags } from '@/modules/tags';
 import { Popover } from '@/ui/components';
 
-import { ContentTag, searchTags } from '../tags';
 import { GroupedSearchMenu } from './GroupedSearchMenu';
-import { useSearch } from './SearchContext';
 import { SearchForm } from './SearchForm';
 
 export function SearchBar() {
@@ -23,7 +23,7 @@ export function SearchBar() {
     setError(null);
     setIsRequesting(true);
     try {
-      const result = await searchTags(searchQuery);
+      const result = searchTags(searchQuery);
       setFilteredTags(result);
     } catch (e) {
       if (e instanceof Error) {

@@ -1,5 +1,6 @@
-import { SearchBar } from '@/modules/search';
 import { Layout } from '@/ui/layouts';
+
+import { SearchBar } from './SearchBar';
 
 const DESCRIPTION =
   'Browse open-source projects built on Solana, filterable by dependencies or topics.';

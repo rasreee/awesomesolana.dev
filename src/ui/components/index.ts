@@ -5,5 +5,5 @@ export * from './NextImage';
 export * from './Popover';
 export * from './Responsive';
 export * from './Seo';
-export * from '../../modules/search/StatefulSearchIcon';
 export * from './Tag';
+export * from './TextInput';
