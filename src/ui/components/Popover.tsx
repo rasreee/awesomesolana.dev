@@ -31,6 +31,7 @@ export function Popover({
         'rounded-lg',
         'shadow-lg',
         'overflow-hidden',
+        'absolute',
         className,
       )}
       ref={ref}

@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
 
+import { capitalizeFirst } from '@/lib/capitalizeFirst';
 import { waitFor } from '@/lib/waitFor';
-import { ContentTag, searchTags } from '@/modules/tags';
+import {
+  ContentTag,
+  searchTags,
+  TAG_TYPE_TO_PLURAL,
+  tagsByType,
+} from '@/modules/tags';
 import {
   ErrorMessage,
   Popover,
@@ -58,6 +64,11 @@ export const SearchBar = () => {
       !search.tags?.map((selectedTag) => selectedTag.name).includes(tag.name),
   );
 
+  const groupedTags: Array<{ type: ContentTag['type']; tags: ContentTag[] }> = [
+    { type: 'dependency', tags: tagsByType(tagsToShow, 'dependency') },
+    { type: 'topic', tags: tagsByType(tagsToShow, 'topic') },
+  ];
+
   return (
     <div>
       <div className="flex items-center gap-1 px-5 py-2">
@@ -74,40 +85,28 @@ export const SearchBar = () => {
         isOpen={tags.length > 0 && !isRequesting}
         onRequestClose={closePopover}
       >
-        <div className="px-4">
-          <span className="text-lg font-semibold">Dependencies</span>
-          <ul>
-            {tagsToShow
-              .filter((tag) => tag.type === 'dependency')
-              .map((tag) => (
-                <li className="w-full" key={tag.name}>
-                  <button
-                    className="w-full py-3 text-left"
-                    onClick={onTagClick(tag)}
-                  >
-                    {tag.name}
-                  </button>
-                </li>
-              ))}
-          </ul>
-        </div>
-        <div className="px-4">
-          <span className="text-lg font-semibold">Topics</span>
-          <ul>
-            {tagsToShow
-              .filter((tag) => tag.type === 'topic')
-              .map((tag) => (
-                <li className="w-full" key={tag.name}>
-                  <button
-                    className="w-full py-3 text-left"
-                    onClick={onTagClick(tag)}
-                  >
-                    {tag.name}
-                  </button>
-                </li>
-              ))}
-          </ul>
-        </div>
+        {groupedTags.map(
+          ({ type, tags: list }) =>
+            list.length > 0 && (
+              <div className="px-4">
+                <span className="text-lg font-semibold">
+                  {capitalizeFirst(TAG_TYPE_TO_PLURAL[type])}
+                </span>
+                <ul>
+                  {list.map((tag) => (
+                    <li className="w-full" key={tag.name}>
+                      <button
+                        className="w-full py-3 text-left"
+                        onClick={onTagClick(tag)}
+                      >
+                        {tag.name}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ),
+        )}
       </Popover>
     </div>
   );

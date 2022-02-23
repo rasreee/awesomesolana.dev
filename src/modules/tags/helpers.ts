@@ -27,3 +27,15 @@ export async function searchTags(query: string): Promise<ContentTag[]> {
 
   return Promise.resolve(hits);
 }
+
+export function tagsByType(
+  tags: ContentTag[],
+  type: ContentTag['type'],
+): ContentTag[] {
+  return tags.filter((tag) => tag.type === type);
+}
+
+export const TAG_TYPE_TO_PLURAL = {
+  dependency: 'dependencies',
+  topic: 'topics',
+};

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { createContext, useContext, useMemo } from 'react';
 
-import { ContentTag } from '@/modules/tags';
+import { ContentTag, tagsByType } from '@/modules/tags';
 
 import { parseSearch, Search } from './search';
 
@@ -9,6 +9,7 @@ export type ISearchContext = {
   search: Search;
   addTag: (tag: ContentTag) => void;
   removeTag: (tag: ContentTag) => void;
+  getTags: (type: ContentTag['type']) => ContentTag[];
 };
 
 export const SearchContext = createContext<ISearchContext | undefined>(
@@ -57,8 +58,11 @@ export function SearchProvider({ children }: { children: any }) {
     router.push(newPath);
   };
 
+  const getTags = (type: ContentTag['type']) =>
+    search.tags ? tagsByType(search.tags, type) : [];
+
   return (
-    <SearchContext.Provider value={{ search, removeTag, addTag }}>
+    <SearchContext.Provider value={{ search, removeTag, addTag, getTags }}>
       {children}
     </SearchContext.Provider>
   );

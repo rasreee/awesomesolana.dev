@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
+import { capitalizeFirst } from '@/lib/capitalizeFirst';
 import clsxm from '@/lib/clsxm';
-import { ContentTag } from '@/modules/tags';
+import { ContentTag, TAG_TYPE_TO_PLURAL } from '@/modules/tags';
 import { Popover, Tag } from '@/ui/components';
 
 import { useSearch } from './SearchContext';
 
-export const DependenciesMenu = () => {
-  const { search, removeTag } = useSearch();
+type TagsMenuProps = { type: ContentTag['type']; tags: ContentTag[] };
+
+export const TagsMenu = ({ type, tags }: TagsMenuProps) => {
+  const { removeTag } = useSearch();
 
   const [open, setOpen] = useState(false);
 
@@ -17,27 +20,23 @@ export const DependenciesMenu = () => {
 
   const onRemoveClick = (tag: ContentTag) => () => {
     removeTag(tag);
+    closeMenu();
   };
 
-  const dependencies: ContentTag[] | undefined = search.tags?.filter(
-    (tag) => tag.type === 'dependency',
-  );
-
-  if (!dependencies) return null;
-
   return (
-    <div>
+    <>
       <button
         onClick={openMenu}
+        disabled={tags.length === 0}
         className={clsxm(
           open && 'border border-base-400 dark:border-base-400',
           'bg-surface-1 flex items-center gap-3 rounded-xl bg-opacity-50 px-4 py-2 hover:bg-opacity-80 active:bg-opacity-100',
         )}
       >
-        <span>Dependencies</span>
+        <span>{capitalizeFirst(TAG_TYPE_TO_PLURAL[type])}</span>
         <div className="bg-surface-2 flex h-6 w-6 items-center justify-center rounded-full">
           <span className="my-auto text-base font-medium leading-none">
-            {dependencies.length ?? 0}
+            {tags.length ?? 0}
           </span>
         </div>
       </button>
@@ -47,13 +46,13 @@ export const DependenciesMenu = () => {
         onRequestClose={closeMenu}
       >
         <ul className={clsxm('flex flex-wrap items-center gap-3')}>
-          {dependencies.map((tag) => (
+          {tags.map((tag) => (
             <li key={tag.name}>
               <Tag onClickRemove={onRemoveClick(tag)}>{tag.name}</Tag>
             </li>
           ))}
         </ul>
       </Popover>
-    </div>
+    </>
   );
 };
