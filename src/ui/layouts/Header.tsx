@@ -13,7 +13,7 @@ export default function Header() {
   const isHomePath = router.asPath === '/';
 
   return (
-    <header className="bg-app layout h-header-footer flex items-center justify-between sm:px-6 sm:px-6 md:gap-9">
+    <header className="bg-app h-header-footer flex items-center justify-between px-5 md:gap-9">
       {!isHomePath ? (
         <div className="my-auto">
           <LogoLink />
