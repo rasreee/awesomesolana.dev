@@ -34,22 +34,20 @@ export function SearchPage() {
 
   return (
     <Layout>
-      <div>
-        <OnlyMobile>
-          <MobileSearchBox {...searchBoxProps} />
-        </OnlyMobile>
-        <HideOnMobile>
-          <div className="flex justify-around gap-3 px-3">
-            <div className="flex-1">
-              <SearchBox {...searchBoxProps} />
-            </div>
-            <div className="bg-surface sm:3/12 rounded-md lg:w-4/12">
-              <FiltersMenu autoExpand />
-            </div>
+      <OnlyMobile className="mx-5">
+        <MobileSearchBox {...searchBoxProps} />
+      </OnlyMobile>
+      <HideOnMobile>
+        <div className="flex justify-around gap-3 px-3">
+          <div className="flex-1">
+            <SearchBox {...searchBoxProps} />
           </div>
-        </HideOnMobile>
-        <Results />
-      </div>
+          <div className="bg-surface sm:3/12 rounded-md lg:w-4/12">
+            <FiltersMenu autoExpand />
+          </div>
+        </div>
+      </HideOnMobile>
+      <Results />
     </Layout>
   );
 }

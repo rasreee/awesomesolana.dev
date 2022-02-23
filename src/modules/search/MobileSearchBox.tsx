@@ -1,10 +1,14 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { ErrorMessage, Popover, TextInput } from '@/ui/components';
 import { AdjustmentsIcon } from '@/ui/icon/AdjustmentsIcon';
+import { XIcon } from '@/ui/icon/XIcon';
 
-import { FiltersMenu } from './Filters';
+import { TAG_TYPES } from '../tags';
+import { FilterSection } from './Filters';
 import { SearchBoxProps } from './SearchBox';
+import { useSearch } from './SearchContext';
 import { StatefulSearchIcon } from './StatefulSearchIcon';
 
 const DEFAULT_PLACEHOLDER = 'Search for any project, dependency, or topic';
@@ -20,8 +24,8 @@ export function MobileSearchBox({
   const toggleFiltersMenu = () => setFiltersMenuOpen((prev) => !prev);
 
   return (
-    <div className="mx-8 flex flex-col gap-2">
-      <div className="bg-surface flex items-center gap-1 rounded-xl px-5 py-2">
+    <div className="flex flex-col gap-2">
+      <div className="bg-surface flex w-full items-center gap-1 rounded-xl px-5 py-2">
         <ErrorMessage>{error}</ErrorMessage>
         <StatefulSearchIcon isRequesting={isRequesting} />
         <TextInput
@@ -35,13 +39,57 @@ export function MobileSearchBox({
           <AdjustmentsIcon />
         </button>
       </div>
-      <Popover
-        className="bg-surface relative w-full"
+      <MobileFiltersMenu
         isOpen={filtersMenuOpen}
         onRequestClose={toggleFiltersMenu}
-      >
-        <FiltersMenu />
-      </Popover>
+      />
     </div>
+  );
+}
+
+function MobileFiltersMenu({
+  isOpen,
+  onRequestClose,
+}: {
+  isOpen: boolean;
+  onRequestClose: () => void;
+}) {
+  const router = useRouter();
+  const { search } = useSearch();
+
+  const selectedCount = search.tags?.length ?? 0;
+
+  const clearFilters = () => router.push('/search');
+
+  return (
+    <Popover
+      className="bg-surface relative w-full"
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+    >
+      <div className="flex flex-col gap-2 py-3">
+        <div className="flex items-center justify-between px-5">
+          <div className="text-lg font-semibold">Filters</div>
+          <div className="flex items-center gap-5">
+            {selectedCount > 0 && (
+              <button
+                onClick={clearFilters}
+                className="active:bg-surface-1 rounded-md px-2 py-1 text-sm font-medium transition-all"
+              >
+                Clear all filters
+              </button>
+            )}
+            <button onClick={onRequestClose}>
+              <XIcon />
+            </button>
+          </div>
+        </div>
+        <div>
+          {TAG_TYPES.map((type) => (
+            <FilterSection type={type} key={type} />
+          ))}
+        </div>
+      </div>
+    </Popover>
   );
 }

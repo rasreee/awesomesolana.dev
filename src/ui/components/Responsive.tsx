@@ -1,7 +1,15 @@
-export function HideOnMobile({ children }: React.PropsWithChildren<{}>) {
-  return <div className="hidden md:block">{children}</div>;
+import clsxm from '@/lib/clsxm';
+
+export function HideOnMobile({
+  children,
+  className,
+}: React.PropsWithChildren<{ className?: string }>) {
+  return <div className={clsxm('hidden md:block', className)}>{children}</div>;
 }
 
-export function OnlyMobile({ children }: React.PropsWithChildren<{}>) {
-  return <div className="md:hidden">{children}</div>;
+export function OnlyMobile({
+  children,
+  className,
+}: React.PropsWithChildren<{ className?: string }>) {
+  return <div className={clsxm('md:hidden', className)}>{children}</div>;
 }
