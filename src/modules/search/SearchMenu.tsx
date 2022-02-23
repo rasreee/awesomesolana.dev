@@ -24,6 +24,7 @@ export function SearchMenu({
 
   const onTagClick = (tag: ContentTag) => () => {
     handleTagClick(tag);
+    onRequestClose();
   };
 
   return (
