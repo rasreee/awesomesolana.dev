@@ -1,4 +1,4 @@
-export const dependenciesConst = [
+export const dependencies = [
   '@project-serum/anchor-cli',
   '@project-serum/anchor',
   '@project-serum/associated-token',
@@ -26,5 +26,3 @@ export const dependenciesConst = [
   '@solana/wallet-adapter-react',
   '@solana/wallet-adapter-phantom',
 ] as const;
-
-export type Dependency = typeof dependenciesConst[number];

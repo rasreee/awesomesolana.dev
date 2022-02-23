@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
 import { createContext, useContext, useMemo } from 'react';
 
+import { ContentTag } from '@/modules/tags';
+
 import { parseSearch, Search } from './search';
-import { ContentTag } from './tags';
 
 export type ISearchContext = {
   search: Search;

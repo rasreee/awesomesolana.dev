@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { waitFor } from '@/lib/waitFor';
+import { ContentTag, searchTags } from '@/modules/tags';
 import {
   ErrorMessage,
   Popover,
@@ -9,7 +10,6 @@ import {
 } from '@/ui/components';
 
 import { useSearch } from './SearchContext';
-import { ContentTag, searchTags } from './tags';
 
 const PLACEHOLDER_TEXT = 'Search for any project, dependency, or topic';
 
@@ -53,6 +53,11 @@ export const SearchBar = () => {
     setValue('');
   };
 
+  const tagsToShow = tags.filter(
+    (tag) =>
+      !search.tags?.map((selectedTag) => selectedTag.name).includes(tag.name),
+  );
+
   return (
     <div>
       <div className="flex items-center gap-1 px-5 py-2">
@@ -65,28 +70,44 @@ export const SearchBar = () => {
         />
       </div>
       <Popover
+        className="bg-surface mx-8"
         isOpen={tags.length > 0 && !isRequesting}
         onRequestClose={closePopover}
       >
-        <ul>
-          {tags
-            .filter(
-              (tag) =>
-                !search.tags
-                  ?.map((selectedTag) => selectedTag.name)
-                  .includes(tag.name),
-            )
-            .map((tag) => (
-              <li key={tag.name}>
-                <button
-                  className="w-full py-2 px-4 text-left"
-                  onClick={onTagClick(tag)}
-                >
-                  {tag.name}
-                </button>
-              </li>
-            ))}
-        </ul>
+        <div className="px-4">
+          <span className="text-lg font-semibold">Dependencies</span>
+          <ul>
+            {tagsToShow
+              .filter((tag) => tag.type === 'dependency')
+              .map((tag) => (
+                <li className="w-full" key={tag.name}>
+                  <button
+                    className="w-full py-3 text-left"
+                    onClick={onTagClick(tag)}
+                  >
+                    {tag.name}
+                  </button>
+                </li>
+              ))}
+          </ul>
+        </div>
+        <div className="px-4">
+          <span className="text-lg font-semibold">Topics</span>
+          <ul>
+            {tagsToShow
+              .filter((tag) => tag.type === 'topic')
+              .map((tag) => (
+                <li className="w-full" key={tag.name}>
+                  <button
+                    className="w-full py-3 text-left"
+                    onClick={onTagClick(tag)}
+                  >
+                    {tag.name}
+                  </button>
+                </li>
+              ))}
+          </ul>
+        </div>
       </Popover>
     </div>
   );

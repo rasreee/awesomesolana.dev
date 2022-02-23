@@ -1,4 +1,13 @@
-import { ContentTag, tags } from './tags';
+import invariant from '@/lib/invariant';
+
+import { tags } from './constants';
+import { ContentTag } from './types';
+
+export function getContentTag(tagName: string): ContentTag {
+  const found = tags.find((tag) => tag.name === tagName);
+  invariant(found, `tag not found for name: ${tagName}`);
+  return found;
+}
 
 export async function searchTags(query: string): Promise<ContentTag[]> {
   if (!query) return Promise.resolve([]);

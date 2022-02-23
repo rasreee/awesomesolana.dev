@@ -1,6 +1,6 @@
 import { NextRouter } from 'next/router';
 
-import { ContentTag, toContentTag } from './tags';
+import { ContentTag, getContentTag } from '@/modules/tags';
 
 export type Search = {
   query?: string;
@@ -16,7 +16,7 @@ export function parseSearch(parsedUrlQuery: NextRouter['query']): Search {
   if ('tags' in parsedUrlQuery) {
     search.tags = (parsedUrlQuery['tags'] as string)
       .split(',')
-      .map(toContentTag);
+      .map(getContentTag);
   }
 
   return search;

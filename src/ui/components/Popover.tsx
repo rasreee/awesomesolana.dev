@@ -8,10 +8,12 @@ export function Popover({
   children,
   isOpen,
   onRequestClose,
+  className,
 }: {
   children: React.ReactNode;
   isOpen: boolean;
   onRequestClose: () => void;
+  className?: string;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -24,12 +26,12 @@ export function Popover({
   return (
     <div
       className={clsxm(
-        'mx-auto min-h-0 w-full max-w-[90%] md:max-w-[46rem]',
+        'min-h-0',
         'flex flex-col',
         'rounded-lg',
         'shadow-lg',
-        'bg-surface',
         'overflow-hidden',
+        className,
       )}
       ref={ref}
     >
