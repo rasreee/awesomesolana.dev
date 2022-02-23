@@ -35,7 +35,7 @@
   }
 
   ::-webkit-scrollbar {
-    width: 0.5rem;
+    width: 0rem;
     background-color: transparent;
   }
 
@@ -93,31 +93,16 @@
     padding: 0;
   }
 
-  html {
-    min-height: 100vh !important;
-    height: 100vh !important;
-    min-width: 100vw !important;
-    width: 100vw !important;
-  }
-
   body {
-    min-height: 100vh !important;
-    height: 100vh !important;
-    min-width: 100vw !important;
-    width: 100vw !important;
-  }
-
-  #__next {
-    min-height: 100vh !important;
-    height: 100vh !important;
-    min-width: 100vw !important;
-    width: 100vw !important;
+    min-height: 100%;
+    width: 100%;
   }
 
   html,
   body {
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
   }
 }
 

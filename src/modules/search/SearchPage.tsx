@@ -5,20 +5,26 @@ import { SearchBar } from './SearchBar';
 import { useSearch } from './SearchContext';
 import { TagsMenu } from './TagsMenu';
 
-export function SearchPage() {
+function FilterBar() {
   const { search } = useSearch();
 
   return (
+    <div className="flex items-center gap-2 px-5 py-3">
+      {search.tags &&
+        groupTagsByType(search.tags).map(({ type, tags }) => (
+          <div key={type}>
+            <TagsMenu type={type} tags={tags} />
+          </div>
+        ))}
+    </div>
+  );
+}
+
+export function SearchPage() {
+  return (
     <Layout>
-      <div className="flex items-center gap-2 px-5 py-3">
-        {search.tags &&
-          groupTagsByType(search.tags).map(({ type, tags }) => (
-            <div key={type}>
-              <TagsMenu type={type} tags={tags} />
-            </div>
-          ))}
-      </div>
       <SearchBar />
+      <FilterBar />
     </Layout>
   );
 }
