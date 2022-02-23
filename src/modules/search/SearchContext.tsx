@@ -9,8 +9,10 @@ export type ISearchContext = {
   search: Search;
   addTag: (tag: ContentTag) => void;
   removeTag: (tag: ContentTag) => void;
+  getFilterChecked: (tag: ContentTag) => boolean;
   getTags: (type: ContentTag['type']) => ContentTag[];
   clearFilters: () => void;
+  clearFiltersByType: (type: ContentTag['type']) => void;
 };
 
 export const SearchContext = createContext<ISearchContext | undefined>(
@@ -85,9 +87,37 @@ export function SearchProvider({ children }: { children: any }) {
   const getTags = (type: ContentTag['type']) =>
     search.tags ? filterTagsByType(search.tags, type) : [];
 
+  const getFilterChecked = (filter: ContentTag): boolean => {
+    const tags = search.tags ?? [];
+    return filterTagsByType(tags, filter.type)
+      .map((item) => item.name)
+      .includes(filter.name);
+  };
+
+  const clearFiltersByType = (type: ContentTag['type']) => {
+    const oldTags = search.tags ?? [];
+
+    const newTags = oldTags.filter((tag) => tag.type !== type);
+    if (newTags.length === 0) return router.push('/search');
+
+    router.push(
+      `/search?tags=${encodeURIComponent(
+        newTags.map((tag) => tag.name).join(','),
+      )}`,
+    );
+  };
+
   return (
     <SearchContext.Provider
-      value={{ search, removeTag, addTag, getTags, clearFilters }}
+      value={{
+        search,
+        removeTag,
+        addTag,
+        getTags,
+        clearFilters,
+        getFilterChecked,
+        clearFiltersByType,
+      }}
     >
       {children}
     </SearchContext.Provider>

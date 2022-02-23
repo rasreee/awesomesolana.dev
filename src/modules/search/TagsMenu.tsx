@@ -1,9 +1,15 @@
 import { useState } from 'react';
 
-import { allTagsByType, ContentTag, TAG_TYPE_TO_PLURAL } from '@/data/tags';
+import {
+  allTagsByType,
+  ContentTag,
+  searchTags,
+  sortTagsByProjectCount,
+  TAG_TYPE_TO_PLURAL,
+} from '@/data/tags';
 import { capitalizeFirst } from '@/lib/capitalizeFirst';
 import clsxm from '@/lib/clsxm';
-import { Popover, Tag, TextInput } from '@/ui/components';
+import { Popover, TextInput } from '@/ui/components';
 
 import { useSearch } from './SearchContext';
 
@@ -40,51 +46,94 @@ export const TagsMenu = ({ type }: TagsMenuProps) => {
         </div>
       </button>
       <Popover
-        className="bg-surface fixed top-0 left-0 max-w-fit rounded-none px-2 py-3"
+        className="bg-surface fixed top-0 left-0 min-w-full max-w-fit rounded-none px-2 py-3"
         isOpen={open}
         onRequestClose={closeMenu}
       >
-        <TagsSearch type={type} />
+        <TagsSearch type={type} onRequestClose={closeMenu} />
       </Popover>
     </>
   );
 };
 
-function TagsSearch({ type }: { type: ContentTag['type'] }) {
-  const { removeTag } = useSearch();
+function TagsSearch({
+  type,
+  onRequestClose,
+}: {
+  type: ContentTag['type'];
+  onRequestClose: () => void;
+}) {
+  const { addTag, removeTag, getFilterChecked, clearFiltersByType } =
+    useSearch();
 
   const [query, setQuery] = useState('');
 
-  const onRemoveClick = (tag: ContentTag) => () => removeTag(tag);
+  const onClickTag = (tag: ContentTag) => () => {
+    if (!getFilterChecked(tag)) {
+      addTag(tag);
+    } else {
+      removeTag(tag);
+    }
+    setQuery('');
+  };
+
+  const tagsToShow = sortTagsByProjectCount(
+    query ? searchTags(query, (tag) => tag.type === type) : allTagsByType(type),
+  );
 
   return (
-    <>
-      <div className="flex items-center justify-between py-4 pb-7">
-        <button className="text bg-surface-1 rounded-lg bg-opacity-80 px-3 py-1 font-medium text-opacity-70">
-          Clear
-        </button>
-        <span className="text-lg font-semibold">
-          {capitalizeFirst(TAG_TYPE_TO_PLURAL[type])}
-        </span>
-        <button className="text rounded-lg bg-indigo-600 px-3 py-1 font-medium">
-          Done
-        </button>
+    <div className="relative z-0 h-screen overflow-y-auto">
+      <div className="bg-surface sticky top-0 left-0 z-50 max-h-min w-full px-4 py-2">
+        <div className="flex items-center justify-between py-4 pb-7">
+          <button
+            className="text bg-surface-1 rounded-lg bg-opacity-80 px-3 py-1 font-medium text-opacity-70"
+            onClick={() => clearFiltersByType(type)}
+          >
+            Clear
+          </button>
+          <span className="text-lg font-semibold">
+            {capitalizeFirst(TAG_TYPE_TO_PLURAL[type])}
+          </span>
+          <button
+            className="text rounded-lg bg-indigo-600 px-3 py-1 font-medium"
+            onClick={onRequestClose}
+          >
+            Done
+          </button>
+        </div>
+        <TextInput
+          type="search"
+          name={`${type}-filter-search`}
+          value={query}
+          onChange={setQuery}
+          placeholder={`Search ${TAG_TYPE_TO_PLURAL[type]}...`}
+          className="bg-app w-full rounded-md py-3 text-base placeholder:text-base"
+        />
       </div>
-      <TextInput
-        type="search"
-        name={`${type}-filter-search`}
-        value={query}
-        onChange={setQuery}
-        placeholder={`Search ${TAG_TYPE_TO_PLURAL[type]}...`}
-        className="bg-app rounded-md text-base placeholder:text-base"
-      />
-      <ul className={clsxm('flex flex-wrap items-center gap-3')}>
-        {allTagsByType(type).map((tag) => (
-          <li key={tag.name}>
-            <Tag onClickRemove={onRemoveClick(tag)}>{tag.name}</Tag>
-          </li>
-        ))}
-      </ul>
-    </>
+      <div className="absolute z-0 flex-1">
+        <ul
+          className={clsxm(
+            'flex w-full flex-col items-center gap-3 overflow-y-auto pt-5',
+          )}
+        >
+          {tagsToShow.map((tag) => (
+            <li
+              key={tag.name}
+              className="flex w-full cursor-pointer items-center justify-between gap-2 px-1 py-1.5"
+              onClick={onClickTag(tag)}
+            >
+              <div className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  className="bg-app rounded border-none"
+                  checked={getFilterChecked(tag)}
+                />
+                <span className="text-lg leading-none">{tag.name}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
