@@ -3,6 +3,7 @@ import { useState } from 'react';
 import {
   allTagsByType,
   ContentTag,
+  filterTagsByType,
   searchTags,
   sortTagsByProjectCount,
   TAG_TYPE_TO_PLURAL,
@@ -30,7 +31,7 @@ export const TagsMenu = ({ type }: TagsMenuProps) => {
         onClick={openMenu}
         className={clsxm(
           open && 'border border-base-400 dark:border-base-400',
-          search.tags?.map((tag) => tag.type).includes(type)
+          filterTagsByType(search.tags ?? [], type)?.length > 0
             ? 'text'
             : 'text-hint',
           'bg-surface flex w-full items-center justify-between gap-3 rounded-md bg-opacity-70 px-4 py-2 hover:bg-opacity-90 active:bg-opacity-100',
@@ -41,7 +42,7 @@ export const TagsMenu = ({ type }: TagsMenuProps) => {
         </span>
         <div className="bg-surface-2 flex h-5 w-5 items-center justify-center rounded-full">
           <span className="my-auto text-xs font-medium leading-none">
-            {search.tags?.length ?? 0}
+            {filterTagsByType(search.tags ?? [], type)?.length ?? 0}
           </span>
         </div>
       </button>
