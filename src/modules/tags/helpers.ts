@@ -9,26 +9,29 @@ export function getContentTag(tagName: string): ContentTag {
   return found;
 }
 
-export async function searchTags(query: string): Promise<ContentTag[]> {
+export async function searchTags(
+  query: string,
+  predicate?: (tag: ContentTag) => boolean,
+): Promise<ContentTag[]> {
   if (!query) return Promise.resolve([]);
 
   let hits = [] as ContentTag[];
 
   const a = query.toLowerCase();
 
-  hits = tags.filter((item) => {
+  const tagsToSearch = predicate ? tags.filter(predicate) : tags;
+
+  hits = tagsToSearch.filter((item) => {
     const name = item.name;
     const b = name.toLowerCase().slice(0, query.length);
 
     return a === b;
   });
 
-  console.table(hits);
-
   return Promise.resolve(hits);
 }
 
-export function tagsByType(
+export function filterTagsByType(
   tags: ContentTag[],
   type: ContentTag['type'],
 ): ContentTag[] {
@@ -44,7 +47,11 @@ type GroupedTags = Array<{ type: ContentTag['type']; tags: ContentTag[] }>;
 
 export function groupTagsByType(tags: ContentTag[]): GroupedTags {
   return [
-    { type: 'dependency', tags: tagsByType(tags, 'dependency') },
-    { type: 'topic', tags: tagsByType(tags, 'topic') },
+    { type: 'dependency', tags: filterTagsByType(tags, 'dependency') },
+    { type: 'topic', tags: filterTagsByType(tags, 'topic') },
   ];
+}
+
+export function allTagsByType(type: ContentTag['type']): ContentTag[] {
+  return filterTagsByType(tags, type);
 }

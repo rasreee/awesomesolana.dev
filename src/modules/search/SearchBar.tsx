@@ -1,19 +1,22 @@
 import { useState } from 'react';
 
+import { Popover } from '@/ui/components';
+
 import { ContentTag, searchTags } from '../tags';
+import { GroupedSearchMenu } from './GroupedSearchMenu';
 import { useSearch } from './SearchContext';
 import { SearchForm } from './SearchForm';
-import { SearchMenu } from './SearchMenu';
 
 export function SearchBar() {
   const { addTag } = useSearch();
 
+  const [value, setValue] = useState('');
   const [isRequesting, setIsRequesting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [tags, setTags] = useState<ContentTag[]>([]);
+  const [filteredTags, setFilteredTags] = useState<ContentTag[]>([]);
 
   const closePopover = () => {
-    setTags([]);
+    setFilteredTags([]);
   };
 
   const submitQuery = async (searchQuery: string) => {
@@ -21,7 +24,7 @@ export function SearchBar() {
     setIsRequesting(true);
     try {
       const result = await searchTags(searchQuery);
-      setTags(result);
+      setFilteredTags(result);
     } catch (e) {
       if (e instanceof Error) {
         console.error(e);
@@ -32,18 +35,28 @@ export function SearchBar() {
     }
   };
 
+  const onTagClick = (tag: ContentTag) => {
+    addTag(tag);
+    closePopover();
+    setValue('');
+  };
+
   return (
     <>
       <SearchForm
+        value={value}
+        onChange={setValue}
         error={error}
         isRequesting={isRequesting}
         onSubmit={submitQuery}
       />
-      <SearchMenu
-        isOpen={tags.length > 0 && !isRequesting}
+      <Popover
+        className="bg-surface"
+        isOpen={filteredTags.length > 0 && !isRequesting}
         onRequestClose={closePopover}
-        onTagClick={addTag}
-      />
+      >
+        <GroupedSearchMenu tags={filteredTags} onTagClick={onTagClick} />
+      </Popover>
     </>
   );
 }

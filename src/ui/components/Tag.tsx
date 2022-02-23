@@ -19,7 +19,7 @@ function XIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
 }
 
 export interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
-  onClickRemove: () => void;
+  onClickRemove?: () => void;
 }
 
 export function Tag({
@@ -48,12 +48,14 @@ export function Tag({
       >
         {children}
       </span>
-      <button
-        className="px-1 opacity-60 hover:opacity-80 active:opacity-100"
-        onClick={onClickRemove}
-      >
-        <XIcon className="my-auto h-4 w-4" />
-      </button>
+      {onClickRemove && (
+        <button
+          className="px-1 opacity-60 hover:opacity-80 active:opacity-100"
+          onClick={onClickRemove}
+        >
+          <XIcon className="my-auto h-4 w-4" />
+        </button>
+      )}
     </div>
   );
 }

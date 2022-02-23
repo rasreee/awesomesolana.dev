@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { waitFor } from '@/lib/waitFor';
 import { ErrorMessage } from '@/ui/components';
@@ -6,19 +6,27 @@ import { ErrorMessage } from '@/ui/components';
 import { SearchInput } from './SearchInput';
 import { StatefulSearchIcon } from './StatefulSearchIcon';
 
-const PLACEHOLDER_TEXT = 'Search for any project, dependency, or topic';
+const DEFAULT_PLACEHOLDER = 'Search for any project, dependency, or topic';
 
 type SearchFormProps = {
+  value: string;
+  onChange: (value: string) => void;
   onSubmit: (query: string) => void;
   error: string | undefined | null;
   isRequesting: boolean;
+  placeholder?: string;
 };
 
-export function SearchForm({ error, isRequesting, onSubmit }: SearchFormProps) {
-  const [value, setValue] = useState('');
-
+export function SearchForm({
+  value,
+  onChange: handleChange,
+  error,
+  isRequesting,
+  onSubmit,
+  placeholder = DEFAULT_PLACEHOLDER,
+}: SearchFormProps) {
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setValue(event.currentTarget.value);
+    handleChange(event.currentTarget.value);
   };
 
   useEffect(() => {
@@ -30,7 +38,7 @@ export function SearchForm({ error, isRequesting, onSubmit }: SearchFormProps) {
       <ErrorMessage>{error}</ErrorMessage>
       <StatefulSearchIcon isRequesting={isRequesting} />
       <SearchInput
-        placeholder={PLACEHOLDER_TEXT}
+        placeholder={placeholder}
         value={value}
         onChange={onChange}
       />

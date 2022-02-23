@@ -11,11 +11,6 @@ export interface LayoutProps {
 }
 
 export function Layout({ children, seoProps }: LayoutProps) {
-  React.useEffect(() => {
-    const screen = window.screen;
-    console.log('SCREEN: ', screen);
-  }, []);
-
   return (
     <>
       <Seo {...seoProps} />

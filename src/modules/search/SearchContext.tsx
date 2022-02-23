@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { createContext, useContext, useMemo } from 'react';
 
-import { ContentTag, tagsByType } from '@/modules/tags';
+import { ContentTag, filterTagsByType } from '@/modules/tags';
 
 import { parseSearch, Search } from './search';
 
@@ -59,7 +59,7 @@ export function SearchProvider({ children }: { children: any }) {
   };
 
   const getTags = (type: ContentTag['type']) =>
-    search.tags ? tagsByType(search.tags, type) : [];
+    search.tags ? filterTagsByType(search.tags, type) : [];
 
   return (
     <SearchContext.Provider value={{ search, removeTag, addTag, getTags }}>
