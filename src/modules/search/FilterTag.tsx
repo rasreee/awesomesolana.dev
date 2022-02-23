@@ -7,14 +7,16 @@ export function FilterTag({
   onClickRemove,
   className,
   isActive,
+  onClick,
 }: {
   tag: ContentTag;
   onClickRemove?: () => void;
   className?: string;
   isActive?: boolean;
+  onClick: () => void;
 }) {
   return (
-    <div
+    <button
       className={clsxm(
         'py-0.5 px-2.5',
         'rounded-md',
@@ -24,6 +26,7 @@ export function FilterTag({
         className,
         isActive ? 'bg-surface-1 font-medium' : 'bg-surface bg-opacity-80',
       )}
+      onClick={onClick}
     >
       <span className="truncate text-sm">{tag.name}</span>
       {onClickRemove && (
@@ -34,6 +37,6 @@ export function FilterTag({
           <XIcon className="my-auto h-4 w-4" />
         </button>
       )}
-    </div>
+    </button>
   );
 }

@@ -5,10 +5,16 @@ import { FilterTag } from './FilterTag';
 import { useSearch } from './SearchContext';
 
 export function ProjectItem({ title, description, tags, ...props }: Project) {
-  const { search } = useSearch();
+  const { search, addTag, removeTag } = useSearch();
 
   const getIsTagActive = (tag: ContentTag) => {
     return search.tags?.map((t) => t.name).includes(tag.name);
+  };
+
+  const onClickTag = (tag: ContentTag) => () => {
+    if (getIsTagActive(tag)) return removeTag(tag);
+
+    addTag(tag);
   };
 
   return (
@@ -18,7 +24,11 @@ export function ProjectItem({ title, description, tags, ...props }: Project) {
       <ul className="flex flex-wrap items-center gap-1.5">
         {tags.map((tag) => (
           <li key={getTagKey(tag)}>
-            <FilterTag isActive={getIsTagActive(tag)} tag={tag} />
+            <FilterTag
+              isActive={getIsTagActive(tag)}
+              tag={tag}
+              onClick={onClickTag(tag)}
+            />
           </li>
         ))}
       </ul>
