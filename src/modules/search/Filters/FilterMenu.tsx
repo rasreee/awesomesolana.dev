@@ -71,7 +71,7 @@ export function FilterMenu({ type }: { type: SearchFilter['type'] }) {
           value={query}
           onChange={setQuery}
           placeholder={`Search ${toPluralFilterType(type).toLowerCase()}...`}
-          className={clsxm('input input-sm')}
+          className={clsxm('input-sm input-focus-unset')}
           onFocus={onFocus}
           onBlur={onBlur}
         />

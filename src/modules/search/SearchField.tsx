@@ -9,10 +9,10 @@ const DEFAULT_PLACEHOLDER = 'Search for any project, dependency, or topic';
 
 export function SearchField({
   onClickFilters,
-  FiltersOpen,
+  isFiltersMenuOpen,
 }: {
   onClickFilters?: () => void;
-  FiltersOpen?: boolean;
+  isFiltersMenuOpen?: boolean;
 }) {
   const { query, setQuery, error, isRequesting } = useSearch();
 
@@ -28,7 +28,7 @@ export function SearchField({
       className={clsxm(
         'flex flex-1 items-center gap-1 px-2 py-1',
         'input bg-surface-1',
-        focused || FiltersOpen ? 'input-border-focused' : 'input-border',
+        focused || isFiltersMenuOpen ? 'input-border-focused' : 'input-border',
       )}
     >
       <ErrorMessage>{error}</ErrorMessage>
@@ -43,6 +43,7 @@ export function SearchField({
       <TextInput
         type="search"
         name="search"
+        className="input-focus-unset"
         placeholder={DEFAULT_PLACEHOLDER}
         value={query}
         onChange={setQuery}
@@ -55,12 +56,15 @@ export function SearchField({
           onClick={onClickFilters}
           className={clsxm(
             'text',
-            FiltersOpen || (focused && 'bg-surface text-color-primary'),
+            isFiltersMenuOpen || (focused && 'bg-surface text-color-primary'),
             'h-full rounded p-1',
           )}
         >
           <AdjustmentsIcon
-            className={clsxm('text-hint', FiltersOpen && 'text-color-primary')}
+            className={clsxm(
+              'text-hint',
+              isFiltersMenuOpen && 'text-color-primary',
+            )}
           />
         </button>
       )}

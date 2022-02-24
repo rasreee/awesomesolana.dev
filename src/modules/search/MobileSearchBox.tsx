@@ -7,7 +7,7 @@ import { MobileFilters } from './Filters';
 import { SearchField } from './SearchField';
 
 export function MobileSearchBox() {
-  const [FiltersOpen, setFiltersOpen] = useState(false);
+  const [isFiltersMenuOpen, setIsFiltersMenuOpen] = useState(false);
 
   const popoverRef = useRef<HTMLDivElement | null>(null);
 
@@ -15,18 +15,21 @@ export function MobileSearchBox() {
 
   useClickOutside(popoverRef, (e) => {
     if (buttonRef.current?.contains(e.target as HTMLElement)) return;
-    setFiltersOpen(false);
+    setIsFiltersMenuOpen(false);
   });
 
   const toggleFilters = () => {
-    setFiltersOpen((prev) => !prev);
+    setIsFiltersMenuOpen((prev) => !prev);
   };
 
   return (
     <div className="flex flex-col gap-2">
-      <SearchField FiltersOpen={FiltersOpen} onClickFilters={toggleFilters} />
+      <SearchField
+        isFiltersMenuOpen={isFiltersMenuOpen}
+        onClickFilters={toggleFilters}
+      />
       <div className="relative">
-        {FiltersOpen && (
+        {isFiltersMenuOpen && (
           <div
             className={clsxm(
               'min-h-0',
@@ -41,7 +44,7 @@ export function MobileSearchBox() {
           >
             <MobileFilters
               onRequestClose={() => {
-                setFiltersOpen(false);
+                setIsFiltersMenuOpen(false);
               }}
             />
           </div>
