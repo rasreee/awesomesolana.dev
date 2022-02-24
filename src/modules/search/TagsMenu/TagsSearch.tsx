@@ -9,8 +9,14 @@ import {
   toPluralFilterType,
 } from '@/api/filters';
 import { getProjectsCountForTag } from '@/api/projects';
+import { getIntersection } from '@/common/utils';
 import { useSearch } from '@/contexts/search';
-import { CheckBox, TextInput } from '@/ui/components';
+import {
+  CheckBox,
+  PrimaryButton,
+  SolidButton,
+  TextInput,
+} from '@/ui/components';
 import { clsxm } from '@/ui/utils';
 
 export function TagsSearch({
@@ -20,8 +26,13 @@ export function TagsSearch({
   type: SearchFilter['type'];
   onRequestClose: () => void;
 }) {
-  const { addFilter, removeFilter, getFilterChecked, clearFiltersByType } =
-    useSearch();
+  const {
+    addFilter,
+    removeFilter,
+    getFilterChecked,
+    clearFiltersByType,
+    search,
+  } = useSearch();
 
   const [query, setQuery] = useState('');
 
@@ -44,21 +55,22 @@ export function TagsSearch({
     <div className="relative z-0 h-screen overflow-y-auto">
       <div className="bg-surface sticky top-0 left-0 z-50 max-h-min w-full px-4 py-2">
         <div className="flex items-center justify-between py-4 pb-7">
-          <button
-            className="text bg-surface-1 rounded-lg bg-opacity-80 px-3 py-1 font-medium text-opacity-70"
+          <SolidButton
+            disabled={
+              getIntersection(
+                search.tags ?? [],
+                tagsToShow,
+                (a, b) => a.name === b.name,
+              ).length === 0
+            }
             onClick={() => clearFiltersByType(type)}
           >
             Clear
-          </button>
+          </SolidButton>
           <span className="text-lg font-semibold">
             {toPluralFilterType(type)}
           </span>
-          <button
-            className="bg-color-primary rounded-lg px-3 py-1 font-medium text-white"
-            onClick={onRequestClose}
-          >
-            Done
-          </button>
+          <PrimaryButton onClick={onRequestClose}>Done</PrimaryButton>
         </div>
         <TextInput
           type="search"
