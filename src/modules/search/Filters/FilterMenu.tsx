@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   filtersByType,
@@ -9,7 +9,7 @@ import {
   toPluralFilterType,
 } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
-import { TextInput } from '@/ui/components';
+import { SolidButton, TextInput } from '@/ui/components';
 import { clsxm } from '@/ui/utils';
 
 import { FilterMenuOption } from './FilterMenuOption';
@@ -76,15 +76,12 @@ export function FilterMenu({ type }: { type: SearchFilter['type'] }) {
           onBlur={onBlur}
         />
         {selectedCount > 0 && (
-          <button
+          <SolidButton
             onClick={() => clearFiltersByType(type)}
-            className={clsxm(
-              'bg-surface-1',
-              'rounded-md py-1.5 px-2.5 text-sm leading-none transition hover:font-medium',
-            )}
+            className="py-1.5 text-sm leading-none"
           >
             Clear
-          </button>
+          </SolidButton>
         )}
       </div>
       <ul>

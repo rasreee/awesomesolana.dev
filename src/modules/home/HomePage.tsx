@@ -2,7 +2,6 @@ import Image from 'next/image';
 
 import { Layout } from '@/ui/components';
 
-import { FilterCategories } from './FilterCategories';
 import { SearchBar } from './SearchBar';
 
 const DESCRIPTION =
@@ -35,7 +34,6 @@ export function HomePage() {
           </div>
           <div className="flex flex-col gap-3">
             <SearchBar />
-            <FilterCategories />
           </div>
         </div>
       </div>

@@ -23,6 +23,7 @@ export function FilterTag({
         'flex items-center justify-between gap-1',
         'w-max max-w-[11rem] overflow-hidden',
         'font-medium',
+        'flex-1',
         isActive
           ? 'bg-color-primary text-white'
           : 'bg-surface-2 text text-opacity-90',
