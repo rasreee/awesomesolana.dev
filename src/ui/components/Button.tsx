@@ -6,7 +6,8 @@ export type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
 
 const sharedClasses = clsxm(
   'rounded-md',
-  'font-semibold hover:font-bold leading-none',
+  'text-hase leading-none',
+  'font-medium hover:font-semibold',
   'transition-all',
   'px-3 py-2',
   'disabled:!text-opacity-80 disabled:!opacity-70',
@@ -32,7 +33,7 @@ export const GhostButton = ({ children, className, ...props }: ButtonProps) => {
   return (
     <button
       className={clsxm(
-        'text text-base',
+        'text',
         'bg-transparent active:bg-gray-300 disabled:text-gray-500 dark:disabled:text-gray-400',
         sharedClasses,
         className,

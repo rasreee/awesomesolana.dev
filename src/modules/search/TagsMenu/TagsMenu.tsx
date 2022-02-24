@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { filtersByType, SearchFilter, toPluralFilterType } from '@/api/filters';
 import { capitalizeFirst } from '@/common/utils';
 import { useSearch } from '@/contexts/search';
-import { Popover } from '@/ui/components';
+import { Popover, SolidButton } from '@/ui/components';
+import { PlusIcon } from '@/ui/icons';
 import { clsxm } from '@/ui/utils';
 
 import { TagsSearch } from './TagsSearch';
@@ -23,15 +24,11 @@ export const TagsMenu = ({ type }: TagsMenuProps) => {
 
   return (
     <>
-      <button
+      <SolidButton
         onClick={openMenu}
         className={clsxm(
-          open && 'border border-base-400 dark:border-base-400',
-          count > 0 ? 'text bg-surface-1' : 'text-hint bg-surface',
-          'px-3 py-2',
-          'rounded-lg',
-          'flex w-full items-center justify-between gap-5 bg-opacity-70 hover:bg-opacity-90 active:bg-opacity-100',
-          'md:flex-1',
+          'flex max-w-min items-center justify-between gap-2',
+          'relative',
         )}
       >
         <span className="max-w-[9rem] truncate text-sm leading-none md:max-w-[10rem]">
@@ -39,16 +36,20 @@ export const TagsMenu = ({ type }: TagsMenuProps) => {
         </span>
         <div
           className={clsxm(
-            count > 0 ? 'bg-color-primary text-white' : 'bg-surface-2',
+            Boolean(count) ? 'bg-color-primary text-white' : '',
             'h-5 w-5 min-w-[1.25rem] rounded-full',
             'flex items-center justify-center',
           )}
         >
-          <span className="my-auto text-xs font-semibold leading-none">
-            {count}
-          </span>
+          {Boolean(count) ? (
+            <span className="my-auto text-xs font-semibold leading-none">
+              {count}
+            </span>
+          ) : (
+            <PlusIcon className="absolute right-2.5 h-4 w-4" />
+          )}
         </div>
-      </button>
+      </SolidButton>
       <Popover
         className="bg-surface fixed top-0 left-0 min-w-full max-w-fit rounded-none px-2 py-3"
         isOpen={open}

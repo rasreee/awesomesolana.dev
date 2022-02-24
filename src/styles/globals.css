@@ -166,7 +166,7 @@
   }
 
   .bg-surface-2 {
-    @apply bg-base-200 dark:bg-base-600 dark:bg-opacity-70;
+    @apply bg-base-200 dark:bg-base-600 dark:!bg-opacity-40;
   }
 
   .text {
