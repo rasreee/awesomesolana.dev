@@ -85,6 +85,9 @@ export function TagsSearch({
           className={clsxm('bg-surface-1 w-full py-3')}
         />
       </div>
+      <div className="text-hint px-5 pt-1 text-sm leading-none">
+        {fallbackResults.length} results found
+      </div>
       <div className="absolute z-0 flex-1 pb-10">
         <ul
           className={clsxm(
@@ -94,7 +97,7 @@ export function TagsSearch({
           {(hits.length ? hits : fallbackResults).map((hit) => (
             <li
               key={hit.name}
-              className="flex w-full cursor-pointer items-center justify-between gap-2 px-1 py-1.5"
+              className="flex w-full cursor-pointer items-center justify-between px-5 py-2.5"
               onClick={onClickTag(hit)}
             >
               <div className="flex items-center gap-3">
