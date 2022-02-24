@@ -7,9 +7,12 @@ import {
   Project,
   useProjectsByTags,
 } from '@/api/projects';
-import { waitFor } from '@/lib/waitFor';
+import { waitFor } from '@/common/utils';
 
-import { Search } from './types';
+type Search = {
+  query?: string;
+  tags?: SearchFilter[];
+};
 
 export type ISearchContext = {
   search: Search;

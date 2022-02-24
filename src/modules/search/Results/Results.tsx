@@ -1,7 +1,7 @@
 import { ALL_PROJECTS } from '@/api/projects';
+import { useSearch } from '@/contexts/search';
 import { OnlyMobile } from '@/ui/components';
 
-import { useSearch } from '../SearchContext';
 import { MobileFilterBar } from './MobileFilterBar';
 import { ProjectItem } from './ProjectItem';
 import { ResultsInfo } from './ResultsInfo';

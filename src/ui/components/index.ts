@@ -1,3 +1,4 @@
+export * from './CheckBox';
 export * from './Divider';
 export * from './ErrorMessage';
 export * from './Modal';
@@ -6,6 +7,7 @@ export * from './Popover';
 export * from './Responsive';
 export * from './Seo';
 export * from './Spinner';
+export * from './StatefulIcon';
 export * from './TextInput';
 export * from './Layout';
 export * from './colorMode';

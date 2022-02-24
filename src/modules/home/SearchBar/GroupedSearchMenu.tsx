@@ -1,6 +1,9 @@
-import { getFilterTypes, toPluralFilterType } from '@/api/filters';
-import { SearchFilter } from '@/api/filters';
-import { useSearch } from '@/modules/search';
+import {
+  getFilterTypes,
+  SearchFilter,
+  toPluralFilterType,
+} from '@/api/filters';
+import { useSearch } from '@/contexts/search';
 
 type GroupedSearchMenuProps = {
   tags: SearchFilter[];

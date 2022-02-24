@@ -1,4 +1,4 @@
-import { capitalizeFirst } from '@/lib/capitalizeFirst';
+import { capitalizeFirst } from '@/common/utils';
 
 import { DEPENDENCIES } from './dependencies';
 import { getProjectsCountForTag } from './projects';

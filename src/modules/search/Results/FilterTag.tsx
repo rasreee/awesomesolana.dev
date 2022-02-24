@@ -1,6 +1,6 @@
 import { SearchFilter } from '@/api/filters';
-import clsxm from '@/ui/clsxm';
 import { XIcon } from '@/ui/icons';
+import { clsxm } from '@/ui/utils';
 
 export function FilterTag({
   tag,
@@ -24,7 +24,7 @@ export function FilterTag({
         'text w-max max-w-[11rem] overflow-hidden',
 
         isActive
-          ? 'bg-indigo-600 font-medium'
+          ? 'bg-color-primary font-medium'
           : 'bg-surface-2 text text-opacity-90',
         className,
       )}

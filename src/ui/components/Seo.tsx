@@ -1,14 +1,14 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { openGraph } from '@/lib/helper';
+import { configs } from '@/common/configs';
 
 const defaultSeoProps = {
   title: 'Awesome Solana Dev',
   siteName: 'Awesome Solana Dev',
   description:
     'Curation of Awesome Solana development resources, in particular open-source Github repos, real-world examples of coding on Solana, tutorials, and more.',
-  url: 'https://awesomesolana.dev',
+  url: configs.hostUrl,
   type: 'website',
   robots: 'follow, index',
   image: '',
@@ -25,6 +25,35 @@ export type SeoProps = Partial<{
   robots: string;
   image: string;
 }>;
+
+type OpenGraphType = {
+  siteName: string;
+  description: string;
+  templateTitle?: string;
+  logo?: string;
+};
+
+// Please clone them and self-host if your site is going to be visited by many people.
+// Then change the url and the default logo.
+function openGraph({
+  siteName,
+  templateTitle,
+  description,
+  logo = `${configs.hostUrl}/images/logo.jpg`,
+}: OpenGraphType): string {
+  const ogLogo = encodeURIComponent(logo);
+  const ogSiteName = encodeURIComponent(siteName.trim());
+  const ogTemplateTitle = templateTitle
+    ? encodeURIComponent(templateTitle.trim())
+    : undefined;
+  const ogDesc = encodeURIComponent(description.trim());
+
+  return `${
+    configs.hostUrl
+  }/api/general?siteName=${ogSiteName}&description=${ogDesc}&logo=${ogLogo}${
+    ogTemplateTitle ? `&templateTitle=${ogTemplateTitle}` : ''
+  }`;
+}
 
 export function Seo(props: SeoProps) {
   const router = useRouter();

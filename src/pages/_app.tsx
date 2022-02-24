@@ -5,7 +5,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
 
-import { SearchProvider } from '@/modules/search';
+import { SearchProvider } from '@/contexts/search';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

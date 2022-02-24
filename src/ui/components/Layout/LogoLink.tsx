@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
-import clsxm from '@/ui/clsxm';
 import { HideOnMobile, OnlyMobile, UnstyledLink } from '@/ui/components';
+import { clsxm } from '@/ui/utils';
 
 function LogoLink() {
   return (

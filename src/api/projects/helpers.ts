@@ -1,7 +1,7 @@
 import useSWR, { SWRResponse } from 'swr';
 
 import { SearchFilter } from '@/api/filters';
-import { getIntersection, uniques } from '@/lib/array';
+import { getIntersection, uniques } from '@/common/utils';
 
 import { ALL_PROJECTS } from './constants';
 import { Project } from './types';
@@ -36,7 +36,7 @@ function isRelevantProject(project: Project, tags: SearchFilter[]): boolean {
     const intersection = getIntersection(
       projectTags,
       tagsForType,
-      (tag) => tag.name,
+      (a, b) => a.name === b.name,
     );
 
     commonTags.push(...intersection);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   filtersByType,
@@ -9,10 +9,9 @@ import {
   toPluralFilterType,
 } from '@/api/filters';
 import { getProjectsCountForTag } from '@/api/projects';
-import clsxm from '@/ui/clsxm';
-import { TextInput } from '@/ui/components';
-
-import { useSearch } from '../SearchContext';
+import { useSearch } from '@/contexts/search';
+import { CheckBox, TextInput } from '@/ui/components';
+import { clsxm } from '@/ui/utils';
 
 export function TagsSearch({
   type,
@@ -55,7 +54,7 @@ export function TagsSearch({
             {toPluralFilterType(type)}
           </span>
           <button
-            className="rounded-lg bg-indigo-600 px-3 py-1 font-medium text-white"
+            className="bg-color-primary rounded-lg px-3 py-1 font-medium text-white"
             onClick={onRequestClose}
           >
             Done
@@ -70,7 +69,7 @@ export function TagsSearch({
           className={clsxm(
             'dark:bg-base-1100 dark:bg-opacity-70',
             'w-full rounded-md py-3 text-base placeholder:text-base',
-            'border border-base-300 focus:border-2 focus:border-indigo-400 dark:border-base-600 dark:focus:border-indigo-500',
+            'input-border focus:border-2 focus:border-indigo-400 dark:focus:border-indigo-500',
           )}
         />
       </div>
@@ -87,11 +86,7 @@ export function TagsSearch({
               onClick={onClickTag(tag)}
             >
               <div className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  className="bg-app rounded border-none"
-                  checked={getFilterChecked(tag)}
-                />
+                <CheckBox checked={getFilterChecked(tag)} readOnly />
                 <span className="text-lg leading-none">{tag.name}</span>
                 <span className="text-lg leading-none">
                   {`(${getProjectsCountForTag(tag)})`}

@@ -1,7 +1,7 @@
 import { getFilterTypes } from '@/api/filters';
-import clsxm from '@/ui/clsxm';
+import { useSearch } from '@/contexts/search';
+import { clsxm } from '@/ui/utils';
 
-import { useSearch } from '../SearchContext';
 import { FilterSection } from './FilterSection';
 
 export function Filters({ autoExpand = false }: { autoExpand?: boolean }) {

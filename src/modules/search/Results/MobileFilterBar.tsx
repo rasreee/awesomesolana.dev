@@ -1,7 +1,7 @@
 import { FilterType, getFilterTypes } from '@/api/filters';
-import clsxm from '@/ui/clsxm';
+import { useSearch } from '@/contexts/search';
+import { clsxm } from '@/ui/utils';
 
-import { useSearch } from '../SearchContext';
 import { TagsMenu } from '../TagsMenu';
 
 export function MobileFilterBar({ className }: { className?: string }) {

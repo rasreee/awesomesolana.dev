@@ -1,6 +1,5 @@
-import clsxm from '@/ui/clsxm';
-
-import { useSearch } from '../SearchContext';
+import { useSearch } from '@/contexts/search';
+import { clsxm } from '@/ui/utils';
 
 export function ResultsInfo() {
   const { clearFilters, search, filteredProjects } = useSearch();

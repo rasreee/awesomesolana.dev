@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { configs } from '@/configs';
+import { configs } from '@/common/configs';
 import { GithubRepo } from '@/modules/github/types';
 
 interface GetGithubReposResult {

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 import { filtersByType, SearchFilter, toPluralFilterType } from '@/api/filters';
-import { capitalizeFirst } from '@/lib/capitalizeFirst';
-import clsxm from '@/ui/clsxm';
+import { capitalizeFirst } from '@/common/utils';
+import { useSearch } from '@/contexts/search';
 import { Popover } from '@/ui/components';
+import { clsxm } from '@/ui/utils';
 
-import { useSearch } from '../SearchContext';
 import { TagsSearch } from './TagsSearch';
 
 type TagsMenuProps = { type: SearchFilter['type'] };
@@ -39,9 +39,7 @@ export const TagsMenu = ({ type }: TagsMenuProps) => {
         </span>
         <div
           className={clsxm(
-            count > 0
-              ? 'bg-indigo-500 text-white dark:bg-indigo-600'
-              : 'bg-surface-2',
+            count > 0 ? 'bg-color-primary text-white' : 'bg-surface-2',
             'h-5 w-5 min-w-[1.25rem] rounded-full',
             'flex items-center justify-center',
           )}

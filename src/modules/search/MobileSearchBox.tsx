@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
-import { useClickOutside } from '@/hooks/useClickOutside';
-import clsxm from '@/ui/clsxm';
+import { useClickOutside } from '@/ui/hooks';
+import { clsxm } from '@/ui/utils';
 
 import { MobileFilters } from './Filters';
 import { SearchField } from './SearchField';

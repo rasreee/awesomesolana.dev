@@ -1,5 +1,8 @@
+import React from 'react';
+
 import { SearchFilter } from '@/api/filters';
 import { getProjectsCountForTag } from '@/api/projects';
+import { CheckBox } from '@/ui/components';
 
 export function FilterMenuOption({
   tag,
@@ -20,11 +23,7 @@ export function FilterMenuOption({
       onClick={onClick}
     >
       <div className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          className="bg-app rounded border-none"
-          checked={checked}
-        />
+        <CheckBox checked={checked} readOnly />
         <span className="text-sm leading-none">{tag.name}</span>
       </div>
       <span className="bg-surface-2 rounded-lg px-1.5 py-0.5 text-xs leading-none">

@@ -1,7 +1,7 @@
 import Link, { LinkProps } from 'next/link';
 import * as React from 'react';
 
-import clsxm from '@/ui/clsxm';
+import { clsxm } from '@/ui/utils';
 
 export type UnstyledLinkProps = {
   href: string;

@@ -1,7 +1,7 @@
 import { FilterType, getFilterTypes } from '@/api/filters';
-import clsxm from '@/ui/clsxm';
-
-import { TagsMenu, useSearch } from '../search';
+import { useSearch } from '@/contexts/search';
+import { TagsMenu } from '@/modules/search';
+import { clsxm } from '@/ui/utils';
 
 export function FilterCategories() {
   const { search } = useSearch();

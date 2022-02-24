@@ -1,7 +1,7 @@
 import { SearchFilter } from '@/api/filters';
 import { Project } from '@/api/projects';
+import { useSearch } from '@/contexts/search';
 
-import { useSearch } from '../SearchContext';
 import { FilterTag } from './FilterTag';
 
 export function ProjectItem({ title, description, tags, ...props }: Project) {

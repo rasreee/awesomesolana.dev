@@ -1,11 +1,9 @@
 import { useRef, useState } from 'react';
 
-import clsxm from '@/ui/clsxm';
-import { ErrorMessage, TextInput } from '@/ui/components';
-import { AdjustmentsIcon } from '@/ui/icons';
-
-import { useSearch } from '../SearchContext';
-import { StatefulSearchIcon } from './StatefulSearchIcon';
+import { useSearch } from '@/contexts/search';
+import { ErrorMessage, StatefulIcon, TextInput } from '@/ui/components';
+import { AdjustmentsIcon, SearchIcon } from '@/ui/icons';
+import { clsxm } from '@/ui/utils';
 
 const DEFAULT_PLACEHOLDER = 'Search for any project, dependency, or topic';
 
@@ -36,13 +34,13 @@ export function SearchField({
       )}
     >
       <ErrorMessage>{error}</ErrorMessage>
-      <StatefulSearchIcon
-        className={clsxm(
-          focused
-            ? 'text-indigo-600 dark:text-indigo-400'
-            : 'text text-opacity-60',
-        )}
-        isRequesting={isRequesting}
+      <StatefulIcon
+        className={clsxm({
+          'text-color-primary': focused,
+        })}
+        label="search"
+        loading={isRequesting}
+        icon={SearchIcon}
       />
       <TextInput
         type="search"

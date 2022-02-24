@@ -3,6 +3,7 @@ export interface IConfigs {
 }
 
 export const configs = Object.freeze({
+  hostUrl: 'https://awesomesolana.dev',
   github: {
     apiUrl: 'https://api.github.com',
   },

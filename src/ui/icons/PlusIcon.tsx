@@ -1,4 +1,4 @@
-import clsxm from '@/ui/clsxm';
+import { clsxm } from '@/ui/utils';
 
 export function PlusIcon({
   className,

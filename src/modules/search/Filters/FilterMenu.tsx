@@ -8,10 +8,10 @@ import {
   sortFiltersByProjectCount,
   toPluralFilterType,
 } from '@/api/filters';
-import clsxm from '@/ui/clsxm';
+import { useSearch } from '@/contexts/search';
 import { TextInput } from '@/ui/components';
+import { clsxm } from '@/ui/utils';
 
-import { useSearch } from '../SearchContext';
 import { FilterMenuOption } from './FilterMenuOption';
 
 export function FilterMenu({ type }: { type: SearchFilter['type'] }) {

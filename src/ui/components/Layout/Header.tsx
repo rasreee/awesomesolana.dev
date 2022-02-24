@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
-import { rem } from '@/lib/rem';
 import { ColorModeToggle } from '@/ui/components';
+import { rem } from '@/ui/utils';
 
 import LogoLink from './LogoLink';
 

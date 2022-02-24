@@ -1,7 +1,7 @@
 import { getFilterTypes } from '@/api/filters';
+import { useSearch } from '@/contexts/search';
 import { XIcon } from '@/ui/icons';
 
-import { useSearch } from '../SearchContext';
 import { FilterSection } from './FilterSection';
 
 export function MobileFilters({

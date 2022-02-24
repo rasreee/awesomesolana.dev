@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react';
 
 import { SearchFilter, searchFilters } from '@/api/filters';
-import { waitFor } from '@/lib/waitFor';
-import { StatefulSearchIcon, useSearch } from '@/modules/search';
-import clsxm from '@/ui/clsxm';
-import { ErrorMessage, Popover, TextInput } from '@/ui/components';
+import { waitFor } from '@/common/utils';
+import { useSearch } from '@/contexts/search';
+import {
+  ErrorMessage,
+  Popover,
+  StatefulIcon,
+  TextInput,
+} from '@/ui/components';
+import { SearchIcon } from '@/ui/icons';
+import { clsxm } from '@/ui/utils';
 
 import { GroupedSearchMenu } from './GroupedSearchMenu';
 
@@ -60,9 +66,13 @@ export function SearchBar() {
     >
       <div className="flex items-center gap-1 px-5 py-2">
         <ErrorMessage>{error}</ErrorMessage>
-        <StatefulSearchIcon
-          className={clsxm(focused && 'text-indigo-600 dark:text-indigo-400')}
-          isRequesting={isRequesting}
+        <StatefulIcon
+          label="search"
+          className={clsxm({
+            'text-primary': focused,
+          })}
+          loading={isRequesting}
+          icon={SearchIcon}
         />
         <TextInput
           type="search"

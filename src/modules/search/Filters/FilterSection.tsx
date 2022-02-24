@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 import { filtersByType, SearchFilter, toPluralFilterType } from '@/api/filters';
-import clsxm from '@/ui/clsxm';
+import { useSearch } from '@/contexts/search';
 import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icons';
+import { clsxm } from '@/ui/utils';
 
-import { useSearch } from '../SearchContext';
 import { FilterMenu } from './FilterMenu';
 
 export function FilterSection({

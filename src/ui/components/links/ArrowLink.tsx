@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import clsxm from '@/ui/clsxm';
+import { clsxm } from '@/ui/utils';
 
 import { UnderlineLink } from './UnderlineLink';
 import { UnstyledLinkProps } from './UnstyledLink';
