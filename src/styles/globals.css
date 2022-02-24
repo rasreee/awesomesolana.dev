@@ -43,6 +43,14 @@
     background: transparent;
   }
 
+  input {
+    border-width: none;
+    border-color: none;
+    outline: none;
+    border: none;
+    background: none;
+  }
+
   input:-webkit-autofill,
   textarea:-webkit-autofill,
   select:-webkit-autofill {
@@ -51,18 +59,19 @@
   }
 
   input:-internal-autofill-selected {
-    background-color: none !important;
+    background: none !important;
     color: none !important;
   }
 
   &:focus-visible {
-    outline: unset !important;
+    outline: none;
   }
 
   input:focus {
-    outline: unset !important;
-    outline-offset: unset !important;
-    box-shadow: unset !important;
+    border: none;
+    outline: none;
+    outline-offset: none;
+    box-shadow: none;
   }
 
   /* clears the ‘X’ from Internet Explorer */
@@ -130,22 +139,6 @@
     background-size: 0 2px, 100% 2px;
   }
 
-  .bg-app {
-    @apply bg-base-100 dark:bg-base-1100;
-  }
-
-  .bg-surface {
-    @apply bg-white dark:bg-base-800;
-  }
-
-  .bg-surface-1 {
-    @apply bg-base-100 dark:bg-base-700;
-  }
-
-  .bg-surface-2 {
-    @apply bg-base-200 dark:bg-base-600 dark:bg-opacity-70;
-  }
-
   .layout {
     /* 1100px */
     max-width: 68.75rem;
@@ -160,39 +153,62 @@
     @apply h-[var(--header-height)];
   }
 
+  .bg-app {
+    @apply !bg-base-100 dark:!bg-base-1100;
+  }
+
+  .bg-surface {
+    @apply !bg-white dark:!bg-base-800;
+  }
+
+  .bg-surface-1 {
+    @apply !bg-base-100 dark:!bg-base-700;
+  }
+
+  .bg-surface-2 {
+    @apply !bg-base-200 dark:!bg-base-600 dark:!bg-opacity-70;
+  }
+
   .text {
-    @apply text-gray-800 dark:text-white;
+    @apply !text-gray-800 dark:!text-white;
   }
 
   .text-body {
-    @apply text-gray-700 dark:text-gray-100;
+    @apply !text-gray-700 dark:!text-gray-100;
   }
 
   .text-hint {
-    @apply text-gray-500 dark:text-gray-400;
+    @apply !text-gray-500 dark:!text-gray-400;
   }
 
   .text-color-primary {
-    @apply text-indigo-600 dark:text-indigo-500;
+    @apply text-indigo-600 dark:!text-indigo-500;
   }
 
   .bg-color-primary {
-    @apply bg-indigo-600 dark:bg-indigo-500;
+    @apply !bg-indigo-600 dark:!bg-indigo-500;
   }
 
   .input-border {
-    @apply !border !border-base-300 transition-all dark:!border-base-600;
+    @apply !border !border-base-300 !transition-all dark:!border-base-600;
   }
 
   .input-border-focused {
-    @apply !border-2 !border-indigo-300 dark:!border-indigo-500;
+    @apply !border-2 !border-indigo-500 dark:!border-indigo-500;
   }
 
   .input {
-    @apply rounded-md text-base leading-none placeholder:text-base placeholder:leading-none dark:bg-base-1100 dark:bg-opacity-70;
+    @apply bg-surface !rounded-md !text-base !leading-none !text-base-600 placeholder:!text-base placeholder:!leading-none dark:!bg-base-1100 dark:!bg-opacity-70 dark:!text-base-100 dark:placeholder:!text-gray-400;
   }
 
   .input-sm {
-    @apply text-sm placeholder:text-sm dark:bg-base-1100 dark:bg-opacity-70;
+    @apply !text-sm placeholder:!text-sm dark:!bg-base-1100 dark:!bg-opacity-70;
+  }
+
+  .input-focus-unset {
+    border: none;
+    outline: none;
+    outline-offset: none;
+    box-shadow: none;
   }
 }

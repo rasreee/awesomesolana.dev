@@ -66,10 +66,7 @@ export function TagsSearch({
           value={query}
           onChange={setQuery}
           placeholder={`Search ${toPluralFilterType(type)}...`}
-          className={clsxm(
-            'input input-border focus:input-border-focus',
-            'w-full py-3',
-          )}
+          className={clsxm('bg-surface-1 w-full py-3')}
         />
       </div>
       <div className="absolute z-0 flex-1 pb-10">

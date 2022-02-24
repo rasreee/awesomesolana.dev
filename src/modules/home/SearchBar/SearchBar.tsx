@@ -81,6 +81,7 @@ export function SearchBar() {
           onChange={setValue}
           onFocus={onFocus}
           onBlur={onBlur}
+          className="input-focus-unset"
         />
       </div>
       <Popover

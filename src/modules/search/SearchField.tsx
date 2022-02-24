@@ -27,7 +27,7 @@ export function SearchField({
     <div
       className={clsxm(
         'flex flex-1 items-center gap-1 px-2 py-1',
-        'input',
+        'input bg-surface-1',
         focused || FiltersOpen ? 'input-border-focused' : 'input-border',
       )}
     >
