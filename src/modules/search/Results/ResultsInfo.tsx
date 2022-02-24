@@ -1,13 +1,9 @@
-import { useSearch } from '@/contexts/search';
+import { Project } from '@/api/projects';
 import { ClearFiltersButton } from '@/modules/search/ClearFiltersButton';
 
-export function ResultsInfo() {
-  const { filteredProjects } = useSearch();
-
-  const infoText = filteredProjects.length
-    ? `${filteredProjects.length} ${
-        filteredProjects.length === 1 ? 'result' : 'results'
-      } found`
+export function ResultsInfo({ hits }: { hits: Project[] }) {
+  const infoText = hits.length
+    ? `${hits.length} ${hits.length === 1 ? 'result' : 'results'} found`
     : `No results found.`;
 
   return (

@@ -9,12 +9,34 @@ import {
   toPluralFilterType,
 } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
+import { useSearchField } from '@/modules/search/SearchField';
 import { SolidButton, TextInput } from '@/ui/components';
 import { clsxm } from '@/ui/utils';
 
 import { FilterMenuOption } from './FilterMenuOption';
 
 export function FilterMenu({ type }: { type: SearchFilter['type'] }) {
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleExpanded = () => setExpanded((prev) => !prev);
+
+  const previewOptions = filtersByType(SEARCH_FILTERS, type).slice(
+    0,
+    expanded ? 10 : 5,
+  );
+
+  const runSearch = async (searchQuery: string): Promise<SearchFilter[]> => {
+    if (!searchQuery) return previewOptions;
+
+    const filters = await searchFilters(searchQuery, { type }).then(
+      sortFiltersByProjectCount,
+    );
+
+    return filters;
+  };
+
+  const { query, setQuery, hits } = useSearchField(runSearch);
+
   const {
     search,
     addFilter,
@@ -22,12 +44,6 @@ export function FilterMenu({ type }: { type: SearchFilter['type'] }) {
     getFilterChecked,
     clearFiltersByType,
   } = useSearch();
-
-  const [expanded, setExpanded] = useState(false);
-
-  const toggleExpanded = () => setExpanded((prev) => !prev);
-
-  const [query, setQuery] = useState('');
 
   const onClickItem = (filter: SearchFilter) => () => {
     if (!getFilterChecked(filter)) {
@@ -38,18 +54,9 @@ export function FilterMenu({ type }: { type: SearchFilter['type'] }) {
     setQuery('');
   };
 
-  const previewOptions = filtersByType(SEARCH_FILTERS, type).slice(
-    0,
-    expanded ? 10 : 5,
-  );
-
-  const tagsToShow = sortFiltersByProjectCount(
-    query ? searchFilters(query, { type }) : previewOptions,
-  );
-
   const selectedCount = filtersByType(search.tags ?? [], type).length;
 
-  const canShowMore = tagsToShow.length > 0;
+  const canShowMore = hits.length > 0;
 
   const [focused, setFocused] = useState(false);
   const onFocus = () => setFocused(true);
@@ -85,7 +92,7 @@ export function FilterMenu({ type }: { type: SearchFilter['type'] }) {
         )}
       </div>
       <ul>
-        {tagsToShow.map((tag) => (
+        {hits.map((tag) => (
           <FilterMenuOption
             key={`${tag.type}_${tag.name}`}
             tag={tag}

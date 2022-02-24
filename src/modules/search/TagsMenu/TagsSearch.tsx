@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 import {
   filtersByType,
   SEARCH_FILTERS,
@@ -11,6 +9,7 @@ import {
 import { getProjectsCountForTag } from '@/api/projects';
 import { getIntersection } from '@/common/utils';
 import { useSearch } from '@/contexts/search';
+import { useSearchField } from '@/modules/search/SearchField';
 import {
   CheckBox,
   PrimaryButton,
@@ -26,6 +25,17 @@ export function TagsSearch({
   type: SearchFilter['type'];
   onRequestClose: () => void;
 }) {
+  const runSearch = async (searchQuery: string): Promise<SearchFilter[]> => {
+    if (!searchQuery) return filtersByType(SEARCH_FILTERS, type);
+
+    const filters = await searchFilters(searchQuery, { type }).then(
+      sortFiltersByProjectCount,
+    );
+    return filters;
+  };
+
+  const { query, hits, setQuery, onChange } = useSearchField(runSearch);
+
   const {
     addFilter,
     removeFilter,
@@ -33,8 +43,6 @@ export function TagsSearch({
     clearFiltersByType,
     search,
   } = useSearch();
-
-  const [query, setQuery] = useState('');
 
   const onClickTag = (tag: SearchFilter) => () => {
     if (!getFilterChecked(tag)) {
@@ -45,12 +53,6 @@ export function TagsSearch({
     setQuery('');
   };
 
-  const tagsToShow = sortFiltersByProjectCount(
-    query
-      ? searchFilters(query, { type })
-      : filtersByType(SEARCH_FILTERS, type),
-  );
-
   return (
     <div className="relative z-0 h-screen overflow-y-auto">
       <div className="bg-surface sticky top-0 left-0 z-50 max-h-min w-full px-4 py-2">
@@ -59,7 +61,7 @@ export function TagsSearch({
             disabled={
               getIntersection(
                 search.tags ?? [],
-                tagsToShow,
+                hits,
                 (a, b) => a.name === b.name,
               ).length === 0
             }
@@ -76,7 +78,7 @@ export function TagsSearch({
           type="search"
           name={`${type}-filter-search`}
           value={query}
-          onChange={setQuery}
+          onChange={onChange}
           placeholder={`Search ${toPluralFilterType(type)}...`}
           className={clsxm('bg-surface-1 w-full py-3')}
         />
@@ -87,17 +89,17 @@ export function TagsSearch({
             'flex w-full flex-col items-center gap-3 overflow-y-auto pt-5',
           )}
         >
-          {tagsToShow.map((tag) => (
+          {hits.map((hit) => (
             <li
-              key={tag.name}
+              key={hit.name}
               className="flex w-full cursor-pointer items-center justify-between gap-2 px-1 py-1.5"
-              onClick={onClickTag(tag)}
+              onClick={onClickTag(hit)}
             >
               <div className="flex items-center gap-3">
-                <CheckBox checked={getFilterChecked(tag)} readOnly />
-                <span className="text-lg leading-none">{tag.name}</span>
+                <CheckBox checked={getFilterChecked(hit)} readOnly />
+                <span className="text-lg leading-none">{hit.name}</span>
                 <span className="text-lg leading-none">
-                  {`(${getProjectsCountForTag(tag)})`}
+                  {`(${getProjectsCountForTag(hit)})`}
                 </span>
               </div>
             </li>

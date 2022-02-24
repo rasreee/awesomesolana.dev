@@ -1,13 +1,7 @@
 import { NextRouter, useRouter } from 'next/router';
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useContext, useMemo } from 'react';
 
 import { filtersByType, getFilterTypes, SearchFilter } from '@/api/filters';
-import {
-  filterProjectsByTitle,
-  Project,
-  useProjectsByTags,
-} from '@/api/projects';
-import { waitFor } from '@/common/utils';
 
 type Search = {
   query?: string;
@@ -16,13 +10,6 @@ type Search = {
 
 export type ISearchContext = {
   search: Search;
-  query: string;
-  setQuery: (query: string) => void;
-  error: string | null;
-  setError: (error: string | null) => void;
-  isRequesting: boolean;
-  setIsRequesting: (value: boolean) => void;
-  filteredProjects: Project[];
   addFilter: (tag: SearchFilter) => void;
   removeFilter: (tag: SearchFilter) => void;
   getFilterChecked: (tag: SearchFilter) => boolean;
@@ -71,35 +58,7 @@ function parseSearch(parsedUrlQuery: NextRouter['query']): Search {
 export function SearchProvider({ children }: { children: any }) {
   const router = useRouter();
 
-  const [query, setQuery] = useState('');
-  const [isRequesting, setIsRequesting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
-
   const search = useMemo(() => parseSearch(router.query), [router.query]);
-  const { data: allProjects } = useProjectsByTags(search.tags);
-
-  useEffect(() => {
-    if (!allProjects || !query) return;
-
-    const submitQuery = async (query: string) => {
-      setIsRequesting(true);
-      setError(null);
-      try {
-        const newFilteredProjects = filterProjectsByTitle(
-          allProjects ?? [],
-          query,
-        );
-        setFilteredProjects(newFilteredProjects);
-      } catch (e) {
-        setError((e as Error).message);
-      } finally {
-        setIsRequesting(false);
-      }
-    };
-
-    waitFor(300).then(() => submitQuery(query));
-  }, [query, allProjects]);
 
   const removeFilter = (tagToRemove: SearchFilter) => {
     const { tags } = search;
@@ -188,18 +147,11 @@ export function SearchProvider({ children }: { children: any }) {
     <SearchContext.Provider
       value={{
         search,
-        query,
-        setQuery,
-        error,
-        setError,
-        isRequesting,
-        setIsRequesting,
         removeFilter,
         addFilter,
         clearFilters,
         getFilterChecked,
         clearFiltersByType,
-        filteredProjects,
       }}
     >
       {children}

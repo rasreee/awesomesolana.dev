@@ -1,12 +1,17 @@
 import { useRef, useState } from 'react';
 
+import { Project } from '@/api/projects';
 import { useClickOutside } from '@/ui/hooks';
 import { clsxm } from '@/ui/utils';
 
 import { MobileFilters } from './Filters';
-import { SearchField } from './SearchField';
+import { SearchField, UseSearchField } from './SearchField';
 
-export function MobileSearchBox() {
+export function MobileSearchBox({
+  searchField,
+}: {
+  searchField: UseSearchField<Project>;
+}) {
   const [isFiltersMenuOpen, setIsFiltersMenuOpen] = useState(false);
 
   const popoverRef = useRef<HTMLDivElement | null>(null);
@@ -27,6 +32,7 @@ export function MobileSearchBox() {
       <SearchField
         isFiltersMenuOpen={isFiltersMenuOpen}
         onClickFilters={toggleFilters}
+        {...searchField}
       />
       <div className="relative">
         {isFiltersMenuOpen && (

@@ -107,10 +107,10 @@ export function getFilterTypes(): FilterType[] {
   return result;
 }
 
-export function searchFilters(
+export async function searchFilters(
   query: string,
   filter?: { type: FilterType },
-): SearchFilter[] {
+): Promise<SearchFilter[]> {
   if (!query) return [];
 
   let hits = [] as SearchFilter[];

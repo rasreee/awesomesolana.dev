@@ -1,17 +1,12 @@
-import { ALL_PROJECTS } from '@/api/projects';
-import { useSearch } from '@/contexts/search';
+import { ALL_PROJECTS, Project } from '@/api/projects';
 import { OnlyMobile } from '@/ui/components';
 
 import { MobileFilterBar } from './MobileFilterBar';
 import { ProjectItem } from './ProjectItem';
 import { ResultsInfo } from './ResultsInfo';
 
-export function Results() {
-  const { filteredProjects } = useSearch();
-
-  const projectsToShow = filteredProjects.length
-    ? filteredProjects
-    : ALL_PROJECTS;
+export function Results({ hits }: { hits: Project[] }) {
+  const hitsToShow = hits.length ? hits : ALL_PROJECTS;
 
   return (
     <div>
@@ -19,12 +14,12 @@ export function Results() {
         <OnlyMobile>
           <MobileFilterBar />
         </OnlyMobile>
-        <ResultsInfo />
+        <ResultsInfo hits={hits} />
       </div>
       <ul>
-        {projectsToShow.map((project) => (
-          <li key={project.id}>
-            <ProjectItem {...project} />
+        {hitsToShow.map((hit) => (
+          <li key={hit.id}>
+            <ProjectItem {...hit} />
           </li>
         ))}
       </ul>
