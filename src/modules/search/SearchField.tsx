@@ -26,11 +26,9 @@ export function SearchField({
   return (
     <div
       className={clsxm(
-        'bg-surface',
-        'flex flex-1 items-center gap-1 rounded-lg px-2 py-1',
-        focused || FiltersOpen
-          ? 'border-2 border-indigo-400 dark:border-indigo-600'
-          : 'border border-base-300 dark:border-base-500',
+        'flex flex-1 items-center gap-1 px-2 py-1',
+        'input',
+        focused || FiltersOpen ? 'input-border-focused' : 'input-border',
       )}
     >
       <ErrorMessage>{error}</ErrorMessage>
@@ -48,7 +46,6 @@ export function SearchField({
         placeholder={DEFAULT_PLACEHOLDER}
         value={query}
         onChange={setQuery}
-        className="text-base"
         onFocus={onFocus}
         onBlur={onBlur}
       />
@@ -58,12 +55,12 @@ export function SearchField({
           onClick={onClickFilters}
           className={clsxm(
             'text',
-            FiltersOpen || (focused && 'bg-surface text-indigo-600'),
+            FiltersOpen || (focused && 'bg-surface text-color-primary'),
             'h-full rounded p-1',
           )}
         >
           <AdjustmentsIcon
-            className={clsxm('text-hint', FiltersOpen && 'text-indigo-500')}
+            className={clsxm('text-hint', FiltersOpen && 'text-color-primary')}
           />
         </button>
       )}

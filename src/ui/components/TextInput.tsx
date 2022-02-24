@@ -36,9 +36,9 @@ export function TextInput({
       placeholder={placeholder}
       className={clsxm(
         'block max-w-full flex-1',
-        'bg-surface border-transparent',
+        'border-transparent',
         'text-base-600 dark:text-base-100 dark:placeholder:text-gray-400',
-        'text-base leading-none placeholder:leading-none md:text-lg md:leading-none',
+        'input',
         className,
       )}
       ref={inputRef}

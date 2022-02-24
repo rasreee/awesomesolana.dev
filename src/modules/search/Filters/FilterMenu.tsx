@@ -60,8 +60,8 @@ export function FilterMenu({ type }: { type: SearchFilter['type'] }) {
       <div
         className={clsxm(
           'flex items-center gap-1 rounded-md pr-3',
-          'border border-base-300',
-          focused && 'border-2 border-indigo-400',
+          'input-border',
+          focused && 'input-border-focused',
           'dark:bg-base-1100 dark:bg-opacity-60',
         )}
       >
@@ -71,10 +71,7 @@ export function FilterMenu({ type }: { type: SearchFilter['type'] }) {
           value={query}
           onChange={setQuery}
           placeholder={`Search ${toPluralFilterType(type).toLowerCase()}...`}
-          className={clsxm(
-            'bg-transparent',
-            'rounded-md text-sm leading-none placeholder:text-sm placeholder:leading-none',
-          )}
+          className={clsxm('input input-sm')}
           onFocus={onFocus}
           onBlur={onBlur}
         />

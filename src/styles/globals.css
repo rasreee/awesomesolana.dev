@@ -46,13 +46,13 @@
   input:-webkit-autofill,
   textarea:-webkit-autofill,
   select:-webkit-autofill {
-    -webkit-box-shadow: unset !important;
-    -webkit-text-fill-color: unset !important;
+    -webkit-box-shadow: none !important;
+    -webkit-text-fill-color: none !important;
   }
 
   input:-internal-autofill-selected {
-    background-color: unset !important;
-    color: unset !important;
+    background-color: none !important;
+    color: none !important;
   }
 
   &:focus-visible {
@@ -181,6 +181,18 @@
   }
 
   .input-border {
-    @apply border border-base-300 dark:border-base-500;
+    @apply !border !border-base-300 transition-all dark:!border-base-600;
+  }
+
+  .input-border-focused {
+    @apply !border-2 !border-indigo-300 dark:!border-indigo-500;
+  }
+
+  .input {
+    @apply rounded-md text-base leading-none placeholder:text-base placeholder:leading-none dark:bg-base-1100 dark:bg-opacity-70;
+  }
+
+  .input-sm {
+    @apply text-sm placeholder:text-sm dark:bg-base-1100 dark:bg-opacity-70;
   }
 }

@@ -59,9 +59,8 @@ export function SearchBar() {
   return (
     <div
       className={clsxm(
-        'mx-auto w-full rounded-full border border-base-300 dark:border-base-600',
-        focused && 'border-2 border-indigo-300 dark:border-indigo-500',
-        'bg-surface dark:bg-opacity-60',
+        'input input-border mx-auto w-full rounded-full',
+        focused && 'input-border-focused',
       )}
     >
       <div className="flex items-center gap-1 px-5 py-2">
@@ -77,7 +76,6 @@ export function SearchBar() {
         <TextInput
           type="search"
           name="search"
-          className="bg-transparent"
           placeholder={'Search for open-source projects...'}
           value={value}
           onChange={setValue}

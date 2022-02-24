@@ -67,9 +67,8 @@ export function TagsSearch({
           onChange={setQuery}
           placeholder={`Search ${toPluralFilterType(type)}...`}
           className={clsxm(
-            'dark:bg-base-1100 dark:bg-opacity-70',
-            'w-full rounded-md py-3 text-base placeholder:text-base',
-            'input-border focus:border-2 focus:border-indigo-400 dark:focus:border-indigo-500',
+            'input input-border focus:input-border-focus',
+            'w-full py-3',
           )}
         />
       </div>
