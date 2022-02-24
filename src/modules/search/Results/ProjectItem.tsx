@@ -5,16 +5,10 @@ import { useSearch } from '@/contexts/search';
 import { FilterTag } from './FilterTag';
 
 export function ProjectItem({ title, description, tags, ...props }: Project) {
-  const { search, addFilter, removeFilter } = useSearch();
+  const { search, toggleFilter } = useSearch();
 
   const getIsTagActive = (tag: SearchFilter) => {
     return search.tags?.map((t) => t.name).includes(tag.name);
-  };
-
-  const onClickTag = (tag: SearchFilter) => () => {
-    if (getIsTagActive(tag)) return removeFilter(tag);
-
-    addFilter(tag);
   };
 
   return (
@@ -28,7 +22,7 @@ export function ProjectItem({ title, description, tags, ...props }: Project) {
               <FilterTag
                 isActive={getIsTagActive(tag)}
                 tag={tag}
-                onClick={onClickTag(tag)}
+                onClick={toggleFilter}
               />
             </li>
           ))}

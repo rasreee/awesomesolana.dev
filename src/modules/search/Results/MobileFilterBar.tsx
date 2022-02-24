@@ -1,10 +1,21 @@
+import React, { useState } from 'react';
+
 import { FilterType, getFilterTypes } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
+import { Popover } from '@/ui/components';
 import { clsxm } from '@/ui/utils';
 
-import { TagsMenu } from '../TagsMenu';
+import { CategoryFilterMultiSelect } from './CategoryFilterMultiSelect';
+import { FilterTypeMenuButton } from './FilterTypeMenuButton';
 
 export function MobileFilterBar({ className }: { className?: string }) {
+  const [selectedFilterType, setSelectedFilterType] =
+    useState<FilterType | null>(null);
+
+  const selectFilterType = (type: FilterType) => setSelectedFilterType(type);
+
+  const closeMenu = () => setSelectedFilterType(null);
+
   const { search } = useSearch();
 
   const tags = search.tags ?? [];
@@ -22,10 +33,22 @@ export function MobileFilterBar({ className }: { className?: string }) {
           .sort((a, b) => getCountForType(b) - getCountForType(a))
           .map((type) => (
             <li key={type}>
-              <TagsMenu type={type} />
+              <FilterTypeMenuButton type={type} onClick={selectFilterType} />
             </li>
           ))}
       </ul>
+      <Popover
+        className="bg-surface fixed top-0 left-0 min-w-full max-w-fit rounded-none px-2 py-3"
+        isOpen={Boolean(selectFilterType)}
+        onRequestClose={closeMenu}
+      >
+        {selectedFilterType && (
+          <CategoryFilterMultiSelect
+            type={selectedFilterType}
+            onRequestClose={closeMenu}
+          />
+        )}
+      </Popover>
     </>
   );
 }

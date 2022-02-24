@@ -13,8 +13,10 @@ export function FilterTag({
   onClickRemove?: () => void;
   className?: string;
   isActive?: boolean;
-  onClick?: () => void;
+  onClick: (tag: SearchFilter) => void;
 }) {
+  const handleClick = () => onClick(tag);
+
   return (
     <button
       className={clsxm(
@@ -29,7 +31,7 @@ export function FilterTag({
           : 'bg-surface-2 text text-opacity-90',
         className,
       )}
-      onClick={onClick}
+      onClick={handleClick}
     >
       <span
         className={clsxm(isActive && 'text-white', 'text truncate text-sm')}

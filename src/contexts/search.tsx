@@ -12,6 +12,7 @@ export type ISearchContext = {
   search: Search;
   addFilter: (tag: SearchFilter) => void;
   removeFilter: (tag: SearchFilter) => void;
+  toggleFilter: (tag: SearchFilter) => void;
   getFilterChecked: (tag: SearchFilter) => boolean;
   clearFilters: () => void;
   clearFiltersByType: (type: SearchFilter['type']) => void;
@@ -143,6 +144,14 @@ export function SearchProvider({ children }: { children: any }) {
     router.push(newPath);
   };
 
+  const toggleFilter = (tag: SearchFilter) => {
+    if (!getFilterChecked(tag)) {
+      addFilter(tag);
+    } else {
+      removeFilter(tag);
+    }
+  };
+
   return (
     <SearchContext.Provider
       value={{
@@ -152,6 +161,7 @@ export function SearchProvider({ children }: { children: any }) {
         clearFilters,
         getFilterChecked,
         clearFiltersByType,
+        toggleFilter,
       }}
     >
       {children}

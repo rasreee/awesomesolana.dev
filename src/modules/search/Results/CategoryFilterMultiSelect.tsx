@@ -18,7 +18,7 @@ import {
 } from '@/ui/components';
 import { clsxm } from '@/ui/utils';
 
-export function TagsSearch({
+export function CategoryFilterMultiSelect({
   type,
   onRequestClose,
 }: {
@@ -38,20 +38,11 @@ export function TagsSearch({
 
   const { query, hits, setQuery, onChange } = useSearchField(runSearch);
 
-  const {
-    addFilter,
-    removeFilter,
-    getFilterChecked,
-    clearFiltersByType,
-    search,
-  } = useSearch();
+  const { toggleFilter, getFilterChecked, clearFiltersByType, search } =
+    useSearch();
 
   const onClickTag = (tag: SearchFilter) => () => {
-    if (!getFilterChecked(tag)) {
-      addFilter(tag);
-    } else {
-      removeFilter(tag);
-    }
+    toggleFilter(tag);
     setQuery('');
   };
 
