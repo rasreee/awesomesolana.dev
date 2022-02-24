@@ -154,19 +154,19 @@
   }
 
   .bg-app {
-    @apply !bg-base-100 dark:!bg-base-1100;
+    @apply bg-base-100 dark:bg-base-1100;
   }
 
   .bg-surface {
-    @apply !bg-white dark:!bg-base-800;
+    @apply bg-white dark:bg-base-800;
   }
 
   .bg-surface-1 {
-    @apply !bg-base-100 dark:!bg-base-700;
+    @apply bg-base-100 dark:bg-base-700;
   }
 
   .bg-surface-2 {
-    @apply !bg-base-200 dark:!bg-base-600 dark:!bg-opacity-70;
+    @apply bg-base-200 dark:bg-base-600 dark:bg-opacity-70;
   }
 
   .text {
@@ -186,23 +186,23 @@
   }
 
   .bg-color-primary {
-    @apply !bg-indigo-500 bg-opacity-100 dark:!bg-indigo-600;
+    @apply bg-indigo-500 bg-opacity-100 dark:bg-indigo-600;
   }
 
   .input-border {
-    @apply !border !border-base-300 !transition-all dark:!border-base-600;
+    @apply border border-base-300 !transition-all dark:border-base-600;
   }
 
   .input-border-focused {
-    @apply !border-2 !border-indigo-500 dark:!border-indigo-500;
+    @apply border-2 border-indigo-500 dark:border-indigo-500;
   }
 
   .input {
-    @apply bg-surface !rounded-md !text-base !leading-none !text-base-600 placeholder:!text-base placeholder:!leading-none dark:!bg-base-1100 dark:!bg-opacity-70 dark:!text-base-100 dark:placeholder:!text-gray-400;
+    @apply bg-surface !rounded-md !text-base !leading-none !text-base-600 placeholder:!text-base placeholder:!leading-none dark:bg-base-1100 dark:bg-opacity-70 dark:text-base-100 dark:placeholder:!text-gray-400;
   }
 
   .input-sm {
-    @apply !text-sm placeholder:!text-sm dark:!bg-base-1100 dark:!bg-opacity-70;
+    @apply !text-sm placeholder:!text-sm dark:bg-base-1100 dark:bg-opacity-70;
   }
 
   .input-focus-unset {

@@ -10,6 +10,7 @@ const sharedClasses = clsxm(
   'transition-all',
   'px-3 py-2',
   'disabled:!text-opacity-80 disabled:!opacity-70',
+  'bg-opacity-70 hover:bg-opacity-80 active:bg-opacity-100',
 );
 
 export const PrimaryButton = ({
