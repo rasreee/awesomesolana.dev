@@ -2,6 +2,7 @@ export * from './Button';
 export * from './CheckBox';
 export * from './Divider';
 export * from './ErrorMessage';
+export * from './Logo';
 export * from './Modal';
 export * from './NextImage';
 export * from './Popover';
