@@ -1,13 +1,13 @@
 import { useRef, useState } from 'react';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/ui/clsxm';
 
-import { MobileFiltersMenu } from './MobileFiltersMenu';
+import { MobileFilters } from './Filters';
 import { SearchField } from './SearchField';
 
 export function MobileSearchBox() {
-  const [filtersMenuOpen, setFiltersMenuOpen] = useState(false);
+  const [FiltersOpen, setFiltersOpen] = useState(false);
 
   const popoverRef = useRef<HTMLDivElement | null>(null);
 
@@ -15,21 +15,18 @@ export function MobileSearchBox() {
 
   useClickOutside(popoverRef, (e) => {
     if (buttonRef.current?.contains(e.target as HTMLElement)) return;
-    setFiltersMenuOpen(false);
+    setFiltersOpen(false);
   });
 
-  const toggleFiltersMenu = () => {
-    setFiltersMenuOpen((prev) => !prev);
+  const toggleFilters = () => {
+    setFiltersOpen((prev) => !prev);
   };
 
   return (
     <div className="flex flex-col gap-2">
-      <SearchField
-        filtersMenuOpen={filtersMenuOpen}
-        onClickFilters={toggleFiltersMenu}
-      />
+      <SearchField FiltersOpen={FiltersOpen} onClickFilters={toggleFilters} />
       <div className="relative">
-        {filtersMenuOpen && (
+        {FiltersOpen && (
           <div
             className={clsxm(
               'min-h-0',
@@ -42,9 +39,9 @@ export function MobileSearchBox() {
             )}
             ref={popoverRef}
           >
-            <MobileFiltersMenu
+            <MobileFilters
               onRequestClose={() => {
-                setFiltersMenuOpen(false);
+                setFiltersOpen(false);
               }}
             />
           </div>

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/ui/clsxm';
 
 export function Popover({
   children,

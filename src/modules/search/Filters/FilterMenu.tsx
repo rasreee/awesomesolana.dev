@@ -8,7 +8,7 @@ import {
   sortFiltersByProjectCount,
   toPluralFilterType,
 } from '@/api/filters';
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/ui/clsxm';
 import { TextInput } from '@/ui/components';
 
 import { useSearch } from '../SearchContext';

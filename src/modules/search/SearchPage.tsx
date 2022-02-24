@@ -1,7 +1,7 @@
 import { HideOnMobile, OnlyMobile } from '@/ui/components';
-import { Layout } from '@/ui/layouts';
+import { Layout } from '@/ui/components';
 
-import { FiltersMenu } from './Filters';
+import { Filters } from './Filters';
 import { MobileSearchBox } from './MobileSearchBox';
 import { Results } from './Results';
 import { SearchField } from './SearchField';
@@ -20,7 +20,7 @@ export function SearchPage() {
             <Results />
           </div>
           <div className="bg-surface sm:3/12 rounded-md lg:w-4/12">
-            <FiltersMenu autoExpand />
+            <Filters autoExpand />
           </div>
         </div>
       </HideOnMobile>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import clsxm from '@/lib/clsxm';
+import clsxm from '@/ui/clsxm';
 
 type TextInputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,

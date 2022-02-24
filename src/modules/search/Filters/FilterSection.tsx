@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import { filtersByType, SearchFilter, toPluralFilterType } from '@/api/filters';
-import clsxm from '@/lib/clsxm';
-import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icon/ChevronIcon';
+import clsxm from '@/ui/clsxm';
+import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icons';
 
 import { useSearch } from '../SearchContext';
 import { FilterMenu } from './FilterMenu';

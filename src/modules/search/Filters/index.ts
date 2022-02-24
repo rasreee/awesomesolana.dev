@@ -1,3 +1,2 @@
-export * from './FilterMenu';
-export * from './FilterSection';
-export * from './FiltersMenu';
+export * from './Filters';
+export * from './MobileFilters';

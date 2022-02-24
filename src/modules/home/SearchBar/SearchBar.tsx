@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
 import { SearchFilter, searchFilters } from '@/api/filters';
-import clsxm from '@/lib/clsxm';
 import { waitFor } from '@/lib/waitFor';
 import { StatefulSearchIcon, useSearch } from '@/modules/search';
+import clsxm from '@/ui/clsxm';
 import { ErrorMessage, Popover, TextInput } from '@/ui/components';
 
 import { GroupedSearchMenu } from './GroupedSearchMenu';

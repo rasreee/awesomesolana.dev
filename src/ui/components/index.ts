@@ -5,4 +5,8 @@ export * from './NextImage';
 export * from './Popover';
 export * from './Responsive';
 export * from './Seo';
+export * from './Spinner';
 export * from './TextInput';
+export * from './Layout';
+export * from './colorMode';
+export * from './links';

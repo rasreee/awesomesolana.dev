@@ -2,8 +2,7 @@ import * as React from 'react';
 import { RiAlarmWarningFill } from 'react-icons/ri';
 
 import { Seo } from '@/ui/components';
-import { Layout } from '@/ui/layouts';
-import ArrowLink from '@/ui/links/ArrowLink';
+import { ArrowLink, Layout } from '@/ui/components';
 
 export default function NotFoundPage() {
   return (

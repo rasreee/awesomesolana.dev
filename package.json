@@ -5,6 +5,8 @@
   "scripts": {
     "analyze:unused": "next-unused",
     "analyze": "cross-env ANALYZE=true yarn run build",
+    "unimported": "unimported",
+    "find-unused-exports": "find-unused-exports --moduyle-glob \"**/*.{ts,tsx}\" --resolve-file-extensions ts,tsx --resolve-index-files",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -57,6 +59,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "find-unused-exports": "^3.0.0",
     "husky": "^7.0.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
@@ -69,13 +72,20 @@
     "react-test-renderer": "^17.0.2",
     "standard-version": "^9.3.2",
     "tailwindcss": "^3.0.23",
-    "typescript": "^4.5.5"
+    "typescript": "<4.5.0",
+    "unimported": "^1.19.1"
   },
   "next-unused": {
-    "alias": {},
+    "alias": {
+      "@/*": [
+        "src/*"
+      ]
+    },
     "debug": true,
     "include": [
-      "src"
+      "src",
+      "src/modules",
+      "src/ui"
     ],
     "exclude": [
       ".test.",
@@ -83,7 +93,8 @@
       ".spec."
     ],
     "entrypoints": [
-      "src/pages"
+      "src/pages",
+      "src/modules"
     ]
   },
   "lint-staged": {
