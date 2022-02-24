@@ -7,6 +7,7 @@ const TAG_NAMES = {
   language: [
     'Rust',
     'JavaScript',
+    'Typescript',
     'C',
     'Golang',
     'Python',
