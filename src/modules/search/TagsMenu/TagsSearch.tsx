@@ -25,8 +25,10 @@ export function TagsSearch({
   type: SearchFilter['type'];
   onRequestClose: () => void;
 }) {
+  const fallbackResults = filtersByType(SEARCH_FILTERS, type);
+
   const runSearch = async (searchQuery: string): Promise<SearchFilter[]> => {
-    if (!searchQuery) return filtersByType(SEARCH_FILTERS, type);
+    if (!searchQuery) return fallbackResults;
 
     const filters = await searchFilters(searchQuery, { type }).then(
       sortFiltersByProjectCount,
@@ -89,7 +91,7 @@ export function TagsSearch({
             'flex w-full flex-col items-center gap-3 overflow-y-auto pt-5',
           )}
         >
-          {hits.map((hit) => (
+          {(hits.length ? hits : fallbackResults).map((hit) => (
             <li
               key={hit.name}
               className="flex w-full cursor-pointer items-center justify-between gap-2 px-1 py-1.5"
