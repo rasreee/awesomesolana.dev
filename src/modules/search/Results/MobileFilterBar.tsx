@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { FilterType, getFilterTypes } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
@@ -14,7 +14,7 @@ export function MobileFilterBar({ className }: { className?: string }) {
 
   const selectFilterType = (type: FilterType) => setSelectedFilterType(type);
 
-  const closeMenu = () => setSelectedFilterType(null);
+  const onRequestClose = () => setSelectedFilterType(null);
 
   const { search } = useSearch();
 
@@ -37,18 +37,18 @@ export function MobileFilterBar({ className }: { className?: string }) {
             </li>
           ))}
       </ul>
-      <Popover
-        className="bg-surface fixed top-0 left-0 min-w-full max-w-fit rounded-none px-2 py-3"
-        isOpen={Boolean(selectFilterType)}
-        onRequestClose={closeMenu}
-      >
-        {selectedFilterType && (
+      {selectedFilterType && (
+        <Popover
+          className="bg-surface fixed top-0 left-0 min-w-full max-w-fit rounded-none px-2 py-3"
+          onRequestClose={onRequestClose}
+          isOpen={Boolean(selectedFilterType)}
+        >
           <CategoryFilterMultiSelect
             type={selectedFilterType}
-            onRequestClose={closeMenu}
+            onRequestClose={onRequestClose}
           />
-        )}
-      </Popover>
+        </Popover>
+      )}
     </>
   );
 }

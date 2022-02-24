@@ -21,7 +21,11 @@ export const PrimaryButton = ({
 }: ButtonProps) => {
   return (
     <button
-      className={clsxm('bg-color-primary text-white', sharedClasses, className)}
+      className={clsxm(
+        'bg-color-primary !bg-opacity-100 !text-white',
+        sharedClasses,
+        className,
+      )}
       {...props}
     >
       {children}
