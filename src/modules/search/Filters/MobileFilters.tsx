@@ -30,6 +30,7 @@ export function MobileFilters({
         <div className="flex items-center justify-around px-5 py-1">
           <button
             onClick={clearFilters}
+            disabled
             className="active:bg-surface-1 text-hint hover:text active:text rounded-md px-12 py-2 text-base font-medium transition-all"
           >
             Clear
