@@ -21,10 +21,10 @@ export function FilterTag({
         'py-0.5 px-2.5',
         'rounded-md',
         'flex items-center justify-between gap-1',
-        'text w-max max-w-[11rem] overflow-hidden',
-
+        'w-max max-w-[11rem] overflow-hidden',
+        'font-medium',
         isActive
-          ? 'bg-color-primary font-medium'
+          ? 'bg-color-primary text-white'
           : 'bg-surface-2 text text-opacity-90',
         className,
       )}
