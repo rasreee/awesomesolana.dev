@@ -92,7 +92,7 @@ export function FilterMenu({ type }: { type: SearchFilter['type'] }) {
         )}
       </div>
       <ul>
-        {hits.map((tag) => (
+        {(hits.length ? hits : previewOptions).map((tag) => (
           <FilterMenuOption
             key={`${tag.type}_${tag.name}`}
             tag={tag}
