@@ -1,6 +1,7 @@
-import { getFilterTypes } from '@/api/filters';
+import { FilterType, getFilterTypes } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
 import { GhostButton } from '@/ui/components';
+import { useSelections } from '@/ui/hooks/useSelections';
 import { XIcon } from '@/ui/icons';
 
 import { FilterSection } from './FilterSection';
@@ -11,6 +12,8 @@ export function MobileFilters({
   onRequestClose: () => void;
 }) {
   const { clearFilters, search } = useSearch();
+
+  const { getIsExpanded, toggleSelection } = useSelections<FilterType>();
 
   return (
     <>
@@ -25,7 +28,12 @@ export function MobileFilters({
         </div>
         <div>
           {getFilterTypes().map((type) => (
-            <FilterSection type={type} key={type} />
+            <FilterSection
+              type={type}
+              key={type}
+              isExpanded={getIsExpanded(type)}
+              onToggleExpanded={toggleSelection}
+            />
           ))}
         </div>
         <div className="flex items-center justify-around px-5 py-1">

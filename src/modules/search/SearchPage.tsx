@@ -41,7 +41,7 @@ export function SearchPage() {
             <Results hits={hits} />
           </div>
           <div className="bg-surface sm:3/12 rounded-md lg:w-4/12">
-            <Filters autoExpand />
+            <Filters />
           </div>
         </div>
       </HideOnMobile>
