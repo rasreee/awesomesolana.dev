@@ -1,5 +1,6 @@
 import { getFilterTypes } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
+import { GhostButton } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
 
 import { FilterSection } from './FilterSection';
@@ -9,7 +10,7 @@ export function MobileFilters({
 }: {
   onRequestClose: () => void;
 }) {
-  const { clearFilters } = useSearch();
+  const { clearFilters, search } = useSearch();
 
   return (
     <>
@@ -28,19 +29,12 @@ export function MobileFilters({
           ))}
         </div>
         <div className="flex items-center justify-around px-5 py-1">
-          <button
-            onClick={clearFilters}
-            disabled
-            className="active:bg-surface-1 text-hint hover:text active:text rounded-md px-12 py-2 text-base font-medium transition-all"
-          >
+          <GhostButton onClick={clearFilters} disabled={!search.tags?.length}>
             Clear
-          </button>
-          <button
-            onClick={onRequestClose}
-            className="active:bg-surface-1 rounded-md px-12 py-2 text-base font-medium transition-all"
-          >
+          </GhostButton>
+          <GhostButton className="text-color-primary" onClick={onRequestClose}>
             Done
-          </button>
+          </GhostButton>
         </div>
       </div>
     </>

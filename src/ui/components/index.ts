@@ -1,6 +1,7 @@
 export * from './CheckBox';
 export * from './Divider';
 export * from './ErrorMessage';
+export * from './GhostButton';
 export * from './Modal';
 export * from './NextImage';
 export * from './Popover';
