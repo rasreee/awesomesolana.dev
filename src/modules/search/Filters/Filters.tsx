@@ -26,7 +26,7 @@ export function Filters() {
             key={type}
             type={type}
             isExpanded={getIsExpanded(type)}
-            onToggleExpanded={toggleSelection}
+            onToggle={toggleSelection}
           />
         ))}
       </div>

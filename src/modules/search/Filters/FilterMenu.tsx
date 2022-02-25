@@ -15,7 +15,13 @@ import { clsxm } from '@/ui/utils';
 
 import { FilterMenuOption } from './FilterMenuOption';
 
-export function FilterMenu({ type }: { type: SearchFilter['type'] }) {
+export function FilterMenu({
+  type,
+  onClear,
+}: {
+  type: SearchFilter['type'];
+  onClear: () => void;
+}) {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpanded = () => setExpanded((prev) => !prev);
@@ -37,13 +43,7 @@ export function FilterMenu({ type }: { type: SearchFilter['type'] }) {
 
   const { query, setQuery, hits } = useSearchField(runSearch);
 
-  const {
-    search,
-    addFilter,
-    removeFilter,
-    getFilterChecked,
-    clearFiltersByType,
-  } = useSearch();
+  const { search, addFilter, removeFilter, getFilterChecked } = useSearch();
 
   const onClickItem = (filter: SearchFilter) => () => {
     if (!getFilterChecked(filter)) {
@@ -84,7 +84,7 @@ export function FilterMenu({ type }: { type: SearchFilter['type'] }) {
         />
         {selectedCount > 0 && (
           <SolidButton
-            onClick={() => clearFiltersByType(type)}
+            onClick={onClear}
             className="py-1.5 text-sm leading-none"
           >
             Clear

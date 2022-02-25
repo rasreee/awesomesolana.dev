@@ -7,25 +7,23 @@ import { FilterMenu } from './FilterMenu';
 
 export function FilterSection({
   type,
-  onToggleExpanded,
+  onToggle,
   isExpanded,
+  onClear,
 }: {
   type: FilterType;
   isExpanded: boolean;
-  onToggleExpanded: (type: FilterType) => void;
+  onToggle: () => void;
+  onClear: () => void;
 }) {
   const { search } = useSearch();
 
   const selectedCount = filtersByType(search.tags ?? [], type).length;
 
-  const handleClick = () => {
-    onToggleExpanded(type);
-  };
-
   return (
     <div className="flex flex-col gap-2">
       <button
-        onClick={handleClick}
+        onClick={onToggle}
         className="hover:bg-surface-1 flex w-full items-center gap-3 px-5 py-3"
       >
         <div className={clsxm('text', isExpanded && 'text-primary-500')}>
@@ -36,7 +34,9 @@ export function FilterSection({
           {selectedCount > 0 ? `(${selectedCount})` : ''}
         </div>
       </button>
-      <div className="px-5">{isExpanded && <FilterMenu type={type} />}</div>
+      <div className="px-5">
+        {isExpanded && <FilterMenu type={type} onClear={onClear} />}
+      </div>
     </div>
   );
 }

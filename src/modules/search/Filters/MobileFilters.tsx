@@ -12,12 +12,13 @@ export function MobileFilters({
 }: {
   onRequestClose: () => void;
 }) {
-  const { clearFilters, search, getFiltersCountByType } = useSearch();
+  const { clearFilters, search, getFiltersCountByType, clearFiltersByType } =
+    useSearch();
 
   const [expanded, setExpanded] = useState<FilterType | null>(null);
   const [wasCleared, setWasCleared] = useState(false);
 
-  const toggleExpanded = (item: FilterType) => {
+  const handleToggleCategory = (item: FilterType) => () => {
     setExpanded((prev) => (prev !== item ? item : null));
     setWasCleared(false);
   };
@@ -35,6 +36,14 @@ export function MobileFilters({
     }
   }, [expanded, getFiltersCountByType, wasCleared]);
 
+  const getIsCategoryExpanded = (item: FilterType) =>
+    Boolean(expanded && item === expanded);
+
+  const handleClearCategory = (category: FilterType) => () => {
+    clearFiltersByType(category);
+    setExpanded(null);
+  };
+
   return (
     <>
       <div className="flex flex-col gap-2 py-3">
@@ -46,10 +55,18 @@ export function MobileFilters({
             </button>
           </div>
         </div>
-        <FilterTypes
-          getIsExpanded={(item) => expanded !== null && item === expanded}
-          toggleExpanded={toggleExpanded}
-        />
+        <ul>
+          {getFilterTypes().map((item) => (
+            <li key={item}>
+              <FilterSection
+                type={item}
+                isExpanded={getIsCategoryExpanded(item)}
+                onToggle={handleToggleCategory(item)}
+                onClear={handleClearCategory(item)}
+              />
+            </li>
+          ))}
+        </ul>
         <div className="flex items-center justify-around px-5 py-1">
           <GhostButton onClick={handleClear} disabled={!search.tags?.length}>
             Clear
@@ -62,25 +79,3 @@ export function MobileFilters({
     </>
   );
 }
-
-export const FilterTypes = ({
-  getIsExpanded,
-  toggleExpanded,
-}: {
-  getIsExpanded: (item: FilterType) => boolean;
-  toggleExpanded: (item: FilterType) => void;
-}) => {
-  return (
-    <ul>
-      {getFilterTypes().map((item) => (
-        <li key={item}>
-          <FilterSection
-            type={item}
-            isExpanded={getIsExpanded(item)}
-            onToggleExpanded={toggleExpanded}
-          />
-        </li>
-      ))}
-    </ul>
-  );
-};
