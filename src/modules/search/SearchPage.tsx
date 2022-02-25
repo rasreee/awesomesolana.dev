@@ -6,8 +6,18 @@ import {
   filterProjectsByTitle,
   Project,
 } from '@/api/projects';
-import { FILTER_CATEGORIES } from '@/api/tags';
+import { FILTER_CATEGORIES, Tag } from '@/api/tags';
 import { useSearchFilters } from '@/contexts/SearchContext';
+
+export async function searchProjects(
+  query: string,
+  tags: Tag[],
+): Promise<Project[]> {
+  const initialResult = filterProjectsByTags(ALL_PROJECTS, tags);
+  const result = filterProjectsByTitle(initialResult, query);
+
+  return result;
+}
 
 import {
   FilterItemToggle,
@@ -19,14 +29,9 @@ import {
 export function SearchPage() {
   const searchFilters = useSearchFilters();
 
-  async function searchProjectsByQuery(query: string): Promise<Project[]> {
-    const initialResult = filterProjectsByTags(ALL_PROJECTS, searchFilters);
-    const result = filterProjectsByTitle(initialResult, query);
-
-    return result;
-  }
-
-  const searchField = useSearchField(searchProjectsByQuery);
+  const searchField = useSearchField((query) =>
+    searchProjects(query, searchFilters),
+  );
 
   return (
     <div className="flex-1 px-3 sm:px-6">
