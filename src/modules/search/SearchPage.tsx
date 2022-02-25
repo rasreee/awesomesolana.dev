@@ -33,7 +33,6 @@ export function SearchPage() {
             {hits.map((hit) => (
               <li key={hit.id}>
                 <RepoItem {...hit} />
-                {/* {JSON.stringify(hit)} */}
               </li>
             ))}
           </ul>
