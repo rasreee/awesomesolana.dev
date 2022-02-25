@@ -46,14 +46,12 @@ export function SearchPage() {
 
 export function FilterBar() {
   return (
-    <>
-      <ul className="grid grid-cols-2 gap-2 overflow-x-auto sm:flex sm:items-center sm:gap-5">
-        {FILTER_CATEGORIES.map((name) => (
-          <li key={name}>
-            <FilterItemToggle category={name} />
-          </li>
-        ))}
-      </ul>
-    </>
+    <ul className="grid grid-cols-2 gap-2 overflow-x-auto sm:flex sm:items-center sm:gap-5">
+      {FILTER_CATEGORIES.map((name) => (
+        <li key={name}>
+          <FilterItemToggle category={name} />
+        </li>
+      ))}
+    </ul>
   );
 }
