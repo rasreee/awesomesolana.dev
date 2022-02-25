@@ -66,6 +66,7 @@
     "husky": "^7.0.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
+    "jest-runner-groups": "^2.1.0",
     "lint-staged": "^12.3.4",
     "next-sitemap": "^2.4.4",
     "next-unused": "^0.0.6",

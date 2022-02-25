@@ -25,3 +25,12 @@ export const githubApi = {
       formatGithubApiQuery({ page, per_page }),
     ].join(''),
 };
+
+export const githubSwrKey = {
+  route: <Route extends '/search' | '/browse'>(
+    route: '/search' | '/browse',
+    params: Route extends '/search'
+      ? Partial<GithubReposSearchParams>
+      : Partial<GithubReposBrowseParams> = {},
+  ) => [`/api/github` + route, formatGithubApiQuery(params)].join(''),
+};

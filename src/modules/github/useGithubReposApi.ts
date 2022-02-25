@@ -1,18 +1,12 @@
 import useSWR from 'swr';
 
-import { formatGithubApiQuery } from '.';
-import { GithubReposBrowseParams, GithubReposSearchParams } from './api';
+import {
+  GithubReposBrowseParams,
+  GithubReposSearchParams,
+  githubSwrKey,
+} from './api';
 import { parseRawGitHubRepo } from './helpers';
 import { GitHubApiResponse, GitHubRepo } from './types';
-
-const swrKey = {
-  githubReposApi: <Route extends '/search' | '/browse'>(
-    route: '/search' | '/browse',
-    params: Route extends '/search'
-      ? Partial<GithubReposSearchParams>
-      : Partial<GithubReposBrowseParams> = {},
-  ) => [`/api/github` + route, formatGithubApiQuery(params)].join(''),
-};
 
 export function useGithubReposApi<Route extends '/search' | '/browse'>(
   route: Route,
@@ -25,7 +19,7 @@ export function useGithubReposApi<Route extends '/search' | '/browse'>(
   error: Error | undefined;
 } {
   const { data: rawData, error } = useSWR<GitHubApiResponse, Error>(
-    shouldFetch ? swrKey.githubReposApi(route, params) : null,
+    shouldFetch ? githubSwrKey.route(route, params) : null,
   );
 
   const repos = rawData?.items.map(parseRawGitHubRepo);
@@ -40,7 +34,7 @@ export function useBrowseGithubRepos(
   error: Error | undefined;
 } {
   const { data: rawData, error } = useSWR<GitHubApiResponse, Error>(
-    swrKey.githubReposApi('/browse', params),
+    githubSwrKey.route('/browse', params),
   );
 
   const repos = rawData?.items.map(parseRawGitHubRepo);
@@ -55,7 +49,7 @@ export function useSearchGithubRepos(
   error: Error | undefined;
 } {
   const { data: rawData, error } = useSWR<GitHubApiResponse, Error>(
-    swrKey.githubReposApi('/search', params),
+    githubSwrKey.route('/search', params),
   );
 
   const repos = rawData?.items.map(parseRawGitHubRepo);

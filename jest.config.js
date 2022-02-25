@@ -32,7 +32,7 @@ module.exports = {
     '/node_modules/',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
-
+  runner: 'groups',
   // https://nextjs.org/docs/testing#manual-setup-2
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };
