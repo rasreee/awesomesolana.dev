@@ -30,9 +30,7 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
     clearFilters,
   } = useSearch();
 
-  const {
-    filtersMenu: { isOpen: isFiltersMenuOpen },
-  } = useAppState();
+  const { filtersMenu } = useAppState();
 
   return (
     <div className="flex flex-col gap-1">
@@ -40,7 +38,7 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
         <span className="text text-sm opacity-90">
           {getInfoText({ hits, hasFilters })}
         </span>
-        {!isFiltersMenuOpen && hasFilters && (
+        {!filtersMenu.isOpen && hasFilters && (
           <SolidButton
             onClick={clearFilters}
             className="py-2 text-sm leading-none"
