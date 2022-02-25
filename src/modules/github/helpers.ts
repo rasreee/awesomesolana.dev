@@ -36,21 +36,21 @@ function formatTagSearchParam(tag: Tag): string {
 }
 
 export function formatGithubApiQuery({
-  q = '',
+  keywords = [],
   filters = [],
   per_page = DEFAULT_PAGINATION_PARAMS.per_page,
   page = DEFAULT_PAGINATION_PARAMS.page,
-}: Partial<PaginationParams> & Partial<{ filters: Tag[]; q: string }>): string {
+}: Partial<PaginationParams> &
+  Partial<{ keywords: string[]; filters: Tag[] }>): string {
   const params = [
-    'solana',
-    ...q.trim().split(' '),
+    ...keywords.map((keyword) => keyword.trim()),
     ...filters.map((tag) => formatTagSearchParam(tag)),
   ]
     .filter(Boolean)
     .join('+');
 
-  const query = `q=${params}`;
-  const pagination = `&page=${page}&per_page=${per_page}`;
+  const query = params.length ? `?q=${params}` : '';
+  const pagination = `${query ? '&' : '?'}page=${page}&per_page=${per_page}`;
 
-  return `?${query}${pagination}`;
+  return `${query}${pagination}`;
 }

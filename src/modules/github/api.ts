@@ -4,7 +4,7 @@ import { Tag } from '@/modules/tags';
 import { formatGithubApiQuery } from './helpers';
 
 export interface GithubReposSearchParams extends PaginationParams {
-  q: string;
+  keywords: string[];
   filters: Tag[];
 }
 
@@ -12,17 +12,27 @@ export interface GithubReposBrowseParams extends PaginationParams {}
 
 export const githubApi = {
   baseUrl: 'https://api.github.com',
-  searchRepos: ({ page, per_page, filters, q }: GithubReposSearchParams) =>
+  searchRepos: ({
+    page,
+    per_page,
+    filters,
+    keywords,
+  }: GithubReposSearchParams) =>
     [
       githubApi.baseUrl,
       `/search/repositories`,
-      formatGithubApiQuery({ q, filters, page, per_page }),
+      formatGithubApiQuery({
+        keywords: ['solana', ...keywords],
+        filters,
+        page,
+        per_page,
+      }),
     ].join(''),
   browseRepos: ({ page, per_page }: GithubReposBrowseParams) =>
     [
       githubApi.baseUrl,
       `/search/repositories`,
-      formatGithubApiQuery({ page, per_page }),
+      formatGithubApiQuery({ keywords: ['solana'], page, per_page }),
     ].join(''),
 };
 
