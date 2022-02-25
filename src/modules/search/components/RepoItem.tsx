@@ -1,6 +1,7 @@
 import { GitHubRepo } from '@/modules/github';
+import { Badge } from '@/ui/components';
 
-export function RepoItem({ name, description }: GitHubRepo) {
+export function RepoItem({ name, description, topics }: GitHubRepo) {
   // const getIsFilterActive = useGetIsFilterActive();
   // const toggleFilter = useToggleFilter();
 
@@ -12,15 +13,11 @@ export function RepoItem({ name, description }: GitHubRepo) {
         <div className="text-xl font-semibold">{name}</div>
         <div className="text-base">{description}</div>
         <ul className="flex flex-wrap items-center gap-1.5">
-          {/* {topics.map((topic) => (
+          {topics.map((topic) => (
             <li key={`${topic}`}>
-              <FilterTag
-                isActive={getIsFilterActive(topic)}
-                tag={topic}
-                onClick={handleToggleFilter(topic)}
-              />
+              <Badge>{topic}</Badge>
             </li>
-          ))} */}
+          ))}
         </ul>
       </div>
     </div>
