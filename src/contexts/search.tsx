@@ -15,6 +15,7 @@ type Search = {
 
 export type ISearchContext = {
   search: Search;
+  hasFilters: boolean;
   getFiltersCountByType: (category: FilterCategory) => number;
   addFilter: (tag: SearchFilter) => void;
   removeFilter: (tag: SearchFilter) => void;
@@ -163,10 +164,13 @@ export function SearchProvider({ children }: { children: any }) {
     }
   };
 
+  const hasFilters = Boolean(search.tags?.length);
+
   return (
     <SearchContext.Provider
       value={{
         search,
+        hasFilters,
         removeFilter,
         addFilter,
         clearFilters,

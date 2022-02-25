@@ -8,7 +8,7 @@ import { clsxm } from '@/ui/utils';
 const DEFAULT_PLACEHOLDER = 'Search for any project, dependency, or topic';
 
 export type SearchFieldProps = {
-  onClickFilters?: () => void;
+  onShowFilters?: () => void;
   isFiltersMenuOpen?: boolean;
   error: string | null;
   isRequesting: boolean;
@@ -17,7 +17,7 @@ export type SearchFieldProps = {
 };
 
 export function SearchField({
-  onClickFilters,
+  onShowFilters,
   isFiltersMenuOpen,
   error,
   isRequesting,
@@ -34,7 +34,7 @@ export function SearchField({
   return (
     <div
       className={clsxm(
-        'flex flex-1 items-center gap-1 px-2 py-1',
+        'flex !max-h-[3rem] min-w-full items-center gap-1 px-2 py-1',
         'input bg-surface-1',
         focused || isFiltersMenuOpen ? 'input-border-focused' : 'input-border',
       )}
@@ -58,10 +58,10 @@ export function SearchField({
         onFocus={onFocus}
         onBlur={onBlur}
       />
-      {onClickFilters && (
+      {onShowFilters && (
         <button
           ref={buttonRef}
-          onClick={onClickFilters}
+          onClick={onShowFilters}
           className={clsxm(
             'text',
             isFiltersMenuOpen || (focused && 'bg-surface text-color-primary'),
@@ -82,7 +82,7 @@ export function SearchField({
 
 export type UseSearchField<T> = Omit<
   SearchFieldProps,
-  'onClickFilters' | 'isFiltersMenuOpen'
+  'onShowFilters' | 'isFiltersMenuOpen'
 > & {
   setQuery: Dispatch<SetStateAction<string>>;
   onChange: Dispatch<SetStateAction<string>>;

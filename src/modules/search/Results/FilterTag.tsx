@@ -4,18 +4,19 @@ import { clsxm } from '@/ui/utils';
 
 export function FilterTag({
   tag,
-  onClickRemove,
+  onRemove,
   className,
   isActive,
-  onClick,
+  onToggle,
 }: {
   tag: SearchFilter;
-  onClickRemove?: () => void;
+  onRemove?: (tag: SearchFilter) => void;
   className?: string;
   isActive?: boolean;
-  onClick: (tag: SearchFilter) => void;
+  onToggle: (tag: SearchFilter) => void;
 }) {
-  const handleClick = () => onClick(tag);
+  const handleClick = () => onToggle(tag);
+  const handleRemove = () => onRemove && onRemove(tag);
 
   return (
     <button
@@ -38,10 +39,10 @@ export function FilterTag({
       >
         {tag.name}
       </span>
-      {onClickRemove && (
+      {onRemove && (
         <button
           className="px-1 opacity-60 hover:opacity-80 active:opacity-100"
-          onClick={onClickRemove}
+          onToggle={handleRemove}
         >
           <XIcon className="my-auto h-4 w-4" />
         </button>

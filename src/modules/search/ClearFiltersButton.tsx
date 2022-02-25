@@ -2,10 +2,12 @@ import { useSearch } from '@/contexts/search';
 import { SolidButton } from '@/ui/components';
 
 export const ClearFiltersButton = () => {
-  const { clearFilters, search } = useSearch();
+  const { clearFilters, hasFilters } = useSearch();
+
+  if (!hasFilters) return null;
 
   return (
-    <SolidButton onClick={clearFilters} disabled={!search.tags?.length}>
+    <SolidButton className="py-2 text-sm leading-none" onClick={clearFilters}>
       Clear all
     </SolidButton>
   );

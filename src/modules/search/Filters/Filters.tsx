@@ -6,9 +6,7 @@ import { useSelections } from '@/ui/hooks/useSelections';
 import { FilterSection } from './FilterSection';
 
 export function Filters() {
-  const { search, clearFiltersByType } = useSearch();
-
-  const selectedCount = search.tags?.length ?? 0;
+  const { clearFiltersByType } = useSearch();
 
   const { getIsExpanded, toggleSelection } = useSelections<FilterCategory>(
     getFilterCategorys(),
@@ -26,7 +24,7 @@ export function Filters() {
     <div className="flex flex-col gap-2 py-3">
       <div className="flex items-center justify-between px-5">
         <div className="text-lg font-semibold">Filters</div>
-        {selectedCount > 0 && <ClearFiltersButton />}
+        <ClearFiltersButton />
       </div>
       <div>
         {getFilterCategorys().map((category) => (

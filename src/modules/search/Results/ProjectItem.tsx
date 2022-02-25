@@ -22,7 +22,7 @@ export function ProjectItem({ title, description, tags, ...props }: Project) {
               <FilterTag
                 isActive={getIsTagActive(tag)}
                 tag={tag}
-                onClick={toggleFilter}
+                onToggle={toggleFilter}
               />
             </li>
           ))}
