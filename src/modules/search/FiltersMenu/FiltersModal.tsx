@@ -10,8 +10,8 @@ import clsxm from '@/lib/clsxm';
 import { GhostButton, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
 
-import { FilterSection } from './FilterSection';
-import { FiltersMenuProps } from './FIltersMenu';
+import { FilterCategoryToggleList } from './FilterCategoryToggleList';
+import { FiltersMenuProps } from './FiltersMenu';
 
 export function FiltersModal({ isOpen, onRequestClose }: FiltersMenuProps) {
   const searchFilters = useSearchFilters();
@@ -68,7 +68,7 @@ export function FiltersModal({ isOpen, onRequestClose }: FiltersMenuProps) {
         <ul>
           {FILTER_CATEGORIES.map((item) => (
             <li key={item}>
-              <FilterSection
+              <FilterCategoryToggleList
                 category={item}
                 isExpanded={getIsCategoryExpanded(item)}
                 onToggle={handleToggleCategory(item)}

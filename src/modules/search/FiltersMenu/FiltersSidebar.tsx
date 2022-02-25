@@ -7,7 +7,7 @@ import { FiltersMenuProps } from '@/modules/search';
 import { SolidButton } from '@/ui/components';
 import { useSelections } from '@/ui/hooks/useSelections';
 
-import { FilterSection } from './FilterSection';
+import { FilterCategoryToggleList } from './FilterCategoryToggleList';
 
 export function FiltersSidebar({ isOpen }: FiltersMenuProps) {
   const { getIsExpanded, toggleSelection } =
@@ -34,7 +34,7 @@ export function FiltersSidebar({ isOpen }: FiltersMenuProps) {
       </div>
       <div>
         {FILTER_CATEGORIES.map((category) => (
-          <FilterSection
+          <FilterCategoryToggleList
             key={category}
             category={category}
             isExpanded={getIsExpanded(category)}

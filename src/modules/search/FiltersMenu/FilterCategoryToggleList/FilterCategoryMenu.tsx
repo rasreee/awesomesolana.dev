@@ -16,7 +16,7 @@ import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
 import { SolidButton, TextInput, useSearchField } from '@/ui/components';
 
-import { FilterMenuOption } from './FilterMenuOption';
+import { FilterCategoryOption } from './FilterCategoryOption';
 
 function sortTagsByProjectsCount(list: Tag[]): Tag[] {
   return list.sort(
@@ -28,7 +28,7 @@ function getTagsForCategory(category: FilterCategory): Tag[] {
   return SEARCH_FILTERS.filter((filter) => filter.category === category);
 }
 
-export function FilterMenu({
+export function FilterCategoryMenu({
   category,
   onClear,
 }: {
@@ -105,7 +105,7 @@ export function FilterMenu({
       </div>
       <ul>
         {(hits.length ? hits : previewOptions).map((tag) => (
-          <FilterMenuOption
+          <FilterCategoryOption
             key={`${tag.category}_${tag.name}`}
             tag={tag}
             onClick={onClickItem(tag)}
