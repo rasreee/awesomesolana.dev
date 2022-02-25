@@ -18,7 +18,7 @@ export function ProjectItem({ title, description, tags, ...props }: Project) {
         <div className="text-base">{description}</div>
         <ul className="flex flex-wrap items-center gap-1.5">
           {tags.map((tag) => (
-            <li key={`${tag.type}_${tag.name}`}>
+            <li key={`${tag.category}_${tag.name}`}>
               <FilterTag
                 isActive={getIsTagActive(tag)}
                 tag={tag}

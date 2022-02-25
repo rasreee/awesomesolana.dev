@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { FilterType, getFilterTypes } from '@/api/filters';
+import { FilterCategory, getFilterCategorys } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
 import { GhostButton } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
@@ -15,10 +15,10 @@ export function MobileFilters({
   const { clearFilters, search, getFiltersCountByType, clearFiltersByType } =
     useSearch();
 
-  const [expanded, setExpanded] = useState<FilterType | null>(null);
+  const [expanded, setExpanded] = useState<FilterCategory | null>(null);
   const [wasCleared, setWasCleared] = useState(false);
 
-  const handleToggleCategory = (item: FilterType) => () => {
+  const handleToggleCategory = (item: FilterCategory) => () => {
     setExpanded((prev) => (prev !== item ? item : null));
     setWasCleared(false);
   };
@@ -36,10 +36,10 @@ export function MobileFilters({
     }
   }, [expanded, getFiltersCountByType, wasCleared]);
 
-  const getIsCategoryExpanded = (item: FilterType) =>
+  const getIsCategoryExpanded = (item: FilterCategory) =>
     Boolean(expanded && item === expanded);
 
-  const handleClearCategory = (category: FilterType) => () => {
+  const handleClearCategory = (category: FilterCategory) => () => {
     clearFiltersByType(category);
     setExpanded(null);
   };
@@ -56,10 +56,10 @@ export function MobileFilters({
           </div>
         </div>
         <ul>
-          {getFilterTypes().map((item) => (
+          {getFilterCategorys().map((item) => (
             <li key={item}>
               <FilterSection
-                type={item}
+                category={item}
                 isExpanded={getIsCategoryExpanded(item)}
                 onToggle={handleToggleCategory(item)}
                 onClear={handleClearCategory(item)}

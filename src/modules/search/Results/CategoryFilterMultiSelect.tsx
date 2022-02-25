@@ -4,7 +4,7 @@ import {
   SearchFilter,
   searchFilters,
   sortFiltersByProjectCount,
-  toPluralFilterType,
+  toPluralFilterCategory,
 } from '@/api/filters';
 import { getProjectsCountForTag } from '@/api/projects';
 import { getIntersection } from '@/common/utils';
@@ -19,18 +19,18 @@ import {
 import { clsxm } from '@/ui/utils';
 
 export function CategoryFilterMultiSelect({
-  type,
+  category,
   onRequestClose,
 }: {
-  type: SearchFilter['type'];
+  category: SearchFilter['category'];
   onRequestClose: () => void;
 }) {
-  const fallbackResults = filtersByType(SEARCH_FILTERS, type);
+  const fallbackResults = filtersByType(SEARCH_FILTERS, category);
 
   const runSearch = async (searchQuery: string): Promise<SearchFilter[]> => {
     if (!searchQuery) return fallbackResults;
 
-    const filters = await searchFilters(searchQuery, { type }).then(
+    const filters = await searchFilters(searchQuery, { category }).then(
       sortFiltersByProjectCount,
     );
     return filters;
@@ -58,21 +58,21 @@ export function CategoryFilterMultiSelect({
                 (a, b) => a.name === b.name,
               ).length === 0
             }
-            onClick={() => clearFiltersByType(type)}
+            onClick={() => clearFiltersByType(category)}
           >
             Clear
           </SolidButton>
           <span className="text-lg font-semibold">
-            {toPluralFilterType(type)}
+            {toPluralFilterCategory(category)}
           </span>
           <PrimaryButton onClick={onRequestClose}>Done</PrimaryButton>
         </div>
         <TextInput
           type="search"
-          name={`${type}-filter-search`}
+          name={`${category}-filter-search`}
           value={query}
           onChange={onChange}
-          placeholder={`Search ${toPluralFilterType(type)}...`}
+          placeholder={`Search ${toPluralFilterCategory(category)}...`}
           className={clsxm('bg-surface-1 w-full py-3')}
         />
       </div>

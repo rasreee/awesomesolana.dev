@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
 import {
+  FilterCategory,
   filtersByType,
   SEARCH_FILTERS,
   SearchFilter,
   searchFilters,
   sortFiltersByProjectCount,
-  toPluralFilterType,
+  toPluralFilterCategory,
 } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
 import { useSearchField } from '@/modules/search/SearchField';
@@ -16,17 +17,17 @@ import { clsxm } from '@/ui/utils';
 import { FilterMenuOption } from './FilterMenuOption';
 
 export function FilterMenu({
-  type,
+  category,
   onClear,
 }: {
-  type: SearchFilter['type'];
+  category: FilterCategory;
   onClear: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpanded = () => setExpanded((prev) => !prev);
 
-  const previewOptions = filtersByType(SEARCH_FILTERS, type).slice(
+  const previewOptions = filtersByType(SEARCH_FILTERS, category).slice(
     0,
     expanded ? 10 : 5,
   );
@@ -34,7 +35,7 @@ export function FilterMenu({
   const runSearch = async (searchQuery: string): Promise<SearchFilter[]> => {
     if (!searchQuery) return previewOptions;
 
-    const filters = await searchFilters(searchQuery, { type }).then(
+    const filters = await searchFilters(searchQuery, { category }).then(
       sortFiltersByProjectCount,
     );
 
@@ -54,7 +55,7 @@ export function FilterMenu({
     setQuery('');
   };
 
-  const selectedCount = filtersByType(search.tags ?? [], type).length;
+  const selectedCount = filtersByType(search.tags ?? [], category).length;
 
   const canShowMore = hits.length > 0;
 
@@ -74,10 +75,12 @@ export function FilterMenu({
       >
         <TextInput
           type="search"
-          name={`${type}-filter-search`}
+          name={`${category}-filter-search`}
           value={query}
           onChange={setQuery}
-          placeholder={`Search ${toPluralFilterType(type).toLowerCase()}...`}
+          placeholder={`Search ${toPluralFilterCategory(
+            category,
+          ).toLowerCase()}...`}
           className={clsxm('input-sm input-focus-unset')}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -94,7 +97,7 @@ export function FilterMenu({
       <ul>
         {(hits.length ? hits : previewOptions).map((tag) => (
           <FilterMenuOption
-            key={`${tag.type}_${tag.name}`}
+            key={`${tag.category}_${tag.name}`}
             tag={tag}
             onClick={onClickItem(tag)}
             checked={getFilterChecked(tag)}

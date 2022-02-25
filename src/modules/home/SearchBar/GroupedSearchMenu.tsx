@@ -1,7 +1,8 @@
 import {
-  getFilterTypes,
+  FilterCategory,
+  getFilterCategorys,
   SearchFilter,
-  toPluralFilterType,
+  toPluralFilterCategory,
 } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
 
@@ -10,12 +11,12 @@ type GroupedSearchMenuProps = {
   onFilterClick: (tag: SearchFilter) => void;
 };
 
-type GroupedTags = Array<{ type: SearchFilter['type']; tags: SearchFilter[] }>;
+type GroupedTags = Array<{ category: FilterCategory; tags: SearchFilter[] }>;
 
 function groupTagsByType(list: SearchFilter[]): GroupedTags {
-  const groups = getFilterTypes().map((type) => ({
-    type,
-    tags: list.filter((filter) => filter.type === type),
+  const groups = getFilterCategorys().map((category) => ({
+    category,
+    tags: list.filter((filter) => filter.category === category),
   }));
 
   return groups;
@@ -39,11 +40,11 @@ export function GroupedSearchMenu({
   return (
     <>
       {groupTagsByType(tagsToShow).map(
-        ({ type, tags: list }) =>
+        ({ category, tags: list }) =>
           list.length > 0 && (
             <div className="flex flex-col gap-2 px-1">
               <span className="px-3 py-2 text-lg font-semibold">
-                {toPluralFilterType(type)} {`(${list.length})`}
+                {toPluralFilterCategory(category)} {`(${list.length})`}
               </span>
               <ul className="max-h-[16rem] overflow-y-auto">
                 {list.map((tag) => (

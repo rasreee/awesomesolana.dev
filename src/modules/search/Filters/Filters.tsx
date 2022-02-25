@@ -1,4 +1,4 @@
-import { FilterType, getFilterTypes } from '@/api/filters';
+import { FilterCategory, getFilterCategorys } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
 import { ClearFiltersButton } from '@/modules/search/ClearFiltersButton';
 import { useSelections } from '@/ui/hooks/useSelections';
@@ -6,13 +6,21 @@ import { useSelections } from '@/ui/hooks/useSelections';
 import { FilterSection } from './FilterSection';
 
 export function Filters() {
-  const { search } = useSearch();
+  const { search, clearFiltersByType } = useSearch();
 
   const selectedCount = search.tags?.length ?? 0;
 
-  const { getIsExpanded, toggleSelection } = useSelections<FilterType>(
-    getFilterTypes(),
+  const { getIsExpanded, toggleSelection } = useSelections<FilterCategory>(
+    getFilterCategorys(),
   );
+
+  const handleToggleCategory = (category: FilterCategory) => () => {
+    toggleSelection(category);
+  };
+
+  const handleClearCategory = (category: FilterCategory) => () => {
+    clearFiltersByType(category);
+  };
 
   return (
     <div className="flex flex-col gap-2 py-3">
@@ -21,12 +29,13 @@ export function Filters() {
         {selectedCount > 0 && <ClearFiltersButton />}
       </div>
       <div>
-        {getFilterTypes().map((type) => (
+        {getFilterCategorys().map((category) => (
           <FilterSection
-            key={type}
-            type={type}
-            isExpanded={getIsExpanded(type)}
-            onToggle={toggleSelection}
+            key={category}
+            category={category}
+            isExpanded={getIsExpanded(category)}
+            onToggle={handleToggleCategory(category)}
+            onClear={handleClearCategory(category)}
           />
         ))}
       </div>

@@ -1,4 +1,8 @@
-import { filtersByType, FilterType, toPluralFilterType } from '@/api/filters';
+import {
+  FilterCategory,
+  filtersByType,
+  toPluralFilterCategory,
+} from '@/api/filters';
 import { useSearch } from '@/contexts/search';
 import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icons';
 import { clsxm } from '@/ui/utils';
@@ -6,19 +10,19 @@ import { clsxm } from '@/ui/utils';
 import { FilterMenu } from './FilterMenu';
 
 export function FilterSection({
-  type,
+  category,
   onToggle,
   isExpanded,
   onClear,
 }: {
-  type: FilterType;
+  category: FilterCategory;
   isExpanded: boolean;
   onToggle: () => void;
   onClear: () => void;
 }) {
   const { search } = useSearch();
 
-  const selectedCount = filtersByType(search.tags ?? [], type).length;
+  const selectedCount = filtersByType(search.tags ?? [], category).length;
 
   return (
     <div className="flex flex-col gap-2">
@@ -30,12 +34,12 @@ export function FilterSection({
           {isExpanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
         </div>
         <div className={clsxm(isExpanded && 'font-semibold')}>
-          {toPluralFilterType(type)}{' '}
+          {toPluralFilterCategory(category)}{' '}
           {selectedCount > 0 ? `(${selectedCount})` : ''}
         </div>
       </button>
       <div className="px-5">
-        {isExpanded && <FilterMenu type={type} onClear={onClear} />}
+        {isExpanded && <FilterMenu category={category} onClear={onClear} />}
       </div>
     </div>
   );

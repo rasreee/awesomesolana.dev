@@ -1,27 +1,28 @@
 import { useState } from 'react';
 
-import { FilterType, getFilterTypes } from '@/api/filters';
+import { FilterCategory, getFilterCategorys } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
 import { Popover } from '@/ui/components';
 import { clsxm } from '@/ui/utils';
 
 import { CategoryFilterMultiSelect } from './CategoryFilterMultiSelect';
-import { FilterTypeMenuButton } from './FilterTypeMenuButton';
+import { FilterCategoryMenuButton } from './FilterCategoryMenuButton';
 
 export function MobileFilterBar({ className }: { className?: string }) {
-  const [selectedFilterType, setSelectedFilterType] =
-    useState<FilterType | null>(null);
+  const [selectedFilterCategory, setSelectedFilterCategory] =
+    useState<FilterCategory | null>(null);
 
-  const selectFilterType = (type: FilterType) => setSelectedFilterType(type);
+  const selectFilterCategory = (category: FilterCategory) =>
+    setSelectedFilterCategory(category);
 
-  const onRequestClose = () => setSelectedFilterType(null);
+  const onRequestClose = () => setSelectedFilterCategory(null);
 
   const { search } = useSearch();
 
   const tags = search.tags ?? [];
 
-  const getCountForType = (type: FilterType): number => {
-    return tags.filter((tag) => tag.type === type).length;
+  const getCountForType = (category: FilterCategory): number => {
+    return tags.filter((tag) => tag.category === category).length;
   };
 
   return (
@@ -29,22 +30,25 @@ export function MobileFilterBar({ className }: { className?: string }) {
       <ul
         className={clsxm('flex items-center gap-2 overflow-x-auto', className)}
       >
-        {getFilterTypes()
+        {getFilterCategorys()
           .sort((a, b) => getCountForType(b) - getCountForType(a))
-          .map((type) => (
-            <li key={type}>
-              <FilterTypeMenuButton type={type} onClick={selectFilterType} />
+          .map((category) => (
+            <li key={category}>
+              <FilterCategoryMenuButton
+                category={category}
+                onClick={selectFilterCategory}
+              />
             </li>
           ))}
       </ul>
-      {selectedFilterType && (
+      {selectedFilterCategory && (
         <Popover
           className="bg-surface fixed top-0 left-0 min-w-full max-w-fit rounded-none px-2 py-3"
           onRequestClose={onRequestClose}
-          isOpen={Boolean(selectedFilterType)}
+          isOpen={Boolean(selectedFilterCategory)}
         >
           <CategoryFilterMultiSelect
-            type={selectedFilterType}
+            category={selectedFilterCategory}
             onRequestClose={onRequestClose}
           />
         </Popover>

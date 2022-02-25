@@ -45,7 +45,7 @@ const TAG_NAMES = {
   ],
 };
 
-export type FilterType =
+export type FilterCategory =
   | 'npm-dependency'
   | 'cargo-dependency'
   | 'topic'
@@ -53,28 +53,30 @@ export type FilterType =
   | 'framework';
 
 export type SearchFilter = {
-  type: FilterType;
+  category: FilterCategory;
   name: string;
 };
 
 export const DEPENDENCY_FILTERS: SearchFilter[] = Object.entries(DEPENDENCIES)
-  .map(([type, values]) =>
+  .map(([category, values]) =>
     values.map(
-      (name) => ({ type: `${type}-dependency`, name } as SearchFilter),
+      (name) => ({ category: `${category}-dependency`, name } as SearchFilter),
     ),
   )
   .flat();
 
 const TAG_FILTERS: SearchFilter[] = Object.entries(TAG_NAMES)
-  .map(([type, values]) =>
-    values.map((name) => ({ type, name: name.toLowerCase() } as SearchFilter)),
+  .map(([category, values]) =>
+    values.map(
+      (name) => ({ category, name: name.toLowerCase() } as SearchFilter),
+    ),
   )
   .flat();
 
-export function toPluralFilterType(type: FilterType): string {
-  if (type === 'cargo-dependency') return 'Cargo Dependencies';
-  if (type === 'npm-dependency') return 'NPM Dependencies';
-  return `${capitalizeFirst(type)}s`;
+export function toPluralFilterCategory(category: FilterCategory): string {
+  if (category === 'cargo-dependency') return 'Cargo Dependencies';
+  if (category === 'npm-dependency') return 'NPM Dependencies';
+  return `${capitalizeFirst(category)}s`;
 }
 
 export const SEARCH_FILTERS: SearchFilter[] = [
@@ -84,9 +86,9 @@ export const SEARCH_FILTERS: SearchFilter[] = [
 
 export function filtersByType(
   list: SearchFilter[],
-  type: SearchFilter['type'],
+  category: SearchFilter['category'],
 ): SearchFilter[] {
-  return list.filter((filter) => filter.type === type);
+  return list.filter((filter) => filter.category === category);
 }
 
 export function sortFiltersByProjectCount(
@@ -97,20 +99,20 @@ export function sortFiltersByProjectCount(
   );
 }
 
-export function getFilterTypes(): FilterType[] {
+export function getFilterCategorys(): FilterCategory[] {
   const result = [
     'topic',
     'framework',
     'language',
     'npm-dependency',
     'cargo-dependency',
-  ] as FilterType[];
+  ] as FilterCategory[];
   return result;
 }
 
 export async function searchFilters(
   query: string,
-  filter?: { type: FilterType },
+  filter?: { category: FilterCategory },
 ): Promise<SearchFilter[]> {
   if (!query) return [];
 
@@ -119,7 +121,7 @@ export async function searchFilters(
   const a = query.toLowerCase();
 
   const tagsToSearch = filter
-    ? SEARCH_FILTERS.filter((tag) => tag.type === filter.type)
+    ? SEARCH_FILTERS.filter((tag) => tag.category === filter.category)
     : SEARCH_FILTERS;
 
   hits = tagsToSearch.filter((item) => {

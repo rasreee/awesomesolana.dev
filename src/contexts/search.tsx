@@ -2,9 +2,9 @@ import { NextRouter, useRouter } from 'next/router';
 import { createContext, useContext, useMemo } from 'react';
 
 import {
+  FilterCategory,
   filtersByType,
-  FilterType,
-  getFilterTypes,
+  getFilterCategorys,
   SearchFilter,
 } from '@/api/filters';
 
@@ -15,13 +15,13 @@ type Search = {
 
 export type ISearchContext = {
   search: Search;
-  getFiltersCountByType: (type: FilterType) => number;
+  getFiltersCountByType: (category: FilterCategory) => number;
   addFilter: (tag: SearchFilter) => void;
   removeFilter: (tag: SearchFilter) => void;
   toggleFilter: (tag: SearchFilter) => void;
   getFilterChecked: (tag: SearchFilter) => boolean;
   clearFilters: () => void;
-  clearFiltersByType: (type: SearchFilter['type']) => void;
+  clearFiltersByType: (category: SearchFilter['category']) => void;
 };
 
 export const SearchContext = createContext<ISearchContext | undefined>(
@@ -46,12 +46,12 @@ function parseSearch(parsedUrlQuery: NextRouter['query']): Search {
 
   const keys = Object.keys(parsedUrlQuery);
 
-  getFilterTypes().forEach((type) => {
-    if (keys.includes(type)) {
-      console.log(`keys.includes(${type})`, keys.includes(type));
-      const tagsForType = (parsedUrlQuery[type] as string)
+  getFilterCategorys().forEach((category) => {
+    if (keys.includes(category)) {
+      console.log(`keys.includes(${category})`, keys.includes(category));
+      const tagsForType = (parsedUrlQuery[category] as string)
         .split(',')
-        .map((name) => ({ type, name }));
+        .map((name) => ({ category, name }));
 
       tags.push(...tagsForType);
     }
@@ -76,16 +76,16 @@ export function SearchProvider({ children }: { children: any }) {
 
     let newPath = `/search`;
 
-    getFilterTypes().forEach((type) => {
-      const tagsForType = newTags.filter((tag) => tag.type === type);
+    getFilterCategorys().forEach((category) => {
+      const tagsForType = newTags.filter((tag) => tag.category === category);
       if (tagsForType.length > 0) {
         const prefix = newPath === '/search' ? '?' : '&';
         newPath =
           newPath +
           prefix +
-          type +
+          category +
           `=${newTags
-            .filter((tag) => tag.type === type)
+            .filter((tag) => tag.category === category)
             .map((tag) => tag.name)
             .join(',')}`;
       }
@@ -100,15 +100,15 @@ export function SearchProvider({ children }: { children: any }) {
 
     let newPath = `/search`;
 
-    getFilterTypes().forEach((type) => {
-      const tagsForType = newTags.filter((tag) => tag.type === type);
+    getFilterCategorys().forEach((category) => {
+      const tagsForType = newTags.filter((tag) => tag.category === category);
 
       if (tagsForType.length > 0) {
         const prefix = newPath === '/search' ? '?' : '&';
         newPath =
           newPath +
           prefix +
-          type +
+          category +
           `=${tagsForType.map((tag) => tag.name).join(',')}`;
       }
     });
@@ -122,31 +122,32 @@ export function SearchProvider({ children }: { children: any }) {
 
   const getFilterChecked = (filter: SearchFilter): boolean => {
     const tags = search.tags ?? [];
-    return filtersByType(tags, filter.type)
+    return filtersByType(tags, filter.category)
       .map((item) => item.name)
       .includes(filter.name);
   };
 
-  const getFiltersCountByType = (type: FilterType): number => {
-    return (search.tags ?? []).filter((filter) => filter.type === type).length;
+  const getFiltersCountByType = (category: FilterCategory): number => {
+    return (search.tags ?? []).filter((filter) => filter.category === category)
+      .length;
   };
 
-  const clearFiltersByType = (typeToRemove: SearchFilter['type']) => {
+  const clearFiltersByType = (typeToRemove: SearchFilter['category']) => {
     const oldTags = search.tags ?? [];
 
     let newPath = `/search`;
 
-    getFilterTypes()
-      .filter((type) => type !== typeToRemove)
-      .forEach((type) => {
-        const tagsForType = oldTags.filter((tag) => tag.type === type);
+    getFilterCategorys()
+      .filter((category) => category !== typeToRemove)
+      .forEach((category) => {
+        const tagsForType = oldTags.filter((tag) => tag.category === category);
 
         if (tagsForType.length > 0) {
           const prefix = newPath === '/search' ? '?' : '&';
           newPath =
             newPath +
             prefix +
-            type +
+            category +
             `=${tagsForType.map((tag) => tag.name).join(',')}`;
         }
       });

@@ -26,12 +26,14 @@ export function filterProjectsByTitle(
 }
 
 function isRelevantProject(project: Project, tags: SearchFilter[]): boolean {
-  const projectTagTypes = uniques(project.tags.map((project) => project.type));
+  const projectTagTypes = uniques(
+    project.tags.map((project) => project.category),
+  );
 
   const commonTags: SearchFilter[] = [];
-  projectTagTypes.forEach((type) => {
-    const projectTags = project.tags.filter((tag) => tag.type === type);
-    const tagsForType = tags.filter((tag) => tag.type === type);
+  projectTagTypes.forEach((category) => {
+    const projectTags = project.tags.filter((tag) => tag.category === category);
+    const tagsForType = tags.filter((tag) => tag.category === category);
 
     const intersection = getIntersection(
       projectTags,
@@ -64,9 +66,11 @@ export function getProjectsCountForTag(tag: SearchFilter): number {
   ).length;
 }
 
-export function getProjectsCountForTagType(type: SearchFilter['type']): number {
+export function getProjectsCountForTagType(
+  category: SearchFilter['category'],
+): number {
   return ALL_PROJECTS.filter((project) =>
-    project.tags.map((tag) => tag.type).includes(type),
+    project.tags.map((tag) => tag.category).includes(category),
   ).length;
 }
 

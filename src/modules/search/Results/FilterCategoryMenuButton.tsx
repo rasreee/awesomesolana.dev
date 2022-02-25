@@ -1,23 +1,27 @@
-import { filtersByType, FilterType, toPluralFilterType } from '@/api/filters';
+import {
+  FilterCategory,
+  filtersByType,
+  toPluralFilterCategory,
+} from '@/api/filters';
 import { capitalizeFirst } from '@/common/utils';
 import { useSearch } from '@/contexts/search';
 import { SolidButton } from '@/ui/components';
 import { PlusIcon } from '@/ui/icons';
 import { clsxm } from '@/ui/utils';
 
-export const FilterTypeMenuButton = ({
-  type,
+export const FilterCategoryMenuButton = ({
+  category,
   onClick,
 }: {
-  type: FilterType;
-  onClick: (type: FilterType) => void;
+  category: FilterCategory;
+  onClick: (category: FilterCategory) => void;
 }) => {
   const { search } = useSearch();
 
-  const count = filtersByType(search.tags ?? [], type).length;
+  const count = filtersByType(search.tags ?? [], category).length;
 
   const handleClick = () => {
-    onClick(type);
+    onClick(category);
   };
 
   return (
@@ -29,7 +33,7 @@ export const FilterTypeMenuButton = ({
       )}
     >
       <span className="max-w-[9rem] truncate text-sm leading-none md:max-w-[10rem]">
-        {capitalizeFirst(toPluralFilterType(type))}
+        {capitalizeFirst(toPluralFilterCategory(category))}
       </span>
       <div
         className={clsxm(
