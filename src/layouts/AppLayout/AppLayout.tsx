@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { ComponentType } from 'react';
 
 import { SearchOptionsModal, SearchOptionsSidebar } from '@/modules/search';
-import { Divider, Seo, SeoProps } from '@/ui/components';
-import { useIsMobile } from '@/ui/hooks';
+import { Divider, ResponsiveRender, Seo, SeoProps } from '@/ui/components';
 
 import AppFooter from './AppFooter';
 import AppHeader from './AppHeader';
@@ -23,8 +21,8 @@ export function AppLayout({ children, seoProps }: AppLayoutProps) {
           <div className="w-full gap-3 sm:flex sm:items-start">
             {children}
             <ResponsiveRender
-              small={SearchOptionsModal}
-              aboveSmall={SearchOptionsSidebar}
+              mobile={SearchOptionsModal}
+              aboveMobile={SearchOptionsSidebar}
             />
           </div>
         </main>
@@ -33,18 +31,4 @@ export function AppLayout({ children, seoProps }: AppLayoutProps) {
       </div>
     </>
   );
-}
-
-export function ResponsiveRender({
-  small: Small,
-  aboveSmall: AboveSmall,
-}: {
-  small: ComponentType;
-  aboveSmall: ComponentType;
-}) {
-  const isMobile = useIsMobile();
-
-  if (isMobile) return <Small />;
-
-  return <AboveSmall />;
 }

@@ -9,10 +9,10 @@ import {
 import { useSearchOptions } from '@/contexts/AppContext';
 import { useSearchFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
-import { SearchField, useSearchField } from '@/ui/components';
 import { AdjustmentsIcon } from '@/ui/icons';
 
 import { Results } from './Results';
+import { SearchField, useSearchField } from './SearchField';
 
 export function SearchPage() {
   const searchFilters = useSearchFilters();

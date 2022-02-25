@@ -3,3 +3,4 @@ export * from './SearchOptionsSidebar';
 export * from './SearchPage';
 export * from './FilterCategoryToggleList';
 export * from './Results';
+export * from './SearchField';

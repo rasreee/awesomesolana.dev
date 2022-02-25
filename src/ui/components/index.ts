@@ -12,6 +12,5 @@ export * from './Seo';
 export * from './Spinner';
 export * from './StatefulIcon';
 export * from './TextInput';
-export * from './SearchField';
-export * from './links';
 export * from './colorMode';
+export * from './links';

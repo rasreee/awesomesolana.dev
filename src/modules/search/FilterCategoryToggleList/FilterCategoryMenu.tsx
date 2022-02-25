@@ -14,7 +14,8 @@ import {
 } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
-import { SolidButton, TextInput, useSearchField } from '@/ui/components';
+import { useSearchField } from '@/modules/search';
+import { SolidButton, TextInput } from '@/ui/components';
 
 import { FilterCategoryOption } from './FilterCategoryOption';
 

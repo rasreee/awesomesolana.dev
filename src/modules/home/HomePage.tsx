@@ -1,6 +1,9 @@
+import React from 'react';
+
 import { getTagSuggestions, Tag } from '@/api/tags';
 import { useToggleFilter } from '@/contexts/SearchContext';
-import { Logo, SearchField, useSearchField } from '@/ui/components';
+import { SearchField, useSearchField } from '@/modules/search';
+import { Logo } from '@/ui/components';
 
 import { GroupedResults } from './GroupedResults';
 
