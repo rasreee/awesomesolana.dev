@@ -1,13 +1,11 @@
 import { FILTER_CATEGORIES, FilterCategory } from '@/api/tags';
-import { useSearch } from '@/contexts/SearchContext';
-import { ClearFiltersButton } from '@/modules/search/ClearFiltersButton';
+import clsxm from '@/lib/clsxm';
+import { ClearFiltersButton, FiltersMenuProps } from '@/modules/search';
 import { useSelections } from '@/ui/hooks/useSelections';
 
 import { FilterSection } from './FilterSection';
 
-export function FiltersSidebar() {
-  const { clearFiltersByType } = useSearch();
-
+export function FiltersSidebar({ onRequestClear }: FiltersMenuProps) {
   const { getIsExpanded, toggleSelection } =
     useSelections<FilterCategory>(FILTER_CATEGORIES);
 
@@ -15,12 +13,8 @@ export function FiltersSidebar() {
     toggleSelection(category);
   };
 
-  const handleClearCategory = (category: FilterCategory) => () => {
-    clearFiltersByType(category);
-  };
-
   return (
-    <div className="flex flex-col gap-2 py-3">
+    <div className={clsxm('bg-surface', 'flex flex-col gap-2 py-3')}>
       <div className="flex items-center justify-between px-5">
         <div className="text-lg font-semibold">Filters</div>
         <ClearFiltersButton />
@@ -32,7 +26,7 @@ export function FiltersSidebar() {
             category={category}
             isExpanded={getIsExpanded(category)}
             onToggle={handleToggleCategory(category)}
-            onClear={handleClearCategory(category)}
+            onClear={onRequestClear}
           />
         ))}
       </div>

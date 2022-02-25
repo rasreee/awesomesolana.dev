@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
   ALL_PROJECTS,
   filterProjectsByTags,
@@ -8,8 +6,8 @@ import {
 } from '@/api/projects';
 import { useSearch } from '@/contexts/SearchContext';
 import { Layout, SearchField, useSearchField } from '@/ui/components';
+import { SearchOptionsMenuToggle } from '@/ui/components/SearchOptionsMenuToggle';
 
-import { Filters } from './Filters';
 import { Results } from './Results';
 
 export function SearchPage() {
@@ -30,10 +28,12 @@ export function SearchPage() {
     <Layout>
       <div className="w-full gap-3 sm:flex sm:items-start">
         <div className="flex-1 px-3 sm:px-6">
-          <SearchField autoFocused {...searchField} />
+          <div className="flex items-center gap-2">
+            <SearchField autoFocused {...searchField} />
+            <SearchOptionsMenuToggle />
+          </div>
           <Results hits={searchField.hits} />
         </div>
-        <Filters />
       </div>
     </Layout>
   );

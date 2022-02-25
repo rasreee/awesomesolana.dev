@@ -1,7 +1,7 @@
 import { Project } from '@/api/projects';
 import { Tag } from '@/api/tags';
-import { useAppState } from '@/contexts/AppContext';
 import { useSearch } from '@/contexts/SearchContext';
+import { useUiState } from '@/contexts/UiStateContext';
 import pluralize from '@/lib/pluralize';
 import { SolidButton } from '@/ui/components';
 
@@ -31,7 +31,7 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
     removeFilter,
   } = useSearch();
 
-  const { filtersMenu } = useAppState();
+  const { filtersMenu } = useUiState();
 
   return (
     <div className="flex flex-col gap-1">

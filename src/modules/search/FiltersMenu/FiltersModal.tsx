@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { FILTER_CATEGORIES, FilterCategory } from '@/api/tags';
-import { useAppState } from '@/contexts/AppContext';
 import { useSearch } from '@/contexts/SearchContext';
+import clsxm from '@/lib/clsxm';
 import { GhostButton, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
 
 import { FilterSection } from './FilterSection';
+import { FiltersMenuProps } from './FIltersMenu';
 
-export function FiltersModal() {
-  const {
-    filtersMenu: { isOpen, onRequestClose },
-  } = useAppState();
-  const { clearFilters, search, getFiltersCountByType, clearFiltersByType } =
-    useSearch();
+export function FiltersModal({
+  isOpen,
+  onRequestClose,
+  onRequestClear,
+}: FiltersMenuProps) {
+  const { search, getFiltersCountByType, clearFiltersByType } = useSearch();
 
   const [expanded, setExpanded] = useState<FilterCategory | null>(null);
   const [wasCleared, setWasCleared] = useState(false);
@@ -23,8 +24,8 @@ export function FiltersModal() {
     setWasCleared(false);
   };
 
-  const handleClear = () => {
-    clearFilters();
+  const handleClearAll = () => {
+    onRequestClear();
     setWasCleared(true);
   };
 
@@ -46,7 +47,10 @@ export function FiltersModal() {
 
   return (
     <Popover
-      className="fixed top-20 bottom-20 right-5 left-5 my-auto min-h-[60vh] max-w-full flex-1"
+      className={clsxm(
+        'bg-surface',
+        'fixed top-20 bottom-20 right-5 left-5 my-auto min-h-[60vh] max-w-full flex-1',
+      )}
       isOpen={isOpen}
       onRequestClose={onRequestClose}
     >
@@ -72,7 +76,7 @@ export function FiltersModal() {
           ))}
         </ul>
         <div className="flex items-center justify-around px-5 py-1">
-          <GhostButton onClick={handleClear} disabled={!search.tags?.length}>
+          <GhostButton onClick={handleClearAll} disabled={!search.tags?.length}>
             Clear
           </GhostButton>
           <GhostButton className="text-color-primary" onClick={onRequestClose}>

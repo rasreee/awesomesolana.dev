@@ -1,4 +1,4 @@
 export * from './ClearFiltersButton';
 export * from './SearchPage';
-export * from './Filters';
+export * from './FiltersMenu';
 export * from './Results';

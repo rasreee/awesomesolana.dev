@@ -5,8 +5,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
 
-import { AppStateProvider } from '@/contexts/AppContext';
-import { SearchProvider } from '@/contexts/SearchContext';
+import { AppProviders } from '@/contexts/AppProviders';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -15,11 +14,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
       <NextThemeProvider attribute="class">
-        <AppStateProvider>
-          <SearchProvider>
-            <Component {...pageProps} />
-          </SearchProvider>
-        </AppStateProvider>
+        <AppProviders>
+          <Component {...pageProps} />
+        </AppProviders>
       </NextThemeProvider>
     </>
   );
