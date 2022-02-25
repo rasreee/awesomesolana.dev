@@ -24,7 +24,7 @@ export function FilterTag({
         'py-0.5 px-2.5',
         'rounded-md',
         'flex items-center justify-between gap-1',
-        'w-max max-w-[11rem] overflow-hidden',
+        'w-max max-w-[14rem] overflow-hidden',
         'font-medium',
         'flex-1',
         isActive
