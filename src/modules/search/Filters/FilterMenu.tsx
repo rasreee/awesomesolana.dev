@@ -74,7 +74,6 @@ export function FilterMenu({
         )}
       >
         <TextInput
-          type="search"
           name={`${category}-filter-search`}
           value={query}
           onChange={setQuery}

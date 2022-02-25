@@ -52,7 +52,6 @@ export function SearchField({
         icon={SearchIcon}
       />
       <TextInput
-        type="search"
         name="search"
         className="input-focus-unset"
         placeholder={DEFAULT_PLACEHOLDER}

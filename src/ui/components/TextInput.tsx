@@ -21,6 +21,8 @@ export function TextInput({
   value,
   className,
   autoFocused = false,
+  autoComplete = 'off',
+  type = 'text',
   ...props
 }: TextInputProps) {
   const inputRef = React.useRef<HTMLInputElement | null>(null);
@@ -47,6 +49,8 @@ export function TextInput({
       ref={inputRef}
       onChange={onChange}
       value={value}
+      autoComplete={autoComplete}
+      type={type}
       {...props}
     />
   );
