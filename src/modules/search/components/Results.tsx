@@ -15,7 +15,7 @@ export function Results({ hits }: { hits: GitHubRepo[] | undefined }) {
         {hits.map((hit) => (
           <li key={hit.id}>
             <RepoItem {...hit} />
-            {JSON.stringify(hit)}
+            {/* {JSON.stringify(hit)} */}
           </li>
         ))}
       </ul>
