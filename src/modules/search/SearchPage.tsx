@@ -1,5 +1,5 @@
 import { useSearchFilters } from '@/contexts/SearchContext';
-import { searchProjects } from '@/modules/projects';
+import { searchProjects, useSearchGithubRepos } from '@/modules/projects';
 import { FILTER_CATEGORIES } from '@/modules/tags';
 
 import {
@@ -16,13 +16,15 @@ export function SearchPage() {
     searchProjects(query, searchFilters),
   );
 
+  const { data } = useSearchGithubRepos(searchField.query, searchFilters);
+
   return (
     <div className="flex-1 px-3 sm:px-6">
       <div className="flex flex-col gap-2">
         <SearchField autoFocused {...searchField} />
         <FilterBar />
       </div>
-      <Results hits={searchField.hits} />
+      <Results hits={data} />
     </div>
   );
 }

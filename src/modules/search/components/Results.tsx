@@ -1,18 +1,18 @@
-import { ALL_PROJECTS, Project } from '@/modules/projects';
+import { GitHubRepo } from '@/modules/github/types';
 
-import { ProjectItem } from './ProjectItem';
 import { ResultsInfo } from './ResultsInfo';
 
-export function Results({ hits }: { hits: Project[] }) {
-  const hitsToShow = hits.length ? hits : ALL_PROJECTS;
+export function Results({ hits }: { hits: GitHubRepo[] | undefined }) {
+  if (!hits) return <div>Loading...</div>;
 
   return (
     <div>
-      <ResultsInfo hits={hitsToShow} />
+      <ResultsInfo hits={hits} />
       <ul>
-        {hitsToShow.map((hit) => (
+        {hits.map((hit) => (
           <li key={hit.id}>
-            <ProjectItem {...hit} />
+            {/* <ProjectItem {...hit} /> */}
+            {JSON.stringify(hit)}
           </li>
         ))}
       </ul>

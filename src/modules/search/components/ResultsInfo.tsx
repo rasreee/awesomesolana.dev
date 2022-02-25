@@ -1,13 +1,13 @@
 import { useSearchFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
-import { Project } from '@/modules/projects';
+import { GitHubRepo } from '@/modules/github/types';
 
 function getInfoText({
   hits,
   hasFilters,
 }: {
-  hits: Project[];
+  hits: GitHubRepo[];
   hasFilters: boolean;
 }): string {
   if (!hasFilters) return `Showing all ${hits.length} results`;
@@ -19,7 +19,7 @@ function getInfoText({
   return result;
 }
 
-export function ResultsInfo({ hits }: { hits: Project[] }) {
+export function ResultsInfo({ hits }: { hits: GitHubRepo[] }) {
   const filters = useSearchFilters();
   const hasFilters = Boolean(filters.length);
 

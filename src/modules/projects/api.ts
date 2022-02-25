@@ -1,9 +1,10 @@
 import useSWR, { SWRResponse } from 'swr';
 
-import { getIntersection, uniques } from '@/common/utils';
+import { authFetch, fetcher, getIntersection, uniques } from '@/common/utils';
+import { Tag } from '@/modules/tags';
 
-import { Tag } from '../tags';
-import { ALL_PROJECTS } from './constants';
+import { githubApi, parseRawGitHubRepo } from '../github/helpers';
+import { GitHubApiResponse, GitHubRepo, RawGitHubRepo } from '../github/types';
 import { Project } from './types';
 
 export function filterProjectsByTitle(
@@ -63,26 +64,52 @@ export function filterProjectsByTags(
 export async function searchProjects(
   query: string,
   tags: Tag[],
-): Promise<Project[]> {
-  const initialResult = filterProjectsByTags(ALL_PROJECTS, tags);
-  const result = filterProjectsByTitle(initialResult, query);
-
-  return result;
-}
-
-export function useProjectsByTags(
-  tags: Tag[] | undefined,
-): SWRResponse<Project[], Error> {
-  const swr = useSWR<Project[], Error>(
-    tags
-      ? `projects?tags=${encodeURIComponent(
-          tags.map((tag) => tag.name).join(','),
-        )}`
-      : null,
-    async (): Promise<Project[]> => {
-      return filterProjectsByTags(ALL_PROJECTS, tags ?? []);
-    },
+): Promise<RawGitHubRepo[]> {
+  console.log(
+    'TAGS: ',
+    tags.map((tag) => tag.name),
+  );
+  const url = githubApi.searchRepos(
+    [
+      'solana',
+      query,
+      ...tags.map((tag) =>
+        tag.category === 'language' ? `language:${tag.name}` : '',
+      ),
+    ]
+      .filter(Boolean)
+      .join('+'),
   );
 
-  return swr;
+  console.log('SEARCH URL: ', url);
+  const response = await authFetch(url);
+
+  const data = (await response.json()) as RawGitHubRepo[];
+
+  return data;
+}
+
+export function useSearchGithubRepos(
+  query: string,
+  tags: Tag[],
+): Pick<SWRResponse<GitHubRepo[], Error>, 'data' | 'error'> {
+  const { data: rawData, error } = useSWR<GitHubApiResponse, Error>(
+    tags.length ? `/api/github?q=${formatQuery(query, tags)}` : null,
+    fetcher,
+  );
+  const data = rawData?.items.map(parseRawGitHubRepo);
+
+  return { data, error };
+}
+
+function formatQuery(query: string, tags: Tag[]): string {
+  return [
+    'solana',
+    query,
+    ...tags.map((tag) =>
+      tag.category === 'language' ? `language:${tag.name}` : '',
+    ),
+  ]
+    .filter(Boolean)
+    .join('+');
 }

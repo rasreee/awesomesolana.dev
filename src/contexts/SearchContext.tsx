@@ -24,7 +24,6 @@ export function useSearch() {
 
     FILTER_CATEGORIES.forEach((category) => {
       if (keys.includes(category)) {
-        console.log(`keys.includes(${category})`, keys.includes(category));
         const tagsForType = (parsedUrlQuery[category] as string)
           .split(',')
           .map((name) => ({ category, name }));

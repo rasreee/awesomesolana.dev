@@ -1,7 +1,11 @@
-import { GithubRepo } from './types';
+import { authFetch } from '@/common/utils';
+import { Tag } from '@/modules/tags';
+
+import { RawGitHubRepo } from './types';
 
 export interface GetGithubReposParams {
   query: string;
+  tags?: Tag[];
   page?: number;
   perPage?: number;
 }
@@ -10,22 +14,16 @@ const DEFAULT_PAGE_SIZE = 15;
 
 export async function getGithubRepos(
   params: GetGithubReposParams,
-): Promise<GithubRepo[]> {
+): Promise<RawGitHubRepo[]> {
   const { query, page = 0, perPage = DEFAULT_PAGE_SIZE } = params;
 
   if (!query.length) return [];
 
-  const response = await fetch(
+  const response = await authFetch(
     `https://api.github.com/repos?page=${page}&per_page=${perPage}&sort=created`,
-    {
-      headers: {
-        Authorization: `token ${process.env.GITHUB_PERSONAL_ACCESS_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-    },
   );
 
   const data = await response.json();
 
-  return data as GithubRepo[];
+  return data as RawGitHubRepo[];
 }
