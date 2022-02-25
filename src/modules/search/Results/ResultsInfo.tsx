@@ -1,6 +1,8 @@
 import { Project } from '@/api/projects';
+import { Tag } from '@/api/tags';
 import { useAppState } from '@/contexts/AppContext';
 import { useSearch } from '@/contexts/SearchContext';
+import pluralize from '@/lib/pluralize';
 import { SolidButton } from '@/ui/components';
 
 import { FilterTag } from './FilterTag';
@@ -12,10 +14,10 @@ function getInfoText({
   hits: Project[];
   hasFilters: boolean;
 }): string {
-  if (!hasFilters) return `Showing ${hits.length} results`;
+  if (!hasFilters) return `Showing all ${hits.length} results`;
 
   const result = hits.length
-    ? `${hits.length} ${hits.length === 1 ? 'result' : 'results'}`
+    ? `Showing ${hits.length} ${pluralize('result', hits.length)} for `
     : `No results found`;
 
   return result;
@@ -25,9 +27,8 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
   const {
     search: { tags },
     hasFilters,
-    removeFilter,
-    toggleFilter,
     clearFilters,
+    removeFilter,
   } = useSearch();
 
   const { filtersMenu } = useAppState();
@@ -47,17 +48,29 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
           </SolidButton>
         )}
       </div>
-      <ul className="flex items-center gap-2">
-        {tags?.map((tag) => (
-          <li key={`${tag.category}_${tag.name}`}>
-            <FilterTag
-              tag={tag}
-              onRemove={removeFilter}
-              onToggle={toggleFilter}
-            />
-          </li>
-        ))}
-      </ul>
+      <FilterTags tags={tags ?? []} removeFilter={removeFilter} />
     </div>
+  );
+}
+
+export function FilterTags({
+  tags,
+  removeFilter,
+}: {
+  tags: Tag[];
+  removeFilter: (tag: Tag) => void;
+}) {
+  const handleRemoveTag = (tag: Tag) => () => {
+    removeFilter(tag);
+  };
+
+  return (
+    <ul className="flex items-center gap-2">
+      {tags?.map((tag) => (
+        <li key={`${tag.category}_${tag.name}`}>
+          <FilterTag tag={tag} onRemove={handleRemoveTag} />
+        </li>
+      ))}
+    </ul>
   );
 }

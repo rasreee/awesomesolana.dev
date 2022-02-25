@@ -1,11 +1,24 @@
-import { Layout, Logo } from '@/ui/components';
+import React from 'react';
 
-import { SearchBar } from './SearchBar';
+import { getTagSuggestions, Tag } from '@/api/tags';
+import { useSearch } from '@/contexts/SearchContext';
+import { Layout, Logo, SearchField, useSearchField } from '@/ui/components';
+
+import { GroupedResults } from './GroupedResults';
 
 const DESCRIPTION =
   'Browse open-source projects built on Solana, filterable by dependencies, languages, frameworks, and/or topics.';
 
 export function HomePage() {
+  const { addFilter } = useSearch();
+
+  const searchField = useSearchField(getTagSuggestions);
+
+  const onFilterClick = (tag: Tag) => {
+    addFilter(tag);
+    searchField.reset();
+  };
+
   return (
     <Layout>
       <div className="mx-auto px-6 md:max-w-3xl">
@@ -17,7 +30,13 @@ export function HomePage() {
             </div>
           </div>
           <div className="flex flex-col gap-3">
-            <SearchBar />
+            <SearchField autoFocused {...searchField} />
+            <GroupedResults
+              isOpen={searchField.hits.length > 0 && !searchField.isRequesting}
+              hits={searchField.hits}
+              onFilterClick={onFilterClick}
+              onRequestClose={searchField.reset}
+            />
           </div>
         </div>
       </div>

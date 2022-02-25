@@ -13,9 +13,9 @@ export function FilterTag({
   onRemove?: (tag: Tag) => void;
   className?: string;
   isActive?: boolean;
-  onToggle: (tag: Tag) => void;
+  onToggle?: (tag: Tag) => void;
 }) {
-  const handleClick = () => onToggle(tag);
+  const handleClick = () => onToggle && onToggle(tag);
   const handleRemove = () => onRemove && onRemove(tag);
 
   return (
