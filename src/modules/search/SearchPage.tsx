@@ -6,12 +6,16 @@ import {
   filterProjectsByTitle,
   Project,
 } from '@/api/projects';
-import { FILTER_CATEGORIES, FilterCategory } from '@/api/tags';
-import { capitalizeFirst } from '@/common/utils';
-import { useSearchFilters } from '@/contexts/SearchContext';
+import {
+  FILTER_CATEGORIES,
+  FilterCategory,
+  getCategoryFilters,
+} from '@/api/tags';
+import { capitalizeFirst, getIntersection } from '@/common/utils';
+import { useClearFilters, useSearchFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
-import { ChevronDownIcon } from '@/ui/icons';
+import { ChevronDownIcon, XIcon } from '@/ui/icons';
 
 import { CategoryFilters } from './CategoryFilters';
 import { Results, SearchField, useSearchField } from './components';
@@ -42,10 +46,10 @@ export function SearchPage() {
 export function FilterBar() {
   return (
     <>
-      <ul className="grid grid-cols-2 gap-2 overflow-x-auto">
+      <ul className="grid grid-cols-2 gap-2 overflow-x-auto sm:flex sm:items-center sm:gap-5">
         {FILTER_CATEGORIES.map((name) => (
           <li key={name}>
-            <FilterItemToggle name={name} />
+            <FilterItemToggle category={name} />
           </li>
         ))}
       </ul>
@@ -66,7 +70,7 @@ export function TagButton({
     <div
       className={clsxm(
         'cursor-pointer',
-        'py-2 px-3',
+        'py-2 px-3 sm:gap-2 sm:px-4',
         'rounded-md',
         'flex items-center justify-between',
         'min-w-max overflow-hidden',
@@ -82,24 +86,50 @@ export function TagButton({
   );
 }
 
-export function FilterItemToggle({ name }: { name: FilterCategory }) {
+export function FilterItemToggle({ category }: { category: FilterCategory }) {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const allFilters = useSearchFilters();
+  const categoryFilters = getCategoryFilters(category);
+  const clearFilters = useClearFilters();
+
+  const selectedList = getIntersection(
+    categoryFilters,
+    allFilters,
+    (a, b) => a.name === b.name,
+  );
+
   return (
     <>
       <TagButton
         onClick={() => setIsExpanded(true)}
         className={clsxm(
-          isExpanded ? 'bg-color-primary text-white' : '',
-          'mb-2',
+          isExpanded || selectedList.length > 0
+            ? 'bg-color-primary text-white'
+            : '',
         )}
       >
-        <span className="text-base leading-none">
-          {capitalizeFirst(pluralize(name))}
+        <span className="text-left text-base leading-none">
+          {capitalizeFirst(pluralize(category))}
         </span>
-        <ChevronDownIcon />
+        {selectedList.length ? (
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 text-sm leading-none">
+              <span>{'·'}</span>
+              <span className="text-base leading-none">
+                {selectedList.length}
+              </span>
+            </div>
+            <button onClick={clearFilters.handleClearCategory(category)}>
+              <XIcon className="h-4 w-4" />
+            </button>
+          </div>
+        ) : (
+          <ChevronDownIcon />
+        )}
       </TagButton>
       <CategoryFilters
-        category={name}
+        category={category}
         isOpen={isExpanded}
         onRequestClose={() => setIsExpanded(false)}
       />

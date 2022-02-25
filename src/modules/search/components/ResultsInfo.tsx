@@ -3,8 +3,6 @@ import { useSearchFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
 
-import { FilterTags } from './FilterTags';
-
 function getInfoText({
   hits,
   hasFilters,
@@ -26,8 +24,7 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
   const hasFilters = Boolean(filters.length);
 
   return (
-    <div className={clsxm('py-2 px-1', 'flex flex-col gap-4')}>
-      <FilterTags />
+    <div className={clsxm('py-2 px-1')}>
       <span className="text text-sm leading-none opacity-90">
         {getInfoText({ hits, hasFilters })}
       </span>

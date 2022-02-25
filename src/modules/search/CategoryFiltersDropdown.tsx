@@ -39,6 +39,7 @@ export function CategoryFiltersDropdown({
 
   const allFilters = useSearchFilters();
   const categoryFilters = getCategoryFilters(category);
+
   const selectedList = getIntersection(
     categoryFilters,
     allFilters,
