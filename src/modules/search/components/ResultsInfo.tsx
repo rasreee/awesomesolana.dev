@@ -1,5 +1,6 @@
 import { Project } from '@/api/projects';
 import { useSearchFilters } from '@/contexts/SearchContext';
+import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
 
 import { FilterTags } from './FilterTags';
@@ -25,7 +26,7 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
   const hasFilters = Boolean(filters.length);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className={clsxm('py-2 px-1', 'flex flex-col gap-4')}>
       <FilterTags />
       <span className="text text-sm leading-none opacity-90">
         {getInfoText({ hits, hasFilters })}

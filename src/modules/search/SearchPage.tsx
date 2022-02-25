@@ -6,12 +6,7 @@ import {
 } from '@/api/projects';
 import { useSearchFilters } from '@/contexts/SearchContext';
 
-import {
-  Results,
-  SearchField,
-  SearchOptionsButton,
-  useSearchField,
-} from './components';
+import { Results, SearchField, useSearchField } from './components';
 
 export function SearchPage() {
   const searchFilters = useSearchFilters();
@@ -29,7 +24,6 @@ export function SearchPage() {
     <div className="flex-1 px-3 sm:px-6">
       <div className="flex items-center gap-2">
         <SearchField autoFocused {...searchField} />
-        <SearchOptionsButton />
       </div>
       <Results hits={searchField.hits} />
     </div>

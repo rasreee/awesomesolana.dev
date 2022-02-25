@@ -8,9 +8,7 @@ export function Results({ hits }: { hits: Project[] }) {
 
   return (
     <div>
-      <div className="flex flex-col py-2 px-1">
-        <ResultsInfo hits={hitsToShow} />
-      </div>
+      <ResultsInfo hits={hitsToShow} />
       <ul>
         {hitsToShow.map((hit) => (
           <li key={hit.id}>

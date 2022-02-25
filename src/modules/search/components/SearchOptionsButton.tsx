@@ -11,13 +11,13 @@ export function SearchOptionsButton() {
     <button
       onClick={toggle}
       className={clsxm(
-        'text',
+        'text leading-none',
         isOpen && 'bg-surface text-color-primary',
         'h-full rounded p-1',
       )}
     >
       <AdjustmentsIcon
-        className={clsxm('text-hint', isOpen && 'text-color-p`rimary')}
+        className={clsxm('text-hint', isOpen && 'text-color-primary')}
       />
     </button>
   );

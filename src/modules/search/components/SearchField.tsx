@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
 import { useSearchOptions } from '@/contexts/AppContext';
+import { useSearchFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import { ErrorMessage, StatefulIcon, TextInput } from '@/ui/components';
-import { SearchIcon } from '@/ui/icons';
+import { SearchIcon, XIcon } from '@/ui/icons';
 
 const DEFAULT_PLACEHOLDER = 'Search for any project, dependency, or topic';
 
@@ -13,6 +14,7 @@ export type SearchFieldProps = {
   query: string;
   onChange: (query: string) => void;
   autoFocused?: boolean;
+  reset: () => void;
 };
 
 export function SearchField({
@@ -20,8 +22,10 @@ export function SearchField({
   isRequesting,
   query,
   onChange,
+  reset,
   autoFocused = false,
 }: SearchFieldProps) {
+  const selectedFiltersCount = useSearchFilters().length;
   const { isOpen: isSearchOptionsOpen } = useSearchOptions();
 
   const [focused, setFocused] = useState(autoFocused);
@@ -32,7 +36,7 @@ export function SearchField({
   return (
     <div
       className={clsxm(
-        'flex !max-h-[3rem] max-w-full flex-1 items-center gap-1 px-2 py-1',
+        'flex !max-h-[3rem] max-w-full flex-1 items-center gap-0 px-2 py-1',
         'input bg-surface-1',
         focused || isSearchOptionsOpen
           ? 'input-border-focused'
@@ -42,7 +46,7 @@ export function SearchField({
     >
       <ErrorMessage>{error}</ErrorMessage>
       <StatefulIcon
-        className={clsxm({
+        className={clsxm('h-4 w-4', {
           'text-color-primary': focused,
         })}
         label="search"
@@ -51,7 +55,7 @@ export function SearchField({
       />
       <TextInput
         name="search"
-        className="input-focus-unset"
+        className="input-focus-unset px-2"
         placeholder={DEFAULT_PLACEHOLDER}
         autoFocused={autoFocused}
         value={query}
@@ -59,6 +63,11 @@ export function SearchField({
         onFocus={onFocus}
         onBlur={onBlur}
       />
+      {Boolean(query || selectedFiltersCount) && (
+        <button className="p-1" onClick={reset}>
+          <XIcon className="box-border h-4 w-4" />
+        </button>
+      )}
     </div>
   );
 }
