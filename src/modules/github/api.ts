@@ -16,8 +16,8 @@ export const githubApi = {
     page,
     per_page,
     filters,
-    keywords,
-  }: GithubReposSearchParams) =>
+    keywords = [],
+  }: Partial<GithubReposSearchParams>) =>
     [
       githubApi.baseUrl,
       `/search/repositories`,
@@ -28,11 +28,11 @@ export const githubApi = {
         per_page,
       }),
     ].join(''),
-  browseRepos: ({ page, per_page }: GithubReposBrowseParams) =>
+  browseRepos: (params?: Partial<GithubReposBrowseParams>) =>
     [
       githubApi.baseUrl,
       `/search/repositories`,
-      formatGithubApiQuery({ keywords: ['solana'], page, per_page }),
+      formatGithubApiQuery({ keywords: ['solana'], ...params }),
     ].join(''),
 };
 
