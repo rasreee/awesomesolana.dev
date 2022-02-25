@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useAppState } from '@/contexts/AppStateContext';
+import { useSearchOptions } from '@/contexts/AppContext';
 import clsxm from '@/lib/clsxm';
 import { ErrorMessage, StatefulIcon, TextInput } from '@/ui/components';
 import { SearchIcon } from '@/ui/icons';
@@ -22,7 +22,7 @@ export function SearchField({
   onChange,
   autoFocused = false,
 }: SearchFieldProps) {
-  const { filtersMenu } = useAppState();
+  const { isOpen: isSearchOptionsOpen } = useSearchOptions();
 
   const [focused, setFocused] = useState(autoFocused);
 
@@ -34,7 +34,9 @@ export function SearchField({
       className={clsxm(
         'flex !max-h-[3rem] max-w-full flex-1 items-center gap-1 px-2 py-1',
         'input bg-surface-1',
-        focused || filtersMenu.isOpen ? 'input-border-focused' : 'input-border',
+        focused || isSearchOptionsOpen
+          ? 'input-border-focused'
+          : 'input-border',
         'rounded-full',
       )}
     >

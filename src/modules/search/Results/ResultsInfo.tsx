@@ -1,5 +1,5 @@
 import { Project } from '@/api/projects';
-import { useAppState } from '@/contexts/AppStateContext';
+import { useSearchOptions } from '@/contexts/AppContext';
 import { useClearFilters, useSearchFilters } from '@/contexts/SearchContext';
 import pluralize from '@/lib/pluralize';
 import { SolidButton } from '@/ui/components';
@@ -28,7 +28,7 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
 
   const clearFilters = useClearFilters();
 
-  const { filtersMenu } = useAppState();
+  const { isOpen: isSearchOptionsOpen } = useSearchOptions();
 
   return (
     <div className="flex flex-col gap-1">
@@ -36,7 +36,7 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
         <span className="text text-sm opacity-90">
           {getInfoText({ hits, hasFilters })}
         </span>
-        {!filtersMenu.isOpen && hasFilters && (
+        {!isSearchOptionsOpen && hasFilters && (
           <SolidButton
             onClick={clearFilters.all}
             className="py-2 text-sm leading-none"

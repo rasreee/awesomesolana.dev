@@ -6,7 +6,7 @@ export * from './useIsMobile';
 export * from './useIsMounted';
 export * from './useKeyPress';
 export * from './useKeyboardEvent';
-export * from './useModal';
+export * from './useOverlay';
 export * from './useSafeState';
 export * from './useSelections';
 export * from './useSyncedRef';

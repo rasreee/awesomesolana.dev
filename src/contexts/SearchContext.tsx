@@ -1,5 +1,5 @@
 import { NextRouter, useRouter } from 'next/router';
-import { createContext, useContext, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { FILTER_CATEGORIES, FilterCategory, Tag } from '@/api/tags';
 
@@ -8,66 +8,41 @@ type Search = {
   tags?: Tag[];
 };
 
-export type ISearchContext = {
-  search: Search;
-};
-
-export const SearchContext = createContext<ISearchContext | undefined>(
-  undefined,
-);
-
 export function useSearch() {
-  const context = useContext(SearchContext);
-  if (!context)
-    throw new Error('SearchContext must be defined to use useSearch');
-  return context;
-}
-
-function parseSearch(parsedUrlQuery: NextRouter['query']): Search {
-  const search: Search = {};
-
-  if ('query' in parsedUrlQuery) {
-    search.query = parsedUrlQuery['query'] as string;
-  }
-
-  const tags: Tag[] = [];
-
-  const keys = Object.keys(parsedUrlQuery);
-
-  FILTER_CATEGORIES.forEach((category) => {
-    if (keys.includes(category)) {
-      console.log(`keys.includes(${category})`, keys.includes(category));
-      const tagsForType = (parsedUrlQuery[category] as string)
-        .split(',')
-        .map((name) => ({ category, name }));
-
-      tags.push(...tagsForType);
-    }
-  });
-
-  search.tags = tags;
-
-  return search;
-}
-
-export function SearchProvider({ children }: { children: any }) {
   const router = useRouter();
 
-  const search = useMemo(() => parseSearch(router.query), [router.query]);
+  function parseSearch(parsedUrlQuery: NextRouter['query']): Search {
+    const search: Search = {};
 
-  return (
-    <SearchContext.Provider
-      value={{
-        search,
-      }}
-    >
-      {children}
-    </SearchContext.Provider>
-  );
+    if ('query' in parsedUrlQuery) {
+      search.query = parsedUrlQuery['query'] as string;
+    }
+
+    const tags: Tag[] = [];
+
+    const keys = Object.keys(parsedUrlQuery);
+
+    FILTER_CATEGORIES.forEach((category) => {
+      if (keys.includes(category)) {
+        console.log(`keys.includes(${category})`, keys.includes(category));
+        const tagsForType = (parsedUrlQuery[category] as string)
+          .split(',')
+          .map((name) => ({ category, name }));
+
+        tags.push(...tagsForType);
+      }
+    });
+
+    search.tags = tags;
+
+    return search;
+  }
+
+  return useMemo(() => parseSearch(router.query), [router.query]);
 }
 
 export function useSearchFilters(): Tag[] {
-  const { search } = useSearch();
+  const search = useSearch();
 
   return search.tags ?? [];
 }

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useAppState } from '@/contexts/AppStateContext';
+import { useSearchOptions } from '@/contexts/AppContext';
 import { useIsMobile } from '@/ui/hooks';
 
 import { FiltersModal } from './FiltersModal';
@@ -12,7 +12,7 @@ export type FiltersMenuProps = {
 };
 
 export function FiltersMenu() {
-  const { filtersMenu } = useAppState();
+  const searchOptions = useSearchOptions();
 
   const isMobile = useIsMobile();
 
@@ -24,5 +24,5 @@ export function FiltersMenu() {
     [isMobile],
   );
 
-  return <CompToRender {...filtersMenu} />;
+  return <CompToRender {...searchOptions} />;
 }
