@@ -9,8 +9,12 @@ import {
 import { FILTER_CATEGORIES } from '@/api/tags';
 import { useSearchFilters } from '@/contexts/SearchContext';
 
-import { Results, SearchField, useSearchField } from './components';
-import { FilterItemToggle } from './FilterItemToggle';
+import {
+  FilterItemToggle,
+  Results,
+  SearchField,
+  useSearchField,
+} from './components';
 
 export function SearchPage() {
   const searchFilters = useSearchFilters();

@@ -13,11 +13,9 @@ import { Divider, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
 
 import { CategoryFiltersProps } from './CategoryFilters';
-import {
-  OptionCategoryItemButton,
-  SearchField,
-  useSearchField,
-} from './components';
+import { OptionCategoryItemButton } from './OptionCategoryCheckBox';
+import { SearchField } from './SearchField';
+import { useSearchField } from './useSearchField';
 
 export function CategoryFiltersBottomSheet({
   category,
