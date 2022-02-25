@@ -8,8 +8,8 @@ import {
   Tag,
 } from '@/api/tags';
 import {
+  useCountFilters,
   useGetIsFilterActive,
-  useSearchFilters,
   useToggleFilter,
 } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
@@ -57,7 +57,7 @@ export function FilterCategoryMenu({
 
   const { query, setQuery, hits } = useSearchField(runSearch);
 
-  const searchFilters = useSearchFilters();
+  const selectedCount = useCountFilters()(category);
   const toggleFilter = useToggleFilter();
   const getIsFilterActive = useGetIsFilterActive();
 
@@ -69,10 +69,6 @@ export function FilterCategoryMenu({
     toggleFilter(tag);
     setQuery('');
   };
-
-  const selectedCount = searchFilters.filter(
-    (item) => item.category === category,
-  ).length;
 
   const canShowMore = hits.length > 0;
 

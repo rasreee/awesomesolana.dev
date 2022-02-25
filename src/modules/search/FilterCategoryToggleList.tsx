@@ -18,9 +18,7 @@ export function FilterCategoryToggleList({
   onToggle: () => void;
   onClear: () => void;
 }) {
-  const countFilters = useCountFilters();
-
-  const selectedCount = countFilters(category);
+  const selectedCount = useCountFilters()(category);
 
   return (
     <div>
