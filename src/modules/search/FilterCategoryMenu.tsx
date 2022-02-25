@@ -14,10 +14,10 @@ import {
 } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
-import { useSearchField } from '@/modules/search';
 import { SolidButton, TextInput } from '@/ui/components';
 
 import { FilterCategoryOption } from './FilterCategoryOption';
+import { useSearchField } from './useSearchField';
 
 function sortTagsByProjectsCount(list: Tag[]): Tag[] {
   return list.sort(

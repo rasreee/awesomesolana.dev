@@ -12,7 +12,8 @@ import clsxm from '@/lib/clsxm';
 import { AdjustmentsIcon } from '@/ui/icons';
 
 import { Results } from './Results';
-import { SearchField, useSearchField } from './SearchField';
+import { SearchField } from './SearchField';
+import { useSearchField } from './useSearchField';
 
 export function SearchPage() {
   const searchFilters = useSearchFilters();
