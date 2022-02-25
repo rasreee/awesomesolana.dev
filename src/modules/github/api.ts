@@ -35,14 +35,13 @@ export function useSearchGithubRepos(
   query: string,
   tags: Tag[],
 ): Pick<SWRResponse<GitHubRepo[], Error>, 'data' | 'error'> {
+  function formatTagParam(tag: Tag): string {
+    if (tag.category === 'language') return `language:${tag.name}`;
+    if (tag.category === 'topic') return `topic:${tag.name}`;
+    return '';
+  }
   function formatQuery(query: string, tags: Tag[]): string {
-    return [
-      'solana',
-      query,
-      ...tags.map((tag) =>
-        tag.category === 'language' ? `language:${tag.name}` : '',
-      ),
-    ]
+    return ['solana', query, ...tags.map((tag) => formatTagParam(tag))]
       .filter(Boolean)
       .join('+');
   }
