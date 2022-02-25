@@ -25,9 +25,12 @@ function sortTagsByProjectsCount(list: Tag[]): Tag[] {
   );
 }
 
-function getTagsForCategory(category: FilterCategory): Tag[] {
+function getCategoryFilters(category: FilterCategory): Tag[] {
   return SEARCH_FILTERS.filter((filter) => filter.category === category);
 }
+
+const PREVIEW_SIZE = 5;
+const PAGE_SIZE = 10;
 
 export function FilterCategoryMenu({
   category,
@@ -40,13 +43,17 @@ export function FilterCategoryMenu({
 
   const toggleExpanded = () => setExpanded((prev) => !prev);
 
-  const previewOptions = getTagsForCategory(category).slice(
+  const allCategoryFilters = getCategoryFilters(category);
+
+  const previewOptions = allCategoryFilters.slice(
     0,
-    expanded ? 10 : 5,
+    expanded ? PAGE_SIZE : PREVIEW_SIZE,
   );
 
+  const totalFilters = allCategoryFilters.length;
+
   const runSearch = async (searchQuery: string): Promise<Tag[]> => {
-    if (!searchQuery) return previewOptions;
+    if (!searchQuery) return [];
 
     const filters = await getTagSuggestions(searchQuery, { category }).then(
       sortTagsByProjectsCount,
@@ -70,7 +77,8 @@ export function FilterCategoryMenu({
     setQuery('');
   };
 
-  const canShowMore = hits.length > 0;
+  const listToShow = hits.length ? hits : previewOptions;
+  const canShowMore = totalFilters > PREVIEW_SIZE;
 
   return (
     <div className="flex flex-col">
@@ -101,7 +109,7 @@ export function FilterCategoryMenu({
         )}
       </div>
       <ul>
-        {(hits.length ? hits : previewOptions).map((tag) => (
+        {listToShow.map((tag) => (
           <FilterCategoryOption
             key={`${tag.category}_${tag.name}`}
             tag={tag}
