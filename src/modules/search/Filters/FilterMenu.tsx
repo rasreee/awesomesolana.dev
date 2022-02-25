@@ -10,8 +10,7 @@ import {
   toPluralFilterCategory,
 } from '@/api/filters';
 import { useSearch } from '@/contexts/SearchContext';
-import { useSearchField } from '@/modules/search/SearchField';
-import { SolidButton, TextInput } from '@/ui/components';
+import { SolidButton, TextInput, useSearchField } from '@/ui/components';
 import { clsxm } from '@/ui/utils';
 
 import { FilterMenuOption } from './FilterMenuOption';

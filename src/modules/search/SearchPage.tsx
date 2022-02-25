@@ -1,16 +1,16 @@
+import React from 'react';
+
 import {
   ALL_PROJECTS,
   filterProjectsByTags,
   filterProjectsByTitle,
   Project,
 } from '@/api/projects';
-import { useAppState } from '@/contexts/AppContext';
 import { useSearch } from '@/contexts/SearchContext';
-import { Layout } from '@/ui/components';
+import { Layout, SearchField, useSearchField } from '@/ui/components';
 
 import { Filters } from './Filters';
 import { Results } from './Results';
-import { SearchField, useSearchField } from './SearchField';
 
 export function SearchPage() {
   const {
@@ -26,20 +26,11 @@ export function SearchPage() {
 
   const searchField = useSearchField(searchProjectsByQuery);
 
-  const {
-    filtersMenu: { isOpen: isFiltersMenuOpen, toggle: toggleFiltersMenu },
-  } = useAppState();
-
   return (
     <Layout>
       <div className="w-full gap-3 sm:flex sm:items-start">
         <div className="flex-1 px-3 sm:px-6">
-          <SearchField
-            autoFocused
-            isFiltersMenuOpen={isFiltersMenuOpen}
-            onShowFilters={toggleFiltersMenu}
-            {...searchField}
-          />
+          <SearchField autoFocused {...searchField} />
           <Results hits={searchField.hits} />
         </div>
         <Filters />

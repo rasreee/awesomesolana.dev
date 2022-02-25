@@ -1,6 +1,6 @@
 import { SearchFilter, searchFilters } from '@/api/filters';
 import { useSearch } from '@/contexts/SearchContext';
-import { SearchField, useSearchField } from '@/modules/search';
+import { SearchField, useSearchField } from '@/ui/components';
 
 import { GroupedResults } from './GroupedResults';
 
