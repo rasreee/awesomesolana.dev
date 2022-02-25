@@ -5,7 +5,7 @@ import { capitalizeFirst, getIntersection } from '@/common/utils';
 import { useClearFilters, useSearchFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
-import { XIcon } from '@/ui/icons';
+import { ChevronDownIcon, XIcon } from '@/ui/icons';
 
 import { CategoryFilters } from './CategoryFilters';
 
@@ -72,10 +72,12 @@ export function FilterItemToggle({ category }: { category: FilterCategory }) {
             </span>
           ) : null}
         </div>
-        {selectedList.length > 0 && (
+        {selectedList.length > 0 ? (
           <button onClick={clearFilters.handleClearCategory(category)}>
             <XIcon className="h-4 w-4" />
           </button>
+        ) : (
+          <ChevronDownIcon />
         )}
       </TagButton>
       <CategoryFilters
