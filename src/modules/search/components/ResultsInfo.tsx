@@ -1,8 +1,6 @@
 import { Project } from '@/api/projects';
-import { useSearchOptions } from '@/contexts/AppContext';
-import { useClearFilters, useSearchFilters } from '@/contexts/SearchContext';
+import { useSearchFilters } from '@/contexts/SearchContext';
 import pluralize from '@/lib/pluralize';
-import { SolidButton } from '@/ui/components';
 
 import { FilterTags } from './FilterTags';
 
@@ -26,26 +24,12 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
   const filters = useSearchFilters();
   const hasFilters = Boolean(filters.length);
 
-  const clearFilters = useClearFilters();
-
-  const { isOpen: isSearchOptionsOpen } = useSearchOptions();
-
   return (
-    <div className="flex flex-col gap-1">
-      <div className="flex items-center justify-between">
-        <span className="text text-sm opacity-90">
-          {getInfoText({ hits, hasFilters })}
-        </span>
-        {!isSearchOptionsOpen && hasFilters && (
-          <SolidButton
-            onClick={clearFilters.all}
-            className="py-2 text-sm leading-none"
-          >
-            Clear filters
-          </SolidButton>
-        )}
-      </div>
+    <div className="flex flex-col gap-4">
       <FilterTags />
+      <span className="text text-sm leading-none opacity-90">
+        {getInfoText({ hits, hasFilters })}
+      </span>
     </div>
   );
 }
