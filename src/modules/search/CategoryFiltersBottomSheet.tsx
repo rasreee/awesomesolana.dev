@@ -39,12 +39,15 @@ export function CategoryFiltersBottomSheet({
     <Popover
       className={clsxm(
         'bg-surface fixed bottom-0 left-0 !min-w-full',
-        'h-[80%]',
+        'h-[56%]',
         'rounded-none rounded-t-xl',
       )}
       isOpen={isOpen}
       onRequestClose={onRequestClose}
     >
+      {/* <div className="flex w-full items-center justify-center pt-3">
+        <div className="h-[2.75px] w-16 rounded-full bg-gray-900 opacity-40 dark:bg-white dark:opacity-60" />
+      </div> */}
       <div
         className={clsxm(
           'py-3 px-5',
