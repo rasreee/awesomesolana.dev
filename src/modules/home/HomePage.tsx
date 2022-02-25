@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getTagSuggestions, Tag } from '@/api/tags';
 import { useToggleFilter } from '@/contexts/SearchContext';
-import { SearchField, useSearchField } from '@/modules/search';
+import { SearchField, useSearchField } from '@/modules/search/components';
 import { Logo } from '@/ui/components';
 
 import { GroupedResults } from './GroupedResults';

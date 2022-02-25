@@ -4,7 +4,7 @@ import { getProjectsCountForTag } from '@/api/projects';
 import { Tag } from '@/api/tags';
 import { CheckBox } from '@/ui/components';
 
-export function FilterCategoryOption({
+export function OptionCategoryItemButton({
   tag,
   onClick,
   checked,

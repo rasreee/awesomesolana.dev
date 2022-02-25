@@ -7,7 +7,7 @@ import clsxm from '@/lib/clsxm';
 import { SolidButton } from '@/ui/components';
 import { useSelections } from '@/ui/hooks/useSelections';
 
-import { FilterCategoryToggles } from './FilterCategoryToggles';
+import { OptionCategoryToggles } from './OptionCategoryToggles';
 
 export function SearchOptionsSidebar() {
   const { isOpen } = useSearchOptions();
@@ -34,7 +34,7 @@ export function SearchOptionsSidebar() {
           Clear all
         </SolidButton>
       </div>
-      <FilterCategoryToggles
+      <OptionCategoryToggles
         getIsExpanded={getIsExpanded}
         onToggle={handleToggleCategory}
         onClear={clearFilters.handleClearCategory}

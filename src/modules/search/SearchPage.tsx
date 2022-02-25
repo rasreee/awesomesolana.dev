@@ -1,19 +1,17 @@
-import React from 'react';
-
 import {
   ALL_PROJECTS,
   filterProjectsByTags,
   filterProjectsByTitle,
   Project,
 } from '@/api/projects';
-import { useSearchOptions } from '@/contexts/AppContext';
 import { useSearchFilters } from '@/contexts/SearchContext';
-import clsxm from '@/lib/clsxm';
-import { AdjustmentsIcon } from '@/ui/icons';
 
-import { Results } from './Results';
-import { SearchField } from './SearchField';
-import { useSearchField } from './useSearchField';
+import {
+  Results,
+  SearchField,
+  SearchOptionsButton,
+  useSearchField,
+} from './components';
 
 export function SearchPage() {
   const searchFilters = useSearchFilters();
@@ -31,28 +29,9 @@ export function SearchPage() {
     <div className="flex-1 px-3 sm:px-6">
       <div className="flex items-center gap-2">
         <SearchField autoFocused {...searchField} />
-        <SearchOptionsToggle />
+        <SearchOptionsButton />
       </div>
       <Results hits={searchField.hits} />
     </div>
-  );
-}
-
-function SearchOptionsToggle() {
-  const { isOpen, toggle } = useSearchOptions();
-
-  return (
-    <button
-      onClick={toggle}
-      className={clsxm(
-        'text',
-        isOpen && 'bg-surface text-color-primary',
-        'h-full rounded p-1',
-      )}
-    >
-      <AdjustmentsIcon
-        className={clsxm('text-hint', isOpen && 'text-color-p`rimary')}
-      />
-    </button>
   );
 }

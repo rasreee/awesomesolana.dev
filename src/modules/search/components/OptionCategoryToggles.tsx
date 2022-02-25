@@ -2,9 +2,9 @@ import React from 'react';
 
 import { FILTER_CATEGORIES, FilterCategory } from '@/api/tags';
 
-import { FilterCategoryToggleBlock } from './FilterCategoryToggleBlock';
+import { OptionCategoryToggle } from './OptionCategoryToggle';
 
-export function FilterCategoryToggles({
+export function OptionCategoryToggles({
   getIsExpanded,
   onToggle,
   onClear,
@@ -17,7 +17,7 @@ export function FilterCategoryToggles({
     <ul>
       {FILTER_CATEGORIES.map((item) => (
         <li key={item}>
-          <FilterCategoryToggleBlock
+          <OptionCategoryToggle
             category={item}
             isExpanded={getIsExpanded(item)}
             onToggle={onToggle(item)}

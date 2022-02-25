@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { getProjectsCountForTag } from '@/api/projects';
 import {
@@ -16,7 +16,7 @@ import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
 import { SolidButton, TextInput } from '@/ui/components';
 
-import { FilterCategoryOption } from './FilterCategoryOption';
+import { OptionCategoryItemButton } from './OptionCategoryCheckBox';
 import { useSearchField } from './useSearchField';
 
 function sortTagsByProjectsCount(list: Tag[]): Tag[] {
@@ -32,7 +32,7 @@ function getCategoryFilters(category: FilterCategory): Tag[] {
 const PREVIEW_SIZE = 5;
 const PAGE_SIZE = 10;
 
-export function FilterCategoryMenu({
+export function OptionCategoryMenu({
   category,
   onClear,
 }: {
@@ -110,7 +110,7 @@ export function FilterCategoryMenu({
       </div>
       <ul>
         {listToShow.map((tag) => (
-          <FilterCategoryOption
+          <OptionCategoryItemButton
             key={`${tag.category}_${tag.name}`}
             tag={tag}
             onClick={onClickOption(tag)}

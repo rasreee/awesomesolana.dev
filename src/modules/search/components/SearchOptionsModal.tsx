@@ -11,7 +11,7 @@ import clsxm from '@/lib/clsxm';
 import { GhostButton, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
 
-import { FilterCategoryToggles } from './FilterCategoryToggles';
+import { OptionCategoryToggles } from './OptionCategoryToggles';
 
 export function SearchOptionsModal() {
   const { isOpen, onRequestClose } = useSearchOptions();
@@ -65,7 +65,7 @@ export function SearchOptionsModal() {
             </button>
           </div>
         </div>
-        <FilterCategoryToggles
+        <OptionCategoryToggles
           getIsExpanded={getIsCategoryExpanded}
           onToggle={handleToggleCategory}
           onClear={handleClearCategory}

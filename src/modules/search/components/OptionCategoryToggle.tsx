@@ -5,9 +5,9 @@ import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
 import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icons';
 
-import { FilterCategoryMenu } from './FilterCategoryMenu';
+import { OptionCategoryMenu } from './OptionCategoryMenu';
 
-export function FilterCategoryToggleBlock({
+export function OptionCategoryToggle({
   category,
   onToggle,
   isExpanded,
@@ -28,7 +28,7 @@ export function FilterCategoryToggleBlock({
       </ExpandToggleButton>
       <div className="px-5">
         {isExpanded && (
-          <FilterCategoryMenu category={category} onClear={onClear} />
+          <OptionCategoryMenu category={category} onClear={onClear} />
         )}
       </div>
     </div>
