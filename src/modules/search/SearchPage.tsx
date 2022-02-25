@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import {
   ALL_PROJECTS,
@@ -15,7 +15,7 @@ import { capitalizeFirst, getIntersection } from '@/common/utils';
 import { useClearFilters, useSearchFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
-import { ChevronDownIcon, XIcon } from '@/ui/icons';
+import { XIcon } from '@/ui/icons';
 
 import { CategoryFilters } from './CategoryFilters';
 import { Results, SearchField, useSearchField } from './components';
@@ -109,23 +109,20 @@ export function FilterItemToggle({ category }: { category: FilterCategory }) {
             : '',
         )}
       >
-        <span className="text-left text-base leading-none">
-          {capitalizeFirst(pluralize(category))}
-        </span>
-        {selectedList.length ? (
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 text-sm leading-none">
-              <span>{'·'}</span>
-              <span className="text-base leading-none">
-                {selectedList.length}
-              </span>
-            </div>
-            <button onClick={clearFilters.handleClearCategory(category)}>
-              <XIcon className="h-4 w-4" />
-            </button>
-          </div>
-        ) : (
-          <ChevronDownIcon />
+        <div className="flex items-center gap-1.5">
+          <span className="text-left text-base leading-none">
+            {capitalizeFirst(pluralize(category))}
+          </span>
+          {selectedList.length > 0 ? (
+            <span className="text-base leading-none">
+              {`(${selectedList.length})`}
+            </span>
+          ) : null}
+        </div>
+        {selectedList.length > 0 && (
+          <button onClick={clearFilters.handleClearCategory(category)}>
+            <XIcon className="h-4 w-4" />
+          </button>
         )}
       </TagButton>
       <CategoryFilters
