@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {
   FilterCategory,
   getFilterCategories,
@@ -5,32 +7,36 @@ import {
   toPluralFilterCategory,
 } from '@/api/filters';
 import { useSearch } from '@/contexts/SearchContext';
+import { Popover } from '@/ui/components';
 
-type GroupedSearchMenuProps = {
-  tags: SearchFilter[];
+type GroupedResultsProps = {
+  isOpen: boolean;
+  hits: SearchFilter[];
   onFilterClick: (tag: SearchFilter) => void;
+  onRequestClose: () => void;
 };
 
-type GroupedTags = Array<{ category: FilterCategory; tags: SearchFilter[] }>;
+type GroupedHits = Array<{ category: FilterCategory; hits: SearchFilter[] }>;
 
-function groupTagsByType(list: SearchFilter[]): GroupedTags {
+function groupHitsByType(list: SearchFilter[]): GroupedHits {
   const groups = getFilterCategories().map((category) => ({
     category,
-    tags: list.filter((filter) => filter.category === category),
+    hits: list.filter((filter) => filter.category === category),
   }));
 
   return groups;
 }
 
-export function GroupedSearchMenu({
-  tags,
+export function GroupedResults({
+  isOpen,
+  hits,
   onFilterClick: handleTagClick,
-}: GroupedSearchMenuProps) {
+  onRequestClose,
+}: GroupedResultsProps) {
   const { search } = useSearch();
 
-  const tagsToShow = tags.filter(
-    (tag) =>
-      !search.tags?.map((selectedTag) => selectedTag.name).includes(tag.name),
+  const listToShow = hits.filter(
+    (hit) => !search.tags?.some((filter) => filter.name === hit.name),
   );
 
   const onFilterClick = (tag: SearchFilter) => () => {
@@ -38,22 +44,26 @@ export function GroupedSearchMenu({
   };
 
   return (
-    <>
-      {groupTagsByType(tagsToShow).map(
-        ({ category, tags: list }) =>
+    <Popover
+      className="bg-surface relative overflow-hidden py-5 px-3"
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+    >
+      {groupHitsByType(listToShow).map(
+        ({ category, hits: list }) =>
           list.length > 0 && (
             <div className="flex flex-col gap-2 px-1">
               <span className="px-3 py-2 text-lg font-semibold">
                 {toPluralFilterCategory(category)} {`(${list.length})`}
               </span>
               <ul className="max-h-[16rem] overflow-y-auto">
-                {list.map((tag) => (
-                  <li className="w-full" key={tag.name}>
+                {list.map((hit) => (
+                  <li className="w-full" key={hit.name}>
                     <button
                       className="hover:bg-surface-1 w-full rounded-md py-3 px-3 text-left"
-                      onClick={onFilterClick(tag)}
+                      onClick={onFilterClick(hit)}
                     >
-                      {tag.name}
+                      {hit.name}
                     </button>
                   </li>
                 ))}
@@ -61,6 +71,6 @@ export function GroupedSearchMenu({
             </div>
           ),
       )}
-    </>
+    </Popover>
   );
 }
