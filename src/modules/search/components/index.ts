@@ -9,7 +9,6 @@ export * from './OptionCategoryMenu';
 export * from './OptionCategoryToggle';
 export * from './OptionCategoryToggles';
 export * from './RepoItem';
-export * from './Results';
 export * from './ResultsInfo';
 export * from './SearchField';
 export * from './SearchOptionsButton';

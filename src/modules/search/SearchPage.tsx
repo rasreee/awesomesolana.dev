@@ -5,19 +5,20 @@ import { searchGitHubRepos } from '../github/api';
 import { useSearchGithubRepos } from '../github/useSearchGitHubRepos';
 import {
   FilterItemToggle,
-  Results,
+  RepoItem,
+  ResultsInfo,
   SearchField,
   useSearchField,
 } from './components';
 
 export function SearchPage() {
-  const searchFilters = useSearchFilters();
+  const filters = useSearchFilters();
 
   const searchField = useSearchField((query) =>
-    searchGitHubRepos(query, searchFilters),
+    searchGitHubRepos(query, filters),
   );
 
-  const { data } = useSearchGithubRepos(searchField.query, searchFilters);
+  const { data: hits } = useSearchGithubRepos(searchField.query, filters);
 
   return (
     <div className="flex-1 px-3 sm:px-6">
@@ -25,7 +26,21 @@ export function SearchPage() {
         <SearchField autoFocused {...searchField} />
         <FilterBar />
       </div>
-      <Results hits={data} />
+      <div>
+        <ResultsInfo hits={hits} filters={filters} />
+        {hits ? (
+          <ul>
+            {hits.map((hit) => (
+              <li key={hit.id}>
+                <RepoItem {...hit} />
+                {/* {JSON.stringify(hit)} */}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div>...</div>
+        )}
+      </div>
     </div>
   );
 }
