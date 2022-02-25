@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React from 'react';
 
 import {
   ALL_PROJECTS,
@@ -6,19 +6,11 @@ import {
   filterProjectsByTitle,
   Project,
 } from '@/api/projects';
-import {
-  FILTER_CATEGORIES,
-  FilterCategory,
-  getCategoryFilters,
-} from '@/api/tags';
-import { capitalizeFirst, getIntersection } from '@/common/utils';
-import { useClearFilters, useSearchFilters } from '@/contexts/SearchContext';
-import clsxm from '@/lib/clsxm';
-import pluralize from '@/lib/pluralize';
-import { XIcon } from '@/ui/icons';
+import { FILTER_CATEGORIES } from '@/api/tags';
+import { useSearchFilters } from '@/contexts/SearchContext';
 
-import { CategoryFilters } from './CategoryFilters';
 import { Results, SearchField, useSearchField } from './components';
+import { FilterItemToggle } from './FilterItemToggle';
 
 export function SearchPage() {
   const searchFilters = useSearchFilters();
@@ -53,83 +45,6 @@ export function FilterBar() {
           </li>
         ))}
       </ul>
-    </>
-  );
-}
-
-export function TagButton({
-  children,
-  className,
-  ...props
-}: {
-  children: any;
-  className?: string;
-  onClick?: () => void;
-}) {
-  return (
-    <div
-      className={clsxm(
-        'cursor-pointer',
-        'py-2 px-3 sm:gap-2 sm:px-4',
-        'rounded-md',
-        'flex items-center justify-between',
-        'min-w-max overflow-hidden',
-        'font-medium',
-        'flex-1',
-        'bg-surface-2 text text-opacity-90',
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-}
-
-export function FilterItemToggle({ category }: { category: FilterCategory }) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const allFilters = useSearchFilters();
-  const categoryFilters = getCategoryFilters(category);
-  const clearFilters = useClearFilters();
-
-  const selectedList = getIntersection(
-    categoryFilters,
-    allFilters,
-    (a, b) => a.name === b.name,
-  );
-
-  return (
-    <>
-      <TagButton
-        onClick={() => setIsExpanded(true)}
-        className={clsxm(
-          isExpanded || selectedList.length > 0
-            ? 'bg-color-primary text-white'
-            : '',
-        )}
-      >
-        <div className="flex items-center gap-1.5">
-          <span className="text-left text-base leading-none">
-            {capitalizeFirst(pluralize(category))}
-          </span>
-          {selectedList.length > 0 ? (
-            <span className="text-base leading-none">
-              {`(${selectedList.length})`}
-            </span>
-          ) : null}
-        </div>
-        {selectedList.length > 0 && (
-          <button onClick={clearFilters.handleClearCategory(category)}>
-            <XIcon className="h-4 w-4" />
-          </button>
-        )}
-      </TagButton>
-      <CategoryFilters
-        category={category}
-        isOpen={isExpanded}
-        onRequestClose={() => setIsExpanded(false)}
-      />
     </>
   );
 }
