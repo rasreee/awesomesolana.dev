@@ -1,6 +1,6 @@
 import {
   FilterCategory,
-  getFilterCategorys,
+  getFilterCategories,
   SearchFilter,
   toPluralFilterCategory,
 } from '@/api/filters';
@@ -14,7 +14,7 @@ type GroupedSearchMenuProps = {
 type GroupedTags = Array<{ category: FilterCategory; tags: SearchFilter[] }>;
 
 function groupTagsByType(list: SearchFilter[]): GroupedTags {
-  const groups = getFilterCategorys().map((category) => ({
+  const groups = getFilterCategories().map((category) => ({
     category,
     tags: list.filter((filter) => filter.category === category),
   }));

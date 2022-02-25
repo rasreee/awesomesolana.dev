@@ -25,7 +25,7 @@ export function FilterSection({
   const selectedCount = filtersByType(search.tags ?? [], category).length;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div>
       <button
         onClick={onToggle}
         className="hover:bg-surface-1 flex w-full items-center gap-3 px-5 py-3"

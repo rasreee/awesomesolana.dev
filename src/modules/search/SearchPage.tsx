@@ -6,10 +6,11 @@ import {
 } from '@/api/projects';
 import { useSearch } from '@/contexts/search';
 import { Layout } from '@/ui/components';
+import { useMenu } from '@/ui/hooks';
 
+import { FiltersMenu } from './FiltersMenu';
 import { Results } from './Results';
-import { SearchBox } from './SearchBox';
-import { useSearchField } from './SearchField';
+import { SearchField, useSearchField } from './SearchField';
 
 export function SearchPage() {
   const {
@@ -24,15 +25,28 @@ export function SearchPage() {
   }
 
   const searchField = useSearchField(searchProjectsByQuery);
-  const { hits } = searchField;
+
+  const {
+    isOpen: isFiltersMenuOpen,
+    close: closeFiltersMenu,
+    toggle: toggleFiltersMenu,
+  } = useMenu();
 
   return (
     <Layout>
-      <div className="flex justify-around gap-3 px-3">
-        <div className="flex-1">
-          <SearchBox searchField={searchField} />
-          <Results hits={hits} />
+      <div className="w-full gap-3 sm:flex sm:items-start">
+        <div className="flex-1 px-3 sm:px-6">
+          <SearchField
+            isFiltersMenuOpen={isFiltersMenuOpen}
+            onShowFilters={toggleFiltersMenu}
+            {...searchField}
+          />
+          <Results hits={searchField.hits} />
         </div>
+        <FiltersMenu
+          isOpen={isFiltersMenuOpen}
+          onRequestClose={closeFiltersMenu}
+        />
       </div>
     </Layout>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { FilterCategory, getFilterCategorys } from '@/api/filters';
+import { FilterCategory, getFilterCategories } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
 import { GhostButton } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
@@ -56,7 +56,7 @@ export function MobileFilters({
           </div>
         </div>
         <ul>
-          {getFilterCategorys().map((item) => (
+          {getFilterCategories().map((item) => (
             <li key={item}>
               <FilterSection
                 category={item}

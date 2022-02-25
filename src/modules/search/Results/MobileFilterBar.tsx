@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { FilterCategory, getFilterCategorys } from '@/api/filters';
+import { FilterCategory, getFilterCategories } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
 import { Popover } from '@/ui/components';
 import { clsxm } from '@/ui/utils';
@@ -30,7 +30,7 @@ export function MobileFilterBar({ className }: { className?: string }) {
       <ul
         className={clsxm('flex items-center gap-2 overflow-x-auto', className)}
       >
-        {getFilterCategorys()
+        {getFilterCategories()
           .sort((a, b) => getCountForType(b) - getCountForType(a))
           .map((category) => (
             <li key={category}>

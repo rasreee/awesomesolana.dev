@@ -1,4 +1,4 @@
-import { FilterCategory, getFilterCategorys } from '@/api/filters';
+import { FilterCategory, getFilterCategories } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
 import { ClearFiltersButton } from '@/modules/search/ClearFiltersButton';
 import { useSelections } from '@/ui/hooks/useSelections';
@@ -9,7 +9,7 @@ export function Filters() {
   const { clearFiltersByType } = useSearch();
 
   const { getIsExpanded, toggleSelection } = useSelections<FilterCategory>(
-    getFilterCategorys(),
+    getFilterCategories(),
   );
 
   const handleToggleCategory = (category: FilterCategory) => () => {
@@ -27,7 +27,7 @@ export function Filters() {
         <ClearFiltersButton />
       </div>
       <div>
-        {getFilterCategorys().map((category) => (
+        {getFilterCategories().map((category) => (
           <FilterSection
             key={category}
             category={category}

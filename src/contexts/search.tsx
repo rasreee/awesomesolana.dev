@@ -4,7 +4,7 @@ import { createContext, useContext, useMemo } from 'react';
 import {
   FilterCategory,
   filtersByType,
-  getFilterCategorys,
+  getFilterCategories,
   SearchFilter,
 } from '@/api/filters';
 
@@ -47,7 +47,7 @@ function parseSearch(parsedUrlQuery: NextRouter['query']): Search {
 
   const keys = Object.keys(parsedUrlQuery);
 
-  getFilterCategorys().forEach((category) => {
+  getFilterCategories().forEach((category) => {
     if (keys.includes(category)) {
       console.log(`keys.includes(${category})`, keys.includes(category));
       const tagsForType = (parsedUrlQuery[category] as string)
@@ -77,7 +77,7 @@ export function SearchProvider({ children }: { children: any }) {
 
     let newPath = `/search`;
 
-    getFilterCategorys().forEach((category) => {
+    getFilterCategories().forEach((category) => {
       const tagsForType = newTags.filter((tag) => tag.category === category);
       if (tagsForType.length > 0) {
         const prefix = newPath === '/search' ? '?' : '&';
@@ -101,7 +101,7 @@ export function SearchProvider({ children }: { children: any }) {
 
     let newPath = `/search`;
 
-    getFilterCategorys().forEach((category) => {
+    getFilterCategories().forEach((category) => {
       const tagsForType = newTags.filter((tag) => tag.category === category);
 
       if (tagsForType.length > 0) {
@@ -138,7 +138,7 @@ export function SearchProvider({ children }: { children: any }) {
 
     let newPath = `/search`;
 
-    getFilterCategorys()
+    getFilterCategories()
       .filter((category) => category !== typeToRemove)
       .forEach((category) => {
         const tagsForType = oldTags.filter((tag) => tag.category === category);

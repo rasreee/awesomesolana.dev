@@ -99,7 +99,7 @@ export function sortFiltersByProjectCount(
   );
 }
 
-export function getFilterCategorys(): FilterCategory[] {
+export function getFilterCategories(): FilterCategory[] {
   const result = [
     'topic',
     'framework',
