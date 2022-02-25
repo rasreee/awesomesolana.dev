@@ -1,5 +1,8 @@
+import React from 'react';
+
 import { GitHubRepo } from '@/modules/github/types';
 
+import { RepoItem } from './RepoItem';
 import { ResultsInfo } from './ResultsInfo';
 
 export function Results({ hits }: { hits: GitHubRepo[] | undefined }) {
@@ -11,7 +14,7 @@ export function Results({ hits }: { hits: GitHubRepo[] | undefined }) {
       <ul>
         {hits.map((hit) => (
           <li key={hit.id}>
-            {/* <ProjectItem {...hit} /> */}
+            <RepoItem {...hit} />
             {JSON.stringify(hit)}
           </li>
         ))}

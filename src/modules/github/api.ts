@@ -1,6 +1,7 @@
 import { authFetch } from '@/common/utils';
 import { Tag } from '@/modules/tags';
 
+import { githubApi } from './helpers';
 import { RawGitHubRepo } from './types';
 
 export interface GetGithubReposParams {
@@ -26,4 +27,32 @@ export async function getGithubRepos(
   const data = await response.json();
 
   return data as RawGitHubRepo[];
+}
+
+export async function searchGitHubRepos(
+  query: string,
+  tags: Tag[],
+): Promise<RawGitHubRepo[]> {
+  console.log(
+    'TAGS: ',
+    tags.map((tag) => tag.name),
+  );
+  const url = githubApi.searchRepos(
+    [
+      'solana',
+      query,
+      ...tags.map((tag) =>
+        tag.category === 'language' ? `language:${tag.name}` : '',
+      ),
+    ]
+      .filter(Boolean)
+      .join('+'),
+  );
+
+  console.log('SEARCH URL: ', url);
+  const response = await authFetch(url);
+
+  const data = (await response.json()) as RawGitHubRepo[];
+
+  return data;
 }

@@ -1,4 +1,3 @@
-import { getProjectsCountForTag } from '../projects';
 import { SEARCH_FILTERS } from './constants';
 import { FilterCategory, Tag } from './types';
 
@@ -23,13 +22,7 @@ export async function getTagSuggestions(
     return a === b;
   });
 
-  return sortTagsByProjectsCount(hits);
-}
-
-export function sortTagsByProjectsCount(list: Tag[]): Tag[] {
-  return list.sort(
-    (a, b) => getProjectsCountForTag(b) - getProjectsCountForTag(a),
-  );
+  return hits;
 }
 
 export function getCategoryFilters(category: FilterCategory): Tag[] {

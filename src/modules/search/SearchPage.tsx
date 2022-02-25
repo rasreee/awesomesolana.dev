@@ -1,7 +1,7 @@
 import { useSearchFilters } from '@/contexts/SearchContext';
-import { searchProjects } from '@/modules/projects';
 import { FILTER_CATEGORIES } from '@/modules/tags';
 
+import { searchGitHubRepos } from '../github/api';
 import { useSearchGithubRepos } from '../github/useSearchGitHubRepos';
 import {
   FilterItemToggle,
@@ -14,7 +14,7 @@ export function SearchPage() {
   const searchFilters = useSearchFilters();
 
   const searchField = useSearchField((query) =>
-    searchProjects(query, searchFilters),
+    searchGitHubRepos(query, searchFilters),
   );
 
   const { data } = useSearchGithubRepos(searchField.query, searchFilters);

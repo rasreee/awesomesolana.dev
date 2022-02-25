@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { getProjectsCountForTag } from '@/modules/projects';
 import { Tag } from '@/modules/tags';
 import { CheckBox } from '@/ui/components';
 
@@ -14,8 +13,6 @@ export function OptionCategoryItemButton({
   onClick: () => void;
   checked: boolean;
 }) {
-  const count = getProjectsCountForTag(tag);
-
   return (
     <li
       {...props}
@@ -26,9 +23,9 @@ export function OptionCategoryItemButton({
         <CheckBox checked={checked} readOnly />
         <span className="text-sm leading-none">{tag.name}</span>
       </div>
-      <span className="bg-surface-2 rounded-lg px-1.5 py-0.5 text-xs leading-none">
+      {/* <span className="bg-surface-2 rounded-lg px-1.5 py-0.5 text-xs leading-none">
         {count}
-      </span>
+      </span> */}
     </li>
   );
 }
