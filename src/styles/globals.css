@@ -166,7 +166,7 @@
   }
 
   .bg-surface-2 {
-    @apply bg-base-200 dark:bg-base-600 dark:!bg-opacity-40;
+    @apply bg-base-200 dark:bg-base-600 dark:bg-opacity-40;
   }
 
   .text {
@@ -190,7 +190,7 @@
   }
 
   .input-border {
-    @apply border border-base-300 !transition-all dark:border-base-600;
+    @apply border border-base-300 transition-all dark:border-base-600;
   }
 
   .input-border-focused {
@@ -198,11 +198,11 @@
   }
 
   .input {
-    @apply bg-surface !rounded-md !text-base !leading-none !text-base-600 placeholder:!text-base placeholder:!leading-none dark:bg-base-1100 dark:bg-opacity-70 dark:text-base-100 dark:placeholder:!text-gray-400;
+    @apply bg-surface rounded-md text-base leading-none text-base-600 placeholder:text-base placeholder:leading-none dark:bg-base-1100 dark:bg-opacity-70 dark:text-base-100 dark:placeholder:text-gray-400;
   }
 
   .input-sm {
-    @apply !text-sm placeholder:!text-sm dark:bg-base-1100 dark:bg-opacity-70;
+    @apply text-sm placeholder:text-sm dark:bg-base-1100 dark:bg-opacity-70;
   }
 
   .input-focus-unset {

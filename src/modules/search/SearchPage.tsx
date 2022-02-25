@@ -35,6 +35,7 @@ export function SearchPage() {
       <div className="w-full gap-3 sm:flex sm:items-start">
         <div className="flex-1 px-3 sm:px-6">
           <SearchField
+            autoFocused
             isFiltersMenuOpen={isFiltersMenuOpen}
             onShowFilters={toggleFiltersMenu}
             {...searchField}

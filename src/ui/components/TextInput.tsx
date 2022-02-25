@@ -12,7 +12,7 @@ type TextInputProps = Omit<
   type?: string;
   name?: string;
   className?: string;
-  autoFocus?: boolean;
+  autoFocused?: boolean;
 };
 
 export function TextInput({
@@ -20,14 +20,14 @@ export function TextInput({
   onChange: handleChange,
   value,
   className,
-  autoFocus = false,
+  autoFocused = false,
   ...props
 }: TextInputProps) {
   const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    autoFocus && inputRef.current?.focus();
-  }, [autoFocus]);
+    autoFocused && inputRef.current?.focus();
+  }, [autoFocused]);
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     handleChange(event.currentTarget.value);
@@ -35,7 +35,7 @@ export function TextInput({
 
   return (
     <input
-      autoFocus={autoFocus}
+      autoFocus={autoFocused}
       placeholder={placeholder}
       className={clsxm(
         'block max-w-full flex-1',

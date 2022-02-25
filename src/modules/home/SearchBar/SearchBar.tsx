@@ -16,7 +16,7 @@ export function SearchBar() {
 
   return (
     <>
-      <SearchField {...searchField} />
+      <SearchField autoFocused {...searchField} />
       <GroupedResults
         isOpen={searchField.hits.length > 0 && !searchField.isRequesting}
         hits={searchField.hits}

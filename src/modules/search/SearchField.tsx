@@ -14,6 +14,7 @@ export type SearchFieldProps = {
   isRequesting: boolean;
   query: string;
   onChange: (query: string) => void;
+  autoFocused?: boolean;
 };
 
 export function SearchField({
@@ -23,10 +24,11 @@ export function SearchField({
   isRequesting,
   query,
   onChange,
+  autoFocused = false,
 }: SearchFieldProps) {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  const [focused, setFocused] = useState(false);
+  const [focused, setFocused] = useState(autoFocused);
 
   const onFocus = () => setFocused(true);
   const onBlur = () => setFocused(false);
@@ -37,6 +39,7 @@ export function SearchField({
         'flex !max-h-[3rem] min-w-full items-center gap-1 px-2 py-1',
         'input bg-surface-1',
         focused || isFiltersMenuOpen ? 'input-border-focused' : 'input-border',
+        'rounded-full',
       )}
     >
       <ErrorMessage>{error}</ErrorMessage>
@@ -53,6 +56,7 @@ export function SearchField({
         name="search"
         className="input-focus-unset"
         placeholder={DEFAULT_PLACEHOLDER}
+        autoFocused={autoFocused}
         value={query}
         onChange={onChange}
         onFocus={onFocus}
