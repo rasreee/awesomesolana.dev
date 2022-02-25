@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useSearchOptions } from '@/app/AppContext';
+import { useAppSearchOptions } from '@/app/AppContext';
 import clsxm from '@/lib/clsxm';
 import {
   useClearFilters,
@@ -14,7 +14,7 @@ import { XIcon } from '@/ui/icons';
 import { OptionCategoryToggles } from './OptionCategoryToggles';
 
 export function SearchOptionsModal() {
-  const { isOpen, onRequestClose } = useSearchOptions();
+  const { isOpen, onRequestClose } = useAppSearchOptions();
   const searchFilters = useSearchFilters();
   const clearFilters = useClearFilters();
   const countFilters = useCountFilters();

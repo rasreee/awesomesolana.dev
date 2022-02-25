@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { useSubmitQuery } from '@/modules/search';
+import { useAppSearchField } from '@/app/AppContext';
 
 import {
   FilterCategoriesBar,
@@ -8,13 +6,10 @@ import {
   FilterCategoryMenu,
   Results,
   SearchField,
-  useSearchForm,
 } from './components';
 
 export function SearchPage() {
-  const submitQuery = useSubmitQuery();
-
-  const searchField = useSearchForm((query) => submitQuery(query));
+  const searchField = useAppSearchField();
 
   return (
     <div className="flex-1 px-3 sm:px-6">

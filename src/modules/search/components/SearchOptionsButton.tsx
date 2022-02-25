@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { useSearchOptions } from '@/app/AppContext';
+import { useAppSearchOptions } from '@/app/AppContext';
 import clsxm from '@/lib/clsxm';
 import { AdjustmentsIcon } from '@/ui/icons';
 
 export function SearchOptionsButton() {
-  const { isOpen, toggle } = useSearchOptions();
+  const { isOpen, toggle } = useAppSearchOptions();
 
   return (
     <button

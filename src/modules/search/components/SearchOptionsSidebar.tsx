@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useSearchOptions } from '@/app/AppContext';
+import { useAppSearchOptions } from '@/app/AppContext';
 import clsxm from '@/lib/clsxm';
 import { useClearFilters } from '@/modules/search';
 import { FILTER_CATEGORIES, FilterCategory } from '@/modules/tags';
@@ -10,7 +10,7 @@ import { useSelections } from '@/ui/hooks/useSelections';
 import { OptionCategoryToggles } from './OptionCategoryToggles';
 
 export function SearchOptionsSidebar() {
-  const { isOpen } = useSearchOptions();
+  const { isOpen } = useAppSearchOptions();
 
   const { getIsExpanded, toggleSelection } =
     useSelections<FilterCategory>(FILTER_CATEGORIES);

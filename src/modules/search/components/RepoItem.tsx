@@ -1,7 +1,14 @@
-import { GitHubRepo } from '@/modules/github';
-import { Badge } from '@/ui/components';
+import React from 'react';
 
-export function RepoItem({ name, description, topics }: GitHubRepo) {
+import { GitHubRepo } from '@/modules/github';
+import { Badge, RepoStat } from '@/ui/components';
+
+export function RepoItem({
+  name,
+  description,
+  topics,
+  starsCount,
+}: GitHubRepo) {
   // const getIsFilterActive = useGetIsFilterActive();
   // const toggleFilter = useToggleFilter();
 
@@ -12,6 +19,11 @@ export function RepoItem({ name, description, topics }: GitHubRepo) {
       <div className="flex flex-col gap-2 px-3 py-3">
         <div className="text-xl font-semibold">{name}</div>
         <div className="text-base">{description}</div>
+        <ul className="flex flex-wrap items-center gap-1.5">
+          <li>
+            <RepoStat type="stargazers" count={starsCount} />
+          </li>
+        </ul>
         <ul className="flex flex-wrap items-center gap-1.5">
           {topics.map((topic) => (
             <li key={`${topic}`}>

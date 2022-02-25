@@ -26,6 +26,7 @@
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
+    "@primer/octicons-react": "^16.3.1",
     "@tailwindcss/typography": "^0.5.2",
     "clsx": "^1.1.1",
     "nanoid": "^3.3.1",
