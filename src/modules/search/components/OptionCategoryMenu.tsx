@@ -1,18 +1,18 @@
 import { useState } from 'react';
 
 import {
-  FilterCategory,
-  getCategoryFilters,
-  getTagSuggestions,
-  Tag,
-} from '@/api/tags';
-import {
   useCountFilters,
   useGetIsFilterActive,
   useToggleFilter,
 } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
+import {
+  FilterCategory,
+  getCategoryFilters,
+  getTagSuggestions,
+  Tag,
+} from '@/modules/tags';
 import { SolidButton, TextInput } from '@/ui/components';
 
 import { OptionCategoryItemButton } from './OptionCategoryCheckBox';

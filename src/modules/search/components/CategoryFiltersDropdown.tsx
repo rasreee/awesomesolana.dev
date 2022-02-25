@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { getCategoryFilters, getTagSuggestions, Tag } from '@/api/tags';
 import { capitalizeFirst, getIntersection } from '@/common/utils';
 import {
   useGetIsFilterActive,
@@ -9,6 +8,7 @@ import {
 } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
+import { getCategoryFilters, getTagSuggestions, Tag } from '@/modules/tags';
 import { Divider, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
 import { rem } from '@/ui/utils';

@@ -1,8 +1,8 @@
-import { FilterCategory } from '@/api/tags';
 import { capitalizeFirst } from '@/common/utils';
 import { useCountFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
+import { FilterCategory } from '@/modules/tags';
 import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icons';
 
 import { OptionCategoryMenu } from './OptionCategoryMenu';

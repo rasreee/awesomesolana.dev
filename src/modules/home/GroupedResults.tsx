@@ -1,7 +1,7 @@
-import { FILTER_CATEGORIES, FilterCategory, Tag } from '@/api/tags';
 import { capitalizeFirst } from '@/common/utils';
 import { useSearchFilters } from '@/contexts/SearchContext';
 import pluralize from '@/lib/pluralize';
+import { FILTER_CATEGORIES, FilterCategory, Tag } from '@/modules/tags';
 import { Popover } from '@/ui/components';
 
 type GroupedResultsProps = {

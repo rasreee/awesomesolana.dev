@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import { FilterCategory, getCategoryFilters } from '@/api/tags';
 import { capitalizeFirst, getIntersection } from '@/common/utils';
 import { useClearFilters, useSearchFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
+import { FilterCategory, getCategoryFilters } from '@/modules/tags';
 import { ChevronDownIcon, XIcon } from '@/ui/icons';
 
 import { CategoryFilters } from './CategoryFilters';

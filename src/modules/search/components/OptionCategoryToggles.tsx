@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FILTER_CATEGORIES, FilterCategory } from '@/api/tags';
+import { FILTER_CATEGORIES, FilterCategory } from '@/modules/tags';
 
 import { OptionCategoryToggle } from './OptionCategoryToggle';
 

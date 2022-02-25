@@ -1,7 +1,7 @@
 import useSWR, { SWRResponse } from 'swr';
 
-import { Tag } from '@/api/tags';
 import { getIntersection, uniques } from '@/common/utils';
+import { Tag } from '@/modules/tags';
 
 import { ALL_PROJECTS } from './constants';
 import { Project } from './types';

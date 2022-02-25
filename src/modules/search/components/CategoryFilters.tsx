@@ -1,4 +1,4 @@
-import { FilterCategory } from '@/api/tags';
+import { FilterCategory } from '@/modules/tags';
 import { ResponsiveRender } from '@/ui/components';
 
 import { CategoryFiltersBottomSheet } from './CategoryFiltersBottomSheet';

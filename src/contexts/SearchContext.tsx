@@ -1,7 +1,7 @@
 import { NextRouter, useRouter } from 'next/router';
 import { useMemo } from 'react';
 
-import { FILTER_CATEGORIES, FilterCategory, Tag } from '@/api/tags';
+import { FILTER_CATEGORIES, FilterCategory, Tag } from '@/modules/tags';
 
 type Search = {
   query?: string;

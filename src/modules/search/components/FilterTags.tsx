@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Tag } from '@/api/tags';
 import { useSearchFilters, useToggleFilter } from '@/contexts/SearchContext';
 import pluralize from '@/lib/pluralize';
+import { Tag } from '@/modules/tags';
 import { useIsMobile } from '@/ui/hooks';
 import { XIcon } from '@/ui/icons';
 

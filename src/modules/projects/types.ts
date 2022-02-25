@@ -1,4 +1,4 @@
-import { Tag } from '@/api/tags';
+import { Tag } from '@/modules/tags';
 
 export type Project = {
   id: string;

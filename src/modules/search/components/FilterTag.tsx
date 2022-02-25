@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-import { Tag } from '@/api/tags';
 import clsxm from '@/lib/clsxm';
+import { Tag } from '@/modules/tags';
 
 export function FilterTag({
   tag,

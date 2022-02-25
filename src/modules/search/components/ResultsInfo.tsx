@@ -1,7 +1,7 @@
-import { Project } from '@/api/projects';
 import { useSearchFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
+import { Project } from '@/modules/projects';
 
 function getInfoText({
   hits,

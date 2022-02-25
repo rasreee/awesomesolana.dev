@@ -1,9 +1,9 @@
-import { Project } from '@/api/projects';
-import { Tag } from '@/api/tags';
 import {
   useGetIsFilterActive,
   useToggleFilter,
 } from '@/contexts/SearchContext';
+import { Project } from '@/modules/projects';
+import { Tag } from '@/modules/tags';
 
 import { FilterTag } from './FilterTag';
 

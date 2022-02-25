@@ -1,23 +1,6 @@
-import React from 'react';
-
-import {
-  ALL_PROJECTS,
-  filterProjectsByTags,
-  filterProjectsByTitle,
-  Project,
-} from '@/api/projects';
-import { FILTER_CATEGORIES, Tag } from '@/api/tags';
 import { useSearchFilters } from '@/contexts/SearchContext';
-
-export async function searchProjects(
-  query: string,
-  tags: Tag[],
-): Promise<Project[]> {
-  const initialResult = filterProjectsByTags(ALL_PROJECTS, tags);
-  const result = filterProjectsByTitle(initialResult, query);
-
-  return result;
-}
+import { searchProjects } from '@/modules/projects';
+import { FILTER_CATEGORIES } from '@/modules/tags';
 
 import {
   FilterItemToggle,

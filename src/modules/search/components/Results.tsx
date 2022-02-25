@@ -1,4 +1,4 @@
-import { ALL_PROJECTS, Project } from '@/api/projects';
+import { ALL_PROJECTS, Project } from '@/modules/projects';
 
 import { ProjectItem } from './ProjectItem';
 import { ResultsInfo } from './ResultsInfo';

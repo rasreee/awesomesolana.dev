@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { getProjectsCountForTag } from '@/api/projects';
-import { Tag } from '@/api/tags';
+import { getProjectsCountForTag } from '@/modules/projects';
+import { Tag } from '@/modules/tags';
 import { CheckBox } from '@/ui/components';
 
 export function OptionCategoryItemButton({
