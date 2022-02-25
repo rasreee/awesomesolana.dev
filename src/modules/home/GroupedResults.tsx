@@ -13,7 +13,7 @@ type GroupedResultsProps = {
 
 type GroupedHits = Array<{ category: FilterCategory; hits: Tag[] }>;
 
-function groupHitsByType(list: Tag[]): GroupedHits {
+function groupByCategory(list: Tag[]): GroupedHits {
   const groups = FILTER_CATEGORIES.map((category) => ({
     category,
     hits: list.filter((filter) => filter.category === category),
@@ -44,7 +44,7 @@ export function GroupedResults({
       isOpen={isOpen}
       onRequestClose={onRequestClose}
     >
-      {groupHitsByType(listToShow).map(
+      {groupByCategory(listToShow).map(
         ({ category, hits: list }) =>
           list.length > 0 && (
             <div className="flex flex-col gap-2 px-1">

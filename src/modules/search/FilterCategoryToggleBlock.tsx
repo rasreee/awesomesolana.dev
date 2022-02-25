@@ -7,7 +7,7 @@ import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icons';
 
 import { FilterCategoryMenu } from './FilterCategoryMenu';
 
-export function FilterCategoryToggleList({
+export function FilterCategoryToggleBlock({
   category,
   onToggle,
   isExpanded,

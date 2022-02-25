@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { FILTER_CATEGORIES, FilterCategory } from '@/api/tags';
+import { FilterCategory } from '@/api/tags';
 import { useSearchOptions } from '@/contexts/AppContext';
 import {
   useClearFilters,
@@ -11,7 +11,7 @@ import clsxm from '@/lib/clsxm';
 import { GhostButton, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
 
-import { FilterCategoryToggleList } from './FilterCategoryToggleList';
+import { FilterCategoryToggles } from './FilterCategoryToggles';
 
 export function SearchOptionsModal() {
   const { isOpen, onRequestClose } = useSearchOptions();
@@ -40,8 +40,7 @@ export function SearchOptionsModal() {
     }
   }, [expanded, countFilters, wasCleared]);
 
-  const getIsCategoryExpanded = (item: FilterCategory) =>
-    Boolean(expanded && item === expanded);
+  const getIsCategoryExpanded = (item: FilterCategory) => item === expanded;
 
   const handleClearCategory = (category: FilterCategory) => () => {
     clearFilters.category(category);
@@ -66,18 +65,11 @@ export function SearchOptionsModal() {
             </button>
           </div>
         </div>
-        <ul>
-          {FILTER_CATEGORIES.map((item) => (
-            <li key={item}>
-              <FilterCategoryToggleList
-                category={item}
-                isExpanded={getIsCategoryExpanded(item)}
-                onToggle={handleToggleCategory(item)}
-                onClear={handleClearCategory(item)}
-              />
-            </li>
-          ))}
-        </ul>
+        <FilterCategoryToggles
+          getIsExpanded={getIsCategoryExpanded}
+          onToggle={handleToggleCategory}
+          onClear={handleClearCategory}
+        />
         <div className="flex items-center justify-around px-5 py-1">
           <GhostButton
             onClick={handleClearAll}
