@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import { useSearchOptions } from '@/contexts/AppContext';
-import { useSearchFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import { ErrorMessage, StatefulIcon, TextInput } from '@/ui/components';
 import { SearchIcon, XIcon } from '@/ui/icons';
@@ -25,7 +24,6 @@ export function SearchField({
   reset,
   autoFocused = false,
 }: SearchFieldProps) {
-  const selectedFiltersCount = useSearchFilters().length;
   const { isOpen: isSearchOptionsOpen } = useSearchOptions();
 
   const [focused, setFocused] = useState(autoFocused);
@@ -63,7 +61,7 @@ export function SearchField({
         onFocus={onFocus}
         onBlur={onBlur}
       />
-      {Boolean(query || selectedFiltersCount) && (
+      {Boolean(query) && (
         <button className="p-1" onClick={reset}>
           <XIcon className="box-border h-4 w-4" />
         </button>

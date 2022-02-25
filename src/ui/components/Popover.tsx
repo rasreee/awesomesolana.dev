@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
+import React, { HTMLAttributes, useRef } from 'react';
 
 import { useClickOutside } from '@/ui/hooks';
 
 import { Overlay } from './Overlay';
 
-export interface PopoverProps {
+export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   isOpen: boolean;
   onRequestClose: () => void;
@@ -16,6 +16,7 @@ export function Popover({
   isOpen,
   onRequestClose,
   className,
+  ...props
 }: PopoverProps) {
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -24,7 +25,7 @@ export function Popover({
   if (!isOpen) return null;
 
   return (
-    <Overlay ref={ref} className={className}>
+    <Overlay ref={ref} className={className} {...props}>
       {children}
     </Overlay>
   );

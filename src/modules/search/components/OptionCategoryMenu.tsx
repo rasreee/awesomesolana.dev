@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-import { getProjectsCountForTag } from '@/api/projects';
 import {
   FilterCategory,
+  getCategoryFilters,
   getTagSuggestions,
-  SEARCH_FILTERS,
   Tag,
 } from '@/api/tags';
 import {
@@ -18,16 +17,6 @@ import { SolidButton, TextInput } from '@/ui/components';
 
 import { OptionCategoryItemButton } from './OptionCategoryCheckBox';
 import { useSearchField } from './useSearchField';
-
-function sortTagsByProjectsCount(list: Tag[]): Tag[] {
-  return list.sort(
-    (a, b) => getProjectsCountForTag(b) - getProjectsCountForTag(a),
-  );
-}
-
-function getCategoryFilters(category: FilterCategory): Tag[] {
-  return SEARCH_FILTERS.filter((filter) => filter.category === category);
-}
 
 const PREVIEW_SIZE = 5;
 const PAGE_SIZE = 10;
@@ -52,17 +41,9 @@ export function OptionCategoryMenu({
 
   const totalFilters = allCategoryFilters.length;
 
-  const runSearch = async (searchQuery: string): Promise<Tag[]> => {
-    if (!searchQuery) return [];
-
-    const filters = await getTagSuggestions(searchQuery, { category }).then(
-      sortTagsByProjectsCount,
-    );
-
-    return filters;
-  };
-
-  const { query, setQuery, hits } = useSearchField(runSearch);
+  const { query, setQuery, hits } = useSearchField((q) =>
+    getTagSuggestions(q, { category }),
+  );
 
   const selectedCount = useCountFilters()(category);
   const toggleFilter = useToggleFilter();

@@ -16,7 +16,6 @@ export const Overlay = forwardRef(
       <div
         ref={ref}
         className={clsxm(
-          'min-h-0',
           'flex flex-col',
           'rounded-lg',
           'shadow-lg',
