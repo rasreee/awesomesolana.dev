@@ -1,15 +1,17 @@
 import { Project } from '@/api/projects';
 import { Tag } from '@/api/tags';
-import { useSearch } from '@/contexts/SearchContext';
+import {
+  useGetIsFilterActive,
+  useToggleFilter,
+} from '@/contexts/SearchContext';
 
 import { FilterTag } from './FilterTag';
 
 export function ProjectItem({ title, description, tags, ...props }: Project) {
-  const { search, toggleFilter } = useSearch();
+  const getIsFilterActive = useGetIsFilterActive();
+  const toggleFilter = useToggleFilter();
 
-  const getIsTagActive = (tag: Tag) => {
-    return search.tags?.map((t) => t.name).includes(tag.name);
-  };
+  const handleToggleFilter = (tag: Tag) => () => toggleFilter(tag);
 
   return (
     <div className="bg-surface rounded bg-opacity-70">
@@ -20,9 +22,9 @@ export function ProjectItem({ title, description, tags, ...props }: Project) {
           {tags.map((tag) => (
             <li key={`${tag.category}_${tag.name}`}>
               <FilterTag
-                isActive={getIsTagActive(tag)}
+                isActive={getIsFilterActive(tag)}
                 tag={tag}
-                onToggle={toggleFilter}
+                onClick={handleToggleFilter(tag)}
               />
             </li>
           ))}

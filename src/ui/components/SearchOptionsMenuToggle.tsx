@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { useUiState } from '@/contexts/UiStateContext';
+import { useSearchOptionsMenu } from '@/contexts/SearchOptionsMenuContext';
 import clsxm from '@/lib/clsxm';
 import { AdjustmentsIcon } from '@/ui/icons';
 
 export function SearchOptionsMenuToggle() {
   const {
     filtersMenu: { isOpen, toggle },
-  } = useUiState();
+  } = useSearchOptionsMenu();
 
   return (
     <button

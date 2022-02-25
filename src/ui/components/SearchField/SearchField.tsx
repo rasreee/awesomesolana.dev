@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useUiState } from '@/contexts/UiStateContext';
+import { useSearchOptionsMenu } from '@/contexts/SearchOptionsMenuContext';
 import clsxm from '@/lib/clsxm';
 import { ErrorMessage, StatefulIcon, TextInput } from '@/ui/components';
 import { SearchIcon } from '@/ui/icons';
@@ -22,7 +22,7 @@ export function SearchField({
   onChange,
   autoFocused = false,
 }: SearchFieldProps) {
-  const { filtersMenu } = useUiState();
+  const { filtersMenu } = useSearchOptionsMenu();
 
   const [focused, setFocused] = useState(autoFocused);
 

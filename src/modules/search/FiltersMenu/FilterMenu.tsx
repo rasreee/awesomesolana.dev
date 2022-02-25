@@ -7,7 +7,11 @@ import {
   SEARCH_FILTERS,
   Tag,
 } from '@/api/tags';
-import { useSearch } from '@/contexts/SearchContext';
+import {
+  useGetIsFilterActive,
+  useSearch,
+  useToggleFilter,
+} from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
 import { SolidButton, TextInput, useSearchField } from '@/ui/components';
@@ -52,14 +56,12 @@ export function FilterMenu({
 
   const { query, setQuery, hits } = useSearchField(runSearch);
 
-  const { search, addFilter, removeFilter, getIsFilterActive } = useSearch();
+  const { search } = useSearch();
+  const toggleFilter = useToggleFilter();
+  const getIsFilterActive = useGetIsFilterActive();
 
   const onClickItem = (tag: Tag) => () => {
-    if (!getIsFilterActive(tag)) {
-      addFilter(tag);
-    } else {
-      removeFilter(tag);
-    }
+    toggleFilter(tag);
     setQuery('');
   };
 

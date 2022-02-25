@@ -1,11 +1,10 @@
 import { Project } from '@/api/projects';
-import { Tag } from '@/api/tags';
-import { useSearch } from '@/contexts/SearchContext';
-import { useUiState } from '@/contexts/UiStateContext';
+import { useClearFilters, useSearch } from '@/contexts/SearchContext';
+import { useSearchOptionsMenu } from '@/contexts/SearchOptionsMenuContext';
 import pluralize from '@/lib/pluralize';
 import { SolidButton } from '@/ui/components';
 
-import { FilterTag } from './FilterTag';
+import { FilterTags } from './FilterTags';
 
 function getInfoText({
   hits,
@@ -24,14 +23,11 @@ function getInfoText({
 }
 
 export function ResultsInfo({ hits }: { hits: Project[] }) {
-  const {
-    search: { tags },
-    hasFilters,
-    clearFilters,
-    removeFilter,
-  } = useSearch();
+  const { hasFilters } = useSearch();
 
-  const { filtersMenu } = useUiState();
+  const clearFilters = useClearFilters();
+
+  const { filtersMenu } = useSearchOptionsMenu();
 
   return (
     <div className="flex flex-col gap-1">
@@ -41,36 +37,14 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
         </span>
         {!filtersMenu.isOpen && hasFilters && (
           <SolidButton
-            onClick={clearFilters}
+            onClick={clearFilters.all}
             className="py-2 text-sm leading-none"
           >
             Clear all filters
           </SolidButton>
         )}
       </div>
-      <FilterTags tags={tags ?? []} removeFilter={removeFilter} />
+      <FilterTags />
     </div>
-  );
-}
-
-export function FilterTags({
-  tags,
-  removeFilter,
-}: {
-  tags: Tag[];
-  removeFilter: (tag: Tag) => void;
-}) {
-  const handleRemoveTag = (tag: Tag) => () => {
-    removeFilter(tag);
-  };
-
-  return (
-    <ul className="flex items-center gap-2">
-      {tags?.map((tag) => (
-        <li key={`${tag.category}_${tag.name}`}>
-          <FilterTag tag={tag} onRemove={handleRemoveTag} />
-        </li>
-      ))}
-    </ul>
   );
 }

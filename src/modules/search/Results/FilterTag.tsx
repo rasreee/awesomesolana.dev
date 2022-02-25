@@ -1,26 +1,25 @@
+import { ReactNode } from 'react';
+
 import { Tag } from '@/api/tags';
 import clsxm from '@/lib/clsxm';
-import { XIcon } from '@/ui/icons';
 
 export function FilterTag({
   tag,
-  onRemove,
   className,
   isActive,
-  onToggle,
+  onClick,
+  postFix = null,
 }: {
   tag: Tag;
-  onRemove?: (tag: Tag) => void;
   className?: string;
   isActive?: boolean;
-  onToggle?: (tag: Tag) => void;
+  postFix?: ReactNode;
+  onClick: () => void;
 }) {
-  const handleClick = () => onToggle && onToggle(tag);
-  const handleRemove = () => onRemove && onRemove(tag);
-
   return (
-    <button
+    <div
       className={clsxm(
+        'cursor-pointer',
         'py-0.5 px-2.5',
         'rounded-md',
         'flex items-center justify-between gap-1',
@@ -32,21 +31,14 @@ export function FilterTag({
           : 'bg-surface-2 text text-opacity-90',
         className,
       )}
-      onClick={handleClick}
+      onClick={onClick}
     >
       <span
         className={clsxm(isActive && 'text-white', 'text truncate text-sm')}
       >
         {tag.name}
       </span>
-      {onRemove && (
-        <button
-          className="px-1 opacity-60 hover:opacity-80 active:opacity-100"
-          onClick={handleRemove}
-        >
-          <XIcon className="my-auto h-4 w-4" />
-        </button>
-      )}
-    </button>
+      {postFix}
+    </div>
   );
 }

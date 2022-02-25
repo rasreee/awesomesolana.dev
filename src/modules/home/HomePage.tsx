@@ -1,7 +1,5 @@
-import React from 'react';
-
 import { getTagSuggestions, Tag } from '@/api/tags';
-import { useSearch } from '@/contexts/SearchContext';
+import { useToggleFilter } from '@/contexts/SearchContext';
 import { Layout, Logo, SearchField, useSearchField } from '@/ui/components';
 
 import { GroupedResults } from './GroupedResults';
@@ -10,13 +8,13 @@ const DESCRIPTION =
   'Browse open-source projects built on Solana, filterable by dependencies, languages, frameworks, and/or topics.';
 
 export function HomePage() {
-  const { addFilter } = useSearch();
-
   const { hits, isRequesting, reset, query, onChange, error } =
     useSearchField(getTagSuggestions);
 
-  const onFilterClick = (tag: Tag) => {
-    addFilter(tag);
+  const toggleFilter = useToggleFilter();
+
+  const handleAddFilter = (tag: Tag) => {
+    toggleFilter(tag);
     reset();
   };
 
@@ -38,7 +36,7 @@ export function HomePage() {
             <GroupedResults
               isOpen={hits.length > 0 && !isRequesting}
               hits={hits}
-              onFilterClick={onFilterClick}
+              onAddFilter={handleAddFilter}
               onRequestClose={reset}
             />
           </div>

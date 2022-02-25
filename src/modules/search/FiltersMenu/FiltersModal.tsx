@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { FILTER_CATEGORIES, FilterCategory } from '@/api/tags';
-import { useSearch } from '@/contexts/SearchContext';
+import { useClearFilters, useSearch } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import { GhostButton, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
@@ -9,12 +9,9 @@ import { XIcon } from '@/ui/icons';
 import { FilterSection } from './FilterSection';
 import { FiltersMenuProps } from './FIltersMenu';
 
-export function FiltersModal({
-  isOpen,
-  onRequestClose,
-  onRequestClear,
-}: FiltersMenuProps) {
-  const { search, getFiltersCountByType, clearFiltersByType } = useSearch();
+export function FiltersModal({ isOpen, onRequestClose }: FiltersMenuProps) {
+  const { search, getFiltersCountByType } = useSearch();
+  const clearFilters = useClearFilters();
 
   const [expanded, setExpanded] = useState<FilterCategory | null>(null);
   const [wasCleared, setWasCleared] = useState(false);
@@ -25,7 +22,7 @@ export function FiltersModal({
   };
 
   const handleClearAll = () => {
-    onRequestClear();
+    clearFilters.all();
     setWasCleared(true);
   };
 
@@ -41,7 +38,7 @@ export function FiltersModal({
     Boolean(expanded && item === expanded);
 
   const handleClearCategory = (category: FilterCategory) => () => {
-    clearFiltersByType(category);
+    clearFilters.category(category);
     setExpanded(null);
   };
 

@@ -9,7 +9,7 @@ import { Popover } from '@/ui/components';
 type GroupedResultsProps = {
   isOpen: boolean;
   hits: Tag[];
-  onFilterClick: (tag: Tag) => void;
+  onAddFilter: (tag: Tag) => void;
   onRequestClose: () => void;
 };
 
@@ -27,7 +27,7 @@ function groupHitsByType(list: Tag[]): GroupedHits {
 export function GroupedResults({
   isOpen,
   hits,
-  onFilterClick: handleTagClick,
+  onAddFilter: handleTagClick,
   onRequestClose,
 }: GroupedResultsProps) {
   const { search } = useSearch();
@@ -36,7 +36,7 @@ export function GroupedResults({
     (hit) => !search.tags?.some((filter) => filter.name === hit.name),
   );
 
-  const onFilterClick = (tag: Tag) => () => {
+  const onAddFilter = (tag: Tag) => () => {
     handleTagClick(tag);
   };
 
@@ -58,7 +58,7 @@ export function GroupedResults({
                   <li className="w-full" key={hit.name}>
                     <button
                       className="hover:bg-surface-1 w-full rounded-md py-3 px-3 text-left"
-                      onClick={onFilterClick(hit)}
+                      onClick={onAddFilter(hit)}
                     >
                       {hit.name}
                     </button>

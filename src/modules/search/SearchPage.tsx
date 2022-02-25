@@ -26,14 +26,12 @@ export function SearchPage() {
 
   return (
     <Layout>
-      <div className="w-full gap-3 sm:flex sm:items-start">
-        <div className="flex-1 px-3 sm:px-6">
-          <div className="flex items-center gap-2">
-            <SearchField autoFocused {...searchField} />
-            <SearchOptionsMenuToggle />
-          </div>
-          <Results hits={searchField.hits} />
+      <div className="flex-1 px-3 sm:px-6">
+        <div className="flex items-center gap-2">
+          <SearchField autoFocused {...searchField} />
+          <SearchOptionsMenuToggle />
         </div>
+        <Results hits={searchField.hits} />
       </div>
     </Layout>
   );
