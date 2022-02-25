@@ -8,7 +8,7 @@ import { AdjustmentsIcon, SearchIcon } from '@/ui/icons';
 const DEFAULT_PLACEHOLDER = 'Search for any project, dependency, or topic';
 
 export type SearchFieldProps = {
-  error: string | null;
+  error?: string | null;
   isRequesting: boolean;
   query: string;
   onChange: (query: string) => void;

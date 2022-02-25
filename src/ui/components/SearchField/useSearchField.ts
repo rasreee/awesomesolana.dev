@@ -28,9 +28,10 @@ export function useSearchField<T = any>(
   const [hits, setHits] = useState<T[]>([]);
 
   useEffect(() => {
-    if (!query) return;
-
     const submitQuery = async (query: string) => {
+      if (!query) {
+        return setHits([]);
+      }
       setIsRequesting(true);
       setError(null);
       try {
@@ -43,7 +44,7 @@ export function useSearchField<T = any>(
       }
     };
 
-    waitFor(300).then(() => submitQuery(query));
+    waitFor(200).then(() => submitQuery(query));
   }, [query]);
 
   const reset = () => {

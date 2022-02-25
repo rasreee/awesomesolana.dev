@@ -12,11 +12,12 @@ const DESCRIPTION =
 export function HomePage() {
   const { addFilter } = useSearch();
 
-  const searchField = useSearchField(getTagSuggestions);
+  const { hits, isRequesting, reset, query, onChange, error } =
+    useSearchField(getTagSuggestions);
 
   const onFilterClick = (tag: Tag) => {
     addFilter(tag);
-    searchField.reset();
+    reset();
   };
 
   return (
@@ -30,12 +31,15 @@ export function HomePage() {
             </div>
           </div>
           <div className="flex flex-col gap-3">
-            <SearchField autoFocused {...searchField} />
+            <SearchField
+              autoFocused
+              {...{ hits, error, isRequesting, query, onChange }}
+            />
             <GroupedResults
-              isOpen={searchField.hits.length > 0 && !searchField.isRequesting}
-              hits={searchField.hits}
+              isOpen={hits.length > 0 && !isRequesting}
+              hits={hits}
               onFilterClick={onFilterClick}
-              onRequestClose={searchField.reset}
+              onRequestClose={reset}
             />
           </div>
         </div>
