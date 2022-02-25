@@ -1,14 +1,15 @@
 import React from 'react';
 
 import { getCategoryFilters, getTagSuggestions, Tag } from '@/api/tags';
-import { capitalizeFirst } from '@/common/utils';
+import { capitalizeFirst, getIntersection } from '@/common/utils';
 import {
   useGetIsFilterActive,
+  useSearchFilters,
   useToggleFilter,
 } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
-import { Popover } from '@/ui/components';
+import { Divider, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
 
 import { CategoryFiltersProps } from './CategoryFilters';
@@ -31,9 +32,18 @@ export function CategoryFiltersBottomSheet({
     searchField.setQuery('');
   };
 
-  const listToShow = searchField.hits.length
-    ? searchField.hits
-    : getCategoryFilters(category);
+  const allFilters = useSearchFilters();
+  const categoryFilters = getCategoryFilters(category);
+
+  const selectedList = getIntersection(
+    categoryFilters,
+    allFilters,
+    (a, b) => a.name === b.name,
+  );
+
+  const availableOptions = categoryFilters.filter(
+    (filter) => !selectedList.map((item) => item.name).includes(filter.name),
+  );
 
   return (
     <Popover
@@ -67,9 +77,25 @@ export function CategoryFiltersBottomSheet({
         </div>
         <SearchField {...searchField} autoFocused />
       </div>
-      <div className="relative z-0 h-[80%] w-full">
+      <div className="relative top-5 z-0 h-[80%] w-full">
+        {selectedList.length ? (
+          <div className="flex flex-col gap-2 py-2">
+            <span className="px-5 text-lg font-medium">Selected</span>
+            <ul className={clsxm('px-5 pb-2', 'min-w-full')}>
+              {selectedList.map((tag) => (
+                <OptionCategoryItemButton
+                  key={`${tag.category}_${tag.name}`}
+                  tag={tag}
+                  onClick={onClickOption(tag)}
+                  checked={getIsFilterActive(tag)}
+                />
+              ))}
+            </ul>
+            <Divider />
+          </div>
+        ) : null}
         <ul className={clsxm('px-5 pt-3', 'h-full overflow-y-auto')}>
-          {listToShow.map((tag) => (
+          {availableOptions.map((tag) => (
             <OptionCategoryItemButton
               key={`${tag.category}_${tag.name}`}
               tag={tag}

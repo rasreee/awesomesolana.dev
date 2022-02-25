@@ -78,7 +78,6 @@ export function CategoryFiltersDropdown({
         </div>
         <SearchField {...searchField} autoFocused />
       </div>
-
       <div
         className={clsxm(
           'overflow-y-auto',
