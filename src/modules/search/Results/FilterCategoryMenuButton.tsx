@@ -4,7 +4,7 @@ import {
   toPluralFilterCategory,
 } from '@/api/filters';
 import { capitalizeFirst } from '@/common/utils';
-import { useSearch } from '@/contexts/search';
+import { useSearch } from '@/contexts/SearchContext';
 import { SolidButton } from '@/ui/components';
 import { PlusIcon } from '@/ui/icons';
 import { clsxm } from '@/ui/utils';

@@ -1,5 +1,5 @@
 import { SearchFilter, searchFilters } from '@/api/filters';
-import { useSearch } from '@/contexts/search';
+import { useSearch } from '@/contexts/SearchContext';
 import { SearchField, useSearchField } from '@/modules/search';
 import { Popover } from '@/ui/components';
 

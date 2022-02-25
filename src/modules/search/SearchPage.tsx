@@ -4,9 +4,9 @@ import {
   filterProjectsByTitle,
   Project,
 } from '@/api/projects';
-import { useSearch } from '@/contexts/search';
+import { useAppState } from '@/contexts/AppContext';
+import { useSearch } from '@/contexts/SearchContext';
 import { Layout } from '@/ui/components';
-import { useMenu } from '@/ui/hooks';
 
 import { FiltersMenu } from './FiltersMenu';
 import { Results } from './Results';
@@ -27,10 +27,12 @@ export function SearchPage() {
   const searchField = useSearchField(searchProjectsByQuery);
 
   const {
-    isOpen: isFiltersMenuOpen,
-    close: closeFiltersMenu,
-    toggle: toggleFiltersMenu,
-  } = useMenu();
+    filtersMenu: {
+      isOpen: isFiltersMenuOpen,
+      close: closeFiltersMenu,
+      toggle: toggleFiltersMenu,
+    },
+  } = useAppState();
 
   return (
     <Layout>

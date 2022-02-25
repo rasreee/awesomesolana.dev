@@ -1,6 +1,6 @@
 import { SearchFilter } from '@/api/filters';
 import { Project } from '@/api/projects';
-import { useSearch } from '@/contexts/search';
+import { useSearch } from '@/contexts/SearchContext';
 
 import { FilterTag } from './FilterTag';
 

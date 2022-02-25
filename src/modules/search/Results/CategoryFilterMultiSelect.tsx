@@ -8,7 +8,7 @@ import {
 } from '@/api/filters';
 import { getProjectsCountForTag } from '@/api/projects';
 import { getIntersection } from '@/common/utils';
-import { useSearch } from '@/contexts/search';
+import { useSearch } from '@/contexts/SearchContext';
 import { useSearchField } from '@/modules/search/SearchField';
 import {
   CheckBox,

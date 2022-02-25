@@ -1,4 +1,4 @@
-import { useSearch } from '@/contexts/search';
+import { useSearch } from '@/contexts/SearchContext';
 import { SolidButton } from '@/ui/components';
 
 export const ClearFiltersButton = () => {

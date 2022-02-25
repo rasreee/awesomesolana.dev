@@ -1,6 +1,13 @@
 import { useState } from 'react';
 
-export function useMenu() {
+export type UseMenu = {
+  isOpen: boolean;
+  close: () => void;
+  open: () => void;
+  toggle: () => void;
+};
+
+export function useMenu(): UseMenu {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => {

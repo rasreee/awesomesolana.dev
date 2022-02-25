@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { FilterCategory, getFilterCategories } from '@/api/filters';
-import { useSearch } from '@/contexts/search';
+import { useSearch } from '@/contexts/SearchContext';
 import { Popover } from '@/ui/components';
 import { clsxm } from '@/ui/utils';
 

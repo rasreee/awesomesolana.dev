@@ -1,6 +1,7 @@
 import { SearchFilter } from '@/api/filters';
 import { Project } from '@/api/projects';
-import { useSearch } from '@/contexts/search';
+import { useAppState } from '@/contexts/AppContext';
+import { useSearch } from '@/contexts/SearchContext';
 import { SolidButton } from '@/ui/components';
 
 import { FilterTag } from './FilterTag';
@@ -29,18 +30,24 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
     clearFilters,
   } = useSearch();
 
+  const {
+    filtersMenu: { isOpen: isFiltersMenuOpen },
+  } = useAppState();
+
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center justify-between">
         <span className="text text-sm opacity-90">
           {getInfoText({ hits, tags })}
         </span>
-        <SolidButton
-          onClick={clearFilters}
-          className="py-2 text-sm leading-none"
-        >
-          Clear all filters
-        </SolidButton>
+        {!isFiltersMenuOpen && (
+          <SolidButton
+            onClick={clearFilters}
+            className="py-2 text-sm leading-none"
+          >
+            Clear all filters
+          </SolidButton>
+        )}
       </div>
       <ul className="flex items-center gap-2">
         {tags?.map((tag) => (

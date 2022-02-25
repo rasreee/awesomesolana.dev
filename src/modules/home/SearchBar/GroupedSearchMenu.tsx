@@ -4,7 +4,7 @@ import {
   SearchFilter,
   toPluralFilterCategory,
 } from '@/api/filters';
-import { useSearch } from '@/contexts/search';
+import { useSearch } from '@/contexts/SearchContext';
 
 type GroupedSearchMenuProps = {
   tags: SearchFilter[];

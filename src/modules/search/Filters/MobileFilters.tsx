@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { FilterCategory, getFilterCategories } from '@/api/filters';
-import { useSearch } from '@/contexts/search';
+import { useSearch } from '@/contexts/SearchContext';
 import { GhostButton } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
 
