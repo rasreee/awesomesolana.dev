@@ -1,9 +1,9 @@
 import { createContext, useContext } from 'react';
 
-import { UseMenu, useMenu } from '@/ui/hooks';
+import { UseModal, useModal } from '@/ui/hooks';
 
 export type IAppStateContext = {
-  filtersMenu: UseMenu;
+  filtersMenu: UseModal;
 };
 
 export const AppStateContext = createContext<IAppStateContext | undefined>(
@@ -18,7 +18,7 @@ export function useAppState() {
 }
 
 export function AppStateProvider({ children }: { children: any }) {
-  const filtersMenu = useMenu();
+  const filtersMenu = useModal();
 
   return (
     <AppStateContext.Provider

@@ -8,7 +8,7 @@ import { useAppState } from '@/contexts/AppContext';
 import { useSearch } from '@/contexts/SearchContext';
 import { Layout } from '@/ui/components';
 
-import { FiltersMenu } from './FiltersMenu';
+import { Filters } from './Filters';
 import { Results } from './Results';
 import { SearchField, useSearchField } from './SearchField';
 
@@ -27,11 +27,7 @@ export function SearchPage() {
   const searchField = useSearchField(searchProjectsByQuery);
 
   const {
-    filtersMenu: {
-      isOpen: isFiltersMenuOpen,
-      close: closeFiltersMenu,
-      toggle: toggleFiltersMenu,
-    },
+    filtersMenu: { isOpen: isFiltersMenuOpen, toggle: toggleFiltersMenu },
   } = useAppState();
 
   return (
@@ -45,10 +41,7 @@ export function SearchPage() {
           />
           <Results hits={searchField.hits} />
         </div>
-        <FiltersMenu
-          isOpen={isFiltersMenuOpen}
-          onRequestClose={closeFiltersMenu}
-        />
+        <Filters />
       </div>
     </Layout>
   );

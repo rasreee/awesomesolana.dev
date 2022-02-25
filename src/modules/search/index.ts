@@ -1,5 +1,5 @@
 export * from './ClearFiltersButton';
-export * from './FiltersMenu';
+export * from './Filters';
 export * from './SearchField';
 export * from './SearchPage';
 export * from './Filters';

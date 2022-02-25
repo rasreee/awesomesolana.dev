@@ -1,42 +1,17 @@
-import { FilterCategory, getFilterCategories } from '@/api/filters';
-import { useSearch } from '@/contexts/SearchContext';
-import { ClearFiltersButton } from '@/modules/search/ClearFiltersButton';
-import { useSelections } from '@/ui/hooks/useSelections';
+import { useIsMobile } from '@/ui/hooks';
+import { clsxm } from '@/ui/utils';
 
-import { FilterSection } from './FilterSection';
+import { FiltersModal } from './FiltersModal';
+import { FiltersSidebar } from './FiltersSidebar';
 
 export function Filters() {
-  const { clearFiltersByType } = useSearch();
+  const isMobile = useIsMobile();
 
-  const { getIsExpanded, toggleSelection } = useSelections<FilterCategory>(
-    getFilterCategories(),
-  );
-
-  const handleToggleCategory = (category: FilterCategory) => () => {
-    toggleSelection(category);
-  };
-
-  const handleClearCategory = (category: FilterCategory) => () => {
-    clearFiltersByType(category);
-  };
+  const CompToRender = isMobile ? FiltersModal : FiltersSidebar;
 
   return (
-    <div className="flex flex-col gap-2 py-3">
-      <div className="flex items-center justify-between px-5">
-        <div className="text-lg font-semibold">Filters</div>
-        <ClearFiltersButton />
-      </div>
-      <div>
-        {getFilterCategories().map((category) => (
-          <FilterSection
-            key={category}
-            category={category}
-            isExpanded={getIsExpanded(category)}
-            onToggle={handleToggleCategory(category)}
-            onClear={handleClearCategory(category)}
-          />
-        ))}
-      </div>
+    <div className={clsxm('bg-surface')}>
+      <CompToRender />
     </div>
   );
 }

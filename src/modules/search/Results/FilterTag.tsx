@@ -42,7 +42,7 @@ export function FilterTag({
       {onRemove && (
         <button
           className="px-1 opacity-60 hover:opacity-80 active:opacity-100"
-          onToggle={handleRemove}
+          onClick={handleRemove}
         >
           <XIcon className="my-auto h-4 w-4" />
         </button>

@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { FilterCategory, getFilterCategories } from '@/api/filters';
+import { useAppState } from '@/contexts/AppContext';
 import { useSearch } from '@/contexts/SearchContext';
-import { GhostButton } from '@/ui/components';
+import { GhostButton, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
 
 import { FilterSection } from './FilterSection';
 
-export function MobileFilters({
-  onRequestClose,
-}: {
-  onRequestClose: () => void;
-}) {
+export function FiltersModal() {
+  const {
+    filtersMenu: { isOpen, onRequestClose },
+  } = useAppState();
   const { clearFilters, search, getFiltersCountByType, clearFiltersByType } =
     useSearch();
 
@@ -45,7 +45,11 @@ export function MobileFilters({
   };
 
   return (
-    <>
+    <Popover
+      className="fixed top-20 bottom-20 right-5 left-5 my-auto min-h-[60vh] max-w-full flex-1"
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+    >
       <div className="flex flex-col gap-2 py-3">
         <div className="flex items-center justify-between px-5">
           <div className="text-lg font-semibold">Filters</div>
@@ -76,6 +80,6 @@ export function MobileFilters({
           </GhostButton>
         </div>
       </div>
-    </>
+    </Popover>
   );
 }

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-export type UseMenu = {
+export type UseModal = {
   isOpen: boolean;
-  close: () => void;
+  onRequestClose: () => void;
   open: () => void;
   toggle: () => void;
 };
 
-export function useMenu(): UseMenu {
+export function useModal(): UseModal {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => {
@@ -15,7 +15,7 @@ export function useMenu(): UseMenu {
   };
 
   const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
+  const onRequestClose = () => setIsOpen(false);
 
-  return { isOpen, close, open, toggle };
+  return { isOpen, onRequestClose, open, toggle };
 }
