@@ -21,24 +21,38 @@ export function FilterCategoryToggleBlock({
   const selectedCount = useCountFilters()(category);
 
   return (
-    <div>
-      <button
-        onClick={onToggle}
-        className="hover:bg-surface-1 flex w-full items-center gap-3 px-5 py-3"
-      >
-        <div className={clsxm('text', isExpanded && 'text-primary-500')}>
-          {isExpanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
-        </div>
-        <div className={clsxm(isExpanded && 'font-semibold')}>
-          {capitalizeFirst(pluralize(category))}{' '}
-          {selectedCount > 0 ? `(${selectedCount})` : ''}
-        </div>
-      </button>
+    <div className="flex flex-col gap-2">
+      <ExpandToggleButton isExpanded={isExpanded} onToggle={onToggle}>
+        {capitalizeFirst(pluralize(category))}{' '}
+        {selectedCount > 0 ? `(${selectedCount})` : ''}
+      </ExpandToggleButton>
       <div className="px-5">
         {isExpanded && (
           <FilterCategoryMenu category={category} onClear={onClear} />
         )}
       </div>
     </div>
+  );
+}
+
+export function ExpandToggleButton({
+  onToggle,
+  children,
+  isExpanded,
+}: {
+  isExpanded: boolean;
+  onToggle: () => void;
+  children: any;
+}) {
+  return (
+    <button
+      onClick={onToggle}
+      className="hover:bg-surface-1 flex w-full items-center gap-3 px-5 py-3"
+    >
+      <div className={clsxm('text', isExpanded && 'text-primary-500')}>
+        {isExpanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
+      </div>
+      <div className={clsxm(isExpanded && 'font-semibold')}>{children}</div>
+    </button>
   );
 }

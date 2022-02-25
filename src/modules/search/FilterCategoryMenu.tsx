@@ -72,7 +72,7 @@ export function FilterCategoryMenu({
   const onFocus = () => setFocused(true);
   const onBlur = () => setFocused(false);
 
-  const onClickItem = (tag: Tag) => () => {
+  const onClickOption = (tag: Tag) => () => {
     toggleFilter(tag);
     setQuery('');
   };
@@ -81,7 +81,7 @@ export function FilterCategoryMenu({
   const canShowMore = totalFilters > PREVIEW_SIZE;
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-2">
       <div
         className={clsxm(
           'flex items-center gap-1 rounded-md pr-3',
@@ -113,7 +113,7 @@ export function FilterCategoryMenu({
           <FilterCategoryOption
             key={`${tag.category}_${tag.name}`}
             tag={tag}
-            onClick={onClickItem(tag)}
+            onClick={onClickOption(tag)}
             checked={getIsFilterActive(tag)}
           />
         ))}
