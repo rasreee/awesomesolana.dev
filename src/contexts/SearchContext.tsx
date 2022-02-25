@@ -5,24 +5,24 @@ import {
   FilterCategory,
   filtersByType,
   getFilterCategories,
-  SearchFilter,
-} from '@/api/filters';
+  Tag,
+} from '@/api/tags';
 
 type Search = {
   query?: string;
-  tags?: SearchFilter[];
+  tags?: Tag[];
 };
 
 export type ISearchContext = {
   search: Search;
   hasFilters: boolean;
   getFiltersCountByType: (category: FilterCategory) => number;
-  addFilter: (tag: SearchFilter) => void;
-  removeFilter: (tag: SearchFilter) => void;
-  toggleFilter: (tag: SearchFilter) => void;
-  getFilterChecked: (tag: SearchFilter) => boolean;
+  addFilter: (tag: Tag) => void;
+  removeFilter: (tag: Tag) => void;
+  toggleFilter: (tag: Tag) => void;
+  getFilterChecked: (tag: Tag) => boolean;
   clearFilters: () => void;
-  clearFiltersByType: (category: SearchFilter['category']) => void;
+  clearFiltersByType: (category: Tag['category']) => void;
 };
 
 export const SearchContext = createContext<ISearchContext | undefined>(
@@ -43,7 +43,7 @@ function parseSearch(parsedUrlQuery: NextRouter['query']): Search {
     search.query = parsedUrlQuery['query'] as string;
   }
 
-  const tags: SearchFilter[] = [];
+  const tags: Tag[] = [];
 
   const keys = Object.keys(parsedUrlQuery);
 
@@ -68,7 +68,7 @@ export function SearchProvider({ children }: { children: any }) {
 
   const search = useMemo(() => parseSearch(router.query), [router.query]);
 
-  const removeFilter = (tagToRemove: SearchFilter) => {
+  const removeFilter = (tagToRemove: Tag) => {
     const { tags } = search;
 
     if (!tags) return;
@@ -95,7 +95,7 @@ export function SearchProvider({ children }: { children: any }) {
     router.push(newPath);
   };
 
-  const addFilter = (tagToAdd: SearchFilter) => {
+  const addFilter = (tagToAdd: Tag) => {
     const { tags: oldTags } = search;
     const newTags = oldTags ? [...oldTags, tagToAdd] : [tagToAdd];
 
@@ -121,7 +121,7 @@ export function SearchProvider({ children }: { children: any }) {
     router.push('/search');
   };
 
-  const getFilterChecked = (filter: SearchFilter): boolean => {
+  const getFilterChecked = (filter: Tag): boolean => {
     const tags = search.tags ?? [];
     return filtersByType(tags, filter.category)
       .map((item) => item.name)
@@ -133,7 +133,7 @@ export function SearchProvider({ children }: { children: any }) {
       .length;
   };
 
-  const clearFiltersByType = (typeToRemove: SearchFilter['category']) => {
+  const clearFiltersByType = (typeToRemove: Tag['category']) => {
     const oldTags = search.tags ?? [];
 
     let newPath = `/search`;
@@ -156,7 +156,7 @@ export function SearchProvider({ children }: { children: any }) {
     router.push(newPath);
   };
 
-  const toggleFilter = (tag: SearchFilter) => {
+  const toggleFilter = (tag: Tag) => {
     if (!getFilterChecked(tag)) {
       addFilter(tag);
     } else {

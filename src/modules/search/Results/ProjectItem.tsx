@@ -1,5 +1,5 @@
-import { SearchFilter } from '@/api/filters';
 import { Project } from '@/api/projects';
+import { Tag } from '@/api/tags';
 import { useSearch } from '@/contexts/SearchContext';
 
 import { FilterTag } from './FilterTag';
@@ -7,7 +7,7 @@ import { FilterTag } from './FilterTag';
 export function ProjectItem({ title, description, tags, ...props }: Project) {
   const { search, toggleFilter } = useSearch();
 
-  const getIsTagActive = (tag: SearchFilter) => {
+  const getIsTagActive = (tag: Tag) => {
     return search.tags?.map((t) => t.name).includes(tag.name);
   };
 

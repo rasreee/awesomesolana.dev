@@ -2,7 +2,7 @@ import {
   FilterCategory,
   filtersByType,
   toPluralFilterCategory,
-} from '@/api/filters';
+} from '@/api/tags';
 import { useSearch } from '@/contexts/SearchContext';
 import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icons';
 import { clsxm } from '@/ui/utils';

@@ -1,6 +1,6 @@
 import useSWR, { SWRResponse } from 'swr';
 
-import { SearchFilter } from '@/api/filters';
+import { Tag } from '@/api/tags';
 import { getIntersection, uniques } from '@/common/utils';
 
 import { ALL_PROJECTS } from './constants';
@@ -25,12 +25,12 @@ export function filterProjectsByTitle(
   return hits;
 }
 
-function isRelevantProject(project: Project, tags: SearchFilter[]): boolean {
+function isRelevantProject(project: Project, tags: Tag[]): boolean {
   const projectTagTypes = uniques(
     project.tags.map((project) => project.category),
   );
 
-  const commonTags: SearchFilter[] = [];
+  const commonTags: Tag[] = [];
   projectTagTypes.forEach((category) => {
     const projectTags = project.tags.filter((tag) => tag.category === category);
     const tagsForType = tags.filter((tag) => tag.category === category);
@@ -49,7 +49,7 @@ function isRelevantProject(project: Project, tags: SearchFilter[]): boolean {
 
 export function filterProjectsByTags(
   projects: Project[],
-  tags: SearchFilter[],
+  tags: Tag[],
 ): Project[] {
   if (tags.length === 0) return projects;
 
@@ -60,22 +60,20 @@ export function filterProjectsByTags(
   return filtered;
 }
 
-export function getProjectsCountForTag(tag: SearchFilter): number {
+export function getProjectsCountForTag(tag: Tag): number {
   return ALL_PROJECTS.filter((project) =>
     project.tags.map((t) => t.name).includes(tag.name),
   ).length;
 }
 
-export function getProjectsCountForTagType(
-  category: SearchFilter['category'],
-): number {
+export function getProjectsCountForTagType(category: Tag['category']): number {
   return ALL_PROJECTS.filter((project) =>
     project.tags.map((tag) => tag.category).includes(category),
   ).length;
 }
 
 export function useProjectsByTags(
-  tags: SearchFilter[] | undefined,
+  tags: Tag[] | undefined,
 ): SWRResponse<Project[], Error> {
   const swr = useSWR<Project[], Error>(
     tags

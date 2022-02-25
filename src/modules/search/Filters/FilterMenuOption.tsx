@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { SearchFilter } from '@/api/filters';
 import { getProjectsCountForTag } from '@/api/projects';
+import { Tag } from '@/api/tags';
 import { CheckBox } from '@/ui/components';
 
 export function FilterMenuOption({
@@ -10,7 +10,7 @@ export function FilterMenuOption({
   checked,
   ...props
 }: React.HTMLAttributes<HTMLLIElement> & {
-  tag: SearchFilter;
+  tag: Tag;
   onClick: () => void;
   checked: boolean;
 }) {

@@ -1,4 +1,4 @@
-import { SearchFilter } from '@/api/filters';
+import { Tag } from '@/api/tags';
 import { XIcon } from '@/ui/icons';
 import { clsxm } from '@/ui/utils';
 
@@ -9,11 +9,11 @@ export function FilterTag({
   isActive,
   onToggle,
 }: {
-  tag: SearchFilter;
-  onRemove?: (tag: SearchFilter) => void;
+  tag: Tag;
+  onRemove?: (tag: Tag) => void;
   className?: string;
   isActive?: boolean;
-  onToggle: (tag: SearchFilter) => void;
+  onToggle: (tag: Tag) => void;
 }) {
   const handleClick = () => onToggle(tag);
   const handleRemove = () => onRemove && onRemove(tag);

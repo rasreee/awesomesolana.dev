@@ -4,11 +4,11 @@ import {
   FilterCategory,
   filtersByType,
   SEARCH_FILTERS,
-  SearchFilter,
   searchFilters,
   sortFiltersByProjectCount,
+  Tag,
   toPluralFilterCategory,
-} from '@/api/filters';
+} from '@/api/tags';
 import { useSearch } from '@/contexts/SearchContext';
 import { SolidButton, TextInput, useSearchField } from '@/ui/components';
 import { clsxm } from '@/ui/utils';
@@ -31,7 +31,7 @@ export function FilterMenu({
     expanded ? 10 : 5,
   );
 
-  const runSearch = async (searchQuery: string): Promise<SearchFilter[]> => {
+  const runSearch = async (searchQuery: string): Promise<Tag[]> => {
     if (!searchQuery) return previewOptions;
 
     const filters = await searchFilters(searchQuery, { category }).then(
@@ -45,7 +45,7 @@ export function FilterMenu({
 
   const { search, addFilter, removeFilter, getFilterChecked } = useSearch();
 
-  const onClickItem = (filter: SearchFilter) => () => {
+  const onClickItem = (filter: Tag) => () => {
     if (!getFilterChecked(filter)) {
       addFilter(filter);
     } else {

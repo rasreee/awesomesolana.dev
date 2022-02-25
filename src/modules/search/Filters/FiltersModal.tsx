@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { FilterCategory, getFilterCategories } from '@/api/filters';
+import { FilterCategory, getFilterCategories } from '@/api/tags';
 import { useAppState } from '@/contexts/AppContext';
 import { useSearch } from '@/contexts/SearchContext';
 import { GhostButton, Popover } from '@/ui/components';

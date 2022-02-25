@@ -3,22 +3,22 @@ import React from 'react';
 import {
   FilterCategory,
   getFilterCategories,
-  SearchFilter,
+  Tag,
   toPluralFilterCategory,
-} from '@/api/filters';
+} from '@/api/tags';
 import { useSearch } from '@/contexts/SearchContext';
 import { Popover } from '@/ui/components';
 
 type GroupedResultsProps = {
   isOpen: boolean;
-  hits: SearchFilter[];
-  onFilterClick: (tag: SearchFilter) => void;
+  hits: Tag[];
+  onFilterClick: (tag: Tag) => void;
   onRequestClose: () => void;
 };
 
-type GroupedHits = Array<{ category: FilterCategory; hits: SearchFilter[] }>;
+type GroupedHits = Array<{ category: FilterCategory; hits: Tag[] }>;
 
-function groupHitsByType(list: SearchFilter[]): GroupedHits {
+function groupHitsByType(list: Tag[]): GroupedHits {
   const groups = getFilterCategories().map((category) => ({
     category,
     hits: list.filter((filter) => filter.category === category),
@@ -39,7 +39,7 @@ export function GroupedResults({
     (hit) => !search.tags?.some((filter) => filter.name === hit.name),
   );
 
-  const onFilterClick = (tag: SearchFilter) => () => {
+  const onFilterClick = (tag: Tag) => () => {
     handleTagClick(tag);
   };
 

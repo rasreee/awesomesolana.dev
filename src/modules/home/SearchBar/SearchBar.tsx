@@ -1,4 +1,4 @@
-import { SearchFilter, searchFilters } from '@/api/filters';
+import { searchFilters, Tag } from '@/api/tags';
 import { useSearch } from '@/contexts/SearchContext';
 import { SearchField, useSearchField } from '@/ui/components';
 
@@ -9,7 +9,7 @@ export function SearchBar() {
 
   const searchField = useSearchField(searchFilters);
 
-  const onFilterClick = (tag: SearchFilter) => {
+  const onFilterClick = (tag: Tag) => {
     addFilter(tag);
     searchField.reset();
   };
