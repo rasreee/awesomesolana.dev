@@ -7,7 +7,7 @@ import LogoLink from './LogoLink';
 
 const buttonSize = rem(44);
 
-export default function Header() {
+export default function AppHeader() {
   const router = useRouter();
 
   const isHomePath = router.asPath === '/';

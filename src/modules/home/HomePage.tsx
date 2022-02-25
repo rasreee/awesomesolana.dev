@@ -1,6 +1,6 @@
 import { getTagSuggestions, Tag } from '@/api/tags';
 import { useToggleFilter } from '@/contexts/SearchContext';
-import { Layout, Logo, SearchField, useSearchField } from '@/ui/components';
+import { Logo, SearchField, useSearchField } from '@/ui/components';
 
 import { GroupedResults } from './GroupedResults';
 
@@ -19,29 +19,27 @@ export function HomePage() {
   };
 
   return (
-    <Layout>
-      <div className="mx-auto px-6 md:max-w-3xl">
-        <div className="my-24 flex w-full flex-col gap-10">
-          <div className="mx-auto flex flex-col items-center gap-6">
-            <Logo size="lg" />
-            <div className="text-body  text-center text-base leading-normal text-opacity-80 sm:text-lg md:text-xl">
-              {DESCRIPTION}
-            </div>
-          </div>
-          <div className="flex flex-col gap-3">
-            <SearchField
-              autoFocused
-              {...{ hits, error, isRequesting, query, onChange }}
-            />
-            <GroupedResults
-              isOpen={hits.length > 0 && !isRequesting}
-              hits={hits}
-              onAddFilter={handleAddFilter}
-              onRequestClose={reset}
-            />
+    <div className="mx-auto px-6 md:max-w-3xl">
+      <div className="my-24 flex w-full flex-col gap-10">
+        <div className="mx-auto flex flex-col items-center gap-6">
+          <Logo size="lg" />
+          <div className="text-body  text-center text-base leading-normal text-opacity-80 sm:text-lg md:text-xl">
+            {DESCRIPTION}
           </div>
         </div>
+        <div className="flex flex-col gap-3">
+          <SearchField
+            autoFocused
+            {...{ hits, error, isRequesting, query, onChange }}
+          />
+          <GroupedResults
+            isOpen={hits.length > 0 && !isRequesting}
+            hits={hits}
+            onAddFilter={handleAddFilter}
+            onRequestClose={reset}
+          />
+        </div>
       </div>
-    </Layout>
+    </div>
   );
 }

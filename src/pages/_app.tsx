@@ -4,8 +4,10 @@ import '@/styles/colors.css';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
+import React from 'react';
 
 import { AppProvider } from '@/contexts/AppContext';
+import AppLayout from '@/layouts/AppLayout';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -15,7 +17,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <NextThemeProvider attribute="class">
         <AppProvider>
-          <Component {...pageProps} />
+          <AppLayout>
+            <Component {...pageProps} />
+          </AppLayout>
         </AppProvider>
       </NextThemeProvider>
     </>

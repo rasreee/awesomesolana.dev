@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { FILTER_CATEGORIES, FilterCategory } from '@/api/tags';
+import { useSearchOptions } from '@/contexts/AppContext';
 import {
   useClearFilters,
   useCountFilters,
@@ -11,9 +12,9 @@ import { GhostButton, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
 
 import { FilterCategoryToggleList } from './FilterCategoryToggleList';
-import { FiltersMenuProps } from './FiltersMenu';
 
-export function FiltersModal({ isOpen, onRequestClose }: FiltersMenuProps) {
+export function SearchOptionsModal() {
+  const { isOpen, onRequestClose } = useSearchOptions();
   const searchFilters = useSearchFilters();
   const clearFilters = useClearFilters();
   const countFilters = useCountFilters();

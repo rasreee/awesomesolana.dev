@@ -1,15 +1,17 @@
 import React from 'react';
 
 import { FILTER_CATEGORIES, FilterCategory } from '@/api/tags';
+import { useSearchOptions } from '@/contexts/AppContext';
 import { useClearFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
-import { FiltersMenuProps } from '@/modules/search';
 import { SolidButton } from '@/ui/components';
 import { useSelections } from '@/ui/hooks/useSelections';
 
 import { FilterCategoryToggleList } from './FilterCategoryToggleList';
 
-export function FiltersSidebar({ isOpen }: FiltersMenuProps) {
+export function SearchOptionsSidebar() {
+  const { isOpen } = useSearchOptions();
+
   const { getIsExpanded, toggleSelection } =
     useSelections<FilterCategory>(FILTER_CATEGORIES);
 

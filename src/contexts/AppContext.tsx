@@ -1,6 +1,5 @@
 import { createContext, useContext } from 'react';
 
-import { FiltersMenu } from '@/modules/search';
 import { UseOverlay, useOverlay } from '@/ui/hooks';
 
 export type AppStateContext = {
@@ -27,10 +26,7 @@ export function AppProvider({ children }: { children: any }) {
         searchOptions,
       }}
     >
-      <div className="w-full gap-3 sm:flex sm:items-start">
-        {children}
-        <FiltersMenu />
-      </div>
+      {children}
     </AppStateContext.Provider>
   );
 }

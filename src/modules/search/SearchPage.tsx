@@ -9,7 +9,7 @@ import {
 import { useSearchOptions } from '@/contexts/AppContext';
 import { useSearchFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
-import { Layout, SearchField, useSearchField } from '@/ui/components';
+import { SearchField, useSearchField } from '@/ui/components';
 import { AdjustmentsIcon } from '@/ui/icons';
 
 import { Results } from './Results';
@@ -27,19 +27,17 @@ export function SearchPage() {
   const searchField = useSearchField(searchProjectsByQuery);
 
   return (
-    <Layout>
-      <div className="flex-1 px-3 sm:px-6">
-        <div className="flex items-center gap-2">
-          <SearchField autoFocused {...searchField} />
-          <SearchOptionsMenuToggle />
-        </div>
-        <Results hits={searchField.hits} />
+    <div className="flex-1 px-3 sm:px-6">
+      <div className="flex items-center gap-2">
+        <SearchField autoFocused {...searchField} />
+        <SearchOptionsToggle />
       </div>
-    </Layout>
+      <Results hits={searchField.hits} />
+    </div>
   );
 }
 
-function SearchOptionsMenuToggle() {
+function SearchOptionsToggle() {
   const { isOpen, toggle } = useSearchOptions();
 
   return (
@@ -52,7 +50,7 @@ function SearchOptionsMenuToggle() {
       )}
     >
       <AdjustmentsIcon
-        className={clsxm('text-hint', isOpen && 'text-color-primary')}
+        className={clsxm('text-hint', isOpen && 'text-color-p`rimary')}
       />
     </button>
   );

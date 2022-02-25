@@ -1,3 +1,5 @@
+export * from './SearchOptionsModal';
+export * from './SearchOptionsSidebar';
 export * from './SearchPage';
-export * from './FiltersMenu';
+export * from './FilterCategoryToggleList';
 export * from './Results';
