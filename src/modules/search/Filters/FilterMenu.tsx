@@ -3,13 +3,13 @@ import { useState } from 'react';
 import { getProjectsCountForTag } from '@/api/projects';
 import {
   FilterCategory,
-  getPluralCategory,
   getTagSuggestions,
   SEARCH_FILTERS,
   Tag,
 } from '@/api/tags';
 import { useSearch } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
+import pluralize from '@/lib/pluralize';
 import { SolidButton, TextInput, useSearchField } from '@/ui/components';
 
 import { FilterMenuOption } from './FilterMenuOption';
@@ -87,7 +87,7 @@ export function FilterMenu({
           name={`${category}-filter-search`}
           value={query}
           onChange={setQuery}
-          placeholder={`Search ${getPluralCategory(category).toLowerCase()}...`}
+          placeholder={`Search ${pluralize(category)}...`}
           className={clsxm('input-sm input-focus-unset')}
           onFocus={onFocus}
           onBlur={onBlur}

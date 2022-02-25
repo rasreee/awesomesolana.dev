@@ -1,12 +1,9 @@
 import React from 'react';
 
-import {
-  FILTER_CATEGORIES,
-  FilterCategory,
-  getPluralCategory,
-  Tag,
-} from '@/api/tags';
+import { FILTER_CATEGORIES, FilterCategory, Tag } from '@/api/tags';
+import { capitalizeFirst } from '@/common/utils';
 import { useSearch } from '@/contexts/SearchContext';
+import pluralize from '@/lib/pluralize';
 import { Popover } from '@/ui/components';
 
 type GroupedResultsProps = {
@@ -54,7 +51,7 @@ export function GroupedResults({
           list.length > 0 && (
             <div className="flex flex-col gap-2 px-1">
               <span className="px-3 py-2 text-lg font-semibold">
-                {getPluralCategory(category)} {`(${list.length})`}
+                {capitalizeFirst(pluralize(category))} {`(${list.length})`}
               </span>
               <ul className="max-h-[16rem] overflow-y-auto">
                 {list.map((hit) => (

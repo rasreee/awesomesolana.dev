@@ -1,6 +1,8 @@
-import { FilterCategory, getPluralCategory } from '@/api/tags';
+import { FilterCategory } from '@/api/tags';
+import { capitalizeFirst } from '@/common/utils';
 import { useSearch } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
+import pluralize from '@/lib/pluralize';
 import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icons';
 
 import { FilterMenu } from './FilterMenu';
@@ -32,7 +34,7 @@ export function FilterSection({
           {isExpanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
         </div>
         <div className={clsxm(isExpanded && 'font-semibold')}>
-          {getPluralCategory(category)}{' '}
+          {capitalizeFirst(pluralize(category))}{' '}
           {selectedCount > 0 ? `(${selectedCount})` : ''}
         </div>
       </button>

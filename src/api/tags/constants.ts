@@ -4,8 +4,7 @@ export const FILTER_CATEGORIES = [
   'topic',
   'framework',
   'language',
-  'npm-dependency',
-  'cargo-dependency',
+  'dependency',
 ] as FilterCategory[];
 
 export const TAG_NAMES = Object.freeze({
@@ -82,9 +81,9 @@ export const DEPENDENCIES = Object.freeze({
   cargo: ['cronos-sdk'],
 });
 
-const DEPENDENCY_FILTERS: Tag[] = Object.entries(DEPENDENCIES)
-  .map(([category, values]) =>
-    values.map((name) => ({ category: `${category}-dependency`, name } as Tag)),
+const DEPENDENCY_FILTERS: Tag[] = Object.values(DEPENDENCIES)
+  .map((tagNames) =>
+    tagNames.map((name) => ({ category: `dependency`, name } as Tag)),
   )
   .flat();
 

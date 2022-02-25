@@ -1,13 +1,5 @@
-import { capitalizeFirst } from '@/common/utils';
-
 import { SEARCH_FILTERS } from './constants';
 import { FilterCategory, Tag } from './types';
-
-export function getPluralCategory(category: FilterCategory): string {
-  if (category === 'cargo-dependency') return 'Cargo Dependencies';
-  if (category === 'npm-dependency') return 'NPM Dependencies';
-  return `${capitalizeFirst(category)}s`;
-}
 
 export async function getTagSuggestions(
   query: string,

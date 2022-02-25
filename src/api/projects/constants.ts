@@ -7,7 +7,7 @@ export const ALL_PROJECTS: Project[] = [
     description: 'Foo Bar is an AMM built with Typescript and Rust',
     githubUrl: 'https://github.com/rasreee/foo-bar',
     tags: [
-      { category: 'npm-dependency', name: '@project-serum/anchor' },
+      { category: 'dependency', name: '@project-serum/anchor' },
       { category: 'language', name: 'typescript' },
       { category: 'topic', name: 'dao' },
     ],
