@@ -1,4 +1,5 @@
 import React from 'react';
+import useSWR from 'swr';
 
 import { capitalizeFirst, getIntersection } from '@/common/utils';
 import {
@@ -24,16 +25,25 @@ export function CategoryFiltersDropdown({
   onRequestClose,
 }: CategoryFiltersProps) {
   const searchField = useSearchField((q) => getTagSuggestions(q, { category }));
+
+  const { data: hits } = useSWR<Tag[], Error>(
+    `categoryFiltersSearch?query=${searchField.query}`,
+    async (): Promise<Tag[]> => {
+      const query = searchField.query;
+      if (!query) return [];
+
+      const result = await getTagSuggestions(query);
+
+      return result;
+    },
+  );
+
   const getIsFilterActive = useGetIsFilterActive();
   const toggleFilter = useToggleFilter();
   const onClickOption = (tag: Tag) => () => {
     toggleFilter(tag);
     searchField.setQuery('');
   };
-
-  const listToShow = searchField.hits.length
-    ? searchField.hits
-    : getCategoryFilters(category);
 
   const allFilters = useSearchFilters();
   const categoryFilters = getCategoryFilters(category);
@@ -44,10 +54,6 @@ export function CategoryFiltersDropdown({
     (a, b) => a.name === b.name,
   );
 
-  const availableOptions = categoryFilters.filter(
-    (filter) => !selectedList.map((item) => item.name).includes(filter.name),
-  );
-
   return (
     <Popover
       className={clsxm('bg-surface w-[28rem] max-w-xl pb-5', 'max-h-[60vh]')}
@@ -55,7 +61,7 @@ export function CategoryFiltersDropdown({
       onRequestClose={onRequestClose}
       style={{
         maxHeight:
-          rem(listToShow.slice(0, 10).length * 48 + 72) + ' !important',
+          rem(hits ? hits.slice(0, 10).length * 48 + 72 : 10) + ' !important',
       }}
     >
       <div
@@ -100,16 +106,20 @@ export function CategoryFiltersDropdown({
             <Divider />
           </div>
         ) : null}
-        <ul className={clsxm('px-5 pt-3', 'min-w-full')}>
-          {availableOptions.map((tag) => (
-            <OptionCategoryItemButton
-              key={`${tag.category}_${tag.name}`}
-              tag={tag}
-              onClick={onClickOption(tag)}
-              checked={getIsFilterActive(tag)}
-            />
-          ))}
-        </ul>
+        {hits ? (
+          <ul className={clsxm('px-5 pt-3', 'min-w-full')}>
+            {(hits?.length ? hits : categoryFilters).map((tag) => (
+              <OptionCategoryItemButton
+                key={`${tag.category}_${tag.name}`}
+                tag={tag}
+                onClick={onClickOption(tag)}
+                checked={getIsFilterActive(tag)}
+              />
+            ))}
+          </ul>
+        ) : (
+          <ul>Loading...</ul>
+        )}
       </div>
     </Popover>
   );

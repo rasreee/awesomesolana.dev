@@ -1,10 +1,11 @@
+import React from 'react';
+
 import { useSearchFilters } from '@/contexts/SearchContext';
-import { FILTER_CATEGORIES } from '@/modules/tags';
 
 import { searchGitHubRepos } from '../github/api';
 import { useSearchGithubRepos } from '../github/useSearchGitHubRepos';
 import {
-  FilterItemToggle,
+  FilterBar,
   RepoItem,
   ResultsInfo,
   SearchField,
@@ -37,21 +38,9 @@ export function SearchPage() {
             ))}
           </ul>
         ) : (
-          <div>...</div>
+          <ul>...</ul>
         )}
       </div>
     </div>
-  );
-}
-
-export function FilterBar() {
-  return (
-    <ul className="grid grid-cols-2 gap-2 overflow-x-auto sm:flex sm:items-center sm:gap-5">
-      {FILTER_CATEGORIES.map((name) => (
-        <li key={name}>
-          <FilterItemToggle category={name} />
-        </li>
-      ))}
-    </ul>
   );
 }

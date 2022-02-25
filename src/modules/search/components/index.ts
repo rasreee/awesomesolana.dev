@@ -1,6 +1,7 @@
 export * from './CategoryFilters';
 export * from './CategoryFiltersBottomSheet';
 export * from './CategoryFiltersDropdown';
+export * from './FilterBar';
 export * from './FilterItemToggle';
 export * from './FilterTag';
 export * from './FilterTags';
