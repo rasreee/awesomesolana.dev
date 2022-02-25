@@ -1,6 +1,6 @@
 import { FilterCategory } from '@/api/tags';
 import { capitalizeFirst } from '@/common/utils';
-import { useSearch } from '@/contexts/SearchContext';
+import { useCountFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
 import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icons';
@@ -18,11 +18,9 @@ export function FilterSection({
   onToggle: () => void;
   onClear: () => void;
 }) {
-  const { search } = useSearch();
+  const countFilters = useCountFilters();
 
-  const selectedCount = (search.tags ?? []).filter(
-    (item) => item.category === category,
-  ).length;
+  const selectedCount = countFilters(category);
 
   return (
     <div>

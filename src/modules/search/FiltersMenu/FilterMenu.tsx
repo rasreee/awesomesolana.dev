@@ -9,7 +9,7 @@ import {
 } from '@/api/tags';
 import {
   useGetIsFilterActive,
-  useSearch,
+  useSearchFilters,
   useToggleFilter,
 } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
@@ -56,24 +56,24 @@ export function FilterMenu({
 
   const { query, setQuery, hits } = useSearchField(runSearch);
 
-  const { search } = useSearch();
+  const searchFilters = useSearchFilters();
   const toggleFilter = useToggleFilter();
   const getIsFilterActive = useGetIsFilterActive();
+
+  const [focused, setFocused] = useState(false);
+  const onFocus = () => setFocused(true);
+  const onBlur = () => setFocused(false);
 
   const onClickItem = (tag: Tag) => () => {
     toggleFilter(tag);
     setQuery('');
   };
 
-  const selectedCount = (search.tags ?? []).filter(
+  const selectedCount = searchFilters.filter(
     (item) => item.category === category,
   ).length;
 
   const canShowMore = hits.length > 0;
-
-  const [focused, setFocused] = useState(false);
-  const onFocus = () => setFocused(true);
-  const onBlur = () => setFocused(false);
 
   return (
     <div className="flex flex-col">

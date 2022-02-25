@@ -10,8 +10,6 @@ type Search = {
 
 export type ISearchContext = {
   search: Search;
-  hasFilters: boolean;
-  getFiltersCountByType: (category: FilterCategory) => number;
 };
 
 export const SearchContext = createContext<ISearchContext | undefined>(
@@ -57,19 +55,10 @@ export function SearchProvider({ children }: { children: any }) {
 
   const search = useMemo(() => parseSearch(router.query), [router.query]);
 
-  const getFiltersCountByType = (category: FilterCategory): number => {
-    return (search.tags ?? []).filter((filter) => filter.category === category)
-      .length;
-  };
-
-  const hasFilters = Boolean(search.tags?.length);
-
   return (
     <SearchContext.Provider
       value={{
         search,
-        hasFilters,
-        getFiltersCountByType,
       }}
     >
       {children}
@@ -77,13 +66,28 @@ export function SearchProvider({ children }: { children: any }) {
   );
 }
 
+export function useSearchFilters(): Tag[] {
+  const { search } = useSearch();
+
+  return search.tags ?? [];
+}
+
+export function useCountFilters() {
+  const searchFilters = useSearchFilters();
+
+  const countFiltersForCategory = (category: FilterCategory): number => {
+    return searchFilters.filter((filter) => filter.category === category)
+      .length;
+  };
+
+  return countFiltersForCategory;
+}
+
 export function useGetIsFilterActive() {
-  const {
-    search: { tags },
-  } = useSearch();
+  const searchFilters = useSearchFilters();
 
   const getIsFilterActive = (input: Tag): boolean => {
-    return (tags ?? [])
+    return searchFilters
       .filter((tag) => tag.category === input.category)
       .map((item) => item.name)
       .includes(input.name);
@@ -163,12 +167,6 @@ export function useToggleFilter() {
   };
 
   return toggleFilter;
-}
-
-export function useSearchFilters(): Tag[] {
-  const { search } = useSearch();
-
-  return search.tags ?? [];
 }
 
 export function useClearFilters() {

@@ -1,6 +1,6 @@
 import { Project } from '@/api/projects';
-import { useClearFilters, useSearch } from '@/contexts/SearchContext';
-import { useSearchOptionsMenu } from '@/contexts/SearchOptionsMenuContext';
+import { useAppState } from '@/contexts/AppStateContext';
+import { useClearFilters, useSearchFilters } from '@/contexts/SearchContext';
 import pluralize from '@/lib/pluralize';
 import { SolidButton } from '@/ui/components';
 
@@ -23,11 +23,12 @@ function getInfoText({
 }
 
 export function ResultsInfo({ hits }: { hits: Project[] }) {
-  const { hasFilters } = useSearch();
+  const filters = useSearchFilters();
+  const hasFilters = Boolean(filters.length);
 
   const clearFilters = useClearFilters();
 
-  const { filtersMenu } = useSearchOptionsMenu();
+  const { filtersMenu } = useAppState();
 
   return (
     <div className="flex flex-col gap-1">

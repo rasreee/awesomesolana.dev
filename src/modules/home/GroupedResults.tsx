@@ -1,8 +1,6 @@
-import React from 'react';
-
 import { FILTER_CATEGORIES, FilterCategory, Tag } from '@/api/tags';
 import { capitalizeFirst } from '@/common/utils';
-import { useSearch } from '@/contexts/SearchContext';
+import { useSearchFilters } from '@/contexts/SearchContext';
 import pluralize from '@/lib/pluralize';
 import { Popover } from '@/ui/components';
 
@@ -30,10 +28,10 @@ export function GroupedResults({
   onAddFilter: handleTagClick,
   onRequestClose,
 }: GroupedResultsProps) {
-  const { search } = useSearch();
+  const searchFilters = useSearchFilters();
 
   const listToShow = hits.filter(
-    (hit) => !search.tags?.some((filter) => filter.name === hit.name),
+    (hit) => !searchFilters.some((filter) => filter.name === hit.name),
   );
 
   const onAddFilter = (tag: Tag) => () => {

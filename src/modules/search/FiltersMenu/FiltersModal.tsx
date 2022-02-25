@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import { FILTER_CATEGORIES, FilterCategory } from '@/api/tags';
-import { useClearFilters, useSearch } from '@/contexts/SearchContext';
+import {
+  useClearFilters,
+  useCountFilters,
+  useSearchFilters,
+} from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import { GhostButton, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
@@ -10,8 +14,9 @@ import { FilterSection } from './FilterSection';
 import { FiltersMenuProps } from './FIltersMenu';
 
 export function FiltersModal({ isOpen, onRequestClose }: FiltersMenuProps) {
-  const { search, getFiltersCountByType } = useSearch();
+  const searchFilters = useSearchFilters();
   const clearFilters = useClearFilters();
+  const countFilters = useCountFilters();
 
   const [expanded, setExpanded] = useState<FilterCategory | null>(null);
   const [wasCleared, setWasCleared] = useState(false);
@@ -29,10 +34,10 @@ export function FiltersModal({ isOpen, onRequestClose }: FiltersMenuProps) {
   useEffect(() => {
     if (!expanded || !wasCleared) return;
 
-    if (getFiltersCountByType(expanded) === 0) {
+    if (!countFilters(expanded)) {
       setExpanded(null);
     }
-  }, [expanded, getFiltersCountByType, wasCleared]);
+  }, [expanded, countFilters, wasCleared]);
 
   const getIsCategoryExpanded = (item: FilterCategory) =>
     Boolean(expanded && item === expanded);
@@ -73,7 +78,10 @@ export function FiltersModal({ isOpen, onRequestClose }: FiltersMenuProps) {
           ))}
         </ul>
         <div className="flex items-center justify-around px-5 py-1">
-          <GhostButton onClick={handleClearAll} disabled={!search.tags?.length}>
+          <GhostButton
+            onClick={handleClearAll}
+            disabled={!searchFilters.length}
+          >
             Clear
           </GhostButton>
           <GhostButton className="text-color-primary" onClick={onRequestClose}>

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useSearchOptionsMenu } from '@/contexts/SearchOptionsMenuContext';
+import { useAppState } from '@/contexts/AppStateContext';
 import { useIsMobile } from '@/ui/hooks';
 
 import { FiltersModal } from './FiltersModal';
@@ -12,7 +12,7 @@ export type FiltersMenuProps = {
 };
 
 export function FiltersMenu() {
-  const { filtersMenu } = useSearchOptionsMenu();
+  const { filtersMenu } = useAppState();
 
   const isMobile = useIsMobile();
 

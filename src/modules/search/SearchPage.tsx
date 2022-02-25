@@ -4,19 +4,17 @@ import {
   filterProjectsByTitle,
   Project,
 } from '@/api/projects';
-import { useSearch } from '@/contexts/SearchContext';
+import { useSearchFilters } from '@/contexts/SearchContext';
 import { Layout, SearchField, useSearchField } from '@/ui/components';
 import { SearchOptionsMenuToggle } from '@/ui/components/SearchOptionsMenuToggle';
 
 import { Results } from './Results';
 
 export function SearchPage() {
-  const {
-    search: { tags },
-  } = useSearch();
+  const searchFilters = useSearchFilters();
 
   async function searchProjectsByQuery(query: string): Promise<Project[]> {
-    const initialResult = filterProjectsByTags(ALL_PROJECTS, tags ?? []);
+    const initialResult = filterProjectsByTags(ALL_PROJECTS, searchFilters);
     const result = filterProjectsByTitle(initialResult, query);
 
     return result;
