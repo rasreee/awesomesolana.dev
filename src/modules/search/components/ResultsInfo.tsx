@@ -16,7 +16,7 @@ function getInfoText({
   if (!hasFilters) return `Showing all ${hits.length} results`;
 
   const result = hits.length
-    ? `Showing ${hits.length} ${pluralize('result', hits.length)} for `
+    ? `Showing ${hits.length} ${pluralize('result', hits.length)}`
     : `No results found`;
 
   return result;
@@ -41,7 +41,7 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
             onClick={clearFilters.all}
             className="py-2 text-sm leading-none"
           >
-            Clear all filters
+            Clear filters
           </SolidButton>
         )}
       </div>
