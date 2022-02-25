@@ -1,7 +1,10 @@
-import { authFetch } from '@/common/utils';
+import useSWR, { SWRResponse } from 'swr';
+
+import { authFetch, fetcher } from '@/common/utils';
 import { Tag } from '@/modules/tags';
 
-import { RawGitHubRepo } from './types';
+import { parseRawGitHubRepo } from './helpers';
+import { GitHubApiResponse, GitHubRepo, RawGitHubRepo } from './types';
 
 export interface GetGithubReposParams {
   query: string;
@@ -26,4 +29,29 @@ export async function getGithubRepos(
   const data = await response.json();
 
   return data as RawGitHubRepo[];
+}
+
+export function useSearchGithubRepos(
+  query: string,
+  tags: Tag[],
+): Pick<SWRResponse<GitHubRepo[], Error>, 'data' | 'error'> {
+  function formatQuery(query: string, tags: Tag[]): string {
+    return [
+      'solana',
+      query,
+      ...tags.map((tag) =>
+        tag.category === 'language' ? `language:${tag.name}` : '',
+      ),
+    ]
+      .filter(Boolean)
+      .join('+');
+  }
+
+  const { data: rawData, error } = useSWR<GitHubApiResponse, Error>(
+    tags.length ? `/api/github?q=${formatQuery(query, tags)}` : null,
+    fetcher,
+  );
+  const data = rawData?.items.map(parseRawGitHubRepo);
+
+  return { data, error };
 }

@@ -1,7 +1,8 @@
 import { useSearchFilters } from '@/contexts/SearchContext';
-import { searchProjects, useSearchGithubRepos } from '@/modules/projects';
+import { searchProjects } from '@/modules/projects';
 import { FILTER_CATEGORIES } from '@/modules/tags';
 
+import { useSearchGithubRepos } from '../github/api';
 import {
   FilterItemToggle,
   Results,

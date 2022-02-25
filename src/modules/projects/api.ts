@@ -1,10 +1,8 @@
-import useSWR, { SWRResponse } from 'swr';
-
-import { authFetch, fetcher, getIntersection, uniques } from '@/common/utils';
+import { authFetch, getIntersection, uniques } from '@/common/utils';
 import { Tag } from '@/modules/tags';
 
-import { githubApi, parseRawGitHubRepo } from '../github/helpers';
-import { GitHubApiResponse, GitHubRepo, RawGitHubRepo } from '../github/types';
+import { githubApi } from '../github/helpers';
+import { RawGitHubRepo } from '../github/types';
 import { Project } from './types';
 
 export function filterProjectsByTitle(
@@ -87,29 +85,4 @@ export async function searchProjects(
   const data = (await response.json()) as RawGitHubRepo[];
 
   return data;
-}
-
-export function useSearchGithubRepos(
-  query: string,
-  tags: Tag[],
-): Pick<SWRResponse<GitHubRepo[], Error>, 'data' | 'error'> {
-  const { data: rawData, error } = useSWR<GitHubApiResponse, Error>(
-    tags.length ? `/api/github?q=${formatQuery(query, tags)}` : null,
-    fetcher,
-  );
-  const data = rawData?.items.map(parseRawGitHubRepo);
-
-  return { data, error };
-}
-
-function formatQuery(query: string, tags: Tag[]): string {
-  return [
-    'solana',
-    query,
-    ...tags.map((tag) =>
-      tag.category === 'language' ? `language:${tag.name}` : '',
-    ),
-  ]
-    .filter(Boolean)
-    .join('+');
 }
