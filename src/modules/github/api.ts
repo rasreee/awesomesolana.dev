@@ -1,10 +1,7 @@
-import useSWR, { SWRResponse } from 'swr';
-
-import { authFetch, fetcher } from '@/common/utils';
+import { authFetch } from '@/common/utils';
 import { Tag } from '@/modules/tags';
 
-import { parseRawGitHubRepo } from './helpers';
-import { GitHubApiResponse, GitHubRepo, RawGitHubRepo } from './types';
+import { RawGitHubRepo } from './types';
 
 export interface GetGithubReposParams {
   query: string;
@@ -29,33 +26,4 @@ export async function getGithubRepos(
   const data = await response.json();
 
   return data as RawGitHubRepo[];
-}
-
-export function useSearchGithubRepos(
-  query: string,
-  tags: Tag[],
-): Pick<SWRResponse<GitHubRepo[], Error>, 'data' | 'error'> {
-  function frameworkTopic(name: string) {
-    return name.replaceAll('.', '').replaceAll(' ', '-').toLowerCase();
-  }
-  function formatTagParam(tag: Tag): string {
-    if (tag.category === 'language') return `language:${tag.name}`;
-    if (tag.category === 'topic') return `topic:${tag.name}`;
-    if (tag.category === 'framework')
-      return `topic:${frameworkTopic(tag.name)}`;
-    return '';
-  }
-  function formatQuery(query: string, tags: Tag[]): string {
-    return ['solana', query, ...tags.map((tag) => formatTagParam(tag))]
-      .filter(Boolean)
-      .join('+');
-  }
-
-  const { data: rawData, error } = useSWR<GitHubApiResponse, Error>(
-    tags.length ? `/api/github?q=${formatQuery(query, tags)}` : null,
-    fetcher,
-  );
-  const data = rawData?.items.map(parseRawGitHubRepo);
-
-  return { data, error };
 }

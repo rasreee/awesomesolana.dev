@@ -2,7 +2,7 @@ import { useSearchFilters } from '@/contexts/SearchContext';
 import { searchProjects } from '@/modules/projects';
 import { FILTER_CATEGORIES } from '@/modules/tags';
 
-import { useSearchGithubRepos } from '../github/api';
+import { useSearchGithubRepos } from '../github/useSearchGitHubRepos';
 import {
   FilterItemToggle,
   Results,
