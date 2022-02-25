@@ -35,9 +35,14 @@ export function useSearchGithubRepos(
   query: string,
   tags: Tag[],
 ): Pick<SWRResponse<GitHubRepo[], Error>, 'data' | 'error'> {
+  function frameworkTopic(name: string) {
+    return name.replaceAll('.', '').replaceAll(' ', '-').toLowerCase();
+  }
   function formatTagParam(tag: Tag): string {
     if (tag.category === 'language') return `language:${tag.name}`;
     if (tag.category === 'topic') return `topic:${tag.name}`;
+    if (tag.category === 'framework')
+      return `topic:${frameworkTopic(tag.name)}`;
     return '';
   }
   function formatQuery(query: string, tags: Tag[]): string {
