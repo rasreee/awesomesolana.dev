@@ -12,14 +12,13 @@ import { getCategoryFilters, getTagSuggestions, Tag } from '@/modules/tags';
 import { Divider, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
 
-import { CategoryFiltersProps } from './CategoryFilters';
 import { OptionCategoryItemButton } from './OptionCategoryCheckBox';
 import { SearchField } from './SearchField';
+import { CategoryFiltersProps } from './types';
 import { useSearchField } from './useSearchField';
 
-export function CategoryFiltersBottomSheet({
+export function FilterCategoryMenuBottomSheet({
   category,
-  isOpen,
   onRequestClose,
 }: CategoryFiltersProps) {
   const searchField = useSearchField((q) => getTagSuggestions(q, { category }));
@@ -50,7 +49,6 @@ export function CategoryFiltersBottomSheet({
         'h-[56%]',
         'rounded-none rounded-t-xl',
       )}
-      isOpen={isOpen}
       onRequestClose={onRequestClose}
     >
       {/* <div className="flex w-full items-center justify-center pt-3">

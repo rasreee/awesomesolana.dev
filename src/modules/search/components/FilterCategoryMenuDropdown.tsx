@@ -14,14 +14,13 @@ import { Divider, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';
 import { rem } from '@/ui/utils';
 
-import { CategoryFiltersProps } from './CategoryFilters';
 import { OptionCategoryItemButton } from './OptionCategoryCheckBox';
 import { SearchField } from './SearchField';
+import { CategoryFiltersProps } from './types';
 import { useSearchField } from './useSearchField';
 
-export function CategoryFiltersDropdown({
+export function FilterCategoryMenuDropdown({
   category,
-  isOpen,
   onRequestClose,
 }: CategoryFiltersProps) {
   const searchField = useSearchField((q) => getTagSuggestions(q, { category }));
@@ -57,7 +56,6 @@ export function CategoryFiltersDropdown({
   return (
     <Popover
       className={clsxm('bg-surface w-[28rem] max-w-xl pb-5', 'max-h-[60vh]')}
-      isOpen={isOpen}
       onRequestClose={onRequestClose}
       style={{
         maxHeight:

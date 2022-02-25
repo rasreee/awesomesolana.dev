@@ -6,14 +6,14 @@ import { Overlay } from './Overlay';
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  isOpen: boolean;
+  isOpen?: boolean;
   onRequestClose: () => void;
   className?: string;
 }
 
 export function Popover({
   children,
-  isOpen,
+  isOpen = true,
   onRequestClose,
   className,
   ...props

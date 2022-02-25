@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 import { capitalizeFirst, getIntersection } from '@/common/utils';
 import { useClearFilters, useSearchFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
@@ -7,84 +5,66 @@ import pluralize from '@/lib/pluralize';
 import { FilterCategory, getCategoryFilters } from '@/modules/tags';
 import { ChevronDownIcon, XIcon } from '@/ui/icons';
 
-import { CategoryFilters } from './CategoryFilters';
-
-export function TagButton({
-  children,
-  className,
-  ...props
-}: {
-  children: any;
-  className?: string;
-}) {
-  return (
-    <div
-      className={clsxm(
-        'cursor-pointer',
-        'py-2 px-3 sm:gap-2 sm:px-4',
-        'rounded-md',
-        'flex items-center justify-between',
-        'min-w-max overflow-hidden',
-        'font-medium',
-        'flex-1',
-        'bg-surface-2 text text-opacity-90',
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-}
+import { useFilterCategoriesBar } from './FilterCategoriesBar';
+import { TagButton } from './TagButton';
 
 export function FilterItemToggle({ category }: { category: FilterCategory }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const { category: selectedCategory, expand } = useFilterCategoriesBar();
 
   const allFilters = useSearchFilters();
   const categoryFilters = getCategoryFilters(category);
   const clearFilters = useClearFilters();
 
-  const selectedList = getIntersection(
+  const selected = getIntersection(
     categoryFilters,
     allFilters,
     (a, b) => a.name === b.name,
   );
 
-  return (
-    <>
-      <TagButton
-        className={clsxm(
-          isExpanded || selectedList.length > 0
-            ? 'bg-color-primary text-white'
-            : '',
-        )}
+  const hasAnySelected = selected.length > 0;
+
+  function PrefixText() {
+    return (
+      <div
+        className="flex flex-1 cursor-pointer items-center gap-1.5"
+        onClick={() => expand(category)}
       >
-        <div
-          className="flex flex-1 cursor-pointer items-center gap-1.5"
-          onClick={() => setIsExpanded(true)}
-        >
-          <span className="text-left text-base leading-none">
-            {capitalizeFirst(pluralize(category))}
+        <span className="text-left text-base leading-none">
+          {capitalizeFirst(pluralize(category))}
+        </span>
+        {hasAnySelected && (
+          <span className="text-base leading-none">
+            {`(${selected.length})`}
           </span>
-          {selectedList.length > 0 ? (
-            <span className="text-base leading-none">
-              {`(${selectedList.length})`}
-            </span>
-          ) : null}
-        </div>
-        {selectedList.length > 0 ? (
+        )}
+      </div>
+    );
+  }
+
+  function Postfix() {
+    return (
+      <>
+        {hasAnySelected ? (
           <button onClick={clearFilters.handleClearCategory(category)}>
             <XIcon className="h-4 w-4" />
           </button>
         ) : (
           <ChevronDownIcon />
         )}
-      </TagButton>
-      <CategoryFilters
-        category={category}
-        isOpen={isExpanded}
-        onRequestClose={() => setIsExpanded(false)}
-      />
-    </>
+      </>
+    );
+  }
+
+  return (
+    <TagButton
+      className={clsxm(
+        (selectedCategory && selectedCategory === category) || hasAnySelected
+          ? 'bg-color-primary text-white'
+          : '',
+      )}
+    >
+      <PrefixText />
+      <Postfix />
+    </TagButton>
   );
 }

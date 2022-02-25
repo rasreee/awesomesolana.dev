@@ -1,24 +1,51 @@
 import { NextRouter, useRouter } from 'next/router';
 import { useMemo } from 'react';
 
+import { normalizeQueryParam } from '@/common/utils';
+import { useSearchGithubRepos } from '@/modules/github/useSearchGitHubRepos';
 import { FILTER_CATEGORIES, FilterCategory, Tag } from '@/modules/tags';
 
-type Search = {
-  query?: string;
-  tags?: Tag[];
-};
+export function useSearchQuery() {
+  const router = useRouter();
+  return useMemo(
+    () => ('q' in router.query ? normalizeQueryParam(router.query.q) : ''),
+    [router.query],
+  );
+}
+
+export function useSubmitQuery() {
+  const router = useRouter();
+  const filters = useSearchFilters();
+
+  const submitQuery = (query: string) => {
+    if (!query) return router.push('/search');
+
+    let newPath = `/search?q=${query}`;
+
+    filters.forEach((filter) => {
+      newPath = [newPath, filter.category + '=' + filter.name].join('&');
+    });
+
+    router.push(newPath);
+  };
+
+  return submitQuery;
+}
 
 export function useSearch() {
+  const query = useSearchQuery();
+  const filters = useSearchFilters();
+
+  const { data: results, error } = useSearchGithubRepos(query, filters);
+
+  return { results, error, filters, query };
+}
+
+export function useSearchFilters(): Tag[] {
   const router = useRouter();
 
-  function parseSearch(parsedUrlQuery: NextRouter['query']): Search {
-    const search: Search = {};
-
-    if ('query' in parsedUrlQuery) {
-      search.query = parsedUrlQuery['query'] as string;
-    }
-
-    const tags: Tag[] = [];
+  function parseSearch(parsedUrlQuery: NextRouter['query']): Tag[] {
+    const filters: Tag[] = [];
 
     const keys = Object.keys(parsedUrlQuery);
 
@@ -28,22 +55,14 @@ export function useSearch() {
           .split(',')
           .map((name) => ({ category, name }));
 
-        tags.push(...tagsForType);
+        filters.push(...tagsForType);
       }
     });
 
-    search.tags = tags;
-
-    return search;
+    return filters;
   }
 
   return useMemo(() => parseSearch(router.query), [router.query]);
-}
-
-export function useSearchFilters(): Tag[] {
-  const search = useSearch();
-
-  return search.tags ?? [];
 }
 
 export function useCountFilters() {

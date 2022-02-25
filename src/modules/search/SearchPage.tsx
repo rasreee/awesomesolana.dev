@@ -1,46 +1,37 @@
 import React from 'react';
 
-import { useSearchFilters } from '@/contexts/SearchContext';
+import { useSubmitQuery } from '@/contexts/SearchContext';
 
-import { searchGitHubRepos } from '../github/api';
-import { useSearchGithubRepos } from '../github/useSearchGitHubRepos';
 import {
-  FilterBar,
-  RepoItem,
-  ResultsInfo,
+  FilterCategoriesBar,
+  FilterCategoriesControls,
+  FilterCategoryMenu,
+  Results,
   SearchField,
-  useSearchField,
+  useSearchForm,
 } from './components';
 
 export function SearchPage() {
-  const filters = useSearchFilters();
+  const submitQuery = useSubmitQuery();
 
-  const searchField = useSearchField((query) =>
-    searchGitHubRepos(query, filters),
-  );
-
-  const { data: hits } = useSearchGithubRepos(searchField.query, filters);
+  const searchField = useSearchForm((query) => submitQuery(query));
 
   return (
     <div className="flex-1 px-3 sm:px-6">
       <div className="flex flex-col gap-2">
         <SearchField autoFocused {...searchField} />
-        <FilterBar />
+        <FilterCategories />
       </div>
-      <div>
-        <ResultsInfo hits={hits} filters={filters} />
-        {hits ? (
-          <ul>
-            {hits.map((hit) => (
-              <li key={hit.id}>
-                <RepoItem {...hit} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <ul>...</ul>
-        )}
-      </div>
+      <Results />
     </div>
+  );
+}
+
+function FilterCategories() {
+  return (
+    <FilterCategoriesBar>
+      <FilterCategoriesControls />
+      <FilterCategoryMenu />
+    </FilterCategoriesBar>
   );
 }
