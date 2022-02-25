@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useSubmitQuery } from '@/contexts/SearchContext';
+import { useSubmitQuery } from '@/modules/search';
 
 import {
   FilterCategoriesBar,

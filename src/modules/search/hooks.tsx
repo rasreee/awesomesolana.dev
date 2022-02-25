@@ -2,7 +2,7 @@ import { NextRouter, useRouter } from 'next/router';
 import { useMemo } from 'react';
 
 import { normalizeQueryParam } from '@/common/utils';
-import { useSearchGithubRepos } from '@/modules/github/useSearchGitHubRepos';
+import { useSearchGithubRepos } from '@/modules/github';
 import { FILTER_CATEGORIES, FilterCategory, Tag } from '@/modules/tags';
 
 export function useSearchQuery() {

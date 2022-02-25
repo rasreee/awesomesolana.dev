@@ -2,13 +2,13 @@ import React from 'react';
 import useSWR from 'swr';
 
 import { capitalizeFirst, getIntersection } from '@/common/utils';
+import clsxm from '@/lib/clsxm';
+import pluralize from '@/lib/pluralize';
 import {
   useGetIsFilterActive,
   useSearchFilters,
   useToggleFilter,
-} from '@/contexts/SearchContext';
-import clsxm from '@/lib/clsxm';
-import pluralize from '@/lib/pluralize';
+} from '@/modules/search';
 import { getCategoryFilters, getTagSuggestions, Tag } from '@/modules/tags';
 import { Divider, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';

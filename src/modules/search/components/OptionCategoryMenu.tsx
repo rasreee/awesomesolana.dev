@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
+import clsxm from '@/lib/clsxm';
+import pluralize from '@/lib/pluralize';
 import {
   useCountFilters,
   useGetIsFilterActive,
   useToggleFilter,
-} from '@/contexts/SearchContext';
-import clsxm from '@/lib/clsxm';
-import pluralize from '@/lib/pluralize';
+} from '@/modules/search';
 import {
   FilterCategory,
   getCategoryFilters,

@@ -1,8 +1,8 @@
 import useSWR, { SWRResponse } from 'swr';
 
 import { fetcher } from '@/common/utils';
+import { Tag } from '@/modules/tags';
 
-import { Tag } from '../tags';
 import { parseRawGitHubRepo } from './helpers';
 import { GitHubApiResponse, GitHubRepo } from './types';
 

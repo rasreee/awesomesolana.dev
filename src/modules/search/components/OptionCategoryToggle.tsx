@@ -1,7 +1,7 @@
 import { capitalizeFirst } from '@/common/utils';
-import { useCountFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
+import { useCountFilters } from '@/modules/search';
 import { FilterCategory } from '@/modules/tags';
 import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icons';
 

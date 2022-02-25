@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { useSearch } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
+import { GitHubRepo } from '@/modules/github';
+import { useSearch } from '@/modules/search';
+import { Tag } from '@/modules/tags';
 
-import { GitHubRepo } from '../../github/types';
-import { Tag } from '../../tags';
 import { RepoItem } from '.';
 
 export function Results() {

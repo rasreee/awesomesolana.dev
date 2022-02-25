@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { useSearchOptions } from '@/contexts/AppContext';
+import clsxm from '@/lib/clsxm';
 import {
   useClearFilters,
   useCountFilters,
   useSearchFilters,
-} from '@/contexts/SearchContext';
-import clsxm from '@/lib/clsxm';
+} from '@/modules/search';
 import { FilterCategory } from '@/modules/tags';
 import { GhostButton, Popover } from '@/ui/components';
 import { XIcon } from '@/ui/icons';

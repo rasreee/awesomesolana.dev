@@ -1,7 +1,7 @@
 import { capitalizeFirst, getIntersection } from '@/common/utils';
-import { useClearFilters, useSearchFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
+import { useClearFilters, useSearchFilters } from '@/modules/search';
 import { FilterCategory, getCategoryFilters } from '@/modules/tags';
 import { ChevronDownIcon, XIcon } from '@/ui/icons';
 

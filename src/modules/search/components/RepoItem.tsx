@@ -1,4 +1,4 @@
-import { GitHubRepo } from '@/modules/github/types';
+import { GitHubRepo } from '@/modules/github';
 
 export function RepoItem({ name, description }: GitHubRepo) {
   // const getIsFilterActive = useGetIsFilterActive();

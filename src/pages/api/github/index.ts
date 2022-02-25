@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { authFetch, normalizeQueryParam } from '@/common/utils';
-import { githubApi } from '@/modules/github/helpers';
-import { GitHubApiResponse } from '@/modules/github/types';
+import { githubApi, GitHubApiResponse } from '@/modules/github';
 
 export default async function githubApiHandler(
   req: NextApiRequest,

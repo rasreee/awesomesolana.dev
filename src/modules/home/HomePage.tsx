@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useToggleFilter } from '@/contexts/SearchContext';
-import { SearchField, useSearchField } from '@/modules/search/components';
+import { useToggleFilter } from '@/modules/search';
+import { SearchField, useSearchField } from '@/modules/search';
 import { getTagSuggestions, Tag } from '@/modules/tags';
 import { Logo } from '@/ui/components';
 

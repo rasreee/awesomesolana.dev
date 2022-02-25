@@ -1,9 +1,6 @@
 import * as React from 'react';
 
-import {
-  SearchOptionsModal,
-  SearchOptionsSidebar,
-} from '@/modules/search/components';
+import { SearchOptionsModal, SearchOptionsSidebar } from '@/modules/search';
 import { Divider, ResponsiveRender, Seo, SeoProps } from '@/ui/components';
 
 import AppFooter from './AppFooter';

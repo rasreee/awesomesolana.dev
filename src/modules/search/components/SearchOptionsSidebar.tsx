@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { useSearchOptions } from '@/contexts/AppContext';
-import { useClearFilters } from '@/contexts/SearchContext';
 import clsxm from '@/lib/clsxm';
+import { useClearFilters } from '@/modules/search';
 import { FILTER_CATEGORIES, FilterCategory } from '@/modules/tags';
 import { SolidButton } from '@/ui/components';
 import { useSelections } from '@/ui/hooks/useSelections';
