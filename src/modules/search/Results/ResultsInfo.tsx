@@ -1,4 +1,3 @@
-import { SearchFilter } from '@/api/filters';
 import { Project } from '@/api/projects';
 import { useAppState } from '@/contexts/AppContext';
 import { useSearch } from '@/contexts/SearchContext';
@@ -8,12 +7,12 @@ import { FilterTag } from './FilterTag';
 
 function getInfoText({
   hits,
-  tags,
+  hasFilters,
 }: {
   hits: Project[];
-  tags: SearchFilter[] | undefined;
+  hasFilters: boolean;
 }): string {
-  if (!tags?.length) return `Showing ${hits.length} results`;
+  if (!hasFilters) return `Showing ${hits.length} results`;
 
   const result = hits.length
     ? `${hits.length} ${hits.length === 1 ? 'result' : 'results'}`
@@ -25,6 +24,7 @@ function getInfoText({
 export function ResultsInfo({ hits }: { hits: Project[] }) {
   const {
     search: { tags },
+    hasFilters,
     removeFilter,
     toggleFilter,
     clearFilters,
@@ -38,9 +38,9 @@ export function ResultsInfo({ hits }: { hits: Project[] }) {
     <div className="flex flex-col gap-1">
       <div className="flex items-center justify-between">
         <span className="text text-sm opacity-90">
-          {getInfoText({ hits, tags })}
+          {getInfoText({ hits, hasFilters })}
         </span>
-        {!isFiltersMenuOpen && (
+        {!isFiltersMenuOpen && hasFilters && (
           <SolidButton
             onClick={clearFilters}
             className="py-2 text-sm leading-none"
