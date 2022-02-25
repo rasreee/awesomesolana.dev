@@ -17,14 +17,14 @@ export function OnlyMobile({
   return <div className={clsxm('md:hidden', className)}>{children}</div>;
 }
 
-export function ResponsiveRender<P = any>({
+export function ResponsiveRender<P = {}>({
   mobile: Small,
   aboveMobile: AboveMobile,
-  props,
+  props = {} as P,
 }: {
   mobile: ComponentType<P>;
   aboveMobile: ComponentType<P>;
-  props: P;
+  props?: P;
 }) {
   const isMobile = useIsMobile();
 

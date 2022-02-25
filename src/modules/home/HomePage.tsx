@@ -33,7 +33,7 @@ export function HomePage() {
         <div className="flex flex-col gap-3">
           <SearchField
             autoFocused
-            {...{ hits, error, isRequesting, query, onChange }}
+            {...{ hits, error, isRequesting, query, onChange, reset }}
           />
           <GroupedResults
             isOpen={hits.length > 0 && !isRequesting}
