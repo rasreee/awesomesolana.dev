@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
+import { getProjectsCountForTag } from '@/api/projects';
 import {
   FilterCategory,
-  filtersByType,
+  getPluralCategory,
+  getTagSuggestions,
   SEARCH_FILTERS,
-  searchFilters,
-  sortFiltersByProjectCount,
   Tag,
-  toPluralFilterCategory,
 } from '@/api/tags';
 import { useSearch } from '@/contexts/SearchContext';
+import clsxm from '@/lib/clsxm';
 import { SolidButton, TextInput, useSearchField } from '@/ui/components';
-import { clsxm } from '@/ui/utils';
 
 import { FilterMenuOption } from './FilterMenuOption';
+
+function sortTagsByProjectsCount(list: Tag[]): Tag[] {
+  return list.sort(
+    (a, b) => getProjectsCountForTag(b) - getProjectsCountForTag(a),
+  );
+}
+
+function getTagsForCategory(category: FilterCategory): Tag[] {
+  return SEARCH_FILTERS.filter((filter) => filter.category === category);
+}
 
 export function FilterMenu({
   category,
@@ -26,7 +35,7 @@ export function FilterMenu({
 
   const toggleExpanded = () => setExpanded((prev) => !prev);
 
-  const previewOptions = filtersByType(SEARCH_FILTERS, category).slice(
+  const previewOptions = getTagsForCategory(category).slice(
     0,
     expanded ? 10 : 5,
   );
@@ -34,8 +43,8 @@ export function FilterMenu({
   const runSearch = async (searchQuery: string): Promise<Tag[]> => {
     if (!searchQuery) return previewOptions;
 
-    const filters = await searchFilters(searchQuery, { category }).then(
-      sortFiltersByProjectCount,
+    const filters = await getTagSuggestions(searchQuery, { category }).then(
+      sortTagsByProjectsCount,
     );
 
     return filters;
@@ -43,18 +52,20 @@ export function FilterMenu({
 
   const { query, setQuery, hits } = useSearchField(runSearch);
 
-  const { search, addFilter, removeFilter, getFilterChecked } = useSearch();
+  const { search, addFilter, removeFilter, getIsFilterActive } = useSearch();
 
-  const onClickItem = (filter: Tag) => () => {
-    if (!getFilterChecked(filter)) {
-      addFilter(filter);
+  const onClickItem = (tag: Tag) => () => {
+    if (!getIsFilterActive(tag)) {
+      addFilter(tag);
     } else {
-      removeFilter(filter);
+      removeFilter(tag);
     }
     setQuery('');
   };
 
-  const selectedCount = filtersByType(search.tags ?? [], category).length;
+  const selectedCount = (search.tags ?? []).filter(
+    (item) => item.category === category,
+  ).length;
 
   const canShowMore = hits.length > 0;
 
@@ -76,9 +87,7 @@ export function FilterMenu({
           name={`${category}-filter-search`}
           value={query}
           onChange={setQuery}
-          placeholder={`Search ${toPluralFilterCategory(
-            category,
-          ).toLowerCase()}...`}
+          placeholder={`Search ${getPluralCategory(category).toLowerCase()}...`}
           className={clsxm('input-sm input-focus-unset')}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -98,7 +107,7 @@ export function FilterMenu({
             key={`${tag.category}_${tag.name}`}
             tag={tag}
             onClick={onClickItem(tag)}
-            checked={getFilterChecked(tag)}
+            checked={getIsFilterActive(tag)}
           />
         ))}
       </ul>

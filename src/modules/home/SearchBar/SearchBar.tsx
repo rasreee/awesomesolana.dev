@@ -1,4 +1,4 @@
-import { searchFilters, Tag } from '@/api/tags';
+import { getTagSuggestions, Tag } from '@/api/tags';
 import { useSearch } from '@/contexts/SearchContext';
 import { SearchField, useSearchField } from '@/ui/components';
 
@@ -7,7 +7,7 @@ import { GroupedResults } from './GroupedResults';
 export function SearchBar() {
   const { addFilter } = useSearch();
 
-  const searchField = useSearchField(searchFilters);
+  const searchField = useSearchField(getTagSuggestions);
 
   const onFilterClick = (tag: Tag) => {
     addFilter(tag);

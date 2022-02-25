@@ -1,5 +1,5 @@
+import clsxm from '@/lib/clsxm';
 import { SVGIconProps } from '@/ui/icons';
-import { clsxm } from '@/ui/utils';
 
 import { Spinner } from './Spinner';
 

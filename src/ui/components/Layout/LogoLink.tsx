@@ -1,5 +1,5 @@
+import clsxm from '@/lib/clsxm';
 import { HideOnMobile, Logo, OnlyMobile, UnstyledLink } from '@/ui/components';
-import { clsxm } from '@/ui/utils';
 
 function LogoLink() {
   return (

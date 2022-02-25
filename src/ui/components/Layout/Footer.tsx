@@ -1,7 +1,7 @@
 import { capitalizeFirst } from '@/common/utils';
+import clsxm from '@/lib/clsxm';
 import { UnstyledLink } from '@/ui/components';
 import { SVGIconProps } from '@/ui/icons';
-import { clsxm } from '@/ui/utils';
 
 const defaultIconSizeProps = {
   height: '1.5em',

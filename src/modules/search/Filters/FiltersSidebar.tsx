@@ -1,4 +1,4 @@
-import { FilterCategory, getFilterCategories } from '@/api/tags';
+import { FILTER_CATEGORIES, FilterCategory } from '@/api/tags';
 import { useSearch } from '@/contexts/SearchContext';
 import { ClearFiltersButton } from '@/modules/search/ClearFiltersButton';
 import { useSelections } from '@/ui/hooks/useSelections';
@@ -8,9 +8,8 @@ import { FilterSection } from './FilterSection';
 export function FiltersSidebar() {
   const { clearFiltersByType } = useSearch();
 
-  const { getIsExpanded, toggleSelection } = useSelections<FilterCategory>(
-    getFilterCategories(),
-  );
+  const { getIsExpanded, toggleSelection } =
+    useSelections<FilterCategory>(FILTER_CATEGORIES);
 
   const handleToggleCategory = (category: FilterCategory) => () => {
     toggleSelection(category);
@@ -27,7 +26,7 @@ export function FiltersSidebar() {
         <ClearFiltersButton />
       </div>
       <div>
-        {getFilterCategories().map((category) => (
+        {FILTER_CATEGORIES.map((category) => (
           <FilterSection
             key={category}
             category={category}

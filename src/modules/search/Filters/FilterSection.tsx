@@ -1,11 +1,7 @@
-import {
-  FilterCategory,
-  filtersByType,
-  toPluralFilterCategory,
-} from '@/api/tags';
+import { FilterCategory, getPluralCategory } from '@/api/tags';
 import { useSearch } from '@/contexts/SearchContext';
+import clsxm from '@/lib/clsxm';
 import { ChevronDownIcon, ChevronUpIcon } from '@/ui/icons';
-import { clsxm } from '@/ui/utils';
 
 import { FilterMenu } from './FilterMenu';
 
@@ -22,7 +18,9 @@ export function FilterSection({
 }) {
   const { search } = useSearch();
 
-  const selectedCount = filtersByType(search.tags ?? [], category).length;
+  const selectedCount = (search.tags ?? []).filter(
+    (item) => item.category === category,
+  ).length;
 
   return (
     <div>
@@ -34,7 +32,7 @@ export function FilterSection({
           {isExpanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
         </div>
         <div className={clsxm(isExpanded && 'font-semibold')}>
-          {toPluralFilterCategory(category)}{' '}
+          {getPluralCategory(category)}{' '}
           {selectedCount > 0 ? `(${selectedCount})` : ''}
         </div>
       </button>

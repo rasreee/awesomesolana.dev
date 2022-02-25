@@ -1,5 +1,5 @@
+import clsxm from '@/lib/clsxm';
 import { HeroIconProps, SVGIconProps } from '@/ui/icons';
-import { clsxm } from '@/ui/utils';
 
 function SearchIconOutline({ className, ...props }: SVGIconProps) {
   return (

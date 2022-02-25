@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { clsxm } from '@/ui/utils';
+import clsxm from '@/lib/clsxm';
 
 import { UnstyledLink, UnstyledLinkProps } from './UnstyledLink';
 

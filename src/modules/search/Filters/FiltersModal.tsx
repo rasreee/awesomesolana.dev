@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { FilterCategory, getFilterCategories } from '@/api/tags';
+import { FILTER_CATEGORIES, FilterCategory } from '@/api/tags';
 import { useAppState } from '@/contexts/AppContext';
 import { useSearch } from '@/contexts/SearchContext';
 import { GhostButton, Popover } from '@/ui/components';
@@ -60,7 +60,7 @@ export function FiltersModal() {
           </div>
         </div>
         <ul>
-          {getFilterCategories().map((item) => (
+          {FILTER_CATEGORIES.map((item) => (
             <li key={item}>
               <FilterSection
                 category={item}

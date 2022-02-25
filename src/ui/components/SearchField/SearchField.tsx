@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
 
 import { useAppState } from '@/contexts/AppContext';
+import clsxm from '@/lib/clsxm';
 import { ErrorMessage, StatefulIcon, TextInput } from '@/ui/components';
 import { AdjustmentsIcon, SearchIcon } from '@/ui/icons';
-import { clsxm } from '@/ui/utils';
 
 const DEFAULT_PLACEHOLDER = 'Search for any project, dependency, or topic';
 

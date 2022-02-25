@@ -1,6 +1,6 @@
 import { Tag } from '@/api/tags';
+import clsxm from '@/lib/clsxm';
 import { XIcon } from '@/ui/icons';
-import { clsxm } from '@/ui/utils';
 
 export function FilterTag({
   tag,

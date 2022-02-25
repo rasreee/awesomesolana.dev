@@ -1,5 +1,5 @@
+import clsxm from '@/lib/clsxm';
 import { useIsMobile } from '@/ui/hooks';
-import { clsxm } from '@/ui/utils';
 
 import { FiltersModal } from './FiltersModal';
 import { FiltersSidebar } from './FiltersSidebar';

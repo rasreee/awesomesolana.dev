@@ -1,37 +1,15 @@
-import { getProjectsCountForTag } from '@/api/projects';
 import { capitalizeFirst } from '@/common/utils';
 
 import { SEARCH_FILTERS } from './constants';
 import { FilterCategory, Tag } from './types';
 
-export function toPluralFilterCategory(category: FilterCategory): string {
+export function getPluralCategory(category: FilterCategory): string {
   if (category === 'cargo-dependency') return 'Cargo Dependencies';
   if (category === 'npm-dependency') return 'NPM Dependencies';
   return `${capitalizeFirst(category)}s`;
 }
 
-export function filtersByType(list: Tag[], category: Tag['category']): Tag[] {
-  return list.filter((filter) => filter.category === category);
-}
-
-export function sortFiltersByProjectCount(list: Tag[]): Tag[] {
-  return list.sort(
-    (a, b) => getProjectsCountForTag(b) - getProjectsCountForTag(a),
-  );
-}
-
-export function getFilterCategories(): FilterCategory[] {
-  const result = [
-    'topic',
-    'framework',
-    'language',
-    'npm-dependency',
-    'cargo-dependency',
-  ] as FilterCategory[];
-  return result;
-}
-
-export async function searchFilters(
+export async function getTagSuggestions(
   query: string,
   filter?: { category: FilterCategory },
 ): Promise<Tag[]> {

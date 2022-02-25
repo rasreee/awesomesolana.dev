@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {
+  FILTER_CATEGORIES,
   FilterCategory,
-  getFilterCategories,
+  getPluralCategory,
   Tag,
-  toPluralFilterCategory,
 } from '@/api/tags';
 import { useSearch } from '@/contexts/SearchContext';
 import { Popover } from '@/ui/components';
@@ -19,7 +19,7 @@ type GroupedResultsProps = {
 type GroupedHits = Array<{ category: FilterCategory; hits: Tag[] }>;
 
 function groupHitsByType(list: Tag[]): GroupedHits {
-  const groups = getFilterCategories().map((category) => ({
+  const groups = FILTER_CATEGORIES.map((category) => ({
     category,
     hits: list.filter((filter) => filter.category === category),
   }));
@@ -54,7 +54,7 @@ export function GroupedResults({
           list.length > 0 && (
             <div className="flex flex-col gap-2 px-1">
               <span className="px-3 py-2 text-lg font-semibold">
-                {toPluralFilterCategory(category)} {`(${list.length})`}
+                {getPluralCategory(category)} {`(${list.length})`}
               </span>
               <ul className="max-h-[16rem] overflow-y-auto">
                 {list.map((hit) => (

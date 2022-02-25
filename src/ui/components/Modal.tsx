@@ -1,7 +1,7 @@
 import { FC, ReactNode, useRef } from 'react';
 
+import clsxm from '@/lib/clsxm';
 import { EventKeys, useClickOutside, useKeyPress } from '@/ui/hooks';
-import { clsxm } from '@/ui/utils';
 
 export interface ModalProps {
   /**
