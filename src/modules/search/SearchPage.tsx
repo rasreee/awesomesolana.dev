@@ -1,15 +1,21 @@
+import React from 'react';
+
 import { useAppSearchField } from '@/app/AppContext';
 
 import {
+  BrowseResults,
   FilterCategoriesBar,
   FilterCategoriesControls,
   FilterCategoryMenu,
-  Results,
   SearchField,
+  SearchResults,
 } from './components';
+import { useSearchState } from './hooks';
 
 export function SearchPage() {
   const searchField = useAppSearchField();
+  const { filters, query } = useSearchState();
+  const shouldSearch = Boolean(filters.length || query.trim());
 
   return (
     <div className="flex-1 px-3 sm:px-6">
@@ -17,7 +23,18 @@ export function SearchPage() {
         <SearchField autoFocused {...searchField} />
         <FilterCategories />
       </div>
-      <Results />
+
+      {shouldSearch ? (
+        <div>
+          SEARCH RESULTS
+          <SearchResults />
+        </div>
+      ) : (
+        <div>
+          BROWSE RESULTS
+          <BrowseResults />
+        </div>
+      )}
     </div>
   );
 }

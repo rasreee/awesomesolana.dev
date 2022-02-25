@@ -2,7 +2,6 @@ import { NextRouter, useRouter } from 'next/router';
 import { useMemo } from 'react';
 
 import { normalizeQueryParam } from '@/common/utils';
-import { useSearchGithubRepos } from '@/modules/github';
 import { FILTER_CATEGORIES, FilterCategory, Tag } from '@/modules/tags';
 
 export function useSearchQuery() {
@@ -32,15 +31,6 @@ export function useSubmitQuery() {
   return submitQuery;
 }
 
-export function useSearch() {
-  const query = useSearchQuery();
-  const filters = useSearchFilters();
-
-  const { data: results, error } = useSearchGithubRepos(query, filters);
-
-  return { results, error, filters, query };
-}
-
 export function useSearchFilters(): Tag[] {
   const router = useRouter();
 
@@ -63,6 +53,13 @@ export function useSearchFilters(): Tag[] {
   }
 
   return useMemo(() => parseSearch(router.query), [router.query]);
+}
+
+export function useSearchState() {
+  const query = useSearchQuery();
+  const filters = useSearchFilters();
+
+  return { filters, query };
 }
 
 export function useCountFilters() {

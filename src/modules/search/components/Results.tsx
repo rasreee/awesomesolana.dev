@@ -3,21 +3,54 @@ import React from 'react';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
 import { GitHubRepo } from '@/modules/github';
-import { useSearch } from '@/modules/search';
+import {
+  useBrowseGithubRepos,
+  useSearchGithubRepos,
+} from '@/modules/github/useGithubReposApi';
+import { useSearchState } from '@/modules/search';
 import { Tag } from '@/modules/tags';
+import { ErrorMessage } from '@/ui/components';
 
-import { RepoItem } from '.';
+import { RepoItem } from './RepoItem';
 
-export function Results() {
-  const { results } = useSearch();
+export function SearchResults() {
+  const { filters, query } = useSearchState();
 
-  if (!results) return <ul>...</ul>;
+  const { data, error } = useSearchGithubRepos({
+    filters,
+    q: query,
+  });
+
+  if (error) return <ErrorMessage>{error?.message}</ErrorMessage>;
+
+  if (!data) return <ul>...</ul>;
 
   return (
     <div>
-      <ResultsInfo />
+      <ResultsInfo data={data} filters={filters} />
       <ul>
-        {results.map((hit) => (
+        {data.map((hit) => (
+          <li key={hit.id}>
+            <RepoItem {...hit} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export function BrowseResults() {
+  const { data, error } = useBrowseGithubRepos();
+
+  if (error) return <ErrorMessage>{error?.message}</ErrorMessage>;
+
+  if (!data) return <ul>...</ul>;
+
+  return (
+    <div>
+      <ResultsInfo data={data} />
+      <ul>
+        {data.map((hit) => (
           <li key={hit.id}>
             <RepoItem {...hit} />
           </li>
@@ -28,35 +61,39 @@ export function Results() {
 }
 
 function getResultsInfoText({
-  results,
+  data,
   filters,
 }: {
-  results: GitHubRepo[];
-  filters: Tag[];
+  data: GitHubRepo[];
+  filters?: Tag[];
 }): string {
-  const hasFilters = Boolean(filters.length);
+  const hasFilters = Boolean(filters?.length);
 
   if (!hasFilters)
-    return `Showing ${results.length} ${pluralize('result', results.length)}`;
+    return `Showing ${data.length} ${pluralize('result', data.length)}`;
 
-  const result = results.length
-    ? `Showing ${results.length} ${pluralize('result', results.length)} for `
+  const result = data.length
+    ? `Showing ${data.length} ${pluralize('result', data.length)} for `
     : `No results found for `;
 
   return result;
 }
 
-function ResultsInfo() {
-  const { results, filters } = useSearch();
-
-  if (!results) return <div className="py-2 px-1">Loading...</div>;
+function ResultsInfo({
+  data,
+  filters,
+}: {
+  data: GitHubRepo[] | undefined;
+  filters?: Tag[];
+}) {
+  if (!data) return <div className="py-2 px-1">Loading...</div>;
 
   return (
     <div className={clsxm('py-2 px-1')}>
       <span className="text text-sm leading-none opacity-90">
-        {getResultsInfoText({ results, filters })}
+        {getResultsInfoText({ data, filters })}
       </span>
-      {filters.map((filter) => `${filter.name}`)}
+      {filters?.map((filter) => `${filter.name}`)}
     </div>
   );
 }

@@ -8,14 +8,16 @@ function getHeaders(): HeadersInit {
 }
 
 export async function authFetch(uri: string): Promise<Response> {
-  return await fetch(uri, {
+  const res = await fetch(uri, {
     headers: getHeaders(),
   });
+
+  return res;
 }
 
 export async function fetcher<JSON = any>(
   input: RequestInfo,
-  init?: RequestInit,
+  init: RequestInit,
 ): Promise<JSON> {
   const res = await fetch(input, init);
   return res.json();

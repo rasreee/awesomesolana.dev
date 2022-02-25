@@ -1,40 +1,7 @@
-import type { ParsedUrlQuery } from 'querystring';
+import { DEFAULT_PAGINATION_PARAMS, PaginationParams } from '@/common/utils';
 
-import { normalizeQueryParam } from '@/common/utils';
-
+import { Tag } from '../tags';
 import { GitHubRepo, RawGitHubRepo } from './types';
-
-/**
- * Parse query from urls like :
- * - `[owner]/[repository]`
- */
-export function parseGithubQuery(query: ParsedUrlQuery): {
-  owner: string;
-  repositoryName: string;
-} {
-  return {
-    owner: normalizeQueryParam(query.owner),
-    repositoryName: normalizeQueryParam(query.repositoryName),
-  };
-}
-
-const DEFAULT_PAGE_SIZE = 10;
-
-export const githubApi = {
-  baseUrl: 'https://api.github.com',
-  searchRepos: (
-    q: string,
-    sort?: string,
-    order?: string,
-    per_page = DEFAULT_PAGE_SIZE,
-    page = 0,
-  ) =>
-    [
-      githubApi.baseUrl,
-      `/search/repositories`,
-      `?q=${q}` + `&page=${page}&per_page=${per_page}`,
-    ].join(''),
-};
 
 export function parseRawGitHubRepo(data: RawGitHubRepo): GitHubRepo {
   return {
@@ -54,4 +21,36 @@ export function parseRawGitHubRepo(data: RawGitHubRepo): GitHubRepo {
     license: data.license,
     owner: data.owner,
   };
+}
+
+export function formatGitHubTopic(name: string) {
+  return name.replaceAll('.', '').replaceAll(' ', '-').toLowerCase();
+}
+
+function formatTagSearchParam(tag: Tag): string {
+  if (tag.category === 'language') return `language:${tag.name}`;
+  if (tag.category === 'topic') return `topic:${tag.name}`;
+  if (tag.category === 'framework')
+    return `topic:${formatGitHubTopic(tag.name)}`;
+  return '';
+}
+
+export function formatGithubApiQuery({
+  q = '',
+  filters = [],
+  per_page = DEFAULT_PAGINATION_PARAMS.per_page,
+  page = DEFAULT_PAGINATION_PARAMS.page,
+}: Partial<PaginationParams> & Partial<{ filters: Tag[]; q: string }>): string {
+  const params = [
+    'solana',
+    ...q.trim().split(' '),
+    ...filters.map((tag) => formatTagSearchParam(tag)),
+  ]
+    .filter(Boolean)
+    .join('+');
+
+  const query = `q=${params}`;
+  const pagination = `&page=${page}&per_page=${per_page}`;
+
+  return `?${query}${pagination}`;
 }

@@ -4,7 +4,6 @@ import '@/styles/colors.css';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
-import React from 'react';
 
 import { AppProvider } from '@/app/AppContext';
 import AppLayout from '@/app/AppLayout';
