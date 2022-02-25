@@ -1,45 +1,40 @@
-import React from 'react';
-
 import { useAppSearchField } from '@/app/AppContext';
 
 import {
-  BrowseResults,
   FilterCategoriesBar,
   FilterCategoriesControls,
   FilterCategoryMenu,
+  GithubReposFeed,
+  GithubReposProps,
   SearchField,
-  SearchResults,
 } from './components';
 import { useSearchState } from './hooks';
 
 export function SearchPage() {
   const searchField = useAppSearchField();
-  const { filters, query } = useSearchState();
-  const shouldSearch = Boolean(filters.length || query.trim());
 
   return (
     <div className="flex-1 px-3 sm:px-6">
       <div className="flex flex-col gap-2">
         <SearchField autoFocused {...searchField} />
-        <FilterCategories />
+        <Filters />
       </div>
-
-      {shouldSearch ? (
-        <div>
-          SEARCH RESULTS
-          <SearchResults />
-        </div>
-      ) : (
-        <div>
-          BROWSE RESULTS
-          <BrowseResults />
-        </div>
-      )}
+      <Results />
     </div>
   );
 }
 
-function FilterCategories() {
+function Results() {
+  const { filters, query } = useSearchState();
+  const shouldSearch = Boolean(filters.length || query.trim());
+  const args: GithubReposProps = shouldSearch
+    ? { route: '/search', params: { filters, keywords: [query] } }
+    : { route: '/browse' };
+
+  return <GithubReposFeed {...args} />;
+}
+
+function Filters() {
   return (
     <FilterCategoriesBar>
       <FilterCategoriesControls />
