@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useSearchOptions } from '@/contexts/AppContext';
+import { useSearchOptions } from '@/app/AppContext';
 import clsxm from '@/lib/clsxm';
 import { useClearFilters } from '@/modules/search';
 import { FILTER_CATEGORIES, FilterCategory } from '@/modules/tags';

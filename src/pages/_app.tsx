@@ -6,8 +6,8 @@ import Head from 'next/head';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
 import React from 'react';
 
-import { AppProvider } from '@/contexts/AppContext';
-import AppLayout from '@/layouts/AppLayout';
+import { AppProvider } from '@/app/AppContext';
+import AppLayout from '@/app/AppLayout';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
