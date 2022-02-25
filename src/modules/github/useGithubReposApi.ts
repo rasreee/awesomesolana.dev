@@ -33,13 +33,7 @@ export function useBrowseGithubRepos(
   data: GitHubRepo[] | undefined;
   error: Error | undefined;
 } {
-  const { data: rawData, error } = useSWR<GitHubApiResponse, Error>(
-    githubSwrKey.route('/browse', params),
-  );
-
-  const repos = rawData?.items.map(parseRawGitHubRepo);
-
-  return { data: repos, error };
+  return useGithubReposApi('/browse', params);
 }
 
 export function useSearchGithubRepos(
@@ -48,11 +42,5 @@ export function useSearchGithubRepos(
   data: GitHubRepo[] | undefined;
   error: Error | undefined;
 } {
-  const { data: rawData, error } = useSWR<GitHubApiResponse, Error>(
-    githubSwrKey.route('/search', params),
-  );
-
-  const repos = rawData?.items.map(parseRawGitHubRepo);
-
-  return { data: repos, error };
+  return useGithubReposApi('/search', params);
 }
