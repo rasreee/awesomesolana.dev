@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
+
 import { FilterType, getFilterTypes } from '@/api/filters';
 import { useSearch } from '@/contexts/search';
 import { GhostButton } from '@/ui/components';
-import { useSelections } from '@/ui/hooks/useSelections';
 import { XIcon } from '@/ui/icons';
 
 import { FilterSection } from './FilterSection';
@@ -11,9 +12,28 @@ export function MobileFilters({
 }: {
   onRequestClose: () => void;
 }) {
-  const { clearFilters, search } = useSearch();
+  const { clearFilters, search, getFiltersCountByType } = useSearch();
 
-  const { getIsExpanded, toggleSelection } = useSelections<FilterType>();
+  const [expanded, setExpanded] = useState<FilterType | null>(null);
+  const [wasCleared, setWasCleared] = useState(false);
+
+  const toggleExpanded = (item: FilterType) => {
+    setExpanded((prev) => (prev !== item ? item : null));
+    setWasCleared(false);
+  };
+
+  const handleClear = () => {
+    clearFilters();
+    setWasCleared(true);
+  };
+
+  useEffect(() => {
+    if (!expanded || !wasCleared) return;
+
+    if (getFiltersCountByType(expanded) === 0) {
+      setExpanded(null);
+    }
+  }, [expanded, getFiltersCountByType, wasCleared]);
 
   return (
     <>
@@ -26,18 +46,12 @@ export function MobileFilters({
             </button>
           </div>
         </div>
-        <div>
-          {getFilterTypes().map((type) => (
-            <FilterSection
-              type={type}
-              key={type}
-              isExpanded={getIsExpanded(type)}
-              onToggleExpanded={toggleSelection}
-            />
-          ))}
-        </div>
+        <FilterTypes
+          getIsExpanded={(item) => expanded !== null && item === expanded}
+          toggleExpanded={toggleExpanded}
+        />
         <div className="flex items-center justify-around px-5 py-1">
-          <GhostButton onClick={clearFilters} disabled={!search.tags?.length}>
+          <GhostButton onClick={handleClear} disabled={!search.tags?.length}>
             Clear
           </GhostButton>
           <GhostButton className="text-color-primary" onClick={onRequestClose}>
@@ -48,3 +62,25 @@ export function MobileFilters({
     </>
   );
 }
+
+export const FilterTypes = ({
+  getIsExpanded,
+  toggleExpanded,
+}: {
+  getIsExpanded: (item: FilterType) => boolean;
+  toggleExpanded: (item: FilterType) => void;
+}) => {
+  return (
+    <ul>
+      {getFilterTypes().map((item) => (
+        <li key={item}>
+          <FilterSection
+            type={item}
+            isExpanded={getIsExpanded(item)}
+            onToggleExpanded={toggleExpanded}
+          />
+        </li>
+      ))}
+    </ul>
+  );
+};

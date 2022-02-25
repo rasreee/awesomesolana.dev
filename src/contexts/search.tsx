@@ -1,7 +1,12 @@
 import { NextRouter, useRouter } from 'next/router';
 import { createContext, useContext, useMemo } from 'react';
 
-import { filtersByType, getFilterTypes, SearchFilter } from '@/api/filters';
+import {
+  filtersByType,
+  FilterType,
+  getFilterTypes,
+  SearchFilter,
+} from '@/api/filters';
 
 type Search = {
   query?: string;
@@ -10,6 +15,7 @@ type Search = {
 
 export type ISearchContext = {
   search: Search;
+  getFiltersCountByType: (type: FilterType) => number;
   addFilter: (tag: SearchFilter) => void;
   removeFilter: (tag: SearchFilter) => void;
   toggleFilter: (tag: SearchFilter) => void;
@@ -121,6 +127,10 @@ export function SearchProvider({ children }: { children: any }) {
       .includes(filter.name);
   };
 
+  const getFiltersCountByType = (type: FilterType): number => {
+    return (search.tags ?? []).filter((filter) => filter.type === type).length;
+  };
+
   const clearFiltersByType = (typeToRemove: SearchFilter['type']) => {
     const oldTags = search.tags ?? [];
 
@@ -162,6 +172,7 @@ export function SearchProvider({ children }: { children: any }) {
         getFilterChecked,
         clearFiltersByType,
         toggleFilter,
+        getFiltersCountByType,
       }}
     >
       {children}
