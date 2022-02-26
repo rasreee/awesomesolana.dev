@@ -1,4 +1,4 @@
-import { searchRoute } from './search-route';
+import { searchRoute } from './route';
 
 /**
  * @group modules
@@ -6,7 +6,7 @@ import { searchRoute } from './search-route';
  * @group filters
  * @group helpers
  */
-describe('utils/search-route', () => {
+describe('utils/route', () => {
   describe('excludeCategory', () => {
     it('excludes filter category params from url', () => {
       const prevPath = `/search?q=testing&language=rust`;
@@ -35,6 +35,16 @@ describe('utils/search-route', () => {
       const result = searchRoute.filters.categoryParam(url);
 
       expect(result).toBeNull();
+    });
+  });
+
+  describe('categoryUrl', () => {
+    it('gets page url for category', () => {
+      const category = 'language';
+
+      const result = searchRoute.filters.categoryUrl(category);
+
+      expect(result).toEqual(`/search/filters?category=${category}`);
     });
   });
 });

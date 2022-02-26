@@ -1,18 +1,20 @@
 import { FilterCategory, getCategoryFilters } from '@modules/tags';
 import { getIntersection } from '@utils';
 import clsxm from '@utils/clsxm';
+import { useRouter } from 'next/router';
 
 import { useSearchState } from '@/hooks/useSearchState';
 import { useToggleFilter } from '@/hooks/useToggleFilter';
 import { Popover } from '@/ui/components';
+import { route } from '@/utils/route';
 
-import { useFilterCategoriesBar } from './FilterCategoriesBar';
 import { FilterCategoryMenu } from './FilterCategoryMenu';
 
 export function FilterCategoryModal() {
-  const { filters: allFilters } = useSearchState();
+  const router = useRouter();
+  const selectedCategory = route.search.filters.getCategory(router.asPath);
 
-  const { category, onClose } = useFilterCategoriesBar();
+  const { filters: allFilters } = useSearchState();
 
   const toggleFilter = useToggleFilter();
 
@@ -28,11 +30,11 @@ export function FilterCategoryModal() {
     return selected;
   };
 
-  if (!category) return null;
+  if (!selectedCategory) return null;
 
-  const selectedFilters = getSelectedFilters(category);
+  const selectedFilters = getSelectedFilters(selectedCategory);
 
-  const options = getCategoryFilters(category).filter(
+  const options = getCategoryFilters(selectedCategory).filter(
     (filter) => !selectedFilters.map((item) => item.name).includes(filter.name),
   );
 
@@ -43,13 +45,13 @@ export function FilterCategoryModal() {
         'h-[56%]',
         'rounded-none rounded-t-xl',
       )}
-      onClose={onClose}
-      isOpen={Boolean(category)}
+      onClose={() => route.search.filters.closeCategory(router)}
+      isOpen={Boolean(selectedCategory)}
     >
       <FilterCategoryMenu
-        category={category}
+        category={selectedCategory}
         options={options}
-        onClose={onClose}
+        onClose={() => route.search.filters.closeCategory(router)}
         selected={selectedFilters}
         onToggleFilter={toggleFilter}
       />

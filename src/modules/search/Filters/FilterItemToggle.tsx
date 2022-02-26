@@ -7,26 +7,13 @@ import { useRouter } from 'next/router';
 
 import { useSearchState } from '@/hooks/useSearchState';
 import { ChevronDownIcon, XIcon } from '@/ui/icons';
-import { searchRoute } from '@/utils/search-route';
+import { route } from '@/utils/route';
 
-import { useFilterCategoriesBar } from './FilterCategoriesBar';
 import { TagButton } from './TagButton';
 
 export function FilterItemToggle({ category }: { category: FilterCategory }) {
   const router = useRouter();
   const { filters: allFilters } = useSearchState();
-
-  const clearCategory = (target: FilterCategory) => {
-    router.replace(
-      searchRoute.filters.excludeCategory(router.asPath, target),
-      undefined,
-      {
-        shallow: true,
-      },
-    );
-  };
-
-  const { category: selectedCategory, expand } = useFilterCategoriesBar();
 
   const categoryFilters = getCategoryFilters(category);
 
@@ -42,7 +29,7 @@ export function FilterItemToggle({ category }: { category: FilterCategory }) {
     return (
       <div
         className="flex flex-1 cursor-pointer items-center gap-1.5"
-        onClick={() => expand(category)}
+        onClick={() => route.search.filters.openCategory(category, router)}
       >
         <span className="text-left text-base leading-none">
           {capitalize(pluralize(category))}
@@ -56,6 +43,8 @@ export function FilterItemToggle({ category }: { category: FilterCategory }) {
     );
   }
 
+  const selectedCategory = route.search.filters.getCategory(router.asPath);
+
   return (
     <TagButton
       className={clsxm(
@@ -66,7 +55,7 @@ export function FilterItemToggle({ category }: { category: FilterCategory }) {
     >
       <PrefixText />
       {hasAnySelected ? (
-        <button onClick={() => clearCategory(category)}>
+        <button onClick={() => route.search.clearCategory(category, router)}>
           <XIcon className="h-4 w-4" />
         </button>
       ) : (

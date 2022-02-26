@@ -5,7 +5,7 @@ import { useSearchState } from '@/hooks/useSearchState';
 import { SearchForm, useSearchForm } from '@/ui/components';
 import { waitFor } from '@/utils';
 
-import { FilterCategoriesControls } from './filters/FilterCategoriesBar';
+import { FilterCategoriesControls } from './filters/FilterCategoriesControls';
 import { FilterCategoryModal } from './filters/FilterCategoryModal';
 import { Results } from './Results';
 
