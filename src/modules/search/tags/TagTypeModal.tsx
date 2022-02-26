@@ -1,11 +1,4 @@
-import {
-  getTags,
-  route,
-  TagType,
-  useSearchState,
-  useToggleTag,
-} from '@core/search';
-import { getIntersection } from '@utils';
+import { route } from '@core/search';
 import clsxm from '@utils/clsxm';
 import { useRouter } from 'next/router';
 
@@ -15,31 +8,9 @@ import { TagTypeMenu } from './TagTypeMenu';
 
 export function TagTypeModal() {
   const router = useRouter();
-  const selectedTag = route.search.tags.getType(router.asPath);
+  const tagType = route.search.tags.getType(router.asPath);
 
-  const { tags } = useSearchState();
-
-  const toggleFilter = useToggleTag();
-
-  const getSelectedTags = (type: TagType) => {
-    const tagsForType = getTags(type);
-
-    const selected = getIntersection(
-      tagsForType,
-      tags,
-      (a, b) => a.name === b.name,
-    );
-
-    return selected;
-  };
-
-  if (!selectedTag) return null;
-
-  const selectedTags = getSelectedTags(selectedTag);
-
-  const options = getTags(selectedTag).filter(
-    (tag) => !selectedTags.map((item) => item.name).includes(tag.name),
-  );
+  if (!tagType) return null;
 
   return (
     <Popover
@@ -49,15 +20,9 @@ export function TagTypeModal() {
         'rounded-none rounded-t-xl',
       )}
       onClose={() => route.search.tags.closeType(router)}
-      isOpen={Boolean(selectedTag)}
+      isOpen={Boolean(tagType)}
     >
-      <TagTypeMenu
-        type={selectedTag}
-        options={options}
-        onClose={() => route.search.tags.closeType(router)}
-        selected={selectedTags}
-        onToggleFilter={toggleFilter}
-      />
+      <TagTypeMenu type={tagType} />
     </Popover>
   );
 }

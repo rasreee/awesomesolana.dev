@@ -1,27 +1,36 @@
-import { getTagSuggestions, Tag, TagType } from '@core/search';
+import {
+  getTagSuggestions,
+  route,
+  Tag,
+  TagType,
+  useSearchState,
+  useToggleTag,
+} from '@core/search';
 import { XIcon } from '@primer/octicons-react';
-import { capitalize, waitFor } from '@utils';
+import { capitalize, getIntersection, waitFor } from '@utils';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { Divider, SearchForm, useSearchForm } from '@/ui/components';
 
 import { TagTypeFilterOption } from './TagTypeFilterOption';
+import { useTags } from './useTags';
 
-export function TagTypeMenu({
-  type,
-  options,
-  selected,
-  onClose,
-  onToggleFilter,
-}: {
-  type: TagType;
-  options: Tag[];
-  selected: Tag[];
-  onClose: () => void;
-  onToggleFilter: (tag: Tag) => void;
-}) {
+export function TagTypeMenu({ type }: { type: TagType }) {
+  const router = useRouter();
+
+  const handleClose = () => {
+    route.search.tags.closeType(router);
+  };
+
+  const { data: tagsForType } = useTags(type);
+
+  const { tags } = useSearchState();
+
+  const toggleFilter = useToggleTag();
+
   const [hits, setHits] = useState<Tag[]>([]);
   const searchForm = useSearchForm();
 
@@ -43,15 +52,23 @@ export function TagTypeMenu({
       .finally(() => setLoading(false));
   }, [searchForm.query]);
 
-  const handleToggleFilter = (tag: Tag) => () => {
-    onToggleFilter(tag);
-  };
+  const handleToggleFilter = (tag: Tag) => () => toggleFilter(tag);
+
+  const selectedTags = tagsForType
+    ? getIntersection(tagsForType, tags, (a, b) => a.name === b.name)
+    : undefined;
+
+  const options = tagsForType
+    ? tagsForType.filter(
+        (tag) => !selectedTags?.map((item) => item.name).includes(tag.name),
+      )
+    : [];
 
   const getIsFilterActive = (tag: Tag): boolean =>
-    selected
-      .filter((tag) => tag.type === tag.type)
+    selectedTags
+      ?.filter((tag) => tag.type === tag.type)
       .map((item) => item.name)
-      .includes(tag.name);
+      .includes(tag.name) ?? false;
 
   return (
     <>
@@ -68,18 +85,18 @@ export function TagTypeMenu({
           <h2 className="font-heading text-2xl font-semibold leading-none">
             {capitalize(pluralize(type))}
           </h2>
-          <button onClick={onClose}>
+          <button onClick={handleClose}>
             <XIcon />
           </button>
         </div>
         <SearchForm {...searchForm} onSubmit={searchForm.setQuery} />
       </div>
       <div className="relative top-5 z-0 h-[80%] w-full">
-        {selected.length ? (
+        {selectedTags?.length ? (
           <div className="flex flex-col gap-2 py-2">
             <span className="px-5 text-lg font-medium">Selected</span>
             <ul className={clsxm('px-5 pb-2', 'min-w-full')}>
-              {selected.map((tag) => (
+              {selectedTags.map((tag) => (
                 <TagTypeFilterOption
                   key={`${tag.type}_${tag.name}`}
                   tag={tag}
