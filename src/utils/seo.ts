@@ -1,19 +1,41 @@
 import { siteConfig } from '@configs/site-config';
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 
-type GetSeoOptions = {
+import { capitalize } from './capitalize';
+
+export type SeoOptions = {
   omitOpenGraphImage?: boolean;
 };
 
-export function getSeo(options: GetSeoOptions = {}) {
+function getRouteTitle(pathname: string): string {
+  console.log('PATHNAME:', pathname);
+  const splits = pathname.split('/');
+  const basePath = splits.length > 1 ? splits[1] : '';
+  const title = capitalize(basePath.replace('/', ''));
+
+  console.log('TITLE: ', title);
+
+  return title;
+}
+
+export function getSeo(pathname = '', options: SeoOptions = {}) {
   const { omitOpenGraphImage } = options;
   const { seo } = siteConfig;
   const { images, ...openGraph } = seo.openGraph;
 
   return {
     ...seo,
+    title: getRouteTitle(pathname),
     openGraph: {
       ...openGraph,
       images: omitOpenGraphImage ? undefined : images,
     },
   };
+}
+
+export function useSeoProps(options: SeoOptions = {}) {
+  const pathname = useRouter().pathname;
+
+  return useMemo(() => getSeo(pathname, options), [pathname, options]);
 }

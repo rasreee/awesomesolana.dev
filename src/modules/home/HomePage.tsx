@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { siteConfig } from '@/configs/site-config';
 import { useToggleFilter } from '@/hooks/useToggleFilter';
-import { Logo, SearchForm, useSearchForm } from '@/ui/components';
+import { Logo, SearchForm, Seo, useSearchForm } from '@/ui/components';
 import { waitFor } from '@/utils';
 
 import { GroupedResults } from './GroupedResults';
@@ -48,26 +48,29 @@ export function HomePage() {
   };
 
   return (
-    <div className="min-h-main mx-auto flex w-full flex-1 flex-col gap-10 px-6 pt-28 md:max-w-3xl md:pt-36">
-      <div className="flex flex-col items-center justify-center gap-6">
-        <Logo size="lg" />
-        <div className="text-body text-center text-base leading-normal text-opacity-80 sm:text-lg md:text-xl">
-          {siteConfig.seo.description}
+    <>
+      <Seo title="Home" description={siteConfig.seo.description} />
+      <div className="min-h-main mx-auto flex w-full flex-1 flex-col gap-10 px-6 pt-28 md:max-w-3xl md:pt-36">
+        <div className="flex flex-col items-center justify-center gap-6">
+          <Logo size="lg" />
+          <div className="text-body text-center text-base leading-normal text-opacity-80 sm:text-lg md:text-xl">
+            {siteConfig.seo.description}
+          </div>
+        </div>
+        <div className="flex h-min flex-col gap-3">
+          <SearchForm
+            {...searchBox}
+            onClick={handleInputClick}
+            onSubmit={handleSubmit}
+          />
+          <GroupedResults
+            isOpen={hits.length > 0}
+            hits={hits}
+            onAddFilter={toggleFilter}
+            onClose={closeResults}
+          />
         </div>
       </div>
-      <div className="flex h-min flex-col gap-3">
-        <SearchForm
-          {...searchBox}
-          onClick={handleInputClick}
-          onSubmit={handleSubmit}
-        />
-        <GroupedResults
-          isOpen={hits.length > 0}
-          hits={hits}
-          onAddFilter={toggleFilter}
-          onClose={closeResults}
-        />
-      </div>
-    </div>
+    </>
   );
 }
