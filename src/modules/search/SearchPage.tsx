@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import { useSearchState } from '@/hooks/useSearchState';
 import { SearchForm, useSearchForm } from '@/ui/components';
@@ -12,14 +12,15 @@ export function SearchPage() {
   const router = useRouter();
   const { filters } = useSearchState();
 
-  const { current: restQueryStrings } = useRef(
-    filters.map((filter) => filter.category + '=' + filter.name),
-  );
-
   const submitQuery = (query: string) => {
     if (!query) return;
 
-    const newPath = `/search?q=${query}&${restQueryStrings.join('&')}`;
+    const newPath = `/search?q=${query}${
+      filters.length
+        ? '&' +
+          filters.map((filter) => filter.category + '=' + filter.name).join('&')
+        : ''
+    }`;
 
     router.push(newPath);
   };
