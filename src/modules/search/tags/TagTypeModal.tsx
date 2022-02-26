@@ -1,12 +1,15 @@
-import { getTagsForType, TagType } from '@api/tags';
+import {
+  getTagsForType,
+  route,
+  TagType,
+  useSearchState,
+  useToggleTag,
+} from '@core/search';
 import { getIntersection } from '@utils';
 import clsxm from '@utils/clsxm';
 import { useRouter } from 'next/router';
 
-import { useSearchState } from '@/hooks/useSearchState';
-import { useToggleTag } from '@/hooks/useToggleTag';
 import { Popover } from '@/ui/components';
-import { route } from '@/utils/route';
 
 import { TagTypeMenu } from './TagTypeMenu';
 

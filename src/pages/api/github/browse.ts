@@ -3,7 +3,7 @@ import {
   GitHubApiResponse,
   githubFetch,
   GithubReposBrowseParams,
-} from '@api/github';
+} from '@core/github';
 import { DEFAULT_PAGINATION_PARAMS } from '@utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 

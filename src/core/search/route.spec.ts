@@ -6,7 +6,7 @@ import { searchRoute } from './route';
  * @group tags
  * @group helpers
  */
-describe('utils/route', () => {
+describe('core/search', () => {
   describe('excludeType', () => {
     it('excludes tag type params from url', () => {
       const prevPath = `/search?q=testing&language=rust`;

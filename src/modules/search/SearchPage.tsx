@@ -1,9 +1,9 @@
+import { useSearchState } from '@core/search';
+import { waitFor } from '@utils';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { useSearchState } from '@/hooks/useSearchState';
 import { SearchForm, Seo, useSearchForm } from '@/ui/components';
-import { waitFor } from '@/utils';
 
 import { Results } from './Results';
 import { TagTypeModal } from './tags/TagTypeModal';

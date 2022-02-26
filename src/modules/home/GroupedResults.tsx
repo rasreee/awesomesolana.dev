@@ -1,8 +1,7 @@
-import { Tag, TAG_TYPES, TagType } from '@api/tags';
+import { Tag, TAG_TYPES, TagType, useSearchState } from '@core/search';
 import { capitalize } from '@utils/capitalize';
 import pluralize from '@utils/pluralize';
 
-import { useSearchState } from '@/hooks/useSearchState';
 import { Popover } from '@/ui/components';
 
 type GroupedResultsProps = {

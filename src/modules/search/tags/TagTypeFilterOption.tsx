@@ -1,4 +1,4 @@
-import { Tag } from '@api/tags';
+import { Tag } from '@core/search';
 import React from 'react';
 
 import { CheckBox } from '@/ui/components';

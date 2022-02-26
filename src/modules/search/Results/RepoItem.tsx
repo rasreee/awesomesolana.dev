@@ -1,4 +1,4 @@
-import { GitHubRepo } from '@api/github';
+import { GitHubRepo } from '@core/github';
 import React from 'react';
 
 import { Badge, RepoStat } from '@/ui/components';

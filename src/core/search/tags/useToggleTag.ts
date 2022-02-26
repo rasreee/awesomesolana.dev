@@ -1,8 +1,8 @@
+import { useSearchState } from '@core/search';
 import { useRouter } from 'next/router';
 
-import { Tag, TAG_TYPES } from '@/api/tags';
-
-import { useSearchState } from './useSearchState';
+import { TAG_TYPES } from './constants';
+import { Tag } from './types';
 
 export function useToggleTag() {
   const router = useRouter();

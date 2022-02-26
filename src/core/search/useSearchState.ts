@@ -1,4 +1,4 @@
-import { Tag, TAG_TYPES } from '@api/tags';
+import { Tag, TAG_TYPES } from '@core/search';
 import { normalizeQueryParam } from '@utils/query';
 import { NextRouter, useRouter } from 'next/router';
 import { useMemo } from 'react';

@@ -1,4 +1,4 @@
-import { useSearchState } from '@/hooks/useSearchState';
+import { useSearchState } from '@core/search';
 
 import { GithubReposFeed, GithubReposProps } from './GithubReposFeed';
 

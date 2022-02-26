@@ -1,13 +1,11 @@
-import { getTagsForType, TagType } from '@api/tags';
+import { getTagsForType, route, TagType, useSearchState } from '@core/search';
 import { getIntersection } from '@utils/array';
 import { capitalize } from '@utils/capitalize';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
 import { useRouter } from 'next/router';
 
-import { useSearchState } from '@/hooks/useSearchState';
 import { ChevronDownIcon, XIcon } from '@/ui/icons';
-import { route } from '@/utils/route';
 
 import { TagButton } from './TagButton';
 

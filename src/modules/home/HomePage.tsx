@@ -1,10 +1,14 @@
-import { getTagSuggestions, SEARCH_TAGS, Tag } from '@api/tags';
+import {
+  getTagSuggestions,
+  SEARCH_TAGS,
+  Tag,
+  useToggleTag,
+} from '@core/search';
+import { waitFor } from '@utils';
 import { useEffect, useState } from 'react';
 
 import { siteConfig } from '@/configs/site-config';
-import { useToggleTag } from '@/hooks/useToggleTag';
 import { Logo, SearchForm, Seo, useSearchForm } from '@/ui/components';
-import { waitFor } from '@/utils';
 
 import { GroupedResults } from './GroupedResults';
 

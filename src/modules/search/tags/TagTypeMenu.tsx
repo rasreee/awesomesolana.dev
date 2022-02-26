@@ -1,11 +1,11 @@
+import { getTagSuggestions, Tag, TagType } from '@core/search';
 import { XIcon } from '@primer/octicons-react';
+import { capitalize, waitFor } from '@utils';
+import clsxm from '@utils/clsxm';
+import pluralize from '@utils/pluralize';
 import { useEffect, useState } from 'react';
 
-import { getTagSuggestions, Tag, TagType } from '@/api/tags';
 import { Divider, SearchForm, useSearchForm } from '@/ui/components';
-import { capitalize, waitFor } from '@/utils';
-import clsxm from '@/utils/clsxm';
-import pluralize from '@/utils/pluralize';
 
 import { TagTypeFilterOption } from './TagTypeFilterOption';
 

@@ -1,6 +1,6 @@
+import { Tag } from '@core/search';
 import { DEFAULT_PAGINATION_PARAMS, PaginationParams } from '@utils';
 
-import { Tag } from '../tags';
 import { GitHubRepo, RawGitHubRepo } from './types';
 
 export function parseRawGitHubRepo(data: RawGitHubRepo): GitHubRepo {

@@ -1,4 +1,4 @@
-import { TAG_TYPES } from '@api/tags';
+import { TAG_TYPES } from '@core/search';
 
 import { TagTypeToggle } from './TagTypeToggle';
 
