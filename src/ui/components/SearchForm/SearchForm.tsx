@@ -14,6 +14,7 @@ export type SearchFormProps = {
   autoFocused?: boolean;
   onReset: () => void;
   onSubmit: (query: string) => any;
+  onClick?: () => void;
 };
 
 export function SearchForm({
@@ -24,6 +25,7 @@ export function SearchForm({
   onReset,
   autoFocused = false,
   onSubmit,
+  onClick,
 }: SearchFormProps) {
   const [focused, setFocused] = useState(autoFocused);
 
@@ -64,6 +66,7 @@ export function SearchForm({
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
+        onClick={onClick}
       />
       {Boolean(query) && (
         <button className="p-1" onClick={onReset}>

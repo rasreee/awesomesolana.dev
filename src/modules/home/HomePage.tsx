@@ -1,4 +1,4 @@
-import { getTagSuggestions, Tag } from '@modules/tags';
+import { getTagSuggestions, SEARCH_FILTERS, Tag } from '@modules/tags';
 import { useEffect, useState } from 'react';
 
 import { siteConfig } from '@/configs/site-config';
@@ -37,6 +37,16 @@ export function HomePage() {
     handleSubmit(query);
   }, [searchBox.query]);
 
+  const handleInputClick = () => {
+    console.log('handleInputClick');
+    setHits(SEARCH_FILTERS.slice(0, 10));
+  };
+
+  const closeResults = () => {
+    searchBox.onReset();
+    setHits([]);
+  };
+
   return (
     <div className="mx-auto px-6 md:max-w-3xl">
       <div className="my-24 flex w-full flex-col gap-10">
@@ -47,12 +57,16 @@ export function HomePage() {
           </div>
         </div>
         <div className="flex flex-col gap-3">
-          <SearchForm {...searchBox} onSubmit={handleSubmit} />
+          <SearchForm
+            {...searchBox}
+            onClick={handleInputClick}
+            onSubmit={handleSubmit}
+          />
           <GroupedResults
             isOpen={hits.length > 0}
             hits={hits}
             onAddFilter={toggleFilter}
-            onClose={searchBox.onReset}
+            onClose={closeResults}
           />
         </div>
       </div>

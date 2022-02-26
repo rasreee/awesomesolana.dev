@@ -48,13 +48,13 @@ export function GroupedResults({
       {groupByCategory(listToShow).map(
         ({ category, hits: list }) =>
           list.length > 0 && (
-            <div className="flex flex-col gap-2 px-1">
+            <div className="flex flex-col gap-2 px-1" key={category}>
               <span className="px-3 py-2 text-lg font-semibold">
                 {capitalize(pluralize(category))} {`(${list.length})`}
               </span>
               <ul className="max-h-[16rem] overflow-y-auto">
                 {list.map((hit) => (
-                  <li className="w-full" key={hit.name}>
+                  <li className="w-full" key={`${hit.category}_${hit.name}`}>
                     <button
                       className="hover:bg-surface-1 w-full rounded-md py-3 px-3 text-left"
                       onClick={onAddFilter(hit)}
