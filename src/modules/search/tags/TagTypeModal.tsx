@@ -1,16 +1,15 @@
-import { route } from '@core/search';
 import clsxm from '@utils/clsxm';
-import { useRouter } from 'next/router';
+import { observer } from 'mobx-react-lite';
 
 import { Popover } from '@/ui/components';
 
+import { useSearchStore } from '../SearchStore';
 import { TagTypeMenu } from './TagTypeMenu';
 
-export function TagTypeModal() {
-  const router = useRouter();
-  const tagType = route.search.tags.getType(router.asPath);
+export const TagTypeModal = observer(function TagTypeModal() {
+  const searchStore = useSearchStore();
 
-  if (!tagType) return null;
+  if (!searchStore.tagTypeModal) return null;
 
   return (
     <Popover
@@ -19,10 +18,10 @@ export function TagTypeModal() {
         'h-[56%]',
         'rounded-none rounded-t-xl',
       )}
-      onClose={() => route.search.tags.closeType(router)}
-      isOpen={Boolean(tagType)}
+      onClose={searchStore.closeTagTypeModal}
+      isOpen={Boolean(searchStore.tagTypeModal)}
     >
-      <TagTypeMenu type={tagType} />
+      <TagTypeMenu type={searchStore.tagTypeModal} />
     </Popover>
   );
-}
+});

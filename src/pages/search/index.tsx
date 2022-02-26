@@ -1,6 +1,7 @@
-import Layout from '@layouts/Layout';
 import { SearchPage as Search } from '@modules/search/SearchPage';
 
-(Search as any).Layout = Layout;
+import { SearchPageLayout } from '@/modules/search/SearchPageLayout';
+
+(Search as any).Layout = SearchPageLayout;
 
 export default Search;

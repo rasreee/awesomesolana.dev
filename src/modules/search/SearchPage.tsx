@@ -3,7 +3,7 @@ import { waitFor } from '@utils';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { SearchForm, Seo, useSearchForm } from '@/ui/components';
+import { SearchForm, useSearchForm } from '@/ui/components';
 
 import { Results } from './Results';
 import { TagTypeModal } from './tags/TagTypeModal';
@@ -11,6 +11,7 @@ import { TagTypesControls } from './tags/TagTypesControls';
 
 export const SearchPage = () => {
   const router = useRouter();
+
   const { tags } = useSearchState();
 
   const submitQuery = (q: string) => {
@@ -58,15 +59,12 @@ export const SearchPage = () => {
 
   return (
     <>
-      <Seo title="Search" />
-      <div className="flex-1 px-3 sm:px-6">
-        <div className="flex flex-col gap-2">
-          <SearchForm {...{ query, ...restSearchForm }} onSubmit={setQuery} />
-          <TagTypesControls />
-          <TagTypeModal />
-        </div>
-        <Results />
+      <div className="flex flex-col gap-2">
+        <SearchForm {...{ query, ...restSearchForm }} onSubmit={setQuery} />
+        <TagTypesControls />
+        <TagTypeModal />
       </div>
+      <Results />
     </>
   );
 };
