@@ -1,14 +1,28 @@
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useRef } from 'react';
 
 import { SearchForm, useSearchForm } from '@/ui/components';
 import { waitFor } from '@/utils';
 
 import { Filters } from './Filters';
-import { useSubmitQuery } from './hooks';
 import { Results } from './Results';
+import { useSearchState } from './useSearchState';
 
 export function SearchPage() {
-  const submitQuery = useSubmitQuery();
+  const router = useRouter();
+  const { filters } = useSearchState();
+
+  const { current: restQueryStrings } = useRef(
+    filters.map((filter) => filter.category + '=' + filter.name),
+  );
+
+  const submitQuery = (query: string) => {
+    if (!query) return;
+
+    const newPath = `/search?q=${query}&${restQueryStrings.join('&')}`;
+
+    router.push(newPath);
+  };
 
   const { query, setQuery, setLoading, setError, ...restSearchForm } =
     useSearchForm();

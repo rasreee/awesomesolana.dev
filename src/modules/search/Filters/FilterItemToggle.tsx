@@ -1,21 +1,50 @@
-import { FilterCategory, getCategoryFilters } from '@modules/tags';
+import {
+  FILTER_CATEGORIES,
+  FilterCategory,
+  getCategoryFilters,
+} from '@modules/tags';
 import { getIntersection } from '@utils/array';
 import { capitalize } from '@utils/capitalize';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
+import { useRouter } from 'next/router';
 
 import { ChevronDownIcon, XIcon } from '@/ui/icons';
 
-import { useClearFilters, useSearchFilters } from '../hooks';
+import { useSearchState } from '../useSearchState';
 import { useFilterCategoriesBar } from './FilterCategoriesBar';
 import { TagButton } from './TagButton';
 
 export function FilterItemToggle({ category }: { category: FilterCategory }) {
+  const router = useRouter();
+  const { filters: allFilters } = useSearchState();
+
+  const clearCategory = (categoryToRemove: FilterCategory) => {
+    const oldTags = allFilters;
+
+    let newPath = `/search`;
+
+    FILTER_CATEGORIES.filter(
+      (category) => category !== categoryToRemove,
+    ).forEach((category) => {
+      const tagsForType = oldTags.filter((tag) => tag.category === category);
+
+      if (tagsForType.length > 0) {
+        const prefix = newPath === '/search' ? '?' : '&';
+        newPath =
+          newPath +
+          prefix +
+          category +
+          `=${tagsForType.map((tag) => tag.name).join(',')}`;
+      }
+    });
+
+    router.push(newPath);
+  };
+
   const { category: selectedCategory, expand } = useFilterCategoriesBar();
 
-  const allFilters = useSearchFilters();
   const categoryFilters = getCategoryFilters(category);
-  const clearFilters = useClearFilters();
 
   const selected = getIntersection(
     categoryFilters,
@@ -47,7 +76,7 @@ export function FilterItemToggle({ category }: { category: FilterCategory }) {
     return (
       <>
         {hasAnySelected ? (
-          <button onClick={clearFilters.handleClearCategory(category)}>
+          <button onClick={() => clearCategory(category)}>
             <XIcon className="h-4 w-4" />
           </button>
         ) : (

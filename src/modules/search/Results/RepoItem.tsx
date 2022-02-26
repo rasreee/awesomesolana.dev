@@ -9,11 +9,6 @@ export function RepoItem({
   topics,
   starsCount,
 }: GitHubRepo) {
-  // const getIsFilterActive = useGetIsFilterActive();
-  // const toggleFilter = useToggleFilter();
-
-  // const handleToggleFilter = (tag: Tag) => () => toggleFilter(tag);
-
   return (
     <div className="bg-surface rounded bg-opacity-70">
       <div className="flex flex-col gap-2 px-3 py-3">

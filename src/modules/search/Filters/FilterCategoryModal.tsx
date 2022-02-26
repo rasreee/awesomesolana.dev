@@ -4,12 +4,13 @@ import clsxm from '@utils/clsxm';
 
 import { Popover } from '@/ui/components';
 
-import { useSearchFilters, useToggleFilter } from '../hooks';
+import { useSearchState } from '../useSearchState';
+import { useToggleFilter } from '../useToggleFilter';
 import { useFilterCategoriesBar } from './FilterCategoriesBar';
 import { FilterCategoryMenu } from './FilterCategoryMenu';
 
 export function FilterCategoryModal() {
-  const allFilters = useSearchFilters();
+  const { filters: allFilters } = useSearchState();
 
   const { category, onClose } = useFilterCategoriesBar();
 

@@ -1,4 +1,4 @@
-import { useSearchFilters } from '@modules/search';
+import { useSearchState } from '@modules/search';
 import { FILTER_CATEGORIES, FilterCategory, Tag } from '@modules/tags';
 import { capitalize } from '@utils/capitalize';
 import pluralize from '@utils/pluralize';
@@ -29,7 +29,7 @@ export function GroupedResults({
   onAddFilter: handleTagClick,
   onClose,
 }: GroupedResultsProps) {
-  const searchFilters = useSearchFilters();
+  const { filters: searchFilters } = useSearchState();
 
   const listToShow = hits.filter(
     (hit) => !searchFilters.some((filter) => filter.name === hit.name),
