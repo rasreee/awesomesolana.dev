@@ -1,4 +1,4 @@
-import { Tag, TAG_TYPES, TagType, useSearchState } from '@core/search';
+import { Tag, TagType, tagTypes, useSearchState } from '@core/search';
 import { capitalize } from '@utils/capitalize';
 import pluralize from '@utils/pluralize';
 
@@ -14,7 +14,7 @@ type GroupedResultsProps = {
 type GroupedHits = Array<{ type: TagType; hits: Tag[] }>;
 
 function groupByTag(list: Tag[]): GroupedHits {
-  const groups = TAG_TYPES.map((type) => ({
+  const groups = tagTypes.map((type) => ({
     type,
     hits: list.filter((tag) => tag.type === type),
   }));

@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import * as React from 'react';
-import { FC } from 'react';
 
 import { Divider, Seo, SeoProps } from '@/ui/components';
 
@@ -12,7 +11,7 @@ export interface LayoutProps {
   seo?: SeoProps;
 }
 
-const Layout: FC<LayoutProps> = ({ children, seo }) => {
+const Layout: React.FC<LayoutProps> = ({ children, seo }) => {
   return (
     <>
       <Head>
@@ -30,3 +29,11 @@ const Layout: FC<LayoutProps> = ({ children, seo }) => {
 };
 
 export default Layout;
+
+const Noop: React.FC = ({ children }) => <>{children}</>;
+
+export function getLayout<LP extends {}>(
+  Component: React.ComponentType<any>,
+): React.ComponentType<LP> {
+  return (Component as any).Layout || Noop;
+}

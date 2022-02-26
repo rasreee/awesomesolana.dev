@@ -1,7 +1,8 @@
 import { GitHubRepo } from '@core/github';
 import React from 'react';
 
-import { Badge, RepoStat } from '@/ui/components';
+import { Badge } from '@/ui/components';
+import { RepoStat } from '@/ui/github';
 
 export function RepoItem({
   name,

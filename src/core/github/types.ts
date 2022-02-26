@@ -80,7 +80,7 @@ export interface GitHubRepo {
   };
 }
 
-export interface GitHubApiResponse {
+export interface GithubReposResponse {
   incomplete_results: boolean;
   items: RawGitHubRepo[];
   total_count: number;

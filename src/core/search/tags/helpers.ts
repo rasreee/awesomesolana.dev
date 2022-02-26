@@ -1,4 +1,4 @@
-import { SEARCH_TAGS } from './constants';
+import { searchTags } from './constants';
 import { Tag, TagType } from './types';
 
 export async function getTagSuggestions(
@@ -12,8 +12,8 @@ export async function getTagSuggestions(
   const a = query.toLowerCase();
 
   const tagsToSearch = filter?.type
-    ? SEARCH_TAGS.filter((tag) => tag.type === filter.type)
-    : SEARCH_TAGS;
+    ? searchTags.filter((tag) => tag.type === filter.type)
+    : searchTags;
 
   hits = tagsToSearch.filter((item) => {
     const name = item.name;
@@ -26,5 +26,5 @@ export async function getTagSuggestions(
 }
 
 export function getTagsForType(type: TagType): Tag[] {
-  return SEARCH_TAGS.filter((filter) => filter.type === type);
+  return searchTags.filter((filter) => filter.type === type);
 }

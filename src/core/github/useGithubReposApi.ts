@@ -6,7 +6,7 @@ import {
   githubSwrKey,
 } from './api';
 import { parseRawGitHubRepo } from './helpers';
-import { GitHubApiResponse, GitHubRepo } from './types';
+import { GitHubRepo, GithubReposResponse } from './types';
 
 export type UseGithubReposApi = {
   data: GitHubRepo[] | undefined;
@@ -20,7 +20,7 @@ export function useGithubReposApi<Route extends '/search' | '/browse'>(
     : Partial<GithubReposBrowseParams>,
   shouldFetch = true,
 ): UseGithubReposApi {
-  const { data: rawData, error } = useSWR<GitHubApiResponse, Error>(
+  const { data: rawData, error } = useSWR<GithubReposResponse, Error>(
     shouldFetch ? githubSwrKey.route(route, params) : null,
   );
 

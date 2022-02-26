@@ -1,7 +1,7 @@
 import { useSearchState } from '@core/search';
 import { useRouter } from 'next/router';
 
-import { TAG_TYPES } from './constants';
+import { tagTypes } from './constants';
 import { Tag } from './types';
 
 export function useToggleTag() {
@@ -21,7 +21,7 @@ export function useToggleTag() {
 
     let newPath = `/search`;
 
-    TAG_TYPES.forEach((type) => {
+    tagTypes.forEach((type) => {
       const tagsForType = newTags.filter((tag) => tag.type === type);
 
       if (tagsForType.length > 0) {
@@ -42,7 +42,7 @@ export function useToggleTag() {
 
     let newPath = `/search`;
 
-    TAG_TYPES.forEach((type) => {
+    tagTypes.forEach((type) => {
       const tagsForType = newTags.filter((tag) => tag.type === type);
       if (tagsForType.length > 0) {
         const prefix = newPath === '/search' ? '?' : '&';

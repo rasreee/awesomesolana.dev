@@ -1,19 +1,19 @@
 import {
   githubApi,
-  GitHubApiResponse,
-  githubFetch,
   GithubReposBrowseParams,
+  githubReposJsonFetch,
+  GithubReposResponse,
 } from '@core/github';
 import { DEFAULT_PAGINATION_PARAMS } from '@utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export type GitHubBrowseReposRequest = NextApiRequest & {
+export type GithubReposBrowseRequest = NextApiRequest & {
   query: Partial<GithubReposBrowseParams>;
 };
 
-export default async function githubApiHandler(
-  req: GitHubBrowseReposRequest,
-  res: NextApiResponse<GitHubApiResponse>,
+export default async function githubReposBrowseApiHandler(
+  req: GithubReposBrowseRequest,
+  res: NextApiResponse<GithubReposResponse>,
 ) {
   const {
     page = DEFAULT_PAGINATION_PARAMS.page,
@@ -22,9 +22,7 @@ export default async function githubApiHandler(
 
   const params = { page, per_page };
 
-  const reposResponse = await githubFetch(githubApi.browseRepos(params));
-
-  const data = (await reposResponse.json()) as GitHubApiResponse;
+  const data = await githubReposJsonFetch(githubApi.browseRepos(params));
 
   return res.status(200).json(data);
 }

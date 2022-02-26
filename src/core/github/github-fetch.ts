@@ -1,3 +1,5 @@
+import { GithubReposResponse } from './types';
+
 function getHeaders(): HeadersInit {
   const headers: HeadersInit = new Headers();
   headers.set('Accept', 'application/vnd.github.v3+json');
@@ -7,10 +9,20 @@ function getHeaders(): HeadersInit {
   return headers;
 }
 
-export async function githubFetch(uri: string): Promise<Response> {
+async function githubAuthFetch(uri: string): Promise<Response> {
   const res = await fetch(uri, {
     headers: getHeaders(),
   });
 
   return res;
+}
+
+export async function githubReposJsonFetch(
+  uri: string,
+): Promise<GithubReposResponse> {
+  const reposResponse = await githubAuthFetch(uri);
+
+  const data = (await reposResponse.json()) as GithubReposResponse;
+
+  return data;
 }

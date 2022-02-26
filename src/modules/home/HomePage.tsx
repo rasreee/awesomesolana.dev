@@ -1,9 +1,4 @@
-import {
-  getTagSuggestions,
-  SEARCH_TAGS,
-  Tag,
-  useToggleTag,
-} from '@core/search';
+import { getTagSuggestions, searchTags, Tag, useToggleTag } from '@core/search';
 import { waitFor } from '@utils';
 import { useEffect, useState } from 'react';
 
@@ -43,7 +38,7 @@ export function HomePage() {
 
   const handleInputClick = () => {
     console.log('handleInputClick');
-    setHits(SEARCH_TAGS.slice(0, 10));
+    setHits(searchTags.slice(0, 10));
   };
 
   const closeResults = () => {

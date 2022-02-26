@@ -1,8 +1,8 @@
 import { capitalize } from '@utils/capitalize';
 import clsxm from '@utils/clsxm';
 
-import { UnstyledLink } from '@/ui/components';
 import { SVGIconProps } from '@/ui/icons';
+import { UnstyledLink } from '@/ui/links';
 
 const defaultIconSizeProps = {
   height: '1.5em',

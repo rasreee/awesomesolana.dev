@@ -1,13 +1,47 @@
+import invariant from '@/utils/invariant';
+
 import { Tag, TagType } from './types';
 
-export const TAG_TYPES = [
+export const tagTypes = [
   'topic',
   'framework',
   'language',
   'dependency',
 ] as TagType[];
 
-export const TAG_NAMES = Object.freeze({
+export const dependencies = Object.freeze({
+  npm: [
+    '@project-serum/anchor-cli',
+    '@project-serum/anchor',
+    '@project-serum/associated-token',
+    '@project-serum/awesome-serum',
+    '@project-serum/borsh',
+    '@project-serum/common',
+    '@project-serum/lockup',
+    '@project-serum/pool',
+    '@project-serum/registry',
+    '@project-serum/serum',
+    '@project-serum/sol-wallet-adapter',
+    '@project-serum/spl-token-swap',
+    '@project-serum/swap-ui',
+    '@project-serum/swap',
+    '@project-serum/token',
+    '@project-serum/tokens',
+    '@solana/buffer-layout',
+    '@solana/spl-name-service',
+    '@solana/spl-token-lending',
+    '@solana/spl-token-registry',
+    '@solana/spl-token',
+    '@solana/token-swap',
+    '@solana/wallet-adapter-phantom',
+    '@solana/wallet-adapter-react',
+    '@solana/wallet-adapter',
+    '@solana/web3.js',
+  ],
+  cargo: ['cronos-sdk'],
+});
+
+export const tagNames = Object.freeze({
   language: [
     'C',
     'Golang',
@@ -57,50 +91,68 @@ export const TAG_NAMES = Object.freeze({
     'cross-program-invocations',
     'program-signed-accounts',
   ],
+  dependency: dependencies,
 });
 
-export const DEPENDENCIES = Object.freeze({
-  npm: [
-    '@project-serum/anchor-cli',
-    '@project-serum/anchor',
-    '@project-serum/associated-token',
-    '@project-serum/awesome-serum',
-    '@project-serum/borsh',
-    '@project-serum/common',
-    '@project-serum/lockup',
-    '@project-serum/pool',
-    '@project-serum/registry',
-    '@project-serum/serum',
-    '@project-serum/sol-wallet-adapter',
-    '@project-serum/spl-token-swap',
-    '@project-serum/swap-ui',
-    '@project-serum/swap',
-    '@project-serum/token',
-    '@project-serum/tokens',
-    '@solana/buffer-layout',
-    '@solana/spl-name-service',
-    '@solana/spl-token-lending',
-    '@solana/spl-token-registry',
-    '@solana/spl-token',
-    '@solana/token-swap',
-    '@solana/wallet-adapter-phantom',
-    '@solana/wallet-adapter-react',
-    '@solana/wallet-adapter',
-    '@solana/web3.js',
-  ],
-  cargo: ['cronos-sdk'],
-});
+interface BaseToTagsArgs {
+  type: TagType;
+  values: any;
+}
 
-const DEPENDENCY_FILTERS: Tag[] = Object.values(DEPENDENCIES)
-  .map((tagNames) =>
-    tagNames.map((name) => ({ type: `dependency`, name } as Tag)),
-  )
-  .flat();
+interface ToTagsArgsBase extends BaseToTagsArgs {
+  type: Exclude<TagType, 'dependency'>;
+  values: string[];
+}
 
-const TAG_FILTERS: Tag[] = Object.entries(TAG_NAMES)
+interface ToTagsArgsDependency extends BaseToTagsArgs {
+  type: Exclude<TagType, 'language' | 'framework' | 'topic'>;
+  values: Readonly<{
+    npm: string[];
+    cargo: string[];
+  }>;
+}
+
+type ToTagsArgs = ToTagsArgsBase | ToTagsArgsDependency;
+
+function isTagsArgs(o: any): o is ToTagsArgs {
+  return (
+    typeof o === 'object' &&
+    'type' in o &&
+    typeof o.type === 'string' &&
+    tagTypes.includes(o.type) &&
+    'values' in o &&
+    (Array.isArray(o.values) ||
+      (typeof o.values === 'object' &&
+        'npm' in o.values &&
+        Array.isArray(o.values.npm) &&
+        'cargo' in o.values &&
+        Array.isArray(o.values.cargo)))
+  );
+}
+
+function toTags(args: ToTagsArgsBase): Tag[];
+
+function toTags(args: ToTagsArgsDependency): Tag[];
+
+function toTags(args: any): Tag[] {
+  invariant(isTagsArgs(args));
+  if (args.type === 'dependency') {
+    const { npm, cargo } = args.values;
+    return [
+      ...npm.map((name) => ({ type: args.type, name })),
+      ...cargo.map((name) => ({ type: args.type, name })),
+    ];
+  } else {
+    const values = args.values;
+    return values.map((name) => ({ type: args.type, name }));
+  }
+}
+
+export const searchTags: Tag[] = Object.entries(tagNames)
   .map(([type, values]) =>
-    values.map((name) => ({ type, name: name.toLowerCase() } as Tag)),
+    toTags({
+      type,
+      values,
+    } as any),
   )
   .flat();
-
-export const SEARCH_TAGS: Tag[] = [...TAG_FILTERS, ...DEPENDENCY_FILTERS];

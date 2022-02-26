@@ -31,7 +31,8 @@
       "@utils": ["./src/utils"],
       "@utils/*": ["./src/utils/*"],
       "@core/*": ["./src/core/*"],
-      "@modules/*": ["./src/modules/*"]
+      "@modules/*": ["./src/modules/*"],
+      "@layouts/*": ["./src/layouts/*"]
     },
     "incremental": true
   },
