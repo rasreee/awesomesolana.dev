@@ -1,9 +1,9 @@
-import { SEARCH_FILTERS } from './constants';
-import { FilterCategory, Tag } from './types';
+import { SEARCH_TAGS } from './constants';
+import { Tag, TagType } from './types';
 
 export async function getTagSuggestions(
   query: string,
-  filter?: { category?: FilterCategory },
+  filter?: { type?: TagType },
 ): Promise<Tag[]> {
   if (!query) return [];
 
@@ -11,9 +11,9 @@ export async function getTagSuggestions(
 
   const a = query.toLowerCase();
 
-  const tagsToSearch = filter?.category
-    ? SEARCH_FILTERS.filter((tag) => tag.category === filter.category)
-    : SEARCH_FILTERS;
+  const tagsToSearch = filter?.type
+    ? SEARCH_TAGS.filter((tag) => tag.type === filter.type)
+    : SEARCH_TAGS;
 
   hits = tagsToSearch.filter((item) => {
     const name = item.name;
@@ -25,6 +25,6 @@ export async function getTagSuggestions(
   return hits;
 }
 
-export function getCategoryFilters(category: FilterCategory): Tag[] {
-  return SEARCH_FILTERS.filter((filter) => filter.category === category);
+export function getTypeFilters(type: TagType): Tag[] {
+  return SEARCH_TAGS.filter((filter) => filter.type === type);
 }

@@ -1,11 +1,11 @@
-import { FilterCategory, Tag } from './types';
+import { Tag, TagType } from './types';
 
-export const FILTER_CATEGORIES = [
+export const TAG_TYPES = [
   'topic',
   'framework',
   'language',
   'dependency',
-] as FilterCategory[];
+] as TagType[];
 
 export const TAG_NAMES = Object.freeze({
   language: [
@@ -93,14 +93,14 @@ export const DEPENDENCIES = Object.freeze({
 
 const DEPENDENCY_FILTERS: Tag[] = Object.values(DEPENDENCIES)
   .map((tagNames) =>
-    tagNames.map((name) => ({ category: `dependency`, name } as Tag)),
+    tagNames.map((name) => ({ type: `dependency`, name } as Tag)),
   )
   .flat();
 
 const TAG_FILTERS: Tag[] = Object.entries(TAG_NAMES)
-  .map(([category, values]) =>
-    values.map((name) => ({ category, name: name.toLowerCase() } as Tag)),
+  .map(([type, values]) =>
+    values.map((name) => ({ type, name: name.toLowerCase() } as Tag)),
   )
   .flat();
 
-export const SEARCH_FILTERS: Tag[] = [...TAG_FILTERS, ...DEPENDENCY_FILTERS];
+export const SEARCH_TAGS: Tag[] = [...TAG_FILTERS, ...DEPENDENCY_FILTERS];

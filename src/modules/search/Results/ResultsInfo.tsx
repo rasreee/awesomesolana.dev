@@ -5,12 +5,12 @@ import pluralize from '@utils/pluralize';
 
 function getResultsInfoText({
   data,
-  filters,
+  tags,
 }: {
   data: GitHubRepo[];
-  filters?: Tag[];
+  tags?: Tag[];
 }): string {
-  const hasFilters = Boolean(filters?.length);
+  const hasFilters = Boolean(tags?.length);
 
   if (!hasFilters)
     return `Showing ${data.length} ${pluralize('result', data.length)}`;
@@ -24,19 +24,19 @@ function getResultsInfoText({
 
 export function ResultsInfo({
   data,
-  filters,
+  tags,
 }: {
   data: GitHubRepo[] | undefined;
-  filters?: Tag[];
+  tags?: Tag[];
 }) {
   if (!data) return <div className="py-2 px-1">Loading...</div>;
 
   return (
     <div className={clsxm('py-2 px-1')}>
       <span className="text text-sm leading-none opacity-90">
-        {getResultsInfoText({ data, filters })}
+        {getResultsInfoText({ data, tags })}
       </span>
-      {filters?.map((filter) => `${filter.name}`)}
+      {tags?.map((filter) => `${filter.name}`)}
     </div>
   );
 }

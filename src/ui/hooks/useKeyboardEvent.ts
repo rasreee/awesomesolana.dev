@@ -55,7 +55,7 @@ const WINDOW_OR_NULL = isBrowser ? window : null;
 /**
  * Executes callback when keyboard event occurred on target (window by default).
  *
- * @param keyOrPredicate Filters keypresses on which `callback` will be executed.
+ * @param keyOrPredicate Tags keypresses on which `callback` will be executed.
  * @param callback Function to call when key is pressed and `keyOrPredicate` matches positive.
  * @param deps Dependencies list that will be passed to underlying `useMemo`.
  * @param options Hook options.

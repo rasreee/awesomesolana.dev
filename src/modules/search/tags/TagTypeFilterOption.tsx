@@ -3,7 +3,7 @@ import React from 'react';
 
 import { CheckBox } from '@/ui/components';
 
-export function OptionCategoryItemButton({
+export function TagTypeFilterOption({
   tag,
   onClick,
   checked,

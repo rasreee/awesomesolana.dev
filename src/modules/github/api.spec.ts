@@ -25,7 +25,7 @@ describe('modules/github/api', () => {
 
     it('should format github repos search api url', () => {
       const result = githubApi.searchRepos({
-        filters: [{ category: 'language', name: 'typescript' }],
+        tags: [{ type: 'language', name: 'typescript' }],
       });
       expect(result).toEqual(
         `${GITHUB_API_URL}/search/repositories?q=solana+language:typescript&page=0&per_page=10`,

@@ -1,8 +1,8 @@
-import { getTagSuggestions, SEARCH_FILTERS, Tag } from '@modules/tags';
+import { getTagSuggestions, SEARCH_TAGS, Tag } from '@modules/tags';
 import { useEffect, useState } from 'react';
 
 import { siteConfig } from '@/configs/site-config';
-import { useToggleFilter } from '@/hooks/useToggleFilter';
+import { useToggleTag } from '@/hooks/useToggleTag';
 import { Logo, SearchForm, Seo, useSearchForm } from '@/ui/components';
 import { waitFor } from '@/utils';
 
@@ -12,7 +12,7 @@ export function HomePage() {
   const searchBox = useSearchForm();
   const [hits, setHits] = useState<Tag[]>([]);
 
-  const toggleFilter = useToggleFilter();
+  const toggleFilter = useToggleTag();
 
   const handleSubmit = async (query: string) => {
     const { setLoading, setError } = searchBox;
@@ -39,7 +39,7 @@ export function HomePage() {
 
   const handleInputClick = () => {
     console.log('handleInputClick');
-    setHits(SEARCH_FILTERS.slice(0, 10));
+    setHits(SEARCH_TAGS.slice(0, 10));
   };
 
   const closeResults = () => {

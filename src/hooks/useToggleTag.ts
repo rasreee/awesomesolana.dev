@@ -1,16 +1,16 @@
 import { useRouter } from 'next/router';
 
-import { FILTER_CATEGORIES, Tag } from '@/modules/tags';
+import { Tag, TAG_TYPES } from '@/modules/tags';
 
 import { useSearchState } from './useSearchState';
 
-export function useToggleFilter() {
+export function useToggleTag() {
   const router = useRouter();
-  const { filters: allFilters } = useSearchState();
+  const { tags: allFilters } = useSearchState();
 
   const getIsFilterActive = (input: Tag): boolean => {
     return allFilters
-      .filter((tag) => tag.category === input.category)
+      .filter((tag) => tag.type === input.type)
       .map((item) => item.name)
       .includes(input.name);
   };
@@ -21,15 +21,15 @@ export function useToggleFilter() {
 
     let newPath = `/search`;
 
-    FILTER_CATEGORIES.forEach((category) => {
-      const tagsForType = newTags.filter((tag) => tag.category === category);
+    TAG_TYPES.forEach((type) => {
+      const tagsForType = newTags.filter((tag) => tag.type === type);
 
       if (tagsForType.length > 0) {
         const prefix = newPath === '/search' ? '?' : '&';
         newPath =
           newPath +
           prefix +
-          category +
+          type +
           `=${tagsForType.map((tag) => tag.name).join(',')}`;
       }
     });
@@ -42,16 +42,16 @@ export function useToggleFilter() {
 
     let newPath = `/search`;
 
-    FILTER_CATEGORIES.forEach((category) => {
-      const tagsForType = newTags.filter((tag) => tag.category === category);
+    TAG_TYPES.forEach((type) => {
+      const tagsForType = newTags.filter((tag) => tag.type === type);
       if (tagsForType.length > 0) {
         const prefix = newPath === '/search' ? '?' : '&';
         newPath =
           newPath +
           prefix +
-          category +
+          type +
           `=${newTags
-            .filter((tag) => tag.category === category)
+            .filter((tag) => tag.type === type)
             .map((tag) => tag.name)
             .join(',')}`;
       }

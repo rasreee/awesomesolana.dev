@@ -28,23 +28,22 @@ export function formatGitHubTopic(name: string) {
 }
 
 function formatTagSearchParam(tag: Tag): string {
-  if (tag.category === 'language') return `language:${tag.name}`;
-  if (tag.category === 'topic') return `topic:${tag.name}`;
-  if (tag.category === 'framework')
-    return `topic:${formatGitHubTopic(tag.name)}`;
+  if (tag.type === 'language') return `language:${tag.name}`;
+  if (tag.type === 'topic') return `topic:${tag.name}`;
+  if (tag.type === 'framework') return `topic:${formatGitHubTopic(tag.name)}`;
   return '';
 }
 
 export function formatGithubApiQuery({
   keywords = [],
-  filters = [],
+  tags = [],
   per_page = DEFAULT_PAGINATION_PARAMS.per_page,
   page = DEFAULT_PAGINATION_PARAMS.page,
 }: Partial<PaginationParams> &
-  Partial<{ keywords: string[]; filters: Tag[] }>): string {
+  Partial<{ keywords: string[]; tags: Tag[] }>): string {
   const params = [
     ...keywords.map((keyword) => keyword.trim()),
-    ...filters.map((tag) => formatTagSearchParam(tag)),
+    ...tags.map((tag) => formatTagSearchParam(tag)),
   ]
     .filter(Boolean)
     .join('+');

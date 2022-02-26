@@ -1,25 +1,25 @@
-import { FilterCategory, getCategoryFilters } from '@modules/tags';
+import { getTypeFilters, TagType } from '@modules/tags';
 import { getIntersection } from '@utils';
 import clsxm from '@utils/clsxm';
 import { useRouter } from 'next/router';
 
 import { useSearchState } from '@/hooks/useSearchState';
-import { useToggleFilter } from '@/hooks/useToggleFilter';
+import { useToggleTag } from '@/hooks/useToggleTag';
 import { Popover } from '@/ui/components';
 import { route } from '@/utils/route';
 
-import { FilterCategoryMenu } from './FilterCategoryMenu';
+import { TagTypeMenu } from './TagTypeMenu';
 
-export function FilterCategoryModal() {
+export function TagTypeModal() {
   const router = useRouter();
-  const selectedCategory = route.search.filters.getCategory(router.asPath);
+  const selectedCategory = route.search.tags.getType(router.asPath);
 
-  const { filters: allFilters } = useSearchState();
+  const { tags: allFilters } = useSearchState();
 
-  const toggleFilter = useToggleFilter();
+  const toggleFilter = useToggleTag();
 
-  const getSelectedFilters = (category: FilterCategory) => {
-    const categoryFilters = getCategoryFilters(category);
+  const getSelectedFilters = (type: TagType) => {
+    const categoryFilters = getTypeFilters(type);
 
     const selected = getIntersection(
       categoryFilters,
@@ -34,7 +34,7 @@ export function FilterCategoryModal() {
 
   const selectedFilters = getSelectedFilters(selectedCategory);
 
-  const options = getCategoryFilters(selectedCategory).filter(
+  const options = getTypeFilters(selectedCategory).filter(
     (filter) => !selectedFilters.map((item) => item.name).includes(filter.name),
   );
 
@@ -45,13 +45,13 @@ export function FilterCategoryModal() {
         'h-[56%]',
         'rounded-none rounded-t-xl',
       )}
-      onClose={() => route.search.filters.closeCategory(router)}
+      onClose={() => route.search.tags.closeType(router)}
       isOpen={Boolean(selectedCategory)}
     >
-      <FilterCategoryMenu
-        category={selectedCategory}
+      <TagTypeMenu
+        type={selectedCategory}
         options={options}
-        onClose={() => route.search.filters.closeCategory(router)}
+        onClose={() => route.search.tags.closeType(router)}
         selected={selectedFilters}
         onToggleFilter={toggleFilter}
       />

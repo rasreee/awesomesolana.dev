@@ -1,4 +1,4 @@
-import { FILTER_CATEGORIES, Tag } from '@modules/tags';
+import { Tag, TAG_TYPES } from '@modules/tags';
 import { normalizeQueryParam } from '@utils/query';
 import { NextRouter, useRouter } from 'next/router';
 import { useMemo } from 'react';
@@ -12,24 +12,24 @@ export function useSearchState() {
   );
 
   function parseSearch(parsedUrlQuery: NextRouter['query']): Tag[] {
-    const filters: Tag[] = [];
+    const tags: Tag[] = [];
 
     const keys = Object.keys(parsedUrlQuery);
 
-    FILTER_CATEGORIES.forEach((category) => {
-      if (keys.includes(category)) {
-        const tagsForType = (parsedUrlQuery[category] as string)
+    TAG_TYPES.forEach((type) => {
+      if (keys.includes(type)) {
+        const tagsForType = (parsedUrlQuery[type] as string)
           .split(',')
-          .map((name) => ({ category, name }));
+          .map((name) => ({ type, name }));
 
-        filters.push(...tagsForType);
+        tags.push(...tagsForType);
       }
     });
 
-    return filters;
+    return tags;
   }
 
-  const filters = useMemo(() => parseSearch(router.query), [router.query]);
+  const tags = useMemo(() => parseSearch(router.query), [router.query]);
 
-  return { filters, query };
+  return { tags, query };
 }

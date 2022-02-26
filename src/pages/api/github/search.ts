@@ -19,10 +19,10 @@ export default async function githubApiHandler(
     q = '',
     page = DEFAULT_PAGINATION_PARAMS.page,
     per_page = DEFAULT_PAGINATION_PARAMS.per_page,
-    filters = [],
+    tags = [],
   } = req.query;
 
-  const params = { q, page, per_page, filters };
+  const params = { q, page, per_page, tags };
 
   const reposResponse = await githubFetch(githubApi.searchRepos(params));
 

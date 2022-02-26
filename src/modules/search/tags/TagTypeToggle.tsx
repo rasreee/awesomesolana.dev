@@ -1,4 +1,4 @@
-import { FilterCategory, getCategoryFilters } from '@modules/tags';
+import { getTypeFilters, TagType } from '@modules/tags';
 import { getIntersection } from '@utils/array';
 import { capitalize } from '@utils/capitalize';
 import clsxm from '@utils/clsxm';
@@ -11,11 +11,11 @@ import { route } from '@/utils/route';
 
 import { TagButton } from './TagButton';
 
-export function FilterItemToggle({ category }: { category: FilterCategory }) {
+export function TagTypeToggle({ type }: { type: TagType }) {
   const router = useRouter();
-  const { filters: allFilters } = useSearchState();
+  const { tags: allFilters } = useSearchState();
 
-  const categoryFilters = getCategoryFilters(category);
+  const categoryFilters = getTypeFilters(type);
 
   const selected = getIntersection(
     categoryFilters,
@@ -29,10 +29,10 @@ export function FilterItemToggle({ category }: { category: FilterCategory }) {
     return (
       <div
         className="flex flex-1 cursor-pointer items-center gap-1.5"
-        onClick={() => route.search.filters.openCategory(category, router)}
+        onClick={() => route.search.tags.openType(type, router)}
       >
         <span className="text-left text-base leading-none">
-          {capitalize(pluralize(category))}
+          {capitalize(pluralize(type))}
         </span>
         {hasAnySelected && (
           <span className="text-base leading-none">
@@ -43,19 +43,19 @@ export function FilterItemToggle({ category }: { category: FilterCategory }) {
     );
   }
 
-  const selectedCategory = route.search.filters.getCategory(router.asPath);
+  const selectedCategory = route.search.tags.getType(router.asPath);
 
   return (
     <TagButton
       className={clsxm(
-        (selectedCategory && selectedCategory === category) || hasAnySelected
+        (selectedCategory && selectedCategory === type) || hasAnySelected
           ? 'bg-color-primary text-white'
           : '',
       )}
     >
       <PrefixText />
       {hasAnySelected ? (
-        <button onClick={() => route.search.clearCategory(category, router)}>
+        <button onClick={() => route.search.clearType(type, router)}>
           <XIcon className="h-4 w-4" />
         </button>
       ) : (

@@ -5,7 +5,7 @@ import { formatGithubApiQuery } from './helpers';
 
 export interface GithubReposSearchParams extends PaginationParams {
   keywords: string[];
-  filters: Tag[];
+  tags: Tag[];
 }
 
 export interface GithubReposBrowseParams extends PaginationParams {}
@@ -15,7 +15,7 @@ export const githubApi = {
   searchRepos: ({
     page,
     per_page,
-    filters,
+    tags,
     keywords = [],
   }: Partial<GithubReposSearchParams>) =>
     [
@@ -23,7 +23,7 @@ export const githubApi = {
       `/search/repositories`,
       formatGithubApiQuery({
         keywords: ['solana', ...keywords],
-        filters,
+        tags,
         page,
         per_page,
       }),

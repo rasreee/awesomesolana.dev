@@ -3,48 +3,48 @@ import { searchRoute } from './route';
 /**
  * @group modules
  * @group search
- * @group filters
+ * @group tags
  * @group helpers
  */
 describe('utils/route', () => {
-  describe('excludeCategory', () => {
-    it('excludes filter category params from url', () => {
+  describe('excludeType', () => {
+    it('excludes filter type params from url', () => {
       const prevPath = `/search?q=testing&language=rust`;
 
-      const category = 'language';
+      const type = 'language';
 
-      const result = searchRoute.filters.excludeCategory(prevPath, category);
+      const result = searchRoute.tags.excludeType(prevPath, type);
       expect(result).toEqual('/search?q=testing');
     });
   });
 
-  describe('categoryParam', () => {
-    it('parses and returns filter category from url', () => {
-      const url = `/search/filters?category=language`;
+  describe('typeParam', () => {
+    it('parses and returns filter type from url', () => {
+      const url = `/search/tags?type=language`;
 
-      const category = 'language';
+      const type = 'language';
 
-      const result = searchRoute.filters.categoryParam(url);
+      const result = searchRoute.tags.typeParam(url);
 
-      expect(result).toEqual(category);
+      expect(result).toEqual(type);
     });
 
-    it('returns null given url with no category', () => {
+    it('returns null given url with no type', () => {
       const url = `/search`;
 
-      const result = searchRoute.filters.categoryParam(url);
+      const result = searchRoute.tags.typeParam(url);
 
       expect(result).toBeNull();
     });
   });
 
-  describe('categoryUrl', () => {
-    it('gets page url for category', () => {
-      const category = 'language';
+  describe('typeUrl', () => {
+    it('gets page url for type', () => {
+      const type = 'language';
 
-      const result = searchRoute.filters.categoryUrl(category);
+      const result = searchRoute.tags.typeUrl(type);
 
-      expect(result).toEqual(`/search/filters?category=${category}`);
+      expect(result).toEqual(`/search/tags?type=${type}`);
     });
   });
 });

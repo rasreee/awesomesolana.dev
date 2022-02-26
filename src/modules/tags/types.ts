@@ -1,6 +1,6 @@
-export type FilterCategory = 'dependency' | 'topic' | 'language' | 'framework';
+export type TagType = 'dependency' | 'topic' | 'language' | 'framework';
 
 export type Tag = {
-  category: FilterCategory;
+  type: TagType;
   name: string;
 };

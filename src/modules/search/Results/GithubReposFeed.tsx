@@ -9,7 +9,7 @@ import { RepoItem } from './RepoItem';
 import { ResultsInfo } from './ResultsInfo';
 
 export type GithubApiParams = {
-  filters?: Tag[];
+  tags?: Tag[];
   keywords?: string[];
 } & Partial<PaginationParams>;
 
@@ -27,7 +27,7 @@ export function GithubReposFeed({ route, params }: GithubReposProps) {
 
   return (
     <div>
-      <ResultsInfo data={data} filters={params?.filters} />
+      <ResultsInfo data={data} tags={params?.tags} />
       <ul>
         {data.map((hit) => (
           <li key={hit.id}>

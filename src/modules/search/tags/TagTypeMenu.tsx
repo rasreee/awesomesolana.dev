@@ -1,22 +1,22 @@
 import { XIcon } from '@primer/octicons-react';
 import { useEffect, useState } from 'react';
 
-import { FilterCategory, getTagSuggestions, Tag } from '@/modules/tags';
+import { getTagSuggestions, Tag, TagType } from '@/modules/tags';
 import { Divider, SearchForm, useSearchForm } from '@/ui/components';
 import { capitalize, waitFor } from '@/utils';
 import clsxm from '@/utils/clsxm';
 import pluralize from '@/utils/pluralize';
 
-import { OptionCategoryItemButton } from './OptionCategoryCheckBox';
+import { TagTypeFilterOption } from './TagTypeFilterOption';
 
-export function FilterCategoryMenu({
-  category,
+export function TagTypeMenu({
+  type,
   options,
   selected,
   onClose,
   onToggleFilter,
 }: {
-  category: FilterCategory;
+  type: TagType;
   options: Tag[];
   selected: Tag[];
   onClose: () => void;
@@ -36,7 +36,7 @@ export function FilterCategoryMenu({
     setError(null);
     waitFor(300)
       .then(async () => {
-        const newHits = await getTagSuggestions(query, { category });
+        const newHits = await getTagSuggestions(query, { type });
         setHits(newHits);
       })
       .catch((e) => setError((e as Error).message))
@@ -49,7 +49,7 @@ export function FilterCategoryMenu({
 
   const getIsFilterActive = (tag: Tag): boolean =>
     selected
-      .filter((tag) => tag.category === tag.category)
+      .filter((tag) => tag.type === tag.type)
       .map((item) => item.name)
       .includes(tag.name);
 
@@ -66,7 +66,7 @@ export function FilterCategoryMenu({
       >
         <div className="flex items-center justify-between pt-2">
           <h2 className="font-heading text-2xl font-semibold leading-none">
-            {capitalize(pluralize(category))}
+            {capitalize(pluralize(type))}
           </h2>
           <button onClick={onClose}>
             <XIcon />
@@ -80,8 +80,8 @@ export function FilterCategoryMenu({
             <span className="px-5 text-lg font-medium">Selected</span>
             <ul className={clsxm('px-5 pb-2', 'min-w-full')}>
               {selected.map((tag) => (
-                <OptionCategoryItemButton
-                  key={`${tag.category}_${tag.name}`}
+                <TagTypeFilterOption
+                  key={`${tag.type}_${tag.name}`}
                   tag={tag}
                   onClick={handleToggleFilter(tag)}
                   checked={getIsFilterActive(tag)}
@@ -93,8 +93,8 @@ export function FilterCategoryMenu({
         ) : null}
         <ul className={clsxm('px-5 pt-3', 'h-full overflow-y-auto')}>
           {(hits.length ? hits : options).map((tag) => (
-            <OptionCategoryItemButton
-              key={`${tag.category}_${tag.name}`}
+            <TagTypeFilterOption
+              key={`${tag.type}_${tag.name}`}
               tag={tag}
               onClick={handleToggleFilter(tag)}
               checked={getIsFilterActive(tag)}

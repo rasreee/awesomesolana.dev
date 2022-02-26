@@ -5,13 +5,13 @@ import { useSearchState } from '@/hooks/useSearchState';
 import { SearchForm, Seo, useSearchForm } from '@/ui/components';
 import { waitFor } from '@/utils';
 
-import { FilterCategoriesControls } from './filters/FilterCategoriesControls';
-import { FilterCategoryModal } from './filters/FilterCategoryModal';
 import { Results } from './Results';
+import { TagTypeModal } from './tags/TagTypeModal';
+import { TagTypesControls } from './tags/TagTypesControls';
 
 export const SearchPage = () => {
   const router = useRouter();
-  const { filters } = useSearchState();
+  const { tags } = useSearchState();
 
   const submitQuery = (q: string) => {
     const queryString = q.trim();
@@ -19,11 +19,9 @@ export const SearchPage = () => {
     if (!queryString)
       return router.push(
         `/search${
-          filters.length
+          tags.length
             ? '?' +
-              filters
-                .map((filter) => filter.category + '=' + filter.name)
-                .join('&')
+              tags.map((filter) => filter.type + '=' + filter.name).join('&')
             : ''
         }`,
         undefined,
@@ -31,9 +29,8 @@ export const SearchPage = () => {
       );
 
     const newPath = `/search?q=${query}${
-      filters.length
-        ? '&' +
-          filters.map((filter) => filter.category + '=' + filter.name).join('&')
+      tags.length
+        ? '&' + tags.map((filter) => filter.type + '=' + filter.name).join('&')
         : ''
     }`;
 
@@ -65,8 +62,8 @@ export const SearchPage = () => {
       <div className="flex-1 px-3 sm:px-6">
         <div className="flex flex-col gap-2">
           <SearchForm {...{ query, ...restSearchForm }} onSubmit={setQuery} />
-          <FilterCategoriesControls />
-          <FilterCategoryModal />
+          <TagTypesControls />
+          <TagTypeModal />
         </div>
         <Results />
       </div>
