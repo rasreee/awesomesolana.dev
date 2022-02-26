@@ -12,8 +12,22 @@ export function SearchPage() {
   const router = useRouter();
   const { filters } = useSearchState();
 
-  const submitQuery = (query: string) => {
-    if (!query) return;
+  const submitQuery = (q: string) => {
+    const queryString = q.trim();
+
+    if (!queryString)
+      return router.push(
+        `/search${
+          filters.length
+            ? '?' +
+              filters
+                .map((filter) => filter.category + '=' + filter.name)
+                .join('&')
+            : ''
+        }`,
+        undefined,
+        { shallow: true },
+      );
 
     const newPath = `/search?q=${query}${
       filters.length
@@ -22,7 +36,7 @@ export function SearchPage() {
         : ''
     }`;
 
-    router.push(newPath);
+    router.push(newPath, undefined, { shallow: true });
   };
 
   const { query, setQuery, setLoading, setError, ...restSearchForm } =
