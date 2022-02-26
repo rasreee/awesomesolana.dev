@@ -1,18 +1,22 @@
-import { action, makeAutoObservable } from 'mobx';
+import { action, makeAutoObservable, reaction } from 'mobx';
 import Router from 'next/router';
 
 import { searchRoute, Tag, TagType, tagTypes } from '@/core/search';
 import { useStore } from '@/mobx/storeContext';
+import { waitFor } from '@/utils';
 
 export class SearchStore {
   tags: Tag[] = [];
 
-  query = '';
+  searchForm = { loading: false, error: null, query: '' };
 
   tagTypeModal: TagType | null = null;
 
   get rootUrl(): string {
-    const { tags, query } = this;
+    const {
+      tags,
+      searchForm: { query },
+    } = this;
 
     let result = '/search';
 
@@ -27,6 +31,10 @@ export class SearchStore {
     }
 
     return result;
+  }
+
+  setQuery(query: string) {
+    this.searchForm.query = query;
   }
 
   addTag(tag: Tag) {
@@ -93,9 +101,42 @@ export class SearchStore {
         openTagTypeModal: action.bound,
         removeTag: action.bound,
         addTag: action.bound,
+        submitQuery: action.bound,
+        setQuery: action.bound,
       },
       { name: 'SearchStore' },
     );
+
+    reaction(
+      () => this.searchForm.query,
+      (query) => this.submitQuery(query),
+    );
+  }
+
+  async submitQuery(query: string) {
+    await waitFor(300);
+    const tags = this.tags;
+    const queryString = query.trim();
+
+    if (!queryString)
+      return Router.router?.push(
+        `/search${
+          tags.length
+            ? '?' +
+              tags.map((filter) => filter.type + '=' + filter.name).join('&')
+            : ''
+        }`,
+        undefined,
+        { shallow: true },
+      );
+
+    const newPath = `/search?q=${query}${
+      tags.length
+        ? '&' + tags.map((filter) => filter.type + '=' + filter.name).join('&')
+        : ''
+    }`;
+
+    Router.router?.push(newPath, undefined, { shallow: true });
   }
 }
 
