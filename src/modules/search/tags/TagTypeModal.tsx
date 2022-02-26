@@ -1,5 +1,5 @@
 import {
-  getTagsForType,
+  getTags,
   route,
   TagType,
   useSearchState,
@@ -22,7 +22,7 @@ export function TagTypeModal() {
   const toggleFilter = useToggleTag();
 
   const getSelectedTags = (type: TagType) => {
-    const tagsForType = getTagsForType(type);
+    const tagsForType = getTags(type);
 
     const selected = getIntersection(
       tagsForType,
@@ -37,7 +37,7 @@ export function TagTypeModal() {
 
   const selectedTags = getSelectedTags(selectedTag);
 
-  const options = getTagsForType(selectedTag).filter(
+  const options = getTags(selectedTag).filter(
     (tag) => !selectedTags.map((item) => item.name).includes(tag.name),
   );
 

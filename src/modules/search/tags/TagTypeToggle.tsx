@@ -1,4 +1,4 @@
-import { getTagsForType, route, TagType, useSearchState } from '@core/search';
+import { getTags, route, TagType, useSearchState } from '@core/search';
 import { getIntersection } from '@utils/array';
 import { capitalize } from '@utils/capitalize';
 import clsxm from '@utils/clsxm';
@@ -13,7 +13,7 @@ export function TagTypeToggle({ type }: { type: TagType }) {
   const router = useRouter();
   const { tags } = useSearchState();
 
-  const tagsForType = getTagsForType(type);
+  const tagsForType = getTags(type);
 
   const selected = getIntersection(
     tagsForType,

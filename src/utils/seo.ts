@@ -9,12 +9,9 @@ export type SeoOptions = {
 };
 
 function getRouteTitle(pathname: string): string {
-  console.log('PATHNAME:', pathname);
   const splits = pathname.split('/');
   const basePath = splits.length > 1 ? splits[1] : '';
   const title = capitalize(basePath.replace('/', ''));
-
-  console.log('TITLE: ', title);
 
   return title;
 }
