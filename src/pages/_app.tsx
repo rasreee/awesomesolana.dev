@@ -5,8 +5,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 
 import AppLayout from '@/app/AppLayout';
-import AppStateProvider from '@/app/contexts/AppStateProvider';
-import ExternalProviders from '@/app/contexts/ExternalProviders';
+import ExternalProviders from '@/app/ExternalProviders';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -15,11 +14,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
       <ExternalProviders>
-        <AppStateProvider>
-          <AppLayout>
-            <Component {...pageProps} />
-          </AppLayout>
-        </AppStateProvider>
+        <AppLayout>
+          <Component {...pageProps} />
+        </AppLayout>
       </ExternalProviders>
     </>
   );

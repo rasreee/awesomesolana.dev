@@ -1,6 +1,5 @@
 import { FormEventHandler, useState } from 'react';
 
-import { useAppSearchOptions } from '@/app/contexts';
 import clsxm from '@/lib/clsxm';
 import { ErrorMessage, StatefulIcon, TextInput } from '@/ui/components';
 import { SearchIcon, XIcon } from '@/ui/icons';
@@ -26,8 +25,6 @@ export function SearchForm({
   autoFocused = false,
   onSubmit,
 }: SearchFormProps) {
-  const { isOpen: isSearchOptionsOpen } = useAppSearchOptions();
-
   const [focused, setFocused] = useState(autoFocused);
 
   const onFocus = () => setFocused(true);
@@ -45,9 +42,7 @@ export function SearchForm({
       className={clsxm(
         'flex !max-h-[3rem] max-w-full flex-1 items-center gap-0 px-2 py-1',
         'input bg-surface-1',
-        focused || isSearchOptionsOpen
-          ? 'input-border-focused'
-          : 'input-border',
+        focused ? 'input-border-focused' : 'input-border',
         'rounded-full',
       )}
     >
