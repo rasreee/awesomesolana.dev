@@ -6,17 +6,17 @@ import { useSearchState } from './useSearchState';
 
 export function useToggleTag() {
   const router = useRouter();
-  const { tags: allFilters } = useSearchState();
+  const { tags } = useSearchState();
 
-  const getIsFilterActive = (input: Tag): boolean => {
-    return allFilters
+  const getIsTagActive = (input: Tag): boolean => {
+    return tags
       .filter((tag) => tag.type === input.type)
       .map((item) => item.name)
       .includes(input.name);
   };
 
-  const addFilter = (tagToAdd: Tag) => {
-    const oldTags = allFilters;
+  const addTag = (tagToAdd: Tag) => {
+    const oldTags = tags;
     const newTags = oldTags ? [...oldTags, tagToAdd] : [tagToAdd];
 
     let newPath = `/search`;
@@ -37,8 +37,8 @@ export function useToggleTag() {
     router.push(newPath);
   };
 
-  const removeFilter = (tagToRemove: Tag) => {
-    const newTags = allFilters.filter((tag) => tag.name !== tagToRemove.name);
+  const removeTag = (tagToRemove: Tag) => {
+    const newTags = tags.filter((tag) => tag.name !== tagToRemove.name);
 
     let newPath = `/search`;
 
@@ -60,13 +60,13 @@ export function useToggleTag() {
     router.push(newPath);
   };
 
-  const toggleFilter = (tag: Tag) => {
-    if (!getIsFilterActive(tag)) {
-      addFilter(tag);
+  const toggleTag = (tag: Tag) => {
+    if (!getIsTagActive(tag)) {
+      addTag(tag);
     } else {
-      removeFilter(tag);
+      removeTag(tag);
     }
   };
 
-  return toggleFilter;
+  return toggleTag;
 }

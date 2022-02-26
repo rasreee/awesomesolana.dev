@@ -25,6 +25,6 @@ export async function getTagSuggestions(
   return hits;
 }
 
-export function getTypeFilters(type: TagType): Tag[] {
+export function getTagsForType(type: TagType): Tag[] {
   return SEARCH_TAGS.filter((filter) => filter.type === type);
 }

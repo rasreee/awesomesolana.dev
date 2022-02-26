@@ -1,4 +1,4 @@
-import { getTypeFilters, TagType } from '@modules/tags';
+import { getTagsForType, TagType } from '@modules/tags';
 import { getIntersection } from '@utils';
 import clsxm from '@utils/clsxm';
 import { useRouter } from 'next/router';
@@ -12,30 +12,30 @@ import { TagTypeMenu } from './TagTypeMenu';
 
 export function TagTypeModal() {
   const router = useRouter();
-  const selectedCategory = route.search.tags.getType(router.asPath);
+  const selectedTag = route.search.tags.getType(router.asPath);
 
-  const { tags: allFilters } = useSearchState();
+  const { tags } = useSearchState();
 
   const toggleFilter = useToggleTag();
 
-  const getSelectedFilters = (type: TagType) => {
-    const categoryFilters = getTypeFilters(type);
+  const getSelectedTags = (type: TagType) => {
+    const tagsForType = getTagsForType(type);
 
     const selected = getIntersection(
-      categoryFilters,
-      allFilters,
+      tagsForType,
+      tags,
       (a, b) => a.name === b.name,
     );
 
     return selected;
   };
 
-  if (!selectedCategory) return null;
+  if (!selectedTag) return null;
 
-  const selectedFilters = getSelectedFilters(selectedCategory);
+  const selectedTags = getSelectedTags(selectedTag);
 
-  const options = getTypeFilters(selectedCategory).filter(
-    (filter) => !selectedFilters.map((item) => item.name).includes(filter.name),
+  const options = getTagsForType(selectedTag).filter(
+    (tag) => !selectedTags.map((item) => item.name).includes(tag.name),
   );
 
   return (
@@ -46,13 +46,13 @@ export function TagTypeModal() {
         'rounded-none rounded-t-xl',
       )}
       onClose={() => route.search.tags.closeType(router)}
-      isOpen={Boolean(selectedCategory)}
+      isOpen={Boolean(selectedTag)}
     >
       <TagTypeMenu
-        type={selectedCategory}
+        type={selectedTag}
         options={options}
         onClose={() => route.search.tags.closeType(router)}
-        selected={selectedFilters}
+        selected={selectedTags}
         onToggleFilter={toggleFilter}
       />
     </Popover>

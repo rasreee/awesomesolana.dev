@@ -8,16 +8,16 @@ import { Popover } from '@/ui/components';
 type GroupedResultsProps = {
   isOpen: boolean;
   hits: Tag[];
-  onAddFilter: (tag: Tag) => void;
+  onTagClick: (tag: Tag) => void;
   onClose: () => void;
 };
 
 type GroupedHits = Array<{ type: TagType; hits: Tag[] }>;
 
-function groupByCategory(list: Tag[]): GroupedHits {
+function groupByTag(list: Tag[]): GroupedHits {
   const groups = TAG_TYPES.map((type) => ({
     type,
-    hits: list.filter((filter) => filter.type === type),
+    hits: list.filter((tag) => tag.type === type),
   }));
 
   return groups;
@@ -26,17 +26,17 @@ function groupByCategory(list: Tag[]): GroupedHits {
 export function GroupedResults({
   isOpen,
   hits,
-  onAddFilter: handleTagClick,
+  onTagClick,
   onClose,
 }: GroupedResultsProps) {
-  const { tags: searchFilters } = useSearchState();
+  const { tags } = useSearchState();
 
   const listToShow = hits.filter(
-    (hit) => !searchFilters.some((filter) => filter.name === hit.name),
+    (hit) => !tags.some((tag) => tag.name === hit.name),
   );
 
-  const onAddFilter = (tag: Tag) => () => {
-    handleTagClick(tag);
+  const handleTagClick = (tag: Tag) => () => {
+    onTagClick(tag);
   };
 
   return (
@@ -45,7 +45,7 @@ export function GroupedResults({
       isOpen={isOpen}
       onClose={onClose}
     >
-      {groupByCategory(listToShow).map(
+      {groupByTag(listToShow).map(
         ({ type, hits: list }) =>
           list.length > 0 && (
             <div className="flex flex-col gap-2 px-1" key={type}>
@@ -57,7 +57,7 @@ export function GroupedResults({
                   <li className="w-full" key={`${hit.type}_${hit.name}`}>
                     <button
                       className="hover:bg-surface-1 w-full rounded-md py-3 px-3 text-left"
-                      onClick={onAddFilter(hit)}
+                      onClick={handleTagClick(hit)}
                     >
                       {hit.name}
                     </button>

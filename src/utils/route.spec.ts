@@ -8,7 +8,7 @@ import { searchRoute } from './route';
  */
 describe('utils/route', () => {
   describe('excludeType', () => {
-    it('excludes filter type params from url', () => {
+    it('excludes tag type params from url', () => {
       const prevPath = `/search?q=testing&language=rust`;
 
       const type = 'language';
@@ -19,7 +19,7 @@ describe('utils/route', () => {
   });
 
   describe('typeParam', () => {
-    it('parses and returns filter type from url', () => {
+    it('parses and returns tag type from url', () => {
       const url = `/search/tags?type=language`;
 
       const type = 'language';

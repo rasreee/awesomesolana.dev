@@ -12,7 +12,7 @@ export function HomePage() {
   const searchBox = useSearchForm();
   const [hits, setHits] = useState<Tag[]>([]);
 
-  const toggleFilter = useToggleTag();
+  const toggleTag = useToggleTag();
 
   const handleSubmit = async (query: string) => {
     const { setLoading, setError } = searchBox;
@@ -66,7 +66,7 @@ export function HomePage() {
           <GroupedResults
             isOpen={hits.length > 0}
             hits={hits}
-            onAddFilter={toggleFilter}
+            onTagClick={toggleTag}
             onClose={closeResults}
           />
         </div>

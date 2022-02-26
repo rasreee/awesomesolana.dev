@@ -1,4 +1,4 @@
-import { getTypeFilters, TagType } from '@modules/tags';
+import { getTagsForType, TagType } from '@modules/tags';
 import { getIntersection } from '@utils/array';
 import { capitalize } from '@utils/capitalize';
 import clsxm from '@utils/clsxm';
@@ -13,13 +13,13 @@ import { TagButton } from './TagButton';
 
 export function TagTypeToggle({ type }: { type: TagType }) {
   const router = useRouter();
-  const { tags: allFilters } = useSearchState();
+  const { tags } = useSearchState();
 
-  const categoryFilters = getTypeFilters(type);
+  const tagsForType = getTagsForType(type);
 
   const selected = getIntersection(
-    categoryFilters,
-    allFilters,
+    tagsForType,
+    tags,
     (a, b) => a.name === b.name,
   );
 
@@ -43,12 +43,12 @@ export function TagTypeToggle({ type }: { type: TagType }) {
     );
   }
 
-  const selectedCategory = route.search.tags.getType(router.asPath);
+  const selectedTag = route.search.tags.getType(router.asPath);
 
   return (
     <TagButton
       className={clsxm(
-        (selectedCategory && selectedCategory === type) || hasAnySelected
+        (selectedTag && selectedTag === type) || hasAnySelected
           ? 'bg-color-primary text-white'
           : '',
       )}
