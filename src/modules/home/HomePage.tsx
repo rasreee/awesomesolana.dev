@@ -14,11 +14,6 @@ export function HomePage() {
 
   const toggleFilter = useToggleFilter();
 
-  const handleAddFilter = (tag: Tag) => {
-    toggleFilter(tag);
-    searchBox.onReset();
-  };
-
   const handleSubmit = async (query: string) => {
     const { setLoading, setError } = searchBox;
     setLoading(true);
@@ -56,7 +51,7 @@ export function HomePage() {
           <GroupedResults
             isOpen={hits.length > 0}
             hits={hits}
-            onAddFilter={handleAddFilter}
+            onAddFilter={toggleFilter}
             onClose={searchBox.onReset}
           />
         </div>
