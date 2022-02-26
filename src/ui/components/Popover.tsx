@@ -7,20 +7,20 @@ import { Overlay } from './Overlay';
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   isOpen?: boolean;
-  onRequestClose: () => void;
+  onClose: () => void;
   className?: string;
 }
 
 export function Popover({
   children,
   isOpen = true,
-  onRequestClose,
+  onClose,
   className,
   ...props
 }: PopoverProps) {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  useClickOutside(ref, onRequestClose);
+  useClickOutside(ref, onClose);
 
   if (!isOpen) return null;
 

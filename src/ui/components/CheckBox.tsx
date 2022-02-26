@@ -1,4 +1,4 @@
-import clsxm from '@/lib/clsxm';
+import clsxm from '@utils/clsxm';
 
 export interface CheckBoxProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}

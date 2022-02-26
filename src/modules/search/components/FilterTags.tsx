@@ -1,8 +1,7 @@
-import React from 'react';
+import { useSearchFilters, useToggleFilter } from '@modules/search';
+import { Tag } from '@modules/tags';
+import pluralize from '@utils/pluralize';
 
-import pluralize from '@/lib/pluralize';
-import { useSearchFilters, useToggleFilter } from '@/modules/search';
-import { Tag } from '@/modules/tags';
 import { useIsMobile } from '@/ui/hooks';
 import { XIcon } from '@/ui/icons';
 

@@ -1,6 +1,6 @@
+import { Tag } from '@modules/tags';
 import React from 'react';
 
-import { Tag } from '@/modules/tags';
 import { CheckBox } from '@/ui/components';
 
 export function OptionCategoryItemButton({

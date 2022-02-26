@@ -1,7 +1,6 @@
-import { configs } from '@/common/configs';
+const GITHUB_API_URL = 'https://api.github.com';
 
-import { githubApi } from '.';
-import { githubSwrKey } from './api';
+import { githubApi, githubSwrKey } from './api';
 
 /**
  * @group modules
@@ -20,7 +19,7 @@ describe('modules/github/api', () => {
     it('should format github repos browse api url', () => {
       const result = githubApi.browseRepos();
       expect(result).toEqual(
-        `${configs.github.apiUrl}/search/repositories?q=solana&page=0&per_page=10`,
+        `${GITHUB_API_URL}/search/repositories?q=solana&page=0&per_page=10`,
       );
     });
 
@@ -29,7 +28,7 @@ describe('modules/github/api', () => {
         filters: [{ category: 'language', name: 'typescript' }],
       });
       expect(result).toEqual(
-        `${configs.github.apiUrl}/search/repositories?q=solana+language:typescript&page=0&per_page=10`,
+        `${GITHUB_API_URL}/search/repositories?q=solana+language:typescript&page=0&per_page=10`,
       );
     });
   });

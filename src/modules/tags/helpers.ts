@@ -3,7 +3,7 @@ import { FilterCategory, Tag } from './types';
 
 export async function getTagSuggestions(
   query: string,
-  filter?: { category: FilterCategory },
+  filter?: { category?: FilterCategory },
 ): Promise<Tag[]> {
   if (!query) return [];
 
@@ -11,7 +11,7 @@ export async function getTagSuggestions(
 
   const a = query.toLowerCase();
 
-  const tagsToSearch = filter
+  const tagsToSearch = filter?.category
     ? SEARCH_FILTERS.filter((tag) => tag.category === filter.category)
     : SEARCH_FILTERS;
 

@@ -1,8 +1,11 @@
+import {
+  githubApi,
+  GitHubApiResponse,
+  githubFetch,
+  GithubReposSearchParams,
+} from '@modules/github';
+import { DEFAULT_PAGINATION_PARAMS } from '@utils';
 import { NextApiRequest, NextApiResponse } from 'next';
-
-import { authFetch, DEFAULT_PAGINATION_PARAMS } from '@/common/utils';
-import { GitHubApiResponse } from '@/modules/github';
-import { githubApi, GithubReposSearchParams } from '@/modules/github/api';
 
 export type GitHubSearchReposRequest = NextApiRequest & {
   query: Partial<GithubReposSearchParams>;
@@ -21,7 +24,7 @@ export default async function githubApiHandler(
 
   const params = { q, page, per_page, filters };
 
-  const reposResponse = await authFetch(githubApi.searchRepos(params));
+  const reposResponse = await githubFetch(githubApi.searchRepos(params));
 
   const data = (await reposResponse.json()) as GitHubApiResponse;
 

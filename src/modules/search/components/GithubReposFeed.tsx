@@ -1,8 +1,8 @@
+import { useGithubReposApi } from '@modules/github';
+import { Tag } from '@modules/tags';
+import { PaginationParams } from '@utils';
 import React from 'react';
 
-import { PaginationParams } from '@/common/utils';
-import { useGithubReposApi } from '@/modules/github';
-import { Tag } from '@/modules/tags';
 import { ErrorMessage } from '@/ui/components';
 
 import { RepoItem } from './RepoItem';

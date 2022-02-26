@@ -1,4 +1,4 @@
-import { DEFAULT_PAGINATION_PARAMS, PaginationParams } from '@/common/utils';
+import { DEFAULT_PAGINATION_PARAMS, PaginationParams } from '@utils';
 
 import { Tag } from '../tags';
 import { GitHubRepo, RawGitHubRepo } from './types';

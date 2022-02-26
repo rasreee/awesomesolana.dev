@@ -1,4 +1,4 @@
-import clsxm from '@/lib/clsxm';
+import clsxm from '@utils/clsxm';
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   disabled?: boolean;

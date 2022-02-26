@@ -1,5 +1,6 @@
 export * from './useClickOutside';
 export * from './useDebouncedCallback';
+export * from './useDebouncedEffect';
 export * from './useDebouncedState';
 export * from './useEventListener';
 export * from './useIsMobile';

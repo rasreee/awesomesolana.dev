@@ -1,6 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-
-import { waitFor } from '@/common/utils';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 export type UseSearchForm = {
   query: string;
@@ -9,27 +7,29 @@ export type UseSearchForm = {
   setError: Dispatch<SetStateAction<string | null>>;
   setLoading: Dispatch<SetStateAction<boolean>>;
   setQuery: Dispatch<SetStateAction<string>>;
-  onChange: Dispatch<SetStateAction<string>>;
+  onReset: () => void;
+  onChange: (query: string) => void;
 };
 
-export function useSearchForm(
-  submitQuery: (query: string) => any,
-): UseSearchForm {
+export function useSearchForm(): UseSearchForm {
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    waitFor(200).then(() => submitQuery(query));
-  }, [query]);
+  const handleReset = () => {
+    setError(null);
+    setQuery('');
+    setLoading(false);
+  };
 
   return {
     query,
     setQuery,
-    onChange: setQuery,
     loading,
     setLoading,
     setError,
     error,
+    onReset: handleReset,
+    onChange: setQuery,
   };
 }

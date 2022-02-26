@@ -1,6 +1,6 @@
+import { GitHubRepo } from '@modules/github';
 import React from 'react';
 
-import { GitHubRepo } from '@/modules/github';
 import { Badge, RepoStat } from '@/ui/components';
 
 export function RepoItem({

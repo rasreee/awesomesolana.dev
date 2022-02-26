@@ -1,7 +1,7 @@
-import clsxm from '@/lib/clsxm';
-import pluralize from '@/lib/pluralize';
-import { GitHubRepo } from '@/modules/github';
-import { Tag } from '@/modules/tags';
+import { GitHubRepo } from '@modules/github';
+import { Tag } from '@modules/tags';
+import clsxm from '@utils/clsxm';
+import pluralize from '@utils/pluralize';
 
 function getResultsInfoText({
   data,

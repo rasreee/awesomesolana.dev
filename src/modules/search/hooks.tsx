@@ -1,8 +1,7 @@
+import { FILTER_CATEGORIES, FilterCategory, Tag } from '@modules/tags';
+import { normalizeQueryParam } from '@utils/query';
 import { NextRouter, useRouter } from 'next/router';
-import { useMemo } from 'react';
-
-import { normalizeQueryParam } from '@/common/utils';
-import { FILTER_CATEGORIES, FilterCategory, Tag } from '@/modules/tags';
+import { useMemo, useRef } from 'react';
 
 export function useSearchQuery() {
   const router = useRouter();
@@ -16,14 +15,14 @@ export function useSubmitQuery() {
   const router = useRouter();
   const filters = useSearchFilters();
 
+  const { current: restQueryStrings } = useRef(
+    filters.map((filter) => filter.category + '=' + filter.name),
+  );
+
   const submitQuery = (query: string) => {
-    if (!query) return router.push('/search');
+    if (!query) return;
 
-    let newPath = `/search?q=${query}`;
-
-    filters.forEach((filter) => {
-      newPath = [newPath, filter.category + '=' + filter.name].join('&');
-    });
+    const newPath = `/search?q=${query}&${restQueryStrings.join('&')}`;
 
     router.push(newPath);
   };

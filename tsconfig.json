@@ -26,7 +26,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "~/*": ["./public/*"]
+      "~/*": ["./public/*"],
+      "@configs/*": ["./src/configs/*"],
+      "@utils": ["./src/utils"],
+      "@utils/*": ["./src/utils/*"],
+      "@modules/*": ["./src/modules/*"]
     },
     "incremental": true
   },

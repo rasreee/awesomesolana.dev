@@ -1,10 +1,12 @@
-import { capitalizeFirst, getIntersection } from '@/common/utils';
-import clsxm from '@/lib/clsxm';
-import pluralize from '@/lib/pluralize';
-import { useClearFilters, useSearchFilters } from '@/modules/search';
-import { FilterCategory, getCategoryFilters } from '@/modules/tags';
+import { FilterCategory, getCategoryFilters } from '@modules/tags';
+import { getIntersection } from '@utils/array';
+import { capitalize } from '@utils/capitalize';
+import clsxm from '@utils/clsxm';
+import pluralize from '@utils/pluralize';
+
 import { ChevronDownIcon, XIcon } from '@/ui/icons';
 
+import { useClearFilters, useSearchFilters } from '../hooks';
 import { useFilterCategoriesBar } from './FilterCategoriesBar';
 import { TagButton } from './TagButton';
 
@@ -30,7 +32,7 @@ export function FilterItemToggle({ category }: { category: FilterCategory }) {
         onClick={() => expand(category)}
       >
         <span className="text-left text-base leading-none">
-          {capitalizeFirst(pluralize(category))}
+          {capitalize(pluralize(category))}
         </span>
         {hasAnySelected && (
           <span className="text-base leading-none">

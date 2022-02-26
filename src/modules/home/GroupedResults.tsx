@@ -1,14 +1,15 @@
-import { capitalizeFirst } from '@/common/utils';
-import pluralize from '@/lib/pluralize';
-import { useSearchFilters } from '@/modules/search';
-import { FILTER_CATEGORIES, FilterCategory, Tag } from '@/modules/tags';
+import { useSearchFilters } from '@modules/search';
+import { FILTER_CATEGORIES, FilterCategory, Tag } from '@modules/tags';
+import { capitalize } from '@utils/capitalize';
+import pluralize from '@utils/pluralize';
+
 import { Popover } from '@/ui/components';
 
 type GroupedResultsProps = {
   isOpen: boolean;
   hits: Tag[];
   onAddFilter: (tag: Tag) => void;
-  onRequestClose: () => void;
+  onClose: () => void;
 };
 
 type GroupedHits = Array<{ category: FilterCategory; hits: Tag[] }>;
@@ -26,7 +27,7 @@ export function GroupedResults({
   isOpen,
   hits,
   onAddFilter: handleTagClick,
-  onRequestClose,
+  onClose,
 }: GroupedResultsProps) {
   const searchFilters = useSearchFilters();
 
@@ -42,14 +43,14 @@ export function GroupedResults({
     <Popover
       className="bg-surface relative overflow-hidden py-5 px-3"
       isOpen={isOpen}
-      onRequestClose={onRequestClose}
+      onClose={onClose}
     >
       {groupByCategory(listToShow).map(
         ({ category, hits: list }) =>
           list.length > 0 && (
             <div className="flex flex-col gap-2 px-1">
               <span className="px-3 py-2 text-lg font-semibold">
-                {capitalizeFirst(pluralize(category))} {`(${list.length})`}
+                {capitalize(pluralize(category))} {`(${list.length})`}
               </span>
               <ul className="max-h-[16rem] overflow-y-auto">
                 {list.map((hit) => (

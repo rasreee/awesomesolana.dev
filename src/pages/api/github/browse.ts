@@ -1,11 +1,11 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-
-import { authFetch, DEFAULT_PAGINATION_PARAMS } from '@/common/utils';
 import {
   githubApi,
   GitHubApiResponse,
+  githubFetch,
   GithubReposBrowseParams,
-} from '@/modules/github';
+} from '@modules/github';
+import { DEFAULT_PAGINATION_PARAMS } from '@utils';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export type GitHubBrowseReposRequest = NextApiRequest & {
   query: Partial<GithubReposBrowseParams>;
@@ -22,7 +22,7 @@ export default async function githubApiHandler(
 
   const params = { page, per_page };
 
-  const reposResponse = await authFetch(githubApi.browseRepos(params));
+  const reposResponse = await githubFetch(githubApi.browseRepos(params));
 
   const data = (await reposResponse.json()) as GitHubApiResponse;
 

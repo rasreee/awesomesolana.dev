@@ -1,3 +1,5 @@
+import { getSeo } from '@utils/seo';
+import { DefaultSeo } from 'next-seo';
 import * as React from 'react';
 
 import { Divider, Seo, SeoProps } from '@/ui/components';
@@ -11,9 +13,12 @@ export interface AppLayoutProps {
 }
 
 export function AppLayout({ children, seoProps }: AppLayoutProps) {
+  const seo = getSeo();
+
   return (
     <>
       <Seo {...seoProps} />
+      <DefaultSeo {...seo} />
       <div className="bg-app min-h-full w-screen">
         <AppHeader />
         <main className="bg-app min-h-main flex-1">

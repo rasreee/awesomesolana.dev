@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export type UseOverlay = {
   isOpen: boolean;
-  onRequestClose: () => void;
+  onClose: () => void;
   open: () => void;
   toggle: () => void;
 };
@@ -15,7 +15,7 @@ export function useOverlay(): UseOverlay {
   };
 
   const open = () => setIsOpen(true);
-  const onRequestClose = () => setIsOpen(false);
+  const onClose = () => setIsOpen(false);
 
-  return { isOpen, onRequestClose, open, toggle };
+  return { isOpen, onClose, open, toggle };
 }

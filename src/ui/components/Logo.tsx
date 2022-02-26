@@ -1,6 +1,5 @@
+import clsxm from '@utils/clsxm';
 import Image from 'next/image';
-
-import clsxm from '@/lib/clsxm';
 
 const imageSizes = {
   sm: 18,

@@ -1,6 +1,6 @@
+import clsxm from '@utils/clsxm';
 import { FC, ReactNode, useRef } from 'react';
 
-import clsxm from '@/lib/clsxm';
 import { EventKeys, useClickOutside, useKeyPress } from '@/ui/hooks';
 
 export interface ModalProps {
@@ -11,7 +11,7 @@ export interface ModalProps {
   /**
    * Handler to call when modal should be closed
    */
-  onRequestClose: () => void;
+  onClose: () => void;
   /**
    * Children of modal
    */
@@ -21,15 +21,15 @@ export interface ModalProps {
 
 export const Modal: FC<ModalProps> = ({
   isOpen,
-  onRequestClose,
+  onClose,
   children,
   className,
 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  useClickOutside(ref, onRequestClose);
+  useClickOutside(ref, onClose);
 
-  useKeyPress(EventKeys.ESCAPE, onRequestClose);
+  useKeyPress(EventKeys.ESCAPE, onClose);
 
   if (!isOpen) return null;
 

@@ -1,6 +1,6 @@
+import clsxm from '@utils/clsxm';
 import { ComponentType } from 'react';
 
-import clsxm from '@/lib/clsxm';
 import { useIsMobile } from '@/ui/hooks';
 
 export function HideOnMobile({

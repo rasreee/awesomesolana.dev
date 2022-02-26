@@ -7,7 +7,7 @@ function getHeaders(): HeadersInit {
   return headers;
 }
 
-export async function authFetch(uri: string): Promise<Response> {
+export async function githubFetch(uri: string): Promise<Response> {
   const res = await fetch(uri, {
     headers: getHeaders(),
   });

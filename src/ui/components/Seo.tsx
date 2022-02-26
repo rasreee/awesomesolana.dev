@@ -1,18 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { configs } from '@/common/configs';
-
-const defaultSeoProps = {
-  title: 'Awesome Solana Dev',
-  siteName: 'Awesome Solana Dev',
-  description:
-    'Curation of Awesome Solana development resources, in particular open-source Github repos, real-world examples of coding on Solana, tutorials, and more.',
-  url: configs.hostUrl,
-  type: 'website',
-  robots: 'follow, index',
-  image: '',
-};
+import { siteConfig } from '@/configs/site-config';
 
 export type SeoProps = Partial<{
   date: string;
@@ -39,7 +28,7 @@ function openGraph({
   siteName,
   templateTitle,
   description,
-  logo = `${configs.hostUrl}/images/logo.jpg`,
+  logo = `${siteConfig.seo.siteUrl}/images/logo.jpg`,
 }: OpenGraphType): string {
   const ogLogo = encodeURIComponent(logo);
   const ogSiteName = encodeURIComponent(siteName.trim());
@@ -49,7 +38,7 @@ function openGraph({
   const ogDesc = encodeURIComponent(description.trim());
 
   return `${
-    configs.hostUrl
+    siteConfig.seo.siteUrl
   }/api/general?siteName=${ogSiteName}&description=${ogDesc}&logo=${ogLogo}${
     ogTemplateTitle ? `&templateTitle=${ogTemplateTitle}` : ''
   }`;
@@ -58,7 +47,7 @@ function openGraph({
 export function Seo(props: SeoProps) {
   const router = useRouter();
   const meta = {
-    ...defaultSeoProps,
+    ...siteConfig.seo,
     ...props,
   };
   meta['title'] = props.templateTitle
@@ -69,7 +58,9 @@ export function Seo(props: SeoProps) {
   // but show full title if there is none
   meta['image'] = openGraph({
     description: meta.description,
-    siteName: props.templateTitle ? meta.siteName : meta.title,
+    siteName:
+      (props.templateTitle ? meta.siteName : meta.title) ??
+      siteConfig.seo.title,
     templateTitle: props.templateTitle,
   });
 
@@ -129,7 +120,6 @@ type Favicons = {
   type?: string;
 };
 
-// !STARTERCONF this is the default favicon, you can generate your own from https://www.favicon-generator.org/ then replace the whole /public/favicon folder
 const favicons: Array<Favicons> = [
   {
     rel: 'apple-touch-icon',

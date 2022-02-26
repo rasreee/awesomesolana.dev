@@ -1,5 +1,5 @@
-import { PaginationParams } from '@/common/utils';
-import { Tag } from '@/modules/tags';
+import { Tag } from '@modules/tags';
+import { PaginationParams } from '@utils';
 
 import { formatGithubApiQuery } from './helpers';
 

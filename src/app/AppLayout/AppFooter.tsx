@@ -1,5 +1,6 @@
-import { capitalizeFirst } from '@/common/utils';
-import clsxm from '@/lib/clsxm';
+import { capitalize } from '@utils/capitalize';
+import clsxm from '@utils/clsxm';
+
 import { UnstyledLink } from '@/ui/components';
 import { SVGIconProps } from '@/ui/icons';
 
@@ -47,7 +48,7 @@ const SocialLinks = () => {
           href={href}
         >
           <Icon className="h-4 w-4" />
-          {capitalizeFirst(type)}
+          {capitalize(type)}
         </UnstyledLink>
       ))}
     </>
