@@ -1,5 +1,3 @@
-import memoizeOne from 'memoize-one';
-
 import { searchTags } from './constants';
 import { Tag, TagType } from './types';
 
@@ -27,8 +25,6 @@ export async function getTagSuggestions(
   return hits;
 }
 
-function tagsForType(type: TagType): Tag[] {
+export function getTags(type: TagType): Tag[] {
   return searchTags.filter((filter) => filter.type === type);
 }
-
-export const getTags = memoizeOne(tagsForType);
