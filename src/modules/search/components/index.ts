@@ -12,6 +12,7 @@ export * from './OptionCategoryToggles';
 export * from './RepoItem';
 export * from './ResultsInfo';
 export * from './SearchField';
+export * from './SearchForm';
 export * from './SearchOptionsButton';
 export * from './SearchOptionsModal';
 export * from './SearchOptionsSidebar';

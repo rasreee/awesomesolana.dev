@@ -1,4 +1,4 @@
-import { useAppSearchField } from '@/app/contexts';
+import { useRouter } from 'next/router';
 
 import {
   FilterCategoriesBar,
@@ -6,21 +6,69 @@ import {
   FilterCategoryMenu,
   GithubReposFeed,
   GithubReposProps,
-  SearchField,
+  SearchForm,
+  useSearchForm,
 } from './components';
-import { useSearchState } from './hooks';
+import { useSearchState, useSubmitQuery } from './hooks';
 
 export function SearchPage() {
-  const searchField = useAppSearchField();
-
   return (
     <div className="flex-1 px-3 sm:px-6">
       <div className="flex flex-col gap-2">
-        <SearchField autoFocused {...searchField} />
+        <SearchBox />
         <Filters />
       </div>
       <Results />
     </div>
+  );
+}
+
+function SearchBox() {
+  const router = useRouter();
+  const submitQuery = useSubmitQuery();
+  const { query, error, loading, setLoading, setError, setQuery } =
+    useSearchForm((query) => submitQuery(query));
+
+  const handleSubmit = async (q: string) => {
+    setLoading(false);
+    setError(null);
+    try {
+      await submitQuery(q);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleReset = () => {
+    setError(null);
+    setQuery('');
+    setLoading(false);
+    router.push('/search');
+  };
+
+  return (
+    <SearchForm
+      autoFocused
+      {...{
+        query,
+        error,
+        loading,
+        onChange: setQuery,
+        onSubmit: handleSubmit,
+        onReset: handleReset,
+      }}
+    />
+  );
+}
+
+function Filters() {
+  return (
+    <FilterCategoriesBar>
+      <FilterCategoriesControls />
+      <FilterCategoryMenu />
+    </FilterCategoriesBar>
   );
 }
 
@@ -32,13 +80,4 @@ function Results() {
     : { route: '/browse' };
 
   return <GithubReposFeed {...args} />;
-}
-
-function Filters() {
-  return (
-    <FilterCategoriesBar>
-      <FilterCategoriesControls />
-      <FilterCategoryMenu />
-    </FilterCategoriesBar>
-  );
 }

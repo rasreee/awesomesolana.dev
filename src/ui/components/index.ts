@@ -14,5 +14,5 @@ export * from './Spinner';
 export * from './StatefulIcon';
 export * from './TextInput';
 export * from './colorMode';
-export * from './github';
 export * from './links';
+export * from './github';

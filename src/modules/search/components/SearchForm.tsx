@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEventHandler, useState } from 'react';
 
 import { useAppSearchOptions } from '@/app/contexts';
 import clsxm from '@/lib/clsxm';
@@ -7,23 +7,25 @@ import { SearchIcon, XIcon } from '@/ui/icons';
 
 const DEFAULT_PLACEHOLDER = 'Search for any project, dependency, or topic';
 
-export type SearchFieldProps = {
+export type SearchFormProps = {
   error?: string | null;
   loading: boolean;
   query: string;
   onChange: (query: string) => void;
   autoFocused?: boolean;
-  reset: () => void;
+  onReset: () => void;
+  onSubmit: (query: string) => any;
 };
 
-export function SearchField({
+export function SearchForm({
   error,
   loading,
   query,
   onChange,
-  reset,
+  onReset,
   autoFocused = false,
-}: SearchFieldProps) {
+  onSubmit,
+}: SearchFormProps) {
   const { isOpen: isSearchOptionsOpen } = useAppSearchOptions();
 
   const [focused, setFocused] = useState(autoFocused);
@@ -31,8 +33,15 @@ export function SearchField({
   const onFocus = () => setFocused(true);
   const onBlur = () => setFocused(false);
 
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    onSubmit(query);
+  };
+
   return (
-    <div
+    <form
+      noValidate
+      onSubmit={handleSubmit}
       className={clsxm(
         'flex !max-h-[3rem] max-w-full flex-1 items-center gap-0 px-2 py-1',
         'input bg-surface-1',
@@ -62,10 +71,10 @@ export function SearchField({
         onBlur={onBlur}
       />
       {Boolean(query) && (
-        <button className="p-1" onClick={reset}>
+        <button className="p-1" onClick={onReset}>
           <XIcon className="box-border h-4 w-4" />
         </button>
       )}
-    </div>
+    </form>
   );
 }

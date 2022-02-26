@@ -10,7 +10,7 @@ export type UseSearchField<T> = Omit<
 > & {
   setQuery: Dispatch<SetStateAction<string>>;
   onChange: Dispatch<SetStateAction<string>>;
-  isRequesting: boolean;
+  loading: boolean;
   error: string | null;
   hits: T[];
   reset: () => void;
@@ -23,7 +23,7 @@ export function useSearchField<T = any>(
   // onSuccess?: (hits: T[]) => any,
 ): UseSearchField<T> {
   const [query, setQuery] = useState('');
-  const [isRequesting, setIsRequesting] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hits, setHits] = useState<T[]>([]);
 
@@ -32,7 +32,7 @@ export function useSearchField<T = any>(
       if (!query) {
         return setHits([]);
       }
-      setIsRequesting(true);
+      setLoading(true);
       setError(null);
       try {
         const newHits = await searchFn(query);
@@ -40,7 +40,7 @@ export function useSearchField<T = any>(
       } catch (e) {
         setError((e as Error).message);
       } finally {
-        setIsRequesting(false);
+        setLoading(false);
       }
     };
 
@@ -51,7 +51,7 @@ export function useSearchField<T = any>(
     setHits([]);
     setError(null);
     setQuery('');
-    setIsRequesting(false);
+    setLoading(false);
   };
 
   return {
@@ -59,7 +59,7 @@ export function useSearchField<T = any>(
     setQuery,
     hits,
     onChange: setQuery,
-    isRequesting,
+    loading,
     error,
     reset,
   };

@@ -11,7 +11,7 @@ const DESCRIPTION =
   'Browse open-source projects built on Solana, filterable by dependencies, languages, frameworks, and/or topics.';
 
 export function HomePage() {
-  const { hits, isRequesting, reset, query, onChange, error } =
+  const { hits, loading, reset, query, onChange, error } =
     useSearchField(getTagSuggestions);
 
   const toggleFilter = useToggleFilter();
@@ -33,10 +33,10 @@ export function HomePage() {
         <div className="flex flex-col gap-3">
           <SearchField
             autoFocused
-            {...{ hits, error, isRequesting, query, onChange, reset }}
+            {...{ hits, error, loading, query, onChange, reset }}
           />
           <GroupedResults
-            isOpen={hits.length > 0 && !isRequesting}
+            isOpen={hits.length > 0 && !loading}
             hits={hits}
             onAddFilter={handleAddFilter}
             onRequestClose={reset}
