@@ -1,5 +1,5 @@
-import { useGithubReposApi } from '@modules/github';
-import { Tag } from '@modules/tags';
+import { useGithubReposApi } from '@api/github';
+import { Tag } from '@api/tags';
 import { PaginationParams } from '@utils';
 import React from 'react';
 

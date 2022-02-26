@@ -1,4 +1,4 @@
-import { TAG_TYPES } from '@modules/tags';
+import { TAG_TYPES } from '@api/tags';
 
 import { TagTypeToggle } from './TagTypeToggle';
 

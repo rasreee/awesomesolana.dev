@@ -1,7 +1,7 @@
 import { NextRouter } from 'next/router';
 import queryString from 'query-string';
 
-import { TagType } from '@/modules/tags';
+import { TagType } from '@/api/tags';
 
 export const searchRoute = {
   tags: {

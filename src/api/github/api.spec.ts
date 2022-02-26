@@ -7,7 +7,7 @@ import { githubApi, githubSwrKey } from './api';
  * @group github
  * @group api
  */
-describe('modules/github/api', () => {
+describe('api/github/api', () => {
   describe('githubSwrKey', () => {
     it('should format browse repos swr key', () => {
       const result = githubSwrKey.route('/browse');

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { Tag, TAG_TYPES } from '@/modules/tags';
+import { Tag, TAG_TYPES } from '@/api/tags';
 
 import { useSearchState } from './useSearchState';
 

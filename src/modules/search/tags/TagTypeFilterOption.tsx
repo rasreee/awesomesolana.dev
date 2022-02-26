@@ -1,4 +1,4 @@
-import { Tag } from '@modules/tags';
+import { Tag } from '@api/tags';
 import React from 'react';
 
 import { CheckBox } from '@/ui/components';

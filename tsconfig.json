@@ -30,6 +30,7 @@
       "@configs/*": ["./src/configs/*"],
       "@utils": ["./src/utils"],
       "@utils/*": ["./src/utils/*"],
+      "@api/*": ["./src/api/*"],
       "@modules/*": ["./src/modules/*"]
     },
     "incremental": true

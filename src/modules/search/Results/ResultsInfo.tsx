@@ -1,5 +1,5 @@
-import { GitHubRepo } from '@modules/github';
-import { Tag } from '@modules/tags';
+import { GitHubRepo } from '@api/github';
+import { Tag } from '@api/tags';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
 

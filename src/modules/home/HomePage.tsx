@@ -1,4 +1,4 @@
-import { getTagSuggestions, SEARCH_TAGS, Tag } from '@modules/tags';
+import { getTagSuggestions, SEARCH_TAGS, Tag } from '@api/tags';
 import { useEffect, useState } from 'react';
 
 import { siteConfig } from '@/configs/site-config';

@@ -1,4 +1,4 @@
-import { Tag, TAG_TYPES, TagType } from '@modules/tags';
+import { Tag, TAG_TYPES, TagType } from '@api/tags';
 import { capitalize } from '@utils/capitalize';
 import pluralize from '@utils/pluralize';
 

@@ -1,4 +1,4 @@
-import { getTagsForType, TagType } from '@modules/tags';
+import { getTagsForType, TagType } from '@api/tags';
 import { getIntersection } from '@utils';
 import clsxm from '@utils/clsxm';
 import { useRouter } from 'next/router';

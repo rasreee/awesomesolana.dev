@@ -1,4 +1,4 @@
-import { Tag } from '@modules/tags';
+import { Tag } from '@api/tags';
 import { PaginationParams } from '@utils';
 
 import { formatGithubApiQuery } from './helpers';

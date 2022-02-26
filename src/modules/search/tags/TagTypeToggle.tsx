@@ -1,4 +1,4 @@
-import { getTagsForType, TagType } from '@modules/tags';
+import { getTagsForType, TagType } from '@api/tags';
 import { getIntersection } from '@utils/array';
 import { capitalize } from '@utils/capitalize';
 import clsxm from '@utils/clsxm';
