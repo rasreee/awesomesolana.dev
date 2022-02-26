@@ -29,9 +29,7 @@ export const route = {
     tags: {
       getType: (asPath: string) => searchRoute.tags.typeParam(asPath),
       openType: (type: TagType, router: NextRouter) =>
-        router.push(searchRoute.tags.typeUrl(type), undefined, {
-          shallow: true,
-        }),
+        router.replace(searchRoute.tags.typeUrl(type)),
       closeType: (router: NextRouter) => {
         router.back();
       },

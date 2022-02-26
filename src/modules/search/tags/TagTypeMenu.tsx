@@ -3,11 +3,10 @@ import {
   route,
   Tag,
   TagType,
-  useSearchState,
   useToggleTag,
 } from '@core/search';
 import { XIcon } from '@primer/octicons-react';
-import { capitalize, getIntersection, waitFor } from '@utils';
+import { capitalize, waitFor } from '@utils';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
 import { useRouter } from 'next/router';
@@ -16,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { Divider, SearchForm, useSearchForm } from '@/ui/components';
 
 import { TagTypeFilterOption } from './TagTypeFilterOption';
+import { useSelectedTags } from './useSelectedTags';
 import { useTags } from './useTags';
 
 export function TagTypeMenu({ type }: { type: TagType }) {
@@ -27,7 +27,7 @@ export function TagTypeMenu({ type }: { type: TagType }) {
 
   const { data: tagsForType } = useTags(type);
 
-  const { tags } = useSearchState();
+  const selectedTags = useSelectedTags(type);
 
   const toggleFilter = useToggleTag();
 
@@ -53,10 +53,6 @@ export function TagTypeMenu({ type }: { type: TagType }) {
   }, [searchForm.query]);
 
   const handleToggleFilter = (tag: Tag) => () => toggleFilter(tag);
-
-  const selectedTags = tagsForType
-    ? getIntersection(tagsForType, tags, (a, b) => a.name === b.name)
-    : undefined;
 
   const options = tagsForType
     ? tagsForType.filter(

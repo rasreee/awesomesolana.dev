@@ -1,5 +1,4 @@
-import { getTags, route, TagType, useSearchState } from '@core/search';
-import { getIntersection } from '@utils/array';
+import { route, TagType } from '@core/search';
 import { capitalize } from '@utils/capitalize';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
@@ -8,20 +7,13 @@ import { useRouter } from 'next/router';
 import { ChevronDownIcon, XIcon } from '@/ui/icons';
 
 import { TagButton } from './TagButton';
+import { useSelectedTags } from './useSelectedTags';
 
 export function TagTypeToggle({ type }: { type: TagType }) {
   const router = useRouter();
-  const { tags } = useSearchState();
+  const selectedTags = useSelectedTags(type);
 
-  const tagsForType = getTags(type);
-
-  const selected = getIntersection(
-    tagsForType,
-    tags,
-    (a, b) => a.name === b.name,
-  );
-
-  const hasAnySelected = selected.length > 0;
+  const hasAnySelected = Boolean(selectedTags?.length);
 
   function PrefixText() {
     return (
@@ -34,7 +26,7 @@ export function TagTypeToggle({ type }: { type: TagType }) {
         </span>
         {hasAnySelected && (
           <span className="text-base leading-none">
-            {`(${selected.length})`}
+            {`(${selectedTags?.length})`}
           </span>
         )}
       </div>
