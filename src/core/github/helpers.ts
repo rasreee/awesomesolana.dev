@@ -1,5 +1,6 @@
 import { Tag } from '@core/search';
 import { DEFAULT_PAGINATION_PARAMS, PaginationParams } from '@utils';
+import memoizeOne, { EqualityFn } from 'memoize-one';
 
 import { GitHubRepo, RawGitHubRepo } from './types';
 
@@ -23,16 +24,32 @@ export function parseRawGitHubRepo(data: RawGitHubRepo): GitHubRepo {
   };
 }
 
-export function formatGitHubTopic(name: string) {
+function formatGitHubTopic(name: string) {
   return name.replaceAll('.', '').replaceAll(' ', '-').toLowerCase();
 }
+
+const memoizedFormatGithubTopic = memoizeOne(formatGitHubTopic);
 
 function formatTagSearchParam(tag: Tag): string {
   if (tag.type === 'language') return `language:${tag.name}`;
   if (tag.type === 'topic') return `topic:${tag.name}`;
-  if (tag.type === 'framework') return `topic:${formatGitHubTopic(tag.name)}`;
+  if (tag.type === 'framework') {
+    return `topic:${memoizedFormatGithubTopic(tag.name)}`;
+  }
   return '';
 }
+
+const isEqualTag: EqualityFn<typeof formatTagSearchParam> = (
+  aArgs,
+  bArgs,
+): boolean => {
+  const a = aArgs[0];
+  const b = bArgs[0];
+
+  return a.type === b.type && a.name === b.name;
+};
+
+const memoizedFormatTagParam = memoizeOne(formatTagSearchParam, isEqualTag);
 
 export function formatGithubApiQuery({
   keywords = [],
@@ -43,7 +60,7 @@ export function formatGithubApiQuery({
   Partial<{ keywords: string[]; tags: Tag[] }>): string {
   const params = [
     ...keywords.map((keyword) => keyword.trim()),
-    ...tags.map((tag) => formatTagSearchParam(tag)),
+    ...tags.map(memoizedFormatTagParam),
   ]
     .filter(Boolean)
     .join('+');
