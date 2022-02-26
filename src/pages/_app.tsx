@@ -9,8 +9,12 @@ import { DefaultSeo } from 'next-seo';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
 import { SWRConfig } from 'swr';
 
+import { getLayout, LayoutProps } from '@/ui/layouts';
+
 function MyApp({ Component, pageProps }: AppProps) {
   const seo = getSeo();
+
+  const Layout = getLayout<LayoutProps>(Component);
 
   return (
     <>
@@ -20,7 +24,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <DefaultSeo {...seo} />
       <NextThemeProvider attribute="class">
         <SWRConfig value={{ fetcher }}>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </SWRConfig>
       </NextThemeProvider>
     </>

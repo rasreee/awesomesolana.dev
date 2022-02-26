@@ -1,3 +1,7 @@
-import { SearchPage as SearchFiltersPage } from '@modules/search/SearchPage';
+import { SearchPage as SearchFilters } from '@modules/search/SearchPage';
 
-export default SearchFiltersPage;
+import { Layout } from '@/ui/layouts';
+
+(SearchFilters as any).Layout = Layout;
+
+export default SearchFilters;

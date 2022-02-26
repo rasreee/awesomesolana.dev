@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import AppLayout from '@/app/AppLayout';
 import { useSearchState } from '@/hooks/useSearchState';
 import { SearchForm, useSearchForm } from '@/ui/components';
 import { waitFor } from '@/utils';
@@ -10,7 +9,7 @@ import { FilterCategoriesControls } from './filters/FilterCategoriesControls';
 import { FilterCategoryModal } from './filters/FilterCategoryModal';
 import { Results } from './Results';
 
-export function SearchPage() {
+export const SearchPage = () => {
   const router = useRouter();
   const { filters } = useSearchState();
 
@@ -61,15 +60,13 @@ export function SearchPage() {
   }, [query]);
 
   return (
-    <AppLayout>
-      <div className="flex-1 px-3 sm:px-6">
-        <div className="flex flex-col gap-2">
-          <SearchForm {...{ query, ...restSearchForm }} onSubmit={setQuery} />
-          <FilterCategoriesControls />
-          <FilterCategoryModal />
-        </div>
-        <Results />
+    <div className="flex-1 px-3 sm:px-6">
+      <div className="flex flex-col gap-2">
+        <SearchForm {...{ query, ...restSearchForm }} onSubmit={setQuery} />
+        <FilterCategoriesControls />
+        <FilterCategoryModal />
       </div>
-    </AppLayout>
+      <Results />
+    </div>
   );
-}
+};

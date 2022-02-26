@@ -1,18 +1,19 @@
 import { getSeo } from '@utils/seo';
 import { DefaultSeo } from 'next-seo';
 import * as React from 'react';
+import { FC } from 'react';
 
 import { Divider, Seo, SeoProps } from '@/ui/components';
 
-import AppFooter from './AppFooter';
-import AppHeader from './AppHeader';
+import Footer from './Footer';
+import Header from './Header';
 
-export interface AppLayoutProps {
+export interface LayoutProps {
   children?: React.ReactNode;
   seoProps?: SeoProps;
 }
 
-export function AppLayout({ children, seoProps }: AppLayoutProps) {
+const Layout: FC<LayoutProps> = ({ children, seoProps }) => {
   const seo = getSeo();
 
   return (
@@ -20,11 +21,13 @@ export function AppLayout({ children, seoProps }: AppLayoutProps) {
       <Seo {...seoProps} />
       <DefaultSeo {...seo} />
       <div className="bg-app min-h-full w-screen">
-        <AppHeader />
+        <Header />
         <main className="bg-app min-h-main flex-1">{children}</main>
         <Divider />
-        <AppFooter />
+        <Footer />
       </div>
     </>
   );
-}
+};
+
+export default Layout;
