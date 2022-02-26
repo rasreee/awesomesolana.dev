@@ -5,7 +5,8 @@ import { useSearchState } from '@/hooks/useSearchState';
 import { SearchForm, useSearchForm } from '@/ui/components';
 import { waitFor } from '@/utils';
 
-import { Filters } from './Filters';
+import { FilterCategoriesControls } from './filters/FilterCategoriesBar';
+import { FilterCategoryModal } from './filters/FilterCategoryModal';
 import { Results } from './Results';
 
 export function SearchPage() {
@@ -62,7 +63,8 @@ export function SearchPage() {
     <div className="flex-1 px-3 sm:px-6">
       <div className="flex flex-col gap-2">
         <SearchForm {...{ query, ...restSearchForm }} onSubmit={setQuery} />
-        <Filters />
+        <FilterCategoriesControls />
+        <FilterCategoryModal />
       </div>
       <Results />
     </div>

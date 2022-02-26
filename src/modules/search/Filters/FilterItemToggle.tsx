@@ -1,8 +1,4 @@
-import {
-  FILTER_CATEGORIES,
-  FilterCategory,
-  getCategoryFilters,
-} from '@modules/tags';
+import { FilterCategory, getCategoryFilters } from '@modules/tags';
 import { getIntersection } from '@utils/array';
 import { capitalize } from '@utils/capitalize';
 import clsxm from '@utils/clsxm';
@@ -11,6 +7,7 @@ import { useRouter } from 'next/router';
 
 import { useSearchState } from '@/hooks/useSearchState';
 import { ChevronDownIcon, XIcon } from '@/ui/icons';
+import { searchRoute } from '@/utils/search-route';
 
 import { useFilterCategoriesBar } from './FilterCategoriesBar';
 import { TagButton } from './TagButton';
@@ -19,27 +16,14 @@ export function FilterItemToggle({ category }: { category: FilterCategory }) {
   const router = useRouter();
   const { filters: allFilters } = useSearchState();
 
-  const clearCategory = (categoryToRemove: FilterCategory) => {
-    const oldTags = allFilters;
-
-    let newPath = `/search`;
-
-    FILTER_CATEGORIES.filter(
-      (category) => category !== categoryToRemove,
-    ).forEach((category) => {
-      const tagsForType = oldTags.filter((tag) => tag.category === category);
-
-      if (tagsForType.length > 0) {
-        const prefix = newPath === '/search' ? '?' : '&';
-        newPath =
-          newPath +
-          prefix +
-          category +
-          `=${tagsForType.map((tag) => tag.name).join(',')}`;
-      }
-    });
-
-    router.push(newPath);
+  const clearCategory = (target: FilterCategory) => {
+    router.replace(
+      searchRoute.filters.excludeCategory(router.asPath, target),
+      undefined,
+      {
+        shallow: true,
+      },
+    );
   };
 
   const { category: selectedCategory, expand } = useFilterCategoriesBar();
@@ -72,20 +56,6 @@ export function FilterItemToggle({ category }: { category: FilterCategory }) {
     );
   }
 
-  function Postfix() {
-    return (
-      <>
-        {hasAnySelected ? (
-          <button onClick={() => clearCategory(category)}>
-            <XIcon className="h-4 w-4" />
-          </button>
-        ) : (
-          <ChevronDownIcon />
-        )}
-      </>
-    );
-  }
-
   return (
     <TagButton
       className={clsxm(
@@ -95,7 +65,13 @@ export function FilterItemToggle({ category }: { category: FilterCategory }) {
       )}
     >
       <PrefixText />
-      <Postfix />
+      {hasAnySelected ? (
+        <button onClick={() => clearCategory(category)}>
+          <XIcon className="h-4 w-4" />
+        </button>
+      ) : (
+        <ChevronDownIcon />
+      )}
     </TagButton>
   );
 }

@@ -2,17 +2,20 @@ import { FILTER_CATEGORIES, FilterCategory } from '@modules/tags';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 
-import { normalizeQueryParam } from '@/utils';
+import { searchRoute } from '@/utils/search-route';
 
 import { FilterItemToggle } from './FilterItemToggle';
 
-export function useFilterCategoriesBar() {
+type UseFilterCategoriesBar = {
+  category: FilterCategory | null;
+  onClose: () => void;
+  expand: (category: FilterCategory) => void;
+};
+
+export function useFilterCategoriesBar(): UseFilterCategoriesBar {
   const router = useRouter();
   const selectedCategory = useMemo(
-    () =>
-      router.asPath.includes('/filters?category=') && 'category' in router.query
-        ? normalizeQueryParam<FilterCategory>(router.query.category)
-        : null,
+    () => searchRoute.filters.categoryParam(router.asPath),
     [router.query, router.asPath],
   );
 
@@ -20,10 +23,14 @@ export function useFilterCategoriesBar() {
     router.back();
   };
 
-  const expandCategory = (filterCategory: FilterCategory) => {
-    router.push(`/search/filters?category=${filterCategory}`, undefined, {
-      shallow: true,
-    });
+  const expandCategory = (category: FilterCategory) => {
+    router.push(
+      searchRoute.filters.categoryUrl(router.asPath, category),
+      undefined,
+      {
+        shallow: true,
+      },
+    );
   };
 
   return {
