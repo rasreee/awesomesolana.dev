@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 
+import { useSearchState } from '@/hooks/useSearchState';
 import { SearchForm, useSearchForm } from '@/ui/components';
 import { waitFor } from '@/utils';
 
 import { Filters } from './Filters';
 import { Results } from './Results';
-import { useSearchState } from './useSearchState';
 
 export function SearchPage() {
   const router = useRouter();

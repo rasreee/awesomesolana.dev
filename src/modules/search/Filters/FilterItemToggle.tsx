@@ -9,9 +9,9 @@ import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
 import { useRouter } from 'next/router';
 
+import { useSearchState } from '@/hooks/useSearchState';
 import { ChevronDownIcon, XIcon } from '@/ui/icons';
 
-import { useSearchState } from '../useSearchState';
 import { useFilterCategoriesBar } from './FilterCategoriesBar';
 import { TagButton } from './TagButton';
 

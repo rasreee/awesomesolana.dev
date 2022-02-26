@@ -1,8 +1,8 @@
-import { useSearchState } from '@modules/search';
 import { FILTER_CATEGORIES, FilterCategory, Tag } from '@modules/tags';
 import { capitalize } from '@utils/capitalize';
 import pluralize from '@utils/pluralize';
 
+import { useSearchState } from '@/hooks/useSearchState';
 import { Popover } from '@/ui/components';
 
 type GroupedResultsProps = {

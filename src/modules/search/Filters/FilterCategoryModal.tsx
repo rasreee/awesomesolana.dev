@@ -2,10 +2,10 @@ import { FilterCategory, getCategoryFilters } from '@modules/tags';
 import { getIntersection } from '@utils';
 import clsxm from '@utils/clsxm';
 
+import { useSearchState } from '@/hooks/useSearchState';
+import { useToggleFilter } from '@/hooks/useToggleFilter';
 import { Popover } from '@/ui/components';
 
-import { useSearchState } from '../useSearchState';
-import { useToggleFilter } from '../useToggleFilter';
 import { useFilterCategoriesBar } from './FilterCategoriesBar';
 import { FilterCategoryMenu } from './FilterCategoryMenu';
 

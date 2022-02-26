@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
-import { FILTER_CATEGORIES, Tag } from '../tags';
+import { FILTER_CATEGORIES, Tag } from '@/modules/tags';
+
 import { useSearchState } from './useSearchState';
 
 export function useToggleFilter() {

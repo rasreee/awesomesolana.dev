@@ -1,4 +1,5 @@
-import { useSearchState } from '../useSearchState';
+import { useSearchState } from '@/hooks/useSearchState';
+
 import { GithubReposFeed, GithubReposProps } from './GithubReposFeed';
 
 export function Results() {

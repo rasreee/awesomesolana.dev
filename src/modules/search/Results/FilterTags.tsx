@@ -1,11 +1,11 @@
 import { Tag } from '@modules/tags';
 import pluralize from '@utils/pluralize';
 
+import { useSearchState } from '@/hooks/useSearchState';
+import { useToggleFilter } from '@/hooks/useToggleFilter';
 import { useIsMobile } from '@/ui/hooks';
 import { XIcon } from '@/ui/icons';
 
-import { useSearchState } from '../useSearchState';
-import { useToggleFilter } from '../useToggleFilter';
 import { FilterTag } from './FilterTag';
 
 const MOBILE_PREVIEW_SIZE = 5;

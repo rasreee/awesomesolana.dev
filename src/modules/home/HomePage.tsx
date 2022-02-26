@@ -1,8 +1,8 @@
-import { useToggleFilter } from '@modules/search';
 import { getTagSuggestions, Tag } from '@modules/tags';
 import { useEffect, useState } from 'react';
 
 import { siteConfig } from '@/configs/site-config';
+import { useToggleFilter } from '@/hooks/useToggleFilter';
 import { Logo, SearchForm, useSearchForm } from '@/ui/components';
 import { waitFor } from '@/utils';
 
