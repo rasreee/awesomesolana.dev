@@ -1,35 +1,21 @@
-import {
-  getTagSuggestions,
-  route,
-  Tag,
-  TagType,
-  useToggleTag,
-} from '@core/search';
+import { getTagSuggestions, Tag, TagType } from '@core/search';
 import { XIcon } from '@primer/octicons-react';
 import { capitalize, waitFor } from '@utils';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
-import { useRouter } from 'next/router';
+import { runInAction } from 'mobx';
 import { useEffect, useState } from 'react';
 
 import { Divider, SearchForm, useSearchForm } from '@/ui/components';
 
+import { useSearchStore } from '../SearchStore';
 import { TagTypeFilterOption } from './TagTypeFilterOption';
-import { useSelectedTags } from './useSelectedTags';
 import { useTags } from './useTags';
 
 export function TagTypeMenu({ type }: { type: TagType }) {
-  const router = useRouter();
-
-  const handleClose = () => {
-    route.search.tags.closeType(router);
-  };
+  const searchStore = useSearchStore();
 
   const { data: tagsForType } = useTags(type);
-
-  const selectedTags = useSelectedTags(type);
-
-  const toggleFilter = useToggleTag();
 
   const [hits, setHits] = useState<Tag[]>([]);
   const searchForm = useSearchForm();
@@ -52,19 +38,15 @@ export function TagTypeMenu({ type }: { type: TagType }) {
       .finally(() => setLoading(false));
   }, [searchForm.query]);
 
-  const handleToggleFilter = (tag: Tag) => () => toggleFilter(tag);
+  const handleToggleFilter = (tag: Tag) => () =>
+    runInAction(() => searchStore.toggleTag(tag));
 
+  const selectedTags = searchStore.getTags(type);
   const options = tagsForType
     ? tagsForType.filter(
         (tag) => !selectedTags?.map((item) => item.name).includes(tag.name),
       )
     : [];
-
-  const getIsFilterActive = (tag: Tag): boolean =>
-    selectedTags
-      ?.filter((tag) => tag.type === tag.type)
-      .map((item) => item.name)
-      .includes(tag.name) ?? false;
 
   return (
     <>
@@ -81,7 +63,7 @@ export function TagTypeMenu({ type }: { type: TagType }) {
           <h2 className="font-heading text-2xl font-semibold leading-none">
             {capitalize(pluralize(type))}
           </h2>
-          <button onClick={handleClose}>
+          <button onClick={searchStore.closeTagTypeModal}>
             <XIcon />
           </button>
         </div>
@@ -97,7 +79,6 @@ export function TagTypeMenu({ type }: { type: TagType }) {
                   key={`${tag.type}_${tag.name}`}
                   tag={tag}
                   onClick={handleToggleFilter(tag)}
-                  checked={getIsFilterActive(tag)}
                 />
               ))}
             </ul>
@@ -110,7 +91,6 @@ export function TagTypeMenu({ type }: { type: TagType }) {
               key={`${tag.type}_${tag.name}`}
               tag={tag}
               onClick={handleToggleFilter(tag)}
-              checked={getIsFilterActive(tag)}
             />
           ))}
         </ul>

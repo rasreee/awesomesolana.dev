@@ -1,18 +1,22 @@
 import { Tag } from '@core/search';
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 
 import { CheckBox } from '@/ui/components';
 
-export function TagTypeFilterOption({
+import { useSearchStore } from '../SearchStore';
+
+export const TagTypeFilterOption = observer(function TagTypeFilterOption({
   tag,
   onClick,
-  checked,
   ...props
 }: React.HTMLAttributes<HTMLLIElement> & {
   tag: Tag;
   onClick: () => void;
-  checked: boolean;
 }) {
+  const searchStore = useSearchStore();
+  const checked = searchStore.getIsTagActive(tag);
+
   return (
     <li
       {...props}
@@ -28,4 +32,4 @@ export function TagTypeFilterOption({
       </span> */}
     </li>
   );
-}
+});

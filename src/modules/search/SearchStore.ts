@@ -1,4 +1,4 @@
-import { action, makeAutoObservable, reaction } from 'mobx';
+import { action, computed, makeAutoObservable, reaction } from 'mobx';
 import Router from 'next/router';
 
 import { searchRoute, Tag, TagType, tagTypes } from '@/core/search';
@@ -11,6 +11,16 @@ export class SearchStore {
   searchForm = { loading: false, error: null, query: '' };
 
   tagTypeModal: TagType | null = null;
+
+  getTags = (type: TagType) =>
+    computed(() => this.tags.filter((tag) => tag.type === type)).get();
+
+  getIsTagActive = (target: Tag) =>
+    computed(() =>
+      this.tags.some(
+        (tag) => tag.type === target.type && tag.name === target.name,
+      ),
+    ).get();
 
   get rootUrl(): string {
     const {
@@ -81,6 +91,12 @@ export class SearchStore {
     });
 
     this.tags = newTags;
+  }
+
+  toggleTag(tag: Tag) {
+    if (this.getIsTagActive(tag)) return this.removeTag(tag);
+
+    this.addTag(tag);
   }
 
   openTagTypeModal(type: TagType) {
