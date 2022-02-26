@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
+import AppLayout from '@/app/AppLayout';
 import { useSearchState } from '@/hooks/useSearchState';
 import { SearchForm, useSearchForm } from '@/ui/components';
 import { waitFor } from '@/utils';
@@ -60,13 +61,15 @@ export function SearchPage() {
   }, [query]);
 
   return (
-    <div className="flex-1 px-3 sm:px-6">
-      <div className="flex flex-col gap-2">
-        <SearchForm {...{ query, ...restSearchForm }} onSubmit={setQuery} />
-        <FilterCategoriesControls />
-        <FilterCategoryModal />
+    <AppLayout>
+      <div className="flex-1 px-3 sm:px-6">
+        <div className="flex flex-col gap-2">
+          <SearchForm {...{ query, ...restSearchForm }} onSubmit={setQuery} />
+          <FilterCategoriesControls />
+          <FilterCategoryModal />
+        </div>
+        <Results />
       </div>
-      <Results />
-    </div>
+    </AppLayout>
   );
 }

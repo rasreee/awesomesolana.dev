@@ -21,9 +21,7 @@ export function AppLayout({ children, seoProps }: AppLayoutProps) {
       <DefaultSeo {...seo} />
       <div className="bg-app min-h-full w-screen">
         <AppHeader />
-        <main className="bg-app min-h-main flex-1">
-          <div className="w-full gap-3 sm:flex sm:items-start">{children}</div>
-        </main>
+        <main className="bg-app min-h-main flex-1">{children}</main>
         <Divider />
         <AppFooter />
       </div>

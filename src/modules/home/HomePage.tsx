@@ -1,6 +1,7 @@
 import { getTagSuggestions, SEARCH_FILTERS, Tag } from '@modules/tags';
 import { useEffect, useState } from 'react';
 
+import AppLayout from '@/app/AppLayout';
 import { siteConfig } from '@/configs/site-config';
 import { useToggleFilter } from '@/hooks/useToggleFilter';
 import { Logo, SearchForm, useSearchForm } from '@/ui/components';
@@ -48,15 +49,15 @@ export function HomePage() {
   };
 
   return (
-    <div className="mx-auto px-6 md:max-w-3xl">
-      <div className="my-24 flex w-full flex-col gap-10">
-        <div className="mx-auto flex flex-col items-center gap-6">
+    <AppLayout>
+      <div className="min-h-main mx-auto flex w-full flex-1 flex-col gap-10 px-6 pt-28 md:max-w-3xl md:pt-36">
+        <div className="flex flex-col items-center justify-center gap-6">
           <Logo size="lg" />
-          <div className="text-body  text-center text-base leading-normal text-opacity-80 sm:text-lg md:text-xl">
+          <div className="text-body text-center text-base leading-normal text-opacity-80 sm:text-lg md:text-xl">
             {siteConfig.seo.description}
           </div>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex h-min flex-col gap-3">
           <SearchForm
             {...searchBox}
             onClick={handleInputClick}
@@ -70,6 +71,6 @@ export function HomePage() {
           />
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }
