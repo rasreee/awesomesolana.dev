@@ -14,11 +14,3 @@ export async function authFetch(uri: string): Promise<Response> {
 
   return res;
 }
-
-export async function fetcher<JSON = any>(
-  input: RequestInfo,
-  init: RequestInit,
-): Promise<JSON> {
-  const res = await fetch(input, init);
-  return res.json();
-}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useAppSearchOptions } from '@/app/AppContext';
+import { useAppSearchOptions } from '@/app/contexts';
 import clsxm from '@/lib/clsxm';
 import {
   useClearFilters,

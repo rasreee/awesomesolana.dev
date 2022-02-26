@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext } from 'react';
 
 import {
   SearchFieldProps,
@@ -16,16 +16,7 @@ export const AppStateContext = createContext<IAppStateContext | undefined>(
   undefined,
 );
 
-export function useAppState() {
-  const context = useContext(AppStateContext);
-  if (!context)
-    throw new Error(
-      'AppStateContext must be defined to use useAppSearchOptions',
-    );
-  return context;
-}
-
-export function AppProvider({ children }: { children: any }) {
+function AppStateProvider({ children }: { children: any }) {
   const searchOptions = useOverlay();
   const submitQuery = useSubmitQuery();
   const searchField = useSearchForm((query) => submitQuery(query));
@@ -42,10 +33,4 @@ export function AppProvider({ children }: { children: any }) {
   );
 }
 
-export function useAppSearchOptions(): IAppStateContext['searchOptions'] {
-  return useAppState().searchOptions;
-}
-
-export function useAppSearchField(): IAppStateContext['searchField'] {
-  return useAppState().searchField;
-}
+export default AppStateProvider;

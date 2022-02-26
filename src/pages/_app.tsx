@@ -3,12 +3,10 @@ import '@/styles/colors.css';
 
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { ThemeProvider as NextThemeProvider } from 'next-themes';
-import { SWRConfig } from 'swr';
 
-import { AppProvider } from '@/app/AppContext';
 import AppLayout from '@/app/AppLayout';
-import { fetcher } from '@/common/utils';
+import AppStateProvider from '@/app/contexts/AppStateProvider';
+import ExternalProviders from '@/app/contexts/ExternalProviders';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -16,15 +14,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
-      <NextThemeProvider attribute="class">
-        <SWRConfig value={{ fetcher }}>
-          <AppProvider>
-            <AppLayout>
-              <Component {...pageProps} />
-            </AppLayout>
-          </AppProvider>
-        </SWRConfig>
-      </NextThemeProvider>
+      <ExternalProviders>
+        <AppStateProvider>
+          <AppLayout>
+            <Component {...pageProps} />
+          </AppLayout>
+        </AppStateProvider>
+      </ExternalProviders>
     </>
   );
 }

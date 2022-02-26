@@ -1,4 +1,4 @@
-import { useAppSearchField } from '@/app/AppContext';
+import { useAppSearchField } from '@/app/contexts';
 
 import {
   FilterCategoriesBar,

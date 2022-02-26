@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useAppSearchOptions } from '@/app/AppContext';
+import { useAppSearchOptions } from '@/app/contexts';
 import clsxm from '@/lib/clsxm';
 import { ErrorMessage, StatefulIcon, TextInput } from '@/ui/components';
 import { SearchIcon, XIcon } from '@/ui/icons';
