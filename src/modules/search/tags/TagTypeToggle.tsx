@@ -21,8 +21,19 @@ export const TagTypeToggle = observer(function TagTypeToggle({
     () => searchStore.tags.filter((tag) => tag.type === type).length,
   ).get();
 
-  function PrefixText() {
-    return (
+  const handleRemove = () => {
+    searchStore.clearTags(type);
+  };
+
+  return (
+    <TagButton
+      className={clsxm(
+        (searchStore.tagTypeModal && searchStore.tagTypeModal === type) ||
+          selectedCount
+          ? 'bg-color-primary text-white'
+          : '',
+      )}
+    >
       <div
         className="flex flex-1 cursor-pointer items-center gap-1.5"
         onClick={() => searchStore.openTagTypeModal(type)}
@@ -34,21 +45,8 @@ export const TagTypeToggle = observer(function TagTypeToggle({
           <span className="text-base leading-none">{`(${selectedCount})`}</span>
         )}
       </div>
-    );
-  }
-
-  return (
-    <TagButton
-      className={clsxm(
-        (searchStore.tagTypeModal && searchStore.tagTypeModal === type) ||
-          selectedCount
-          ? 'bg-color-primary text-white'
-          : '',
-      )}
-    >
-      <PrefixText />
       {selectedCount ? (
-        <button onClick={searchStore.closeTagTypeModal}>
+        <button onClick={handleRemove}>
           <XIcon className="h-4 w-4" />
         </button>
       ) : (

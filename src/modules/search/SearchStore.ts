@@ -1,7 +1,6 @@
 import { action, computed, makeAutoObservable, reaction } from 'mobx';
-import Router from 'next/router';
 
-import { searchRoute, Tag, TagType, tagTypes } from '@/core/search';
+import { Tag, TagType, tagTypes } from '@/core/search';
 import { useStore } from '@/mobx/storeContext';
 import { waitFor } from '@/utils';
 
@@ -22,12 +21,13 @@ export class SearchStore {
       ),
     ).get();
 
-  get rootUrl(): string {
-    const {
-      tags,
-      searchForm: { query },
-    } = this;
+  clearTags(type: TagType) {
+    const newTags = this.tags.filter((tag) => tag.type !== type);
 
+    this.tags = newTags;
+  }
+
+  getRootUrl(query: string, tags: Tag[]): string {
     let result = '/search';
 
     if (query) {
@@ -41,6 +41,16 @@ export class SearchStore {
     }
 
     return result;
+  }
+
+  get rootUrl(): string {
+    const tags = this.tags;
+    const query = this.searchForm.query;
+    return this.getRootUrl(query, tags);
+  }
+
+  get searchParams(): { tags: Tag[]; query: string } {
+    return { tags: this.tags, query: this.searchForm.query };
   }
 
   setQuery(query: string) {
@@ -101,12 +111,26 @@ export class SearchStore {
 
   openTagTypeModal(type: TagType) {
     this.tagTypeModal = type;
-    Router.router?.replace(searchRoute.tags.typeUrl(type));
   }
 
   closeTagTypeModal() {
     this.tagTypeModal = null;
-    Router.router?.replace(this.rootUrl);
+  }
+
+  async submitQuery(query: string) {
+    await waitFor(300);
+    console.log('query', query);
+    // if (!queryString)
+    //   return Router.router?.push(
+    //     `/search${
+    //       tags.length
+    //         ? '?' +
+    //           tags.map((filter) => filter.type + '=' + filter.name).join('&')
+    //         : ''
+    //     }`,
+    //     undefined,
+    //     { shallow: true },
+    //   );
   }
 
   constructor() {
@@ -119,6 +143,7 @@ export class SearchStore {
         addTag: action.bound,
         submitQuery: action.bound,
         setQuery: action.bound,
+        clearTags: action.bound,
       },
       { name: 'SearchStore' },
     );
@@ -127,32 +152,6 @@ export class SearchStore {
       () => this.searchForm.query,
       (query) => this.submitQuery(query),
     );
-  }
-
-  async submitQuery(query: string) {
-    await waitFor(300);
-    const tags = this.tags;
-    const queryString = query.trim();
-
-    if (!queryString)
-      return Router.router?.push(
-        `/search${
-          tags.length
-            ? '?' +
-              tags.map((filter) => filter.type + '=' + filter.name).join('&')
-            : ''
-        }`,
-        undefined,
-        { shallow: true },
-      );
-
-    const newPath = `/search?q=${query}${
-      tags.length
-        ? '&' + tags.map((filter) => filter.type + '=' + filter.name).join('&')
-        : ''
-    }`;
-
-    Router.router?.push(newPath, undefined, { shallow: true });
   }
 }
 

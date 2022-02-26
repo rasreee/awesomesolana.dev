@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { reaction } from 'mobx';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 import Layout from '@/layouts/Layout';
 import { StoreProvider } from '@/mobx/storeContext';
@@ -11,7 +13,18 @@ export const SearchPageLayout = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const router = useRouter();
+
   const [store] = useState(() => new SearchStore());
+
+  useEffect(() => {
+    reaction(
+      () => store.rootUrl,
+      (rootUrl) => {
+        router.push(rootUrl, undefined, { shallow: true });
+      },
+    );
+  }, []);
 
   return (
     <Layout>
