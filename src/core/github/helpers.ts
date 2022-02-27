@@ -1,4 +1,4 @@
-import { isEqualTag, Tag } from '@core/search';
+import { isEqualTag, Tag } from '@core/tags';
 import type { PaginationParams } from '@utils/pagination';
 import { defaultPaginationParams } from '@utils/pagination';
 import memoizeOne from 'memoize-one';

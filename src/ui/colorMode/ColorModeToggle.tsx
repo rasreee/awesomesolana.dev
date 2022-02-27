@@ -37,7 +37,7 @@ function SunOutlineIcon(props: SVGIconProps) {
   );
 }
 
-export function ColorModeToggle({
+function ColorModeToggle({
   style,
   className,
   iconProps,
@@ -74,3 +74,5 @@ export function ColorModeToggle({
     </button>
   );
 }
+
+export default ColorModeToggle;

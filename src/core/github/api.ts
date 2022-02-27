@@ -1,4 +1,4 @@
-import { Tag } from '@core/search';
+import { Tag } from '@core/tags';
 import type { PaginationParams } from '@utils/pagination';
 
 import { formatGithubApiQuery } from './helpers';

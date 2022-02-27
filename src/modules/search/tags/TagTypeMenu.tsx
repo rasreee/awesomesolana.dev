@@ -1,4 +1,4 @@
-import { getTags, TagType, tagUtils } from '@core/search';
+import { getTags, TagType, tagUtils } from '@core/tags';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
 import { capitalize } from '@utils/string';
@@ -9,13 +9,15 @@ import useSWR from 'swr';
 
 import { useRootStore } from '@/stores/root-store';
 import { Divider } from '@/ui/components/Divider';
-import { XIcon } from '@/ui/icons/XIcon';
 import TagsSearchBox from '@/ui/search/TagsSearchBox';
+
+const XIcon = dynamic(() => import('@/ui/icons/XIcon'));
 
 const TagTypeFilterOption = dynamic(() => import('./TagTypeFilterOption'));
 
 const TagTypeMenu = observer(function TagTypeMenu({ type }: { type: TagType }) {
   const store = useRootStore();
+  const { tagTypeModal } = store;
 
   const { data: tagsForType } = useSWR(`tagsForType/${type}`, () =>
     getTags(type),
@@ -44,7 +46,7 @@ const TagTypeMenu = observer(function TagTypeMenu({ type }: { type: TagType }) {
           <h2 className="font-heading text-2xl font-semibold leading-none">
             {capitalize(pluralize(type))}
           </h2>
-          <button onClick={store.closeTagTypeModal}>
+          <button onClick={tagTypeModal.onClose}>
             <XIcon />
           </button>
         </div>

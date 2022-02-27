@@ -2,9 +2,8 @@ import { GithubRepo } from '@core/github';
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-import Badge from '@/ui/components/Badge';
-
 const RepoStat = dynamic(() => import('@/ui/github/RepoStat'));
+const Badge = dynamic(() => import('@/ui/components/Badge'));
 
 export function RepoItem({
   name,

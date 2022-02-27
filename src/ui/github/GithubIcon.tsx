@@ -1,7 +1,7 @@
 import { SVGIconProps } from '@/ui/icons/types';
 import clsxm from '@/utils/clsxm';
 
-export function GithubIcon({ className, ...props }: SVGIconProps) {
+function GithubIcon({ className, ...props }: SVGIconProps) {
   return (
     <svg
       role="img"
@@ -16,3 +16,5 @@ export function GithubIcon({ className, ...props }: SVGIconProps) {
     </svg>
   );
 }
+
+export default GithubIcon;

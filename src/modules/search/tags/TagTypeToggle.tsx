@@ -1,4 +1,4 @@
-import { TagType } from '@core/search';
+import { TagType } from '@core/tags';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
 import { computed } from 'mobx';
@@ -6,12 +6,12 @@ import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
 import { useRootStore } from '@/stores/root-store';
-import { XIcon } from '@/ui/icons/XIcon';
 import { capitalize } from '@/utils/string';
 
 import { TagButton } from './TagButton';
 
 const ChevronDownIcon = dynamic(() => import('@/ui/icons/ChevronDownIcon'));
+const XIcon = dynamic(() => import('@/ui/icons/XIcon'));
 
 const TagTypeToggle = observer(function TagTypeToggle({
   type,
@@ -19,6 +19,7 @@ const TagTypeToggle = observer(function TagTypeToggle({
   type: TagType;
 }) {
   const searchStore = useRootStore();
+  const { tagTypeModal } = searchStore;
 
   const selectedCount = computed(
     () =>
@@ -32,15 +33,14 @@ const TagTypeToggle = observer(function TagTypeToggle({
   return (
     <TagButton
       className={clsxm(
-        (searchStore.tagTypeModal && searchStore.tagTypeModal === type) ||
-          selectedCount
+        (tagTypeModal.tagType && tagTypeModal.tagType === type) || selectedCount
           ? 'bg-color-primary text-white'
           : '',
       )}
     >
       <div
         className="flex flex-1 cursor-pointer items-center gap-1.5"
-        onClick={() => searchStore.openTagTypeModal(type)}
+        onClick={() => tagTypeModal.openTagType(type)}
       >
         <span className="text-left text-base leading-none">
           {capitalize(pluralize(type))}
@@ -54,7 +54,7 @@ const TagTypeToggle = observer(function TagTypeToggle({
           <XIcon className="h-4 w-4" />
         </button>
       ) : (
-        <button onClick={() => searchStore.openTagTypeModal(type)}>
+        <button onClick={() => tagTypeModal.openTagType(type)}>
           <ChevronDownIcon />
         </button>
       )}

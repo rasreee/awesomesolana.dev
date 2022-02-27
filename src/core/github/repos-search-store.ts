@@ -1,17 +1,14 @@
 import { action, computed, makeAutoObservable } from 'mobx';
 
 import { appConfig } from '@/configs/app-config';
-import {
-  GithubRepo,
-  GithubReposSearchParams,
-  githubSwrKey,
-  parseRawGitHubRepo,
-  RawGithubReposResponse,
-} from '@/core/github';
-import { Tag, TagType, tagUtils } from '@/core/search';
+import { Tag, TagType } from '@/core/tags/types';
+import { createRequestStore, RequestStore } from '@/mobx/request-store';
 import type { TextInputProps } from '@/ui/components';
 
-import { createRequestStore, RequestStore } from './request-store';
+import { tagUtils } from '../tags/helpers';
+import { GithubReposSearchParams, githubSwrKey } from './api';
+import { parseRawGitHubRepo } from './helpers';
+import { GithubRepo, RawGithubReposResponse } from './types';
 
 export interface ReposSearchState {
   hits: GithubRepo[];
@@ -19,7 +16,7 @@ export interface ReposSearchState {
   query: string;
 }
 
-export interface IReposRootStore extends ReposSearchState {
+export interface IReposSearchStore extends ReposSearchState {
   setHits: (hits: GithubRepo[]) => void;
   onSubmit: (query: string) => Promise<any>;
   request: RequestStore;
@@ -39,7 +36,7 @@ async function searchGithubRepos(
   return res.json();
 }
 
-export class ReposRootStore implements IReposRootStore {
+export class ReposSearchStore implements IReposSearchStore {
   hits: GithubRepo[] = [];
   tags: Tag[] = [];
   query = '';
@@ -108,7 +105,7 @@ export class ReposRootStore implements IReposRootStore {
     makeAutoObservable(
       this,
       { onChange: action.bound },
-      { name: 'ReposRootStore' },
+      { name: 'ReposSearchStore' },
     );
   }
 }

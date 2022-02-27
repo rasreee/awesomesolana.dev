@@ -1,9 +1,7 @@
-import { useGithubReposApi } from '@core/github';
-import { Tag } from '@core/search';
+import { GithubRepo } from '@core/github';
+import { Tag } from '@core/tags';
 import type { PaginationParams } from '@utils/pagination';
 import React from 'react';
-
-import { ErrorMessage } from '@/ui/components/ErrorMessage';
 
 import { RepoItem } from './RepoItem';
 import { ResultsInfo } from './ResultsInfo';
@@ -14,20 +12,14 @@ export type GithubApiParams = {
 } & Partial<PaginationParams>;
 
 export type GithubReposProps = {
-  route: '/search' | '/browse';
-  params?: GithubApiParams;
+  data: GithubRepo[];
+  tags: GithubApiParams['tags'];
 };
 
-function GithubReposFeed({ route, params }: GithubReposProps) {
-  const { data, error } = useGithubReposApi(route, params);
-
-  if (error) return <ErrorMessage>{error?.message}</ErrorMessage>;
-
-  if (!data) return <ul>...</ul>;
-
+function GithubReposFeed({ data, tags }: GithubReposProps) {
   return (
     <div>
-      <ResultsInfo data={data} tags={params?.tags} />
+      <ResultsInfo data={data} tags={tags} />
       <ul>
         {data.map((hit) => (
           <li key={hit.id}>

@@ -1,9 +1,10 @@
-import { searchRoute, Tag, TagType, tagTypes } from '@core/search';
+import { searchRoute } from '@core/search';
 import pluralize from '@utils/pluralize';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 
-import { useRootStore } from '@/stores/root-store';
+import { Tag, TagType, tagTypes } from '@/core/tags';
+import { useTagsSearchStore } from '@/core/tags/tags-search-store';
 import Popover from '@/ui/components/Popover';
 import { capitalize } from '@/utils/string';
 
@@ -20,7 +21,7 @@ function groupByTag(list: Tag[]): GroupedHits {
 
 const GroupedResults = observer(function GroupedResults() {
   const router = useRouter();
-  const { tagsSearch } = useRootStore();
+  const tagsSearchStore = useTagsSearchStore();
 
   const handleTagClick = (tag: Tag) => () => {
     router.push(searchRoute.page({ tags: [tag] }));
@@ -29,10 +30,10 @@ const GroupedResults = observer(function GroupedResults() {
   return (
     <Popover
       className="bg-surface relative overflow-hidden py-5 px-3"
-      isOpen={!!tagsSearch.hits.length}
-      onClose={tagsSearch.onReset}
+      isOpen={!!tagsSearchStore.hits.length}
+      onClose={tagsSearchStore.onReset}
     >
-      {groupByTag(tagsSearch.hits).map(
+      {groupByTag(tagsSearchStore.hits).map(
         ({ type, hits: list }) =>
           list.length > 0 && (
             <div className="flex flex-col gap-2 px-1" key={type}>

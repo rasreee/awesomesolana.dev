@@ -1,55 +1,12 @@
-import { action, makeAutoObservable } from 'mobx';
-
-import { TagType } from '@/core/search';
-import { useStore } from '@/mobx/storeContext';
-
-import { ReposRootStore } from './repos-search-store';
-import { TagsRootStore } from './tags-search-store';
+import { ReposSearchStore } from '@/core/github/repos-search-store';
+import { TagTypeModalStore } from '@/core/tags/tag-type-modal-store';
+import { TagsSearchStore } from '@/core/tags/tags-search-store';
+import { useStore } from '@/mobx/store-context';
 
 export class RootStore {
-  tagsSearch = new TagsRootStore();
-  reposSearch = new ReposRootStore();
-
-  tagTypeModal: TagType | null = null;
-
-  get rootUrl(): string {
-    const tags = this.reposSearch.tags;
-    const query = this.reposSearch.query;
-    let result = '/search';
-
-    if (query) {
-      result = result + `?q=${query}`;
-    }
-
-    if (tags.length) {
-      const prefix = result === '/search' ? '?' : '&';
-
-      result = prefix + tags.map((tag) => `${tag.type}=${tag.name}`).join('&');
-    }
-
-    return result;
-  }
-
-  openTagTypeModal(type: TagType) {
-    this.tagTypeModal = type;
-  }
-
-  closeTagTypeModal() {
-    this.tagTypeModal = null;
-  }
-
-  constructor() {
-    makeAutoObservable(
-      this,
-      {
-        closeTagTypeModal: action.bound,
-        openTagTypeModal: action.bound,
-      },
-      { name: 'RootStore' },
-    );
-  }
+  tagsSearch = new TagsSearchStore();
+  reposSearch = new ReposSearchStore();
+  tagTypeModal = new TagTypeModalStore();
 }
 
-export function useRootStore() {
-  return useStore<RootStore>();
-}
+export const useRootStore = (): RootStore => useStore<RootStore>();

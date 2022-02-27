@@ -8,9 +8,9 @@ import Popover from '@/ui/components/Popover';
 const TagTypeMenu = dynamic(() => import('./TagTypeMenu'));
 
 const TagTypeModal = observer(function TagTypeModal() {
-  const searchStore = useRootStore();
+  const { tagTypeModal } = useRootStore();
 
-  if (!searchStore.tagTypeModal) return null;
+  if (!tagTypeModal.isOpen) return null;
 
   return (
     <Popover
@@ -19,10 +19,10 @@ const TagTypeModal = observer(function TagTypeModal() {
         'h-[56%]',
         'rounded-none rounded-t-xl',
       )}
-      onClose={searchStore.closeTagTypeModal}
-      isOpen={Boolean(searchStore.tagTypeModal)}
+      onClose={tagTypeModal.onClose}
+      isOpen={tagTypeModal.isOpen}
     >
-      <TagTypeMenu type={searchStore.tagTypeModal} />
+      {tagTypeModal.tagType && <TagTypeMenu type={tagTypeModal.tagType} />}
     </Popover>
   );
 });

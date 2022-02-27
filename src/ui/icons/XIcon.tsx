@@ -1,6 +1,6 @@
 import clsxm from '@utils/clsxm';
 
-export function XIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
+function XIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -17,3 +17,5 @@ export function XIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export default XIcon;

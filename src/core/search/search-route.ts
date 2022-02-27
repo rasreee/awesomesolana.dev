@@ -1,4 +1,4 @@
-import { Tag } from '@core/search';
+import { Tag } from '@core/tags';
 
 export const searchRoute = {
   page: ({ tags }: { tags: Tag[] } = { tags: [] }) =>

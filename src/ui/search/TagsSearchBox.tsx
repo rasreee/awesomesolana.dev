@@ -1,23 +1,23 @@
 import { observer } from 'mobx-react-lite';
 
-import { allTags } from '@/core/search';
-import { useRootStore } from '@/stores/root-store';
+import { allTags } from '@/core/tags';
+import { useTagsSearchStore } from '@/core/tags/tags-search-store';
 
 import SearchForm from './SearchForm';
 
 const TagsSearchBox = observer(function TagsSearchBox() {
-  const store = useRootStore();
+  const tagsSearchStore = useTagsSearchStore();
 
   const handleInputClick = () => {
-    store.tagsSearch.setHits(allTags.slice(0, 10));
+    tagsSearchStore.setHits(allTags.slice(0, 10));
   };
 
   return (
     <SearchForm
-      request={store.tagsSearch.request}
-      onReset={store.tagsSearch.onReset}
-      onSubmit={store.tagsSearch.onSubmit}
-      textInputProps={store.tagsSearch.getTextInputProps({
+      request={tagsSearchStore.request}
+      onReset={tagsSearchStore.onReset}
+      onSubmit={tagsSearchStore.onSubmit}
+      textInputProps={tagsSearchStore.getTextInputProps({
         onClick: handleInputClick,
       })}
     />

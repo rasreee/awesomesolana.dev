@@ -1,5 +1,5 @@
 import { GithubRepo } from '@core/github';
-import { Tag } from '@core/search';
+import { Tag } from '@core/tags';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
 

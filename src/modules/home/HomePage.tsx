@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
 import { siteConfig } from '@/configs/site-config';
@@ -8,7 +7,7 @@ import Responsive from '@/ui/responsive/Responsive';
 const GroupedResults = dynamic(() => import('./GroupedResults'));
 const TagsSearchBox = dynamic(() => import('@/ui/search/TagsSearchBox'));
 
-const HomePage = observer(function HomePage() {
+const HomePage = function HomePage() {
   return (
     <>
       <div className="min-h-main mx-auto flex w-full flex-1 flex-col gap-10 px-6 pt-28 md:max-w-3xl md:pt-36">
@@ -29,6 +28,6 @@ const HomePage = observer(function HomePage() {
       </div>
     </>
   );
-});
+};
 
 export default HomePage;

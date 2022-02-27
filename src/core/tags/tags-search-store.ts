@@ -1,16 +1,18 @@
 import { action, computed, makeAutoObservable } from 'mobx';
 
-import { getTagSuggestions, Tag } from '@/core/search';
+import { createRequestStore, RequestStore } from '@/mobx/request-store';
+import { useRootStore } from '@/stores/root-store';
 import type { TextInputProps } from '@/ui/components/TextInput';
 
-import { createRequestStore, RequestStore } from './request-store';
+import { getTagSuggestions } from './helpers';
+import { Tag } from './types';
 
 export interface TagsSearchState {
   hits: Tag[];
   query: string;
 }
 
-export interface ITagsRootStore extends TagsSearchState {
+export interface ITagsSearchStore extends TagsSearchState {
   setHits: (hits: Tag[]) => void;
   onSubmit: (query: string) => any;
   onReset: () => void;
@@ -18,7 +20,7 @@ export interface ITagsRootStore extends TagsSearchState {
   getTextInputProps: (props?: Partial<TextInputProps>) => TextInputProps;
 }
 
-export class TagsRootStore implements ITagsRootStore {
+export class TagsSearchStore implements ITagsSearchStore {
   hits: Tag[] = [];
   query = '';
 
@@ -64,7 +66,10 @@ export class TagsRootStore implements ITagsRootStore {
     makeAutoObservable(
       this,
       { onChange: action.bound, onReset: action.bound },
-      { name: 'TagsRootStore' },
+      { name: 'TagsSearchStore' },
     );
   }
 }
+
+export const useTagsSearchStore = (): TagsSearchStore =>
+  useRootStore().tagsSearch;

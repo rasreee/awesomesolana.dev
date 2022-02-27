@@ -1,4 +1,4 @@
-import { Tag, tagUtils } from '@core/search';
+import { Tag, tagUtils } from '@core/tags';
 import { computed, runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React from 'react';

@@ -1,2 +1,1 @@
-export * from './route';
-export * from './tags';
+export * from './search-route';
