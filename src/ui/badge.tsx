@@ -11,7 +11,7 @@ function Badge({ children, className, ...props }: BadgeProps) {
       )}
       {...props}
     >
-      {children}
+      <span className="truncate text-xs leading-none">{children}</span>
     </span>
   );
 }

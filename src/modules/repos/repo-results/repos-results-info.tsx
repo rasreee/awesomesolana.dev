@@ -63,9 +63,7 @@ export function ReposResultsInfo({
                   'max-h-[24px] max-w-[140px] sm:max-w-[180px]',
                 )}
               >
-                <span className="truncate text-sm leading-none">
-                  {filter.name}
-                </span>
+                {filter.name}
               </Badge>
             ))}
           </span>

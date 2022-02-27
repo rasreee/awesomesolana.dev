@@ -31,6 +31,7 @@ module.exports = {
           ...colors.green,
           500: '#00D68F',
         },
+        basic: { 600: '#8F9BB3' },
         dark: '#192038',
         base: {
           50: '#F8F9FC',
