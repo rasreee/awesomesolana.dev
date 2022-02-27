@@ -2,23 +2,17 @@ import clsxm from '@utils/clsxm';
 import Image from 'next/image';
 
 import { useBreakpoints } from '../responsive';
+import { rem } from '../utils';
 
 const imageSizes = {
-  sm: 18,
-  md: 26,
-  lg: 44,
-};
-
-const fontSizes = {
-  sm: 'text-xl',
-  md: 'text-2xl',
-  lg: 'text-[27px] sm:text-5xl',
-};
-
-const imageContainerSizes = {
-  sm: 'h-[18px] w-[20px] sm:h-6 sm:w-6',
-  md: 'h-[22px] w-[21px]',
-  lg: 'h-6 w-6 sm:h-11 sm:w-11',
+  xs: 20,
+  sm: 24,
+  md: 28,
+  lg: 32,
+  xl: 36,
+  ['2xl']: 40,
+  ['3xl']: 44,
+  ['4xl']: 48,
 };
 
 export const HideOnLarge = ({
@@ -31,26 +25,31 @@ export const HideOnLarge = ({
   return <div className={clsxm('hidden md:block', className)}>{children}</div>;
 };
 
-export const Logo = ({ size = 'sm' }: { size?: 'sm' | 'md' | 'lg' }) => {
+export const Logo = ({ size = 'sm' }: { size?: keyof typeof imageSizes }) => {
   const breakpoints = useBreakpoints();
 
-  if (!breakpoints) return <div>BREAKPOINTS NOT READY</div>;
+  if (!breakpoints) return <div />;
 
   return (
     <div
       className={clsxm(
-        fontSizes[size],
         'flex items-center text-center font-heading font-extrabold uppercase leading-none text-indigo-600',
       )}
+      style={{ fontSize: rem(imageSizes[size] + 4) }}
     >
       Awesome
-      <div className={clsxm(imageContainerSizes[size])}>
+      <div
+        style={{
+          height: rem(imageSizes[size]),
+          width: rem(imageSizes[size]),
+        }}
+      >
         <Image
           height={imageSizes[size]}
           width={imageSizes[size]}
           src={'/images/solana.svg'}
           alt="solana-logo"
-          objectFit="scale-down"
+          objectFit="fill"
         />
       </div>
       olana{breakpoints.isLarge ? '.DEV' : ''}

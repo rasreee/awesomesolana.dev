@@ -21,7 +21,11 @@ export function useBreakpoints(): UseBreakpointsResult | null {
 
     const newResult = {
       isSmall: Boolean(width && width <= emToPx(breakpoints.sm)),
-      isMedium: Boolean(width && width > emToPx(breakpoints.sm)),
+      isMedium: Boolean(
+        width &&
+          width > emToPx(breakpoints.sm) &&
+          width <= emToPx(breakpoints.md),
+      ),
       isLarge: Boolean(width && width > emToPx(breakpoints.md)),
     };
 

@@ -1,5 +1,6 @@
+import Link from 'next/link';
+
 import { Logo } from '@/ui/components';
-import { UnstyledLink } from '@/ui/links';
 import { Responsive } from '@/ui/responsive';
 
 function LogoLink() {
@@ -7,14 +8,25 @@ function LogoLink() {
     <>
       <Responsive
         sm={
-          <UnstyledLink href="/">
-            <Logo size="sm" />
-          </UnstyledLink>
+          <Link href="/" passHref>
+            <a>
+              <Logo size="xs" />
+            </a>
+          </Link>
         }
         aboveSm={
-          <UnstyledLink href="/">
-            <Logo size="md" />
-          </UnstyledLink>
+          <Link href="/" passHref>
+            <a>
+              <Logo size="sm" />
+            </a>
+          </Link>
+        }
+        aboveMd={
+          <Link href="/" passHref>
+            <a>
+              <Logo size="md" />
+            </a>
+          </Link>
         }
       />
     </>
