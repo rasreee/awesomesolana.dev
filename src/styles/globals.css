@@ -26,7 +26,7 @@
   --color-primary-900: rgb(var(--tw-color-primary-900)); /* #004A45 */
   /* #endregion  /**======== Primary Color =========== */
   --header-height: 68px;
-  --footer-height: 54px;
+  --footer-height: 0px;
 }
 
 @layer base {
@@ -146,7 +146,7 @@
   }
 
   .min-h-main {
-    @apply min-h-[calc(100vh-var(--header-height)-var(--footer-height))];
+    @apply min-h-[calc(100vh-var(--header-height))];
   }
 
   .h-header-footer {
