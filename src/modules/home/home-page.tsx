@@ -1,18 +1,29 @@
 import dynamic from 'next/dynamic';
+import { useState } from 'react';
 
 import { exploreSEO } from '@/app/seo';
 import { siteConfig } from '@/app/site-config';
 import PageLayout from '@/layouts/page-layout';
+import { useRootStore } from '@/stores/root-store';
 import { Logo } from '@/ui/logo';
+import Popover from '@/ui/popover';
 import Responsive from '@/ui/responsive/responsive';
 
-const GroupedResults = dynamic(() => import('./grouped-results'));
+import PopularSources from './popular-sources';
+import TagsSearchResults from './tags-search-results';
+
 const TagsSearchBox = dynamic(
   () => import('@/modules/filters/tags-search-box'),
 );
 
 const HomePage = function HomePage() {
   const seo = exploreSEO();
+
+  const { tagsSearch: tagsSearchStore } = useRootStore();
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const openMenu = () => setMenuOpen(true);
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <PageLayout seo={seo}>
@@ -27,9 +38,21 @@ const HomePage = function HomePage() {
             {siteConfig.seo.description}
           </div>
         </div>
-        <div className="flex h-min flex-col gap-3">
-          <TagsSearchBox />
-          <GroupedResults />
+        <div className="relative flex h-min flex-col gap-3">
+          <div className="relative z-50">
+            <TagsSearchBox
+              tagsSearchStore={tagsSearchStore}
+              onInputClick={openMenu}
+            />
+          </div>
+          <Popover
+            className="bg-surface absolute top-12 z-50 overflow-hidden py-5 px-3"
+            isOpen={menuOpen}
+            onClose={closeMenu}
+          >
+            <TagsSearchResults tagsSearchStore={tagsSearchStore} />
+          </Popover>
+          <PopularSources />
         </div>
       </div>
     </PageLayout>

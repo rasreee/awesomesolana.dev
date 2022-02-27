@@ -2,33 +2,32 @@ import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
-import { allTags } from '@/modules/tags';
-import { useTagsSearchStore } from '@/modules/tags/tags-search-store';
+import { TagsSearchStore } from '@/modules/tags/tags-search-store';
 import { TextInputProps } from '@/ui/text-input';
 
 const SearchForm = dynamic(() => import('@/modules/search/search-form'));
 
-const TagsSearchBox = observer(function TagsSearchBox() {
-  const store = useTagsSearchStore();
-
-  const handleInputClick = () => {
-    store.setHits(allTags.slice(0, 10));
-  };
-
+const TagsSearchBox = observer(function TagsSearchBox({
+  tagsSearchStore,
+  onInputClick,
+}: {
+  tagsSearchStore: TagsSearchStore;
+  onInputClick: () => void;
+}) {
   const getTextInputProps = (props?: Partial<TextInputProps>): TextInputProps =>
     computed(() => ({
       ...props,
-      value: store.query,
-      onChange: store.onChange,
+      value: tagsSearchStore.query,
+      onChange: tagsSearchStore.onChange,
     })).get();
 
   return (
     <SearchForm
-      request={store.request}
-      onReset={store.onReset}
-      onSubmit={store.onSubmit}
+      request={tagsSearchStore.request}
+      onReset={tagsSearchStore.onReset}
+      onSubmit={tagsSearchStore.onSubmit}
       textInputProps={getTextInputProps({
-        onClick: handleInputClick,
+        onClick: onInputClick,
       })}
     />
   );
