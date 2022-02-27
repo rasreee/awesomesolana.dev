@@ -1,6 +1,6 @@
-import { Tag } from '@core/search';
+import { isEqualTag, Tag } from '@core/search';
 import { DEFAULT_PAGINATION_PARAMS, PaginationParams } from '@utils';
-import memoizeOne, { EqualityFn } from 'memoize-one';
+import memoizeOne from 'memoize-one';
 
 import { GitHubRepo, RawGitHubRepo } from './types';
 
@@ -39,17 +39,9 @@ function formatTagSearchParam(tag: Tag): string {
   return '';
 }
 
-const isEqualTag: EqualityFn<typeof formatTagSearchParam> = (
-  aArgs,
-  bArgs,
-): boolean => {
-  const a = aArgs[0];
-  const b = bArgs[0];
-
-  return a.type === b.type && a.name === b.name;
-};
-
-const memoizedFormatTagParam = memoizeOne(formatTagSearchParam, isEqualTag);
+const memoizedFormatTagParam = memoizeOne(formatTagSearchParam, ([a], [b]) =>
+  isEqualTag(a, b),
+);
 
 export function formatGithubApiQuery({
   keywords = [],

@@ -1,52 +1,31 @@
-import { getTagSuggestions, Tag, TagType } from '@core/search';
+import { getTags, Tag, tags, TagType } from '@core/search';
 import { XIcon } from '@primer/octicons-react';
-import { capitalize, waitFor } from '@utils';
+import { capitalize } from '@utils';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
 import { runInAction } from 'mobx';
-import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 
 import { Divider, SearchForm, useSearchForm } from '@/ui/components';
 
 import { useSearchStore } from '../SearchStore';
 import { TagTypeFilterOption } from './TagTypeFilterOption';
-import { useTags } from './useTags';
 
 export function TagTypeMenu({ type }: { type: TagType }) {
-  const searchStore = useSearchStore();
+  const store = useSearchStore();
 
-  const { data: tagsForType } = useTags(type);
+  const { data: tagsForType = [] } = useSWR(`tagsForType/${type}`, () =>
+    getTags(type),
+  );
 
-  const [hits, setHits] = useState<Tag[]>([]);
   const searchForm = useSearchForm();
 
-  useEffect(() => {
-    const { query, setLoading, setError } = searchForm;
-
-    if (!query) {
-      return setHits(options);
-    }
-
-    setLoading(true);
-    setError(null);
-    waitFor(300)
-      .then(async () => {
-        const newHits = await getTagSuggestions(query, { type });
-        setHits(newHits);
-      })
-      .catch((e) => setError((e as Error).message))
-      .finally(() => setLoading(false));
-  }, [searchForm.query]);
-
   const handleToggleFilter = (tag: Tag) => () =>
-    runInAction(() => searchStore.toggleTag(tag));
+    runInAction(() => store.toggleTag(tag));
 
-  const selectedTags = searchStore.getTags(type);
-  const options = tagsForType
-    ? tagsForType.filter(
-        (tag) => !selectedTags?.map((item) => item.name).includes(tag.name),
-      )
-    : [];
+  const selectedTags = tags.list(store.tags).ofType(type);
+
+  const options = tags.list(tagsForType).exclude(store.tags);
 
   return (
     <>
@@ -63,7 +42,7 @@ export function TagTypeMenu({ type }: { type: TagType }) {
           <h2 className="font-heading text-2xl font-semibold leading-none">
             {capitalize(pluralize(type))}
           </h2>
-          <button onClick={searchStore.closeTagTypeModal}>
+          <button onClick={store.closeTagTypeModal}>
             <XIcon />
           </button>
         </div>
@@ -86,13 +65,15 @@ export function TagTypeMenu({ type }: { type: TagType }) {
           </div>
         ) : null}
         <ul className={clsxm('px-5 pt-3', 'h-full overflow-y-auto')}>
-          {(hits.length ? hits : options).map((tag) => (
-            <TagTypeFilterOption
-              key={`${tag.type}_${tag.name}`}
-              tag={tag}
-              onClick={handleToggleFilter(tag)}
-            />
-          ))}
+          {(store.tagsSearch.hits.length ? store.tagsSearch.hits : options).map(
+            (tag) => (
+              <TagTypeFilterOption
+                key={`${tag.type}_${tag.name}`}
+                tag={tag}
+                onClick={handleToggleFilter(tag)}
+              />
+            ),
+          )}
         </ul>
       </div>
     </>

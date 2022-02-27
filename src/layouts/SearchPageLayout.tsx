@@ -4,14 +4,15 @@ import { useEffect, useState } from 'react';
 
 import Layout from '@/layouts/Layout';
 import { StoreProvider } from '@/mobx/storeContext';
+import { SearchStore } from '@/modules/search/SearchStore';
 import { Seo } from '@/ui/components';
 
-import { SearchStore } from './SearchStore';
-
-export const SearchPageLayout = ({
+const SearchPageLayout = ({
   children,
+  title = 'Search',
 }: {
   children: React.ReactNode;
+  title?: string;
 }) => {
   const router = useRouter();
 
@@ -29,9 +30,11 @@ export const SearchPageLayout = ({
   return (
     <Layout>
       <StoreProvider store={store}>
-        <Seo title="Search" />
+        <Seo title={title} />
         <div className="flex-1 px-3 sm:px-6">{children}</div>
       </StoreProvider>
     </Layout>
   );
 };
+
+export default SearchPageLayout;

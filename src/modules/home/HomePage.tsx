@@ -1,49 +1,17 @@
-import { getTagSuggestions, searchTags, Tag, useToggleTag } from '@core/search';
-import { waitFor } from '@utils';
-import { useEffect, useState } from 'react';
+import { runInAction } from 'mobx';
 
 import { siteConfig } from '@/configs/site-config';
-import { Logo, SearchForm, Seo, useSearchForm } from '@/ui/components';
+import { allTags } from '@/core/search';
+import { Logo, SearchForm, Seo } from '@/ui/components';
 
+import { useSearchStore } from '../search/SearchStore';
 import { GroupedResults } from './GroupedResults';
 
 export function HomePage() {
-  const searchBox = useSearchForm();
-  const [hits, setHits] = useState<Tag[]>([]);
-
-  const toggleTag = useToggleTag();
-
-  const handleSubmit = async (query: string) => {
-    const { setLoading, setError } = searchBox;
-    setLoading(true);
-    setError(null);
-    await waitFor(300);
-    try {
-      const newHits = await getTagSuggestions(query);
-      setHits(newHits);
-    } catch (e) {
-      setError((e as Error).message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    const query = searchBox.query;
-
-    if (!query) return setHits([]);
-
-    handleSubmit(query);
-  }, [searchBox.query]);
+  const store = useSearchStore();
 
   const handleInputClick = () => {
-    console.log('handleInputClick');
-    setHits(searchTags.slice(0, 10));
-  };
-
-  const closeResults = () => {
-    searchBox.onReset();
-    setHits([]);
+    runInAction(() => (store.tagsSearchResult = allTags.slice(0, 10)));
   };
 
   return (
@@ -58,15 +26,15 @@ export function HomePage() {
         </div>
         <div className="flex h-min flex-col gap-3">
           <SearchForm
-            {...searchBox}
+            {...store.searchForm}
             onClick={handleInputClick}
-            onSubmit={handleSubmit}
+            onSubmit={store.submitTagsSearch}
           />
           <GroupedResults
-            isOpen={hits.length > 0}
-            hits={hits}
-            onTagClick={toggleTag}
-            onClose={closeResults}
+            isOpen={store.tagsSearchResult.length > 0}
+            hits={store.tagsSearchResult}
+            onTagClick={store.toggleTag}
+            onClose={store.reset}
           />
         </div>
       </div>

@@ -1,25 +1,61 @@
-import { action, computed, makeAutoObservable, reaction } from 'mobx';
+import { action, makeAutoObservable, observable, reaction } from 'mobx';
 
-import { Tag, TagType, tagTypes } from '@/core/search';
+import { Tag, tags, TagType, tagTypes } from '@/core/search';
 import { useStore } from '@/mobx/storeContext';
 import { waitFor } from '@/utils';
+
+interface SearchFormState {
+  loading: boolean;
+  error: string | null;
+  query: string;
+}
+
+interface ISearchForm extends SearchFormState {
+  onChange: (value: string) => void;
+  onReset: () => void;
+}
+
+function initSearchForm(): ISearchForm {
+  const state: SearchFormState = observable.object({
+    loading: false,
+    error: null,
+    query: '',
+  });
+
+  const onReset = action(() => {
+    state.loading = false;
+    state.error = null;
+    state.query = '';
+  });
+
+  const onChange = action((value: string) => {
+    state.query = value;
+  });
+
+  return { ...state, onChange, onReset };
+}
+
+interface TagsSearchState {
+  hits: Tag[];
+}
+
+interface TagsSearch extends TagsSearchState {}
+
+function initTagsSearch(): TagsSearch {
+  const state = observable.object<TagsSearchState>({ hits: [] });
+
+  return state;
+}
 
 export class SearchStore {
   tags: Tag[] = [];
 
-  searchForm = { loading: false, error: null, query: '' };
+  tagsSearchResult: Tag[] = [];
+  tagsSearch: TagsSearch = initTagsSearch();
+
+  searchForm = initSearchForm();
 
   tagTypeModal: TagType | null = null;
-
-  getTags = (type: TagType) =>
-    computed(() => this.tags.filter((tag) => tag.type === type)).get();
-
-  getIsTagActive = (target: Tag) =>
-    computed(() =>
-      this.tags.some(
-        (tag) => tag.type === target.type && tag.name === target.name,
-      ),
-    ).get();
 
   clearTags(type: TagType) {
     const newTags = this.tags.filter((tag) => tag.type !== type);
@@ -104,7 +140,7 @@ export class SearchStore {
   }
 
   toggleTag(tag: Tag) {
-    if (this.getIsTagActive(tag)) return this.removeTag(tag);
+    if (tags.list(this.tags).has(tag)) return this.removeTag(tag);
 
     this.addTag(tag);
   }
@@ -115,6 +151,11 @@ export class SearchStore {
 
   closeTagTypeModal() {
     this.tagTypeModal = null;
+  }
+
+  async submitTagsSearch(query: string) {
+    await waitFor(300);
+    console.log('query', query);
   }
 
   async submitQuery(query: string) {
@@ -131,6 +172,11 @@ export class SearchStore {
     //     undefined,
     //     { shallow: true },
     //   );
+  }
+
+  reset() {
+    this.tags = [];
+    this.searchForm = initSearchForm();
   }
 
   constructor() {

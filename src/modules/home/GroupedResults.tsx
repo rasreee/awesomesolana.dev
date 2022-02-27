@@ -1,8 +1,10 @@
-import { Tag, TagType, tagTypes, useSearchState } from '@core/search';
+import { Tag, tags, TagType, tagTypes } from '@core/search';
 import { capitalize } from '@utils/capitalize';
 import pluralize from '@utils/pluralize';
 
 import { Popover } from '@/ui/components';
+
+import { useSearchStore } from '../search/SearchStore';
 
 type GroupedResultsProps = {
   isOpen: boolean;
@@ -28,11 +30,9 @@ export function GroupedResults({
   onTagClick,
   onClose,
 }: GroupedResultsProps) {
-  const { tags } = useSearchState();
+  const store = useSearchStore();
 
-  const listToShow = hits.filter(
-    (hit) => !tags.some((tag) => tag.name === hit.name),
-  );
+  const listToShow = tags.list(hits).exclude(store.tags);
 
   const handleTagClick = (tag: Tag) => () => {
     onTagClick(tag);

@@ -1,4 +1,5 @@
-import { Tag } from '@core/search';
+import { Tag, tags } from '@core/search';
+import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 
@@ -14,8 +15,8 @@ export const TagTypeFilterOption = observer(function TagTypeFilterOption({
   tag: Tag;
   onClick: () => void;
 }) {
-  const searchStore = useSearchStore();
-  const checked = searchStore.getIsTagActive(tag);
+  const store = useSearchStore();
+  const checked = computed(() => tags.list(store.tags).has(tag)).get();
 
   return (
     <li

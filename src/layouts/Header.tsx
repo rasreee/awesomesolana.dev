@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 
+import { siteConfig } from '@/configs/site-config';
 import { ColorModeToggle } from '@/ui/colorMode';
+import { GithubIcon } from '@/ui/github';
 import { rem } from '@/ui/utils';
 
 import LogoLink from './LogoLink';
@@ -21,6 +23,9 @@ export default function Header() {
       ) : (
         <div />
       )}
+      <a href={siteConfig.socials.github.href}>
+        <GithubIcon />
+      </a>
       <ColorModeToggle style={{ height: buttonSize, width: buttonSize }} />
     </header>
   );

@@ -14,6 +14,11 @@ export const siteConfig = Object.freeze({
     editUrl: `${baseUrl}/edit/main/website/pages`,
     blobUrl: `${baseUrl}/blob/main`,
   },
+  socials: {
+    github: {
+      href: 'https://github.com/rasreee/awesomesolana.dev',
+    },
+  },
   youtube: 'https://www.youtube.com/channel/UC4TmDovH46TB4S0SM0Y4CIg',
   seo: {
     title: 'Awesome Solana',

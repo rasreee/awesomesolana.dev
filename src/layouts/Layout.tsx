@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import * as React from 'react';
 
-import { Divider, Seo, SeoProps } from '@/ui/components';
+import { Seo, SeoProps } from '@/ui/components';
 
-import Footer from './Footer';
 import Header from './Header';
 
 export interface LayoutProps {
@@ -21,8 +20,6 @@ const Layout: React.FC<LayoutProps> = ({ children, seo }) => {
       <div className="bg-app min-h-full w-screen">
         <Header />
         <main className="bg-app min-h-main flex-1">{children}</main>
-        <Divider />
-        <Footer />
       </div>
     </>
   );

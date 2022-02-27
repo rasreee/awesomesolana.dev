@@ -1,13 +1,17 @@
-import { useSearchState } from '@core/search';
-
+import { useSearchStore } from '../SearchStore';
 import { GithubReposFeed, GithubReposProps } from './GithubReposFeed';
 
 export function Results() {
-  const { tags, query } = useSearchState();
-  const shouldSearch = Boolean(tags.length || query.trim());
+  const store = useSearchStore();
+  const shouldSearch = Boolean(
+    store.tags.length || store.searchForm.query.trim(),
+  );
 
   const args: GithubReposProps = shouldSearch
-    ? { route: '/search', params: { tags, keywords: [query] } }
+    ? {
+        route: '/search',
+        params: { tags: store.tags, keywords: [store.searchForm.query] },
+      }
     : { route: '/browse' };
 
   return <GithubReposFeed {...args} />;

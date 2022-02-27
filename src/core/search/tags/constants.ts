@@ -148,7 +148,7 @@ function toTags(args: any): Tag[] {
   }
 }
 
-export const searchTags: Tag[] = Object.entries(tagNames)
+export const allTags: Tag[] = Object.entries(tagNames)
   .map(([type, values]) =>
     toTags({
       type,

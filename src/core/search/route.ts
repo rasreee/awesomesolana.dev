@@ -4,8 +4,6 @@ import queryString from 'query-string';
 
 export const searchRoute = {
   tags: {
-    excludeType: (url: string, type: TagType): string =>
-      queryString.exclude(url, [type]),
     typeParam: (url: string): TagType | null => {
       const parsedUrlQuery = queryString.parseUrl(url).query;
       return 'type' in parsedUrlQuery
@@ -23,18 +21,12 @@ export const searchRoute = {
 
 export const route = {
   search: {
-    clearType: (type: TagType, router: NextRouter) => {
-      router.push(searchRoute.tags.excludeType(router.asPath, type));
-    },
     tags: {
       getType: (asPath: string) => searchRoute.tags.typeParam(asPath),
       openType: (type: TagType, router: NextRouter) =>
         router.replace(searchRoute.tags.typeUrl(type)),
       closeType: (router: NextRouter) => {
         router.back();
-      },
-      clearType: (type: TagType, router: NextRouter) => {
-        router.push(searchRoute.tags.excludeType(router.asPath, type));
       },
     },
   },
