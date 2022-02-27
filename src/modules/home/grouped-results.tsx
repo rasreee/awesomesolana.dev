@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import { Tag, TagType, tagTypes } from '@/core/tags';
 import { useTagsSearchStore } from '@/core/tags/tags-search-store';
-import Popover from '@/ui/components/Popover';
+import Popover from '@/ui/components/popover';
 import { capitalize } from '@/utils/string';
 
 type GroupedHits = Array<{ type: TagType; hits: Tag[] }>;

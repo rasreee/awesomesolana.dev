@@ -6,7 +6,7 @@ import React from 'react';
 import { useRootStore } from '@/stores/root-store';
 import { CheckBox } from '@/ui/components/CheckBox';
 
-const TagTypeFilterOption = observer(function TagTypeFilterOption({
+const RepoFilterCheckBox = observer(function RepoFilterCheckBox({
   tag,
   ...props
 }: React.HTMLAttributes<HTMLLIElement> & {
@@ -36,4 +36,4 @@ const TagTypeFilterOption = observer(function TagTypeFilterOption({
   );
 });
 
-export default TagTypeFilterOption;
+export default RepoFilterCheckBox;

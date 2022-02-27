@@ -5,11 +5,11 @@ import { useGithubReposApi } from '@/core/github';
 import { useRootStore } from '@/stores/root-store';
 import { ErrorMessage } from '@/ui/components/ErrorMessage';
 
-import type { GithubApiParams } from './GithubReposFeed';
+import type { GithubApiParams } from './repos-feed';
 
-const GithubReposFeed = dynamic(() => import('./GithubReposFeed'));
+const ReposFeed = dynamic(() => import('./repos-feed'));
 
-const Results = observer(function Results() {
+const ReposResults = observer(function ReposResults() {
   const store = useRootStore();
   const shouldSearch = Boolean(
     store.reposSearch.tags.length || store.reposSearch.query.trim(),
@@ -31,7 +31,7 @@ const Results = observer(function Results() {
 
   if (!data) return <ul>...</ul>;
 
-  return <GithubReposFeed data={data} tags={config.params.tags} />;
+  return <ReposFeed data={data} tags={config.params.tags} />;
 });
 
-export default Results;
+export default ReposResults;

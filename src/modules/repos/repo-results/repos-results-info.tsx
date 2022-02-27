@@ -3,7 +3,7 @@ import { Tag } from '@core/tags';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
 
-function getResultsInfoText({
+function getReposResultsInfoText({
   data,
   tags,
 }: {
@@ -22,7 +22,7 @@ function getResultsInfoText({
   return result;
 }
 
-export function ResultsInfo({
+export function ReposResultsInfo({
   data,
   tags,
 }: {
@@ -34,7 +34,7 @@ export function ResultsInfo({
   return (
     <div className={clsxm('py-2 px-1')}>
       <span className="text text-sm leading-none opacity-90">
-        {getResultsInfoText({ data, tags })}
+        {getReposResultsInfoText({ data, tags })}
       </span>
       {tags?.map((filter) => `${filter.name}`)}
     </div>

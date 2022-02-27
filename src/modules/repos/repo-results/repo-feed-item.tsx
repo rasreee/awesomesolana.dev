@@ -5,7 +5,7 @@ import React from 'react';
 const RepoStat = dynamic(() => import('@/ui/github/RepoStat'));
 const Badge = dynamic(() => import('@/ui/components/Badge'));
 
-export function RepoItem({
+export function RepoFeedItem({
   name,
   description,
   topics,

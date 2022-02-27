@@ -6,7 +6,7 @@ export * from './Logo';
 export * from './Modal';
 export * from './NextImage';
 export * from './Overlay';
-export { default as Popover } from './Popover';
+export { default as Popover } from './popover';
 export * from './Seo';
 export * from './Spinner';
 export * from './StatefulIcon';

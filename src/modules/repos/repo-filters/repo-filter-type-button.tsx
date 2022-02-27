@@ -8,12 +8,38 @@ import dynamic from 'next/dynamic';
 import { useRootStore } from '@/stores/root-store';
 import { capitalize } from '@/utils/string';
 
-import { TagButton } from './TagButton';
-
 const ChevronDownIcon = dynamic(() => import('@/ui/icons/ChevronDownIcon'));
 const XIcon = dynamic(() => import('@/ui/icons/XIcon'));
 
-const TagTypeToggle = observer(function TagTypeToggle({
+function TagButton({
+  children,
+  className,
+  ...props
+}: {
+  children: any;
+  className?: string;
+}) {
+  return (
+    <div
+      className={clsxm(
+        'cursor-pointer',
+        'py-2 px-3 sm:gap-2 sm:px-4',
+        'rounded-md',
+        'flex items-center justify-between',
+        'min-w-max overflow-hidden',
+        'font-medium',
+        'flex-1',
+        'bg-surface-2 text text-opacity-90',
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+
+const RepoFilterTypeButton = observer(function RepoFilterTypeButton({
   type,
 }: {
   type: TagType;
@@ -62,4 +88,4 @@ const TagTypeToggle = observer(function TagTypeToggle({
   );
 });
 
-export default TagTypeToggle;
+export default RepoFilterTypeButton;

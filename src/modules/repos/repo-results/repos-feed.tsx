@@ -3,27 +3,27 @@ import { Tag } from '@core/tags';
 import type { PaginationParams } from '@utils/pagination';
 import React from 'react';
 
-import { RepoItem } from './RepoItem';
-import { ResultsInfo } from './ResultsInfo';
+import { RepoFeedItem } from './repo-feed-item';
+import { ReposResultsInfo } from './repos-results-info';
 
 export type GithubApiParams = {
   tags?: Tag[];
   keywords?: string[];
 } & Partial<PaginationParams>;
 
-export type GithubReposProps = {
+export type ReposFeedProps = {
   data: GithubRepo[];
   tags: GithubApiParams['tags'];
 };
 
-function GithubReposFeed({ data, tags }: GithubReposProps) {
+function ReposFeed({ data, tags }: ReposFeedProps) {
   return (
     <div>
-      <ResultsInfo data={data} tags={tags} />
+      <ReposResultsInfo data={data} tags={tags} />
       <ul>
         {data.map((hit) => (
           <li key={hit.id}>
-            <RepoItem {...hit} />
+            <RepoFeedItem {...hit} />
           </li>
         ))}
       </ul>
@@ -31,4 +31,4 @@ function GithubReposFeed({ data, tags }: GithubReposProps) {
   );
 }
 
-export default GithubReposFeed;
+export default ReposFeed;

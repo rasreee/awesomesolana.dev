@@ -7,15 +7,19 @@ import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 import useSWR from 'swr';
 
+import RepoFiltersSearchBox from '@/modules/repos/repo-filters/repo-filters-search-box';
 import { useRootStore } from '@/stores/root-store';
 import { Divider } from '@/ui/components/Divider';
-import TagsSearchBox from '@/ui/search/TagsSearchBox';
 
 const XIcon = dynamic(() => import('@/ui/icons/XIcon'));
 
-const TagTypeFilterOption = dynamic(() => import('./TagTypeFilterOption'));
+const RepoFilterCheckBox = dynamic(() => import('./repo-filter-check-box'));
 
-const TagTypeMenu = observer(function TagTypeMenu({ type }: { type: TagType }) {
+const RepoFilterTypeMenu = observer(function RepoFilterTypeMenu({
+  type,
+}: {
+  type: TagType;
+}) {
   const store = useRootStore();
   const { tagTypeModal } = store;
 
@@ -50,7 +54,7 @@ const TagTypeMenu = observer(function TagTypeMenu({ type }: { type: TagType }) {
             <XIcon />
           </button>
         </div>
-        <TagsSearchBox />
+        <RepoFiltersSearchBox />
       </div>
       <div className="relative top-5 z-0 h-[80%] w-full">
         {selectedTags?.length ? (
@@ -58,10 +62,7 @@ const TagTypeMenu = observer(function TagTypeMenu({ type }: { type: TagType }) {
             <span className="px-5 text-lg font-medium">Selected</span>
             <ul className={clsxm('px-5 pb-2', 'min-w-full')}>
               {selectedTags.map((tag) => (
-                <TagTypeFilterOption
-                  key={`${tag.type}_${tag.name}`}
-                  tag={tag}
-                />
+                <RepoFilterCheckBox key={`${tag.type}_${tag.name}`} tag={tag} />
               ))}
             </ul>
             <Divider />
@@ -71,10 +72,7 @@ const TagTypeMenu = observer(function TagTypeMenu({ type }: { type: TagType }) {
           {options ? (
             <ul className={clsxm('px-5 pt-3', 'h-full overflow-y-auto')}>
               {options.map((tag) => (
-                <TagTypeFilterOption
-                  key={`${tag.type}_${tag.name}`}
-                  tag={tag}
-                />
+                <RepoFilterCheckBox key={`${tag.type}_${tag.name}`} tag={tag} />
               ))}
             </ul>
           ) : (
@@ -86,4 +84,4 @@ const TagTypeMenu = observer(function TagTypeMenu({ type }: { type: TagType }) {
   );
 });
 
-export default TagTypeMenu;
+export default RepoFilterTypeMenu;

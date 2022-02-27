@@ -24,6 +24,6 @@ export class TagTypeModalStore implements ITagTypeModalStore {
   };
 
   constructor() {
-    makeAutoObservable(this, {}, { name: 'TagTypeModal' });
+    makeAutoObservable(this, {}, { name: 'RepoFilterTypeModal' });
   }
 }

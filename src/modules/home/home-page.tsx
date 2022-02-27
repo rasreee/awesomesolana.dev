@@ -4,8 +4,10 @@ import { siteConfig } from '@/configs/site-config';
 import { Logo } from '@/ui/components/Logo';
 import Responsive from '@/ui/responsive/Responsive';
 
-const GroupedResults = dynamic(() => import('./GroupedResults'));
-const TagsSearchBox = dynamic(() => import('@/ui/search/TagsSearchBox'));
+const GroupedResults = dynamic(() => import('./grouped-results'));
+const RepoFiltersSearchBox = dynamic(
+  () => import('@/modules/repos/repo-filters/repo-filters-search-box'),
+);
 
 const HomePage = function HomePage() {
   return (
@@ -22,7 +24,7 @@ const HomePage = function HomePage() {
           </div>
         </div>
         <div className="flex h-min flex-col gap-3">
-          <TagsSearchBox />
+          <RepoFiltersSearchBox />
           <GroupedResults />
         </div>
       </div>

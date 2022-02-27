@@ -4,9 +4,9 @@ import dynamic from 'next/dynamic';
 import { allTags } from '@/core/tags';
 import { useTagsSearchStore } from '@/core/tags/tags-search-store';
 
-const SearchForm = dynamic(() => import('./SearchForm'));
+const SearchForm = dynamic(() => import('@/ui/search/search-form'));
 
-const TagsSearchBox = observer(function TagsSearchBox() {
+const RepoFiltersSearchBox = observer(function RepoFiltersSearchBox() {
   const tagsSearchStore = useTagsSearchStore();
 
   const handleInputClick = () => {
@@ -25,4 +25,4 @@ const TagsSearchBox = observer(function TagsSearchBox() {
   );
 });
 
-export default TagsSearchBox;
+export default RepoFiltersSearchBox;

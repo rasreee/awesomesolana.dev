@@ -3,11 +3,11 @@ import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
 import { useRootStore } from '@/stores/root-store';
-import Popover from '@/ui/components/Popover';
+import Popover from '@/ui/components/popover';
 
-const TagTypeMenu = dynamic(() => import('./TagTypeMenu'));
+const RepoFilterTypeMenu = dynamic(() => import('./repo-filter-type-menu'));
 
-const TagTypeModal = observer(function TagTypeModal() {
+const RepoFilterTypeModal = observer(function RepoFilterTypeModal() {
   const { tagTypeModal } = useRootStore();
 
   if (!tagTypeModal.isOpen) return null;
@@ -22,9 +22,11 @@ const TagTypeModal = observer(function TagTypeModal() {
       onClose={tagTypeModal.onClose}
       isOpen={tagTypeModal.isOpen}
     >
-      {tagTypeModal.tagType && <TagTypeMenu type={tagTypeModal.tagType} />}
+      {tagTypeModal.tagType && (
+        <RepoFilterTypeMenu type={tagTypeModal.tagType} />
+      )}
     </Popover>
   );
 });
 
-export default TagTypeModal;
+export default RepoFilterTypeModal;

@@ -1,14 +1,14 @@
 import { tagTypes } from '@core/tags';
 import dynamic from 'next/dynamic';
 
-const TagTypeToggle = dynamic(() => import('./TagTypeToggle'));
+const RepoFilterTypeButton = dynamic(() => import('./repo-filter-type-button'));
 
-export function TagTypesControls() {
+export function RepoFilters() {
   return (
     <ul className="grid grid-cols-2 gap-2 overflow-x-auto sm:flex sm:items-center sm:gap-5">
       {tagTypes.map((name) => (
         <li key={name}>
-          <TagTypeToggle type={name} />
+          <RepoFilterTypeButton type={name} />
         </li>
       ))}
     </ul>
