@@ -37,7 +37,15 @@ function SunOutlineIcon(props: SVGIconProps) {
   );
 }
 
-export function ColorModeToggle({ style }: { style?: CSSProperties }) {
+export function ColorModeToggle({
+  style,
+  className,
+  iconProps,
+}: {
+  style?: CSSProperties;
+  className?: string;
+  iconProps?: SVGIconProps;
+}) {
   const { mode, toggle } = useColorMode();
   const [mounted, setMounted] = React.useState(false);
 
@@ -57,11 +65,12 @@ export function ColorModeToggle({ style }: { style?: CSSProperties }) {
         `flex items-center justify-center rounded-lg transition-all`,
         'bg-surface',
         'ring-gray-300 hover:ring-2',
+        className,
       )}
       onClick={toggle}
       style={style}
     >
-      {mounted && <Icon />}
+      {mounted && <Icon {...iconProps} />}
     </button>
   );
 }
