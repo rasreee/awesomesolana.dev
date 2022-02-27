@@ -20,7 +20,8 @@ export function createRequestStore() {
   const setLoading = action((value: boolean) => (state.loading = value));
 
   const setError = action(
-    (value: unknown) => (state.error = (value as Error).message),
+    (value: unknown) =>
+      (state.error = value instanceof Error ? value.message : null),
   );
 
   const onReset = action(() => {

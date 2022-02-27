@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
-import { FormEventHandler, useState } from 'react';
+import { FormEventHandler, useEffect, useState } from 'react';
+import { useDebounce } from 'use-debounce';
 
 import { RequestState } from '@/lib/mobx/request-store';
 import clsxm from '@/lib/utils/clsxm';
@@ -45,8 +46,16 @@ function SearchForm({
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+
     onSubmit(textInputProps.value);
   };
+
+  const [valueToSubmit] = useDebounce(textInputProps.value, 200);
+
+  useEffect(() => {
+    console.log('SearchForm.valueToSubmit: ', valueToSubmit);
+    onSubmit(valueToSubmit);
+  }, [valueToSubmit]);
 
   return (
     <form

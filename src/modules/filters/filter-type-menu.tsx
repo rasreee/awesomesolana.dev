@@ -10,7 +10,7 @@ import { getTags, TagType, tagUtils } from '@/modules/tags';
 import { useRootStore } from '@/stores/root-store';
 import { Divider } from '@/ui/divider';
 
-import FiltersSearchBox from './filters-search-box';
+import TagsSearchBox from './tags-search-box';
 
 const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 
@@ -55,7 +55,7 @@ const FilterTypeMenu = observer(function FilterTypeMenu({
             <XIcon />
           </button>
         </div>
-        <FiltersSearchBox />
+        <TagsSearchBox />
       </div>
       <div className="relative top-5 z-0 h-[80%] w-full">
         {selectedTags?.length ? (

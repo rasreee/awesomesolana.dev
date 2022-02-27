@@ -13,7 +13,6 @@ export interface ITagsSearchStore extends TagsSearchState {
   onSubmit: (query: string) => any;
   onReset: () => void;
   request: RequestStore;
-  getTextInputProps: (props?: Partial<TextInputProps>) => TextInputProps;
 }
 
 interface ReposSearchState {

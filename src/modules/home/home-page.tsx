@@ -7,8 +7,8 @@ import { Logo } from '@/ui/logo';
 import Responsive from '@/ui/responsive/responsive';
 
 const GroupedResults = dynamic(() => import('./grouped-results'));
-const FiltersSearchBox = dynamic(
-  () => import('@/modules/filters/filters-search-box'),
+const TagsSearchBox = dynamic(
+  () => import('@/modules/filters/tags-search-box'),
 );
 
 const HomePage = function HomePage() {
@@ -28,7 +28,7 @@ const HomePage = function HomePage() {
           </div>
         </div>
         <div className="flex h-min flex-col gap-3">
-          <FiltersSearchBox />
+          <TagsSearchBox />
           <GroupedResults />
         </div>
       </div>

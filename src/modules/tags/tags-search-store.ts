@@ -1,4 +1,4 @@
-import { computed, makeAutoObservable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 
 import { createRequestStore } from '@/lib/mobx/request-store';
 import { getTagSuggestions, Tag } from '@/modules/tags';
@@ -10,6 +10,9 @@ export class TagsSearchStore implements ITagsSearchStore {
   constructor() {
     makeAutoObservable(this, {}, { name: 'TagsSearchStore' });
   }
+  getTextInputProps: (
+    props?: Partial<TextInputProps> | undefined,
+  ) => TextInputProps;
 
   hits: Tag[] = [];
   query = '';
@@ -24,13 +27,6 @@ export class TagsSearchStore implements ITagsSearchStore {
     this.query = event.currentTarget.value;
   };
 
-  getTextInputProps = (props?: Partial<TextInputProps>): TextInputProps =>
-    computed(() => ({
-      ...props,
-      value: this.query,
-      onChange: this.onChange,
-    })).get();
-
   onSubmit = async (query: string) => {
     if (!query) return this.setHits([]);
 
@@ -40,6 +36,7 @@ export class TagsSearchStore implements ITagsSearchStore {
       const response = await getTagSuggestions(query);
       this.setHits(response);
     } catch (error) {
+      console.error(error);
       this.request.setError(error);
     } finally {
       this.request.setLoading(false);
