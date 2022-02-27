@@ -1,16 +1,17 @@
-import { Logo, ResponsiveRender } from '@/ui/components';
+import { Logo } from '@/ui/components';
 import { UnstyledLink } from '@/ui/links';
+import { Responsive } from '@/ui/responsive';
 
 function LogoLink() {
   return (
     <>
-      <ResponsiveRender
-        mobile={
+      <Responsive
+        sm={
           <UnstyledLink href="/">
             <Logo size="sm" />
           </UnstyledLink>
         }
-        aboveMobile={
+        aboveSm={
           <UnstyledLink href="/">
             <Logo size="md" />
           </UnstyledLink>

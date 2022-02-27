@@ -1,8 +1,5 @@
-import { useMemo } from 'react';
+import { useBreakpoints } from '../responsive';
 
-import { useWindowDimensions } from './useWindowDimensions';
-
-export function useIsMobile() {
-  const { width } = useWindowDimensions();
-  return useMemo(() => width && width <= 700, [width]);
+export function useIsMobile(): boolean {
+  return Boolean(useBreakpoints()?.isSmall);
 }

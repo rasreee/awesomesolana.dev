@@ -8,7 +8,6 @@ export * from './Modal';
 export * from './NextImage';
 export * from './Overlay';
 export * from './Popover';
-export * from './Responsive';
 export * from './Seo';
 export * from './Spinner';
 export * from './StatefulIcon';
