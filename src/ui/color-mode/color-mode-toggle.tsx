@@ -3,7 +3,7 @@ import React, { CSSProperties } from 'react';
 import clsxm from '@/lib/utils/clsxm';
 import { SVGIconProps } from '@/ui/icons/types';
 
-import { useColorMode } from './useColorMode';
+import { useColorMode } from './use-color-mode';
 
 function MoonSolidIcon(props: SVGIconProps) {
   return (

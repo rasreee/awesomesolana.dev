@@ -3,8 +3,10 @@ import { useRouter } from 'next/router';
 
 import { siteConfig } from '@/app/site-config';
 
-const ColorModeToggle = dynamic(() => import('@/ui/colorMode/ColorModeToggle'));
-const GithubIcon = dynamic(() => import('@/ui/github/GithubIcon'));
+const ColorModeToggle = dynamic(
+  () => import('@/ui/color-mode/color-mode-toggle'),
+);
+const GithubIcon = dynamic(() => import('@/ui/github/github-icon'));
 const LogoLink = dynamic(() => import('./logo-link'));
 
 import clsxm from '@/lib/utils/clsxm';

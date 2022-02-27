@@ -1,7 +1,7 @@
 import { useTheme } from 'next-themes';
 import React from 'react';
 
-import { IColorModeContext } from './ColorModeContext';
+import { IColorModeContext } from './color-mode-context';
 import { ColorMode } from './types';
 
 export function useColorMode(): IColorModeContext {

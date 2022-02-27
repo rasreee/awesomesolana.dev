@@ -1,2 +1,2 @@
-export * from './GithubIcon';
-export { default as RepoStat } from './RepoStat';
+export * from './github-icon';
+export { default as RepoStat } from './repo-stat';

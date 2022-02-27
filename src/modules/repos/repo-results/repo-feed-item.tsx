@@ -3,7 +3,7 @@ import React from 'react';
 
 import { GithubRepo } from '@/modules/github';
 
-const RepoStat = dynamic(() => import('@/ui/github/RepoStat'));
+const RepoStat = dynamic(() => import('@/ui/github/repo-stat'));
 const Badge = dynamic(() => import('@/ui/badge'));
 
 export function RepoFeedItem({
