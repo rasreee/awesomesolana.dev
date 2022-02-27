@@ -1,17 +1,17 @@
 import '@/styles/globals.css';
 import '@/styles/colors.css';
 
-import { getLayout } from '@layouts/get-layout';
-import fetcher from '@utils/fetcher';
-import getSeo from '@utils/get-seo';
 import { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
 import { useState } from 'react';
 import { SWRConfig } from 'swr';
 
+import { getSeo } from '@/app/seo';
 import type { LayoutProps } from '@/layouts/core/types';
-import { StoreProvider } from '@/mobx/store-context';
+import { getLayout } from '@/layouts/get-layout';
+import { StoreProvider } from '@/lib/mobx/store-context';
+import fetcher from '@/lib/utils/fetcher';
 import { RootStore } from '@/stores/root-store';
 
 function MyApp({ Component, pageProps }: AppProps) {

@@ -1,8 +1,8 @@
-import clsxm from '@utils/clsxm';
 import dynamic from 'next/dynamic';
 import { FormEventHandler, useState } from 'react';
 
-import { RequestState } from '@/mobx/request-store';
+import { RequestState } from '@/lib/mobx/request-store';
+import clsxm from '@/lib/utils/clsxm';
 import { ErrorMessage } from '@/ui/components/ErrorMessage';
 import type { TextInputProps } from '@/ui/components/TextInput';
 

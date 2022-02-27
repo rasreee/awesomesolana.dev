@@ -1,5 +1,6 @@
-import clsxm from '@utils/clsxm';
 import { FC, ReactNode, useRef } from 'react';
+
+import clsxm from '@/lib/utils/clsxm';
 
 import { useClickOutside } from '../hooks/useClickOutside';
 import { EventKeys, useKeyPress } from '../hooks/useKeyPress';

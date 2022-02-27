@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
-import { allTags } from '@/core/tags';
-import { useTagsSearchStore } from '@/core/tags/tags-search-store';
+import { allTags } from '@/modules/tags';
+import { useTagsSearchStore } from '@/stores/tags-search-store';
 
 const SearchForm = dynamic(() => import('@/ui/search/search-form'));
 

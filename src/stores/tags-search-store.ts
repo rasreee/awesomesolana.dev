@@ -1,11 +1,9 @@
 import { computed, makeAutoObservable } from 'mobx';
 
-import { createRequestStore, RequestStore } from '@/mobx/request-store';
+import { createRequestStore, RequestStore } from '@/lib/mobx/request-store';
+import { getTagSuggestions, Tag } from '@/modules/tags';
 import { useRootStore } from '@/stores/root-store';
 import type { TextInputProps } from '@/ui/components/TextInput';
-
-import { getTagSuggestions } from './helpers';
-import { Tag } from './types';
 
 export interface TagsSearchState {
   hits: Tag[];

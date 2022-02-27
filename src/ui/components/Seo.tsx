@@ -1,7 +1,7 @@
 import { NextSeo, NextSeoProps } from 'next-seo';
 import React from 'react';
 
-import { siteConfig } from '@/configs/site-config';
+import { siteConfig } from '@/app/site-config';
 
 export interface SeoProps extends Pick<NextSeoProps, 'title' | 'description'> {}
 

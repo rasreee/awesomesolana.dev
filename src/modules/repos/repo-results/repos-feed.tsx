@@ -1,7 +1,8 @@
-import { GithubRepo } from '@core/github';
-import { Tag } from '@core/tags';
-import type { PaginationParams } from '@utils/pagination';
 import React from 'react';
+
+import type { PaginationParams } from '@/lib/utils';
+import { GithubRepo } from '@/modules/github';
+import { Tag } from '@/modules/tags';
 
 import { RepoFeedItem } from './repo-feed-item';
 import { ReposResultsInfo } from './repos-results-info';

@@ -1,11 +1,12 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+
+import { defaultPaginationParams } from '@/lib/utils';
 import {
   githubApi,
   GithubReposBrowseParams,
   githubReposJsonFetch,
   RawGithubReposResponse,
-} from '@core/github';
-import { defaultPaginationParams } from '@utils/pagination';
-import { NextApiRequest, NextApiResponse } from 'next';
+} from '@/modules/github';
 
 export type GithubReposBrowseRequest = NextApiRequest & {
   query: Partial<GithubReposBrowseParams>;

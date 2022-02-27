@@ -1,14 +1,16 @@
 import { computed, makeAutoObservable } from 'mobx';
 
-import { appConfig } from '@/configs/app-config';
-import { Tag, TagType } from '@/core/tags/types';
-import { createRequestStore, RequestStore } from '@/mobx/request-store';
+import { appConfig } from '@/app/app-config';
+import { createRequestStore, RequestStore } from '@/lib/mobx/request-store';
+import {
+  GithubRepo,
+  GithubReposSearchParams,
+  githubSwrKey,
+  parseRawGitHubRepo,
+  RawGithubReposResponse,
+} from '@/modules/github';
+import { Tag, TagType, tagUtils } from '@/modules/tags';
 import type { TextInputProps } from '@/ui/components';
-
-import { tagUtils } from '../tags/helpers';
-import { GithubReposSearchParams, githubSwrKey } from './api';
-import { parseRawGitHubRepo } from './helpers';
-import { GithubRepo, RawGithubReposResponse } from './types';
 
 export interface ReposSearchState {
   hits: GithubRepo[];

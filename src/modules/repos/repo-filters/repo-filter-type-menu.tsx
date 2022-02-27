@@ -1,15 +1,16 @@
-import { getTags, TagType, tagUtils } from '@core/tags';
-import clsxm from '@utils/clsxm';
-import pluralize from '@utils/pluralize';
-import { capitalize } from '@utils/string';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 import useSWR from 'swr';
 
-import RepoFiltersSearchBox from '@/modules/repos/repo-filters/repo-filters-search-box';
+import clsxm from '@/lib/utils/clsxm';
+import pluralize from '@/lib/utils/pluralize';
+import { capitalize } from '@/lib/utils/string';
+import { getTags, TagType, tagUtils } from '@/modules/tags';
 import { useRootStore } from '@/stores/root-store';
 import { Divider } from '@/ui/components/Divider';
+
+import RepoFiltersSearchBox from './repo-filters-search-box';
 
 const XIcon = dynamic(() => import('@/ui/icons/XIcon'));
 

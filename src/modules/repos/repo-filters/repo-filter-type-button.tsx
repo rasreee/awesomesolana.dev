@@ -1,12 +1,12 @@
-import { TagType } from '@core/tags';
-import clsxm from '@utils/clsxm';
-import pluralize from '@utils/pluralize';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
+import clsxm from '@/lib/utils/clsxm';
+import pluralize from '@/lib/utils/pluralize';
+import { capitalize } from '@/lib/utils/string';
+import { TagType } from '@/modules/tags';
 import { useRootStore } from '@/stores/root-store';
-import { capitalize } from '@/utils/string';
 
 const ChevronDownIcon = dynamic(() => import('@/ui/icons/ChevronDownIcon'));
 const XIcon = dynamic(() => import('@/ui/icons/XIcon'));

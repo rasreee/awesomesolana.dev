@@ -1,4 +1,4 @@
-import clsxm from '@utils/clsxm';
+import clsxm from '@/lib/utils/clsxm';
 
 function ChevronUpIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
   return (

@@ -1,4 +1,4 @@
-import invariant from '@/utils/invariant';
+import invariant from '@/lib/utils/invariant';
 
 export const isValidEmString = (s: string): boolean => {
   return Boolean(s.match(/^[+-]?([0-9]+\.?[0-9]*|\.[0-9]+)(em)?$/)?.toString());

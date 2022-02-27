@@ -5,7 +5,7 @@ const Seo = dynamic(() => import('@/ui/components/Seo'));
 
 import dynamic from 'next/dynamic';
 
-import clsxm from '@/utils/clsxm';
+import clsxm from '@/lib/utils/clsxm';
 
 function ArrowLink({
   children,

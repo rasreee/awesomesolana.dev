@@ -1,7 +1,8 @@
-import { ReposSearchStore } from '@/core/github/repos-search-store';
-import { TagTypeModalStore } from '@/core/tags/tag-type-modal-store';
-import { TagsSearchStore } from '@/core/tags/tags-search-store';
-import { useStore } from '@/mobx/store-context';
+import { useStore } from '@/lib/mobx/store-context';
+
+import { ReposSearchStore } from './repos-search-store';
+import { TagTypeModalStore } from './tag-type-modal-store';
+import { TagsSearchStore } from './tags-search-store';
 
 export class RootStore {
   tagsSearch = new TagsSearchStore();

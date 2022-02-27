@@ -17,12 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "~/*": ["./public/*"],
-      "@configs/*": ["./src/configs/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@core/*": ["./src/core/*"],
-      "@modules/*": ["./src/modules/*"],
-      "@layouts/*": ["./src/layouts/*"]
+      "~/*": ["./public/*"]
     },
     "incremental": true
   },

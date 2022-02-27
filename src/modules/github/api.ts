@@ -1,5 +1,5 @@
-import { Tag } from '@core/tags';
-import type { PaginationParams } from '@utils/pagination';
+import type { PaginationParams } from '@/lib/utils';
+import { Tag } from '@/modules/tags';
 
 import { formatGithubApiQuery } from './helpers';
 

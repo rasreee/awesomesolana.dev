@@ -1,5 +1,5 @@
+import clsxm from '@/lib/utils/clsxm';
 import { SVGIconProps } from '@/ui/icons/types';
-import clsxm from '@/utils/clsxm';
 
 function GithubIcon({ className, ...props }: SVGIconProps) {
   return (

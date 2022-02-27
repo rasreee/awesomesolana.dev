@@ -1,7 +1,9 @@
-import { isEqualTag, Tag } from '@core/tags';
-import type { PaginationParams } from '@utils/pagination';
-import { defaultPaginationParams } from '@utils/pagination';
 import memoizeOne from 'memoize-one';
+
+import type { PaginationParams } from '@/lib/utils';
+import { defaultPaginationParams } from '@/lib/utils';
+import { isEqualTag } from '@/modules/tags/is-equal-tag';
+import { Tag } from '@/modules/tags/types';
 
 import { GithubRepo, RawGitHubRepo } from './types';
 

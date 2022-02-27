@@ -1,6 +1,7 @@
-import { GithubRepo } from '@core/github';
 import dynamic from 'next/dynamic';
 import React from 'react';
+
+import { GithubRepo } from '@/modules/github';
 
 const RepoStat = dynamic(() => import('@/ui/github/RepoStat'));
 const Badge = dynamic(() => import('@/ui/components/Badge'));

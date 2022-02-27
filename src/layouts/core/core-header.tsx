@@ -1,13 +1,13 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
-import { siteConfig } from '@/configs/site-config';
+import { siteConfig } from '@/app/site-config';
 
 const ColorModeToggle = dynamic(() => import('@/ui/colorMode/ColorModeToggle'));
 const GithubIcon = dynamic(() => import('@/ui/github/GithubIcon'));
 const LogoLink = dynamic(() => import('./logo-link'));
 
-import clsxm from '@/utils/clsxm';
+import clsxm from '@/lib/utils/clsxm';
 
 export default function Header() {
   const router = useRouter();

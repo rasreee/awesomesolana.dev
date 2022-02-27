@@ -1,8 +1,8 @@
-import { Tag, tagUtils } from '@core/tags';
 import { computed, runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 
+import { Tag, tagUtils } from '@/modules/tags';
 import { useRootStore } from '@/stores/root-store';
 import { CheckBox } from '@/ui/components/CheckBox';
 

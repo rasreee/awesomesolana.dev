@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-import { siteConfig } from '@/configs/site-config';
+import { siteConfig } from '@/app/site-config';
 import { Logo } from '@/ui/components/Logo';
 import Responsive from '@/ui/responsive/Responsive';
 

@@ -1,7 +1,7 @@
-import clsxm from '@utils/clsxm';
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
+import clsxm from '@/lib/utils/clsxm';
 import { useRootStore } from '@/stores/root-store';
 import Popover from '@/ui/components/popover';
 

@@ -1,5 +1,6 @@
-import clsxm from '@utils/clsxm';
 import Image from 'next/image';
+
+import clsxm from '@/lib/utils/clsxm';
 
 import { useBreakpoints } from '../responsive/useBreakpoints';
 

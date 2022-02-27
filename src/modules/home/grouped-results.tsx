@@ -1,12 +1,12 @@
-import { searchRoute } from '@core/search';
-import pluralize from '@utils/pluralize';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 
-import { Tag, TagType, tagTypes } from '@/core/tags';
-import { useTagsSearchStore } from '@/core/tags/tags-search-store';
+import { appRoute } from '@/app/routes';
+import pluralize from '@/lib/utils/pluralize';
+import { capitalize } from '@/lib/utils/string';
+import { Tag, TagType, tagTypes } from '@/modules/tags';
+import { useTagsSearchStore } from '@/stores/tags-search-store';
 import Popover from '@/ui/components/popover';
-import { capitalize } from '@/utils/string';
 
 type GroupedHits = Array<{ type: TagType; hits: Tag[] }>;
 
@@ -24,7 +24,7 @@ const GroupedResults = observer(function GroupedResults() {
   const tagsSearchStore = useTagsSearchStore();
 
   const handleTagClick = (tag: Tag) => () => {
-    router.push(searchRoute.page({ tags: [tag] }));
+    router.push(appRoute.repos.search({ tags: [tag] }));
   };
 
   return (

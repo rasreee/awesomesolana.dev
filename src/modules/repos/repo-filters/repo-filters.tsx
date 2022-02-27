@@ -1,5 +1,6 @@
-import { tagTypes } from '@core/tags';
 import dynamic from 'next/dynamic';
+
+import { tagTypes } from '@/modules/tags';
 
 const RepoFilterTypeButton = dynamic(() => import('./repo-filter-type-button'));
 

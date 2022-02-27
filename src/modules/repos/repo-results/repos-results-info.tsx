@@ -1,7 +1,7 @@
-import { GithubRepo } from '@core/github';
-import { Tag } from '@core/tags';
-import clsxm from '@utils/clsxm';
-import pluralize from '@utils/pluralize';
+import clsxm from '@/lib/utils/clsxm';
+import pluralize from '@/lib/utils/pluralize';
+import { GithubRepo } from '@/modules/github';
+import { Tag } from '@/modules/tags';
 
 function getReposResultsInfoText({
   data,
