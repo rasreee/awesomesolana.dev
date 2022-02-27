@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 
 import { siteConfig } from '@/app/site-config';
+import PageLayout from '@/layouts/page-layout';
 import { Logo } from '@/ui/logo';
 import Responsive from '@/ui/responsive/responsive';
 
@@ -11,7 +12,7 @@ const FiltersSearchBox = dynamic(
 
 const HomePage = function HomePage() {
   return (
-    <>
+    <PageLayout title="Home">
       <div className="min-h-main mx-auto flex w-full flex-1 flex-col gap-10 px-6 pt-28 md:max-w-3xl md:pt-36">
         <div className="flex flex-col items-center justify-center gap-6">
           <Responsive
@@ -28,7 +29,7 @@ const HomePage = function HomePage() {
           <GroupedResults />
         </div>
       </div>
-    </>
+    </PageLayout>
   );
 };
 
