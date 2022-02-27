@@ -6,7 +6,7 @@ import clsxm from '@/lib/utils/clsxm';
 import { ErrorMessage } from '@/ui/error-message';
 import type { TextInputProps } from '@/ui/text-input';
 
-const XIcon = dynamic(() => import('@/ui/icons/XIcon'));
+const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 const TextInput = dynamic(() => import('@/ui/text-input'));
 
 export type SearchFormProps = {

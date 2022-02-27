@@ -1,7 +1,7 @@
 import { RefObject, useEffect, useMemo } from 'react';
 
-import { useIsMounted } from './useIsMounted';
-import { useSyncedRef } from './useSyncedRef';
+import { useIsMounted } from './use-is-mounted';
+import { useSyncedRef } from './use-synced-ref';
 
 export function useEventListener<T extends EventTarget>(
   target: RefObject<T> | T | null,

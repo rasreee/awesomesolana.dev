@@ -12,7 +12,7 @@ import { Divider } from '@/ui/divider';
 
 import RepoFiltersSearchBox from './repo-filters-search-box';
 
-const XIcon = dynamic(() => import('@/ui/icons/XIcon'));
+const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 
 const RepoFilterCheckBox = dynamic(() => import('./repo-filter-check-box'));
 

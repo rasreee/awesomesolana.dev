@@ -8,8 +8,8 @@ import { capitalize } from '@/lib/utils/string';
 import { TagType } from '@/modules/tags';
 import { useRootStore } from '@/stores/root-store';
 
-const ChevronDownIcon = dynamic(() => import('@/ui/icons/ChevronDownIcon'));
-const XIcon = dynamic(() => import('@/ui/icons/XIcon'));
+const ChevronDownIcon = dynamic(() => import('@/ui/icons/chevron-down-icon'));
+const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 
 function TagButton({
   children,

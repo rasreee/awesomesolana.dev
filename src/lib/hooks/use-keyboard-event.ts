@@ -6,8 +6,8 @@ const isBrowser =
 
 import { DependencyList, RefObject, useMemo } from 'react';
 
-import { useEventListener } from './useEventListener';
-import { useSyncedRef } from './useSyncedRef';
+import { useEventListener } from './use-event-listener';
+import { useSyncedRef } from './use-synced-ref';
 
 export type IKeyboardEventPredicate = (event: KeyboardEvent) => boolean;
 export type IKeyboardEventFilter =

@@ -1,4 +1,4 @@
-import { useKeyboardEvent } from './useKeyboardEvent';
+import { useKeyboardEvent } from './use-keyboard-event';
 
 export enum EventKeys {
   ARROW_DOWN = 'ArrowDown',
