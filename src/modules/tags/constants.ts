@@ -144,7 +144,10 @@ function toTags(args: any): Tag[] {
     ];
   } else {
     const values = args.values;
-    return values.map((name) => ({ type: args.type, name }));
+    return values.map((name) => ({
+      type: args.type,
+      name: name.toLowerCase(),
+    }));
   }
 }
 

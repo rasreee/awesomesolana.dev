@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { fontFamily } = require('tailwindcss/defaultTheme');
+const { fontFamily, colors } = require('tailwindcss/defaultTheme');
 
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
@@ -26,6 +26,10 @@ module.exports = {
           700: '#00997A',
           800: '#007D6C',
           900: '#004A45',
+        },
+        green: {
+          ...colors.green,
+          500: '#00D68F',
         },
         dark: '#192038',
         base: {
