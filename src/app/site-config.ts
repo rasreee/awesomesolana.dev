@@ -22,7 +22,7 @@ export const siteConfig = Object.freeze({
   youtube: 'https://www.youtube.com/channel/UC4TmDovH46TB4S0SM0Y4CIg',
   seo: {
     title: 'Awesome Solana',
-    titleTemplate: '%s - Awesome Solana',
+    titleTemplate: '%s · Awesome Solana',
     description:
       'Browse open-source projects built on Solana, filterable by dependencies, languages, frameworks, and/or topics.',
     siteUrl: 'https://awesomesolana.dev',

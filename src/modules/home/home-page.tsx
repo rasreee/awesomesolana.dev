@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 
+import { exploreSEO } from '@/app/seo';
 import { siteConfig } from '@/app/site-config';
 import PageLayout from '@/layouts/page-layout';
 import { Logo } from '@/ui/logo';
@@ -11,8 +12,9 @@ const FiltersSearchBox = dynamic(
 );
 
 const HomePage = function HomePage() {
+  const seo = exploreSEO();
   return (
-    <PageLayout title="Home">
+    <PageLayout seo={seo}>
       <div className="min-h-main mx-auto flex w-full flex-1 flex-col gap-10 px-6 pt-28 md:max-w-3xl md:pt-36">
         <div className="flex flex-col items-center justify-center gap-6">
           <Responsive

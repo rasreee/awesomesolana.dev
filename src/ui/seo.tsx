@@ -1,17 +1,16 @@
 import { NextSeo, NextSeoProps } from 'next-seo';
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import { siteConfig } from '@/app/site-config';
+import { getSEO } from '@/app/seo';
 
-export interface SeoProps extends Pick<NextSeoProps, 'title' | 'description'> {}
+export type SeoProps = Partial<NextSeoProps>;
 
-const Seo = ({ title, description }: SeoProps) => (
-  <NextSeo
-    title={title}
-    description={description}
-    openGraph={{ title, description }}
-    titleTemplate={siteConfig.seo.titleTemplate}
-  />
-);
+const Seo = (props: SeoProps) => {
+  const seo = useMemo(() => {
+    return getSEO(props);
+  }, [props.title, props.description, props.titleTemplate, props]);
+
+  return <NextSeo {...seo} />;
+};
 
 export default Seo;

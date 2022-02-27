@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
-import { siteConfig } from '@/app/site-config';
+import { reposSEO } from '@/app/seo';
 import PageLayout from '@/layouts/page-layout';
 import Filters from '@/modules/filters/filters';
 import { useRootStore } from '@/stores/root-store';
@@ -12,13 +12,10 @@ const ReposResults = dynamic(() => import('./repo-results/repos-results'));
 
 const ReposPage = observer(function ReposPage() {
   const { reposSearch } = useRootStore();
-
-  const title = reposSearch.query
-    ? `${reposSearch.query} · ${siteConfig.seo.title}`
-    : `Repos · ${siteConfig.seo.title}`;
+  const seo = reposSEO(reposSearch.query);
 
   return (
-    <PageLayout title={title}>
+    <PageLayout seo={seo}>
       <div className="flex flex-col gap-2">
         <ReposSearchBox />
         <Filters />
