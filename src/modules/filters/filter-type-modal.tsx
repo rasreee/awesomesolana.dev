@@ -5,9 +5,9 @@ import clsxm from '@/lib/utils/clsxm';
 import { useRootStore } from '@/stores/root-store';
 import Popover from '@/ui/popover';
 
-const RepoFilterTypeMenu = dynamic(() => import('./repo-filter-type-menu'));
+const FilterTypeMenu = dynamic(() => import('./filter-type-menu'));
 
-const RepoFilterTypeModal = observer(function RepoFilterTypeModal() {
+const FilterTypeModal = observer(function FilterTypeModal() {
   const { tagTypeModal } = useRootStore();
 
   if (!tagTypeModal.isOpen) return null;
@@ -22,11 +22,9 @@ const RepoFilterTypeModal = observer(function RepoFilterTypeModal() {
       onClose={tagTypeModal.onClose}
       isOpen={tagTypeModal.isOpen}
     >
-      {tagTypeModal.tagType && (
-        <RepoFilterTypeMenu type={tagTypeModal.tagType} />
-      )}
+      {tagTypeModal.tagType && <FilterTypeMenu type={tagTypeModal.tagType} />}
     </Popover>
   );
 });
 
-export default RepoFilterTypeModal;
+export default FilterTypeModal;

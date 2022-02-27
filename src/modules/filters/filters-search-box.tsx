@@ -6,7 +6,7 @@ import { useTagsSearchStore } from '@/stores/tags-search-store';
 
 const SearchForm = dynamic(() => import('@/modules/search/search-form'));
 
-const RepoFiltersSearchBox = observer(function RepoFiltersSearchBox() {
+const FiltersSearchBox = observer(function FiltersSearchBox() {
   const tagsSearchStore = useTagsSearchStore();
 
   const handleInputClick = () => {
@@ -25,4 +25,4 @@ const RepoFiltersSearchBox = observer(function RepoFiltersSearchBox() {
   );
 });
 
-export default RepoFiltersSearchBox;
+export default FiltersSearchBox;

@@ -39,7 +39,7 @@ function TagButton({
   );
 }
 
-const RepoFilterTypeButton = observer(function RepoFilterTypeButton({
+const FilterTypeMenuToggle = observer(function FilterTypeMenuToggle({
   type,
 }: {
   type: TagType;
@@ -88,4 +88,4 @@ const RepoFilterTypeButton = observer(function RepoFilterTypeButton({
   );
 });
 
-export default RepoFilterTypeButton;
+export default FilterTypeMenuToggle;

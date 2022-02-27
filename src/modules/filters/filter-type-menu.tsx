@@ -10,13 +10,13 @@ import { getTags, TagType, tagUtils } from '@/modules/tags';
 import { useRootStore } from '@/stores/root-store';
 import { Divider } from '@/ui/divider';
 
-import RepoFiltersSearchBox from './repo-filters-search-box';
+import FiltersSearchBox from './filters-search-box';
 
 const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 
-const RepoFilterCheckBox = dynamic(() => import('./repo-filter-check-box'));
+const RepoFilterCheckBox = dynamic(() => import('./filter-check-box'));
 
-const RepoFilterTypeMenu = observer(function RepoFilterTypeMenu({
+const FilterTypeMenu = observer(function FilterTypeMenu({
   type,
 }: {
   type: TagType;
@@ -55,7 +55,7 @@ const RepoFilterTypeMenu = observer(function RepoFilterTypeMenu({
             <XIcon />
           </button>
         </div>
-        <RepoFiltersSearchBox />
+        <FiltersSearchBox />
       </div>
       <div className="relative top-5 z-0 h-[80%] w-full">
         {selectedTags?.length ? (
@@ -85,4 +85,4 @@ const RepoFilterTypeMenu = observer(function RepoFilterTypeMenu({
   );
 });
 
-export default RepoFilterTypeMenu;
+export default FilterTypeMenu;
