@@ -46,14 +46,12 @@ function SearchForm({
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-
     onSubmit(textInputProps.value);
   };
 
   const [valueToSubmit] = useDebounce(textInputProps.value, 200);
 
   useEffect(() => {
-    console.log('SearchForm.valueToSubmit: ', valueToSubmit);
     onSubmit(valueToSubmit);
   }, [valueToSubmit]);
 
