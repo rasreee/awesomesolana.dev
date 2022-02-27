@@ -1,9 +1,11 @@
 type Dict = Record<string, string | number>;
 
+export type GroupBy<T extends Dict, Key extends keyof T> = Record<T[Key], T[]>;
+
 export const groupBy = <T extends Dict = Dict, Key extends keyof T = keyof T>(
   list: T[],
   key: Key,
-): Record<T[Key], T[]> => {
+): GroupBy<T, Key> => {
   const props = getPossibleValuesSet(list, key);
 
   const result = {} as Record<T[Key], T[]>;

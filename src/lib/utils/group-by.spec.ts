@@ -1,3 +1,5 @@
+import { allTags, tagNames } from '@/modules/tags';
+
 import { getPossibleValuesSet, groupBy } from './group-by';
 
 /**
@@ -44,5 +46,17 @@ describe('groupBy', () => {
     ]);
 
     expect(result['b']).toEqual([{ id: 'b', name: '2' }]);
+  });
+
+  it('should group tags', () => {
+    const result = groupBy(allTags, 'type');
+
+    expect(Object.keys(result).length).toBe(4);
+    expect(result.language.length).toBe(tagNames.language.length);
+    expect(result.topic.length).toBe(tagNames.topic.length);
+    expect(result.framework.length).toBe(tagNames.framework.length);
+    expect(result.dependency.length).toBe(
+      tagNames.dependency.npm.length + tagNames.dependency.cargo.length,
+    );
   });
 });

@@ -3,29 +3,17 @@ import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 
 import { appRoute } from '@/app/routes';
+import { groupBy } from '@/lib/utils/group-by';
 import pluralize from '@/lib/utils/pluralize';
 import { capitalize } from '@/lib/utils/string';
-import { Tag, TagType, tagTypes } from '@/modules/tags';
+import { Tag, TagType } from '@/modules/tags';
 import { useTagsSearchStore } from '@/modules/tags/tags-search-store';
 import Popover from '@/ui/popover';
-
-type TagGroup = { type: TagType; tags: Tag[] };
-
-type GroupedHits = Array<TagGroup>;
-
-function groupByTag(list: Tag[]): GroupedHits {
-  const groups = tagTypes.map((type) => ({
-    type,
-    tags: list.filter((tag) => tag.type === type),
-  }));
-
-  return groups;
-}
 
 const GroupedResults = observer(function GroupedResults() {
   const tagsSearchStore = useTagsSearchStore();
 
-  const tagGroups = computed(() => groupByTag(tagsSearchStore.hits)).get();
+  const tagGroups = computed(() => groupBy(tagsSearchStore.hits, 'type')).get();
 
   return (
     <Popover
@@ -33,17 +21,21 @@ const GroupedResults = observer(function GroupedResults() {
       isOpen={!!tagsSearchStore.hits.length}
       onClose={tagsSearchStore.onReset}
     >
-      {tagGroups.map(
-        ({ type, tags }) =>
+      {Object.entries(tagGroups).map(
+        ([type, tags]) =>
           tags.length > 0 && (
-            <GroupTags key={`group-tags__${type}`} type={type} tags={tags} />
+            <GroupTags
+              key={`group-tags__${type}`}
+              type={type as TagType}
+              tags={tags}
+            />
           ),
       )}
     </Popover>
   );
 });
 
-const GroupTags = ({ type, tags }: TagGroup) => {
+const GroupTags = ({ type, tags }: { type: TagType; tags: Tag[] }) => {
   const router = useRouter();
   const tagsSearchStore = useTagsSearchStore();
 
