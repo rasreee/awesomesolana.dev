@@ -35,7 +35,9 @@ const GroupedResults = observer(function GroupedResults() {
     >
       {tagGroups.map(
         ({ type, tags }) =>
-          tags.length > 0 && <GroupTags key={type} type={type} tags={tags} />,
+          tags.length > 0 && (
+            <GroupTags key={`group-tags__${type}`} type={type} tags={tags} />
+          ),
       )}
     </Popover>
   );
@@ -57,7 +59,10 @@ const GroupTags = ({ type, tags }: TagGroup) => {
       </span>
       <ul className="max-h-[16rem] overflow-y-auto">
         {tags.map((tag) => (
-          <li className="w-full" key={`${tag.type}_${tag.name}`}>
+          <li
+            className="w-full"
+            key={`group-tags-item__${tag.type}-${tag.name}`}
+          >
             <button
               className="hover:bg-surface-1 w-full rounded-md py-3 px-3 text-left"
               onClick={handleSelect(tag)}
