@@ -2,7 +2,6 @@ import '@/styles/globals.css';
 import '@/styles/colors.css';
 
 import { getLayout } from '@layouts/get-layout';
-import type { LayoutProps } from '@layouts/types';
 import fetcher from '@utils/fetcher';
 import getSeo from '@utils/get-seo';
 import { AppProps } from 'next/app';
@@ -11,6 +10,7 @@ import { ThemeProvider as NextThemeProvider } from 'next-themes';
 import { useState } from 'react';
 import { SWRConfig } from 'swr';
 
+import type { LayoutProps } from '@/layouts/core/types';
 import { StoreProvider } from '@/mobx/store-context';
 import { RootStore } from '@/stores/root-store';
 

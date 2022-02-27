@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-const Layout = dynamic(() => import('@layouts/Layout'));
+const Layout = dynamic(() => import('./core/core-layout'));
 
 const PageLayout = ({
   children,

@@ -5,7 +5,7 @@ const Seo = dynamic(() => import('@/ui/components/Seo'));
 
 import dynamic from 'next/dynamic';
 
-import Header from './Header';
+import Header from './core-header';
 import type { LayoutProps } from './types';
 
 const Layout: React.FC<LayoutProps> = ({

@@ -5,7 +5,7 @@ import { siteConfig } from '@/configs/site-config';
 
 const ColorModeToggle = dynamic(() => import('@/ui/colorMode/ColorModeToggle'));
 const GithubIcon = dynamic(() => import('@/ui/github/GithubIcon'));
-const LogoLink = dynamic(() => import('./LogoLink'));
+const LogoLink = dynamic(() => import('./logo-link'));
 
 import clsxm from '@/utils/clsxm';
 
