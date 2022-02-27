@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react-lite';
+import dynamic from 'next/dynamic';
 
 import { allTags } from '@/core/tags';
 import { useTagsSearchStore } from '@/core/tags/tags-search-store';
 
-import SearchForm from './SearchForm';
+const SearchForm = dynamic(() => import('./SearchForm'));
 
 const TagsSearchBox = observer(function TagsSearchBox() {
   const tagsSearchStore = useTagsSearchStore();
