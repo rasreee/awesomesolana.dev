@@ -37,7 +37,7 @@ export const Logo = ({ size = 'sm' }: { size?: 'sm' | 'md' | 'lg' }) => {
           objectFit="scale-down"
         />
       </div>
-      olana.DEV
+      olana{size !== 'sm' ? '.DEV' : ''}
     </div>
   );
 };
