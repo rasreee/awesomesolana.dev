@@ -10,15 +10,13 @@ export type ReposFeedProps = {
 
 function ReposFeed({ data }: ReposFeedProps) {
   return (
-    <div>
-      <ul>
-        {data.items.map((hit) => (
-          <li key={hit.id}>
-            <RepoFeedItem {...hit} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className="flex flex-col divide-y divide-base-300 dark:divide-base-700">
+      {data.items.map((hit) => (
+        <li key={hit.id}>
+          <RepoFeedItem {...hit} />
+        </li>
+      ))}
+    </ul>
   );
 }
 
