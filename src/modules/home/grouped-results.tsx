@@ -25,6 +25,7 @@ const GroupedResults = observer(function GroupedResults() {
 
   const handleTagClick = (tag: Tag) => () => {
     router.push(appRoute.repos.search({ tags: [tag] }));
+    tagsSearchStore.onReset();
   };
 
   return (

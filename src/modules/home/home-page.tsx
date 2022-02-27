@@ -13,6 +13,7 @@ const FiltersSearchBox = dynamic(
 
 const HomePage = function HomePage() {
   const seo = exploreSEO();
+
   return (
     <PageLayout seo={seo}>
       <div className="min-h-main mx-auto flex w-full flex-1 flex-col gap-10 px-6 pt-28 md:max-w-3xl md:pt-36">
