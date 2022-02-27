@@ -1,21 +1,21 @@
-import clsxm from '@utils/clsxm';
-
-import { HideOnMobile, Logo, OnlyMobile } from '@/ui/components';
+import { Logo, ResponsiveRender } from '@/ui/components';
 import { UnstyledLink } from '@/ui/links';
 
 function LogoLink() {
   return (
     <>
-      <HideOnMobile>
-        <UnstyledLink href="/">
-          <Logo size="md" />
-        </UnstyledLink>
-      </HideOnMobile>
-      <OnlyMobile>
-        <UnstyledLink href="/" className={clsxm()}>
-          <Logo size="sm" />
-        </UnstyledLink>
-      </OnlyMobile>
+      <ResponsiveRender
+        mobile={
+          <UnstyledLink href="/">
+            <Logo size="sm" />
+          </UnstyledLink>
+        }
+        aboveMobile={
+          <UnstyledLink href="/">
+            <Logo size="md" />
+          </UnstyledLink>
+        }
+      />
     </>
   );
 }
