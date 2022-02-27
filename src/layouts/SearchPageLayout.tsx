@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import Layout from '@/layouts/Layout';
 import { StoreProvider } from '@/mobx/storeContext';
-import { SearchStore } from '@/stores/root-store';
+import { RootStore } from '@/stores/root-store';
 import { Seo } from '@/ui/components';
 
 const SearchPageLayout = ({
@@ -16,7 +16,7 @@ const SearchPageLayout = ({
 }) => {
   const router = useRouter();
 
-  const [store] = useState(() => new SearchStore());
+  const [store] = useState(() => new RootStore());
 
   useEffect(() => {
     reaction(

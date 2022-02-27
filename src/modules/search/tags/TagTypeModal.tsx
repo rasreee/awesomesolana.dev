@@ -1,13 +1,13 @@
 import clsxm from '@utils/clsxm';
 import { observer } from 'mobx-react-lite';
 
-import { useSearchStore } from '@/stores/root-store';
+import { useRootStore } from '@/stores/root-store';
 import { Popover } from '@/ui/components';
 
 import { TagTypeMenu } from './TagTypeMenu';
 
 export const TagTypeModal = observer(function TagTypeModal() {
-  const searchStore = useSearchStore();
+  const searchStore = useRootStore();
 
   if (!searchStore.tagTypeModal) return null;
 

@@ -3,7 +3,7 @@ import { computed, runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 
-import { useSearchStore } from '@/stores/root-store';
+import { useRootStore } from '@/stores/root-store';
 import { CheckBox } from '@/ui/components';
 
 export const TagTypeFilterOption = observer(function TagTypeFilterOption({
@@ -12,7 +12,7 @@ export const TagTypeFilterOption = observer(function TagTypeFilterOption({
 }: React.HTMLAttributes<HTMLLIElement> & {
   tag: Tag;
 }) {
-  const store = useSearchStore();
+  const store = useRootStore();
   const checked = computed(() =>
     tagUtils.list(store.reposSearch.tags).has(tag),
   ).get();

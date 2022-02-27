@@ -7,8 +7,9 @@ import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import useSWR from 'swr';
 
-import { useSearchStore } from '@/stores/root-store';
-import { Divider, TagsSearchBox } from '@/ui/components';
+import { useRootStore } from '@/stores/root-store';
+import { Divider } from '@/ui/components';
+import TagsSearchBox from '@/ui/search/TagsSearchBox';
 
 import { TagTypeFilterOption } from './TagTypeFilterOption';
 
@@ -17,7 +18,7 @@ export const TagTypeMenu = observer(function TagTypeMenu({
 }: {
   type: TagType;
 }) {
-  const store = useSearchStore();
+  const store = useRootStore();
 
   const { data: tagsForType } = useSWR(`tagsForType/${type}`, () =>
     getTags(type),

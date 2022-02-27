@@ -2,10 +2,9 @@ import clsxm from '@utils/clsxm';
 import { FormEventHandler, useState } from 'react';
 
 import { RequestState } from '@/stores/request-store';
-import { ErrorMessage, TextInputProps } from '@/ui/components';
-import { XIcon } from '@/ui/icons';
-
-import { SearchField } from './SearchField';
+import { ErrorMessage } from '@/ui/components/ErrorMessage';
+import { TextInput, TextInputProps } from '@/ui/components/TextInput';
+import { XIcon } from '@/ui/icons/XIcon';
 
 export type SearchFormProps = {
   request: RequestState;
@@ -14,7 +13,23 @@ export type SearchFormProps = {
   onSubmit: (query: string) => any;
 };
 
-export function SearchForm({
+function SearchField({
+  placeholder = 'Search for any project, dependency, or topic',
+  ...props
+}: TextInputProps) {
+  return (
+    <>
+      <TextInput
+        {...props}
+        name="search"
+        className="input-focus-unset px-2"
+        placeholder={placeholder}
+      />
+    </>
+  );
+}
+
+function SearchForm({
   textInputProps,
   request,
   onReset,
@@ -51,3 +66,5 @@ export function SearchForm({
     </form>
   );
 }
+
+export default SearchForm;

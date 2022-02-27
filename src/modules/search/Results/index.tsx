@@ -1,9 +1,9 @@
-import { useSearchStore } from '@/stores/root-store';
+import { useRootStore } from '@/stores/root-store';
 
 import { GithubReposFeed, GithubReposProps } from './GithubReposFeed';
 
 export function Results() {
-  const store = useSearchStore();
+  const store = useRootStore();
   const shouldSearch = Boolean(
     store.reposSearch.tags.length || store.reposSearch.query.trim(),
   );

@@ -1,11 +1,12 @@
 import { observer } from 'mobx-react-lite';
 
 import { allTags } from '@/core/search';
-import { useSearchStore } from '@/stores/root-store';
-import { SearchForm } from '@/ui/components';
+import { useRootStore } from '@/stores/root-store';
 
-export const TagsSearchBox = observer(function TagsSearchBox() {
-  const store = useSearchStore();
+import SearchForm from './SearchForm';
+
+const TagsSearchBox = observer(function TagsSearchBox() {
+  const store = useRootStore();
 
   const handleInputClick = () => {
     store.tagsSearch.setHits(allTags.slice(0, 10));
@@ -22,3 +23,5 @@ export const TagsSearchBox = observer(function TagsSearchBox() {
     />
   );
 });
+
+export default TagsSearchBox;

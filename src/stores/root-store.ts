@@ -3,12 +3,12 @@ import { action, makeAutoObservable } from 'mobx';
 import { TagType } from '@/core/search';
 import { useStore } from '@/mobx/storeContext';
 
-import { ReposSearchStore } from './repos-search-store';
-import { TagsSearchStore } from './tags-search-store';
+import { ReposRootStore } from './repos-search-store';
+import { TagsRootStore } from './tags-search-store';
 
-export class SearchStore {
-  tagsSearch = new TagsSearchStore();
-  reposSearch = new ReposSearchStore();
+export class RootStore {
+  tagsSearch = new TagsRootStore();
+  reposSearch = new ReposRootStore();
 
   tagTypeModal: TagType | null = null;
 
@@ -45,11 +45,11 @@ export class SearchStore {
         closeTagTypeModal: action.bound,
         openTagTypeModal: action.bound,
       },
-      { name: 'SearchStore' },
+      { name: 'RootStore' },
     );
   }
 }
 
-export function useSearchStore() {
-  return useStore<SearchStore>();
+export function useRootStore() {
+  return useStore<RootStore>();
 }

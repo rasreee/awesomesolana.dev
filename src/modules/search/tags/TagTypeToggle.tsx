@@ -4,7 +4,7 @@ import pluralize from '@utils/pluralize';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 
-import { useSearchStore } from '@/stores/root-store';
+import { useRootStore } from '@/stores/root-store';
 import { ChevronDownIcon, XIcon } from '@/ui/icons';
 import { capitalize } from '@/utils/string';
 
@@ -15,7 +15,7 @@ export const TagTypeToggle = observer(function TagTypeToggle({
 }: {
   type: TagType;
 }) {
-  const searchStore = useSearchStore();
+  const searchStore = useRootStore();
 
   const selectedCount = computed(
     () =>

@@ -10,7 +10,7 @@ export interface TagsSearchState {
   query: string;
 }
 
-export interface ITagsSearchStore extends TagsSearchState {
+export interface ITagsRootStore extends TagsSearchState {
   setHits: (hits: Tag[]) => void;
   onSubmit: (query: string) => any;
   onReset: () => void;
@@ -18,7 +18,7 @@ export interface ITagsSearchStore extends TagsSearchState {
   getTextInputProps: (props?: Partial<TextInputProps>) => TextInputProps;
 }
 
-export class TagsSearchStore implements ITagsSearchStore {
+export class TagsRootStore implements ITagsRootStore {
   hits: Tag[] = [];
   query = '';
 
@@ -64,7 +64,7 @@ export class TagsSearchStore implements ITagsSearchStore {
     makeAutoObservable(
       this,
       { onChange: action.bound, onReset: action.bound },
-      { name: 'TagsSearchStore' },
+      { name: 'TagsRootStore' },
     );
   }
 }

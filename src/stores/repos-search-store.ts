@@ -19,7 +19,7 @@ export interface ReposSearchState {
   query: string;
 }
 
-export interface IReposSearchStore extends ReposSearchState {
+export interface IReposRootStore extends ReposSearchState {
   setHits: (hits: GithubRepo[]) => void;
   onSubmit: (query: string) => Promise<any>;
   request: RequestStore;
@@ -39,7 +39,7 @@ async function searchGithubRepos(
   return res.json();
 }
 
-export class ReposSearchStore implements IReposSearchStore {
+export class ReposRootStore implements IReposRootStore {
   hits: GithubRepo[] = [];
   tags: Tag[] = [];
   query = '';
@@ -108,7 +108,7 @@ export class ReposSearchStore implements IReposSearchStore {
     makeAutoObservable(
       this,
       { onChange: action.bound },
-      { name: 'ReposSearchStore' },
+      { name: 'ReposRootStore' },
     );
   }
 }

@@ -1,10 +1,11 @@
 import { observer } from 'mobx-react-lite';
 
 import { siteConfig } from '@/configs/site-config';
-import { Logo, TagsSearchBox } from '@/ui/components';
-import { Responsive } from '@/ui/responsive';
+import { Logo } from '@/ui/components/Logo';
+import { Responsive } from '@/ui/responsive/Responsive';
+import TagsSearchBox from '@/ui/search/TagsSearchBox';
 
-import { GroupedResults } from './GroupedResults';
+import GroupedResults from './GroupedResults';
 
 export const HomePage = observer(function HomePage() {
   return (

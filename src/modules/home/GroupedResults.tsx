@@ -3,8 +3,8 @@ import pluralize from '@utils/pluralize';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 
-import { useSearchStore } from '@/stores/root-store';
-import { Popover } from '@/ui/components';
+import { useRootStore } from '@/stores/root-store';
+import Popover from '@/ui/components/Popover';
 import { capitalize } from '@/utils/string';
 
 type GroupedHits = Array<{ type: TagType; hits: Tag[] }>;
@@ -18,9 +18,9 @@ function groupByTag(list: Tag[]): GroupedHits {
   return groups;
 }
 
-export const GroupedResults = observer(function GroupedResults() {
+const GroupedResults = observer(function GroupedResults() {
   const router = useRouter();
-  const { tagsSearch } = useSearchStore();
+  const { tagsSearch } = useRootStore();
 
   const handleTagClick = (tag: Tag) => () => {
     router.push(searchRoute.page({ tags: [tag] }));
@@ -57,3 +57,5 @@ export const GroupedResults = observer(function GroupedResults() {
     </Popover>
   );
 });
+
+export default GroupedResults;
