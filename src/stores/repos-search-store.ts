@@ -104,6 +104,6 @@ export class ReposSearchStore implements IReposSearchStore {
   };
 
   clearTags = (type: TagType) => {
-    this.tags = this.tags.filter((tag) => tag.type === type);
+    this.tags = this.tags.filter((tag) => tag.type !== type);
   };
 }

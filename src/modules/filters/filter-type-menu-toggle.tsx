@@ -52,10 +52,6 @@ const FilterTypeMenuToggle = observer(function FilterTypeMenuToggle({
       searchStore.reposSearch.tags.filter((tag) => tag.type === type).length,
   ).get();
 
-  const handleRemove = () => {
-    searchStore.reposSearch.clearTags(type);
-  };
-
   return (
     <TagButton
       className={clsxm(
@@ -76,7 +72,7 @@ const FilterTypeMenuToggle = observer(function FilterTypeMenuToggle({
         )}
       </div>
       {selectedCount ? (
-        <button onClick={handleRemove}>
+        <button onClick={() => searchStore.reposSearch.clearTags(type)}>
           <XIcon className="h-4 w-4" />
         </button>
       ) : (
