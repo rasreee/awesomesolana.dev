@@ -1,9 +1,12 @@
+import dynamic from 'next/dynamic';
+
 import { ReposSearchBox } from './ReposSearchBox';
-import { Results } from './Results';
-import { TagTypeModal } from './tags/TagTypeModal';
 import { TagTypesControls } from './tags/TagTypesControls';
 
-export const SearchPage = function SearchPage() {
+const Results = dynamic(() => import('./Results'));
+const TagTypeModal = dynamic(() => import('./tags/TagTypeModal'));
+
+const SearchPage = function SearchPage() {
   return (
     <>
       <div className="flex flex-col gap-2">
@@ -15,3 +18,5 @@ export const SearchPage = function SearchPage() {
     </>
   );
 };
+
+export default SearchPage;

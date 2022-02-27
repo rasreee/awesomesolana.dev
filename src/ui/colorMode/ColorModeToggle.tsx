@@ -1,7 +1,7 @@
 import clsxm from '@utils/clsxm';
 import React, { CSSProperties } from 'react';
 
-import { SVGIconProps } from '@/ui/icons';
+import { SVGIconProps } from '@/ui/icons/types';
 
 import { useColorMode } from './useColorMode';
 

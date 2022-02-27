@@ -1,7 +1,11 @@
 import Head from 'next/head';
 import * as React from 'react';
 
-import { Seo, SeoProps } from '@/ui/components';
+import type { SeoProps } from '@/ui/components/Seo';
+
+const Seo = dynamic(() => import('@/ui/components/Seo'));
+
+import dynamic from 'next/dynamic';
 
 import Header from './Header';
 

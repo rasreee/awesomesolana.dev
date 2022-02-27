@@ -1,8 +1,12 @@
+import dynamic from 'next/dynamic';
+
 import { useRootStore } from '@/stores/root-store';
 
-import { GithubReposFeed, GithubReposProps } from './GithubReposFeed';
+import type { GithubReposProps } from './GithubReposFeed';
 
-export function Results() {
+const GithubReposFeed = dynamic(() => import('./GithubReposFeed'));
+
+function Results() {
   const store = useRootStore();
   const shouldSearch = Boolean(
     store.reposSearch.tags.length || store.reposSearch.query.trim(),
@@ -20,3 +24,5 @@ export function Results() {
 
   return <GithubReposFeed {...args} />;
 }
+
+export default Results;

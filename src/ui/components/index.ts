@@ -1,5 +1,4 @@
-export * from './Badge';
-export * from './Button';
+export { default as Badge } from './Badge';
 export * from './CheckBox';
 export * from './Divider';
 export * from './ErrorMessage';

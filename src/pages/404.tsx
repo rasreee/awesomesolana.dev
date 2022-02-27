@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import type { AnchorHTMLAttributes } from 'react';
 
-import { Seo } from '@/ui/components';
+const Seo = dynamic(() => import('@/ui/components/Seo'));
+
+import dynamic from 'next/dynamic';
+
 import clsxm from '@/utils/clsxm';
 
 function ArrowLink({

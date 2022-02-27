@@ -10,7 +10,7 @@ export type TextInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   autoFocused?: boolean;
 };
 
-export function TextInput({
+function TextInput({
   placeholder,
   value,
   className,
@@ -44,3 +44,5 @@ export function TextInput({
     />
   );
 }
+
+export default TextInput;

@@ -1,11 +1,13 @@
 import { reaction } from 'mobx';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import Layout from '@/layouts/Layout';
 import { StoreProvider } from '@/mobx/storeContext';
 import { RootStore } from '@/stores/root-store';
-import { Seo } from '@/ui/components/Seo';
+
+const Seo = dynamic(() => import('@/ui/components/Seo'));
+const Layout = dynamic(() => import('@layouts/Layout'));
 
 const HomePageLayout = ({
   children,

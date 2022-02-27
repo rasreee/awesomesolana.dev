@@ -9,7 +9,7 @@ import {
   RawGithubReposResponse,
 } from '@/core/github';
 import { Tag, TagType, tagUtils } from '@/core/search';
-import { TextInputProps } from '@/ui/components';
+import type { TextInputProps } from '@/ui/components';
 
 import { createRequestStore, RequestStore } from './request-store';
 

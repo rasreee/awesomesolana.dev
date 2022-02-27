@@ -1,10 +1,13 @@
 import clsxm from '@utils/clsxm';
+import dynamic from 'next/dynamic';
 import { FormEventHandler, useState } from 'react';
 
 import { RequestState } from '@/stores/request-store';
 import { ErrorMessage } from '@/ui/components/ErrorMessage';
-import { TextInput, TextInputProps } from '@/ui/components/TextInput';
+import type { TextInputProps } from '@/ui/components/TextInput';
 import { XIcon } from '@/ui/icons/XIcon';
+
+const TextInput = dynamic(() => import('@/ui/components/TextInput'));
 
 export type SearchFormProps = {
   request: RequestState;

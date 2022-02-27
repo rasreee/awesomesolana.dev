@@ -3,7 +3,7 @@ import { Tag } from '@core/search';
 import type { PaginationParams } from '@utils/pagination';
 import React from 'react';
 
-import { ErrorMessage } from '@/ui/components';
+import { ErrorMessage } from '@/ui/components/ErrorMessage';
 
 import { RepoItem } from './RepoItem';
 import { ResultsInfo } from './ResultsInfo';
@@ -18,7 +18,7 @@ export type GithubReposProps = {
   params?: GithubApiParams;
 };
 
-export function GithubReposFeed({ route, params }: GithubReposProps) {
+function GithubReposFeed({ route, params }: GithubReposProps) {
   const { data, error } = useGithubReposApi(route, params);
 
   if (error) return <ErrorMessage>{error?.message}</ErrorMessage>;
@@ -38,3 +38,5 @@ export function GithubReposFeed({ route, params }: GithubReposProps) {
     </div>
   );
 }
+
+export default GithubReposFeed;

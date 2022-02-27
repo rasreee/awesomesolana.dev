@@ -1,7 +1,7 @@
 import { action, computed, makeAutoObservable } from 'mobx';
 
 import { getTagSuggestions, Tag } from '@/core/search';
-import { TextInputProps } from '@/ui/components';
+import type { TextInputProps } from '@/ui/components/TextInput';
 
 import { createRequestStore, RequestStore } from './request-store';
 

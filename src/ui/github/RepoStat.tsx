@@ -21,7 +21,7 @@ const iconMapping: Record<AllowedType, typeof StarIcon> = {
   pulls: GitPullRequestIcon,
 };
 
-export function RepoStat({ type, count, className, ...props }: RepoStatProps) {
+function RepoStat({ type, count, className, ...props }: RepoStatProps) {
   if (count === undefined || count === null) {
     return null;
   }
@@ -39,3 +39,5 @@ export function RepoStat({ type, count, className, ...props }: RepoStatProps) {
     </div>
   );
 }
+
+export default RepoStat;

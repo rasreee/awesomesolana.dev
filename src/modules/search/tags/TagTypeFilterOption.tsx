@@ -4,9 +4,9 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 
 import { useRootStore } from '@/stores/root-store';
-import { CheckBox } from '@/ui/components';
+import { CheckBox } from '@/ui/components/CheckBox';
 
-export const TagTypeFilterOption = observer(function TagTypeFilterOption({
+const TagTypeFilterOption = observer(function TagTypeFilterOption({
   tag,
   ...props
 }: React.HTMLAttributes<HTMLLIElement> & {
@@ -35,3 +35,5 @@ export const TagTypeFilterOption = observer(function TagTypeFilterOption({
     </li>
   );
 });
+
+export default TagTypeFilterOption;

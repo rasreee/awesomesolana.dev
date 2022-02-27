@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { Logo } from '@/ui/components';
-import { Responsive } from '@/ui/responsive';
+import { Logo } from '@/ui/components/Logo';
+import Responsive from '@/ui/responsive/Responsive';
 
 function LogoLink() {
   return (

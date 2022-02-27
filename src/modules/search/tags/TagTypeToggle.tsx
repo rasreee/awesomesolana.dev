@@ -3,14 +3,17 @@ import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
+import dynamic from 'next/dynamic';
 
 import { useRootStore } from '@/stores/root-store';
-import { ChevronDownIcon, XIcon } from '@/ui/icons';
+import { XIcon } from '@/ui/icons/XIcon';
 import { capitalize } from '@/utils/string';
 
 import { TagButton } from './TagButton';
 
-export const TagTypeToggle = observer(function TagTypeToggle({
+const ChevronDownIcon = dynamic(() => import('@/ui/icons/ChevronDownIcon'));
+
+const TagTypeToggle = observer(function TagTypeToggle({
   type,
 }: {
   type: TagType;
@@ -58,3 +61,5 @@ export const TagTypeToggle = observer(function TagTypeToggle({
     </TagButton>
   );
 });
+
+export default TagTypeToggle;

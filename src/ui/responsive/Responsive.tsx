@@ -1,6 +1,6 @@
 import { Component, ComponentType, FunctionComponent } from 'react';
 
-import { useWindowDimensions } from '../hooks';
+import { useWindowDimensions } from '../hooks/useWindowDimensions';
 import { useBreakpoints } from './useBreakpoints';
 
 function isFunctionComponent<P extends {}>(o: any): o is FunctionComponent<P> {
@@ -31,7 +31,7 @@ function asJSXElement<P extends {}>(
 
 type ComponentOrElement<P extends {} = {}> = ComponentType<P> | JSX.Element;
 
-export function Responsive<P extends {} = {}>({
+function Responsive<P extends {} = {}>({
   sm,
   aboveSm,
   aboveMd,
@@ -67,3 +67,5 @@ export function Responsive<P extends {} = {}>({
       : 'Could not render Responsive due to breakpoints not being hydrated',
   );
 }
+
+export default Responsive;

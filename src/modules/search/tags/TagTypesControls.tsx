@@ -1,6 +1,7 @@
 import { tagTypes } from '@core/search';
+import dynamic from 'next/dynamic';
 
-import { TagTypeToggle } from './TagTypeToggle';
+const TagTypeToggle = dynamic(() => import('./TagTypeToggle'));
 
 export function TagTypesControls() {
   return (

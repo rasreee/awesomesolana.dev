@@ -1,23 +1,20 @@
 import { getTags, TagType, tagUtils } from '@core/search';
-import { XIcon } from '@primer/octicons-react';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
 import { capitalize } from '@utils/string';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
+import dynamic from 'next/dynamic';
 import useSWR from 'swr';
 
 import { useRootStore } from '@/stores/root-store';
-import { Divider } from '@/ui/components';
+import { Divider } from '@/ui/components/Divider';
+import { XIcon } from '@/ui/icons/XIcon';
 import TagsSearchBox from '@/ui/search/TagsSearchBox';
 
-import { TagTypeFilterOption } from './TagTypeFilterOption';
+const TagTypeFilterOption = dynamic(() => import('./TagTypeFilterOption'));
 
-export const TagTypeMenu = observer(function TagTypeMenu({
-  type,
-}: {
-  type: TagType;
-}) {
+const TagTypeMenu = observer(function TagTypeMenu({ type }: { type: TagType }) {
   const store = useRootStore();
 
   const { data: tagsForType } = useSWR(`tagsForType/${type}`, () =>
@@ -86,3 +83,5 @@ export const TagTypeMenu = observer(function TagTypeMenu({
     </>
   );
 });
+
+export default TagTypeMenu;

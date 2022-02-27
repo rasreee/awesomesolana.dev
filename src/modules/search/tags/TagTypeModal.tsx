@@ -1,12 +1,13 @@
 import clsxm from '@utils/clsxm';
 import { observer } from 'mobx-react-lite';
+import dynamic from 'next/dynamic';
 
 import { useRootStore } from '@/stores/root-store';
-import { Popover } from '@/ui/components';
+import Popover from '@/ui/components/Popover';
 
-import { TagTypeMenu } from './TagTypeMenu';
+const TagTypeMenu = dynamic(() => import('./TagTypeMenu'));
 
-export const TagTypeModal = observer(function TagTypeModal() {
+const TagTypeModal = observer(function TagTypeModal() {
   const searchStore = useRootStore();
 
   if (!searchStore.tagTypeModal) return null;
@@ -25,3 +26,5 @@ export const TagTypeModal = observer(function TagTypeModal() {
     </Popover>
   );
 });
+
+export default TagTypeModal;
