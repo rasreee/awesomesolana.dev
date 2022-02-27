@@ -13,7 +13,7 @@ function getReposResultsInfoText({
   totalCount: number;
 }): string {
   if (!params?.tags?.length)
-    return `${totalCount} ${pluralize('result', count)} found`;
+    return `Showing ${count} of ${totalCount} ${pluralize('result', count)}`;
 
   const result = count
     ? `${totalCount} ${pluralize('result', count)} found for:`
@@ -32,12 +32,16 @@ export function ReposResultsInfo({
   params?: GithubApiParams | undefined;
 }) {
   if (!data) return <div className="py-2 px-1">Loading...</div>;
+  const remainingTagsCount = params?.tags
+    ? params?.tags.length - MAX_TAGS_SHOWN
+    : 0;
+  const shouldShowTags = params?.tags && remainingTagsCount > 0;
 
   return (
     <div
       className={clsxm(
         'px-1 py-3',
-        'flex flex-col gap-2 sm:flex-row sm:items-center',
+        'flex flex-col justify-center gap-2 sm:flex-row sm:items-center sm:justify-start',
       )}
     >
       <span className="text-body text-sm leading-tight sm:text-base">
@@ -47,37 +51,39 @@ export function ReposResultsInfo({
           params,
         })}
       </span>
-      <div className="flex w-full items-center justify-between">
-        <span className="flex max-w-[60%] items-center gap-1.5">
-          {params?.tags?.slice(0, MAX_TAGS_SHOWN).map((filter) => (
-            <Badge
-              key={filter.type + '_' + filter.name}
+      {shouldShowTags && (
+        <div className="flex w-full items-center justify-between">
+          <span className="flex max-w-[60%] items-center gap-1.5">
+            {params?.tags?.slice(0, MAX_TAGS_SHOWN).map((filter) => (
+              <Badge
+                key={filter.type + '_' + filter.name}
+                className={clsxm(
+                  'text border border-green-500 bg-green-500 bg-opacity-10 text-green-500',
+                  'h-5.5 rounded-full px-2.5 py-1',
+                  'max-h-[24px] max-w-[140px]',
+                )}
+              >
+                <span className="truncate text-sm leading-none">
+                  {filter.name}
+                </span>
+              </Badge>
+            ))}
+          </span>
+          {shouldShowTags && (
+            <button
               className={clsxm(
-                'text border border-green-500 bg-green-500 bg-opacity-10 text-green-500',
-                'h-5.5 rounded-full px-2.5 py-1',
-                'max-h-[24px] max-w-[140px]',
+                'text-[15px] leading-none',
+                'flex h-6 min-w-[64px] items-center justify-center p-2',
+                'bg-transparent font-medium',
+                'text opacity-80 hover:opacity-90 active:opacity-100',
               )}
+              onClick={() => console.log('')}
             >
-              <span className="truncate text-sm leading-none">
-                {filter.name}
-              </span>
-            </Badge>
-          ))}
-        </span>
-        {params?.tags && params.tags.length - MAX_TAGS_SHOWN > 0 && (
-          <button
-            className={clsxm(
-              'text-[15px] leading-none',
-              'flex h-6 min-w-[64px] items-center justify-center p-2',
-              'bg-transparent font-medium',
-              'text opacity-80 hover:opacity-90 active:opacity-100',
-            )}
-            onClick={() => console.log('')}
-          >
-            + {params.tags.length - MAX_TAGS_SHOWN} more...
-          </button>
-        )}
-      </div>
+              + {remainingTagsCount} more...
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -33,10 +33,10 @@ const ReposResults = observer(function ReposResults() {
   if (!data) return <ul>...</ul>;
 
   return (
-    <div>
+    <>
       <ReposResultsInfo data={data} params={request.params} />
       <ReposFeed data={data} />
-    </div>
+    </>
   );
 });
 
