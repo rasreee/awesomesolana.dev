@@ -56,6 +56,7 @@ export class TagsSearchStore implements ITagsSearchStore {
 
   onReset() {
     this.query = '';
+    this.hits = [];
     this.request.onReset();
   }
 
