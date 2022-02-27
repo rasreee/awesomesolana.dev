@@ -1,7 +1,8 @@
 import { Component, ComponentType, FunctionComponent } from 'react';
 
-import { useWindowDimensions } from '../hooks/useWindowDimensions';
-import { useBreakpoints } from './useBreakpoints';
+import { useWindowDimensions } from '@/lib/hooks/useWindowDimensions';
+
+import { useBreakpoints } from './use-breakpoints';
 
 function isFunctionComponent<P extends {}>(o: any): o is FunctionComponent<P> {
   return (

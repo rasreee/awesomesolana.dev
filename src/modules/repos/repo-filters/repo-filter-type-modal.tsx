@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 
 import clsxm from '@/lib/utils/clsxm';
 import { useRootStore } from '@/stores/root-store';
-import Popover from '@/ui/components/popover';
+import Popover from '@/ui/popover';
 
 const RepoFilterTypeMenu = dynamic(() => import('./repo-filter-type-menu'));
 

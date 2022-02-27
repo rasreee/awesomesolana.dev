@@ -3,11 +3,11 @@ import { FormEventHandler, useState } from 'react';
 
 import { RequestState } from '@/lib/mobx/request-store';
 import clsxm from '@/lib/utils/clsxm';
-import { ErrorMessage } from '@/ui/components/ErrorMessage';
-import type { TextInputProps } from '@/ui/components/TextInput';
+import { ErrorMessage } from '@/ui/error-message';
+import type { TextInputProps } from '@/ui/text-input';
 
 const XIcon = dynamic(() => import('@/ui/icons/XIcon'));
-const TextInput = dynamic(() => import('@/ui/components/TextInput'));
+const TextInput = dynamic(() => import('@/ui/text-input'));
 
 export type SearchFormProps = {
   request: RequestState;

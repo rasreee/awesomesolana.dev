@@ -1,8 +1,8 @@
 import React, { HTMLAttributes, useRef } from 'react';
 
-import { useClickOutside } from '@/ui/hooks/useClickOutside';
+import { useClickOutside } from '@/lib/hooks/useClickOutside';
 
-import { Overlay } from './Overlay';
+import { Overlay } from './overlay';
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

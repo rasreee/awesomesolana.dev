@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import * as React from 'react';
 
-const Seo = dynamic(() => import('@/ui/components/Seo'));
+const Seo = dynamic(() => import('@/ui/seo'));
 
 import dynamic from 'next/dynamic';
 

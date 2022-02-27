@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic';
 
 import { siteConfig } from '@/app/site-config';
-import { Logo } from '@/ui/components/Logo';
-import Responsive from '@/ui/responsive/Responsive';
+import { Logo } from '@/ui/logo';
+import Responsive from '@/ui/responsive/responsive';
 
 const GroupedResults = dynamic(() => import('./grouped-results'));
 const RepoFiltersSearchBox = dynamic(

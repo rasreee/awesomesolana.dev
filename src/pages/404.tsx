@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { AnchorHTMLAttributes } from 'react';
 
-const Seo = dynamic(() => import('@/ui/components/Seo'));
+const Seo = dynamic(() => import('@/ui/seo'));
 
 import dynamic from 'next/dynamic';
 

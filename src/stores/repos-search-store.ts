@@ -10,7 +10,7 @@ import {
   RawGithubReposResponse,
 } from '@/modules/github';
 import { Tag, TagType, tagUtils } from '@/modules/tags';
-import type { TextInputProps } from '@/ui/components';
+import type { TextInputProps } from '@/ui/text-input';
 
 export interface ReposSearchState {
   hits: GithubRepo[];

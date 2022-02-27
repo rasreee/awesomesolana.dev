@@ -3,7 +3,7 @@ import { computed, makeAutoObservable } from 'mobx';
 import { createRequestStore, RequestStore } from '@/lib/mobx/request-store';
 import { getTagSuggestions, Tag } from '@/modules/tags';
 import { useRootStore } from '@/stores/root-store';
-import type { TextInputProps } from '@/ui/components/TextInput';
+import type { TextInputProps } from '@/ui/text-input';
 
 export interface TagsSearchState {
   hits: Tag[];

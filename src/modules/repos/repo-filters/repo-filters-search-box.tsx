@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { allTags } from '@/modules/tags';
 import { useTagsSearchStore } from '@/stores/tags-search-store';
 
-const SearchForm = dynamic(() => import('@/ui/search/search-form'));
+const SearchForm = dynamic(() => import('@/modules/search/search-form'));
 
 const RepoFiltersSearchBox = observer(function RepoFiltersSearchBox() {
   const tagsSearchStore = useTagsSearchStore();

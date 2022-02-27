@@ -8,7 +8,7 @@ import pluralize from '@/lib/utils/pluralize';
 import { capitalize } from '@/lib/utils/string';
 import { getTags, TagType, tagUtils } from '@/modules/tags';
 import { useRootStore } from '@/stores/root-store';
-import { Divider } from '@/ui/components/Divider';
+import { Divider } from '@/ui/divider';
 
 import RepoFiltersSearchBox from './repo-filters-search-box';
 

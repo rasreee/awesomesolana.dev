@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import clsxm from '@/lib/utils/clsxm';
 
-import { useBreakpoints } from '../responsive/useBreakpoints';
+import { useBreakpoints } from './responsive/use-breakpoints';
 
 function rem(px: number): string {
   return `${px / 16}rem`;

@@ -1,4 +1,4 @@
-import type { SeoProps } from '@/ui/components/Seo';
+import type { SeoProps } from '@/ui/seo';
 
 export type LayoutProps = {
   children?: React.ReactNode;

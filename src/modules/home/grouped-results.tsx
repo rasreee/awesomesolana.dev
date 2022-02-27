@@ -6,7 +6,7 @@ import pluralize from '@/lib/utils/pluralize';
 import { capitalize } from '@/lib/utils/string';
 import { Tag, TagType, tagTypes } from '@/modules/tags';
 import { useTagsSearchStore } from '@/stores/tags-search-store';
-import Popover from '@/ui/components/popover';
+import Popover from '@/ui/popover';
 
 type GroupedHits = Array<{ type: TagType; hits: Tag[] }>;
 

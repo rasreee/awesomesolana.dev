@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Tag, tagUtils } from '@/modules/tags';
 import { useRootStore } from '@/stores/root-store';
-import { CheckBox } from '@/ui/components/CheckBox';
+import { CheckBox } from '@/ui/check-box';
 
 const RepoFilterCheckBox = observer(function RepoFilterCheckBox({
   tag,

@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 
 import { useGithubReposApi } from '@/modules/github';
 import { useRootStore } from '@/stores/root-store';
-import { ErrorMessage } from '@/ui/components/ErrorMessage';
+import { ErrorMessage } from '@/ui/error-message';
 
 import type { GithubApiParams } from './repos-feed';
 
