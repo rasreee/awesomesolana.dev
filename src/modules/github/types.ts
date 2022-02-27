@@ -1,3 +1,7 @@
+import { PaginationParams } from '@/lib/utils/pagination';
+
+import { Tag } from '../tags/types';
+
 export interface GithubUser {
   id: number;
   /* Username */
@@ -80,8 +84,19 @@ export interface GithubRepo {
   };
 }
 
+export type GithubApiParams = {
+  tags?: Tag[];
+  keywords?: string[];
+} & Partial<PaginationParams>;
+
 export interface RawGithubReposResponse {
   incomplete_results: boolean;
   items: RawGitHubRepo[];
   total_count: number;
 }
+
+export type GithubReposResponse = {
+  totalCount: number;
+  incompleteResults: boolean;
+  items: GithubRepo[];
+};

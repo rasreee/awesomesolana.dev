@@ -1,28 +1,18 @@
 import React from 'react';
 
-import type { PaginationParams } from '@/lib/utils';
-import { GithubRepo } from '@/modules/github';
-import { Tag } from '@/modules/tags';
+import { GithubReposResponse } from '@/modules/github';
 
 import { RepoFeedItem } from './repo-feed-item';
-import { ReposResultsInfo } from './repos-results-info';
-
-export type GithubApiParams = {
-  tags?: Tag[];
-  keywords?: string[];
-} & Partial<PaginationParams>;
 
 export type ReposFeedProps = {
-  data: GithubRepo[];
-  tags: GithubApiParams['tags'];
+  data: GithubReposResponse;
 };
 
-function ReposFeed({ data, tags }: ReposFeedProps) {
+function ReposFeed({ data }: ReposFeedProps) {
   return (
     <div>
-      <ReposResultsInfo data={data} tags={tags} />
       <ul>
-        {data.map((hit) => (
+        {data.items.map((hit) => (
           <li key={hit.id}>
             <RepoFeedItem {...hit} />
           </li>

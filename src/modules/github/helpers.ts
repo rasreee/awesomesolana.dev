@@ -35,9 +35,9 @@ const memoizedFormatGithubTopic = memoizeOne(formatGitHubTopic);
 
 function formatTagSearchParam(tag: Tag): string {
   if (tag.type === 'language') return `language:${tag.name}`;
-  if (tag.type === 'topic') return `topic:${tag.name}`;
+  if (tag.type === 'topic') return `topic=${tag.name}`;
   if (tag.type === 'framework') {
-    return `topic:${memoizedFormatGithubTopic(tag.name)}`;
+    return `topic=${memoizedFormatGithubTopic(tag.name)}`;
   }
   return '';
 }
@@ -60,7 +60,7 @@ export function formatGithubApiQuery({
     .filter(Boolean)
     .join('+');
 
-  const query = params.length ? `?q=${params}` : '';
+  const query = params.length ? `?q=${encodeURIComponent(params)}` : '';
   const pagination = `${query ? '&' : '?'}page=${page}&per_page=${per_page}`;
 
   return `${query}${pagination}`;

@@ -1,22 +1,21 @@
 import clsxm from '@/lib/utils/clsxm';
 import pluralize from '@/lib/utils/pluralize';
-import { GithubRepo } from '@/modules/github';
-import { Tag } from '@/modules/tags';
+import { GithubApiParams, GithubReposResponse } from '@/modules/github';
 
 function getReposResultsInfoText({
-  data,
-  tags,
+  count,
+  params,
+  totalCount,
 }: {
-  data: GithubRepo[];
-  tags?: Tag[];
+  count: number;
+  params: GithubApiParams | undefined;
+  totalCount: number;
 }): string {
-  const hasFilters = Boolean(tags?.length);
+  if (!params?.tags?.length)
+    return `Showing ${count} ${pluralize('result', count)} of ${totalCount}`;
 
-  if (!hasFilters)
-    return `Showing ${data.length} ${pluralize('result', data.length)}`;
-
-  const result = data.length
-    ? `Showing ${data.length} ${pluralize('result', data.length)} for `
+  const result = count
+    ? `Showing ${count} of ${totalCount} ${pluralize('result', count)} for `
     : `No results found for `;
 
   return result;
@@ -24,19 +23,23 @@ function getReposResultsInfoText({
 
 export function ReposResultsInfo({
   data,
-  tags,
+  params,
 }: {
-  data: GithubRepo[] | undefined;
-  tags?: Tag[];
+  data: GithubReposResponse | undefined;
+  params?: GithubApiParams | undefined;
 }) {
   if (!data) return <div className="py-2 px-1">Loading...</div>;
 
   return (
     <div className={clsxm('py-2 px-1')}>
       <span className="text text-sm leading-none opacity-90">
-        {getReposResultsInfoText({ data, tags })}
+        {getReposResultsInfoText({
+          count: data.items.length,
+          totalCount: data.totalCount,
+          params,
+        })}
       </span>
-      {tags?.map((filter) => `${filter.name}`)}
+      {params?.tags?.map((filter) => `${filter.name}`)}
     </div>
   );
 }

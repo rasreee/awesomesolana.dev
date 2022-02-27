@@ -5,7 +5,7 @@ import {
   githubApi,
   GithubReposBrowseParams,
   githubReposJsonFetch,
-  RawGithubReposResponse,
+  GithubReposResponse,
 } from '@/modules/github';
 
 export type GithubReposBrowseRequest = NextApiRequest & {
@@ -14,7 +14,7 @@ export type GithubReposBrowseRequest = NextApiRequest & {
 
 export default async function githubReposBrowseApiHandler(
   req: GithubReposBrowseRequest,
-  res: NextApiResponse<RawGithubReposResponse>,
+  res: NextApiResponse<GithubReposResponse>,
 ) {
   const {
     page = defaultPaginationParams.page,

@@ -5,11 +5,10 @@ import {
   GithubReposSearchParams,
   githubSwrKey,
 } from './api';
-import { parseRawGitHubRepo } from './helpers';
-import { GithubRepo, RawGithubReposResponse } from './types';
+import { GithubReposResponse } from './types';
 
 export type UseGithubReposApi = {
-  data: GithubRepo[] | undefined;
+  data: GithubReposResponse | undefined;
   error: Error | undefined;
 };
 
@@ -20,13 +19,11 @@ export function useGithubReposApi<Route extends '/search' | '/browse'>(
     : Partial<GithubReposBrowseParams>,
   shouldFetch = true,
 ): UseGithubReposApi {
-  const { data: rawData, error } = useSWR<RawGithubReposResponse, Error>(
+  const { data, error } = useSWR<GithubReposResponse, Error>(
     shouldFetch ? githubSwrKey.route(route, params) : null,
   );
 
-  const repos = rawData?.items.map(parseRawGitHubRepo);
-
-  return { data: repos, error };
+  return { data, error };
 }
 
 export function useBrowseGithubRepos(
