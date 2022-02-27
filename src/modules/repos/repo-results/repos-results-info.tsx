@@ -2,6 +2,7 @@ import clsxm from '@/lib/utils/clsxm';
 import pluralize from '@/lib/utils/pluralize';
 import { GithubApiParams, GithubReposResponse } from '@/modules/github';
 import Badge from '@/ui/badge';
+import { useBreakpoints } from '@/ui/responsive';
 
 function getReposResultsInfoText({
   count,
@@ -22,8 +23,6 @@ function getReposResultsInfoText({
   return result;
 }
 
-const MAX_TAGS_SHOWN = 3;
-
 export function ReposResultsInfo({
   data,
   params,
@@ -31,19 +30,20 @@ export function ReposResultsInfo({
   data: GithubReposResponse | undefined;
   params?: GithubApiParams | undefined;
 }) {
-  if (!data) return <div className="py-2 px-1">Loading...</div>;
+  const breakpoints = useBreakpoints();
+  if (!data || !breakpoints) return <div className="py-2 px-1">Loading...</div>;
+
+  const maxTagsToShow = breakpoints.isSmall ? 3 : 5;
+  const shouldShowTags = params?.tags ? params.tags.length > 0 : false;
+
   const remainingTagsCount = params?.tags
-    ? params?.tags.length - MAX_TAGS_SHOWN
+    ? params?.tags.length - maxTagsToShow
     : 0;
-  const shouldShowTags = params?.tags && remainingTagsCount > 0;
+
+  const shouldShowRemainingTagsInfo = remainingTagsCount > 0;
 
   return (
-    <div
-      className={clsxm(
-        'px-1 py-3',
-        'flex flex-col justify-center gap-2 sm:flex-row sm:items-center sm:justify-start',
-      )}
-    >
+    <div className={clsxm('px-1 py-3', 'flex flex-col justify-center gap-2')}>
       <span className="text-body text-sm leading-tight sm:text-base">
         {getReposResultsInfoText({
           count: data.items.length,
@@ -52,15 +52,15 @@ export function ReposResultsInfo({
         })}
       </span>
       {shouldShowTags && (
-        <div className="flex w-full items-center justify-between">
+        <div className="flex w-full items-center gap-2">
           <span className="flex max-w-[60%] items-center gap-1.5">
-            {params?.tags?.slice(0, MAX_TAGS_SHOWN).map((filter) => (
+            {params?.tags?.slice(0, maxTagsToShow).map((filter) => (
               <Badge
                 key={filter.type + '_' + filter.name}
                 className={clsxm(
                   'text border border-green-500 bg-green-500 bg-opacity-10 text-green-500',
                   'h-5.5 rounded-full px-2.5 py-1',
-                  'max-h-[24px] max-w-[140px]',
+                  'max-h-[24px] max-w-[140px] sm:max-w-[180px]',
                 )}
               >
                 <span className="truncate text-sm leading-none">
@@ -69,13 +69,14 @@ export function ReposResultsInfo({
               </Badge>
             ))}
           </span>
-          {shouldShowTags && (
+          {shouldShowRemainingTagsInfo && (
             <button
               className={clsxm(
                 'text-[15px] leading-none',
                 'flex h-6 min-w-[64px] items-center justify-center p-2',
-                'bg-transparent font-medium',
-                'text opacity-80 hover:opacity-90 active:opacity-100',
+                'bg-transparent font-semibold',
+                'text opacity-70 hover:font-bold hover:opacity-90 active:opacity-100',
+                'transition-all',
               )}
               onClick={() => console.log('')}
             >
