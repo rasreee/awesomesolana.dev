@@ -1,7 +1,15 @@
 import dynamic from 'next/dynamic';
 
-const Repos = dynamic(() => import('@/modules/repos/repos-page'));
+import PageLayout from '@/layouts/page-layout';
 
-(Repos as any).Layout = dynamic(() => import('@/layouts/page-layout'));
+const ReposPage = dynamic(() => import('@/modules/repos/repos-page'));
+
+const Repos = () => {
+  return (
+    <PageLayout title="Repos">
+      <ReposPage />
+    </PageLayout>
+  );
+};
 
 export default Repos;

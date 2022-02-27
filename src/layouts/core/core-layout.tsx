@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import * as React from 'react';
 
 const Seo = dynamic(() => import('@/ui/seo'));
@@ -16,9 +15,6 @@ const Layout: React.FC<LayoutProps> = ({
 }) => {
   return (
     <>
-      <Head>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-      </Head>
       <Seo {...seo} title={title} description={description} />
       <div className="bg-app min-h-full w-screen">
         <Header />

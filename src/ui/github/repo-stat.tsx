@@ -30,10 +30,7 @@ function RepoStat({ type, count, className, ...props }: RepoStatProps) {
   return (
     <div
       {...props}
-      className={clsx(
-        'text-secondary hover:text-brand-primary whitespace-nowrap text-xs',
-        className,
-      )}
+      className={clsx('text-hint whitespace-nowrap text-xs', className)}
     >
       <Icon /> {count}
     </div>

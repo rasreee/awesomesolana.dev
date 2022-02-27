@@ -26,7 +26,9 @@
   "dependencies": {
     "@primer/octicons-react": "^16.3.1",
     "@tailwindcss/typography": "^0.5.2",
+    "axios": "^0.26.0",
     "clsx": "^1.1.1",
+    "date-fns": "^2.28.0",
     "memoize-one": "^6.0.0",
     "mobx": "^6.4.2",
     "mobx-react-lite": "^3.3.0",
@@ -34,6 +36,7 @@
     "next-seo": "^5.1.0",
     "next-themes": "^0.1.1",
     "plur": "^5.1.0",
+    "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "swr": "^1.2.2",

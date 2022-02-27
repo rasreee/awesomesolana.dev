@@ -1,7 +1,15 @@
 import dynamic from 'next/dynamic';
 
-const Home = dynamic(() => import('@/modules/home/home-page'));
+import PageLayout from '@/layouts/page-layout';
 
-(Home as any).Layout = dynamic(() => import('@/layouts/page-layout'));
+const HomePage = dynamic(() => import('@/modules/home/home-page'));
+
+const Home = () => {
+  return (
+    <PageLayout title="Home">
+      <HomePage />
+    </PageLayout>
+  );
+};
 
 export default Home;

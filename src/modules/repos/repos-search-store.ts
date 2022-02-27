@@ -1,7 +1,7 @@
 import { computed, makeAutoObservable } from 'mobx';
 
 import { appConfig } from '@/app/app-config';
-import { createRequestStore, RequestStore } from '@/lib/mobx/request-store';
+import { createRequestStore } from '@/lib/mobx/request-store';
 import {
   GithubRepo,
   GithubReposSearchParams,
@@ -10,23 +10,8 @@ import {
   RawGithubReposResponse,
 } from '@/modules/github';
 import { Tag, TagType, tagUtils } from '@/modules/tags';
+import { IReposSearchStore } from '@/stores/interfaces';
 import type { TextInputProps } from '@/ui/text-input';
-
-export interface ReposSearchState {
-  hits: GithubRepo[];
-  tags: Tag[];
-  query: string;
-}
-
-export interface IReposSearchStore extends ReposSearchState {
-  setHits: (hits: GithubRepo[]) => void;
-  onSubmit: (query: string) => Promise<any>;
-  request: RequestStore;
-  onReset: () => void;
-  getTextInputProps: (props?: Partial<TextInputProps>) => TextInputProps;
-  clearTags: (type: TagType) => void;
-  toggleTag: (tag: Tag) => void;
-}
 
 async function searchGithubRepos(
   params: Partial<GithubReposSearchParams>,

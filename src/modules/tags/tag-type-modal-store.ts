@@ -1,12 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 import { TagType } from '@/modules/tags/types';
-
-interface ITagTypeModalStore {
-  tagType: TagType | null;
-  onClose: () => void;
-  isOpen: boolean;
-}
+import { ITagTypeModalStore } from '@/stores/interfaces';
 
 export class TagTypeModalStore implements ITagTypeModalStore {
   tagType: TagType | null = null;
