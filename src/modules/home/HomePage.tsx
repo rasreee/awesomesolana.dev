@@ -1,4 +1,5 @@
 import { runInAction } from 'mobx';
+import { observer } from 'mobx-react-lite';
 
 import { siteConfig } from '@/configs/site-config';
 import { allTags } from '@/core/search';
@@ -7,7 +8,7 @@ import { Logo, SearchForm, Seo } from '@/ui/components';
 import { useSearchStore } from '../search/SearchStore';
 import { GroupedResults } from './GroupedResults';
 
-export function HomePage() {
+export const HomePage = observer(function HomePage() {
   const store = useSearchStore();
 
   const handleInputClick = () => {
@@ -40,4 +41,4 @@ export function HomePage() {
       </div>
     </>
   );
-}
+});

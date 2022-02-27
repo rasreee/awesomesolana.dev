@@ -1,4 +1,4 @@
-import { Tag, tags, TagType, tagTypes } from '@core/search';
+import { Tag, TagType, tagTypes, tagUtils } from '@core/search';
 import { capitalize } from '@utils/capitalize';
 import pluralize from '@utils/pluralize';
 
@@ -32,7 +32,7 @@ export function GroupedResults({
 }: GroupedResultsProps) {
   const store = useSearchStore();
 
-  const listToShow = tags.list(hits).exclude(store.tags);
+  const listToShow = tagUtils.list(hits).exclude(store.tags);
 
   const handleTagClick = (tag: Tag) => () => {
     onTagClick(tag);

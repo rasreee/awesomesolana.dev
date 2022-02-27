@@ -1,6 +1,6 @@
 import { action, makeAutoObservable, observable, reaction } from 'mobx';
 
-import { Tag, tags, TagType, tagTypes } from '@/core/search';
+import { Tag, TagType, tagTypes, tagUtils } from '@/core/search';
 import { useStore } from '@/mobx/storeContext';
 import { waitFor } from '@/utils';
 
@@ -140,7 +140,7 @@ export class SearchStore {
   }
 
   toggleTag(tag: Tag) {
-    if (tags.list(this.tags).has(tag)) return this.removeTag(tag);
+    if (tagUtils.list(this.tags).has(tag)) return this.removeTag(tag);
 
     this.addTag(tag);
   }

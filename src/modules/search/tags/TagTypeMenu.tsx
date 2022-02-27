@@ -1,4 +1,4 @@
-import { getTags, Tag, tags, TagType } from '@core/search';
+import { getTags, Tag, TagType, tagUtils } from '@core/search';
 import { XIcon } from '@primer/octicons-react';
 import { capitalize } from '@utils';
 import clsxm from '@utils/clsxm';
@@ -23,9 +23,9 @@ export function TagTypeMenu({ type }: { type: TagType }) {
   const handleToggleFilter = (tag: Tag) => () =>
     runInAction(() => store.toggleTag(tag));
 
-  const selectedTags = tags.list(store.tags).ofType(type);
+  const selectedTags = tagUtils.list(store.tags).ofType(type);
 
-  const options = tags.list(tagsForType).exclude(store.tags);
+  const options = tagUtils.list(tagsForType).exclude(store.tags);
 
   return (
     <>

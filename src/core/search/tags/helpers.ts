@@ -37,11 +37,11 @@ export const isEqualTag = (a: Tag, b: Tag): boolean => {
   return a.type === b.type && a.name === b.name;
 };
 
-export const tags = {
+export const tagUtils = {
   list: (arr: Tag[]) => ({
     has: (target: Tag) => arr.some((item) => isEqualTag(item, target)),
     ofType: (type: TagType) => arr.filter((tag) => tag.type === type),
     exclude: (target: Tag[]): Tag[] =>
-      arr.filter((item) => !tags.list(target).has(item)),
+      arr.filter((item) => !tagUtils.list(target).has(item)),
   }),
 };
