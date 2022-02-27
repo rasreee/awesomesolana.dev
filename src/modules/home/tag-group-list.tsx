@@ -17,7 +17,7 @@ const TagGroupList = ({ type, tags }: { type: TagType; tags: Tag[] }) => {
   };
 
   return (
-    <div className="flex flex-col gap-2 px-1" key={type}>
+    <div className="flex w-full flex-col gap-2 px-1">
       <span className="px-3 py-2 text-lg font-semibold">
         {capitalize(pluralize(type))} {`(${tags.length})`}
       </span>

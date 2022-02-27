@@ -28,17 +28,15 @@ const TagsSearchResults = observer(
       </>
     );
 
-    return <>{content}</>;
+    return <div className="min-w-full flex-1 md:max-w-3xl">{content}</div>;
   },
 );
 
 const TagsSearchResultsEmpty = () => {
   return (
-    <div className="flex w-full flex-col gap-0 divide-y divide-base-700">
-      <div className="">
-        <RecommendedTopics />
-      </div>
-    </div>
+    <>
+      <RecommendedTopics />
+    </>
   );
 };
 

@@ -46,7 +46,7 @@ const HomePage = function HomePage() {
             />
           </div>
           <Popover
-            className="bg-surface absolute top-12 z-50 overflow-hidden py-5 px-3"
+            className="bg-surface top-12 z-50 w-full flex-1 overflow-hidden py-5 px-3"
             isOpen={menuOpen}
             onClose={closeMenu}
           >
