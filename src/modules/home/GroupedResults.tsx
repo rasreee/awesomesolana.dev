@@ -1,15 +1,11 @@
-import { Tag, TagType, tagTypes } from '@core/search';
+import { searchRoute, Tag, TagType, tagTypes } from '@core/search';
 import { capitalize } from '@utils/capitalize';
 import pluralize from '@utils/pluralize';
+import { observer } from 'mobx-react-lite';
+import { useRouter } from 'next/router';
 
+import { useSearchStore } from '@/stores/root-store';
 import { Popover } from '@/ui/components';
-
-type GroupedResultsProps = {
-  isOpen: boolean;
-  hits: Tag[];
-  onTagClick: (tag: Tag) => void;
-  onClose: () => void;
-};
 
 type GroupedHits = Array<{ type: TagType; hits: Tag[] }>;
 
@@ -22,23 +18,21 @@ function groupByTag(list: Tag[]): GroupedHits {
   return groups;
 }
 
-export function GroupedResults({
-  isOpen,
-  hits,
-  onTagClick,
-  onClose,
-}: GroupedResultsProps) {
+export const GroupedResults = observer(function GroupedResults() {
+  const router = useRouter();
+  const { tagsSearch } = useSearchStore();
+
   const handleTagClick = (tag: Tag) => () => {
-    onTagClick(tag);
+    router.push(searchRoute.page({ tags: [tag] }));
   };
 
   return (
     <Popover
       className="bg-surface relative overflow-hidden py-5 px-3"
-      isOpen={isOpen}
-      onClose={onClose}
+      isOpen={!!tagsSearch.hits.length}
+      onClose={tagsSearch.onReset}
     >
-      {groupByTag(hits).map(
+      {groupByTag(tagsSearch.hits).map(
         ({ type, hits: list }) =>
           list.length > 0 && (
             <div className="flex flex-col gap-2 px-1" key={type}>
@@ -62,4 +56,4 @@ export function GroupedResults({
       )}
     </Popover>
   );
-}
+});
