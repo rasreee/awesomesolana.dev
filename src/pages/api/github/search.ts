@@ -4,7 +4,7 @@ import {
   GithubReposSearchParams,
   RawGithubReposResponse,
 } from '@core/github';
-import { DEFAULT_PAGINATION_PARAMS } from '@utils';
+import { defaultPaginationParams } from '@utils/pagination';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export type GithubReposSearchRequest = NextApiRequest & {
@@ -17,8 +17,8 @@ export default async function githubApiHandler(
 ) {
   const {
     q = '',
-    page = DEFAULT_PAGINATION_PARAMS.page,
-    per_page = DEFAULT_PAGINATION_PARAMS.per_page,
+    page = defaultPaginationParams.page,
+    per_page = defaultPaginationParams.per_page,
     tags = [],
   } = req.query;
 

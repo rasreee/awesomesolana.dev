@@ -1,9 +1,10 @@
 import '@/styles/globals.css';
 import '@/styles/colors.css';
 
-import { getLayout, LayoutProps } from '@layouts/Layout';
-import { fetcher } from '@utils/fetcher';
-import { getSeo } from '@utils/seo';
+import type { LayoutProps } from '@layouts/Layout';
+import { getLayout } from '@layouts/Layout';
+import fetcher from '@utils/fetcher';
+import getSeo from '@utils/get-seo';
 import { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';

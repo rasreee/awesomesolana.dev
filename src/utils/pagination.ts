@@ -8,11 +8,13 @@ export interface PaginationStringParams {
   per_page: string;
 }
 
-export const DEFAULT_PAGINATION_PARAMS: PaginationParams = {
+export const defaultPaginationParams: PaginationParams = Object.freeze({
   page: 0,
   per_page: 10,
-};
-export const DEFAULT_PAGINATION_STRING_PARAMS: PaginationStringParams = {
-  page: `${DEFAULT_PAGINATION_PARAMS.page}`,
-  per_page: `${DEFAULT_PAGINATION_PARAMS.per_page}`,
-};
+});
+
+export const defaultPaginationStringParams: PaginationStringParams =
+  Object.freeze({
+    page: `${defaultPaginationParams.page}`,
+    per_page: `${defaultPaginationParams.per_page}`,
+  });

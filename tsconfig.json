@@ -19,7 +19,6 @@
       "@/*": ["./src/*"],
       "~/*": ["./public/*"],
       "@configs/*": ["./src/configs/*"],
-      "@utils": ["./src/utils"],
       "@utils/*": ["./src/utils/*"],
       "@core/*": ["./src/core/*"],
       "@modules/*": ["./src/modules/*"],

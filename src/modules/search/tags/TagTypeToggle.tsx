@@ -1,5 +1,4 @@
 import { TagType } from '@core/search';
-import { capitalize } from '@utils/capitalize';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
 import { computed } from 'mobx';
@@ -7,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 
 import { useSearchStore } from '@/stores/root-store';
 import { ChevronDownIcon, XIcon } from '@/ui/icons';
+import { capitalize } from '@/utils/string';
 
 import { TagButton } from './TagButton';
 

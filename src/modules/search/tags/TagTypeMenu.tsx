@@ -1,8 +1,8 @@
 import { getTags, TagType, tagUtils } from '@core/search';
 import { XIcon } from '@primer/octicons-react';
-import { capitalize } from '@utils';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
+import { capitalize } from '@utils/string';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import useSWR from 'swr';

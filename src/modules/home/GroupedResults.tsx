@@ -1,11 +1,11 @@
 import { searchRoute, Tag, TagType, tagTypes } from '@core/search';
-import { capitalize } from '@utils/capitalize';
 import pluralize from '@utils/pluralize';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 
 import { useSearchStore } from '@/stores/root-store';
 import { Popover } from '@/ui/components';
+import { capitalize } from '@/utils/string';
 
 type GroupedHits = Array<{ type: TagType; hits: Tag[] }>;
 

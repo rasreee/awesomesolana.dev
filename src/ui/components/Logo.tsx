@@ -1,8 +1,11 @@
 import clsxm from '@utils/clsxm';
 import Image from 'next/image';
 
-import { useBreakpoints } from '../responsive';
-import { rem } from '../utils';
+import { useBreakpoints } from '../responsive/useBreakpoints';
+
+function rem(px: number): string {
+  return `${px / 16}rem`;
+}
 
 const imageSizes = {
   xs: 20,

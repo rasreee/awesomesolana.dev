@@ -1,5 +1,6 @@
 import { isEqualTag, Tag } from '@core/search';
-import { DEFAULT_PAGINATION_PARAMS, PaginationParams } from '@utils';
+import type { PaginationParams } from '@utils/pagination';
+import { defaultPaginationParams } from '@utils/pagination';
 import memoizeOne from 'memoize-one';
 
 import { GithubRepo, RawGitHubRepo } from './types';
@@ -46,8 +47,8 @@ const memoizedFormatTagParam = memoizeOne(formatTagSearchParam, ([a], [b]) =>
 export function formatGithubApiQuery({
   keywords = [],
   tags = [],
-  per_page = DEFAULT_PAGINATION_PARAMS.per_page,
-  page = DEFAULT_PAGINATION_PARAMS.page,
+  per_page = defaultPaginationParams.per_page,
+  page = defaultPaginationParams.page,
 }: Partial<PaginationParams> &
   Partial<{ keywords: string[]; tags: Tag[] }>): string {
   const params = [

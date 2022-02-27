@@ -1,6 +1,6 @@
 import { useGithubReposApi } from '@core/github';
 import { Tag } from '@core/search';
-import { PaginationParams } from '@utils';
+import type { PaginationParams } from '@utils/pagination';
 import React from 'react';
 
 import { ErrorMessage } from '@/ui/components';
