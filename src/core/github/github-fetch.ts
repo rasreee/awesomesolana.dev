@@ -1,4 +1,4 @@
-import { GithubReposResponse } from './types';
+import { RawGithubReposResponse } from './types';
 
 function getHeaders(): HeadersInit {
   const headers: HeadersInit = new Headers();
@@ -19,10 +19,10 @@ async function githubAuthFetch(uri: string): Promise<Response> {
 
 export async function githubReposJsonFetch(
   uri: string,
-): Promise<GithubReposResponse> {
+): Promise<RawGithubReposResponse> {
   const reposResponse = await githubAuthFetch(uri);
 
-  const data = (await reposResponse.json()) as GithubReposResponse;
+  const data = (await reposResponse.json()) as RawGithubReposResponse;
 
   return data;
 }

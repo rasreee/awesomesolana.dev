@@ -1,40 +1,33 @@
 import clsxm from '@utils/clsxm';
 import { FormEventHandler, useState } from 'react';
 
-import { ErrorMessage, StatefulIcon, TextInput } from '@/ui/components';
-import { SearchIcon, XIcon } from '@/ui/icons';
+import { RequestState } from '@/stores/request-store';
+import { ErrorMessage, TextInputProps } from '@/ui/components';
+import { XIcon } from '@/ui/icons';
 
-const DEFAULT_PLACEHOLDER = 'Search for any project, dependency, or topic';
+import { SearchField } from './SearchField';
 
 export type SearchFormProps = {
-  error?: string | null;
-  loading: boolean;
-  query: string;
-  onChange: (query: string) => void;
-  autoFocused?: boolean;
+  request: RequestState;
+  textInputProps: TextInputProps;
   onReset: () => void;
   onSubmit: (query: string) => any;
-  onClick?: () => void;
 };
 
 export function SearchForm({
-  error,
-  loading,
-  query,
-  onChange,
+  textInputProps,
+  request,
   onReset,
-  autoFocused = false,
   onSubmit,
-  onClick,
 }: SearchFormProps) {
-  const [focused, setFocused] = useState(autoFocused);
+  const [focused, setFocused] = useState(textInputProps.autoFocused);
 
   const onFocus = () => setFocused(true);
   const onBlur = () => setFocused(false);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    onSubmit(query);
+    onSubmit(textInputProps.value);
   };
 
   return (
@@ -48,27 +41,9 @@ export function SearchForm({
         'rounded-full',
       )}
     >
-      <ErrorMessage>{error}</ErrorMessage>
-      <StatefulIcon
-        className={clsxm('h-4 w-4', {
-          'text-color-primary': focused,
-        })}
-        label="search"
-        loading={loading}
-        icon={SearchIcon}
-      />
-      <TextInput
-        name="search"
-        className="input-focus-unset px-2"
-        placeholder={DEFAULT_PLACEHOLDER}
-        autoFocused={autoFocused}
-        value={query}
-        onChange={onChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onClick={onClick}
-      />
-      {Boolean(query) && (
+      <ErrorMessage>{request.error}</ErrorMessage>
+      <SearchField {...textInputProps} {...{ onFocus, onBlur }} />
+      {Boolean(textInputProps.value) && (
         <button className="p-1" onClick={onReset}>
           <XIcon className="box-border h-4 w-4" />
         </button>

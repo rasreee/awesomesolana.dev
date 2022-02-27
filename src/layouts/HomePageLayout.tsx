@@ -7,9 +7,9 @@ import { StoreProvider } from '@/mobx/storeContext';
 import { SearchStore } from '@/stores/root-store';
 import { Seo } from '@/ui/components';
 
-const SearchPageLayout = ({
+const HomePageLayout = ({
   children,
-  title = 'Search',
+  title = 'Home',
 }: {
   children: React.ReactNode;
   title?: string;
@@ -37,4 +37,4 @@ const SearchPageLayout = ({
   );
 };
 
-export default SearchPageLayout;
+export default HomePageLayout;

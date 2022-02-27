@@ -1,4 +1,4 @@
-import { GitHubRepo } from '@core/github';
+import { GithubRepo } from '@core/github';
 import { Tag } from '@core/search';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
@@ -7,7 +7,7 @@ function getResultsInfoText({
   data,
   tags,
 }: {
-  data: GitHubRepo[];
+  data: GithubRepo[];
   tags?: Tag[];
 }): string {
   const hasFilters = Boolean(tags?.length);
@@ -26,7 +26,7 @@ export function ResultsInfo({
   data,
   tags,
 }: {
-  data: GitHubRepo[] | undefined;
+  data: GithubRepo[] | undefined;
   tags?: Tag[];
 }) {
   if (!data) return <div className="py-2 px-1">Loading...</div>;

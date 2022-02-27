@@ -1,31 +1,35 @@
-import { getTags, Tag, TagType, tagUtils } from '@core/search';
+import { getTags, TagType, tagUtils } from '@core/search';
 import { XIcon } from '@primer/octicons-react';
 import { capitalize } from '@utils';
 import clsxm from '@utils/clsxm';
 import pluralize from '@utils/pluralize';
-import { runInAction } from 'mobx';
+import { computed } from 'mobx';
+import { observer } from 'mobx-react-lite';
 import useSWR from 'swr';
 
-import { Divider, SearchForm, useSearchForm } from '@/ui/components';
+import { useSearchStore } from '@/stores/root-store';
+import { Divider, TagsSearchBox } from '@/ui/components';
 
-import { useSearchStore } from '../SearchStore';
 import { TagTypeFilterOption } from './TagTypeFilterOption';
 
-export function TagTypeMenu({ type }: { type: TagType }) {
+export const TagTypeMenu = observer(function TagTypeMenu({
+  type,
+}: {
+  type: TagType;
+}) {
   const store = useSearchStore();
 
-  const { data: tagsForType = [] } = useSWR(`tagsForType/${type}`, () =>
+  const { data: tagsForType } = useSWR(`tagsForType/${type}`, () =>
     getTags(type),
   );
 
-  const searchForm = useSearchForm();
+  const selectedTags = computed(() =>
+    store.reposSearch.tags.filter((tag) => tag.type === type),
+  ).get();
 
-  const handleToggleFilter = (tag: Tag) => () =>
-    runInAction(() => store.toggleTag(tag));
-
-  const selectedTags = tagUtils.list(store.tags).ofType(type);
-
-  const options = tagUtils.list(tagsForType).exclude(store.tags);
+  const options = tagsForType
+    ? tagUtils.list(tagsForType).exclude(selectedTags)
+    : null;
 
   return (
     <>
@@ -46,7 +50,7 @@ export function TagTypeMenu({ type }: { type: TagType }) {
             <XIcon />
           </button>
         </div>
-        <SearchForm {...searchForm} onSubmit={searchForm.setQuery} />
+        <TagsSearchBox />
       </div>
       <div className="relative top-5 z-0 h-[80%] w-full">
         {selectedTags?.length ? (
@@ -57,25 +61,27 @@ export function TagTypeMenu({ type }: { type: TagType }) {
                 <TagTypeFilterOption
                   key={`${tag.type}_${tag.name}`}
                   tag={tag}
-                  onClick={handleToggleFilter(tag)}
                 />
               ))}
             </ul>
             <Divider />
           </div>
         ) : null}
-        <ul className={clsxm('px-5 pt-3', 'h-full overflow-y-auto')}>
-          {(store.tagsSearch.hits.length ? store.tagsSearch.hits : options).map(
-            (tag) => (
-              <TagTypeFilterOption
-                key={`${tag.type}_${tag.name}`}
-                tag={tag}
-                onClick={handleToggleFilter(tag)}
-              />
-            ),
+        <>
+          {options ? (
+            <ul className={clsxm('px-5 pt-3', 'h-full overflow-y-auto')}>
+              {options.map((tag) => (
+                <TagTypeFilterOption
+                  key={`${tag.type}_${tag.name}`}
+                  tag={tag}
+                />
+              ))}
+            </ul>
+          ) : (
+            <div>Loading...</div>
           )}
-        </ul>
+        </>
       </div>
     </>
   );
-}
+});

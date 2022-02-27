@@ -2,9 +2,9 @@ import { isEqualTag, Tag } from '@core/search';
 import { DEFAULT_PAGINATION_PARAMS, PaginationParams } from '@utils';
 import memoizeOne from 'memoize-one';
 
-import { GitHubRepo, RawGitHubRepo } from './types';
+import { GithubRepo, RawGitHubRepo } from './types';
 
-export function parseRawGitHubRepo(data: RawGitHubRepo): GitHubRepo {
+export function parseRawGitHubRepo(data: RawGitHubRepo): GithubRepo {
   return {
     id: data.id,
     name: data.name,

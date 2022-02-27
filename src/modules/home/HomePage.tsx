@@ -1,18 +1,19 @@
-import { runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
+import { useRouter } from 'next/router';
 
 import { siteConfig } from '@/configs/site-config';
-import { allTags } from '@/core/search';
-import { Logo, SearchForm, Seo } from '@/ui/components';
+import { searchRoute, Tag } from '@/core/search';
+import { useSearchStore } from '@/stores/root-store';
+import { Logo, Seo, TagsSearchBox } from '@/ui/components';
 
-import { useSearchStore } from '../search/SearchStore';
 import { GroupedResults } from './GroupedResults';
 
 export const HomePage = observer(function HomePage() {
   const store = useSearchStore();
+  const router = useRouter();
 
-  const handleInputClick = () => {
-    runInAction(() => (store.tagsSearchResult = allTags.slice(0, 10)));
+  const handleTagClick = (tag: Tag) => {
+    router.push(searchRoute.page({ tags: [tag] }));
   };
 
   return (
@@ -26,16 +27,12 @@ export const HomePage = observer(function HomePage() {
           </div>
         </div>
         <div className="flex h-min flex-col gap-3">
-          <SearchForm
-            {...store.searchForm}
-            onClick={handleInputClick}
-            onSubmit={store.submitTagsSearch}
-          />
+          <TagsSearchBox />
           <GroupedResults
-            isOpen={store.tagsSearchResult.length > 0}
-            hits={store.tagsSearchResult}
-            onTagClick={store.toggleTag}
-            onClose={store.reset}
+            isOpen={!!store.tagsSearch.hits.length}
+            hits={store.tagsSearch.hits}
+            onTagClick={handleTagClick}
+            onClose={store.tagsSearch.onReset}
           />
         </div>
       </div>

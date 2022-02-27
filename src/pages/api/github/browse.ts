@@ -2,7 +2,7 @@ import {
   githubApi,
   GithubReposBrowseParams,
   githubReposJsonFetch,
-  GithubReposResponse,
+  RawGithubReposResponse,
 } from '@core/github';
 import { DEFAULT_PAGINATION_PARAMS } from '@utils';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -13,7 +13,7 @@ export type GithubReposBrowseRequest = NextApiRequest & {
 
 export default async function githubReposBrowseApiHandler(
   req: GithubReposBrowseRequest,
-  res: NextApiResponse<GithubReposResponse>,
+  res: NextApiResponse<RawGithubReposResponse>,
 ) {
   const {
     page = DEFAULT_PAGINATION_PARAMS.page,

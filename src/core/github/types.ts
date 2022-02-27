@@ -44,7 +44,7 @@ export interface RawGitHubRepo {
   };
 }
 
-export interface GitHubRepo {
+export interface GithubRepo {
   id: number;
   /* Handle for the repo */
   name: string;
@@ -80,7 +80,7 @@ export interface GitHubRepo {
   };
 }
 
-export interface GithubReposResponse {
+export interface RawGithubReposResponse {
   incomplete_results: boolean;
   items: RawGitHubRepo[];
   total_count: number;

@@ -1,7 +1,7 @@
 import { HomePage as Home } from '@modules/home/HomePage';
 
-import SearchPageLayout from '@/layouts/SearchPageLayout';
+import HomePageLayout from '@/layouts/HomePageLayout';
 
-(Home as any).Layout = SearchPageLayout;
+(Home as any).Layout = HomePageLayout;
 
 export default Home;

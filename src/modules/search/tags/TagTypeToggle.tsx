@@ -5,9 +5,9 @@ import pluralize from '@utils/pluralize';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 
+import { useSearchStore } from '@/stores/root-store';
 import { ChevronDownIcon, XIcon } from '@/ui/icons';
 
-import { useSearchStore } from '../SearchStore';
 import { TagButton } from './TagButton';
 
 export const TagTypeToggle = observer(function TagTypeToggle({
@@ -18,11 +18,12 @@ export const TagTypeToggle = observer(function TagTypeToggle({
   const searchStore = useSearchStore();
 
   const selectedCount = computed(
-    () => searchStore.tags.filter((tag) => tag.type === type).length,
+    () =>
+      searchStore.reposSearch.tags.filter((tag) => tag.type === type).length,
   ).get();
 
   const handleRemove = () => {
-    searchStore.clearTags(type);
+    searchStore.reposSearch.clearTags(type);
   };
 
   return (

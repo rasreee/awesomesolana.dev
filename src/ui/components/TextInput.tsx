@@ -1,13 +1,9 @@
 import clsxm from '@utils/clsxm';
 import React, { useEffect } from 'react';
 
-type TextInputProps = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  'onChange'
-> & {
+export type TextInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   placeholder?: string;
   value: string;
-  onChange: (value: string) => void;
   type?: string;
   name?: string;
   className?: string;
@@ -16,7 +12,6 @@ type TextInputProps = Omit<
 
 export function TextInput({
   placeholder,
-  onChange: handleChange,
   value,
   className,
   autoFocused = false,
@@ -30,10 +25,6 @@ export function TextInput({
     autoFocused && inputRef.current?.focus();
   }, [autoFocused]);
 
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    handleChange(event.currentTarget.value);
-  };
-
   return (
     <input
       autoFocus={autoFocused}
@@ -46,7 +37,6 @@ export function TextInput({
         className,
       )}
       ref={inputRef}
-      onChange={onChange}
       value={value}
       autoComplete={autoComplete}
       type={type}

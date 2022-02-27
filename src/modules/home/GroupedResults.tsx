@@ -1,10 +1,8 @@
-import { Tag, TagType, tagTypes, tagUtils } from '@core/search';
+import { Tag, TagType, tagTypes } from '@core/search';
 import { capitalize } from '@utils/capitalize';
 import pluralize from '@utils/pluralize';
 
 import { Popover } from '@/ui/components';
-
-import { useSearchStore } from '../search/SearchStore';
 
 type GroupedResultsProps = {
   isOpen: boolean;
@@ -30,10 +28,6 @@ export function GroupedResults({
   onTagClick,
   onClose,
 }: GroupedResultsProps) {
-  const store = useSearchStore();
-
-  const listToShow = tagUtils.list(hits).exclude(store.tags);
-
   const handleTagClick = (tag: Tag) => () => {
     onTagClick(tag);
   };
@@ -44,7 +38,7 @@ export function GroupedResults({
       isOpen={isOpen}
       onClose={onClose}
     >
-      {groupByTag(listToShow).map(
+      {groupByTag(hits).map(
         ({ type, hits: list }) =>
           list.length > 0 && (
             <div className="flex flex-col gap-2 px-1" key={type}>

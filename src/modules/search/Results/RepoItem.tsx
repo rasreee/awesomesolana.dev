@@ -1,4 +1,4 @@
-import { GitHubRepo } from '@core/github';
+import { GithubRepo } from '@core/github';
 import React from 'react';
 
 import { Badge } from '@/ui/components';
@@ -9,7 +9,7 @@ export function RepoItem({
   description,
   topics,
   starsCount,
-}: GitHubRepo) {
+}: GithubRepo) {
   return (
     <div className="bg-surface rounded bg-opacity-70">
       <div className="flex flex-col gap-2 px-3 py-3">

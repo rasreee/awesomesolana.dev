@@ -12,5 +12,6 @@ export * from './Responsive';
 export * from './Seo';
 export * from './Spinner';
 export * from './StatefulIcon';
+export * from './TagsSearchBox';
 export * from './TextInput';
 export * from './SearchForm';
