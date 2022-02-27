@@ -1,4 +1,4 @@
-import { action, computed, makeAutoObservable } from 'mobx';
+import { computed, makeAutoObservable } from 'mobx';
 
 import { createRequestStore, RequestStore } from '@/mobx/request-store';
 import { useRootStore } from '@/stores/root-store';
@@ -21,18 +21,22 @@ export interface ITagsSearchStore extends TagsSearchState {
 }
 
 export class TagsSearchStore implements ITagsSearchStore {
+  constructor() {
+    makeAutoObservable(this, {}, { name: 'TagsSearchStore' });
+  }
+
   hits: Tag[] = [];
   query = '';
 
   request = createRequestStore();
 
-  setHits(hits: Tag[]) {
+  setHits = (hits: Tag[]) => {
     this.hits = hits;
-  }
+  };
 
-  onChange(event: React.ChangeEvent<HTMLInputElement>) {
+  onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.query = event.currentTarget.value;
-  }
+  };
 
   getTextInputProps = (props?: Partial<TextInputProps>): TextInputProps =>
     computed(() => ({
@@ -41,7 +45,7 @@ export class TagsSearchStore implements ITagsSearchStore {
       onChange: this.onChange,
     })).get();
 
-  async onSubmit(query: string) {
+  onSubmit = async (query: string) => {
     if (!query) return this.setHits([]);
 
     this.request.setLoading(true);
@@ -54,21 +58,13 @@ export class TagsSearchStore implements ITagsSearchStore {
     } finally {
       this.request.setLoading(false);
     }
-  }
+  };
 
-  onReset() {
+  onReset = () => {
     this.query = '';
     this.hits = [];
     this.request.onReset();
-  }
-
-  constructor() {
-    makeAutoObservable(
-      this,
-      { onChange: action.bound, onReset: action.bound },
-      { name: 'TagsSearchStore' },
-    );
-  }
+  };
 }
 
 export const useTagsSearchStore = (): TagsSearchStore =>

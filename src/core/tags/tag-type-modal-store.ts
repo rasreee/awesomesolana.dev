@@ -11,17 +11,17 @@ interface ITagTypeModalStore {
 export class TagTypeModalStore implements ITagTypeModalStore {
   tagType: TagType | null = null;
 
-  onClose() {
+  onClose = () => {
     this.tagType = null;
-  }
+  };
 
   get isOpen(): boolean {
     return Boolean(this.tagType);
   }
 
-  openTagType(type: TagType) {
+  openTagType = (type: TagType) => {
     this.tagType = type;
-  }
+  };
 
   constructor() {
     makeAutoObservable(this, {}, { name: 'TagTypeModal' });

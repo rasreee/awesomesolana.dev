@@ -1,4 +1,4 @@
-import { action, computed, makeAutoObservable } from 'mobx';
+import { computed, makeAutoObservable } from 'mobx';
 
 import { appConfig } from '@/configs/app-config';
 import { Tag, TagType } from '@/core/tags/types';
@@ -37,19 +37,23 @@ async function searchGithubRepos(
 }
 
 export class ReposSearchStore implements IReposSearchStore {
+  constructor() {
+    makeAutoObservable(this, {}, { name: 'ReposSearchStore' });
+  }
+
   hits: GithubRepo[] = [];
   tags: Tag[] = [];
   query = '';
 
   request = createRequestStore();
 
-  setHits(hits: GithubRepo[]) {
+  setHits = (hits: GithubRepo[]) => {
     this.hits = hits;
-  }
+  };
 
-  onChange(event: React.ChangeEvent<HTMLInputElement>) {
+  onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.query = event.currentTarget.value;
-  }
+  };
 
   getTextInputProps = (props?: Partial<TextInputProps>): TextInputProps =>
     computed(() => ({
@@ -58,7 +62,7 @@ export class ReposSearchStore implements IReposSearchStore {
       onChange: this.onChange,
     })).get();
 
-  async onSubmit(query: string) {
+  onSubmit = async (query: string) => {
     if (!query) return this.setHits([]);
 
     this.request.setLoading(true);
@@ -76,36 +80,28 @@ export class ReposSearchStore implements IReposSearchStore {
     } finally {
       this.request.setLoading(false);
     }
-  }
+  };
 
-  onReset() {
+  onReset = () => {
     this.query = '';
     this.request.onReset();
-  }
+  };
 
-  addTag(tag: Tag) {
+  addTag = (tag: Tag) => {
     this.tags = [...this.tags, tag];
-  }
+  };
 
-  removeTag(tag: Tag) {
+  removeTag = (tag: Tag) => {
     this.tags = tagUtils.list(this.tags).exclude([tag]);
-  }
+  };
 
-  toggleTag(tag: Tag) {
+  toggleTag = (tag: Tag) => {
     if (tagUtils.list(this.tags).has(tag)) return this.removeTag(tag);
 
     this.addTag(tag);
-  }
+  };
 
-  clearTags(type: TagType) {
+  clearTags = (type: TagType) => {
     this.tags = this.tags.filter((tag) => tag.type === type);
-  }
-
-  constructor() {
-    makeAutoObservable(
-      this,
-      { onChange: action.bound },
-      { name: 'ReposSearchStore' },
-    );
-  }
+  };
 }
