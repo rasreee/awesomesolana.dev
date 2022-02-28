@@ -1,5 +1,3 @@
-import dynamic from 'next/dynamic';
+import ReposPage from '@/modules/repos/repos-page';
 
-const Repos = dynamic(() => import('@/modules/repos/repos-page'));
-
-export default Repos;
+export default ReposPage;
