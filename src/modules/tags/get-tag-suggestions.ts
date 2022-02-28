@@ -1,9 +1,10 @@
 import { allTags } from './constants';
-import { Tag, TagType } from './types';
+import { tagUtils } from './helpers';
+import { Tag } from './types';
 
 export async function getTagSuggestions(
   query: string,
-  filter?: { type?: TagType },
+  filters: Tag[] = [],
 ): Promise<Tag[]> {
   if (!query) return [];
 
@@ -11,9 +12,7 @@ export async function getTagSuggestions(
 
   const a = query.toLowerCase();
 
-  const tagsToSearch = filter?.type
-    ? allTags.filter((tag) => tag.type === filter.type)
-    : allTags;
+  const tagsToSearch = tagUtils.list(allTags).exclude(filters);
 
   hits = tagsToSearch.filter((item) => {
     const name = item.name;

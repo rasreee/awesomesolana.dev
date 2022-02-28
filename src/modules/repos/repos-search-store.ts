@@ -13,6 +13,8 @@ import { Tag, TagType, tagUtils } from '@/modules/tags';
 import { IReposSearchStore } from '@/stores/interfaces';
 import type { TextInputProps } from '@/ui/text-input';
 
+import { SearchFormData } from '../search/search-form/types';
+
 async function searchGithubRepos(
   params: Partial<GithubReposSearchParams>,
 ): Promise<RawGithubReposResponse> {
@@ -49,15 +51,15 @@ export class ReposSearchStore implements IReposSearchStore {
       onChange: this.onChange,
     })).get();
 
-  onSubmit = async (query: string) => {
-    if (!query) return this.setHits([]);
+  onSubmit = async ({ query, filters }: SearchFormData) => {
+    if (!query && !filters.length) return this.setHits([]);
 
     this.request.setLoading(true);
     this.request.setError(null);
     try {
       const response = await searchGithubRepos({
         keywords: [query],
-        tags: this.tags,
+        tags: filters,
       });
       this.setHits(
         response.items.map((rawData) => parseRawGitHubRepo(rawData)),
