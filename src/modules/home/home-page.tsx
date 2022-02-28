@@ -40,10 +40,7 @@ const HomePage = function HomePage() {
         </div>
         <div className="relative flex h-min flex-col gap-3">
           <div className="relative z-50">
-            <TagsSearchBox
-              tagsSearchStore={tagsSearchStore}
-              onInputClick={openMenu}
-            />
+            <TagsSearchBox onInputClick={openMenu} />
           </div>
           <Popover
             className="bg-surface top-12 z-50 w-full flex-1 overflow-hidden py-5 px-3"
