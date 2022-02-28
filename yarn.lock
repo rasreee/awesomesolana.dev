@@ -1049,6 +1049,13 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
+"@types/lodash.delay@^4.1.6":
+  version "4.1.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash.delay/-/lodash.delay-4.1.6.tgz#1c31fdeae86fc78984bcf88639f9722e958a98aa"
+  integrity sha512-4BMZPCBFb4n06pSzlA5TU0bZ3Kc1YNa6eqY+5nWVEkUI0vi6DY+/IXuUf5J9F7Q5RnPNo8kzPwrTlp7yn9U2rQ==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash.pick@^4.4.6":
   version "4.4.6"
   resolved "https://registry.yarnpkg.com/@types/lodash.pick/-/lodash.pick-4.4.6.tgz#ae4e8f109e982786313bb6aac4b1a73aefa6e9be"
@@ -4543,6 +4550,11 @@ lodash.castarray@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.castarray/-/lodash.castarray-4.4.0.tgz#c02513515e309daddd4c24c60cfddcf5976d9115"
   integrity sha1-wCUTUV4wna3dTCTGDP3c9ZdtkRU=
+
+lodash.delay@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.delay/-/lodash.delay-4.1.1.tgz#8a3b424988252ab912356d8e3ce93eb172d9f231"
+  integrity sha1-ijtCSYglKrkSNW2OPOk+sXLZ8jE=
 
 lodash.ismatch@^4.4.0:
   version "4.4.0"

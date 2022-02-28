@@ -14,25 +14,8 @@ import { HomePageStore } from './home-page-store';
 import PopularSources from './search-results/popular-sources';
 import SearchResults from './search-results/search-results';
 
-const HomePage = observer(function HomePage() {
-  const homePageStore = useStore<HomePageStore>();
-
+const HomePage = function HomePage() {
   const seo = exploreSEO();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    homePageStore.setSearchQuery(e.currentTarget.value);
-  };
-
-  const getTextInputProps = (props?: Partial<TextInputProps>) =>
-    computed(() => ({
-      ...props,
-      ...{
-        onFocus: homePageStore.openMenu,
-        onClick: homePageStore.openMenu,
-        onChange: handleChange,
-        value: homePageStore.search.query,
-      },
-    }));
 
   return (
     <PageLayout seo={seo}>
@@ -49,18 +32,37 @@ const HomePage = observer(function HomePage() {
         </div>
         <div className="relative flex h-min flex-col gap-3">
           <div className="relative z-50">
-            <SearchForm
-              request={homePageStore.request}
-              onReset={homePageStore.reset}
-              onSubmit={homePageStore.submitSearch}
-              textInputProps={getTextInputProps().get()}
-            />
+            <HomeSearchBox />
           </div>
           <SearchResults />
           <PopularSources />
         </div>
       </div>
     </PageLayout>
+  );
+};
+
+const HomeSearchBox = observer(() => {
+  const homePageStore = useStore<HomePageStore>();
+  const { search } = homePageStore;
+
+  const getTextInputProps = (props?: Partial<TextInputProps>): TextInputProps =>
+    computed(() => ({
+      ...props,
+      ...{
+        onClick: homePageStore.openMenu,
+        onChange: search.onChange,
+        value: search.query,
+      },
+    })).get();
+
+  return (
+    <SearchForm
+      request={search.request}
+      onReset={search.reset}
+      onSubmit={search.submitSearch}
+      textInputProps={getTextInputProps()}
+    />
   );
 });
 

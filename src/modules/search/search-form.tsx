@@ -53,6 +53,7 @@ function SearchForm({
   useEffect(() => {
     const form = formRef.current;
     if (!form) return;
+
     submitForm(form);
   }, [formRef.current]);
 
@@ -60,7 +61,10 @@ function SearchForm({
     <form
       ref={formRef}
       noValidate
-      onSubmit={(event) => submitForm(event.currentTarget)}
+      onSubmit={(event) => {
+        event.preventDefault();
+        submitForm(event.currentTarget);
+      }}
       className={clsxm(
         'flex !max-h-[3rem] max-w-full flex-1 items-center gap-0 px-2 py-1',
         'input bg-surface-1',
