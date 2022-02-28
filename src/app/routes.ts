@@ -1,4 +1,4 @@
-import { Tag } from '@/modules/search/types';
+import { Tag } from '@/domains/tags/tags.types';
 
 export const appRoute = {
   repos: {

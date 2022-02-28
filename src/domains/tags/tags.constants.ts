@@ -1,6 +1,6 @@
 import invariant from '@/lib/utils/invariant';
 
-import { Tag, TagType } from './types';
+import { Tag, TagType } from './tags.types';
 
 export const tagTypes = [
   'topic',

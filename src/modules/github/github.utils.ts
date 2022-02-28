@@ -1,9 +1,9 @@
 import memoizeOne from 'memoize-one';
 
+import { Tag } from '@/domains/tags/tags.types';
+import { isEqualTag } from '@/domains/tags/tags.utils';
 import { defaultPaginationParams, PaginationParams } from '@/lib/utils';
 
-import { isEqualTag } from '../search/tags.utils';
-import { Tag } from '../search/types';
 import {
   GithubRepo,
   GithubReposBrowseParams,

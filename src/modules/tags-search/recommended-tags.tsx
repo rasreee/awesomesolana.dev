@@ -34,7 +34,7 @@ const trendingTopics: Topic[] = makeTopics(
   { name: 'anchor' },
 );
 
-const RecommendedTopics = () => {
+const RecommendedTags = () => {
   return (
     <div className="flex flex-col gap-7 py-2 px-5">
       <span className="text-xl font-medium leading-none">
@@ -66,4 +66,4 @@ const RecommendedTopics = () => {
   );
 };
 
-export default RecommendedTopics;
+export default RecommendedTags;

@@ -1,6 +1,8 @@
 import { computed, makeAutoObservable } from 'mobx';
 
 import { appConfig } from '@/app/app-config';
+import { Tag, TagType } from '@/domains/tags/tags.types';
+import { tagUtils } from '@/domains/tags/tags.utils';
 import { createRequestStore } from '@/lib/mobx/request-store';
 import {
   GithubRepo,
@@ -9,11 +11,10 @@ import {
   parseRawGitHubRepo,
   RawGithubReposResponse,
 } from '@/modules/github';
-import { SearchFormData, Tag, TagType } from '@/modules/search/types';
 import { IReposSearchStore } from '@/stores/interfaces';
 import type { TextInputProps } from '@/ui/text-input';
 
-import { tagUtils } from '../search/tags.utils';
+import { SearchFormData } from '../search/search.types';
 
 async function searchGithubRepos(
   params: Partial<GithubReposSearchParams>,

@@ -1,12 +1,11 @@
 import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 
+import { TagType } from '@/domains/tags/tags.types';
 import { groupBy } from '@/lib/utils/group-by';
-import { TagsSearchStore } from '@/modules/search/tags-search-store';
-import { TagType } from '@/modules/search/types';
+import TagGroupList from '@/modules/tags-search/tag-group-list';
+import { TagsSearchStore } from '@/modules/tags-search/tags-search-store';
 import Popover from '@/ui/popover';
-
-import TagGroupList from './tag-group-list';
 
 const GroupedResults = observer(function GroupedResults({
   tagsSearchStore,

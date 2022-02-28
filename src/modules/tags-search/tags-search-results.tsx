@@ -1,10 +1,10 @@
 import { observer } from 'mobx-react-lite';
 
+import { TagType } from '@/domains/tags/tags.types';
 import { groupBy } from '@/lib/utils/group-by';
-import { TagsSearchStore } from '@/modules/search/tags-search-store';
-import { TagType } from '@/modules/search/types';
+import { TagsSearchStore } from '@/modules/tags-search/tags-search-store';
 
-import RecommendedTopics from './recommended-topics';
+import RecommendedTags from './recommended-tags';
 import TagGroupList from './tag-group-list';
 
 const TagsSearchResults = observer(
@@ -35,7 +35,7 @@ const TagsSearchResults = observer(
 const TagsSearchResultsEmpty = () => {
   return (
     <>
-      <RecommendedTopics />
+      <RecommendedTags />
     </>
   );
 };

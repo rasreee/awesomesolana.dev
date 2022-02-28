@@ -1,4 +1,4 @@
-import { allTags, tagNames } from '@/modules/search/constants';
+import { allTags, tagNames } from '@/domains/tags/tags.constants';
 
 import { getPossibleValuesSet, groupBy } from './group-by';
 

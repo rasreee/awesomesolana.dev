@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 
-import { TagType } from '@/modules/search/types';
+import { TagType } from '@/domains/tags/tags.types';
 import { ITagTypeModalStore } from '@/stores/interfaces';
 
 export class TagTypeModalStore implements ITagTypeModalStore {

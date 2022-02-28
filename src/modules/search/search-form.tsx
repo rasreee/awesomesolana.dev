@@ -8,7 +8,7 @@ import { useRootStore } from '@/stores/root-store';
 import { ErrorMessage } from '@/ui/error-message';
 import type { TextInputProps } from '@/ui/text-input';
 
-import { SearchFormData } from './types';
+import { SearchFormData } from './search.types';
 
 const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 const TextInput = dynamic(() => import('@/ui/text-input'));

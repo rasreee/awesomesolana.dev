@@ -2,11 +2,10 @@ import { computed, runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 
+import { Tag } from '@/domains/tags/tags.types';
+import { tagUtils } from '@/domains/tags/tags.utils';
 import { useRootStore } from '@/stores/root-store';
 import { CheckBox } from '@/ui/check-box';
-
-import { tagUtils } from '../search/tags.utils';
-import { Tag } from '../search/types';
 
 const RepoFilterCheckBox = observer(function RepoFilterCheckBox({
   tag,

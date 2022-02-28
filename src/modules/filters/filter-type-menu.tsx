@@ -3,15 +3,14 @@ import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 import useSWR from 'swr';
 
+import { TagType } from '@/domains/tags/tags.types';
+import { getTags, tagUtils } from '@/domains/tags/tags.utils';
 import clsxm from '@/lib/utils/clsxm';
 import pluralize from '@/lib/utils/pluralize';
 import { capitalize } from '@/lib/utils/string';
+import TagsSearchBox from '@/modules/tags-search/tags-search-box';
 import { useRootStore } from '@/stores/root-store';
 import { Divider } from '@/ui/divider';
-
-import { getTags, tagUtils } from '../search/tags.utils';
-import { TagType } from '../search/types';
-import TagsSearchBox from './tags-search-box';
 
 const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 

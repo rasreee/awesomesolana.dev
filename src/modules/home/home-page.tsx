@@ -4,16 +4,16 @@ import { useState } from 'react';
 import { exploreSEO } from '@/app/seo';
 import { siteConfig } from '@/app/site-config';
 import PageLayout from '@/layouts/page-layout';
+import TagsSearchResults from '@/modules/tags-search/tags-search-results';
 import { useRootStore } from '@/stores/root-store';
 import { Logo } from '@/ui/logo';
 import Popover from '@/ui/popover';
 import Responsive from '@/ui/responsive/responsive';
 
-import PopularSources from './popular-sources';
-import TagsSearchResults from './tags-search-results';
+import PopularSources from './home-search-results/popular-sources';
 
 const TagsSearchBox = dynamic(
-  () => import('@/modules/filters/tags-search-box'),
+  () => import('@/modules/tags-search/tags-search-box'),
 );
 
 const HomePage = function HomePage() {

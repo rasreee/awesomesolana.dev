@@ -1,7 +1,7 @@
 import invariant from '@/lib/utils/invariant';
 
-import { allTags } from './constants';
-import { Tag, TagType } from './types';
+import { allTags } from './tags.constants';
+import { Tag, TagType } from './tags.types';
 
 export const tagUtils = {
   list: (arr: Tag[]) => ({

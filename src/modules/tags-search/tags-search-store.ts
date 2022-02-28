@@ -1,12 +1,12 @@
 import { makeAutoObservable } from 'mobx';
 
+import { Tag } from '@/domains/tags/tags.types';
+import { getTagSuggestions } from '@/domains/tags/tags.utils';
 import { createRequestStore } from '@/lib/mobx/request-store';
 import { ITagsSearchStore } from '@/stores/interfaces';
-import { useRootStore } from '@/stores/root-store';
 import type { TextInputProps } from '@/ui/text-input';
 
-import { getTagSuggestions } from './tags.utils';
-import { SearchFormData, Tag } from './types';
+import { SearchFormData } from '../search/search.types';
 
 export class TagsSearchStore implements ITagsSearchStore {
   constructor() {
@@ -52,6 +52,3 @@ export class TagsSearchStore implements ITagsSearchStore {
     this.request.onReset();
   };
 }
-
-export const useTagsSearchStore = (): TagsSearchStore =>
-  useRootStore().tagsSearch;
