@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-import { tagTypes } from '@/modules/search/tags.constants';
+import { tagTypes } from '@/modules/search/constants';
 
 const FilterTypeMenuToggle = dynamic(() => import('./filter-type-menu-toggle'));
 

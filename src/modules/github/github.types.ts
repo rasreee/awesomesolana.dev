@@ -99,3 +99,10 @@ export type GithubReposResponse = {
   incompleteResults: boolean;
   items: GithubRepo[];
 };
+
+export interface GithubReposSearchParams extends PaginationParams {
+  keywords: string[];
+  tags: Tag[];
+}
+
+export interface GithubReposBrowseParams extends PaginationParams {}

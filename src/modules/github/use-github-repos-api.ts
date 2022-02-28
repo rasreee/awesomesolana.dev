@@ -2,10 +2,10 @@ import useSWR from 'swr';
 
 import {
   GithubReposBrowseParams,
+  GithubReposResponse,
   GithubReposSearchParams,
-  githubSwrKey,
-} from './api';
-import { GithubReposResponse } from './types';
+} from './github.types';
+import { githubSwrKey } from './github.utils';
 
 export type UseGithubReposApi = {
   data: GithubReposResponse | undefined;
@@ -24,16 +24,4 @@ export function useGithubReposApi<Route extends '/search' | '/browse'>(
   );
 
   return { data, error };
-}
-
-export function useBrowseGithubRepos(
-  params?: Partial<GithubReposBrowseParams>,
-): UseGithubReposApi {
-  return useGithubReposApi('/browse', params);
-}
-
-export function useSearchGithubRepos(
-  params?: Partial<GithubReposSearchParams>,
-): UseGithubReposApi {
-  return useGithubReposApi('/search', params);
 }

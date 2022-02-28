@@ -1,13 +1,13 @@
 const GITHUB_API_URL = 'https://api.github.com';
 
-import { githubApi, githubSwrKey } from './api';
+import { githubApi, githubSwrKey } from './github.utils';
 
 /**
  * @group modules
  * @group github
- * @group api
+ * @group utils
  */
-describe('api/github/api', () => {
+describe('modules/github/github.utils', () => {
   describe('githubSwrKey', () => {
     it('should format browse repos swr key', () => {
       const result = githubSwrKey.route('/browse');
