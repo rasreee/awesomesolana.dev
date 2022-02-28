@@ -3,12 +3,12 @@ import dynamic from 'next/dynamic';
 
 import { reposSEO } from '@/app/seo';
 import PageLayout from '@/layouts/page-layout';
-import Filters from '@/modules/filters/filters';
 import { useRootStore } from '@/stores/root-store';
 
+import Filters from './filters/filters';
 import { ReposSearchBox } from './repos-search-box';
 
-const ReposResults = dynamic(() => import('./repo-results/repos-results'));
+const ReposResults = dynamic(() => import('./repos-results/repos-results'));
 
 const ReposPage = observer(function ReposPage() {
   const { reposSearch } = useRootStore();

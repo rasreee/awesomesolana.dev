@@ -39,7 +39,7 @@ function TagButton({
   );
 }
 
-const FilterTypeMenuToggle = observer(function FilterTypeMenuToggle({
+const FilterTypeToggle = observer(function FilterTypeToggle({
   type,
 }: {
   type: TagType;
@@ -84,4 +84,4 @@ const FilterTypeMenuToggle = observer(function FilterTypeMenuToggle({
   );
 });
 
-export default FilterTypeMenuToggle;
+export default FilterTypeToggle;

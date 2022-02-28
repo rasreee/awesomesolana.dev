@@ -16,11 +16,7 @@ const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 
 const RepoFilterCheckBox = dynamic(() => import('./filter-check-box'));
 
-const FilterTypeMenu = observer(function FilterTypeMenu({
-  type,
-}: {
-  type: TagType;
-}) {
+const FiltersMenu = observer(function FiltersMenu({ type }: { type: TagType }) {
   const store = useRootStore();
   const { tagTypeModal } = store;
 
@@ -85,4 +81,4 @@ const FilterTypeMenu = observer(function FilterTypeMenu({
   );
 });
 
-export default FilterTypeMenu;
+export default FiltersMenu;
