@@ -9,11 +9,11 @@ import {
   parseRawGitHubRepo,
   RawGithubReposResponse,
 } from '@/modules/github';
-import { Tag, TagType, tagUtils } from '@/modules/tags';
+import { SearchFormData, Tag, TagType } from '@/modules/search/types';
 import { IReposSearchStore } from '@/stores/interfaces';
 import type { TextInputProps } from '@/ui/text-input';
 
-import { SearchFormData } from '../search/search-form/types';
+import { tagUtils } from '../search/tags.utils';
 
 async function searchGithubRepos(
   params: Partial<GithubReposSearchParams>,

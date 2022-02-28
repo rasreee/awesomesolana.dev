@@ -1,11 +1,10 @@
 import { useRouter } from 'next/router';
 
 import { appRoute } from '@/app/routes';
-import { capitalize } from '@/lib/utils';
 import pluralize from '@/lib/utils/pluralize';
+import { capitalize } from '@/lib/utils/string';
+import { Tag, TagType } from '@/modules/search/types';
 import { useRootStore } from '@/stores/root-store';
-
-import { Tag, TagType } from '../tags';
 
 const TagGroupList = ({ type, tags }: { type: TagType; tags: Tag[] }) => {
   const router = useRouter();

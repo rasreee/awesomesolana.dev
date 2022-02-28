@@ -1,6 +1,5 @@
 import { PaginationParams } from '@/lib/utils/pagination';
-
-import { Tag } from '../tags/types';
+import { Tag } from '@/modules/search/types';
 
 export interface GithubUser {
   id: number;

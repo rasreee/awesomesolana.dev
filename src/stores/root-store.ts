@@ -1,7 +1,7 @@
 import { useStore } from '@/lib/mobx/store-context';
 import { ReposSearchStore } from '@/modules/repos/repos-search-store';
-import { TagTypeModalStore } from '@/modules/tags/tag-type-modal-store';
-import { TagsSearchStore } from '@/modules/tags/tags-search-store';
+import { TagTypeModalStore } from '@/modules/search/tag-type-modal-store';
+import { TagsSearchStore } from '@/modules/search/tags-search-store';
 
 export interface RootStore {
   tagsSearch: TagsSearchStore;

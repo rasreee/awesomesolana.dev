@@ -6,10 +6,11 @@ import useSWR from 'swr';
 import clsxm from '@/lib/utils/clsxm';
 import pluralize from '@/lib/utils/pluralize';
 import { capitalize } from '@/lib/utils/string';
-import { getTags, TagType, tagUtils } from '@/modules/tags';
 import { useRootStore } from '@/stores/root-store';
 import { Divider } from '@/ui/divider';
 
+import { getTags, tagUtils } from '../search/tags.utils';
+import { TagType } from '../search/types';
 import TagsSearchBox from './tags-search-box';
 
 const XIcon = dynamic(() => import('@/ui/icons/x-icon'));

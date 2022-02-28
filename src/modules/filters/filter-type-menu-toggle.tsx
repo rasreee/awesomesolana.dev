@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import clsxm from '@/lib/utils/clsxm';
 import pluralize from '@/lib/utils/pluralize';
 import { capitalize } from '@/lib/utils/string';
-import { TagType } from '@/modules/tags';
+import { TagType } from '@/modules/search/types';
 import { useRootStore } from '@/stores/root-store';
 
 const ChevronDownIcon = dynamic(() => import('@/ui/icons/chevron-down-icon'));

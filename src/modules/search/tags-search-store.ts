@@ -1,12 +1,12 @@
 import { makeAutoObservable } from 'mobx';
 
 import { createRequestStore } from '@/lib/mobx/request-store';
-import { getTagSuggestions, Tag } from '@/modules/tags';
 import { ITagsSearchStore } from '@/stores/interfaces';
 import { useRootStore } from '@/stores/root-store';
 import type { TextInputProps } from '@/ui/text-input';
 
-import { SearchFormData } from '../search/search-form/types';
+import { getTagSuggestions } from './tags.utils';
+import { SearchFormData, Tag } from './types';
 
 export class TagsSearchStore implements ITagsSearchStore {
   constructor() {

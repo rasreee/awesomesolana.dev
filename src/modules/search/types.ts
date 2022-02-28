@@ -4,3 +4,8 @@ export type Tag = {
   type: TagType;
   name: string;
 };
+
+export type SearchFormData = {
+  query: string;
+  filters: Tag[];
+};

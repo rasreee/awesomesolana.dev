@@ -1,7 +1,6 @@
 import { RequestStore } from '@/lib/mobx/request-store';
 import { GithubRepo } from '@/modules/github';
-import { SearchFormData } from '@/modules/search/search-form/types';
-import { Tag, TagType } from '@/modules/tags';
+import { SearchFormData, Tag, TagType } from '@/modules/search/types';
 import { TextInputProps } from '@/ui/text-input';
 
 interface TagsSearchState {

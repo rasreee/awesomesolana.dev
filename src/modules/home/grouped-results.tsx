@@ -2,8 +2,8 @@ import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 
 import { groupBy } from '@/lib/utils/group-by';
-import { TagType } from '@/modules/tags';
-import { TagsSearchStore } from '@/modules/tags/tags-search-store';
+import { TagsSearchStore } from '@/modules/search/tags-search-store';
+import { TagType } from '@/modules/search/types';
 import Popover from '@/ui/popover';
 
 import TagGroupList from './tag-group-list';

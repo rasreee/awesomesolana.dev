@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 
-import SearchForm from '@/modules/search/search-form/search-form';
+import SearchForm from '@/modules/search/search-form';
 import { useRootStore } from '@/stores/root-store';
 
 export const ReposSearchBox = observer(function ReposSearchBox() {
