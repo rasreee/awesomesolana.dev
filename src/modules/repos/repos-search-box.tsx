@@ -12,6 +12,7 @@ export const ReposSearchBox = observer(function ReposSearchBox() {
       request={reposSearch.request}
       onSubmit={reposSearch.onSubmit}
       onReset={reposSearch.onReset}
+      filters={reposSearch.tags}
     />
   );
 });

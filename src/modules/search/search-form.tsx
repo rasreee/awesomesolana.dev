@@ -1,10 +1,10 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 
+import { Tag } from '@/domains/tags/tags.types';
 import { RequestState } from '@/lib/mobx/request-store';
 import clsxm from '@/lib/utils/clsxm';
 import { formData } from '@/lib/utils/form-data';
-import { useRootStore } from '@/stores/root-store';
 import { ErrorMessage } from '@/ui/error-message';
 import type { TextInputProps } from '@/ui/text-input';
 
@@ -18,6 +18,7 @@ export type SearchFormProps = {
   textInputProps: TextInputProps;
   onReset: () => void;
   onSubmit: (query: SearchFormData) => any;
+  filters?: Tag[];
 };
 
 const DEFAULT_SEARCH_PLACEHOLDER =
@@ -28,9 +29,9 @@ function SearchForm({
   request,
   onReset,
   onSubmit,
+  filters = [],
 }: SearchFormProps) {
-  const { reposSearch } = useRootStore();
-  const [focused, setFocused] = useState(textInputProps.autoFocused);
+  const [focused, setFocused] = useState(textInputProps?.autoFocused);
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -41,7 +42,7 @@ function SearchForm({
     const { query } = formData<Pick<SearchFormData, 'query'>>(form);
     const data = {
       query,
-      filters: reposSearch.tags,
+      filters,
     };
 
     console.log('TagsSearchStore.onSubmit()', data);
@@ -69,12 +70,13 @@ function SearchForm({
     >
       <ErrorMessage>{request.error}</ErrorMessage>
       <TextInput
+        {...textInputProps}
         {...{ onFocus, onBlur }}
         name="query"
         className="input-focus-unset px-2"
         placeholder={DEFAULT_SEARCH_PLACEHOLDER}
       />
-      {Boolean(textInputProps.value) && (
+      {textInputProps.value && (
         <button className="p-1" onClick={onReset}>
           <XIcon className="box-border h-4 w-4" />
         </button>

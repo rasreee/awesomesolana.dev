@@ -1,29 +1,38 @@
-import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { computed } from 'mobx';
+import { observer } from 'mobx-react-lite';
 
 import { exploreSEO } from '@/app/seo';
 import { siteConfig } from '@/app/site-config';
 import PageLayout from '@/layouts/page-layout';
-import TagsSearchResults from '@/modules/tags-search/tags-search-results';
-import { useRootStore } from '@/stores/root-store';
+import { useStore } from '@/lib/mobx/store-context';
 import { Logo } from '@/ui/logo';
-import Popover from '@/ui/popover';
 import Responsive from '@/ui/responsive/responsive';
+import { TextInputProps } from '@/ui/text-input';
 
-import PopularSources from './home-search-results/popular-sources';
+import SearchForm from '../search/search-form';
+import { HomePageStore } from './home-page-store';
+import PopularSources from './search-results/popular-sources';
+import SearchResults from './search-results/search-results';
 
-const TagsSearchBox = dynamic(
-  () => import('@/modules/tags-search/tags-search-box'),
-);
+const HomePage = observer(function HomePage() {
+  const homePageStore = useStore<HomePageStore>();
 
-const HomePage = function HomePage() {
   const seo = exploreSEO();
 
-  const { tagsSearch: tagsSearchStore } = useRootStore();
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    homePageStore.setSearchQuery(e.currentTarget.value);
+  };
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  const openMenu = () => setMenuOpen(true);
-  const closeMenu = () => setMenuOpen(false);
+  const getTextInputProps = (props?: Partial<TextInputProps>) =>
+    computed(() => ({
+      ...props,
+      ...{
+        onFocus: homePageStore.openMenu,
+        onClick: homePageStore.openMenu,
+        onChange: handleChange,
+        value: homePageStore.search.query,
+      },
+    }));
 
   return (
     <PageLayout seo={seo}>
@@ -40,20 +49,19 @@ const HomePage = function HomePage() {
         </div>
         <div className="relative flex h-min flex-col gap-3">
           <div className="relative z-50">
-            <TagsSearchBox onInputClick={openMenu} />
+            <SearchForm
+              request={homePageStore.request}
+              onReset={homePageStore.reset}
+              onSubmit={homePageStore.submitSearch}
+              textInputProps={getTextInputProps().get()}
+            />
           </div>
-          <Popover
-            className="bg-surface top-12 z-50 w-full flex-1 overflow-hidden py-5 px-3"
-            isOpen={menuOpen}
-            onClose={closeMenu}
-          >
-            <TagsSearchResults tagsSearchStore={tagsSearchStore} />
-          </Popover>
+          <SearchResults />
           <PopularSources />
         </div>
       </div>
     </PageLayout>
   );
-};
+});
 
 export default HomePage;
