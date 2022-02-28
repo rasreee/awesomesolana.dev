@@ -18,8 +18,10 @@ export function RepoFeedItem({
 }: GithubRepo) {
   return (
     <div className="flex flex-col gap-2 py-3">
-      <div className="text-xl font-semibold">{name}</div>
-      <div className="text-base">{description}</div>
+      <div className="heading prose prose-xl font-semibold dark:prose-invert">
+        {name}
+      </div>
+      <div className="prose prose-sm dark:prose-invert">{description}</div>
       <div className="flex items-center gap-2">
         <ul className="flex flex-wrap items-center gap-1.5">
           {topics.map((topic) => (
