@@ -27,6 +27,10 @@ module.exports = {
           800: '#007D6C',
           900: '#004A45',
         },
+        blue: {
+          ...colors.blue,
+          500: '#3366FF',
+        },
         green: {
           ...colors.green,
           500: '#00D68F',

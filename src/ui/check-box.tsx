@@ -11,7 +11,11 @@ export function CheckBox({
   return (
     <input
       type="checkbox"
-      className={clsxm('bg-app rounded border-none', className)}
+      className={clsxm(
+        'form-checkbox',
+        'bg-app rounded dark:border-base-700 dark:checked:bg-blue-500',
+        className,
+      )}
       readOnly={readOnly}
       {...props}
     />
