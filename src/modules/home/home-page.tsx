@@ -51,14 +51,14 @@ const HomeSearchBox = observer(() => {
       ...props,
       ...{
         onClick: homePageStore.openMenu,
-        onChange: search.onChange,
+        onChange: homePageStore.onSearchQueryChange,
         value: search.query,
       },
     })).get();
 
   return (
     <SearchForm
-      request={search.request}
+      error={search.error}
       onReset={search.reset}
       onSubmit={search.submitSearch}
       textInputProps={getTextInputProps()}

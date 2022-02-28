@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 
 import { Tag } from '@/domains/tags/tags.types';
-import { RequestState } from '@/lib/mobx/request-store';
 import clsxm from '@/lib/utils/clsxm';
 import { formData } from '@/lib/utils/form-data';
 import { ErrorMessage } from '@/ui/error-message';
@@ -14,7 +13,7 @@ const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 const TextInput = dynamic(() => import('@/ui/text-input'));
 
 export type SearchFormProps = {
-  request: RequestState;
+  error: string | null | undefined;
   textInputProps: TextInputProps;
   onReset: () => void;
   onSubmit: (query: SearchFormData) => any;
@@ -25,8 +24,8 @@ const DEFAULT_SEARCH_PLACEHOLDER =
   'Search for any project, dependency, or topic';
 
 function SearchForm({
+  error,
   textInputProps,
-  request,
   onReset,
   onSubmit,
   filters = [],
@@ -44,8 +43,6 @@ function SearchForm({
       query,
       filters,
     };
-
-    console.log('TagsSearchStore.onSubmit()', data);
 
     onSubmit(data);
   };
@@ -72,7 +69,7 @@ function SearchForm({
         'rounded-full',
       )}
     >
-      <ErrorMessage>{request.error}</ErrorMessage>
+      <ErrorMessage>{error}</ErrorMessage>
       <TextInput
         {...textInputProps}
         {...{ onFocus, onBlur }}

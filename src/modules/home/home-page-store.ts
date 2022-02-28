@@ -3,68 +3,55 @@ import { makeAutoObservable, reaction } from 'mobx';
 
 import { Tag } from '@/domains/tags/tags.types';
 import { getTagSuggestions } from '@/domains/tags/tags.utils';
-import { createRequestStore } from '@/lib/mobx/request-store';
 
 import { SearchFormData } from '../search/search.types';
 
-export class SearchQuery {
-  constructor() {
-    makeAutoObservable(this, {}, { name: 'SearchQuery' });
+export class SearchState {
+  query = '';
+  results: Tag[] = [];
+  isBusy = false;
+  error: string | null | undefined = null;
+
+  constructor(private store: HomePageStore) {
+    makeAutoObservable(this, {}, { name: 'SearchState' });
 
     reaction(
       () => this.query,
       (query) => {
-        console.log(`[REACTION] query=${query}`);
         delay(this.submitSearch, 200, { query });
       },
     );
   }
 
-  results: Tag[] = [];
+  submitSearch = async ({ query, filters }: Partial<SearchFormData>) => {
+    if (!query) return this.reset();
 
-  query = '';
-
-  request = createRequestStore();
-
-  setQuery = (value: string) => (this.query = value);
-
-  onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.query = event.currentTarget.value;
-  };
-
-  setResults = (hits: Tag[]) => {
-    this.results = hits;
+    this.isBusy = true;
+    this.error = null;
+    try {
+      const response = await getTagSuggestions(query, filters);
+      this.results = response;
+    } catch (error) {
+      console.error(error);
+      if (!(error instanceof Error)) return;
+      this.error = error.message;
+    } finally {
+      this.isBusy = false;
+    }
   };
 
   reset = () => {
     this.query = '';
     this.results = [];
   };
-
-  submitSearch = async ({ query, filters }: Partial<SearchFormData>) => {
-    console.log('SearchQuery.submitSearch()', { query });
-    if (!query) return this.reset();
-
-    this.request.setLoading(true);
-    this.request.setError(null);
-    try {
-      const response = await getTagSuggestions(query, filters);
-      this.setResults(response);
-    } catch (error) {
-      console.error(error);
-      this.request.setError(error);
-    } finally {
-      this.request.setLoading(false);
-    }
-  };
 }
 
 export class HomePageStore {
   menu = { isOpen: false };
-  search = new SearchQuery();
+  search = new SearchState(this);
 
   reset = () => {
-    this.search = new SearchQuery();
+    this.search.reset();
     this.closeMenu();
   };
 
@@ -74,6 +61,10 @@ export class HomePageStore {
 
   closeMenu = () => {
     this.menu = { isOpen: false };
+  };
+
+  onSearchQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.search.query = event.currentTarget.value;
   };
 
   constructor() {

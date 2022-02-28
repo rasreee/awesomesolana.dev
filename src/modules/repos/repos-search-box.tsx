@@ -9,7 +9,7 @@ export const ReposSearchBox = observer(function ReposSearchBox() {
   return (
     <SearchForm
       textInputProps={reposSearch.getTextInputProps({ autoFocused: true })}
-      request={reposSearch.request}
+      error={reposSearch.request.error}
       onSubmit={reposSearch.onSubmit}
       onReset={reposSearch.onReset}
       filters={reposSearch.tags}

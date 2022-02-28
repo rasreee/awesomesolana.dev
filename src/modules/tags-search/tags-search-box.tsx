@@ -23,7 +23,7 @@ const TagsSearchBox = observer(function TagsSearchBox({
 
   return (
     <SearchForm
-      request={tagsSearchStore.request}
+      error={tagsSearchStore.request.error}
       onReset={tagsSearchStore.onReset}
       onSubmit={tagsSearchStore.onSubmit}
       textInputProps={getTextInputProps({
