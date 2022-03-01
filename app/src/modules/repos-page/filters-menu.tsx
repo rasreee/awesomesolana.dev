@@ -2,6 +2,7 @@ import { getTags, tagUtils } from '@awesomesolana/common';
 import { TagType } from '@awesomesolana/common';
 import { capitalize } from '@awesomesolana/common';
 import { clsxm } from '@awesomesolana/tw';
+import { Shimmer } from '@awesomesolana/ui';
 import times from 'lodash.times';
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
@@ -11,7 +12,6 @@ import { useSearchQuery } from '@/contexts/search-query-context';
 import pluralize from '@/lib/pluralize';
 import { useGlobalStore } from '@/stores';
 import { Divider } from '@/ui/divider';
-import Shimmer from '@/ui/shimmer';
 
 import TagsSearchBox from '../common/tags-search/tags-search-box';
 

@@ -1,7 +1,7 @@
+import { FeedSkeleton } from '@awesomesolana/ui';
 import React from 'react';
 
 import { GithubReposData } from '@/domains/github';
-import FeedSkeleton from '@/ui/feed-skeleton';
 
 import { RepoFeedItem } from './repo-feed-item';
 

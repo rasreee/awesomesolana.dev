@@ -1,9 +1,9 @@
-import { classed } from '@awesomesolana/tw';
-import times from 'lodash.times';
+import { classed } from "@awesomesolana/tw";
+import times from "lodash.times";
 
-import Shimmer from './shimmer';
+import Shimmer from "./shimmer";
 
-const ShimmerList = classed('ul', 'flex flex-col gap-5');
+const ShimmerList = classed("ul", "flex flex-col gap-5");
 
 const FeedSkeleton = ({ n = 3 }: { n?: number }) => {
   return (

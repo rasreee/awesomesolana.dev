@@ -1,10 +1,9 @@
 import { ApiData, isApiError, SourceType } from '@awesomesolana/common';
 import { classed } from '@awesomesolana/tw';
-import { ErrorMessage } from '@awesomesolana/ui';
+import { ErrorMessage, FeedSkeleton } from '@awesomesolana/ui';
 import useSWR from 'swr';
 
 import { GithubRepo } from '@/domains/github';
-import FeedSkeleton from '@/ui/feed-skeleton';
 
 const FeedList = classed(
   'ul',
