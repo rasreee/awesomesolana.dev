@@ -14,7 +14,6 @@ const BasicOutlineBadge = dynamic(() => import('@/ui/basic-outline-badge'));
 
 export function RepoFeedItem({
   name,
-  fullName,
   description,
   topics,
   starsCount,
@@ -26,10 +25,8 @@ export function RepoFeedItem({
 
   const handleTitleClick = async () => {
     await registerSourceView({
-      title: fullName,
       type: SourceType.Repo,
       url: htmlUrl,
-      tags: [...topics, language],
     });
   };
 

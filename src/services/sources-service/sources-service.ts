@@ -1,17 +1,13 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 
-import {
-  Source,
-  SOURCE_META_TABLE,
-  SOURCE_TABLE,
-  SourceMeta,
-} from '@/domains/sources/definitions';
+import { Source, SOURCE_TABLE } from '@/domains/sources/definitions';
 import { initSupabase } from '@/lib/init-supabase';
 
 import {
   CreateSourceArgs,
-  FindOrCreateSourceArgs,
-  FindSourceArgs,
+  DeleteSourceArgs,
+  GetSourceMetaArgs,
+  UpdateSourceArgs,
 } from './types';
 
 export class SourcesService {
@@ -20,89 +16,54 @@ export class SourcesService {
     this.client = _client ?? initSupabase();
   }
 
-  async createSource(args: CreateSourceArgs): Promise<Source> {
-    const { data: createdSource, error } = await this.client
-      .from<Source>(SOURCE_TABLE)
-      .insert(args)
-      .single();
-
-    if (error) throw error;
-
-    if (!createdSource)
-      throw new Error(`failed to create source for ${JSON.stringify(args)}`);
-
-    return createdSource;
-  }
-
-  async deleteSource(id: Source['id']) {
-    console.log(`Deleting source for id=${id}`);
-
+  async deleteSource(args: DeleteSourceArgs): Promise<void> {
     const { error } = await this.client
       .from<Source>(SOURCE_TABLE)
       .delete()
-      .eq('id', id);
+      .match({ type: args.type, url: args.url });
 
-    if (error) {
-      console.error(
-        `Failed to delete source for ${JSON.stringify({ id })}.`,
-        error,
-      );
-      throw error;
-    }
+    if (error) throw error;
   }
 
-  async findSource(args: FindSourceArgs): Promise<Source | null> {
-    const { data: foundSource, error: foundError } = await this.client
-      .from<Source>(SOURCE_TABLE)
-      .select('*')
-      .match(args)
-      .limit(1)
-      .maybeSingle();
-
-    if (!foundError) throw foundError;
-
-    return foundSource;
-  }
-
-  async findOrCreateSource(args: FindOrCreateSourceArgs): Promise<Source> {
-    let source: Source | null = await this.findSource(args);
-
-    if (!source) {
-      source = await this.createSource({
-        title: args.title,
-        type: args.type,
-        url: args.url,
-        tags: args.tags,
-      });
-    }
-
-    return source;
-  }
-
-  async getSourceMeta(args: { source_id: Source['id'] }): Promise<SourceMeta> {
+  async createSource(args: CreateSourceArgs): Promise<Source> {
     console.log('getSourceMeta()', JSON.stringify({ args }));
 
     const { data, error } = await this.client
-      .from<SourceMeta>(SOURCE_META_TABLE)
-      .select('*')
-      .match({ source_id: args.source_id })
+      .from<Source>(SOURCE_TABLE)
+      .insert({ type: args.type, url: args.url })
       .single();
 
     if (error) throw error;
 
     if (!data)
-      throw new Error(`failed to get source meta for ${JSON.stringify(args)}`);
+      throw new Error(
+        `failed to create source for args ${JSON.stringify(args)}`,
+      );
 
     return data;
   }
 
-  async updateSourceMeta(args: Partial<SourceMeta>): Promise<SourceMeta> {
+  async findSource(args: GetSourceMetaArgs): Promise<Source | null> {
+    console.log('getSourceMeta()', JSON.stringify({ args }));
+
+    const { data, error } = await this.client
+      .from<Source>(SOURCE_TABLE)
+      .select('*')
+      .match({ type: args.type, url: args.url })
+      .maybeSingle();
+
+    if (error) throw error;
+
+    return data;
+  }
+
+  async updateSource(args: UpdateSourceArgs): Promise<Source> {
     console.log('updateSourceMeta()', JSON.stringify({ args }));
 
     const { data, error } = await this.client
-      .from<SourceMeta>(SOURCE_META_TABLE)
+      .from<Source>(SOURCE_TABLE)
       .update(args)
-      .match({ source_id: args.source_id })
+      .match({ url: args.url, type: args.type })
       .single();
 
     if (error) throw error;

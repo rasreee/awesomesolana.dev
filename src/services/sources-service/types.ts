@@ -1,17 +1,21 @@
-import { Source } from '@/domains/sources/definitions';
+import { SourceType } from '@/domains/sources/definitions';
 
-export type CreateSourceArgs = Pick<
-  Source,
-  'type' | 'title' | 'url' | 'submitted_by' | 'tags'
->;
-
-export type FindSourceArgs = Partial<Pick<Source, 'title' | 'type' | 'url'>>;
-
-export type FindOrCreateSourceArgs = Pick<
-  Source,
-  'type' | 'title' | 'url' | 'submitted_by' | 'tags'
->;
+export interface DeleteSourceArgs {
+  url: string;
+  type: SourceType;
+}
+export interface CreateSourceArgs {
+  url: string;
+  type: SourceType;
+}
 
 export interface GetSourceMetaArgs {
-  source_id: Source['id'];
+  url: string;
+  type: SourceType;
+}
+
+export interface UpdateSourceArgs {
+  url: string;
+  type: SourceType;
+  views: number;
 }
