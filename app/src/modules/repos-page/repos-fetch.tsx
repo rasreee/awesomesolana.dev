@@ -1,4 +1,5 @@
-import { GithubApiParams } from '@/domains/github';
+import { GithubReposApiParams } from '@awesomesolana/common';
+
 import { useGithubReposApi } from '@/hooks/useGithubReposApi';
 import { isApiError } from '@/lib/api';
 import { ErrorMessage } from '@/ui/error-message';
@@ -8,7 +9,7 @@ import { ReposResultsInfo } from './repos-results-info';
 
 export interface ReposFetchProps {
   route: '/search' | '/browse';
-  params?: GithubApiParams;
+  params?: GithubReposApiParams;
 }
 
 const ReposFetch = function ReposFetch({ route, params }: ReposFetchProps) {

@@ -1,15 +1,14 @@
+import {
+  GithubReposApiParams,
+  RawGithubReposResponseData,
+} from '@awesomesolana/common';
 import { useMemo } from 'react';
 import useSWR from 'swr';
 
-import {
-  GithubReposBrowseParams,
-  GithubReposData,
-  GithubReposSearchParams,
-  githubSwrKey,
-  parseRawGitHubRepo,
-  RawGithubReposData,
-} from '@/domains/github';
+import { GithubReposData } from '@/domains/github';
 import { ApiData, isApiError } from '@/lib/api';
+import { githubSwrKey } from '@/lib/githubSwrKey';
+import { parseRawGitHubRepo } from '@/lib/parseRawGithubRepo';
 
 export type UseGithubReposApi = {
   data: ApiData<GithubReposData> | undefined;
@@ -18,14 +17,13 @@ export type UseGithubReposApi = {
 
 export function useGithubReposApi<Route extends '/search' | '/browse'>(
   route: Route,
-  params?: Route extends '/search'
-    ? Partial<GithubReposSearchParams>
-    : Partial<GithubReposBrowseParams>,
+  params?: GithubReposApiParams,
   shouldFetch = true,
 ): UseGithubReposApi {
-  const { data: rawData, error } = useSWR<ApiData<RawGithubReposData>, Error>(
-    shouldFetch ? githubSwrKey.route(route, params) : null,
-  );
+  const { data: rawData, error } = useSWR<
+    ApiData<RawGithubReposResponseData>,
+    Error
+  >(shouldFetch ? githubSwrKey.route(route, params) : null);
 
   const data = useMemo(() => {
     if (!rawData || isApiError(rawData)) {

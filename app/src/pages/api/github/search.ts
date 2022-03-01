@@ -1,21 +1,22 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-
 import {
   githubApiUrl,
-  githubJsonFetch,
-  GithubReposSearchParams,
-  RawGithubReposData,
-} from '@/domains/github';
+  GithubReposApiParams,
+  githubReposFetcher,
+  RawGithubReposResponseData,
+} from '@awesomesolana/common';
+import { NextApiRequest, NextApiResponse } from 'next';
+
+import environment from '@/environment';
 import { ApiData, ErrorData } from '@/lib/api';
 import { defaultPaginationParams } from '@/lib/pagination';
 
 export type GithubReposSearchRequest = NextApiRequest & {
-  query: Partial<GithubReposSearchParams>;
+  query: Partial<GithubReposApiParams>;
 };
 
 export default async function githubApiHandler(
   req: GithubReposSearchRequest,
-  res: NextApiResponse<ApiData<RawGithubReposData>>,
+  res: NextApiResponse<ApiData<RawGithubReposResponseData>>,
 ) {
   const {
     q = '',
@@ -26,7 +27,10 @@ export default async function githubApiHandler(
 
   const params = { q, page, per_page, tags };
   try {
-    const data = await githubJsonFetch(githubApiUrl.searchRepos(params));
+    const data = await githubReposFetcher(
+      githubApiUrl.searchRepos(params),
+      environment.github.accessToken,
+    );
 
     return res.status(200).json(data);
   } catch (err) {

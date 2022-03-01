@@ -5,7 +5,7 @@
   "lib": [
     "es2015"
   ],
-  "module": "commonjs",
+  "module": "esnext",
   "target": "es6",
   "esModuleInterop": true,
   "incremental": true,
@@ -30,9 +30,10 @@
       "dom.iterable",
       "esnext"
     ],
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {}
   },
+  "include": ["src/**/*.ts", "src/*.ts"],
   "exclude": [
     "dist",
     "node_modules",

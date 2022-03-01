@@ -1,4 +1,6 @@
-import { GithubRepo, RawGitHubRepo } from './types';
+import { RawGitHubRepo } from '@awesomesolana/common';
+
+import { GithubRepo } from '../domains/github/types';
 
 export function parseRawGitHubRepo(data: RawGitHubRepo): GithubRepo {
   return {

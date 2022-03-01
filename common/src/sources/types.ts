@@ -1,11 +1,9 @@
+type Int8 = number;
+
 export enum SourceType {
   Repo = "repo",
   Article = "article",
 }
-
-export type Int8 = number;
-
-export type DateString = string;
 
 export interface CreateSourceArgs {
   url: string;

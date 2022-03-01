@@ -1,4 +1,6 @@
-import { GithubApiParams, GithubReposData } from '@/domains/github';
+import { GithubReposApiParams } from '@awesomesolana/common';
+
+import { GithubReposData } from '@/domains/github';
 import { Tag } from '@/domains/tags/types';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
@@ -11,7 +13,7 @@ function getReposResultsInfoText({
   totalCount,
 }: {
   count: number;
-  params: GithubApiParams | undefined;
+  params: GithubReposApiParams | undefined;
   totalCount: number;
 }): string {
   if (!params?.tags?.length)
@@ -29,7 +31,7 @@ export function ReposResultsInfo({
   params,
 }: {
   data: GithubReposData | undefined;
-  params?: GithubApiParams | undefined;
+  params?: GithubReposApiParams | undefined;
 }) {
   const breakpoints = useBreakpoints();
   if (!data || !breakpoints) return <div className="py-2 px-1">Loading...</div>;
