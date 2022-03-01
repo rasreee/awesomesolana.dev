@@ -16,11 +16,11 @@
     "lint:fix": "eslint src --fix && yarn format",
     "lint:strict": "eslint --max-warnings=0 src",
     "typecheck": "tsc --noEmit --incremental false",
-    "test:watch": "jest --watch",
+    "format:check": "prettier -c .",
     "test": "jest --clearCache && jest",
+    "test:watch": "jest --watch",
     "checks": "yarn typecheck && yarn test && yarn build",
     "format": "prettier -w .",
-    "format:check": "prettier -c .",
     "postbuild": "next-sitemap"
   },
   "dependencies": {

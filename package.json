@@ -6,6 +6,10 @@
     "common"
   ],
   "scripts": {
+    "lint:strict": "yarn workspaces foreach run lint:strict",
+    "typecheck": "yarn workspaces foreach run typecheck",
+    "format:check": "yarn workspaces foreach run format:check",
+    "test": "yarn workspaces foreach run test",
     "prepare": "husky install",
     "refreshSources": "ts-node scripts/refreshSources"
   },

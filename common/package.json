@@ -9,12 +9,17 @@
   "scripts": {
     "clean": "rm -rf ./dist ./tsconfig.tsbuildinfo",
     "build": "yarn clean && cross-env NODE_ENV=production microbundle --tsconfig ./tsconfig.json",
-    "publish": "yarn npm publish"
+    "publish": "yarn npm publish",
+    "lint:strict": "eslint --max-warnings=0 src",
+    "typecheck": "tsc --noEmit --incremental false",
+    "format:check": "prettier -c .",
+    "test": "jest --clearCache && jest"
   },
   "main": "dist/awesomesolana-common.cjs",
   "module": "dist/awesomesolana-common.esm.js",
   "types": "dist/index.d.ts",
   "devDependencies": {
+    "@types/jest": "^27.4.1",
     "@types/lodash.times": "^4.3.6",
     "@types/node": "^17.0.21",
     "@types/node-fetch": "^2.6.1",
@@ -25,6 +30,7 @@
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "jest": "^27.5.1",
     "microbundle": "^0.14.2",
     "prettier": "^2.5.1",
     "typescript": "^4.6.2"
