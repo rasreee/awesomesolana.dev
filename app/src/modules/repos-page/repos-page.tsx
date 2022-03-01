@@ -36,10 +36,6 @@ const ReposPage = function ReposPage() {
 
   const reposFetchProps = computeReposFetchProps(searchQuery);
 
-  React.useEffect(() => {
-    console.log({ reposFetchProps });
-  }, [reposFetchProps]);
-
   return (
     <PageLayout seo={seo}>
       <div className="flex flex-col gap-5">

@@ -7,10 +7,6 @@ export type BadgeProps = React.PropsWithChildren<
 >;
 
 function Badge({ children, className, ...props }: BadgeProps) {
-  React.useEffect(() => {
-    console.log('BADGE CHILDREN:\n', children);
-  }, [children]);
-
   return (
     <span
       className={clsxm(
