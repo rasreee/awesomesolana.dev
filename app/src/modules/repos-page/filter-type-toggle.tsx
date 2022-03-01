@@ -41,28 +41,28 @@ function TagButton({
 
 const FilterTypeToggle = observer(function FilterTypeToggle({
   type,
+  isActive,
+  onClick,
 }: {
   type: TagType;
+  isActive: boolean;
+  onClick: () => void;
 }) {
-  const searchStore = useGlobalStore();
-  const { tagTypeModal } = searchStore;
+  const { reposSearch } = useGlobalStore();
 
   const selectedCount = computed(
-    () =>
-      searchStore.reposSearch.tags.filter((tag) => tag.type === type).length,
+    () => reposSearch.tags.filter((tag) => tag.type === type).length,
   ).get();
 
   return (
     <TagButton
       className={clsxm(
-        (tagTypeModal.tagType && tagTypeModal.tagType === type) || selectedCount
-          ? 'bg-color-primary text-white'
-          : '',
+        isActive || selectedCount ? 'bg-color-primary text-white' : '',
       )}
     >
       <div
         className="flex flex-1 cursor-pointer items-center gap-1.5"
-        onClick={() => tagTypeModal.openTagType(type)}
+        onClick={onClick}
       >
         <span className="text-left text-base leading-none">
           {capitalize(pluralize(type))}
@@ -72,11 +72,11 @@ const FilterTypeToggle = observer(function FilterTypeToggle({
         )}
       </div>
       {selectedCount ? (
-        <button onClick={() => searchStore.reposSearch.clearTags(type)}>
+        <button onClick={() => reposSearch.clearTags(type)}>
           <XIcon className="h-4 w-4" />
         </button>
       ) : (
-        <button onClick={() => tagTypeModal.openTagType(type)}>
+        <button onClick={onClick}>
           <ChevronDownIcon />
         </button>
       )}

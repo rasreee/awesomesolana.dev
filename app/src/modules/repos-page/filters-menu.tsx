@@ -13,7 +13,7 @@ import { useGlobalStore } from '@/stores';
 import { Divider } from '@/ui/divider';
 import Shimmer from '@/ui/shimmer';
 
-import TagsSearchBox from '../../../common/tags-search/tags-search-box';
+import TagsSearchBox from '../common/tags-search/tags-search-box';
 
 const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 
