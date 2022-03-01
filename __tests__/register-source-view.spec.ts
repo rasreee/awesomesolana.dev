@@ -14,8 +14,12 @@ describe('usecases/register-source-view', () => {
 
   const args: RegisterSourceViewArgs = {
     type: SourceType.Repo,
-    url: '',
+    url: 'TEST_SOURCE_URL',
   };
+
+  afterAll(() => {
+    service.deleteSource(args);
+  });
 
   it('registers source view', () => {
     const promise = registerSourceView(args, service);
