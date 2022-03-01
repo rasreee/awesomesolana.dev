@@ -9,8 +9,9 @@ import { getTags, tagUtils } from '@/domains/tags/tags.utils';
 import clsxm from '@/lib/utils/clsxm';
 import pluralize from '@/lib/utils/pluralize';
 import { capitalize } from '@/lib/utils/string';
-import TagsSearchBox from '@/modules/tags-search/tags-search-box';
 import { Divider } from '@/ui/divider';
+
+import TagsSearchBox from '../../../common/tags-search/tags-search-box';
 
 const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 

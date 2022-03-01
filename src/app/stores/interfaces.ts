@@ -3,8 +3,8 @@ import { GithubRepo } from '@/domains/github';
 import { Tag, TagType } from '@/domains/tags/tags.types';
 import { RequestStore } from '@/lib/mobx/request-store';
 import { SearchFormData } from '@/modules/common/search-form/types';
+import { TagsSearchStore } from '@/modules/common/tags-search/tags-search-store';
 import { ReposSearchStore } from '@/modules/repos-page/repos-search-store';
-import { TagsSearchStore } from '@/modules/tags-search/tags-search-store';
 import { TextInputProps } from '@/ui/text-input';
 
 export interface IRootStore {

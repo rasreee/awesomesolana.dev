@@ -3,7 +3,8 @@ import React from 'react';
 
 import { Tag, TagType } from '@/domains/tags/tags.types';
 import { groupBy } from '@/lib/utils/group-by';
-import TagGroupOptions from '@/modules/tags-search/tag-group-options';
+
+import TagGroupOptions from '../../common/tags-search/tag-group-options';
 
 export interface GroupedTagsOptionsProps {
   options: Tag[];
