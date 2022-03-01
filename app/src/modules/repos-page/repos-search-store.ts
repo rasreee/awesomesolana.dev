@@ -9,6 +9,7 @@ import {
 import { tagUtils } from '@/domains/tags/tags.utils';
 import { Tag, TagType } from '@/domains/tags/types';
 import { createRequestStore } from '@/lib/mobx/request-store';
+import { searchQuery } from '@/lib/searchQuery';
 import { IReposSearchStore } from '@/stores/interfaces';
 import type { TextInputProps } from '@/ui/text-input';
 
@@ -86,17 +87,7 @@ export class ReposSearchStore implements IReposSearchStore {
   };
 
   private handleRoute(queryString: string, tags: Tag[]) {
-    const queryEntries: [string, string][] = tags.map((tag) => [
-      tag.type,
-      tag.name,
-    ]);
-
-    if (queryString) {
-      queryEntries.push(['query', queryString]);
-    }
-
-    const query = Object.fromEntries(queryEntries);
-
+    const query = searchQuery({ term: queryString, tags });
     Router.router?.push(
       `/repos`,
       {

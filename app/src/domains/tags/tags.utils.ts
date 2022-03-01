@@ -14,6 +14,8 @@ export const tagUtils = {
 
       return tags;
     },
+    excludeType: (type: TagType): Tag[] =>
+      arr.filter((item) => item.type === type),
   }),
 };
 

@@ -8,6 +8,7 @@ import { SWRConfig } from 'swr';
 import GlobalStoreProvider from '@/app/global-store-provider';
 import ServicesProvider from '@/app/services-provider';
 import { siteConfig } from '@/app/site-config';
+import { SearchQueryProvider } from '@/contexts/search-query-context';
 
 async function fetcher<JSON = any>(
   input: RequestInfo,
@@ -32,7 +33,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <SWRConfig value={{ fetcher }}>
           <ServicesProvider>
             <GlobalStoreProvider>
-              <Component {...pageProps} />
+              <SearchQueryProvider>
+                <Component {...pageProps} />
+              </SearchQueryProvider>
             </GlobalStoreProvider>
           </ServicesProvider>
         </SWRConfig>
