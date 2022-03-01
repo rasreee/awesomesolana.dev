@@ -14,8 +14,8 @@
     "refreshSources": "ts-node scripts/refreshSources",
     "postinstall": "yarn husky install",
     "dev": "yarn workspace @awesomesolana/app run dev",
-    "build": "yarn workspaces foreach run build",
-    "start": "yarn workspace @awesolana/app run start"
+    "build": "yarn workspace @awesomesolana/common run build && yarn workspace @awesomesolana/app run build",
+    "start": "yarn workspace @awesomesolana/app run start"
   },
   "lint-staged": {
     "{app,common}": [

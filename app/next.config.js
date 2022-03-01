@@ -38,7 +38,7 @@ let config = {
   },
 };
 
-config = withTM(config);
+config = withBundleAnalyzer(config);
 
 /** @type {import('next').NextConfig} */
-module.exports = withBundleAnalyzer(config);
+module.exports = withTM(config);
