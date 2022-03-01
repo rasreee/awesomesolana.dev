@@ -1,8 +1,7 @@
-import { SourceType } from '@awesomesolana/common';
+import { ApiData, isApiError, SourceType } from '@awesomesolana/common';
 import useSWR from 'swr';
 
 import { GithubRepo } from '@/domains/github';
-import { ApiData, isApiError } from '@/lib/api';
 import classed from '@/lib/classed';
 import { ErrorMessage } from '@/ui/error-message';
 import FeedSkeleton from '@/ui/feed-skeleton';

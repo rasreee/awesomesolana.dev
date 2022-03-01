@@ -1,9 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-const isBrowser =
-  typeof window !== 'undefined' &&
-  typeof navigator !== 'undefined' &&
-  typeof document !== 'undefined';
-
+import { isBrowser } from '@awesomesolana/common';
 import { DependencyList, RefObject, useMemo } from 'react';
 
 import { useEventListener } from './use-event-listener';
@@ -50,7 +45,7 @@ const createKeyPredicate = (
   return keyFilter ? yieldTrue : yieldFalse;
 };
 
-const WINDOW_OR_NULL = isBrowser ? window : null;
+const WINDOW_OR_NULL = isBrowser() ? window : null;
 
 /**
  * Executes callback when keyboard event occurred on target (window by default).

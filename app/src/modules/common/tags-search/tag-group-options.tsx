@@ -1,7 +1,7 @@
 import { Tag, TagType } from '@awesomesolana/common';
+import { capitalize } from '@awesomesolana/common';
 
 import pluralize from '@/lib/pluralize';
-import { capitalize } from '@/lib/string';
 
 export interface TagGroupOptionsProps {
   type: TagType;

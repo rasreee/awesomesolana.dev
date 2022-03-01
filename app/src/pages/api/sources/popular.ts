@@ -1,8 +1,7 @@
-import { Source } from '@awesomesolana/common';
+import { ApiData, Source } from '@awesomesolana/common';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { PopularSourcesRequestParams } from '@/domains/sources/api';
-import { ApiData } from '@/lib/api';
 import { SourcesService } from '@/services/sources-service';
 
 type PopularSourcesRequest = NextApiRequest & {

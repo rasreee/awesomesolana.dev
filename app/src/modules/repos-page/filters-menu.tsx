@@ -1,5 +1,6 @@
 import { getTags, tagUtils } from '@awesomesolana/common';
 import { TagType } from '@awesomesolana/common';
+import { capitalize } from '@awesomesolana/common';
 import times from 'lodash.times';
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
@@ -8,7 +9,6 @@ import useSWR from 'swr';
 import { useSearchQuery } from '@/contexts/search-query-context';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
-import { capitalize } from '@/lib/string';
 import { useGlobalStore } from '@/stores';
 import { Divider } from '@/ui/divider';
 import Shimmer from '@/ui/shimmer';

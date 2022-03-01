@@ -29,7 +29,6 @@ __metadata:
     "@testing-library/jest-dom": ^5.16.2
     "@testing-library/react": ^12.1.3
     "@types/lodash.delay": ^4.1.6
-    "@types/lodash.pick": ^4.4.6
     "@types/lodash.times": ^4.3.6
     "@types/node": ^17.0.21
     "@types/plur": ^3.1.0
@@ -57,7 +56,6 @@ __metadata:
     jest-runner: 27.5.1
     jest-runner-groups: 2.1.0
     lodash.delay: ^4.1.1
-    lodash.pick: ^4.4.0
     lodash.times: ^4.3.2
     mobx: ^6.4.2
     mobx-react-lite: ^3.3.0
@@ -72,7 +70,6 @@ __metadata:
     postcss-import: ^14.0.2
     prettier: ^2.5.1
     prettier-plugin-tailwindcss: ^0.1.8
-    query-string: ^7.1.1
     react: ^17.0.2
     react-dom: ^17.0.2
     react-test-renderer: ^17.0.2
@@ -83,7 +80,6 @@ __metadata:
     ts-node: ^10.5.0
     typescript: 4.6.2
     use-debounce: ^7.0.1
-    uuid: ^8.3.2
   languageName: unknown
   linkType: soft
 
@@ -2607,15 +2603,6 @@ __metadata:
   dependencies:
     "@types/lodash": "*"
   checksum: cba83d65a763eef56593b4c902132ae9cb968026c802899f737877553a8f6f2f139a054731c0df153442409fa0d5d0e57c22052506ee905397a67c710b01b37f
-  languageName: node
-  linkType: hard
-
-"@types/lodash.pick@npm:^4.4.6":
-  version: 4.4.6
-  resolution: "@types/lodash.pick@npm:4.4.6"
-  dependencies:
-    "@types/lodash": "*"
-  checksum: c53b5efc8bf69583aecd823ecb23ee489d44cc741246f69b0add0756dde2a53f94c86139bf77a95222ccdc992eee63dfb1be41f4f03ab18266fbb085d7ba30de
   languageName: node
   linkType: hard
 
@@ -5866,13 +5853,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"filter-obj@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "filter-obj@npm:1.1.0"
-  checksum: cf2104a7c45ff48e7f505b78a3991c8f7f30f28bd8106ef582721f321f1c6277f7751aacd5d83026cb079d9d5091082f588d14a72e7c5d720ece79118fa61e10
-  languageName: node
-  linkType: hard
-
 "find-cache-dir@npm:^3.3.1":
   version: 3.3.2
   resolution: "find-cache-dir@npm:3.3.2"
@@ -8024,13 +8004,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.pick@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "lodash.pick@npm:4.4.0"
-  checksum: 2c36cab7da6b999a20bd3373b40e31a3ef81fa264f34a6979c852c5bc8ac039379686b27380f0cb8e3781610844fafec6949c6fbbebc059c98f8fa8570e3675f
-  languageName: node
-  linkType: hard
-
 "lodash.times@npm:^4.3.2":
   version: 4.3.2
   resolution: "lodash.times@npm:4.3.2"
@@ -10005,18 +9978,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"query-string@npm:^7.1.1":
-  version: 7.1.1
-  resolution: "query-string@npm:7.1.1"
-  dependencies:
-    decode-uri-component: ^0.2.0
-    filter-obj: ^1.1.0
-    split-on-first: ^1.0.0
-    strict-uri-encode: ^2.0.0
-  checksum: b227d1f588ae93f9f0ad078c6b811295fa151dc5a160a03bb2bac5fa0e6919cb1daa570aad1d288e77c8e89fde5362ba505b1014e6e793da9b1e885b59a690a6
-  languageName: node
-  linkType: hard
-
 "queue-microtask@npm:^1.2.2":
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
@@ -10915,13 +10876,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"split-on-first@npm:^1.0.0":
-  version: 1.1.0
-  resolution: "split-on-first@npm:1.1.0"
-  checksum: 16ff85b54ddcf17f9147210a4022529b343edbcbea4ce977c8f30e38408b8d6e0f25f92cd35b86a524d4797f455e29ab89eb8db787f3c10708e0b47ebf528d30
-  languageName: node
-  linkType: hard
-
 "split2@npm:^3.0.0":
   version: 3.2.2
   resolution: "split2@npm:3.2.2"
@@ -10994,13 +10948,6 @@ __metadata:
   bin:
     standard-version: bin/cli.js
   checksum: 40e1105b73e77105338a869096708e15aebf0c1104740f8cbbbb24173f55a8e7f221ff2e4cad4765c230d34094caa4e378ceb74a1ea890709c32f5fb67bd49b7
-  languageName: node
-  linkType: hard
-
-"strict-uri-encode@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "strict-uri-encode@npm:2.0.0"
-  checksum: eaac4cf978b6fbd480f1092cab8b233c9b949bcabfc9b598dd79a758f7243c28765ef7639c876fa72940dac687181b35486ea01ff7df3e65ce3848c64822c581
   languageName: node
   linkType: hard
 
@@ -11931,15 +11878,6 @@ __metadata:
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
   checksum: 474acf1146cb2701fe3b074892217553dfcf9a031280919ba1b8d651a068c9b15d863b7303cb15bd00a862b498e6cf4ad7b4a08fb134edd5a6f7641681cb54a2
-  languageName: node
-  linkType: hard
-
-"uuid@npm:^8.3.2":
-  version: 8.3.2
-  resolution: "uuid@npm:8.3.2"
-  bin:
-    uuid: dist/bin/uuid
-  checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
   languageName: node
   linkType: hard
 

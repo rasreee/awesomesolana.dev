@@ -1,4 +1,7 @@
 import {
+  ApiData,
+  defaultPagination,
+  ErrorData,
   githubApiUrl,
   GithubReposApiParams,
   githubReposFetcher,
@@ -7,8 +10,6 @@ import {
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import environment from '@/environment';
-import { ApiData, ErrorData } from '@/lib/api';
-import { defaultPaginationParams } from '@/lib/pagination';
 
 export type GithubReposBrowseRequest = NextApiRequest & {
   query: Partial<GithubReposApiParams>;
@@ -19,8 +20,8 @@ export default async function githubReposBrowseApiHandler(
   res: NextApiResponse<ApiData<RawGithubReposResponseData>>,
 ) {
   const {
-    page = defaultPaginationParams.page,
-    per_page = defaultPaginationParams.per_page,
+    page = defaultPagination.page,
+    per_page = defaultPagination.per_page,
   } = req.query;
 
   const params = { page, per_page };

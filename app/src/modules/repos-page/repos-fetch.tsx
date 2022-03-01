@@ -1,7 +1,6 @@
-import { GithubReposApiParams } from '@awesomesolana/common';
+import { GithubReposApiParams, isApiError } from '@awesomesolana/common';
 
 import { useGithubReposApi } from '@/hooks/useGithubReposApi';
-import { isApiError } from '@/lib/api';
 import { ErrorMessage } from '@/ui/error-message';
 
 import ReposList from '../common/repos-list';

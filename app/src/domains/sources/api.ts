@@ -1,7 +1,5 @@
-import { SourceType } from '@awesomesolana/common';
+import { Pagination, SourceType } from '@awesomesolana/common';
 
-import { PaginationParams } from '@/lib/pagination';
-
-export interface PopularSourcesRequestParams extends Partial<PaginationParams> {
+export interface PopularSourcesRequestParams extends Partial<Pagination> {
   type: SourceType;
 }

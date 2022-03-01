@@ -1,6 +1,4 @@
-import { SourceType } from '@awesomesolana/common';
-
-import { PaginationParams } from '@/lib/pagination';
+import { Pagination, SourceType } from '@awesomesolana/common';
 
 export interface DeleteSourceArgs {
   url: string;
@@ -22,6 +20,6 @@ export interface UpdateSourceArgs {
   views: number;
 }
 
-export interface GetPopularSourcesArgs extends Partial<PaginationParams> {
+export interface GetPopularSourcesArgs extends Partial<Pagination> {
   type: SourceType;
 }

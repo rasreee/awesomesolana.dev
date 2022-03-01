@@ -1,12 +1,13 @@
 import {
+  ApiData,
   GithubReposApiParams,
+  isApiError,
   RawGithubReposResponseData,
 } from '@awesomesolana/common';
 import { useMemo } from 'react';
 import useSWR from 'swr';
 
 import { GithubReposData } from '@/domains/github';
-import { ApiData, isApiError } from '@/lib/api';
 import { githubSwrKey } from '@/lib/githubSwrKey';
 import { parseRawGitHubRepo } from '@/lib/parseRawGithubRepo';
 

@@ -1,11 +1,11 @@
 import { tagUtils } from '@awesomesolana/common';
 import { TagType } from '@awesomesolana/common';
+import { capitalize } from '@awesomesolana/common';
 import dynamic from 'next/dynamic';
 
 import { useSearchQuery } from '@/contexts/search-query-context';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
-import { capitalize } from '@/lib/string';
 
 const ChevronDownIcon = dynamic(() => import('@/ui/icons/chevron-down-icon'));
 const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
