@@ -1,5 +1,8 @@
 # Sources Notes
 
+## Things to consider
+- Only save source to Supabase if source was clicked
+
 ## Todo
 - [ ] migrate frontend to pull data from new `sources` model instead of the `github` api directly
   - [ ] get initial payload of Github API repos data and load them into Supabase

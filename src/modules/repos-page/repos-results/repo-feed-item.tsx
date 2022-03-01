@@ -4,6 +4,8 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 
 import { GithubRepo } from '@/domains/github';
+import clsxm from '@/lib/clsxm';
+import { Anchor } from '@/ui/anchor';
 
 const RepoStat = dynamic(() => import('@/ui/github/repo-stat'));
 const BasicOutlineBadge = dynamic(() => import('@/ui/basic-outline-badge'));
@@ -15,12 +17,21 @@ export function RepoFeedItem({
   starsCount,
   updatedAt,
   language,
+  htmlUrl,
 }: GithubRepo) {
   return (
     <div className="flex flex-col gap-2 py-3">
-      <div className="heading prose prose-xl font-semibold dark:prose-invert">
+      <Anchor
+        external
+        className={clsxm(
+          'max-w-max',
+          'hover:text-green-500 dark:hover:text-primary-500',
+          'heading text-xl',
+        )}
+        href={htmlUrl}
+      >
         {name}
-      </div>
+      </Anchor>
       <div className="prose prose-sm dark:prose-invert">{description}</div>
       <div className="flex items-center gap-2">
         <ul className="flex flex-wrap items-center gap-1.5">
