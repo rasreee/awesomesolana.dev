@@ -32,7 +32,7 @@ function asJSXElement<P extends {}>(
 
 type ComponentOrElement<P extends {} = {}> = ComponentType<P> | JSX.Element;
 
-function Responsive<P extends {} = {}>({
+function RenderBreakpoints<P extends {} = {}>({
   sm,
   aboveSm,
   aboveMd,
@@ -64,9 +64,9 @@ function Responsive<P extends {} = {}>({
 
   throw new Error(
     breakpoints
-      ? `Could not render Responsive for invalid breakpoint: ${width}.`
-      : 'Could not render Responsive due to breakpoints not being hydrated',
+      ? `Could not render RenderBreakpoints for invalid breakpoint: ${width}.`
+      : 'Could not render RenderBreakpoints due to breakpoints not being hydrated',
   );
 }
 
-export default Responsive;
+export default RenderBreakpoints;

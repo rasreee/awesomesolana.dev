@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
 import { Logo } from '@/ui/logo';
-import Responsive from '@/ui/responsive/responsive';
+import RenderBreakpoints from '@/ui/responsive/render-breakpoints';
 
 function LogoLink() {
   return (
     <>
-      <Responsive
+      <RenderBreakpoints
         sm={
           <Link href="/" passHref>
             <a>
