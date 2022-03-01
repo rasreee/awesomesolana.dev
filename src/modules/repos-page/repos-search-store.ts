@@ -1,7 +1,6 @@
 import { computed, makeAutoObservable } from 'mobx';
 
 import { appConfig } from '@/app/app-config';
-import { IReposSearchStore } from '@/app/stores/interfaces';
 import {
   GithubRepo,
   GithubReposSearchParams,
@@ -12,6 +11,7 @@ import {
 import { Tag, TagType } from '@/domains/tags/tags.types';
 import { tagUtils } from '@/domains/tags/tags.utils';
 import { createRequestStore } from '@/lib/mobx/request-store';
+import { IReposSearchStore } from '@/stores/interfaces';
 import type { TextInputProps } from '@/ui/text-input';
 
 import { SearchFormData } from '../common/search-form/types';

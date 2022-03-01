@@ -2,9 +2,9 @@ import { computed, runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 
-import { useRootStore } from '@/app/stores';
 import { Tag } from '@/domains/tags/tags.types';
 import { tagUtils } from '@/domains/tags/tags.utils';
+import { useGlobalStore } from '@/stores';
 import { CheckBox } from '@/ui/check-box';
 
 const RepoFilterCheckBox = observer(function RepoFilterCheckBox({
@@ -13,7 +13,7 @@ const RepoFilterCheckBox = observer(function RepoFilterCheckBox({
 }: React.HTMLAttributes<HTMLLIElement> & {
   tag: Tag;
 }) {
-  const store = useRootStore();
+  const store = useGlobalStore();
   const checked = computed(() =>
     tagUtils.list(store.reposSearch.tags).has(tag),
   ).get();

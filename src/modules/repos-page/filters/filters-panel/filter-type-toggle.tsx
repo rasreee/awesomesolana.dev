@@ -2,11 +2,11 @@ import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
-import { useRootStore } from '@/app/stores';
 import { TagType } from '@/domains/tags/tags.types';
 import clsxm from '@/lib/utils/clsxm';
 import pluralize from '@/lib/utils/pluralize';
 import { capitalize } from '@/lib/utils/string';
+import { useGlobalStore } from '@/stores';
 
 const ChevronDownIcon = dynamic(() => import('@/ui/icons/chevron-down-icon'));
 const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
@@ -44,7 +44,7 @@ const FilterTypeToggle = observer(function FilterTypeToggle({
 }: {
   type: TagType;
 }) {
-  const searchStore = useRootStore();
+  const searchStore = useGlobalStore();
   const { tagTypeModal } = searchStore;
 
   const selectedCount = computed(

@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
-import { useRootStore } from '@/app/stores';
 import { GithubApiParams } from '@/domains/github';
 import { useGithubReposApi } from '@/hooks/useGithubReposApi';
+import { useGlobalStore } from '@/stores';
 import { ErrorMessage } from '@/ui/error-message';
 
 import { ReposResultsInfo } from './repos-results-info';
@@ -11,7 +11,7 @@ import { ReposResultsInfo } from './repos-results-info';
 const ReposFeed = dynamic(() => import('./repos-feed'));
 
 const ReposResults = observer(function ReposResults() {
-  const store = useRootStore();
+  const store = useGlobalStore();
   const shouldSearch = Boolean(
     store.reposSearch.tags.length || store.reposSearch.query.trim(),
   );

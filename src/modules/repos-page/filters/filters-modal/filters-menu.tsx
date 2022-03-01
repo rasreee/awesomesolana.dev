@@ -3,12 +3,12 @@ import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 import useSWR from 'swr';
 
-import { useRootStore } from '@/app/stores';
 import { TagType } from '@/domains/tags/tags.types';
 import { getTags, tagUtils } from '@/domains/tags/tags.utils';
 import clsxm from '@/lib/utils/clsxm';
 import pluralize from '@/lib/utils/pluralize';
 import { capitalize } from '@/lib/utils/string';
+import { useGlobalStore } from '@/stores';
 import { Divider } from '@/ui/divider';
 
 import TagsSearchBox from '../../../common/tags-search/tags-search-box';
@@ -18,7 +18,7 @@ const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 const RepoFilterCheckBox = dynamic(() => import('./filter-check-box'));
 
 const FiltersMenu = observer(function FiltersMenu({ type }: { type: TagType }) {
-  const store = useRootStore();
+  const store = useGlobalStore();
   const { tagTypeModal } = store;
 
   const { data: tagsForType } = useSWR(`tagsForType/${type}`, () =>

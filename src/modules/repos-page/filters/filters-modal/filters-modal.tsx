@@ -1,14 +1,14 @@
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
-import { useRootStore } from '@/app/stores';
 import clsxm from '@/lib/utils/clsxm';
+import { useGlobalStore } from '@/stores';
 import Popover from '@/ui/popover';
 
 const FiltersMenu = dynamic(() => import('./filters-menu'));
 
 const FiltersModal = observer(function FiltersModal() {
-  const { tagTypeModal } = useRootStore();
+  const { tagTypeModal } = useGlobalStore();
 
   if (!tagTypeModal.isOpen) return null;
 

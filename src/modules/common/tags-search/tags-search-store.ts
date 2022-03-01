@@ -1,9 +1,9 @@
 import { makeAutoObservable } from 'mobx';
 
-import { ITagsSearchStore } from '@/app/stores/interfaces';
 import { Tag } from '@/domains/tags/tags.types';
 import { getTagSuggestions } from '@/domains/tags/tags.utils';
 import { createRequestStore } from '@/lib/mobx/request-store';
+import { ITagsSearchStore } from '@/stores/interfaces';
 import type { TextInputProps } from '@/ui/text-input';
 
 import { SearchFormData } from '../search-form/types';

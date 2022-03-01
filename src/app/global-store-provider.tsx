@@ -1,15 +1,14 @@
 import React from 'react';
 
 import { StoreProvider } from '@/lib/mobx/store-context';
+import { GlobalStore } from '@/stores/global-store';
 
-import { RootStore } from './root-store';
-
-export default function StoresProvider({
+export default function GlobalStoreProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [rootStore] = React.useState(new RootStore());
+  const [rootStore] = React.useState(new GlobalStore());
 
   return <StoreProvider store={rootStore}>{children}</StoreProvider>;
 }

@@ -5,8 +5,8 @@ import Head from 'next/head';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
 import { SWRConfig } from 'swr';
 
+import GlobalStoreProvider from '@/app/global-store-provider';
 import { siteConfig } from '@/app/site-config';
-import StoresProvider from '@/app/stores/stores-provider';
 
 async function fetcher<JSON = any>(
   input: RequestInfo,
@@ -29,9 +29,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <NextThemeProvider attribute="class">
         <SWRConfig value={{ fetcher }}>
-          <StoresProvider>
+          <GlobalStoreProvider>
             <Component {...pageProps} />
-          </StoresProvider>
+          </GlobalStoreProvider>
         </SWRConfig>
       </NextThemeProvider>
     </>
