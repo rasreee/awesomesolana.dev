@@ -1,8 +1,8 @@
-type Dict = Record<string, string | number>;
+type Dict = Record<string, any>;
 
 export type GroupBy<T extends Dict, Key extends keyof T> = Record<T[Key], T[]>;
 
-export const groupBy = <T extends Dict = Dict, Key extends keyof T = keyof T>(
+export const groupBy = <T extends Dict, Key extends keyof T>(
   list: T[],
   key: Key,
 ): GroupBy<T, Key> => {

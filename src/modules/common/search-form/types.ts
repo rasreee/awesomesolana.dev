@@ -1,4 +1,4 @@
-import { Tag } from '@/domains/tags/tags.types';
+import { Tag } from '@/domains/tags/types';
 
 export type SearchFormData = {
   query: string;

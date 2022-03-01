@@ -2,9 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import {
   githubApiUrl,
-  githubReposJsonFetch,
-  GithubReposResponse,
+  githubJsonFetch,
   GithubReposSearchParams,
+  RawGithubReposResponse,
 } from '@/domains/github';
 import { defaultPaginationParams } from '@/lib/pagination';
 
@@ -14,7 +14,7 @@ export type GithubReposSearchRequest = NextApiRequest & {
 
 export default async function githubApiHandler(
   req: GithubReposSearchRequest,
-  res: NextApiResponse<GithubReposResponse>,
+  res: NextApiResponse<RawGithubReposResponse>,
 ) {
   const {
     q = '',
@@ -25,7 +25,7 @@ export default async function githubApiHandler(
 
   const params = { q, page, per_page, tags };
 
-  const data = await githubReposJsonFetch(githubApiUrl.searchRepos(params));
+  const data = await githubJsonFetch(githubApiUrl.searchRepos(params));
 
   return res.status(200).json(data);
 }

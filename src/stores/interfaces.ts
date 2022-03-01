@@ -1,5 +1,5 @@
 import { GithubRepo } from '@/domains/github';
-import { Tag, TagType } from '@/domains/tags/tags.types';
+import { Tag, TagType } from '@/domains/tags/types';
 import { RequestStore } from '@/lib/mobx/request-store';
 import { SearchFormData } from '@/modules/common/search-form/types';
 import { TagsSearchStore } from '@/modules/common/tags-search/tags-search-store';
@@ -7,7 +7,7 @@ import { ReposSearchStore } from '@/modules/repos-page/repos-search-store';
 import { TagTypeModalStore } from '@/stores/tag-type-modal-store';
 import { TextInputProps } from '@/ui/text-input';
 
-export interface IGlobalStore {
+export interface GlobalStore {
   tagsSearch: TagsSearchStore;
   reposSearch: ReposSearchStore;
   tagTypeModal: TagTypeModalStore;

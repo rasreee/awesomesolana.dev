@@ -1,6 +1,6 @@
 import invariant from '@/lib/invariant';
 
-import { Tag, TagType } from './tags.types';
+import { Tag, TagType } from './types';
 
 export const tagTypes = [
   'topic',
@@ -141,13 +141,15 @@ function toTags(args: any): Tag[] {
     return [
       ...npm.map((name) => ({ type: args.type, name })),
       ...cargo.map((name) => ({ type: args.type, name })),
-    ];
+    ].map((tag, index) => ({ ...tag, id: index }));
   } else {
     const values = args.values;
-    return values.map((name) => ({
-      type: args.type,
-      name: name.toLowerCase(),
-    }));
+    return values
+      .map((name) => ({
+        type: args.type,
+        name: name.toLowerCase(),
+      }))
+      .map((tag, index) => ({ ...tag, id: index }));
   }
 }
 

@@ -1,4 +1,4 @@
-import { githubApiRoute, githubSwrKey } from './api-url';
+import { githubApiUrl, githubSwrKey } from './api-url';
 
 /**
  * @group modules
@@ -12,18 +12,18 @@ describe('githubSwrKey', () => {
   });
 });
 
-describe('githubApiRoute', () => {
+describe('githubApiUrl', () => {
   it('repos browse api route', () => {
-    const result = githubApiRoute.browseRepos();
-    expect(result).toEqual(`/search/repositories?q=solana&page=0&per_page=10`);
+    const result = githubApiUrl.browseRepos();
+    expect(result.includes(`?q=solana&page=0&per_page=10`)).toBeTruthy();
   });
 
   it('repos search api route', () => {
-    const result = githubApiRoute.searchRepos({
-      tags: [{ type: 'language', name: 'typescript' }],
+    const result = githubApiUrl.searchRepos({
+      tags: [{ id: 0, type: 'language', name: 'typescript' }],
     });
-    expect(result).toEqual(
-      `/search/repositories?q=solana+language:typescript&page=0&per_page=10`,
-    );
+    expect(
+      result.includes(`?q=solana+language:typescript&page=0&per_page=10`),
+    ).toBeTruthy();
   });
 });

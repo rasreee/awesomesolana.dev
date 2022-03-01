@@ -2,7 +2,7 @@ import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
-import { TagType } from '@/domains/tags/tags.types';
+import { TagType } from '@/domains/tags/types';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
 import { capitalize } from '@/lib/string';

@@ -1,4 +1,4 @@
-import { Tag, TagType } from '@/domains/tags/tags.types';
+import { Tag, TagType } from '@/domains/tags/types';
 import pluralize from '@/lib/pluralize';
 import { capitalize } from '@/lib/string';
 

@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 
 import { appRoute } from '@/app/routes';
-import { Tag } from '@/domains/tags/tags.types';
+import { Tag } from '@/domains/tags/types';
 import { useStore } from '@/lib/mobx/store-context';
 import PopularTags from '@/modules/common/popular-tags';
 import Popover from '@/ui/popover';

@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
-import { Tag } from '@/domains/tags/tags.types';
 import { getTagSuggestions } from '@/domains/tags/tags.utils';
+import { Tag } from '@/domains/tags/types';
 import { createRequestStore } from '@/lib/mobx/request-store';
 import { ITagsSearchStore } from '@/stores/interfaces';
 import type { TextInputProps } from '@/ui/text-input';
@@ -30,7 +30,6 @@ export class TagsSearchStore implements ITagsSearchStore {
   };
 
   onSubmit = async ({ query, filters }: SearchFormData) => {
-    console.log('TagsSearchStore.onSubmit()', { query, filters });
     if (!query) return this.setHits([]);
 
     this.request.setLoading(true);

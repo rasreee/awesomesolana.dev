@@ -1,8 +1,8 @@
 import delay from 'lodash.delay';
 import { makeAutoObservable, reaction } from 'mobx';
 
-import { Tag } from '@/domains/tags/tags.types';
 import { getTagSuggestions } from '@/domains/tags/tags.utils';
+import { Tag } from '@/domains/tags/types';
 
 import { SearchFormData } from '../common/search-form/types';
 

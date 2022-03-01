@@ -1,7 +1,7 @@
 import memoizeOne from 'memoize-one';
 
-import { Tag } from '@/domains/tags/tags.types';
 import { isEqualTag } from '@/domains/tags/tags.utils';
+import { Tag } from '@/domains/tags/types';
 import { defaultPaginationParams, PaginationParams } from '@/lib/pagination';
 
 import { GithubReposBrowseParams, GithubReposSearchParams } from './types';
@@ -45,43 +45,23 @@ function formatGithubApiQuery({
   return `${query}${pagination}`;
 }
 
-export const githubApiRoute = {
-  searchRepos: (params?: Partial<GithubReposSearchParams>) =>
-    [
-      `/search/repositories`,
-      formatGithubApiQuery({ keywords: ['solana'], ...params }),
-    ].join(''),
-  browseRepos: (params?: Partial<GithubReposBrowseParams>) =>
-    [
-      `/search/repositories`,
-      formatGithubApiQuery({ keywords: ['solana'], ...params }),
-    ].join(''),
+const getSolanaGithubReposQueryUrl = (
+  params: Partial<
+    GithubReposSearchParams | GithubReposBrowseParams
+  > = defaultPaginationParams,
+) => {
+  return [
+    '/search/repositories',
+    formatGithubApiQuery({ keywords: ['solana'], ...params }),
+  ].join('');
 };
 
 export const githubApiUrl = {
   baseUrl: 'https://api.github.com',
-  searchRepos: ({
-    page,
-    per_page,
-    tags,
-    keywords = [],
-  }: Partial<GithubReposSearchParams>) =>
-    [
-      githubApiUrl.baseUrl,
-      `/search/repositories`,
-      formatGithubApiQuery({
-        keywords: ['solana', ...keywords],
-        tags,
-        page,
-        per_page,
-      }),
-    ].join(''),
-  browseRepos: (params?: Partial<GithubReposBrowseParams>) =>
-    [
-      githubApiUrl.baseUrl,
-      `/search/repositories`,
-      formatGithubApiQuery({ keywords: ['solana'], ...params }),
-    ].join(''),
+  searchRepos: (params: Partial<GithubReposSearchParams>): string =>
+    [githubApiUrl.baseUrl, getSolanaGithubReposQueryUrl(params)].join(''),
+  browseRepos: (params?: Partial<GithubReposBrowseParams>): string =>
+    [githubApiUrl.baseUrl, getSolanaGithubReposQueryUrl(params)].join(''),
 };
 
 export const githubSwrKey = {
