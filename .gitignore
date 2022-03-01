@@ -46,3 +46,4 @@
 # next-sitemap
 **/robots.txt
 **/sitemap.xml
+.vercel

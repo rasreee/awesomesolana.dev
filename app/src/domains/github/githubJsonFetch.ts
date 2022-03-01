@@ -1,5 +1,3 @@
-import { invariant } from '@awesomesolana/common';
-
 import environment from '@/environment';
 
 import { RawGithubReposData } from './types';

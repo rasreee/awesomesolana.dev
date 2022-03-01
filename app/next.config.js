@@ -8,13 +8,14 @@ dotenv.config({
   ),
 });
 
+const withTM = require('next-transpile-modules')(['@awesomesolana/common']);
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-/** @type {import('next').NextConfig} */
-module.exports = withBundleAnalyzer({
+let config = {
   eslint: {
     dirs: ['src'],
   },
@@ -35,4 +36,9 @@ module.exports = withBundleAnalyzer({
     NEXT_PUBLIC_SUPABASE_KEY: process.env.NEXT_PUBLIC_SUPABASE_KEY,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   },
-});
+};
+
+config = withTM(config);
+
+/** @type {import('next').NextConfig} */
+module.exports = withBundleAnalyzer(config);

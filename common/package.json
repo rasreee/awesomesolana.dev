@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "clean": "rm -rf ./dist ./tsconfig.tsbuildinfo",
-    "build": "yarn clean && cross-env NODE_ENV=production microbundle --tsconfig ./tsconfig.json",
+    "build": "yarn && yarn clean && cross-env NODE_ENV=production microbundle --tsconfig ./tsconfig.json",
     "publish": "yarn npm publish",
     "lint:strict": "eslint --max-warnings=0 src",
     "typecheck": "tsc --noEmit --incremental false",

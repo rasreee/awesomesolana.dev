@@ -13,7 +13,9 @@
     "prepare": "husky install",
     "refreshSources": "ts-node scripts/refreshSources",
     "postinstall": "yarn husky install",
-    "dev": "yarn workspace @awesomesolana/app run dev"
+    "dev": "yarn workspace @awesomesolana/app run dev",
+    "build": "yarn workspaces foreach run build",
+    "start": "yarn workspace @awesolana/app run start"
   },
   "lint-staged": {
     "{app,common}": [
