@@ -1,12 +1,12 @@
-import { RefObject, useEffect, useMemo } from 'react';
+import { RefObject, useEffect, useMemo } from "react";
 
-import { useIsMounted } from './use-is-mounted';
-import { useSyncedRef } from './use-synced-ref';
+import { useIsMounted } from "./use-is-mounted";
+import { useSyncedRef } from "./use-synced-ref";
 
 export function useEventListener<T extends EventTarget>(
   target: RefObject<T> | T | null,
   ...params:
-    | Parameters<T['addEventListener']>
+    | Parameters<T["addEventListener"]>
     | [
         string,
         EventListenerOrEventListenerObject | ((...args: any[]) => any),
@@ -32,25 +32,25 @@ export function useEventListener<T extends EventTarget>(
 
         // we dont care if non-listener provided, simply dont do anything
         /* istanbul ignore else */
-        if (typeof listenerRef.current === 'function') {
+        if (typeof listenerRef.current === "function") {
           listenerRef.current.apply(this, args);
         } else if (
           typeof (listenerRef.current as EventListenerObject).handleEvent ===
-          'function'
+          "function"
         ) {
           // eslint-disable-next-line prettier/prettier
           (listenerRef.current as EventListenerObject).handleEvent.apply(
             this,
-            args,
+            args
           );
         }
       },
 
-    [],
+    []
   );
 
   useEffect(() => {
-    const tgt = target && 'current' in target ? target.current : target;
+    const tgt = target && "current" in target ? target.current : target;
     if (!tgt) return undefined;
 
     const restParams = params.slice(2);

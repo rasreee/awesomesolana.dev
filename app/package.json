@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@awesomesolana/common": "workspace:^",
+    "@awesomesolana/hooks": "workspace:^",
     "@awesomesolana/tw": "workspace:^",
     "@primer/octicons-react": "^16.3.1",
     "@supabase/supabase-js": "^1.30.7",

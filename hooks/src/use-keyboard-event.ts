@@ -1,8 +1,8 @@
-import { isBrowser } from '@awesomesolana/common';
-import { DependencyList, RefObject, useMemo } from 'react';
+import { isBrowser } from "@awesomesolana/common";
+import { DependencyList, RefObject, useMemo } from "react";
 
-import { useEventListener } from './use-event-listener';
-import { useSyncedRef } from './use-synced-ref';
+import { useEventListener } from "./use-event-listener";
+import { useSyncedRef } from "./use-synced-ref";
 
 export type IKeyboardEventPredicate = (event: KeyboardEvent) => boolean;
 export type IKeyboardEventFilter =
@@ -13,7 +13,7 @@ export type IKeyboardEventFilter =
   | IKeyboardEventPredicate;
 export type IKeyboardEventHandler<T extends EventTarget> = (
   this: T,
-  event: KeyboardEvent,
+  event: KeyboardEvent
 ) => void;
 
 export type IUseKeyboardEventOptions<T extends EventTarget> = {
@@ -21,7 +21,7 @@ export type IUseKeyboardEventOptions<T extends EventTarget> = {
    * Event name that triggers handler.
    * @default `keydown`
    */
-  event?: 'keydown' | 'keypress' | 'keyup';
+  event?: "keydown" | "keypress" | "keyup";
   /**
    * Target that should emit event.
    * @default window
@@ -37,10 +37,10 @@ const yieldTrue = () => true as const;
 const yieldFalse = () => false as const;
 
 const createKeyPredicate = (
-  keyFilter: IKeyboardEventFilter,
+  keyFilter: IKeyboardEventFilter
 ): IKeyboardEventPredicate => {
-  if (typeof keyFilter === 'function') return keyFilter;
-  if (typeof keyFilter === 'string') return (ev) => ev.key === keyFilter;
+  if (typeof keyFilter === "function") return keyFilter;
+  if (typeof keyFilter === "string") return (ev) => ev.key === keyFilter;
 
   return keyFilter ? yieldTrue : yieldFalse;
 };
@@ -59,9 +59,9 @@ export function useKeyboardEvent<T extends EventTarget>(
   keyOrPredicate: IKeyboardEventFilter,
   callback: IKeyboardEventHandler<T>,
   deps?: DependencyList,
-  options: IUseKeyboardEventOptions<T> = {},
+  options: IUseKeyboardEventOptions<T> = {}
 ): void {
-  const { event = 'keydown', target = WINDOW_OR_NULL, eventOptions } = options;
+  const { event = "keydown", target = WINDOW_OR_NULL, eventOptions } = options;
   const cbRef = useSyncedRef(callback);
 
   const handler = useMemo<IKeyboardEventHandler<T>>(() => {

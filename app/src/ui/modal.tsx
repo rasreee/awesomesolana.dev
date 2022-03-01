@@ -1,8 +1,6 @@
+import { EventKeys, useClickOutside, useKeyPress } from '@awesomesolana/hooks';
 import { clsxm } from '@awesomesolana/tw';
 import { FC, ReactNode, useRef } from 'react';
-
-import { useClickOutside } from '@/ui/hooks/use-click-outside';
-import { EventKeys, useKeyPress } from '@/ui/hooks/use-key-press';
 
 export interface ModalProps {
   /**

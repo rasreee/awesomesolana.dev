@@ -12,6 +12,7 @@
     "publish": "yarn npm publish",
     "lint:strict": "eslint --max-warnings=0 src",
     "typecheck": "tsc --noEmit --incremental false",
+    "format": "prettier -w .",
     "format:check": "prettier -c .",
     "test": "jest --clearCache && jest"
   },

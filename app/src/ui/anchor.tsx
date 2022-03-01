@@ -1,5 +1,4 @@
-import { classed } from '@awesomesolana/tw';
-import { clsxm } from '@awesomesolana/tw';
+import { classed, clsxm } from '@awesomesolana/tw';
 import React from 'react';
 
 export interface AnchorProps

@@ -1,9 +1,9 @@
-import { MutableRefObject, RefObject, useEffect } from 'react';
+import { MutableRefObject, RefObject, useEffect } from "react";
 
-import { off, on } from './lib/events';
-import { useSyncedRef } from './use-synced-ref';
+import { off, on } from "./lib/events";
+import { useSyncedRef } from "./use-synced-ref";
 
-const DEFAULT_EVENTS = ['mousedown', 'touchstart'];
+const DEFAULT_EVENTS = ["mousedown", "touchstart"];
 
 /**
  * Triggers callback when user clicks outside the target element.
@@ -16,7 +16,7 @@ const DEFAULT_EVENTS = ['mousedown', 'touchstart'];
 export function useClickOutside<T extends HTMLElement>(
   ref: RefObject<T> | MutableRefObject<T>,
   callback: React.MouseEventHandler<T>,
-  events: string[] = DEFAULT_EVENTS,
+  events: string[] = DEFAULT_EVENTS
 ): void {
   const cbRef = useSyncedRef(callback);
   const refRef = useSyncedRef(ref);
@@ -40,7 +40,7 @@ export function useClickOutside<T extends HTMLElement>(
 
     return () => {
       events.forEach((name) =>
-        off(document, name, handler, { passive: false }),
+        off(document, name, handler, { passive: false })
       );
     };
   }, [...events]);

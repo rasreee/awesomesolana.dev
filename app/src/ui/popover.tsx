@@ -1,6 +1,5 @@
+import { useClickOutside } from '@awesomesolana/hooks';
 import React, { HTMLAttributes, useRef } from 'react';
-
-import { useClickOutside } from '@/ui/hooks/use-click-outside';
 
 import { Overlay } from './overlay';
 

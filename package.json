@@ -4,11 +4,13 @@
   "workspaces": [
     "app",
     "common",
-    "tw"
+    "tw",
+    "hooks"
   ],
   "scripts": {
     "lint:strict": "yarn workspaces foreach run lint:strict",
     "typecheck": "yarn workspaces foreach run typecheck",
+    "format": "yarn workspaces foreach run format",
     "format:check": "yarn workspaces foreach run format:check",
     "test": "yarn workspaces foreach run test",
     "prepare": "husky install",

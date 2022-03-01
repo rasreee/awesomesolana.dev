@@ -1,6 +1,5 @@
+import { useWindowDimensions } from '@awesomesolana/hooks';
 import { Component, ComponentType, FunctionComponent } from 'react';
-
-import { useWindowDimensions } from '@/ui/hooks/use-window-dimensions';
 
 import { useBreakpoints } from './use-breakpoints';
 

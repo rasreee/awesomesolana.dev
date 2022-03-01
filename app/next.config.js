@@ -8,7 +8,11 @@ dotenv.config({
   ),
 });
 
-const withTM = require('next-transpile-modules')(['@awesomesolana/common']);
+const withTM = require('next-transpile-modules')([
+  '@awesomesolana/common',
+  '@awesomesolana/hooks',
+  '@awesomesolana/tw',
+]);
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
