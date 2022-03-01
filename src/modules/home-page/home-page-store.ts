@@ -4,7 +4,7 @@ import { makeAutoObservable, reaction } from 'mobx';
 import { Tag } from '@/domains/tags/tags.types';
 import { getTagSuggestions } from '@/domains/tags/tags.utils';
 
-import { SearchFormData } from '../search/search.types';
+import { SearchFormData } from '../common/search-form/types';
 
 export class SearchState {
   query = '';

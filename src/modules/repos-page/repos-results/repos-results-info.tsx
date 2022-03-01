@@ -1,4 +1,4 @@
-import { GithubApiParams, GithubReposResponse } from '@/domains/github/api';
+import { GithubApiParams, GithubReposResponse } from '@/domains/github';
 import clsxm from '@/lib/utils/clsxm';
 import pluralize from '@/lib/utils/pluralize';
 import Badge from '@/ui/badge';

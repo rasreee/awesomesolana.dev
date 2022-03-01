@@ -1,9 +1,9 @@
-import { GithubRepo } from '@/domains/github/api';
+import { TagTypeModalStore } from '@/app/stores/tag-type-modal-store';
+import { GithubRepo } from '@/domains/github';
 import { Tag, TagType } from '@/domains/tags/tags.types';
 import { RequestStore } from '@/lib/mobx/request-store';
-import { ReposSearchStore } from '@/modules/repos/repos-search-store';
-import { SearchFormData } from '@/modules/search/search.types';
-import { TagTypeModalStore } from '@/modules/search/tag-type-modal-store';
+import { SearchFormData } from '@/modules/common/search-form/types';
+import { ReposSearchStore } from '@/modules/repos-page/repos-search-store';
 import { TagsSearchStore } from '@/modules/tags-search/tags-search-store';
 import { TextInputProps } from '@/ui/text-input';
 

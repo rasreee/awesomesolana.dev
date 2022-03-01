@@ -4,10 +4,10 @@ const Seo = dynamic(() => import('@/ui/seo'));
 
 import dynamic from 'next/dynamic';
 
-import Header from './core-header';
+import Header from './header';
 import type { LayoutProps } from './types';
 
-const Layout = ({
+export const Layout = ({
   children,
   seo: seoProps,
 }: React.PropsWithChildren<LayoutProps>) => {
@@ -21,5 +21,3 @@ const Layout = ({
     </>
   );
 };
-
-export default Layout;

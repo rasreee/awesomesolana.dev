@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { useRootStore } from '@/app/stores';
 import { TextInputProps } from '@/ui/text-input';
 
-const SearchForm = dynamic(() => import('@/modules/search/search-form'));
+const SearchForm = dynamic(() => import('@/modules/common/search-form'));
 
 const TagsSearchBox = observer(function TagsSearchBox({
   onInputClick,

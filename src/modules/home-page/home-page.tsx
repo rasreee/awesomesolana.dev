@@ -1,9 +1,9 @@
 import { exploreSEO } from '@/app/seo';
 import { siteConfig } from '@/app/site-config';
-import PageLayout from '@/layouts/page-layout';
 import { Logo } from '@/ui/logo';
 import Responsive from '@/ui/responsive/responsive';
 
+import PageLayout from '../common/page-layout';
 import HomeSearchBox from './home-search-box';
 import HomeSearchResults from './home-search-results/home-search-results';
 

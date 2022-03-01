@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic';
 
-import { LayoutProps } from './core/types';
+import { LayoutProps } from './layout/types';
 
-const Layout = dynamic(() => import('./core/core-layout'));
+const Layout = dynamic(() => import('./layout'));
 
 const PageLayout = ({ children, seo }: LayoutProps) => {
   return (

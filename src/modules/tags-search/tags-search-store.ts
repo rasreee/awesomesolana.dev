@@ -6,7 +6,7 @@ import { getTagSuggestions } from '@/domains/tags/tags.utils';
 import { createRequestStore } from '@/lib/mobx/request-store';
 import type { TextInputProps } from '@/ui/text-input';
 
-import { SearchFormData } from '../search/search.types';
+import { SearchFormData } from '../common/search-form/types';
 
 export class TagsSearchStore implements ITagsSearchStore {
   constructor() {

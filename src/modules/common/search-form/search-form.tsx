@@ -7,7 +7,7 @@ import { formData } from '@/lib/utils/form-data';
 import { ErrorMessage } from '@/ui/error-message';
 import type { TextInputProps } from '@/ui/text-input';
 
-import { SearchFormData } from './search.types';
+import { SearchFormData } from './types';
 
 const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 const TextInput = dynamic(() => import('@/ui/text-input'));
@@ -23,7 +23,7 @@ export type SearchFormProps = {
 const DEFAULT_SEARCH_PLACEHOLDER =
   'Search for any project, dependency, or topic';
 
-function SearchForm({
+export function SearchForm({
   error,
   textInputProps,
   onReset,
@@ -85,5 +85,3 @@ function SearchForm({
     </form>
   );
 }
-
-export default SearchForm;

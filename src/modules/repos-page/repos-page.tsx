@@ -3,8 +3,8 @@ import dynamic from 'next/dynamic';
 
 import { reposSEO } from '@/app/seo';
 import { useRootStore } from '@/app/stores';
-import PageLayout from '@/layouts/page-layout';
 
+import PageLayout from '../common/page-layout';
 import Filters from './filters/filters';
 import { ReposSearchBox } from './repos-search-box';
 

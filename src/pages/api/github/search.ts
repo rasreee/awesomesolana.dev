@@ -5,7 +5,7 @@ import {
   githubReposJsonFetch,
   GithubReposResponse,
   GithubReposSearchParams,
-} from '@/domains/github/api';
+} from '@/domains/github';
 import { defaultPaginationParams } from '@/lib/utils';
 
 export type GithubReposSearchRequest = NextApiRequest & {

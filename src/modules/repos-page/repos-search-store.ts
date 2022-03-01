@@ -8,13 +8,13 @@ import {
   githubSwrKey,
   parseRawGitHubRepo,
   RawGithubReposResponse,
-} from '@/domains/github/api';
+} from '@/domains/github';
 import { Tag, TagType } from '@/domains/tags/tags.types';
 import { tagUtils } from '@/domains/tags/tags.utils';
 import { createRequestStore } from '@/lib/mobx/request-store';
 import type { TextInputProps } from '@/ui/text-input';
 
-import { SearchFormData } from '../search/search.types';
+import { SearchFormData } from '../common/search-form/types';
 
 async function searchGithubRepos(
   params: Partial<GithubReposSearchParams>,
