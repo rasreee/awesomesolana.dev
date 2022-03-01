@@ -1,9 +1,6 @@
 import clsxm from '@/lib/clsxm';
 
-export function PlusIcon({
-  className,
-  ...props
-}: React.SVGProps<SVGSVGElement>) {
+function PlusIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -20,3 +17,5 @@ export function PlusIcon({
     </svg>
   );
 }
+
+export default PlusIcon;

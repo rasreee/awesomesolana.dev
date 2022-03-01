@@ -3,6 +3,7 @@ import React from 'react';
 import { makeTag } from '@/domains/tags/tags.utils';
 import { Tag } from '@/domains/tags/types';
 import clsxm from '@/lib/clsxm';
+import PlusIcon from '@/ui/icons/plus-icon';
 
 const makeTags = (...args: Omit<Tag, 'id'>[]): Tag[] => {
   return args.map((tag, index) => makeTag({ ...tag, id: index }));
@@ -35,15 +36,18 @@ const PopularTags = ({ onSelect }: { onSelect: (tag: Tag) => void }) => {
               className={clsxm(
                 'cursor-pointer',
                 'border border-basic-600 bg-basic-600 bg-opacity-10',
-                'h-5.5 rounded-full px-3 py-1',
+                'h-5.5 rounded-full',
+                'px-1.5 py-1 pl-3',
                 'truncate text-base font-medium leading-none',
                 'inline-flex items-center rounded-full',
                 'text',
                 'hover:border-primary-500 hover:text-primary-500 active:text-primary-600 dark:hover:text-primary-500 dark:active:text-primary-600',
+                'gap-1.5',
               )}
               onClick={handleClickItem(tag)}
             >
-              {tag.name}
+              <span>{tag.name}</span>
+              <PlusIcon className="h-3 w-3 opacity-60" />
             </div>
           </li>
         ))}
