@@ -4,6 +4,7 @@ import type { AnchorHTMLAttributes } from 'react';
 const Seo = dynamic(() => import('@/ui/seo'));
 
 import { clsxm } from '@awesomesolana/tw';
+import { Anchor } from '@awesomesolana/ui';
 import dynamic from 'next/dynamic';
 
 function ArrowLink({
@@ -17,11 +18,11 @@ function ArrowLink({
   href: string;
 }) {
   return (
-    <Link href={href}>
-      <a
+    <Link href={href} passHref>
+      <Anchor
         {...rest}
         className={clsxm(
-          'inline-flex items-center font-semibold',
+          'inline-flex items-center',
           'focus:outline-none focus-visible:rounded focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-offset-2',
           'border-b border-dotted border-dark hover:border-black/0',
           'group gap-[0.25em]',
@@ -59,7 +60,7 @@ function ArrowLink({
             )}
           />
         </svg>
-      </a>
+      </Anchor>
     </Link>
   );
 }

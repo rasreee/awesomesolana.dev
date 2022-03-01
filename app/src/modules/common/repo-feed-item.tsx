@@ -1,5 +1,6 @@
 import { SourceType } from '@awesomesolana/common';
 import { clsxm } from '@awesomesolana/tw';
+import { Anchor } from '@awesomesolana/ui';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
 import intlFormat from 'date-fns/intlFormat';
 import dynamic from 'next/dynamic';
@@ -7,7 +8,6 @@ import React from 'react';
 
 import { GithubRepo } from '@/domains/github';
 import { useRegisterSourceView } from '@/hooks/useRegisterSourceView';
-import { Anchor } from '@/ui/anchor';
 
 const RepoStat = dynamic(() => import('@/ui/github/repo-stat'));
 const BasicOutlineBadge = dynamic(() => import('@/ui/basic-outline-badge'));

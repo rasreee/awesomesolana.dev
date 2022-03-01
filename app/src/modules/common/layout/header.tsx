@@ -10,6 +10,7 @@ const GithubIcon = dynamic(() => import('@/ui/github/github-icon'));
 const LogoLink = dynamic(() => import('./logo-link'));
 
 import { clsxm } from '@awesomesolana/tw';
+import { Anchor } from '@awesomesolana/ui';
 
 export default function Header() {
   const router = useRouter();
@@ -26,7 +27,7 @@ export default function Header() {
         <div />
       )}
       <div className="flex items-center gap-4 sm:gap-6">
-        <a
+        <Anchor
           href={siteConfig.socials.github.href}
           className={clsxm(
             'text-hint hover:text active:text hover:text-opacity-80 active:text-opacity-100',
@@ -34,7 +35,7 @@ export default function Header() {
           )}
         >
           <GithubIcon className="h-7 w-7 sm:h-8 sm:w-8" />
-        </a>
+        </Anchor>
         <ColorModeToggle
           className="h-9 w-9 sm:h-11 sm:w-11"
           iconProps={{ className: 'h-5 w-5 sm:h-6 sm:w-6' }}

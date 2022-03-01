@@ -8,21 +8,21 @@ function LogoLink() {
     <>
       <RenderBreakpoints
         sm={
-          <Link href="/" passHref>
+          <Link href="/">
             <a>
               <Logo size="xs" />
             </a>
           </Link>
         }
         aboveSm={
-          <Link href="/" passHref>
+          <Link href="/">
             <a>
               <Logo size="sm" />
             </a>
           </Link>
         }
         aboveMd={
-          <Link href="/" passHref>
+          <Link href="/">
             <a>
               <Logo size="md" />
             </a>
