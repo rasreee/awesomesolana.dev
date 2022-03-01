@@ -1,3 +1,5 @@
+import environment from '@/environment';
+
 import {
   GithubRepo,
   GithubReposResponse,
@@ -29,8 +31,7 @@ export function parseRawGitHubRepo(data: RawGitHubRepo): GithubRepo {
 function getHeaders(): HeadersInit {
   const headers: HeadersInit = new Headers();
   headers.set('Accept', 'application/vnd.github.v3+json');
-  process.env.GITHUB_ACCESS_TOKEN &&
-    headers.set('Authorization', `token ${process.env.GITHUB_ACCESS_TOKEN}`);
+  headers.set('Authorization', `token ${environment.github.accessToken}`);
 
   return headers;
 }
@@ -49,6 +50,10 @@ export async function githubReposJsonFetch(
   const reposResponse = await githubAuthFetch(uri);
 
   const data = (await reposResponse.json()) as RawGithubReposResponse;
+
+  console.log('URL:', uri);
+  console.log('DATA:');
+  console.log(data);
 
   const result: GithubReposResponse = {
     totalCount: data.total_count,

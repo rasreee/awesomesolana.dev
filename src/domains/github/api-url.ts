@@ -53,14 +53,14 @@ const getSolanaGithubReposQueryUrl = (
   return [
     '/search/repositories',
     formatGithubApiQuery({ keywords: ['solana'], ...params }),
-  ];
+  ].join('');
 };
 
 export const githubApiUrl = {
   baseUrl: 'https://api.github.com',
-  searchRepos: (params: Partial<GithubReposSearchParams>) =>
+  searchRepos: (params: Partial<GithubReposSearchParams>): string =>
     [githubApiUrl.baseUrl, getSolanaGithubReposQueryUrl(params)].join(''),
-  browseRepos: (params?: Partial<GithubReposBrowseParams>) =>
+  browseRepos: (params?: Partial<GithubReposBrowseParams>): string =>
     [githubApiUrl.baseUrl, getSolanaGithubReposQueryUrl(params)].join(''),
 };
 
