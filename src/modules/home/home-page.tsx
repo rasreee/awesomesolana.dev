@@ -4,9 +4,9 @@ import PageLayout from '@/layouts/page-layout';
 import { Logo } from '@/ui/logo';
 import Responsive from '@/ui/responsive/responsive';
 
+import PopularRepos from '../common/popular-repos';
 import HomeSearchBox from './home-search-box';
-import PopularSources from './search-results/popular-sources';
-import SearchResults from './search-results/search-results';
+import HomeSearchResults from './home-search-results/home-search-results';
 
 const HomePage = function HomePage() {
   const seo = exploreSEO();
@@ -25,11 +25,11 @@ const HomePage = function HomePage() {
           </div>
         </div>
         <div className="relative flex h-min flex-col gap-3">
-          <div className="relative z-50">
-            <HomeSearchBox />
+          <HomeSearchBox />
+          <div className="absolute top-12 z-50">
+            <HomeSearchResults />
           </div>
-          <SearchResults />
-          <PopularSources />
+          <PopularRepos />
         </div>
       </div>
     </PageLayout>

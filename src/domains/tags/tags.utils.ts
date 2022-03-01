@@ -1,4 +1,5 @@
 import invariant from '@/lib/utils/invariant';
+import uuid from '@/lib/utils/uuid';
 
 import { allTags } from './tags.constants';
 import { Tag, TagType } from './tags.types';
@@ -56,3 +57,9 @@ export async function getTags(
 
   return allTags.filter((tag) => tag.type === type);
 }
+
+export const makeTag = (initialData: Tag): Tag => {
+  const defaultData = { description: '' };
+
+  return { ...defaultData, ...initialData, id: uuid.v4(), sourcesCount: 0 };
+};

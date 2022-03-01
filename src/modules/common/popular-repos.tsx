@@ -35,7 +35,7 @@ const makeSource = (
   };
 };
 
-const popularSources: Source[] = [
+const popularRepos: Source[] = [
   makeSource({
     title: 'foo-bar',
     description: 'This is a foo bar!',
@@ -59,12 +59,12 @@ const popularSources: Source[] = [
   }),
 ];
 
-const PopularSources = () => {
+const PopularRepos = () => {
   return (
     <div>
       <h3>Popular Repos</h3>
       <ul>
-        {popularSources.map((source) => (
+        {popularRepos.map((source) => (
           <li key={source.id}>
             <span>{source.title}</span>
             <span>{source.description}</span>
@@ -82,4 +82,4 @@ const PopularSources = () => {
     </div>
   );
 };
-export default PopularSources;
+export default PopularRepos;

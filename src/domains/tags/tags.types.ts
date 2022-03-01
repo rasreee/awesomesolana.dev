@@ -1,6 +1,9 @@
 export type TagType = 'dependency' | 'topic' | 'language' | 'framework';
 
 export type Tag = {
-  type: TagType;
+  id?: string;
+  type?: TagType;
   name: string;
+  description?: string;
+  sourcesCount?: number;
 };
