@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import {
   githubApiUrl,
-  githubReposJsonFetch,
+  githubJsonFetch,
   GithubReposSearchParams,
   RawGithubReposResponse,
 } from '@/domains/github';
@@ -25,7 +25,7 @@ export default async function githubApiHandler(
 
   const params = { q, page, per_page, tags };
 
-  const data = await githubReposJsonFetch(githubApiUrl.searchRepos(params));
+  const data = await githubJsonFetch(githubApiUrl.searchRepos(params));
 
   return res.status(200).json(data);
 }

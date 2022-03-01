@@ -18,16 +18,12 @@ async function githubAuthFetch(uri: string): Promise<Response> {
   return res;
 }
 
-export async function githubReposJsonFetch(
+export async function githubJsonFetch(
   uri: string,
 ): Promise<RawGithubReposResponse> {
   const reposResponse = await githubAuthFetch(uri);
 
   const data = await reposResponse.json();
-
-  console.log('URL:', uri);
-  console.log('DATA:');
-  console.log(data);
 
   return data as RawGithubReposResponse;
 }
