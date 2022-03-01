@@ -12,7 +12,8 @@ declare global {
     interface ProcessEnv {
       GITHUB_ACCESS_TOKEN: string;
       BASE_URL: string;
-      API_URL: string;
+      NEXT_PUBLIC_SUPABASE_KEY: string;
+      NEXT_PUBLIC_SUPABASE_URL: string;
     }
   }
 }

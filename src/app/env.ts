@@ -1,7 +1,7 @@
 export const host = must('host', process.env.BASE_URL);
 
 /** API Host */
-export const apiHost = must('apiHost', process.env.API_URL);
+export const apiHost = must('apiHost', host + '/api');
 
 function must(name: string, variable?: string): string {
   if (variable == null) {
