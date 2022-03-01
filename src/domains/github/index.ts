@@ -1,3 +1,4 @@
 export * from './api-url';
-export * from './helpers';
+export * from './githubReposJsonFetch';
+export * from './parseRawGithubRepo';
 export * from './types';
