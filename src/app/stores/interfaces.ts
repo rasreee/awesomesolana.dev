@@ -1,8 +1,17 @@
+import { GithubRepo } from '@/domains/github';
 import { Tag, TagType } from '@/domains/tags/tags.types';
 import { RequestStore } from '@/lib/mobx/request-store';
-import { GithubRepo } from '@/modules/github';
+import { ReposSearchStore } from '@/modules/repos/repos-search-store';
 import { SearchFormData } from '@/modules/search/search.types';
+import { TagTypeModalStore } from '@/modules/search/tag-type-modal-store';
+import { TagsSearchStore } from '@/modules/tags-search/tags-search-store';
 import { TextInputProps } from '@/ui/text-input';
+
+export interface IRootStore {
+  tagsSearch: TagsSearchStore;
+  reposSearch: ReposSearchStore;
+  tagTypeModal: TagTypeModalStore;
+}
 
 interface TagsSearchState {
   hits: Tag[];

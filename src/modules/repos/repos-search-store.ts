@@ -1,17 +1,17 @@
 import { computed, makeAutoObservable } from 'mobx';
 
 import { appConfig } from '@/app/app-config';
-import { Tag, TagType } from '@/domains/tags/tags.types';
-import { tagUtils } from '@/domains/tags/tags.utils';
-import { createRequestStore } from '@/lib/mobx/request-store';
+import { IReposSearchStore } from '@/app/stores/interfaces';
 import {
   GithubRepo,
   GithubReposSearchParams,
   githubSwrKey,
   parseRawGitHubRepo,
   RawGithubReposResponse,
-} from '@/modules/github';
-import { IReposSearchStore } from '@/stores/interfaces';
+} from '@/domains/github';
+import { Tag, TagType } from '@/domains/tags/tags.types';
+import { tagUtils } from '@/domains/tags/tags.utils';
+import { createRequestStore } from '@/lib/mobx/request-store';
 import type { TextInputProps } from '@/ui/text-input';
 
 import { SearchFormData } from '../search/search.types';

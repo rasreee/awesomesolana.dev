@@ -2,8 +2,8 @@ import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
 import { reposSEO } from '@/app/seo';
+import { useRootStore } from '@/app/stores';
 import PageLayout from '@/layouts/page-layout';
-import { useRootStore } from '@/stores/root-store';
 
 import Filters from './filters/filters';
 import { ReposSearchBox } from './repos-search-box';

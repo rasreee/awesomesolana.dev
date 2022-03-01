@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { defaultPaginationParams } from '@/lib/utils';
 import {
   githubApi,
   githubReposJsonFetch,
   GithubReposResponse,
   GithubReposSearchParams,
-} from '@/modules/github';
+} from '@/domains/github';
+import { defaultPaginationParams } from '@/lib/utils';
 
 export type GithubReposSearchRequest = NextApiRequest & {
   query: Partial<GithubReposSearchParams>;

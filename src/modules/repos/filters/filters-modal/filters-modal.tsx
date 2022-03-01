@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
+import { useRootStore } from '@/app/stores';
 import clsxm from '@/lib/utils/clsxm';
-import { useRootStore } from '@/stores/root-store';
 import Popover from '@/ui/popover';
 
 const FiltersMenu = dynamic(() => import('./filters-menu'));

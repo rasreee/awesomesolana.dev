@@ -1,6 +1,6 @@
+import { GithubApiParams, GithubReposResponse } from '@/domains/github';
 import clsxm from '@/lib/utils/clsxm';
 import pluralize from '@/lib/utils/pluralize';
-import { GithubApiParams, GithubReposResponse } from '@/modules/github';
 import Badge from '@/ui/badge';
 import { useBreakpoints } from '@/ui/responsive';
 

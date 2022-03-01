@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
-import { GithubApiParams, useGithubReposApi } from '@/modules/github';
-import { useRootStore } from '@/stores/root-store';
+import { useRootStore } from '@/app/stores';
+import { GithubApiParams, useGithubReposApi } from '@/domains/github';
 import { ErrorMessage } from '@/ui/error-message';
 
 import { ReposResultsInfo } from './repos-results-info';

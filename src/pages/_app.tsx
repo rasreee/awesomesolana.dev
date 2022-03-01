@@ -3,12 +3,10 @@ import '@/styles/globals.css';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
-import { useState } from 'react';
 import { SWRConfig } from 'swr';
 
 import { siteConfig } from '@/app/site-config';
-import { StoreProvider } from '@/lib/mobx/store-context';
-import { RootStore } from '@/stores/root-store';
+import StoresProvider from '@/app/stores/stores-provider';
 
 async function fetcher<JSON = any>(
   input: RequestInfo,
@@ -19,8 +17,6 @@ async function fetcher<JSON = any>(
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [rootStore] = useState(new RootStore());
-
   return (
     <>
       <Head>
@@ -33,9 +29,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <NextThemeProvider attribute="class">
         <SWRConfig value={{ fetcher }}>
-          <StoreProvider store={rootStore}>
+          <StoresProvider>
             <Component {...pageProps} />
-          </StoreProvider>
+          </StoresProvider>
         </SWRConfig>
       </NextThemeProvider>
     </>

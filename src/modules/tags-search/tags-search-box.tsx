@@ -2,7 +2,7 @@ import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
-import { useRootStore } from '@/stores/root-store';
+import { useRootStore } from '@/app/stores';
 import { TextInputProps } from '@/ui/text-input';
 
 const SearchForm = dynamic(() => import('@/modules/search/search-form'));
