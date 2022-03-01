@@ -11,7 +11,8 @@
     "format:check": "yarn workspaces foreach run format:check",
     "test": "yarn workspaces foreach run test",
     "prepare": "husky install",
-    "refreshSources": "ts-node scripts/refreshSources"
+    "refreshSources": "ts-node scripts/refreshSources",
+    "postinstall": "yarn husky install"
   },
   "lint-staged": {
     "{app,common}": [
