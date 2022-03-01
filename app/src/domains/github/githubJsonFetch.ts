@@ -1,18 +1,8 @@
 import environment from '@/environment';
+import getEnvVar from '@/lib/getEnvVar';
 
-import { RawGithubReposData } from './types';
-
-// function validateEnv(...envVars: string[]) {
-//   const errors = envVars
-//     .map((envVar) =>
-//       process.env[envVar] ? '' : `env variable ${envVar} was undefined`,
-//     )
-//     .filter(Boolean);
-
-//   invariant(errors.length === 0, errors.join('\n'));
-// }
-
-// validateEnv('GITHUB_ACCESS_TOKEN');
+import { githubSwrKey } from './api-url';
+import { GithubReposSearchParams, RawGithubReposData } from './types';
 
 function getHeaders(): HeadersInit {
   const headers: HeadersInit = new Headers();
@@ -38,4 +28,14 @@ export async function githubJsonFetch(
   const data = await reposResponse.json();
 
   return data as RawGithubReposData;
+}
+
+export async function searchGithubRepos(
+  params: Partial<GithubReposSearchParams>,
+): Promise<RawGithubReposData> {
+  const res = await fetch(
+    getEnvVar('BASE_URL') + githubSwrKey.route('/search', params),
+  );
+
+  return res.json();
 }

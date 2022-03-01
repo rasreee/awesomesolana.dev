@@ -3,29 +3,16 @@ import Router from 'next/router';
 
 import {
   GithubRepo,
-  GithubReposSearchParams,
-  githubSwrKey,
   parseRawGitHubRepo,
-  RawGithubReposData,
+  searchGithubRepos,
 } from '@/domains/github';
 import { tagUtils } from '@/domains/tags/tags.utils';
 import { Tag, TagType } from '@/domains/tags/types';
-import getEnvVar from '@/lib/getEnvVar';
 import { createRequestStore } from '@/lib/mobx/request-store';
 import { IReposSearchStore } from '@/stores/interfaces';
 import type { TextInputProps } from '@/ui/text-input';
 
 import { SearchFormData } from '../common/search-form/types';
-
-async function searchGithubRepos(
-  params: Partial<GithubReposSearchParams>,
-): Promise<RawGithubReposData> {
-  const res = await fetch(
-    getEnvVar('BASE_URL') + githubSwrKey.route('/search', params),
-  );
-
-  return res.json();
-}
 
 export class ReposSearchStore implements IReposSearchStore {
   constructor() {
@@ -98,11 +85,24 @@ export class ReposSearchStore implements IReposSearchStore {
     this.tags = newTags;
   };
 
-  private handleRoute(query: string, tags: Tag[]) {
-    console.log('Router.router? ', Router.router);
-    Router.router?.replace(`/repos`, {
-      query,
-      ...tags.map((tag) => ({ [tag.type]: tag.name })),
-    });
+  private handleRoute(queryString: string, tags: Tag[]) {
+    const queryEntries: [string, string][] = tags.map((tag) => [
+      tag.type,
+      tag.name,
+    ]);
+
+    if (queryString) {
+      queryEntries.push(['query', queryString]);
+    }
+
+    const query = Object.fromEntries(queryEntries);
+
+    Router.router?.push(
+      `/repos`,
+      {
+        query,
+      },
+      { shallow: true },
+    );
   }
 }
