@@ -1,16 +1,10 @@
-import { computed } from 'mobx';
-import { observer } from 'mobx-react-lite';
-
 import { exploreSEO } from '@/app/seo';
 import { siteConfig } from '@/app/site-config';
 import PageLayout from '@/layouts/page-layout';
-import { useStore } from '@/lib/mobx/store-context';
 import { Logo } from '@/ui/logo';
 import Responsive from '@/ui/responsive/responsive';
-import { TextInputProps } from '@/ui/text-input';
 
-import SearchForm from '../search/search-form';
-import { HomePageStore } from './home-page-store';
+import HomeSearchBox from './home-search-box';
 import PopularSources from './search-results/popular-sources';
 import SearchResults from './search-results/search-results';
 
@@ -41,29 +35,5 @@ const HomePage = function HomePage() {
     </PageLayout>
   );
 };
-
-const HomeSearchBox = observer(() => {
-  const homePageStore = useStore<HomePageStore>();
-  const { search } = homePageStore;
-
-  const getTextInputProps = (props?: Partial<TextInputProps>): TextInputProps =>
-    computed(() => ({
-      ...props,
-      ...{
-        onClick: homePageStore.openMenu,
-        onChange: homePageStore.onSearchQueryChange,
-        value: search.query,
-      },
-    })).get();
-
-  return (
-    <SearchForm
-      error={search.error}
-      onReset={search.reset}
-      onSubmit={search.submitSearch}
-      textInputProps={getTextInputProps()}
-    />
-  );
-});
 
 export default HomePage;
