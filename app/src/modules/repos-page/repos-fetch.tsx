@@ -2,9 +2,8 @@ import { GithubApiParams } from '@/domains/github';
 import { useGithubReposApi } from '@/hooks/useGithubReposApi';
 import { isApiError } from '@/lib/api';
 import { ErrorMessage } from '@/ui/error-message';
-import FeedSkeleton from '@/ui/feed-skeleton';
 
-import ReposFeed from '../common/repos-feed';
+import ReposList from '../common/repos-list';
 import { ReposResultsInfo } from './repos-results-info';
 
 export interface ReposFetchProps {
@@ -20,12 +19,10 @@ const ReposFetch = function ReposFetch({ route, params }: ReposFetchProps) {
   if (isApiError(data))
     return <ErrorMessage>{JSON.stringify(data, null, 2)}</ErrorMessage>;
 
-  if (!data) return <FeedSkeleton n={10} />;
-
   return (
     <div>
       <ReposResultsInfo data={data} params={params} />
-      <ReposFeed data={data} />
+      <ReposList data={data} />
     </div>
   );
 };

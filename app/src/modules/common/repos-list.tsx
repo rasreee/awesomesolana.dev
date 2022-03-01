@@ -1,14 +1,17 @@
 import React from 'react';
 
 import { GithubReposData } from '@/domains/github';
+import FeedSkeleton from '@/ui/feed-skeleton';
 
 import { RepoFeedItem } from './repo-feed-item';
 
-export type ReposFeedProps = {
-  data: GithubReposData;
+export type ReposListProps = {
+  data: GithubReposData | undefined;
 };
 
-function ReposFeed({ data }: ReposFeedProps) {
+function ReposList({ data }: ReposListProps) {
+  if (!data) return <FeedSkeleton n={8} />;
+
   return (
     <ul className="flex flex-col divide-y divide-base-300 dark:divide-base-700">
       {data.items.map((hit) => (
@@ -20,4 +23,4 @@ function ReposFeed({ data }: ReposFeedProps) {
   );
 }
 
-export default ReposFeed;
+export default ReposList;
