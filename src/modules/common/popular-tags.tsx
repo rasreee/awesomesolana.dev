@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Tag } from '@/domains/tags/tags.types';
 import { makeTag } from '@/domains/tags/tags.utils';
+import { Tag } from '@/domains/tags/types';
 import BasicOutlineBadge from '@/ui/basic-outline-badge';
 
-const makeTags = (...args: Tag[]): Tag[] => {
-  return args.map(makeTag);
+const makeTags = (...args: Omit<Tag, 'id'>[]): Tag[] => {
+  return args.map((tag, index) => makeTag({ ...tag, id: index }));
 };
 
 const popularTags: Tag[] = makeTags(
@@ -32,20 +32,9 @@ const PopularTags = ({ onSelect }: { onSelect: (tag: Tag) => void }) => {
         {popularTags.map((tag) => (
           <li key={tag.id}>
             <BasicOutlineBadge className="py-3" onClick={handleClickItem(tag)}>
-              <div className="flex flex-col justify-center">
-                <div className="flex items-center gap-1 py-2">
-                  <span className="text text-base font-medium leading-none text-opacity-80">
-                    {tag.name}
-                  </span>
-                  {' · '}
-                  <span className="text-hint text-xs leading-none">
-                    {tag.sourcesCount}
-                  </span>
-                </div>
-                {tag.description && (
-                  <div className="text-body text-sm">{tag.description}</div>
-                )}
-              </div>
+              <span className="text text-base font-medium leading-none text-opacity-80">
+                {tag.name}
+              </span>
             </BasicOutlineBadge>
           </li>
         ))}

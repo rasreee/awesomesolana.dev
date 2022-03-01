@@ -8,8 +8,8 @@ import {
   parseRawGitHubRepo,
   RawGithubReposResponse,
 } from '@/domains/github';
-import { Tag, TagType } from '@/domains/tags/tags.types';
 import { tagUtils } from '@/domains/tags/tags.utils';
+import { Tag, TagType } from '@/domains/tags/types';
 import { createRequestStore } from '@/lib/mobx/request-store';
 import { IReposSearchStore } from '@/stores/interfaces';
 import type { TextInputProps } from '@/ui/text-input';

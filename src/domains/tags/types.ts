@@ -1,9 +1,10 @@
 export type TagType = 'dependency' | 'topic' | 'language' | 'framework';
 
 export type Tag = {
-  id?: string;
+  id: Int8;
   type?: TagType;
+  /* Primary name the tag is associated with*/
   name: string;
-  description?: string;
-  sourcesCount?: number;
+  /* Other names the tag is associated with*/
+  aliases?: string[];
 };

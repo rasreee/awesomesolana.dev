@@ -1,4 +1,4 @@
-import { Tag } from '@/domains/tags/tags.types';
+import { Tag } from '@/domains/tags/types';
 import { PaginationParams } from '@/lib/pagination';
 
 export interface GithubUser {

@@ -2,8 +2,8 @@ import { computed, runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 
-import { Tag } from '@/domains/tags/tags.types';
 import { tagUtils } from '@/domains/tags/tags.utils';
+import { Tag } from '@/domains/tags/types';
 import { useGlobalStore } from '@/stores';
 import { CheckBox } from '@/ui/check-box';
 
