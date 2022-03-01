@@ -6,6 +6,7 @@
     "common"
   ],
   "scripts": {
+    "prepare": "husky install",
     "refreshSources": "ts-node scripts/refreshSources"
   },
   "devDependencies": {

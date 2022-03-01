@@ -21,10 +21,7 @@
     "checks": "yarn typecheck && yarn test && yarn build",
     "format": "prettier -w .",
     "format:check": "prettier -c .",
-    "release": "standard-version",
-    "push-release": "git push --follow-tags origin main",
-    "postbuild": "next-sitemap",
-    "prepare": "husky install"
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@awesomesolana/common": "workspace:^",
