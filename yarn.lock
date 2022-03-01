@@ -19,6 +19,7 @@ __metadata:
   resolution: "@awesomesolana/app@workspace:app"
   dependencies:
     "@awesomesolana/common": "workspace:^"
+    "@awesomesolana/tw": "workspace:^"
     "@babel/core": ^7.8.0
     "@next/bundle-analyzer": ^12.1.0
     "@primer/octicons-react": ^16.3.1
@@ -102,6 +103,35 @@ __metadata:
     microbundle: ^0.14.2
     prettier: ^2.5.1
     typescript: ^4.6.2
+  languageName: unknown
+  linkType: soft
+
+"@awesomesolana/tw@workspace:^, @awesomesolana/tw@workspace:tw":
+  version: 0.0.0-use.local
+  resolution: "@awesomesolana/tw@workspace:tw"
+  dependencies:
+    "@types/jest": ^27.4.1
+    "@types/node": ^17.0.21
+    "@types/react": ^17.0.39
+    "@types/react-dom": ^17.0.12
+    "@typescript-eslint/eslint-plugin": ^5.13.0
+    "@typescript-eslint/parser": ^5.13.0
+    clsx: ^1.1.1
+    cross-env: ^7.0.3
+    eslint: ^8.10.0
+    eslint-config-prettier: ^8.4.0
+    eslint-plugin-prettier: ^4.0.0
+    eslint-plugin-simple-import-sort: ^7.0.0
+    jest: ^27.5.1
+    microbundle: ^0.14.2
+    prettier: ^2.5.1
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    tailwind-merge: ^1.2.0
+    typescript: ^4.6.2
+  peerDependencies:
+    react: ^16.0.0
+    react-dom: ^16.0.0
   languageName: unknown
   linkType: soft
 
@@ -2689,6 +2719,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: 4d5730dffbef86c887cecad7e3cecda424ce6a64d0b5441c63b5b015d48219868660a2bb1aa15e897e565ad8867fa6b885d4358b04e1c4e589ba4c07c3fda55c
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^17.0.12":
+  version: 17.0.12
+  resolution: "@types/react-dom@npm:17.0.12"
+  dependencies:
+    "@types/react": "*"
+  checksum: 9754e1d0c0107310eab35a2eb1dad45f6ef0a41e562c23a29d6bf723a29c8a2036c4acd6a1a1422bf7cf956d431e41b154608dd917f6e69c7ab0d87720c5e27e
   languageName: node
   linkType: hard
 

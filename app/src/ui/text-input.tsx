@@ -1,6 +1,5 @@
+import { clsxm } from '@awesomesolana/tw';
 import React, { useEffect } from 'react';
-
-import clsxm from '@/lib/clsxm';
 
 export type TextInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   autoFocused?: boolean;

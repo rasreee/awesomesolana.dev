@@ -1,6 +1,5 @@
+import { classed } from '@awesomesolana/tw';
 import times from 'lodash.times';
-
-import classed from '@/lib/classed';
 
 import Shimmer from './shimmer';
 

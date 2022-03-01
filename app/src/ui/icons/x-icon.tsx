@@ -1,4 +1,4 @@
-import clsxm from '@/lib/clsxm';
+import { clsxm } from '@awesomesolana/tw';
 
 function XIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
   return (

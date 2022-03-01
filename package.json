@@ -3,7 +3,8 @@
   "private": true,
   "workspaces": [
     "app",
-    "common"
+    "common",
+    "tw"
   ],
   "scripts": {
     "lint:strict": "yarn workspaces foreach run lint:strict",
@@ -14,7 +15,7 @@
     "refreshSources": "ts-node scripts/refreshSources",
     "postinstall": "yarn husky install",
     "dev": "yarn workspace @awesomesolana/app run dev",
-    "build": "yarn workspace @awesomesolana/common run build && yarn workspace @awesomesolana/app run build",
+    "build": "yarn workspace @awesomesolana/common run build && yarn workspace @awesomesolana/tw run build && yarn workspace @awesomesolana/app run build",
     "start": "yarn workspace @awesomesolana/app run start"
   },
   "lint-staged": {

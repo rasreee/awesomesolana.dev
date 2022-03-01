@@ -26,7 +26,6 @@
   },
   "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx", "../common/src/sources/constants.ts"],
   "exclude": ["node_modules"],
-  "moduleResolution": ["node_modules", ".next", "node"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"

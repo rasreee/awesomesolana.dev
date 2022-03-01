@@ -1,6 +1,5 @@
+import { clsxm } from '@awesomesolana/tw';
 import { forwardRef, HTMLAttributes, Ref } from 'react';
-
-import clsxm from '@/lib/clsxm';
 
 export interface OverlayProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;

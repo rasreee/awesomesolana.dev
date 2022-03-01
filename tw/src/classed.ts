@@ -17,12 +17,12 @@ import React, {
   RefAttributes,
   SVGAttributes,
   TimeHTMLAttributes,
-} from 'react';
+} from "react";
 
-import classNames from './clsxm';
+import classNames from "./clsxm";
 
 function classed(
-  type: 'input',
+  type: "input",
   ...className: string[]
 ): ForwardRefExoticComponent<
   PropsWithoutRef<
@@ -32,7 +32,7 @@ function classed(
 >;
 
 function classed(
-  type: 'time',
+  type: "time",
   ...className: string[]
 ): ForwardRefExoticComponent<
   PropsWithoutRef<
@@ -42,7 +42,7 @@ function classed(
 >;
 
 function classed(
-  type: 'a',
+  type: "a",
   ...className: string[]
 ): ForwardRefExoticComponent<
   PropsWithoutRef<
@@ -52,7 +52,7 @@ function classed(
 >;
 
 function classed(
-  type: 'img',
+  type: "img",
   ...className: string[]
 ): ForwardRefExoticComponent<
   PropsWithoutRef<
@@ -62,7 +62,7 @@ function classed(
 >;
 
 function classed(
-  type: 'details',
+  type: "details",
   ...className: string[]
 ): ForwardRefExoticComponent<
   PropsWithoutRef<

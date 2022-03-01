@@ -3,9 +3,8 @@ import type { AnchorHTMLAttributes } from 'react';
 
 const Seo = dynamic(() => import('@/ui/seo'));
 
+import { clsxm } from '@awesomesolana/tw';
 import dynamic from 'next/dynamic';
-
-import clsxm from '@/lib/clsxm';
 
 function ArrowLink({
   children,

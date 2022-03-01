@@ -1,4 +1,4 @@
-import classed from '@/lib/classed';
+import { classed } from '@awesomesolana/tw';
 
 const Shimmer = classed(
   'div',

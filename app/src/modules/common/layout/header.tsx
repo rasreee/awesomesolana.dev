@@ -9,7 +9,7 @@ const ColorModeToggle = dynamic(
 const GithubIcon = dynamic(() => import('@/ui/github/github-icon'));
 const LogoLink = dynamic(() => import('./logo-link'));
 
-import clsxm from '@/lib/clsxm';
+import { clsxm } from '@awesomesolana/tw';
 
 export default function Header() {
   const router = useRouter();

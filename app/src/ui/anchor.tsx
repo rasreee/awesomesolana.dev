@@ -1,7 +1,6 @@
+import { classed } from '@awesomesolana/tw';
+import { clsxm } from '@awesomesolana/tw';
 import React from 'react';
-
-import classed from '@/lib/classed';
-import clsxm from '@/lib/clsxm';
 
 export interface AnchorProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {

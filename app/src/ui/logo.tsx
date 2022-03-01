@@ -1,6 +1,5 @@
+import { clsxm } from '@awesomesolana/tw';
 import Image from 'next/image';
-
-import clsxm from '@/lib/clsxm';
 
 import { useBreakpoints } from './responsive/use-breakpoints';
 

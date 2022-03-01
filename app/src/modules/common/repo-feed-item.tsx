@@ -1,4 +1,5 @@
 import { SourceType } from '@awesomesolana/common';
+import { clsxm } from '@awesomesolana/tw';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
 import intlFormat from 'date-fns/intlFormat';
 import dynamic from 'next/dynamic';
@@ -6,7 +7,6 @@ import React from 'react';
 
 import { GithubRepo } from '@/domains/github';
 import { useRegisterSourceView } from '@/hooks/useRegisterSourceView';
-import clsxm from '@/lib/clsxm';
 import { Anchor } from '@/ui/anchor';
 
 const RepoStat = dynamic(() => import('@/ui/github/repo-stat'));

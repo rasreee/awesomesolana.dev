@@ -1,7 +1,7 @@
 import { TagType } from '@awesomesolana/common';
+import { clsxm } from '@awesomesolana/tw';
 import { useState } from 'react';
 
-import clsxm from '@/lib/clsxm';
 import Popover from '@/ui/popover';
 
 import FiltersBar from './filters-bar';

@@ -1,6 +1,6 @@
+import { clsxm } from '@awesomesolana/tw';
 import { FC, ReactNode, useRef } from 'react';
 
-import clsxm from '@/lib/clsxm';
 import { useClickOutside } from '@/ui/hooks/use-click-outside';
 import { EventKeys, useKeyPress } from '@/ui/hooks/use-key-press';
 
