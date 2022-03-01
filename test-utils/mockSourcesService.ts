@@ -1,10 +1,28 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import dotenv from 'dotenv';
+
 import { initSupabase } from '@/lib/init-supabase';
+import invariant from '@/lib/invariant';
 import { SourcesService } from '@/services/sources-service';
 
-export const mockSourcesService = () =>
-  new SourcesService(
+dotenv.config({ path: '.env.local' });
+
+export const validateEnv = (...envVars: string[]) => {
+  envVars.forEach((envVar) => {
+    invariant(
+      process.env[envVar],
+      `Environment variable ${envVar} was undefined`,
+    );
+  });
+};
+
+export const mockSourcesService = () => {
+  validateEnv('NEXT_PUBLIC_SUPABASE_URL', 'NEXT_PUBLIC_SUPABASE_KEY');
+
+  return new SourcesService(
     initSupabase({
-      key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjam1wZGZ3cGh5b2Jwb3h6ZmVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDUwMzgzODEsImV4cCI6MTk2MDYxNDM4MX0.0EYr9kBj17GkbfeXzgFnzsFEulcytOcTFD_zOfuPkd4',
-      url: 'https://ccjmpdfwphyobpoxzfel.supabase.co',
+      key: process.env.NEXT_PUBLIC_SUPABASE_KEY!,
+      url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
     }),
   );
+};

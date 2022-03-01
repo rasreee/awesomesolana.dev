@@ -15,7 +15,7 @@ describe('domains/sources/services', () => {
     let createdSource: Source | null = null;
 
     const args: CreateSourceArgs = {
-      url: '',
+      url: 'TEST_CREATE_SOURCE',
       type: SourceType.Repo,
     };
 

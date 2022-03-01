@@ -30,7 +30,6 @@ export class TagsSearchStore implements ITagsSearchStore {
   };
 
   onSubmit = async ({ query, filters }: SearchFormData) => {
-    console.log('TagsSearchStore.onSubmit()', { query, filters });
     if (!query) return this.setHits([]);
 
     this.request.setLoading(true);

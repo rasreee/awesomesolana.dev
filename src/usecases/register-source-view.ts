@@ -21,7 +21,4 @@ export async function registerSourceView(
     type: source.type,
     views: source.views + 1,
   });
-
-  process.env.NODE_ENV === 'development' &&
-    console.log('✅ registered source view!', JSON.stringify({ source }));
 }

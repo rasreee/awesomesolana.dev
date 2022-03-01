@@ -14,16 +14,18 @@ describe('usecases/register-source-view', () => {
 
   const args: RegisterSourceViewArgs = {
     type: SourceType.Repo,
-    url: 'TEST_SOURCE_URL',
+    url: 'TEST_REGISTER_SOURCE_VIEW',
   };
 
-  afterAll(() => {
-    service.deleteSource(args);
+  afterEach(async () => {
+    await service.deleteSource(args);
   });
 
-  it('registers source view', () => {
-    const promise = registerSourceView(args, service);
-
-    expect(promise).resolves.toBeTruthy();
+  it('registers source view', async () => {
+    try {
+      await registerSourceView(args, service);
+    } catch (error) {
+      expect(error).toBeNull();
+    }
   });
 });

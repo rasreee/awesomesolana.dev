@@ -26,8 +26,6 @@ export class SourcesService {
   }
 
   async createSource(args: CreateSourceArgs): Promise<Source> {
-    console.log('getSourceMeta()', JSON.stringify({ args }));
-
     const { data, error } = await this.client
       .from<Source>(SOURCE_TABLE)
       .insert({ type: args.type, url: args.url })
@@ -44,8 +42,6 @@ export class SourcesService {
   }
 
   async findSource(args: GetSourceMetaArgs): Promise<Source | null> {
-    console.log('getSourceMeta()', JSON.stringify({ args }));
-
     const { data, error } = await this.client
       .from<Source>(SOURCE_TABLE)
       .select('*')
@@ -58,8 +54,6 @@ export class SourcesService {
   }
 
   async updateSource(args: UpdateSourceArgs): Promise<Source> {
-    console.log('updateSourceMeta()', JSON.stringify({ args }));
-
     const { data, error } = await this.client
       .from<Source>(SOURCE_TABLE)
       .update(args)

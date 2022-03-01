@@ -1,6 +1,10 @@
+import dotenv from 'dotenv';
+
 import invariant from './invariant';
 
-require('dotenv').config();
+dotenv.config({
+  path: process.env.NODE_ENV !== 'production' ? '.env.local' : '.env',
+});
 
 export default function getEnvVar(envVarKey: string): string {
   const value = process.env[envVarKey];
