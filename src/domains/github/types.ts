@@ -15,6 +15,7 @@ export interface RawGitHubRepo {
   id: number;
   /* Handle for the repo */
   name: string;
+  full_name: string;
   /* Description of the repo */
   description: string;
   /* Programming language the repo was written with */
@@ -51,6 +52,7 @@ export interface GithubRepo {
   id: number;
   /* Handle for the repo */
   name: string;
+  fullName: string;
   /* Description of the repo */
   description: string;
   /* Programming language the repo was written with */

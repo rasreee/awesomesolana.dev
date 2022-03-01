@@ -4,6 +4,8 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 
 import { GithubRepo } from '@/domains/github';
+import { SourceType } from '@/domains/sources/definitions';
+import { useRegisterSourceView } from '@/hooks/useRegisterSourceView';
 import clsxm from '@/lib/clsxm';
 import { Anchor } from '@/ui/anchor';
 
@@ -12,6 +14,7 @@ const BasicOutlineBadge = dynamic(() => import('@/ui/basic-outline-badge'));
 
 export function RepoFeedItem({
   name,
+  fullName,
   description,
   topics,
   starsCount,
@@ -19,6 +22,17 @@ export function RepoFeedItem({
   language,
   htmlUrl,
 }: GithubRepo) {
+  const registerSourceView = useRegisterSourceView();
+
+  const handleTitleClick = async () => {
+    await registerSourceView({
+      title: fullName,
+      type: SourceType.Repo,
+      url: htmlUrl,
+      tags: [...topics, language],
+    });
+  };
+
   return (
     <div className="flex flex-col gap-2 py-3">
       <Anchor
@@ -29,6 +43,7 @@ export function RepoFeedItem({
           'heading text-xl',
         )}
         href={htmlUrl}
+        onClick={handleTitleClick}
       >
         {name}
       </Anchor>

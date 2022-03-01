@@ -1,6 +1,5 @@
 import { computed, makeAutoObservable } from 'mobx';
 
-import { appConfig } from '@/app/app-config';
 import {
   GithubRepo,
   GithubReposSearchParams,
@@ -10,6 +9,7 @@ import {
 } from '@/domains/github';
 import { tagUtils } from '@/domains/tags/tags.utils';
 import { Tag, TagType } from '@/domains/tags/types';
+import getEnvVar from '@/lib/getEnvVar';
 import { createRequestStore } from '@/lib/mobx/request-store';
 import { IReposSearchStore } from '@/stores/interfaces';
 import type { TextInputProps } from '@/ui/text-input';
@@ -20,7 +20,7 @@ async function searchGithubRepos(
   params: Partial<GithubReposSearchParams>,
 ): Promise<RawGithubReposResponse> {
   const res = await fetch(
-    appConfig.baseUrl + githubSwrKey.route('/search', params),
+    getEnvVar('BASE_URL') + githubSwrKey.route('/search', params),
   );
 
   return res.json();

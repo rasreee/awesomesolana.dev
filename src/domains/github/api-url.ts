@@ -45,43 +45,23 @@ function formatGithubApiQuery({
   return `${query}${pagination}`;
 }
 
-export const githubApiRoute = {
-  searchRepos: (params?: Partial<GithubReposSearchParams>) =>
-    [
-      `/search/repositories`,
-      formatGithubApiQuery({ keywords: ['solana'], ...params }),
-    ].join(''),
-  browseRepos: (params?: Partial<GithubReposBrowseParams>) =>
-    [
-      `/search/repositories`,
-      formatGithubApiQuery({ keywords: ['solana'], ...params }),
-    ].join(''),
+const getSolanaGithubReposQueryUrl = (
+  params: Partial<
+    GithubReposSearchParams | GithubReposBrowseParams
+  > = defaultPaginationParams,
+) => {
+  return [
+    '/search/repositories',
+    formatGithubApiQuery({ keywords: ['solana'], ...params }),
+  ];
 };
 
 export const githubApiUrl = {
   baseUrl: 'https://api.github.com',
-  searchRepos: ({
-    page,
-    per_page,
-    tags,
-    keywords = [],
-  }: Partial<GithubReposSearchParams>) =>
-    [
-      githubApiUrl.baseUrl,
-      `/search/repositories`,
-      formatGithubApiQuery({
-        keywords: ['solana', ...keywords],
-        tags,
-        page,
-        per_page,
-      }),
-    ].join(''),
+  searchRepos: (params: Partial<GithubReposSearchParams>) =>
+    [githubApiUrl.baseUrl, getSolanaGithubReposQueryUrl(params)].join(''),
   browseRepos: (params?: Partial<GithubReposBrowseParams>) =>
-    [
-      githubApiUrl.baseUrl,
-      `/search/repositories`,
-      formatGithubApiQuery({ keywords: ['solana'], ...params }),
-    ].join(''),
+    [githubApiUrl.baseUrl, getSolanaGithubReposQueryUrl(params)].join(''),
 };
 
 export const githubSwrKey = {

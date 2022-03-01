@@ -6,6 +6,7 @@ import { ThemeProvider as NextThemeProvider } from 'next-themes';
 import { SWRConfig } from 'swr';
 
 import GlobalStoreProvider from '@/app/global-store-provider';
+import ServicesProvider from '@/app/services-provider';
 import { siteConfig } from '@/app/site-config';
 
 async function fetcher<JSON = any>(
@@ -29,9 +30,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <NextThemeProvider attribute="class">
         <SWRConfig value={{ fetcher }}>
-          <GlobalStoreProvider>
-            <Component {...pageProps} />
-          </GlobalStoreProvider>
+          <ServicesProvider>
+            <GlobalStoreProvider>
+              <Component {...pageProps} />
+            </GlobalStoreProvider>
+          </ServicesProvider>
         </SWRConfig>
       </NextThemeProvider>
     </>

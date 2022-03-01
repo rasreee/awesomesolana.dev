@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@primer/octicons-react": "^16.3.1",
+    "@supabase/supabase-js": "^1.30.7",
     "@tailwindcss/typography": "^0.5.2",
     "axios": "^0.26.0",
     "clsx": "^1.1.1",
@@ -67,6 +68,7 @@
     "autoprefixer": "^10.4.2",
     "babel-jest": "27.5.1",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.0.0",
     "eslint": "^8.10.0",
     "eslint-config-next": "^12.1.0",
     "eslint-config-prettier": "^8.4.0",

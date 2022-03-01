@@ -9,17 +9,17 @@ const makeTags = (...args: Omit<Tag, 'id'>[]): Tag[] => {
 };
 
 const popularTags: Tag[] = makeTags(
-  { name: 'nft' },
-  { name: 'did' },
-  { name: 'payment' },
-  { name: 'names' },
-  { name: 'defi' },
-  { name: 'dao' },
-  { name: 'typescript' },
-  { name: 'rust' },
-  { name: 'nextjs' },
-  { name: 'amm' },
-  { name: 'anchor' },
+  { name: 'nft', type: 'topic' },
+  { name: 'did', type: 'topic' },
+  { name: 'payment', type: 'topic' },
+  { name: 'names', type: 'topic' },
+  { name: 'defi', type: 'topic' },
+  { name: 'dao', type: 'topic' },
+  { name: 'typescript', type: 'language' },
+  { name: 'rust', type: 'language' },
+  { name: 'nextjs', type: 'language' },
+  { name: 'amm', type: 'topic' },
+  { name: 'anchor', type: 'framework' },
 );
 
 const PopularTags = ({ onSelect }: { onSelect: (tag: Tag) => void }) => {

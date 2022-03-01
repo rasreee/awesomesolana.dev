@@ -7,7 +7,7 @@ import { ReposSearchStore } from '@/modules/repos-page/repos-search-store';
 import { TagTypeModalStore } from '@/stores/tag-type-modal-store';
 import { TextInputProps } from '@/ui/text-input';
 
-export interface IGlobalStore {
+export interface GlobalStore {
   tagsSearch: TagsSearchStore;
   reposSearch: ReposSearchStore;
   tagTypeModal: TagTypeModalStore;

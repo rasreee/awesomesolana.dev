@@ -9,6 +9,7 @@ export function parseRawGitHubRepo(data: RawGitHubRepo): GithubRepo {
   return {
     id: data.id,
     name: data.name,
+    fullName: data.full_name,
     description: data.description,
     language: data.language,
     htmlUrl: data.html_url,
