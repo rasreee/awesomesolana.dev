@@ -18,12 +18,24 @@ export const tagUtils = {
       arr.filter((item) => item.type === type),
   }),
 };
+interface ToTagOptions {
+  name: string;
+  type: TagType;
+}
 
-export const toTag = (tagName: string): Tag => {
-  const found = allTags.find((tag) => tag.name === tagName);
-  invariant(found, `invalid tagName ${tagName} for toTag`);
-  return found;
-};
+export function toTag(arg: string | ToTagOptions): Tag {
+  if (typeof arg === 'string') {
+    const found = allTags.find((tag) => tag.name === arg);
+    invariant(found, `invalid tagName ${arg} for toTag`);
+    return found;
+  }
+
+  const { name, type } = arg;
+
+  const index = allTags.findIndex((tag) => tag.name === name);
+
+  return { id: index, type, name };
+}
 
 export const isEqualTag = (a: Tag, b: Tag): boolean => {
   return a.type === b.type && a.name === b.name;

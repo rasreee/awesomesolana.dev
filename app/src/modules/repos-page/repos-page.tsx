@@ -1,40 +1,40 @@
-import { computed } from 'mobx';
-import { observer } from 'mobx-react-lite';
-
 import { reposSEO } from '@/app/seo';
-import { useGlobalStore } from '@/stores';
+import { useSearchQuery } from '@/contexts/search-query-context';
+import { toTag } from '@/domains/tags/tags.utils';
+import { TagType } from '@/domains/tags/types';
+import { SearchQuery } from '@/lib/searchQuery';
 
 import PageLayout from '../common/page-layout';
 import ReposFetch, { ReposFetchProps } from './repos-fetch';
 import ReposSearchControls from './repos-search-controls';
-import { ReposSearchStore } from './repos-search-store';
 
-const computeReposFetchProps = (
-  reposSearch: ReposSearchStore,
-): ReposFetchProps =>
-  computed(() => {
-    const shouldSearch = Boolean(
-      reposSearch.tags.length || reposSearch.query.trim(),
-    );
+const computeReposFetchProps = (searchQuery: SearchQuery): ReposFetchProps => {
+  const shouldSearch = Boolean(
+    Object.values(searchQuery).length || searchQuery.term.trim(),
+  );
 
-    const reposFetchProps: ReposFetchProps = shouldSearch
-      ? {
-          route: '/search',
-          params: {
-            tags: reposSearch.tags,
-            keywords: [reposSearch.query],
-          },
-        }
-      : { route: '/browse' };
+  const reposFetchProps: ReposFetchProps = shouldSearch
+    ? {
+        route: '/search',
+        params: {
+          tags: Object.entries(searchQuery)
+            .filter(([key]) => key !== 'query')
+            .map(([type, value]) =>
+              toTag({ type: type as TagType, name: value }),
+            ),
+          keywords: [searchQuery.term],
+        },
+      }
+    : { route: '/browse' };
 
-    return reposFetchProps;
-  }).get();
+  return reposFetchProps;
+};
 
-const ReposPage = observer(function ReposPage() {
-  const { reposSearch } = useGlobalStore();
-  const seo = reposSEO(reposSearch.query);
+const ReposPage = function ReposPage() {
+  const searchQuery = useSearchQuery();
+  const seo = reposSEO(searchQuery.term);
 
-  const reposFetchProps = computeReposFetchProps(reposSearch);
+  const reposFetchProps = computeReposFetchProps(searchQuery);
 
   return (
     <PageLayout seo={seo}>
@@ -44,6 +44,6 @@ const ReposPage = observer(function ReposPage() {
       </div>
     </PageLayout>
   );
-});
+};
 
 export default ReposPage;

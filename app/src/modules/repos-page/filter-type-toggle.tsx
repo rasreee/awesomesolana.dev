@@ -1,12 +1,11 @@
-import { computed } from 'mobx';
-import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
+import { useSearchQuery } from '@/contexts/search-query-context';
+import { tagUtils } from '@/domains/tags/tags.utils';
 import { TagType } from '@/domains/tags/types';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
 import { capitalize } from '@/lib/string';
-import { useGlobalStore } from '@/stores';
 
 const ChevronDownIcon = dynamic(() => import('@/ui/icons/chevron-down-icon'));
 const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
@@ -39,7 +38,7 @@ function TagButton({
   );
 }
 
-const FilterTypeToggle = observer(function FilterTypeToggle({
+const FilterTypeToggle = function FilterTypeToggle({
   type,
   isActive,
   onClick,
@@ -48,11 +47,8 @@ const FilterTypeToggle = observer(function FilterTypeToggle({
   isActive: boolean;
   onClick: () => void;
 }) {
-  const { reposSearch } = useGlobalStore();
-
-  const selectedCount = computed(
-    () => reposSearch.tags.filter((tag) => tag.type === type).length,
-  ).get();
+  const { tags, clearTags } = useSearchQuery();
+  const selectedCount = tagUtils.list(tags).ofType(type).length;
 
   return (
     <TagButton
@@ -72,7 +68,7 @@ const FilterTypeToggle = observer(function FilterTypeToggle({
         )}
       </div>
       {selectedCount ? (
-        <button onClick={() => reposSearch.clearTags(type)}>
+        <button onClick={() => clearTags(type)}>
           <XIcon className="h-4 w-4" />
         </button>
       ) : (
@@ -82,6 +78,6 @@ const FilterTypeToggle = observer(function FilterTypeToggle({
       )}
     </TagButton>
   );
-});
+};
 
 export default FilterTypeToggle;

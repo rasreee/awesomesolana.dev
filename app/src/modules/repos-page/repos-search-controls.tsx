@@ -1,24 +1,29 @@
 import { observer } from 'mobx-react-lite';
 
+import { useSearchQuery } from '@/contexts/search-query-context';
+import SearchForm from '@/modules/common/search-form';
 import { useGlobalStore } from '@/stores';
 
-import SearchForm from '../common/search-form';
-import FiltersControls from './filters-controls';
+const ReposSearchControls = observer(function ReposSearchBox() {
+  const { search } = useGlobalStore();
+  const searchQuery = useSearchQuery();
 
-const ReposSearchControls = observer(function ReposSearchControls() {
-  const { reposSearch } = useGlobalStore();
+  const onSubmit = () => {
+    searchQuery.setTerm(search.value);
+  };
+
+  const onReset = () => {
+    search.reset();
+  };
 
   return (
-    <div className="flex flex-col gap-2">
-      <SearchForm
-        textInputProps={reposSearch.getTextInputProps({ autoFocused: true })}
-        error={reposSearch.request.error}
-        onSubmit={reposSearch.onSubmit}
-        onReset={reposSearch.onReset}
-        filters={reposSearch.tags}
-      />
-      <FiltersControls />
-    </div>
+    <SearchForm
+      textInputProps={search.getTextInputProps({ autoFocused: true })}
+      error={search.error}
+      onSubmit={onSubmit}
+      onReset={onReset}
+      filters={searchQuery.tags}
+    />
   );
 });
 

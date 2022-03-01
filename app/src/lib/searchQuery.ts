@@ -1,5 +1,3 @@
-import { ParsedUrlQuery } from 'querystring';
-
 import { Tag } from '@/domains/tags/types';
 
 export interface SearchQueryArgs {
@@ -7,10 +5,18 @@ export interface SearchQueryArgs {
   tags?: Tag[];
 }
 
+export type SearchQuery = {
+  language?: string;
+  topic?: string;
+  framework?: string;
+  dependency?: string;
+  term: string;
+};
+
 export function searchQuery({
   tags = [],
   term = '',
-}: SearchQueryArgs): ParsedUrlQuery {
+}: SearchQueryArgs): SearchQuery {
   const queryEntries: [string, string][] = tags.map((tag) => [
     tag.type,
     tag.name,
@@ -22,5 +28,5 @@ export function searchQuery({
 
   const query = Object.fromEntries(queryEntries);
 
-  return query;
+  return query as SearchQuery;
 }

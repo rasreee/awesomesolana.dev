@@ -1,9 +1,9 @@
 import times from 'lodash.times';
-import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 import useSWR from 'swr';
 
+import { useSearchQuery } from '@/contexts/search-query-context';
 import { getTags, tagUtils } from '@/domains/tags/tags.utils';
 import { TagType } from '@/domains/tags/types';
 import clsxm from '@/lib/clsxm';
@@ -21,15 +21,14 @@ const RepoFilterCheckBox = dynamic(() => import('./filter-check-box'));
 
 const FiltersMenu = observer(function FiltersMenu({ type }: { type: TagType }) {
   const store = useGlobalStore();
+  const { tags } = useSearchQuery();
   const { tagTypeModal } = store;
 
   const { data: tagsForType } = useSWR(`tagsForType/${type}`, () =>
     getTags(type),
   );
 
-  const selectedTags = computed(() =>
-    store.reposSearch.tags.filter((tag) => tag.type === type),
-  ).get();
+  const selectedTags = tagUtils.list(tags).ofType(type);
 
   const options = tagsForType
     ? tagUtils.list(tagsForType).exclude(selectedTags)

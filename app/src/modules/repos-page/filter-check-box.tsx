@@ -1,24 +1,20 @@
-import { computed, runInAction } from 'mobx';
-import { observer } from 'mobx-react-lite';
 import React from 'react';
 
+import { useSearchQuery } from '@/contexts/search-query-context';
 import { tagUtils } from '@/domains/tags/tags.utils';
 import { Tag } from '@/domains/tags/types';
-import { useGlobalStore } from '@/stores';
 import { CheckBox } from '@/ui/check-box';
 
-const RepoFilterCheckBox = observer(function RepoFilterCheckBox({
+const RepoFilterCheckBox = function RepoFilterCheckBox({
   tag,
   ...props
 }: React.HTMLAttributes<HTMLLIElement> & {
   tag: Tag;
 }) {
-  const store = useGlobalStore();
-  const checked = computed(() =>
-    tagUtils.list(store.reposSearch.tags).has(tag),
-  ).get();
+  const { tags, toggleTag } = useSearchQuery();
+  const checked = tagUtils.list(tags).has(tag);
 
-  const handleClick = () => runInAction(() => store.reposSearch.toggleTag(tag));
+  const handleClick = () => toggleTag(tag);
 
   return (
     <li
@@ -30,11 +26,8 @@ const RepoFilterCheckBox = observer(function RepoFilterCheckBox({
         <CheckBox checked={checked} readOnly />
         <span className="text-sm leading-none">{tag.name}</span>
       </div>
-      {/* <span className="bg-surface-2 rounded-lg px-1.5 py-0.5 text-xs leading-none">
-        {count}
-      </span> */}
     </li>
   );
-});
+};
 
 export default RepoFilterCheckBox;
