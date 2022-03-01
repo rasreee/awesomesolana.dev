@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import {
-  githubApi,
+  githubApiUrl,
   githubReposJsonFetch,
   GithubReposResponse,
   GithubReposSearchParams,
-} from '@/domains/github';
+} from '@/domains/github/api';
 import { defaultPaginationParams } from '@/lib/utils';
 
 export type GithubReposSearchRequest = NextApiRequest & {
@@ -25,7 +25,7 @@ export default async function githubApiHandler(
 
   const params = { q, page, per_page, tags };
 
-  const data = await githubReposJsonFetch(githubApi.searchRepos(params));
+  const data = await githubReposJsonFetch(githubApiUrl.searchRepos(params));
 
   return res.status(200).json(data);
 }

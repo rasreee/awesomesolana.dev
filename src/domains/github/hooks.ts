@@ -1,11 +1,11 @@
 import useSWR from 'swr';
 
+import { githubSwrKey } from './api/api-url';
 import {
   GithubReposBrowseParams,
   GithubReposResponse,
   GithubReposSearchParams,
-} from './github.types';
-import { githubSwrKey } from './github.utils';
+} from './api/types';
 
 export type UseGithubReposApi = {
   data: GithubReposResponse | undefined;

@@ -8,7 +8,7 @@ import {
   githubSwrKey,
   parseRawGitHubRepo,
   RawGithubReposResponse,
-} from '@/domains/github';
+} from '@/domains/github/api';
 import { Tag, TagType } from '@/domains/tags/tags.types';
 import { tagUtils } from '@/domains/tags/tags.utils';
 import { createRequestStore } from '@/lib/mobx/request-store';

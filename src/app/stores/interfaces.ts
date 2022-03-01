@@ -1,4 +1,4 @@
-import { GithubRepo } from '@/domains/github';
+import { GithubRepo } from '@/domains/github/api';
 import { Tag, TagType } from '@/domains/tags/tags.types';
 import { RequestStore } from '@/lib/mobx/request-store';
 import { ReposSearchStore } from '@/modules/repos/repos-search-store';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GithubReposResponse } from '@/domains/github';
+import { GithubReposResponse } from '@/domains/github/api';
 
 import { RepoFeedItem } from './repo-feed-item';
 
