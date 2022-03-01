@@ -13,16 +13,7 @@
     "react/display-name": "off",
     "react/di": "off",
     "react-hooks/exhaustive-deps": "off",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "ts": "never",
-        "tsx": "never",
-        "js": "never",
-        "jsx": "never"
-      }
-    ],
+    "import/extensions": "off",
     "quotes": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",
