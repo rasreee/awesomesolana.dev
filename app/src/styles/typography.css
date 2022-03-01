@@ -1,0 +1,17 @@
+@layer utilities {
+  .text {
+    @apply text-gray-800 dark:text-gray-100;
+  }
+
+  .text-body {
+    @apply text-gray-600 dark:text-gray-200;
+  }
+
+  .text-hint {
+    @apply text-gray-500 dark:text-gray-400;
+  }
+
+  .text-color-primary {
+    @apply text-indigo-500;
+  }
+}
