@@ -1,7 +1,7 @@
-import { SupabaseClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 import { Source, SOURCE_TABLE } from '@/domains/sources/definitions';
-import { initSupabase } from '@/lib/init-supabase';
+import environment from '@/environment';
 
 import {
   CreateSourceArgs,
@@ -13,7 +13,9 @@ import {
 export class SourcesService {
   private client: SupabaseClient;
   constructor(_client?: SupabaseClient) {
-    this.client = _client ?? initSupabase();
+    this.client =
+      _client ??
+      createClient(environment.supabase.url, environment.supabase.key);
   }
 
   async deleteSource(args: DeleteSourceArgs): Promise<void> {
