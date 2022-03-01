@@ -6,6 +6,7 @@ import { appRoute } from '@/app/routes';
 import { Tag } from '@/domains/tags/types';
 import { useStore } from '@/lib/mobx/store-context';
 import PopularTags from '@/modules/common/popular-tags';
+import { useGlobalStore } from '@/stores';
 import Popover from '@/ui/popover';
 
 import { HomePageStore } from '../home-page-store';
@@ -14,8 +15,11 @@ import GroupedTagsOptions from './grouped-tags-options';
 const HomeSearchResults = observer(() => {
   const router = useRouter();
 
+  const { reposSearch } = useGlobalStore();
+
   const handleSelectTag = (tag: Tag) => {
     router.push(appRoute.repos.search({ tags: [tag] }));
+    reposSearch.toggleTag(tag);
   };
 
   const homePageStore = useStore<HomePageStore>();

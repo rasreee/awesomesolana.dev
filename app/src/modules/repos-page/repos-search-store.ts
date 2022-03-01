@@ -1,4 +1,5 @@
-import { computed, makeAutoObservable } from 'mobx';
+import { action, computed, makeAutoObservable } from 'mobx';
+import Router from 'next/router';
 
 import {
   GithubRepo,
@@ -28,7 +29,11 @@ async function searchGithubRepos(
 
 export class ReposSearchStore implements IReposSearchStore {
   constructor() {
-    makeAutoObservable(this, {}, { name: 'ReposSearchStore' });
+    makeAutoObservable(
+      this,
+      { toggleTag: action.bound },
+      { name: 'ReposSearchStore' },
+    );
   }
 
   hits: GithubRepo[] = [];
@@ -77,21 +82,27 @@ export class ReposSearchStore implements IReposSearchStore {
     this.request.onReset();
   };
 
-  addTag = (tag: Tag) => {
-    this.tags = [...this.tags, tag];
-  };
-
-  removeTag = (tag: Tag) => {
-    this.tags = tagUtils.list(this.tags).exclude([tag]);
-  };
-
   toggleTag = (tag: Tag) => {
-    if (tagUtils.list(this.tags).has(tag)) return this.removeTag(tag);
-
-    this.addTag(tag);
+    const isAdded = tagUtils.list(this.tags).has(tag);
+    const newTags = isAdded
+      ? tagUtils.list(this.tags).exclude([tag])
+      : [...this.tags, tag];
+    this.handleRoute(this.query, newTags);
+    this.tags = newTags;
   };
 
   clearTags = (type: TagType) => {
-    this.tags = this.tags.filter((tag) => tag.type !== type);
+    const newTags = this.tags.filter((tag) => tag.type !== type);
+    this.handleRoute(this.query, newTags);
+    /* important that we set state AFTER using the router */
+    this.tags = newTags;
   };
+
+  private handleRoute(query: string, tags: Tag[]) {
+    console.log('Router.router? ', Router.router);
+    Router.router?.replace(`/repos`, {
+      query,
+      ...tags.map((tag) => ({ [tag.type]: tag.name })),
+    });
+  }
 }

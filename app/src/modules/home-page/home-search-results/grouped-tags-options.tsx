@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react-lite';
 import React from 'react';
 
 import { Tag, TagType } from '@/domains/tags/types';
@@ -11,7 +10,7 @@ export interface GroupedTagsOptionsProps {
   onSelect: (tag: Tag) => void;
 }
 
-const GroupedTagsOptions = observer(function GroupedResults({
+const GroupedTagsOptions = function GroupedResults({
   options,
   onSelect,
 }: GroupedTagsOptionsProps) {
@@ -32,6 +31,6 @@ const GroupedTagsOptions = observer(function GroupedResults({
       )}
     </>
   );
-});
+};
 
 export default GroupedTagsOptions;
