@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 
 import { GithubApiParams } from '@/domains/github';
 import { useGithubReposApi } from '@/hooks/useGithubReposApi';
+import { isApiError } from '@/lib/api';
 import { useGlobalStore } from '@/stores';
 import { ErrorMessage } from '@/ui/error-message';
 import FeedSkeleton from '@/ui/feed-skeleton';
@@ -31,6 +32,9 @@ const ReposResults = observer(function ReposResults() {
   const { data, error } = useGithubReposApi(request.route, request.params);
 
   if (error) return <ErrorMessage>{error?.message}</ErrorMessage>;
+
+  if (isApiError(data))
+    return <ErrorMessage>{JSON.stringify(data, null, 2)}</ErrorMessage>;
 
   if (!data) return <FeedSkeleton n={10} />;
 

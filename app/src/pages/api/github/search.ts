@@ -4,8 +4,9 @@ import {
   githubApiUrl,
   githubJsonFetch,
   GithubReposSearchParams,
-  RawGithubReposResponse,
+  RawGithubReposData,
 } from '@/domains/github';
+import { ApiData, ErrorData } from '@/lib/api';
 import { defaultPaginationParams } from '@/lib/pagination';
 
 export type GithubReposSearchRequest = NextApiRequest & {
@@ -14,7 +15,7 @@ export type GithubReposSearchRequest = NextApiRequest & {
 
 export default async function githubApiHandler(
   req: GithubReposSearchRequest,
-  res: NextApiResponse<RawGithubReposResponse>,
+  res: NextApiResponse<ApiData<RawGithubReposData>>,
 ) {
   const {
     q = '',
@@ -24,8 +25,11 @@ export default async function githubApiHandler(
   } = req.query;
 
   const params = { q, page, per_page, tags };
+  try {
+    const data = await githubJsonFetch(githubApiUrl.searchRepos(params));
 
-  const data = await githubJsonFetch(githubApiUrl.searchRepos(params));
-
-  return res.status(200).json(data);
+    return res.status(200).json(data);
+  } catch (err) {
+    return res.status(401).json({ ...(err as ErrorData) });
+  }
 }

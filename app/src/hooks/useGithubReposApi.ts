@@ -3,15 +3,16 @@ import useSWR from 'swr';
 
 import {
   GithubReposBrowseParams,
-  GithubReposResponse,
+  GithubReposData,
   GithubReposSearchParams,
   githubSwrKey,
   parseRawGitHubRepo,
-  RawGithubReposResponse,
+  RawGithubReposData,
 } from '@/domains/github';
+import { ApiData, isApiError } from '@/lib/api';
 
 export type UseGithubReposApi = {
-  data: GithubReposResponse | undefined;
+  data: ApiData<GithubReposData> | undefined;
   error: Error | undefined;
 };
 
@@ -22,19 +23,20 @@ export function useGithubReposApi<Route extends '/search' | '/browse'>(
     : Partial<GithubReposBrowseParams>,
   shouldFetch = true,
 ): UseGithubReposApi {
-  const { data: rawData, error } = useSWR<RawGithubReposResponse, Error>(
+  const { data: rawData, error } = useSWR<ApiData<RawGithubReposData>, Error>(
     shouldFetch ? githubSwrKey.route(route, params) : null,
   );
 
   const data = useMemo(() => {
-    if (!rawData) {
-      return undefined;
+    if (!rawData || isApiError(rawData)) {
+      return rawData;
     }
+
     return {
       totalCount: rawData.total_count,
       incompleteResults: rawData.incomplete_results,
       items: rawData.items.map(parseRawGitHubRepo),
-    };
+    } as GithubReposData;
   }, [rawData]);
 
   return { data, error };

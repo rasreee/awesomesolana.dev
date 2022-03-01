@@ -1,4 +1,4 @@
-import { GithubApiParams, GithubReposResponse } from '@/domains/github';
+import { GithubApiParams, GithubReposData } from '@/domains/github';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
 import Badge from '@/ui/badge';
@@ -27,7 +27,7 @@ export function ReposResultsInfo({
   data,
   params,
 }: {
-  data: GithubReposResponse | undefined;
+  data: GithubReposData | undefined;
   params?: GithubApiParams | undefined;
 }) {
   const breakpoints = useBreakpoints();

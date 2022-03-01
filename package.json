@@ -12,7 +12,8 @@
     "test": "yarn workspaces foreach run test",
     "prepare": "husky install",
     "refreshSources": "ts-node scripts/refreshSources",
-    "postinstall": "yarn husky install"
+    "postinstall": "yarn husky install",
+    "dev": "yarn workspace @awesomesolana/app run dev"
   },
   "lint-staged": {
     "{app,common}": [

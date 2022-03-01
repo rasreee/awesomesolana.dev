@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
-
 const path = require('path');
 const dotenv = require('dotenv');
 
@@ -13,11 +8,17 @@ dotenv.config({
   ),
 });
 
+/* eslint-disable @typescript-eslint/no-var-requires */
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 /** @type {import('next').NextConfig} */
 module.exports = withBundleAnalyzer({
   eslint: {
     dirs: ['src'],
   },
+  rootDir: 'src',
   reactStrictMode: true,
   webpack: (config) => {
     config.resolve.fallback = {
@@ -29,6 +30,8 @@ module.exports = withBundleAnalyzer({
     return config;
   },
   env: {
+    GITHUB_ACCESS_TOKEN: process.env.GITHUB_ACCESS_TOKEN,
+    BASE_URL: process.env.BASE_URL,
     NEXT_PUBLIC_SUPABASE_KEY: process.env.NEXT_PUBLIC_SUPABASE_KEY,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   },

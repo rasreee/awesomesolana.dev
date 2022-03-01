@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { GithubReposResponse } from '@/domains/github';
+import { GithubReposData } from '@/domains/github';
 
 import { RepoFeedItem } from './repo-feed-item';
 
 export type ReposFeedProps = {
-  data: GithubReposResponse;
+  data: GithubReposData;
 };
 
 function ReposFeed({ data }: ReposFeedProps) {

@@ -5,7 +5,7 @@ import {
   GithubReposSearchParams,
   githubSwrKey,
   parseRawGitHubRepo,
-  RawGithubReposResponse,
+  RawGithubReposData,
 } from '@/domains/github';
 import { tagUtils } from '@/domains/tags/tags.utils';
 import { Tag, TagType } from '@/domains/tags/types';
@@ -18,7 +18,7 @@ import { SearchFormData } from '../common/search-form/types';
 
 async function searchGithubRepos(
   params: Partial<GithubReposSearchParams>,
-): Promise<RawGithubReposResponse> {
+): Promise<RawGithubReposData> {
   const res = await fetch(
     getEnvVar('BASE_URL') + githubSwrKey.route('/search', params),
   );

@@ -90,13 +90,13 @@ export type GithubApiParams = {
   keywords?: string[];
 } & Partial<PaginationParams>;
 
-export interface RawGithubReposResponse {
+export type RawGithubReposData = {
   incomplete_results: boolean;
   items: RawGitHubRepo[];
   total_count: number;
-}
+};
 
-export type GithubReposResponse = {
+export type GithubReposData = {
   totalCount: number;
   incompleteResults: boolean;
   items: GithubRepo[];
