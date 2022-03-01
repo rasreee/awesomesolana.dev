@@ -1,5 +1,4 @@
-import { allTags } from '@/domains/tags/tags.constants';
-import { Tag, TagType } from '@/domains/tags/types';
+import { Tag } from '@awesomesolana/common';
 
 export interface SearchQueryArgs {
   term?: string;
