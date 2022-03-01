@@ -1,4 +1,4 @@
-import invariant from '@/lib/utils/invariant';
+import invariant from '@/lib/invariant';
 
 import { Tag, TagType } from './tags.types';
 

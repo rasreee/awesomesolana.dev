@@ -3,9 +3,9 @@ import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
 import { TagType } from '@/domains/tags/tags.types';
-import clsxm from '@/lib/utils/clsxm';
-import pluralize from '@/lib/utils/pluralize';
-import { capitalize } from '@/lib/utils/string';
+import clsxm from '@/lib/clsxm';
+import pluralize from '@/lib/pluralize';
+import { capitalize } from '@/lib/string';
 import { useGlobalStore } from '@/stores';
 
 const ChevronDownIcon = dynamic(() => import('@/ui/icons/chevron-down-icon'));

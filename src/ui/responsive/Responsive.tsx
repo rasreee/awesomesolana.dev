@@ -1,6 +1,6 @@
 import { Component, ComponentType, FunctionComponent } from 'react';
 
-import { useWindowDimensions } from '@/lib/hooks/use-window-dimensions';
+import { useWindowDimensions } from '@/ui/hooks/use-window-dimensions';
 
 import { useBreakpoints } from './use-breakpoints';
 

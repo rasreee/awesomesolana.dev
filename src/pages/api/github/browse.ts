@@ -6,7 +6,7 @@ import {
   githubReposJsonFetch,
   GithubReposResponse,
 } from '@/domains/github';
-import { defaultPaginationParams } from '@/lib/utils';
+import { defaultPaginationParams } from '@/lib/pagination';
 
 export type GithubReposBrowseRequest = NextApiRequest & {
   query: Partial<GithubReposBrowseParams>;

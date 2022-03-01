@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 
 import { Tag, TagType } from '@/domains/tags/tags.types';
-import { groupBy } from '@/lib/utils/group-by';
+import { groupBy } from '@/lib/group-by';
 
 import TagGroupOptions from '../../common/tags-search/tag-group-options';
 

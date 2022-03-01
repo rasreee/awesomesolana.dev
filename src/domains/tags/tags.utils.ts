@@ -1,5 +1,5 @@
-import invariant from '@/lib/utils/invariant';
-import uuid from '@/lib/utils/uuid';
+import invariant from '@/lib/invariant';
+import uuid from '@/lib/uuid';
 
 import { allTags } from './tags.constants';
 import { Tag, TagType } from './tags.types';

@@ -1,4 +1,4 @@
-import clsxm from '@/lib/utils/clsxm';
+import clsxm from '@/lib/clsxm';
 
 export type BadgeProps = React.HTMLAttributes<HTMLSpanElement>;
 

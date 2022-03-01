@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import clsxm from '@/lib/utils/clsxm';
+import clsxm from '@/lib/clsxm';
 
 export type TextInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   autoFocused?: boolean;

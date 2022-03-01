@@ -6,7 +6,7 @@ import {
   GithubReposResponse,
   GithubReposSearchParams,
 } from '@/domains/github';
-import { defaultPaginationParams } from '@/lib/utils';
+import { defaultPaginationParams } from '@/lib/pagination';
 
 export type GithubReposSearchRequest = NextApiRequest & {
   query: Partial<GithubReposSearchParams>;

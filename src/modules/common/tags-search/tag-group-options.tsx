@@ -1,6 +1,6 @@
 import { Tag, TagType } from '@/domains/tags/tags.types';
-import pluralize from '@/lib/utils/pluralize';
-import { capitalize } from '@/lib/utils/string';
+import pluralize from '@/lib/pluralize';
+import { capitalize } from '@/lib/string';
 
 export interface TagGroupOptionsProps {
   type: TagType;

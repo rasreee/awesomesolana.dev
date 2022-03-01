@@ -5,9 +5,9 @@ import useSWR from 'swr';
 
 import { TagType } from '@/domains/tags/tags.types';
 import { getTags, tagUtils } from '@/domains/tags/tags.utils';
-import clsxm from '@/lib/utils/clsxm';
-import pluralize from '@/lib/utils/pluralize';
-import { capitalize } from '@/lib/utils/string';
+import clsxm from '@/lib/clsxm';
+import pluralize from '@/lib/pluralize';
+import { capitalize } from '@/lib/string';
 import { useGlobalStore } from '@/stores';
 import { Divider } from '@/ui/divider';
 

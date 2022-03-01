@@ -1,4 +1,4 @@
-import uuid from '@/lib/utils/uuid';
+import uuid from '@/lib/uuid';
 
 export interface Source {
   id: string;

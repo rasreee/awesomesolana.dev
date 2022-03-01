@@ -2,8 +2,8 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 
 import { Tag } from '@/domains/tags/tags.types';
-import clsxm from '@/lib/utils/clsxm';
-import { formData } from '@/lib/utils/form-data';
+import clsxm from '@/lib/clsxm';
+import { formData } from '@/lib/form-data';
 import { ErrorMessage } from '@/ui/error-message';
 import type { TextInputProps } from '@/ui/text-input';
 

@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
 
-import clsxm from '@/lib/utils/clsxm';
+import clsxm from '@/lib/clsxm';
 import { useGlobalStore } from '@/stores';
 import Popover from '@/ui/popover';
 

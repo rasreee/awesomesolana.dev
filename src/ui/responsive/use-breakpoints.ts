@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useWindowDimensions } from '@/lib/hooks/use-window-dimensions';
+import { useWindowDimensions } from '@/ui/hooks/use-window-dimensions';
 
 import { breakpoints } from './breakpoints';
 import { emToPx } from './helpers';
