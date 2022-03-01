@@ -1,5 +1,5 @@
 import { defaultPagination, Pagination } from "../pagination";
-import { Tag } from "../sources/types";
+import { Tag } from "../tags/types";
 
 function formatGitHubTopic(name: string) {
   return name.replaceAll(".", "").replaceAll(" ", "-").toLowerCase();

@@ -1,4 +1,4 @@
-import { allTags, tagNames } from '@/domains/tags/tags.constants';
+import { allTags, tagNames } from '@awesomesolana/common';
 
 import { getPossibleValuesSet, groupBy } from './group-by';
 

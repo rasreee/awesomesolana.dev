@@ -1,4 +1,5 @@
-import { Source, SourceType } from '@/domains/sources/definitions';
+import { Source, SourceType } from '@awesomesolana/common';
+
 import { CreateSourceArgs } from '@/services/sources-service';
 
 import { mockSourcesService } from '../test-utils/mockSourcesService';

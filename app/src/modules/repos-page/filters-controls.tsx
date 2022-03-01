@@ -1,6 +1,6 @@
+import { TagType } from '@awesomesolana/common';
 import { useState } from 'react';
 
-import { TagType } from '@/domains/tags/types';
 import clsxm from '@/lib/clsxm';
 import Popover from '@/ui/popover';
 

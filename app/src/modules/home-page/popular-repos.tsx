@@ -1,7 +1,7 @@
+import { SourceType } from '@awesomesolana/common';
 import useSWR from 'swr';
 
 import { GithubRepo } from '@/domains/github';
-import { SourceType } from '@/domains/sources/definitions';
 import { ApiData, isApiError } from '@/lib/api';
 import classed from '@/lib/classed';
 import { ErrorMessage } from '@/ui/error-message';

@@ -1,7 +1,5 @@
 import { Pagination } from "../pagination";
-import { Tag } from "../sources/types";
-
-type DateString = string;
+import { Tag } from "../tags/types";
 
 export interface RawGithubUser {
   id: number;

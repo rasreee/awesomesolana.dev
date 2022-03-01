@@ -1,4 +1,4 @@
-import { SourceType } from '@/domains/sources/definitions';
+import { SourceType } from '@awesomesolana/common';
 
 import {
   registerSourceView,

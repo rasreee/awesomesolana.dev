@@ -1,6 +1,6 @@
+import { Tag, TagType } from '@awesomesolana/common';
 import React from 'react';
 
-import { Tag, TagType } from '@/domains/tags/types';
 import { groupBy } from '@/lib/group-by';
 
 import TagGroupOptions from '../../common/tags-search/tag-group-options';

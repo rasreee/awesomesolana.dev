@@ -1,6 +1,6 @@
+import { Source, SOURCE_TABLE } from '@awesomesolana/common';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-import { Source, SOURCE_TABLE } from '@/domains/sources/definitions';
 import environment from '@/environment';
 
 import {

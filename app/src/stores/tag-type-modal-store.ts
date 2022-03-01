@@ -1,6 +1,5 @@
+import { TagType } from '@awesomesolana/common';
 import { makeAutoObservable } from 'mobx';
-
-import { TagType } from '@/domains/tags/types';
 
 import { ITagTypeModalStore } from './interfaces';
 

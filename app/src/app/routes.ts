@@ -1,4 +1,4 @@
-import { Tag } from '@/domains/tags/types';
+import { Tag } from '@awesomesolana/common';
 
 export const appRoute = {
   repos: {

@@ -1,7 +1,7 @@
+import { Tag } from '@awesomesolana/common';
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 
-import { Tag } from '@/domains/tags/types';
 import clsxm from '@/lib/clsxm';
 import { formData } from '@/lib/form-data';
 import { ErrorMessage } from '@/ui/error-message';

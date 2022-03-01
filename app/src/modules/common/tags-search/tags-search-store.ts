@@ -1,7 +1,7 @@
+import { getTagSuggestions } from '@awesomesolana/common';
+import { Tag } from '@awesomesolana/common';
 import { makeAutoObservable } from 'mobx';
 
-import { getTagSuggestions } from '@/domains/tags/tags.utils';
-import { Tag } from '@/domains/tags/types';
 import { createRequestStore } from '@/lib/mobx/request-store';
 import { ITagsSearchStore } from '@/stores/interfaces';
 import type { TextInputProps } from '@/ui/text-input';

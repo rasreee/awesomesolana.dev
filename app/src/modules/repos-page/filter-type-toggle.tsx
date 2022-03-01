@@ -1,8 +1,8 @@
+import { tagUtils } from '@awesomesolana/common';
+import { TagType } from '@awesomesolana/common';
 import dynamic from 'next/dynamic';
 
 import { useSearchQuery } from '@/contexts/search-query-context';
-import { tagUtils } from '@/domains/tags/tags.utils';
-import { TagType } from '@/domains/tags/types';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
 import { capitalize } from '@/lib/string';

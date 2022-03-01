@@ -1,8 +1,8 @@
+import { Tag } from '@awesomesolana/common';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 
 import { useSearchQuery } from '@/contexts/search-query-context';
-import { Tag } from '@/domains/tags/types';
 import { useStore } from '@/lib/mobx/store-context';
 import PopularTags from '@/modules/common/popular-tags';
 import Popover from '@/ui/popover';

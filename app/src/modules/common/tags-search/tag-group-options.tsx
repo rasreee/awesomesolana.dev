@@ -1,4 +1,5 @@
-import { Tag, TagType } from '@/domains/tags/types';
+import { Tag, TagType } from '@awesomesolana/common';
+
 import pluralize from '@/lib/pluralize';
 import { capitalize } from '@/lib/string';
 

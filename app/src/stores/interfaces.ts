@@ -1,5 +1,6 @@
+import { Tag, TagType } from '@awesomesolana/common';
+
 import { GithubRepo } from '@/domains/github';
-import { Tag, TagType } from '@/domains/tags/types';
 import { RequestStore } from '@/lib/mobx/request-store';
 import { SearchFormData } from '@/modules/common/search-form/types';
 import { TagsSearchStore } from '@/modules/common/tags-search/tags-search-store';

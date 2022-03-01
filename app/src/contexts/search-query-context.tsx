@@ -1,10 +1,8 @@
+import { allTags, Tag, TagType, tagUtils } from '@awesomesolana/common';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import { createContext, useContext, useMemo } from 'react';
 
-import { allTags } from '@/domains/tags/tags.constants';
-import { tagUtils } from '@/domains/tags/tags.utils';
-import { Tag, TagType } from '@/domains/tags/types';
 import { searchQuery, SearchQueryArgs } from '@/lib/searchQuery';
 
 export interface SearchQueryContext {

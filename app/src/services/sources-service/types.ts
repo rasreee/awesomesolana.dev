@@ -1,4 +1,5 @@
-import { SourceType } from '@/domains/sources/definitions';
+import { SourceType } from '@awesomesolana/common';
+
 import { PaginationParams } from '@/lib/pagination';
 
 export interface DeleteSourceArgs {

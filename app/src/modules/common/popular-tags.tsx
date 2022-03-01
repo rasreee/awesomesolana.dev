@@ -1,7 +1,7 @@
+import { makeTag } from '@awesomesolana/common';
+import { Tag } from '@awesomesolana/common';
 import React from 'react';
 
-import { makeTag } from '@/domains/tags/tags.utils';
-import { Tag } from '@/domains/tags/types';
 import clsxm from '@/lib/clsxm';
 import PlusIcon from '@/ui/icons/plus-icon';
 

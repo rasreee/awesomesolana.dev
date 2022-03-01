@@ -1,4 +1,5 @@
-import { Source, SourceType } from '@/domains/sources/definitions';
+import { Source, SourceType } from '@awesomesolana/common';
+
 import { SourcesService } from '@/services/sources-service';
 
 export interface RegisterSourceViewArgs {

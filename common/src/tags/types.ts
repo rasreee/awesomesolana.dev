@@ -1,4 +1,4 @@
-export type TagType = 'dependency' | 'topic' | 'language' | 'framework';
+export type TagType = "dependency" | "topic" | "language" | "framework";
 
 export type Tag = {
   id: Int8;

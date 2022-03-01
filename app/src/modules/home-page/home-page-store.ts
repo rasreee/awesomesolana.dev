@@ -1,8 +1,7 @@
+import { getTagSuggestions } from '@awesomesolana/common';
+import { Tag } from '@awesomesolana/common';
 import delay from 'lodash.delay';
 import { makeAutoObservable, reaction } from 'mobx';
-
-import { getTagSuggestions } from '@/domains/tags/tags.utils';
-import { Tag } from '@/domains/tags/types';
 
 import { SearchFormData } from '../common/search-form/types';
 

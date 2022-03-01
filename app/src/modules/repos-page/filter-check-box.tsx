@@ -1,8 +1,8 @@
+import { tagUtils } from '@awesomesolana/common';
+import { Tag } from '@awesomesolana/common';
 import React from 'react';
 
 import { useSearchQuery } from '@/contexts/search-query-context';
-import { tagUtils } from '@/domains/tags/tags.utils';
-import { Tag } from '@/domains/tags/types';
 import { CheckBox } from '@/ui/check-box';
 
 const RepoFilterCheckBox = function RepoFilterCheckBox({

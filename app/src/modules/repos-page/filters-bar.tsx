@@ -1,5 +1,5 @@
-import { tagTypes } from '@/domains/tags/tags.constants';
-import { TagType } from '@/domains/tags/types';
+import { TagType } from '@awesomesolana/common';
+import { tagTypes } from '@awesomesolana/common';
 
 import FilterTypeToggle from './filter-type-toggle';
 function FiltersBar({

@@ -1,7 +1,7 @@
 import { GithubReposApiParams } from '@awesomesolana/common';
+import { Tag } from '@awesomesolana/common';
 
 import { GithubReposData } from '@/domains/github';
-import { Tag } from '@/domains/tags/types';
 import clsxm from '@/lib/clsxm';
 import pluralize from '@/lib/pluralize';
 import Badge from '@/ui/badge';

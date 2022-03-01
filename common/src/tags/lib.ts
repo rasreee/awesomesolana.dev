@@ -1,7 +1,6 @@
-import { invariant } from '@awesomesolana/common';
-
-import { allTags } from './tags.constants';
-import { Tag, TagType } from './types';
+import invariant from "../invariant";
+import { allTags } from "./constants";
+import { Tag, TagType } from "./types";
 
 export const tagUtils = {
   list: (arr: Tag[]) => ({
@@ -24,7 +23,7 @@ interface ToTagOptions {
 }
 
 export function toTag(arg: string | ToTagOptions): Tag {
-  if (typeof arg === 'string') {
+  if (typeof arg === "string") {
     const found = allTags.find((tag) => tag.name === arg);
     invariant(found, `invalid tagName ${arg} for toTag`);
     return found;
@@ -43,7 +42,7 @@ export const isEqualTag = (a: Tag, b: Tag): boolean => {
 
 export async function getTagSuggestions(
   query: string,
-  filters: Tag[] = [],
+  filters: Tag[] = []
 ): Promise<Tag[]> {
   if (!query) return [];
 
@@ -64,7 +63,7 @@ export async function getTagSuggestions(
 }
 
 export async function getTags(
-  type?: TagType | undefined | null,
+  type?: TagType | undefined | null
 ): Promise<Tag[]> {
   if (!type) return allTags;
 
@@ -72,7 +71,7 @@ export async function getTags(
 }
 
 export const makeTag = (initialData: Tag): Tag => {
-  const defaultData = { description: '' };
+  const defaultData = { description: "" };
 
   return { ...defaultData, ...initialData };
 };
