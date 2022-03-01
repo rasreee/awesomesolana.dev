@@ -5,6 +5,7 @@
     "app",
     "common",
     "tw",
+    "ui",
     "hooks"
   ],
   "scripts": {

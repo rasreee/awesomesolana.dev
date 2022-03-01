@@ -20,11 +20,14 @@
     "paths": {
       "@/*": ["./src/*"],
       "~/*": ["./public/*"],
-      "@awesomesolana/common": ["../common/src/index"]
+      "@awesomesolana/common": ["../common/src/index"],
+      "@awesomesolana/ui": ["../ui/src/index"],
+      "@awesomesolana/tw": ["../tw/src/index"],
+      "@awesomesolana/hooks": ["../hooks/src/index"],
     },
     "incremental": true
   },
-  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx", "../common/src/sources/constants.ts"],
+  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx", "../common/src/sources/constants.ts", "../ui/src/error-message.tsx"],
   "exclude": ["node_modules"],
   "ts-node": {
     "compilerOptions": {

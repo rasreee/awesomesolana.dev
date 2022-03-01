@@ -12,6 +12,7 @@ const withTM = require('next-transpile-modules')([
   '@awesomesolana/common',
   '@awesomesolana/hooks',
   '@awesomesolana/tw',
+  '@awesomesolana/ui',
 ]);
 
 /* eslint-disable @typescript-eslint/no-var-requires */

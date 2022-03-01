@@ -21,6 +21,7 @@ __metadata:
     "@awesomesolana/common": "workspace:^"
     "@awesomesolana/hooks": "workspace:^"
     "@awesomesolana/tw": "workspace:^"
+    "@awesomesolana/ui": "workspace:^"
     "@babel/core": ^7.8.0
     "@next/bundle-analyzer": ^12.1.0
     "@primer/octicons-react": ^16.3.1
@@ -138,6 +139,35 @@ __metadata:
 "@awesomesolana/tw@workspace:^, @awesomesolana/tw@workspace:tw":
   version: 0.0.0-use.local
   resolution: "@awesomesolana/tw@workspace:tw"
+  dependencies:
+    "@types/jest": ^27.4.1
+    "@types/node": ^17.0.21
+    "@types/react": ^17.0.39
+    "@types/react-dom": ^17.0.12
+    "@typescript-eslint/eslint-plugin": ^5.13.0
+    "@typescript-eslint/parser": ^5.13.0
+    clsx: ^1.1.1
+    cross-env: ^7.0.3
+    eslint: ^8.10.0
+    eslint-config-prettier: ^8.4.0
+    eslint-plugin-prettier: ^4.0.0
+    eslint-plugin-simple-import-sort: ^7.0.0
+    jest: ^27.5.1
+    microbundle: ^0.14.2
+    prettier: ^2.5.1
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    tailwind-merge: ^1.2.0
+    typescript: ^4.6.2
+  peerDependencies:
+    react: ^16.0.0
+    react-dom: ^16.0.0
+  languageName: unknown
+  linkType: soft
+
+"@awesomesolana/ui@workspace:^, @awesomesolana/ui@workspace:ui":
+  version: 0.0.0-use.local
+  resolution: "@awesomesolana/ui@workspace:ui"
   dependencies:
     "@types/jest": ^27.4.1
     "@types/node": ^17.0.21
