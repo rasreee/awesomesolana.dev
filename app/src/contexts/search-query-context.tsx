@@ -2,12 +2,12 @@ import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import { createContext, useContext, useMemo } from 'react';
 
-import { tagTypes } from '@/domains/tags/tags.constants';
-import { tagUtils, toTag } from '@/domains/tags/tags.utils';
+import { allTags } from '@/domains/tags/tags.constants';
+import { tagUtils } from '@/domains/tags/tags.utils';
 import { Tag, TagType } from '@/domains/tags/types';
 import { searchQuery, SearchQueryArgs } from '@/lib/searchQuery';
 
-interface ISearchQueryContext {
+export interface SearchQueryContext {
   term: string;
   setTerm: (term: string) => void;
   tags: Tag[];
@@ -16,12 +16,12 @@ interface ISearchQueryContext {
   routeTo: (pathname: string, args: SearchQueryArgs) => void;
 }
 
-export const SearchQueryContext = createContext<ISearchQueryContext>(
-  {} as ISearchQueryContext,
+export const searchQueryContext = createContext<SearchQueryContext>(
+  {} as SearchQueryContext,
 );
 
-export const useSearchQuery = (): ISearchQueryContext =>
-  useContext(SearchQueryContext);
+export const useSearchQuery = (): SearchQueryContext =>
+  useContext(searchQueryContext);
 
 const parseQueryParam = (query: ParsedUrlQuery, key: string): string => {
   if (key in query) return query[key] as string;
@@ -37,13 +37,17 @@ export const SearchQueryProvider: React.FC = ({ children }) => {
     [router.query],
   );
 
-  const tags = useMemo(
-    () =>
-      [...tagTypes.map((type) => parseQueryParam(router.query, type))]
-        .filter(Boolean)
-        .map(toTag),
-    [router.query],
-  );
+  const tags = useMemo(() => {
+    const tagList: Tag[] = Object.entries(searchQuery)
+      .filter(([type]) => type !== 'term')
+      .map(([type, value]) => ({
+        id: allTags.map((tag) => tag.name).indexOf(value),
+        type: `${type}` as TagType,
+        name: value,
+      }));
+
+    return tagList;
+  }, [router.query]);
 
   const setTerm = (newTerm: string) => {
     router.push(router.pathname, {
@@ -72,10 +76,10 @@ export const SearchQueryProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <SearchQueryContext.Provider
+    <searchQueryContext.Provider
       value={{ term, setTerm, tags, toggleTag, clearTags, routeTo }}
     >
       {children}
-    </SearchQueryContext.Provider>
+    </searchQueryContext.Provider>
   );
 };

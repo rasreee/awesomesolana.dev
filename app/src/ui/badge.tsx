@@ -1,17 +1,26 @@
+import React from 'react';
+
 import clsxm from '@/lib/clsxm';
 
-export type BadgeProps = React.HTMLAttributes<HTMLSpanElement>;
+export type BadgeProps = React.PropsWithChildren<
+  React.HTMLAttributes<HTMLSpanElement>
+>;
 
 function Badge({ children, className, ...props }: BadgeProps) {
+  React.useEffect(() => {
+    console.log('BADGE CHILDREN:\n', children);
+  }, [children]);
+
   return (
     <span
       className={clsxm(
+        'truncate text-xs leading-none',
         'inline-flex items-center rounded bg-indigo-100 px-2 py-0.5 text-xs font-medium text-gray-800',
         className,
       )}
       {...props}
     >
-      <span className="truncate text-xs leading-none">{children}</span>
+      {children}
     </span>
   );
 }

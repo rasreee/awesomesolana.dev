@@ -1,4 +1,5 @@
-import { Tag } from '@/domains/tags/types';
+import { allTags } from '@/domains/tags/tags.constants';
+import { Tag, TagType } from '@/domains/tags/types';
 
 export interface SearchQueryArgs {
   term?: string;
