@@ -7,6 +7,8 @@ import { searchQuery, SearchQueryArgs } from '@/lib/searchQuery';
 
 export interface SearchQueryContext {
   term: string;
+  page: number;
+  per_page: number;
   setTerm: (term: string) => void;
   tags: Tag[];
   toggleTag: (tag: Tag) => void;
@@ -21,23 +23,36 @@ export const searchQueryContext = createContext<SearchQueryContext>(
 export const useSearchQuery = (): SearchQueryContext =>
   useContext(searchQueryContext);
 
-const parseQueryParam = (query: ParsedUrlQuery, key: string): string => {
-  if (key in query) return query[key] as string;
-
-  return '';
-};
+function parseQueryParam<T extends string | number>(
+  query: ParsedUrlQuery,
+  key: string,
+): T {
+  return query[key] as T;
+}
 
 export const SearchQueryProvider: React.FC = ({ children }) => {
   const router = useRouter();
 
   const term = useMemo(
-    () => parseQueryParam(router.query, 'term'),
+    () => parseQueryParam<string>(router.query, 'term'),
+    [router.query],
+  );
+
+  const page = useMemo(
+    () => parseQueryParam<number>(router.query, 'page'),
+    [router.query],
+  );
+
+  const per_page = useMemo(
+    () => parseQueryParam<number>(router.query, 'per_page'),
     [router.query],
   );
 
   const tags = useMemo(() => {
     const tagList: Tag[] = Object.entries(searchQuery)
-      .filter(([type]) => type !== 'term')
+      .filter(
+        ([type]) => type !== 'term' && type !== 'page' && type !== 'per_page',
+      )
       .map(([type, value]) => ({
         id: allTags.map((tag) => tag.name).indexOf(value),
         type: `${type}` as TagType,
@@ -75,7 +90,16 @@ export const SearchQueryProvider: React.FC = ({ children }) => {
 
   return (
     <searchQueryContext.Provider
-      value={{ term, setTerm, tags, toggleTag, clearTags, routeTo }}
+      value={{
+        term,
+        page,
+        per_page,
+        setTerm,
+        tags,
+        toggleTag,
+        clearTags,
+        routeTo,
+      }}
     >
       {children}
     </searchQueryContext.Provider>

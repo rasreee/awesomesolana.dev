@@ -1,8 +1,5 @@
-import {
-  GithubReposApiParams,
-  isApiError,
-  Pagination,
-} from '@awesomesolana/common';
+import { isApiError } from '@awesomesolana/common';
+import { Tag } from '@awesomesolana/common';
 import { ErrorMessage } from '@awesomesolana/ui';
 
 import { useGithubReposApi } from '@/hooks/useGithubReposApi';
@@ -11,7 +8,7 @@ import ReposList from '../common/repos-list';
 
 export interface ReposFetchProps {
   route: '/search' | '/browse';
-  params: GithubReposApiParams & Pagination;
+  params: { tags?: Tag[]; term?: string; page: number; per_page: number };
 }
 
 const ReposFetch = function ReposFetch({ route, params }: ReposFetchProps) {

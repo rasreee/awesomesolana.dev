@@ -3,6 +3,8 @@ import { Tag } from '@awesomesolana/common';
 export interface SearchQueryArgs {
   term?: string;
   tags?: Tag[];
+  page?: number;
+  per_page?: number;
 }
 
 export type SearchQuery = {
@@ -11,11 +13,15 @@ export type SearchQuery = {
   framework?: string;
   dependency?: string;
   term: string;
+  page: number;
+  per_page: number;
 };
 
 export function searchQuery({
   tags = [],
   term = '',
+  page = 0,
+  per_page = 10,
 }: SearchQueryArgs): SearchQuery {
   const queryEntries: [string, string][] = tags.map((tag) => [
     tag.type,
@@ -28,5 +34,5 @@ export function searchQuery({
 
   const query = Object.fromEntries(queryEntries);
 
-  return query as SearchQuery;
+  return { ...query, page, per_page: per_page } as SearchQuery;
 }

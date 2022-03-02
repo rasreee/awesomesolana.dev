@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import { reposSEO } from '@/app/seo';
@@ -5,6 +6,7 @@ import {
   SearchQueryContext,
   useSearchQuery,
 } from '@/contexts/search-query-context';
+import { searchQuery } from '@/lib/searchQuery';
 
 import PageLayout from '../common/page-layout';
 import { Pager } from './pager';
@@ -24,32 +26,61 @@ const getReposFetchProps = (
         route: '/search',
         params: {
           tags: searchQuery.tags,
-          keywords: [searchQuery.term],
-          page: 0,
-          per_page: 10,
+          term: searchQuery.term,
+          page: searchQuery.page,
+          per_page: searchQuery.per_page,
         },
       }
-    : { route: '/browse', params: { page: 0, per_page: 10 } };
+    : {
+        route: '/browse',
+        params: { per_page: searchQuery.per_page, page: searchQuery.page },
+      };
 
   return reposFetchProps;
 };
 
 const ReposPage = function ReposPage() {
-  const searchQuery = useSearchQuery();
-  const seo = reposSEO(searchQuery.term);
+  const router = useRouter();
 
-  const reposFetchProps = getReposFetchProps(searchQuery);
+  const search = useSearchQuery();
+  const seo = reposSEO(search.term);
+
+  const reposFetchProps = getReposFetchProps(search);
 
   const handleNext = () => {
     console.log('Next');
+    router.push(router.pathname, {
+      query: searchQuery({
+        tags: search.tags,
+        term: search.term,
+        page: search.page + 1,
+        per_page: search.per_page,
+      }),
+    });
   };
 
   const handlePrev = () => {
     console.log('Prev');
+    router.push(router.pathname, {
+      query: searchQuery({
+        tags: search.tags,
+        term: search.term,
+        page: search.page - 1,
+        per_page: search.per_page,
+      }),
+    });
   };
 
   const handleJumpTo = (index: number) => {
     console.log('JumpTo - index: ' + index);
+    router.push(router.pathname, {
+      query: searchQuery({
+        tags: search.tags,
+        term: search.term,
+        page: index,
+        per_page: search.per_page,
+      }),
+    });
   };
 
   return (
