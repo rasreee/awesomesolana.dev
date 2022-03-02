@@ -10,7 +10,8 @@ function Badge({ children, className, ...props }: BadgeProps) {
     <span
       className={clsxm(
         'truncate text-xs leading-none',
-        'inline-flex items-center rounded bg-indigo-100 px-2 py-0.5 text-xs font-medium text-gray-800',
+        'bg-white dark:bg-indigo-100',
+        'inline-flex items-center rounded px-2 py-0.5 text-xs font-medium text-gray-800',
         className,
       )}
       {...props}
