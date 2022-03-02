@@ -1,6 +1,6 @@
 import { getTagSuggestions } from '@awesomesolana/common';
 import { Tag } from '@awesomesolana/common';
-import type { SearchFormData, TextInputProps } from '@awesomesolana/ui';
+import type { SearchFormData } from '@awesomesolana/ui';
 import { makeAutoObservable } from 'mobx';
 
 import { createRequestStore } from '@/lib/mobx/request-store';
@@ -10,10 +10,6 @@ export class TagsSearchStore implements ITagsSearchStore {
   constructor() {
     makeAutoObservable(this, {}, { name: 'TagsSearchStore' });
   }
-  getTextInputProps: (
-    props?: Partial<TextInputProps> | undefined,
-  ) => TextInputProps;
-
   hits: Tag[] = [];
   query = '';
 
@@ -41,11 +37,5 @@ export class TagsSearchStore implements ITagsSearchStore {
     } finally {
       this.request.setLoading(false);
     }
-  };
-
-  onReset = () => {
-    this.query = '';
-    this.hits = [];
-    this.request.onReset();
   };
 }

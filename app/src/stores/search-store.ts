@@ -14,10 +14,6 @@ export class SearchStore {
         this.setValue(e.currentTarget.value),
     })).get();
 
-  reset = () => {
-    this.error = null;
-  };
-
   constructor() {
     makeAutoObservable(this, {}, { name: 'SearchStore' });
   }

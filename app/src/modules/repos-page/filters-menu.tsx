@@ -4,23 +4,23 @@ import { capitalize } from '@awesomesolana/common';
 import { clsxm } from '@awesomesolana/tw';
 import { Shimmer, XIcon } from '@awesomesolana/ui';
 import times from 'lodash.times';
-import { observer } from 'mobx-react-lite';
-import dynamic from 'next/dynamic';
 import useSWR from 'swr';
 
 import { useSearchQuery } from '@/contexts/search-query-context';
 import pluralize from '@/lib/pluralize';
-import { useGlobalStore } from '@/stores';
 import { Divider } from '@/ui/divider';
 
 import TagsSearchBox from '../common/tags-search/tags-search-box';
+import RepoFilterCheckBox from './filter-check-box';
 
-const RepoFilterCheckBox = dynamic(() => import('./filter-check-box'));
-
-const FiltersMenu = observer(function FiltersMenu({ type }: { type: TagType }) {
-  const store = useGlobalStore();
+const FiltersMenu = function FiltersMenu({
+  type,
+  onClose,
+}: {
+  type: TagType;
+  onClose: () => void;
+}) {
   const { tags } = useSearchQuery();
-  const { tagTypeModal } = store;
 
   const { data: tagsForType } = useSWR(`tagsForType/${type}`, () =>
     getTags(type),
@@ -47,7 +47,7 @@ const FiltersMenu = observer(function FiltersMenu({ type }: { type: TagType }) {
           <h2 className="font-heading text-2xl font-semibold leading-none">
             {capitalize(pluralize(type))}
           </h2>
-          <button onClick={tagTypeModal.onClose}>
+          <button onClick={onClose}>
             <XIcon />
           </button>
         </div>
@@ -85,6 +85,6 @@ const FiltersMenu = observer(function FiltersMenu({ type }: { type: TagType }) {
       </div>
     </>
   );
-});
+};
 
 export default FiltersMenu;

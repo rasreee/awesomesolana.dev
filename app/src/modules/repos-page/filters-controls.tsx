@@ -24,7 +24,7 @@ const FiltersPopover = ({
       onClose={onClose}
       isOpen={Boolean(activeItem)}
     >
-      {activeItem && <FiltersMenu type={activeItem} />}
+      {activeItem && <FiltersMenu type={activeItem} onClose={onClose} />}
     </Popover>
   );
 };
