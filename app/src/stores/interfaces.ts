@@ -1,11 +1,10 @@
 import { Tag, TagType } from '@awesomesolana/common';
+import { SearchFormData, TextInputProps } from '@awesomesolana/ui';
 
 import { GithubRepo } from '@/domains/github';
 import { RequestStore } from '@/lib/mobx/request-store';
-import { SearchFormData } from '@/modules/common/search-form/types';
 import { TagsSearchStore } from '@/modules/common/tags-search/tags-search-store';
 import { TagTypeModalStore } from '@/stores/tag-type-modal-store';
-import { TextInputProps } from '@/ui/text-input';
 
 export interface GlobalStore {
   tagsSearch: TagsSearchStore;

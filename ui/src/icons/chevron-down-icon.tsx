@@ -1,13 +1,13 @@
-import { clsxm } from '@awesomesolana/tw';
+import { clsxm } from "@awesomesolana/tw";
 
-function ChevronDownIcon({
+export function ChevronDownIcon({
   className,
   ...props
 }: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={clsxm('h-5 w-5', className)}
+      className={clsxm("h-5 w-5", className)}
       viewBox="0 0 20 20"
       fill="currentColor"
       {...props}
@@ -20,5 +20,3 @@ function ChevronDownIcon({
     </svg>
   );
 }
-
-export default ChevronDownIcon;

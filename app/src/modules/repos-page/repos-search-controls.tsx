@@ -1,7 +1,7 @@
+import { SearchForm } from '@awesomesolana/ui';
 import { observer } from 'mobx-react-lite';
 
 import { useSearchQuery } from '@/contexts/search-query-context';
-import SearchForm from '@/modules/common/search-form';
 import { useGlobalStore } from '@/stores';
 
 const ReposSearchControls = observer(function ReposSearchBox() {
@@ -22,7 +22,6 @@ const ReposSearchControls = observer(function ReposSearchBox() {
       error={search.error}
       onSubmit={onSubmit}
       onReset={onReset}
-      filters={searchQuery.tags}
     />
   );
 });

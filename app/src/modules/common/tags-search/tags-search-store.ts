@@ -1,12 +1,10 @@
 import { getTagSuggestions } from '@awesomesolana/common';
 import { Tag } from '@awesomesolana/common';
+import type { SearchFormData, TextInputProps } from '@awesomesolana/ui';
 import { makeAutoObservable } from 'mobx';
 
 import { createRequestStore } from '@/lib/mobx/request-store';
 import { ITagsSearchStore } from '@/stores/interfaces';
-import type { TextInputProps } from '@/ui/text-input';
-
-import { SearchFormData } from '../search-form/types';
 
 export class TagsSearchStore implements ITagsSearchStore {
   constructor() {
@@ -29,13 +27,13 @@ export class TagsSearchStore implements ITagsSearchStore {
     this.query = event.currentTarget.value;
   };
 
-  onSubmit = async ({ query, filters }: SearchFormData) => {
+  onSubmit = async ({ query }: SearchFormData) => {
     if (!query) return this.setHits([]);
 
     this.request.setLoading(true);
     this.request.setError(null);
     try {
-      const response = await getTagSuggestions(query, filters);
+      const response = await getTagSuggestions(query);
       this.setHits(response);
     } catch (error) {
       console.error(error);

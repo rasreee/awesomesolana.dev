@@ -1,9 +1,8 @@
-import { getTagSuggestions } from '@awesomesolana/common';
 import { Tag } from '@awesomesolana/common';
+import { getTagSuggestions } from '@awesomesolana/common';
+import { SearchFormData } from '@awesomesolana/ui';
 import delay from 'lodash.delay';
 import { makeAutoObservable, reaction } from 'mobx';
-
-import { SearchFormData } from '../common/search-form/types';
 
 export class SearchState {
   query = '';
@@ -22,13 +21,13 @@ export class SearchState {
     );
   }
 
-  submitSearch = async ({ query, filters }: Partial<SearchFormData>) => {
+  submitSearch = async ({ query }: Partial<SearchFormData>) => {
     if (!query) return this.reset();
 
     this.isBusy = true;
     this.error = null;
     try {
-      const response = await getTagSuggestions(query, filters);
+      const response = await getTagSuggestions(query);
       this.results = response;
     } catch (error) {
       console.error(error);

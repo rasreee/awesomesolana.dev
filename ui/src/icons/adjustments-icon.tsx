@@ -1,4 +1,4 @@
-import { clsxm } from '@awesomesolana/tw';
+import { clsxm } from "@awesomesolana/tw";
 
 export function AdjustmentsIcon({
   className,
@@ -7,7 +7,7 @@ export function AdjustmentsIcon({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={clsxm('h-5 w-5', className)}
+      className={clsxm("h-5 w-5", className)}
       viewBox="0 0 20 20"
       fill="currentColor"
       {...props}

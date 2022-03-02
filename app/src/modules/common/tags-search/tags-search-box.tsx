@@ -1,11 +1,8 @@
+import { SearchForm, TextInputProps } from '@awesomesolana/ui';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
-import dynamic from 'next/dynamic';
 
 import { useGlobalStore } from '@/stores';
-import { TextInputProps } from '@/ui/text-input';
-
-const SearchForm = dynamic(() => import('@/modules/common/search-form'));
 
 const TagsSearchBox = observer(function TagsSearchBox({
   onInputClick,

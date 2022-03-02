@@ -2,13 +2,10 @@ import { tagUtils } from '@awesomesolana/common';
 import { TagType } from '@awesomesolana/common';
 import { capitalize } from '@awesomesolana/common';
 import { clsxm } from '@awesomesolana/tw';
-import dynamic from 'next/dynamic';
+import { ChevronDownIcon, XIcon } from '@awesomesolana/ui';
 
 import { useSearchQuery } from '@/contexts/search-query-context';
 import pluralize from '@/lib/pluralize';
-
-const ChevronDownIcon = dynamic(() => import('@/ui/icons/chevron-down-icon'));
-const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 
 function TagButton({
   children,

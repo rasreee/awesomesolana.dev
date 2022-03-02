@@ -1,11 +1,15 @@
 import { classed } from "@awesomesolana/tw";
 import times from "lodash.times";
 
-import Shimmer from "./shimmer";
+import { Shimmer } from "./shimmer";
 
 const ShimmerList = classed("ul", "flex flex-col gap-5");
 
-const FeedSkeleton = ({ n = 3 }: { n?: number }) => {
+export interface FeedSkeletonProps {
+  n?: number;
+}
+
+export const FeedSkeleton = ({ n = 3 }: FeedSkeletonProps) => {
   return (
     <ShimmerList>
       {times(n, (index) => (
@@ -16,5 +20,3 @@ const FeedSkeleton = ({ n = 3 }: { n?: number }) => {
     </ShimmerList>
   );
 };
-
-export default FeedSkeleton;

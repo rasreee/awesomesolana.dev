@@ -1,6 +1,5 @@
 import { clsxm } from '@awesomesolana/tw';
-
-import { SVGIconProps } from '@/ui/icons/types';
+import { SVGIconProps } from '@awesomesolana/ui';
 
 function GithubIcon({ className, ...props }: SVGIconProps) {
   return (

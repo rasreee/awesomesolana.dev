@@ -1,9 +1,7 @@
-import { makeTag } from '@awesomesolana/common';
-import { Tag } from '@awesomesolana/common';
+import { makeTag, Tag } from '@awesomesolana/common';
 import { clsxm } from '@awesomesolana/tw';
+import { PlusIcon } from '@awesomesolana/ui';
 import React from 'react';
-
-import PlusIcon from '@/ui/icons/plus-icon';
 
 const makeTags = (...args: Omit<Tag, 'id'>[]): Tag[] => {
   return args.map((tag, index) => makeTag({ ...tag, id: index }));

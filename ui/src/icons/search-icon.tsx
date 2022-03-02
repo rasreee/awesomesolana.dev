@@ -1,12 +1,12 @@
-import { clsxm } from '@awesomesolana/tw';
+import { clsxm } from "@awesomesolana/tw";
 
-import { SVGIconProps } from './types';
+import { SVGIconProps } from "./types";
 
-function SearchIcon({ className, ...props }: SVGIconProps) {
+export function SearchIcon({ className, ...props }: SVGIconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={clsxm('h-5 w-5', className)}
+      className={clsxm("h-5 w-5", className)}
       viewBox="0 0 20 20"
       fill="currentColor"
       {...props}
@@ -19,5 +19,3 @@ function SearchIcon({ className, ...props }: SVGIconProps) {
     </svg>
   );
 }
-
-export default SearchIcon;

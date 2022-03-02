@@ -1,6 +1,5 @@
+import { TextInputProps } from '@awesomesolana/ui';
 import { computed, makeAutoObservable } from 'mobx';
-
-import { TextInputProps } from '@/ui/text-input';
 
 export class SearchStore {
   error: string | null = null;

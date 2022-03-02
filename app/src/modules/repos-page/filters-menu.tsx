@@ -2,7 +2,7 @@ import { getTags, tagUtils } from '@awesomesolana/common';
 import { TagType } from '@awesomesolana/common';
 import { capitalize } from '@awesomesolana/common';
 import { clsxm } from '@awesomesolana/tw';
-import { Shimmer } from '@awesomesolana/ui';
+import { Shimmer, XIcon } from '@awesomesolana/ui';
 import times from 'lodash.times';
 import { observer } from 'mobx-react-lite';
 import dynamic from 'next/dynamic';
@@ -14,8 +14,6 @@ import { useGlobalStore } from '@/stores';
 import { Divider } from '@/ui/divider';
 
 import TagsSearchBox from '../common/tags-search/tags-search-box';
-
-const XIcon = dynamic(() => import('@/ui/icons/x-icon'));
 
 const RepoFilterCheckBox = dynamic(() => import('./filter-check-box'));
 

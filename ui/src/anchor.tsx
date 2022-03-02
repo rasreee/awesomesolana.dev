@@ -32,7 +32,7 @@ const getProps = ({
 
 const SAnchor = classed("a", defaultClassName);
 
-const Anchor = forwardRef(
+export const Anchor = forwardRef(
   (
     { external = false, ...restProps }: AnchorProps,
     ref: Ref<HTMLAnchorElement>
@@ -42,5 +42,3 @@ const Anchor = forwardRef(
     return <SAnchor ref={ref} {...props} />;
   }
 );
-
-export default Anchor;

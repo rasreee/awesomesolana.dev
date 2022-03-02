@@ -5,14 +5,8 @@
     "moduleResolution": "node",
     "rootDir": "./src",
     "outDir": "./dist",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "typeRoots": [
-      "./node_modules/@types"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "typeRoots": ["./node_modules/@types"],
     "esModuleInterop": true,
     "noEmit": true,
     "strict": true,
@@ -22,14 +16,8 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "baseUrl": "./src",
-    "paths": {},
     "jsx": "preserve"
   },
   "include": ["src/**/*.tsx", "src/*.tsx", "src/**/*.ts", "src/*.ts"],
-  "exclude": [
-    "dist",
-    "node_modules",
-    ".yarn"
-  ]
+  "exclude": ["dist", "node_modules", ".yarn"]
 }

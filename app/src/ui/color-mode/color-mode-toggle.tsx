@@ -1,7 +1,6 @@
 import { clsxm } from '@awesomesolana/tw';
+import { SVGIconProps } from '@awesomesolana/ui';
 import React, { CSSProperties } from 'react';
-
-import { SVGIconProps } from '@/ui/icons/types';
 
 import { useColorMode } from './use-color-mode';
 

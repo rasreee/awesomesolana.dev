@@ -1,9 +1,8 @@
+import { SearchForm, TextInputProps } from '@awesomesolana/ui';
 import { computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 
 import { useStore } from '@/lib/mobx/store-context';
-import SearchForm from '@/modules/common/search-form';
-import { TextInputProps } from '@/ui/text-input';
 
 import { HomePageStore } from './home-page-store';
 

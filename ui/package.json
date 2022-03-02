@@ -34,14 +34,18 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "jest": "^27.5.1",
     "microbundle": "^0.14.2",
+    "postcss": "^8.4.7",
+    "postcss-import": "^14.0.2",
     "prettier": "^2.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "tailwind-merge": "^1.2.0",
+    "tailwindcss": "^3.0.23",
     "typescript": "^4.6.2"
   },
   "dependencies": {
-    "@awesomesolana/tw": "workspace:^"
+    "@awesomesolana/tw": "workspace:^",
+    "remove": "^0.1.5"
   },
   "peerDependencies": {
     "react": "^16.0.0",

@@ -1,4 +1,7 @@
+export * from "./anchor";
 export * from "./error-message";
-export { default as FeedSkeleton } from "./feed-skeleton";
-export { default as Shimmer } from "./shimmer";
-export { default as Anchor } from "./anchor";
+export * from "./feed-skeleton";
+export * from "./search-form";
+export * from "./shimmer";
+export * from "./text-input";
+export * from "./icons";

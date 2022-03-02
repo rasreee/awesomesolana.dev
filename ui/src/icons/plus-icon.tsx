@@ -1,10 +1,13 @@
-import { clsxm } from '@awesomesolana/tw';
+import { clsxm } from "@awesomesolana/tw";
 
-function PlusIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
+export function PlusIcon({
+  className,
+  ...props
+}: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={clsxm('h-5 w-5', className)}
+      className={clsxm("h-5 w-5", className)}
       viewBox="0 0 20 20"
       fill="currentColor"
       {...props}
@@ -17,5 +20,3 @@ function PlusIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default PlusIcon;
