@@ -1,14 +1,17 @@
-import { GithubReposApiParams, isApiError } from '@awesomesolana/common';
+import {
+  GithubReposApiParams,
+  isApiError,
+  Pagination,
+} from '@awesomesolana/common';
 import { ErrorMessage } from '@awesomesolana/ui';
 
 import { useGithubReposApi } from '@/hooks/useGithubReposApi';
 
 import ReposList from '../common/repos-list';
-import { ReposResultsInfo } from './repos-results-info';
 
 export interface ReposFetchProps {
   route: '/search' | '/browse';
-  params?: GithubReposApiParams;
+  params: GithubReposApiParams & Pagination;
 }
 
 const ReposFetch = function ReposFetch({ route, params }: ReposFetchProps) {
@@ -19,12 +22,7 @@ const ReposFetch = function ReposFetch({ route, params }: ReposFetchProps) {
   if (isApiError(data))
     return <ErrorMessage>{JSON.stringify(data, null, 2)}</ErrorMessage>;
 
-  return (
-    <div>
-      <ReposResultsInfo data={data} params={params} />
-      <ReposList data={data} />
-    </div>
-  );
+  return <ReposList data={data} />;
 };
 
 export default ReposFetch;

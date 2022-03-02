@@ -7,10 +7,12 @@ import {
 } from '@/contexts/search-query-context';
 
 import PageLayout from '../common/page-layout';
+import { Pager } from './pager';
 import ReposFetch, { ReposFetchProps } from './repos-fetch';
+import { ReposResultsInfo } from './repos-results-info';
 import ReposSearchControls from './repos-search-controls';
 
-const computeReposFetchProps = (
+const getReposFetchProps = (
   searchQuery: SearchQueryContext,
 ): ReposFetchProps => {
   const shouldSearch = Boolean(
@@ -23,9 +25,11 @@ const computeReposFetchProps = (
         params: {
           tags: searchQuery.tags,
           keywords: [searchQuery.term],
+          page: 0,
+          per_page: 10,
         },
       }
-    : { route: '/browse' };
+    : { route: '/browse', params: { page: 0, per_page: 10 } };
 
   return reposFetchProps;
 };
@@ -34,13 +38,36 @@ const ReposPage = function ReposPage() {
   const searchQuery = useSearchQuery();
   const seo = reposSEO(searchQuery.term);
 
-  const reposFetchProps = computeReposFetchProps(searchQuery);
+  const reposFetchProps = getReposFetchProps(searchQuery);
+
+  const handleNext = () => {
+    console.log('handleNext');
+  };
+
+  const handlePrev = () => {
+    console.log('handlePrev');
+  };
 
   return (
     <PageLayout seo={seo}>
       <div className="flex flex-col gap-5">
         <ReposSearchControls />
-        <ReposFetch {...reposFetchProps} />
+        <div>
+          <div className="flex items-center justify-between">
+            <ReposResultsInfo {...reposFetchProps} />
+            <Pager
+              page={reposFetchProps.params.page}
+              onNext={handleNext}
+              onPrev={handlePrev}
+            />
+          </div>
+          <ReposFetch {...reposFetchProps} />
+        </div>
+        <Pager
+          page={reposFetchProps.params.page}
+          onNext={handleNext}
+          onPrev={handlePrev}
+        />
       </div>
     </PageLayout>
   );

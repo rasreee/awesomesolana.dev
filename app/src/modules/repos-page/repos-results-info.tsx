@@ -1,11 +1,14 @@
-import { GithubReposApiParams } from '@awesomesolana/common';
+import { GithubReposApiParams, isApiError } from '@awesomesolana/common';
 import { Tag } from '@awesomesolana/common';
 import { clsxm } from '@awesomesolana/tw';
+import { ErrorMessage } from '@awesomesolana/ui';
 
-import { GithubReposData } from '@/domains/github';
+import { useGithubReposApi } from '@/hooks/useGithubReposApi';
 import pluralize from '@/lib/pluralize';
 import Badge from '@/ui/badge';
 import { useBreakpoints } from '@/ui/responsive';
+
+import { ReposFetchProps } from './repos-fetch';
 
 function getReposResultsInfoText({
   count,
@@ -26,14 +29,16 @@ function getReposResultsInfoText({
   return result;
 }
 
-export function ReposResultsInfo({
-  data,
-  params,
-}: {
-  data: GithubReposData | undefined;
-  params?: GithubReposApiParams | undefined;
-}) {
+export function ReposResultsInfo({ route, params }: ReposFetchProps) {
   const breakpoints = useBreakpoints();
+
+  const { data, error } = useGithubReposApi(route, params);
+
+  if (error) return <ErrorMessage>{error?.message}</ErrorMessage>;
+
+  if (isApiError(data))
+    return <ErrorMessage>{JSON.stringify(data, null, 2)}</ErrorMessage>;
+
   if (!data || !breakpoints) return <div className="py-2 px-1">Loading...</div>;
 
   const maxTagsToShow = breakpoints.isSmall ? 3 : 5;
