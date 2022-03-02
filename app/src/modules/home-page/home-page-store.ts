@@ -48,11 +48,6 @@ export class HomePageStore {
   menu = { isOpen: false };
   search = new SearchState(this);
 
-  reset = () => {
-    this.search.reset();
-    this.closeMenu();
-  };
-
   openMenu = () => {
     this.menu = { isOpen: true };
   };

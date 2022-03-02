@@ -1,8 +1,7 @@
 import { clsxm } from "@awesomesolana/tw";
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 import { ErrorMessage } from "./error-message";
-import { XIcon } from "./icons";
 import { formData } from "./lib/form";
 import { TextInput, TextInputProps } from "./text-input";
 
@@ -13,7 +12,6 @@ export type SearchFormData = {
 export type SearchFormProps = {
   error: string | null | undefined;
   textInputProps: TextInputProps;
-  onReset: () => void;
   onSubmit: (query: SearchFormData) => any;
 };
 
@@ -23,7 +21,6 @@ const DEFAULT_SEARCH_PLACEHOLDER =
 export function SearchForm({
   error,
   textInputProps,
-  onReset,
   onSubmit,
 }: SearchFormProps) {
   const [focused, setFocused] = useState(textInputProps?.autoFocused);
@@ -49,34 +46,38 @@ export function SearchForm({
     submitForm(form);
   }, [formRef.current]);
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    submitForm(e.currentTarget);
+  };
+
   return (
-    <form
-      ref={formRef}
-      noValidate
-      onSubmit={(event) => {
-        event.preventDefault();
-        submitForm(event.currentTarget);
-      }}
-      className={clsxm(
-        "flex !max-h-[3rem] max-w-full flex-1 items-center gap-0 px-2 py-1",
-        "input bg-surface-1",
-        focused ? "input-border-focused" : "input-border",
-        "rounded-full"
-      )}
-    >
+    <div>
+      <form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        noValidate
+        className={clsxm(
+          "flex max-w-full items-center gap-0",
+          "rounded-full",
+          "pr-4",
+          "bg-app",
+          "h-14",
+          "transition-all",
+          focused
+            ? "border-2 border-indigo-500 dark:border-indigo-500"
+            : "border-base-300 dark:border-base-500 border"
+        )}
+      >
+        <TextInput
+          {...textInputProps}
+          {...{ onFocus, onBlur }}
+          name="query"
+          className={clsxm("py-2.5", "flex-1 rounded-full px-5")}
+          placeholder={DEFAULT_SEARCH_PLACEHOLDER}
+        />
+      </form>
       <ErrorMessage>{error}</ErrorMessage>
-      <TextInput
-        {...textInputProps}
-        {...{ onFocus, onBlur }}
-        name="query"
-        className="input-focus-unset px-2"
-        placeholder={DEFAULT_SEARCH_PLACEHOLDER}
-      />
-      {textInputProps.value && (
-        <button className="p-1" onClick={onReset}>
-          <XIcon className="box-border h-4 w-4" />
-        </button>
-      )}
-    </form>
+    </div>
   );
 }

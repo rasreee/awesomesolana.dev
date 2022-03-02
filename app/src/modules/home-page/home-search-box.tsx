@@ -23,7 +23,6 @@ const HomeSearchBox = observer(() => {
   return (
     <SearchForm
       error={search.error}
-      onReset={search.reset}
       onSubmit={search.submitSearch}
       textInputProps={getTextInputProps()}
     />

@@ -12,16 +12,11 @@ const ReposSearchControls = observer(function ReposSearchBox() {
     searchQuery.setTerm(search.value);
   };
 
-  const onReset = () => {
-    search.reset();
-  };
-
   return (
     <SearchForm
       textInputProps={search.getTextInputProps({ autoFocused: true })}
       error={search.error}
       onSubmit={onSubmit}
-      onReset={onReset}
     />
   );
 });
