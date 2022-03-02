@@ -41,11 +41,15 @@ const ReposPage = function ReposPage() {
   const reposFetchProps = getReposFetchProps(searchQuery);
 
   const handleNext = () => {
-    console.log('handleNext');
+    console.log('Next');
   };
 
   const handlePrev = () => {
-    console.log('handlePrev');
+    console.log('Prev');
+  };
+
+  const handleJumpTo = (index: number) => {
+    console.log('JumpTo - index: ' + index);
   };
 
   return (
@@ -59,6 +63,7 @@ const ReposPage = function ReposPage() {
               page={reposFetchProps.params.page}
               onNext={handleNext}
               onPrev={handlePrev}
+              jumpTo={handleJumpTo}
             />
           </div>
           <ReposFetch {...reposFetchProps} />
@@ -67,6 +72,7 @@ const ReposPage = function ReposPage() {
           page={reposFetchProps.params.page}
           onNext={handleNext}
           onPrev={handlePrev}
+          jumpTo={handleJumpTo}
         />
       </div>
     </PageLayout>
