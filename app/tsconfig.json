@@ -28,7 +28,7 @@
     "incremental": true
   },
   "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx", "../common/src/sources/constants.ts", "../ui/src/error-message.tsx", "../ui/src/feed-skeleton.tsx", "../ui/src/anchor.tsx"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "cypress"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"
