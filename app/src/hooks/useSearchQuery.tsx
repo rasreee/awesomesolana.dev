@@ -1,9 +1,15 @@
 import { allTags, Tag, TagType, tagUtils } from '@awesomesolana/common';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
-import { createContext, useContext, useMemo } from 'react';
+import { createContext, useMemo } from 'react';
 
 import { searchQuery, SearchQueryArgs } from '@/lib/searchQuery';
+function parseQueryParam<T extends string | number>(
+  query: ParsedUrlQuery,
+  key: string,
+): T {
+  return query[key] as T;
+}
 
 export interface SearchQueryContext {
   term: string;
@@ -20,17 +26,7 @@ export const searchQueryContext = createContext<SearchQueryContext>(
   {} as SearchQueryContext,
 );
 
-export const useSearchQuery = (): SearchQueryContext =>
-  useContext(searchQueryContext);
-
-function parseQueryParam<T extends string | number>(
-  query: ParsedUrlQuery,
-  key: string,
-): T {
-  return query[key] as T;
-}
-
-export const SearchQueryProvider: React.FC = ({ children }) => {
+export const useSearchQuery = (): SearchQueryContext => {
   const router = useRouter();
 
   const term = useMemo(
@@ -88,20 +84,14 @@ export const SearchQueryProvider: React.FC = ({ children }) => {
     router.push(pathname, { query: searchQuery(args) });
   };
 
-  return (
-    <searchQueryContext.Provider
-      value={{
-        term,
-        page,
-        per_page,
-        setTerm,
-        tags,
-        toggleTag,
-        clearTags,
-        routeTo,
-      }}
-    >
-      {children}
-    </searchQueryContext.Provider>
-  );
+  return {
+    term,
+    page,
+    per_page,
+    setTerm,
+    tags,
+    toggleTag,
+    clearTags,
+    routeTo,
+  };
 };

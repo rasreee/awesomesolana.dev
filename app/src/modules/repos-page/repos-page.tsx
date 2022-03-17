@@ -2,10 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { reposSEO } from '@/app/seo';
-import {
-  SearchQueryContext,
-  useSearchQuery,
-} from '@/contexts/search-query-context';
+import { SearchQueryContext, useSearchQuery } from '@/hooks/useSearchQuery';
 import { searchQuery } from '@/lib/searchQuery';
 
 import PageLayout from '../common/page-layout';

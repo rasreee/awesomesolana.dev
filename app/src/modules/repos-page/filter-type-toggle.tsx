@@ -4,7 +4,7 @@ import { capitalize } from '@awesomesolana/common';
 import { clsxm } from '@awesomesolana/tw';
 import { ChevronDownIcon, XIcon } from '@awesomesolana/ui';
 
-import { useSearchQuery } from '@/contexts/search-query-context';
+import { useSearchQuery } from '@/hooks/useSearchQuery';
 import pluralize from '@/lib/pluralize';
 
 function TagButton({

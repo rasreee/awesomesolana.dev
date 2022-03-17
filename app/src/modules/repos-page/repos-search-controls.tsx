@@ -1,7 +1,7 @@
 import { SearchForm } from '@awesomesolana/ui';
 import { observer } from 'mobx-react-lite';
 
-import { useSearchQuery } from '@/contexts/search-query-context';
+import { useSearchQuery } from '@/hooks/useSearchQuery';
 import { useGlobalStore } from '@/stores';
 
 const ReposSearchControls = observer(function ReposSearchBox() {

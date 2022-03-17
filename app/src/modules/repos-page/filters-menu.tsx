@@ -6,7 +6,7 @@ import { Shimmer, XIcon } from '@awesomesolana/ui';
 import times from 'lodash.times';
 import useSWR from 'swr';
 
-import { useSearchQuery } from '@/contexts/search-query-context';
+import { useSearchQuery } from '@/hooks/useSearchQuery';
 import pluralize from '@/lib/pluralize';
 import { Divider } from '@/ui/divider';
 
