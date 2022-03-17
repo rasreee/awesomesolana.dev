@@ -70,8 +70,8 @@ export async function getTags(
   return allTags.filter((tag) => tag.type === type);
 }
 
-export const makeTag = (initialData: Tag): Tag => {
+export const makeTag = (initialData: Partial<Tag>): Tag => {
   const defaultData = { description: "" };
 
-  return { ...defaultData, ...initialData };
+  return { ...defaultData, ...initialData } as Tag;
 };
