@@ -1,7 +1,7 @@
 import { allTags, Tag, TagType, tagUtils } from '@awesomesolana/common';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
-import { createContext, useMemo } from 'react';
+import { createContext, useCallback, useMemo } from 'react';
 
 import { searchQuery, SearchQueryArgs } from '@/lib/searchQuery';
 function parseQueryParam<T extends string | number>(
@@ -58,31 +58,42 @@ export const useSearchQuery = (): SearchQueryContext => {
     return tagList;
   }, [router.query]);
 
-  const setTerm = (newTerm: string) => {
-    router.push(router.pathname, {
-      query: searchQuery({ term: newTerm, tags }),
-    });
-  };
+  const setTerm = useCallback(
+    (newTerm: string) => {
+      router.push(router.pathname, {
+        query: searchQuery({ term: newTerm, tags }),
+      });
+    },
+    [router.pathname],
+  );
 
-  const toggleTag = (tag: Tag) => {
-    const newTags = tagUtils.list(tags).has(tag)
-      ? tagUtils.list(tags).exclude([tag])
-      : [...tags, tag];
-    router.push(router.pathname, {
-      query: searchQuery({ tags: newTags, term }),
-    });
-  };
+  const toggleTag = useCallback(
+    (tag: Tag) => {
+      const newTags = tagUtils.list(tags).has(tag)
+        ? tagUtils.list(tags).exclude([tag])
+        : [...tags, tag];
 
-  const clearTags = (type: TagType) => {
-    const newTags = tagUtils.list(tags).excludeType(type);
-    router.push(router.pathname, {
-      query: searchQuery({ tags: newTags, term }),
-    });
-  };
+      router.push(router.pathname, {
+        query: searchQuery({ tags: newTags, term }),
+      });
+    },
+    [router.pathname],
+  );
 
-  const routeTo = (pathname: string, args: SearchQueryArgs) => {
+  const clearTags = useCallback(
+    (type: TagType) => {
+      const newTags = tagUtils.list(tags).excludeType(type);
+
+      router.push(router.pathname, {
+        query: searchQuery({ tags: newTags, term }),
+      });
+    },
+    [router.pathname],
+  );
+
+  const routeTo = useCallback((pathname: string, args: SearchQueryArgs) => {
     router.push(pathname, { query: searchQuery(args) });
-  };
+  }, []);
 
   return {
     term,
