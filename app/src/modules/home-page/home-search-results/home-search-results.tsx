@@ -15,8 +15,6 @@ const HomeSearchResults = observer(() => {
 
   const homePageStore = useStore<HomePageStore>();
 
-  const isEmptyState = !homePageStore.search.results.length;
-
   const handleSelect = (tag: Tag) => routeTo('/repos', { tags: [tag] });
 
   return (
@@ -25,7 +23,7 @@ const HomeSearchResults = observer(() => {
       onClose={homePageStore.closeMenu}
       isOpen={homePageStore.menu.isOpen}
     >
-      {isEmptyState ? (
+      {homePageStore.isEmptyState ? (
         <PopularTags onSelect={handleSelect} />
       ) : (
         <GroupedTagsOptions

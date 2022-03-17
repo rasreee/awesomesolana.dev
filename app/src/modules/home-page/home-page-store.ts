@@ -48,6 +48,10 @@ export class HomePageStore {
   menu = { isOpen: false };
   search = new SearchState(this);
 
+  get isEmptyState(): boolean {
+    return !this.search.results.length;
+  }
+
   openMenu = () => {
     this.menu = { isOpen: true };
   };
